@@ -208,6 +208,12 @@ def PlaceType(n):
     return code_label(n)
 
 
+def SituationType111(n):
+    return code_label(n)
+
+def JustificationType(n):
+    return code_label(n)
+
 def GraphicPlaceType(n):
     info = CountryType(n.Country)
     info.addfrom(n, 'Graphic', '')
@@ -252,10 +258,6 @@ def LieuType(n):
         # else:
             # info += ForeignJudgementType(place.ForeignJudgement)
     return info
-
-
-def DeliveryType(n):
-    return PlaceType(n.Place)
 
 
 def DiplomaticPostType(n):
@@ -502,6 +504,7 @@ def IT020(n):
 
 
 def IT110(n):
+    # Filiation ascendante
     info = Info()
     info.addfrom(n, 'FiliationType', '', FiliationType)
     info.addfrom(n, 'Parent1', _('of '), ParentType)
@@ -510,6 +513,20 @@ def IT110(n):
     info.addfrom(n, 'Place', _("in "), PlaceType)
     info.addfrom(n, 'Graphic', " ")
     info.add_deldate(n)
+    return info
+
+
+def IT111(n):
+    # Statut de la personne représentée ou assistée
+
+    info = Info()
+    info.addfrom(n, 'Date', _("Date"), DateType)
+    
+    info.addfrom(n, 'Justification', '', JustificationType)
+    info.addfrom(n, 'Situation', '', SituationType111)
+    info.addfrom(n, 'Graphic', " ")
+    info.add_deldate(n)
+    
     return info
 
 
@@ -565,6 +582,13 @@ def TypeOfLicenseType(n):
 
 def TypeOfLicenseType194(n):
     return code_label(n)
+
+
+def DeliveryType206(n):
+    v = getattr(n, 'Place', None)
+    if v:
+        return PlaceType(v)
+    return CountryType(n.Country)
 
 
 def DeliveryType194(n):
@@ -1017,6 +1041,8 @@ register_it_handler('BurialModes',
                     _("Burial modes"), 'BurialMode', 'IT152')
 register_it_handler('PostalAddressAbroad',
                     _("Postal address abroad"), 'PostalAddressAbroad', 'IT023')
+register_it_handler('ParentalAuthorities',
+                    _("Parental authorities"), 'ParentalAuthority', 'IT111')
 
 
 class RowFactory(object):
@@ -1245,7 +1271,7 @@ class RowFactory(object):
             info.chunks.append(E.b(n.CardNumber))
             info.addfrom(n, 'ExpiryDate', _('expires '), DateType)
             # info.chunks.append(E.b(dd.dtos(rn2date(n.ExpiryDate))))
-            info.addfrom(n, 'Delivery', _('delivered in '), DeliveryType)
+            info.addfrom(n, 'Delivery', _('delivered in '), DeliveryType206)
             # info.chunks.append(', delivered in ')
             # info += code_label(n.Delivery.Place)
             yield self.datarow(n, n.Date, info)

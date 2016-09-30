@@ -47,9 +47,8 @@ collected from various documents issued by http://www.bcss.fgov.be):
   sociale (registre BCSS) et dans le répertoire sectoriel des CPAS
   géré par la SmalS-MvM.
   
-- :class:`RetrieveTIGroupsRequest
-  <lino_welfare.modlib.cbss.tx25.RetrieveTIGroupsRequest>`: Obtenir
-  des informations à propos d’une personne dans le cadre de l’enquête
+- :class:`RetrieveTIGroupsRequest` (aka :ref:`tx25`): Obtenir des
+  informations à propos d’une personne dans le cadre de l’enquête
   sociale.
   
 
@@ -57,60 +56,80 @@ collected from various documents issued by http://www.bcss.fgov.be):
 Plugin configuration
 ====================
 
-See :class:`lino_welfare.modlib.cbss.Plugin`.
+When this plugin is installed, then the local system administrator
+must configure certain settings.
+
+The following *plugin attributes* can be set in your
+:meth:`setup_plugins <lino.core.site.Site.setup_plugins>`:
+
+>>> dd.plugins.cbss.cbss_live_requests
+False
+
+>>> dd.plugins.cbss.cbss_environment
+'test'
+
+See :class:`lino_welfare.modlib.cbss.Plugin` for documentation.
+
+And your :class:`SiteConfig <lino.modlib.system.models.SiteConfig>`
+has the following additional fields:
+
+.. django2rst::
+
+   from lino.api.doctest import *
+   show_fields(rt.models.system.SiteConfig, 
+       "sector cbss_org_unit ssdn_user_id cbss_http_password")
+   
+..
+    >>> show_fields(rt.models.system.SiteConfig, 
+    ... "sector cbss_org_unit ssdn_user_id cbss_http_password")
+    +--------------------+-------------------------+-----------------------------------------------------------------------------------------+
+    | Internal name      | Verbose name            | Help text                                                                               |
+    +====================+=========================+=========================================================================================+
+    | sector             | sector                  | The CBSS sector/subsector of the requesting organization.                               |
+    |                    |                         | For PCSWs this is always 17.1.                                                          |
+    |                    |                         | Used in SSDN requests as text of the `MatrixID` and `MatrixSubID`                       |
+    |                    |                         | elements of `AuthorizedUser`.                                                           |
+    |                    |                         | Used in ManageAccess requests as default value                                          |
+    |                    |                         | for the non-editable field `sector`                                                     |
+    |                    |                         | (which defines the choices of the `purpose` field).                                     |
+    +--------------------+-------------------------+-----------------------------------------------------------------------------------------+
+    | cbss_org_unit      | Anfragende Organisation | In CBSS requests, identifies the requesting organization.                               |
+    |                    |                         | For PCSWs this is the enterprise number                                                 |
+    |                    |                         | (CBE, KBO) and should have 10 digits and no formatting characters.                      |
+    |                    |                         |                                                                                         |
+    |                    |                         | Used in SSDN requests as text of the `AuthorizedUser\OrgUnit` element .                 |
+    |                    |                         | Used in new style requests as text of the `CustomerIdentification\cbeNumber` element .  |
+    +--------------------+-------------------------+-----------------------------------------------------------------------------------------+
+    | ssdn_user_id       | SSDN User Id            | Used in SSDN requests as text of the `AuthorizedUser\UserID` element.                   |
+    +--------------------+-------------------------+-----------------------------------------------------------------------------------------+
+    | cbss_http_password | HTTP password           | Used in the http header of new-style requests.                                          |
+    +--------------------+-------------------------+-----------------------------------------------------------------------------------------+
 
 
-Site configuration
-==================
 
-When this plugin is installed, then your :class:`SiteConfig
-<lino.modlib.system.models.SiteConfig>` has the following additional
-fields:
-
->>> show_fields(rt.models.system.SiteConfig, 
-... "sector cbss_org_unit ssdn_user_id cbss_http_password")
-+--------------------+-------------------------+-----------------------------------------------------------------------------------------+
-| Internal name      | Verbose name            | Help text                                                                               |
-+====================+=========================+=========================================================================================+
-| sector             | sector                  | The CBSS sector/subsector of the requesting organization.                               |
-|                    |                         | For PCSWs this is always 17.1.                                                          |
-|                    |                         | Used in SSDN requests as text of the `MatrixID` and `MatrixSubID`                       |
-|                    |                         | elements of `AuthorizedUser`.                                                           |
-|                    |                         | Used in ManageAccess requests as default value                                          |
-|                    |                         | for the non-editable field `sector`                                                     |
-|                    |                         | (which defines the choices of the `purpose` field).                                     |
-+--------------------+-------------------------+-----------------------------------------------------------------------------------------+
-| cbss_org_unit      | Anfragende Organisation | In CBSS requests, identifies the requesting organization.                               |
-|                    |                         | For PCSWs this is the enterprise number                                                 |
-|                    |                         | (CBE, KBO) and should have 10 digits and no formatting characters.                      |
-|                    |                         |                                                                                         |
-|                    |                         | Used in SSDN requests as text of the `AuthorizedUser\OrgUnit` element .                 |
-|                    |                         | Used in new style requests as text of the `CustomerIdentification\cbeNumber` element .  |
-+--------------------+-------------------------+-----------------------------------------------------------------------------------------+
-| ssdn_user_id       | SSDN User Id            | Used in SSDN requests as text of the `AuthorizedUser\UserID` element.                   |
-+--------------------+-------------------------+-----------------------------------------------------------------------------------------+
-| cbss_http_password | HTTP password           | Used in the http header of new-style requests.                                          |
-+--------------------+-------------------------+-----------------------------------------------------------------------------------------+
-
-
-
+.. _tx25:
 .. _welfare.specs.cbss.tx25:
 
 Tx25 requests
 =============
 
+"Transaction 25" or "Tx25" is an alias for the rather complicated name
+"RetrieveTIGroupsRequest".
+
 
 >>> rt.show(cbss.RetrieveTIGroupsRequests,
 ...     column_names='user person environment status ticket')
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
-================= ========================= ======= ================ ======================================
- Autor             Klient                    T/A/B   Zustand          Ticket
------------------ ------------------------- ------- ---------------- --------------------------------------
- Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK               db1521da-3a61-43c0-b500-e96e9dd5c0ee
- Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK               770c5e7d-8555-4ddd-9787-4e4f416c3d21
- Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK               cd241a8b-2092-4f0c-b9d9-53a3707cdc3d
- Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    Fehlgeschlagen
-================= ========================= ======= ================ ======================================
+================= ========================= ======= ========= ======================================
+ Autor             Klient                    T/A/B   Zustand   Ticket
+----------------- ------------------------- ------- --------- --------------------------------------
+ Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK        db1521da-3a61-43c0-b500-e96e9dd5c0ee
+ Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK        770c5e7d-8555-4ddd-9787-4e4f416c3d21
+ Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK        cd241a8b-2092-4f0c-b9d9-53a3707cdc3d
+ Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK        5448d29b-7098-478c-b3ac-f3d51a86f658
+ Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK        fc9b0c4a-ed38-4938-bb17-ea8f05be90bc
+ Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK        42aa2b95-e25d-47a5-beb1-4e3aebc4f09e
+================= ========================= ======= ========= ======================================
 <BLANKLINE>
 
 
@@ -168,7 +187,8 @@ in).
 
 
 Printing a Tx25
------------------
+===============
+
 
 >>> ses = rt.login('hubert')
 >>> rv = ses.run(obj.do_print)
@@ -339,4 +359,113 @@ This section is mostly for testing purposes.
  Erstelldatum                  253   14.02.84
  Zuletzt geändert              254   14.10.15
 ============================= ===== ========== ==========================================================================================================================
+<BLANKLINE>
+
+>>> showit(5)  #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+=============================== ===== ========== ===================================================================================================================================================================================
+ Gruppe                          TI    Seit       Information
+------------------------------- ----- ---------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ NR-Nummer                             26.05.98   **980526 001-51** (Männlich)
+ Wohnsitze                       001   01.04.15   **Sankt Vith** (63067), Fusion: **0**, Sprache: **2**
+                                       31.03.15   **Streichung von Amtswegen** (99991), Fusion: **0**, Sprache: **2**
+                                       01.01.77   **Sankt Vith** (63067), Fusion: **1**, Sprache: **2**
+                                       29.09.69   **Lommersweiler** (63047), Fusion: **0**, Sprache: **2**
+ Geprüfte legale Hauptadressen   003   31.03.15   **Décision du Collège** (bis 01.04.15)
+ Adressänderungsabsicht          005   01.04.15   Umziehen nach **Sankt Vith** (63067)
+                                       11.09.69   Wegziehen aus **Recht** (63063)
+ Namen                           010   09.12.68   **Abbas**, Ambroise Adélaïde
+ Legale Hauptadressen            020   01.04.15   **4783**, **Wiesenbach**, Nr. **12**
+                                       18.04.14   **4780**, **Roderstal,Galhausen**, Nr. **13**
+                                       10.06.13   **4780**, **von-Dhaem-Strasse**, Nr. **14**
+                                       26.11.04   **4780**, **Roderstal,Galhausen**, Nr. **15** **A000**
+                                       01.02.96   **4780**, **Steinefeld,Galhausen**, Nr. **16**
+                                       01.06.92   **4780**, **Luxemburger Strasse**, Nr. **17**
+                                       01.01.72   **4780**, **Roderstal,Galhausen**, Nr. **18**
+                                       01.01.72   **4780**, **Roderstal,Galhausen**, Nr. **19** **A000**
+                                       29.09.69   **4780**, **Braunlaufweg,Galhausen**, Nr. **20**
+ Referenzadressen                024   01.04.15
+ Nationalitäten                  031   09.12.68   **Belgier/in/** (150)
+ Geburtsort                      100   09.12.68   in **Sankt Vith** (63067), Akte Nr. **00000**
+ Abstammung                      110   09.12.68   **Kind** (00), von **Abbas**, Amédée Adèle (**971207 001-67**), und **Bah**, Anastase Agnès (**960715 002-61**)
+ Parental authorities            111   13.05.15   Datum: 13.05.15, **Verfügung den Friedensrichters** (5), **Rechtliche Betreuung** (70)
+                                       27.03.15   Datum: 27.03.15, **Verfügung den Friedensrichters** (5), **Rechtliche Betreuung** (70)
+                                       19.03.13   Datum: 19.03.13, **Verfügung den Friedensrichters** (5), **Unter vorläufiger Verwaltung** (68)
+ Guardians                       113   13.05.15   Datum: 13.05.15, Status: **Betreuer für die Person** (31), Begründung: **Verfügung des Friedenrechters** (5)
+                                       27.03.15   Datum: 27.03.15, Status: **Betreuer für das Vermögen** (30), Begründung: **Verfügung des Friedenrechters** (5)
+                                       19.03.13   Datum: 19.03.13, Status: **Vorläufiger Verwalter** (24), Begründung: **Verfügung des Friedenrechters** (5)
+ Zivilstände                     120   09.12.68   **Unverheiratet** (10)
+ Familienmitglieder              140   18.04.14   Housing  (00), **Alleinstehende** (01)
+                                       21.09.05   **Alleinstehende** (01) (bis 27.06.11)
+                                       01.06.92   **Alleinstehende** (01) (bis 28.11.94)
+                                       11.12.12   Housing  (00), **Sohn** (03), in Familie mit Vorstand **Adriaen**, Arthur (**900627 002-53**) (bis 10.06.13)
+                                       28.11.94   **Sohn** (03), in Familie mit Vorstand **Adriaen**, Arthur (**900627 002-53**) (bis 21.09.05)
+                                       27.06.11   Housing  (00), **Mutter** (06), in Familie mit Vorstand **Bah**, Anastase Agnès (**960715 002-61**) (bis 10.06.13)
+ Familienoberhaupt               141   10.06.13   **Abbasi**, Alix (**890722 001-93**), als **nicht verwandt** (12), Housing  (00) (bis 18.04.14)
+                                       09.12.68   **Abbas**, Amédée Adèle (**971207 001-67**), als **Tochter** (03) (bis 01.06.92)
+ Personalausweise                195   22.10.15   **P.A.** (0000) Nr. **595488123456**, gültig bis 17.04.25, ausgestellt in **Sankt Vith** (63067)
+                                       02.05.13   **P.A.** (0000) Nr. **427003123456**, gültig bis 01.03.18, ausgestellt in **Sankt Vith** (63067)
+                                       25.04.08   **P.A.** (0000) Nr. **427003123455**, gültig bis 19.03.13, ausgestellt in **Sankt Vith** (63067)
+                                       09.02.01   **P.A.** (0000) Nr. **427003123454**
+                                       23.05.91   **P.A.** (0000) Nr. **427003123453**
+                                       04.07.86   **P.A.** (0000) Nr. **427003123452**
+                                       31.03.81   **P.A.** (0000) Nr. **427003123451**, ausgestellt in **Sankt Vith** (63067)
+ Reisepässe                      199   12.09.88   Status: **Austel.** (0), Typ **Reisepass** (0), Nr. **AE 123456**, ausgestellt durch **Sankt Vith** (63067), Erneuerungsnr.: **00**, Seriennr.: **00002616**, gültig bis 11.09.93
+ Wohnsitzänderungen              251   29.04.15
+                                       29.04.15
+ Erstelldatum                    253   30.03.72
+ Zuletzt geändert                254   26.06.16
+=============================== ===== ========== ===================================================================================================================================================================================
+<BLANKLINE>
+
+>>> showit(6)  #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+======================== ===== ========== =====================================================================================================================================================================================
+ Gruppe                   TI    Seit       Information
+------------------------ ----- ---------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ NR-Nummer                      26.05.98   **980526 001-51** (Männlich)
+ Wohnsitze                001   21.06.07   **Eupen** (63023), Fusion: **0**, Sprache: **2**
+                                31.01.06   **Bastogne** (82003), Fusion: **0**, Sprache: **2**
+                                31.07.84   **Deutschland (Bundesrep.)** (103), Fusion: **0**, Sprache: **2**
+                                25.06.79   **Ninove** (41048), Fusion: **0**, Sprache: **2**
+                                17.02.70   **Deutschland (Bundesrep.)** (103), Fusion: **0**, Sprache: **2**
+                                15.06.00   **Bouffioulx** (52007), Fusion: **0**, Sprache: **2**
+ Adressänderungsabsicht   005   19.06.07   Umziehen nach **Eupen** (63023)
+                                27.01.06   Umziehen nach **Bastogne** (82003)
+ Namen                    010   21.01.52   **Adriaen**, Ambroise
+ Legale Hauptadressen     020   19.07.07   **4700**, **Am Berg**, Nr. **12**
+                                21.06.07   **4700**, **Pfarrer-Henreco-Strasse**, Nr. **13**
+                                31.01.06   **6600**, **Bois-d'Hazy**, Nr. **14** **B  1**
+                                29.05.80   **9400**, **Inschrijving zonder adres**, Nr. **15**
+                                25.06.79   **9400**, **Hulststraat**, Nr. **16**
+                                15.06.70   **6200**, **Avenue Emile Vandervelde**, Nr. **17**
+ Wohnsitz im Ausland      022   24.02.03   Address, PosteDiplomatique **Köln** (1207) **Deutschland (Bundesrep.)** (103) **Deutschland (Bundesrep.)** (103), **Thomas-Esser-Strasse 46**, **53879 Euskirchen ** (bis 31.01.06)
+                                30.03.01   Address, PosteDiplomatique **Köln** (1207) **Deutschland (Bundesrep.)** (103) **Thomas-Esserstr46-53879Euskirchen**
+                                25.11.99   Address, PosteDiplomatique **Köln** (1207) **Deutschland (Bundesrep.)** (103) ** Welkenbergstr.1 47139 Duisburg**
+                                01.01.78   Address, PosteDiplomatique **Düsseldorf** (1203) **000** (000) **0013 SCHELLINGWEG,4300 ESSEN 14** (bis 25.06.79)
+                                09.10.72   Address, PosteDiplomatique **Düsseldorf** (1203) **000** (000) **0133 FRIEDRICH EBERTSTRASSE 4250 BOTTROP**
+ Nationalitäten           031   21.01.52   **Belgier/in/** (150)
+ Geburtsort               100   21.01.52   in **Deutschland (Bundesrep.)** (103), **SIEGEN**, Akte Nr. **00059**
+ Abstammung               110   21.01.52   **Kind** (00), von **Adriaen**, Adélaïde (**971207 001-67**), und **Abbasi**, Amédée (**960715 002-61**)
+ Zivilstände              120   26.09.08   **Geschieden** (41), in Tribunal **Entscheid des erstinstanzlichen Gerichtes** (01), Date 26.08.08, Place **Eupen** (63023), Akte Nr. **3737**
+                                23.05.03   **Verheiratet** (20), mit **Ballo**, Adèle Anastase Agnès (970101 001-73), in Place2 **Deutschland (Bundesrep.)** (103), **Schleiden**
+                                05.09.95   **Geschieden** (40), mit **Adriaensen**, Arthur (950221 001-20), in Place2 **Deutschland (Bundesrep.)** (103), **Erfstadt**
+                                30.12.83   **Verheiratet** (20), mit **Adriaensen**, Arthur (950221 001-20), in Place2 **Deutschland (Bundesrep.)** (103), **Erfstadt**, Akte Nr. **0220**
+                                23.02.82   **Geschieden** (40), mit **Abdalla**, Alix Augustin (900627 002-53), in Place2 **Deutschland (Bundesrep.)** (103), **KEULEN**
+                                17.04.70   **Verheiratet** (20), mit **Abdalla**, Alix Béatrice (900627 002-53), in Place2 **Deutschland (Bundesrep.)** (103), **ESSEN STOPPENBERG**, Akte Nr. **0132**
+                                21.01.52   **Unverheiratet** (10)
+ Familienmitglieder       140   19.07.07   **Alleinstehende** (01)
+                                03.07.81   **Tochter** (03), in Familie mit Vorstand **Abdalla**, Aymeric (**890722 001-93**) (bis 31.01.06)
+                                06.05.82   **Tochter** (03), in Familie mit Vorstand **Abdalla**, Beatrix Béranger (**900108 001-07**) (bis 31.01.06)
+ Familienoberhaupt        141   21.06.07   **Chahine**, Elizabeth Adélaïde Geoffroy (**921024 001-20**), als **Schwägerin** (10) (bis 19.07.07)
+                                31.01.06   **Ballo**, Adèle Anastase Agnès (**970101 001-73**), als **Gemahlin** (02) (bis 21.06.07)
+ Personalausweise         195   04.07.12   **P.A.** (0000) Nr. **595488123456**, gültig bis 14.06.17, ausgestellt in **Eupen** (63023)
+                                16.07.07   **P.A.** (0000) Nr. **427003123456**, gültig bis 28.06.12, ausgestellt in **Eupen** (63023)
+                                02.06.06   **P.A.** (0000) Nr. **427003123455**
+                                08.12.04   **P.A.** (0000) Nr. **427003123454**, gültig bis 07.12.14, ausgestellt in **Deutschland (Bundesrep.)** (103)
+                                20.10.82   **P.A.** (0000) Nr. **427003123453**, ausgestellt in **Ninove** (41048)
+                                25.06.79   **P.A.** (0000) Nr. **427003123452**, ausgestellt in **Ninove** (41048)
+                                26.02.75   **Im. K. B.** (0050) Nr. **427003123451**, gültig bis 25.02.80, ausgestellt in **Deutschland (Bundesrep.)** (103)
+ Reisepässe               199   08.12.04   Status: **Austel.** (0), Typ **Reisepass** (0), Nr. **AE 123456**, ausgestellt durch **Köln** (1207) (Botschaft), Erneuerungsnr.: **00**, gültig bis 07.12.09
+ Erstelldatum             253   14.04.70
+ Zuletzt geändert         254   28.05.15
+======================== ===== ========== =====================================================================================================================================================================================
 <BLANKLINE>

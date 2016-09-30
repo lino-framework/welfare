@@ -82,6 +82,12 @@ guests. Ask confirmation naming the guests who need to check out."""),
     'lino_welfare.modlib.cal.models.EventsByClient.master' : _("""alias of Client"""),
     'lino_welfare.modlib.cal.models.EventsByClient.model' : _("""alias of Event"""),
     'lino_welfare.modlib.cal.models.Guest.client' : _("""Virtual field which returns the partner if it is a client."""),
+    'lino_welfare.modlib.cbss.Plugin' : _("""The descriptor for this plugin. See
+lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.cbss.Plugin.cbss_live_requests' : _("""Whether executing requests should try to really connect to the
+CBSS.  Real requests would fail with a timeout if run from behind
+an IP address that is not registered at the CBSS."""),
+    'lino_welfare.modlib.cbss.Plugin.cbss_environment' : _("""Either None or one of 'test', 'acpt' or 'prod'."""),
     'lino_welfare.modlib.cbss.choicelists.RequestStates' : _("""The status of a CBSSRequest."""),
     'lino_welfare.modlib.cbss.choicelists.ManageActions' : _("""Possible values for the action field of a
 lino_welfare.modlib.cbss.models.ManageAccessRequest."""),
@@ -544,8 +550,5 @@ which might be reason to not get a given job."""),
     'lino_welfare.projects.chatelet.modlib.cv.models.Obstacle.user' : _("""The agent who observed this obstacle."""),
     'lino_welfare.projects.chatelet.modlib.cv.models.Obstacle.detected_date' : _("""The date when the agent observed this obstacle."""),
     'lino_welfare.projects.chatelet.tests.test_chatelet.TestCase' : _("""Miscellaneous tests on an empty database."""),
-    'lino_welfare.projects.eupen.scramble_tx25.Search.cycler' : _("""Alias for field number 1"""),
-    'lino_welfare.projects.eupen.scramble_tx25.Search.expr' : _("""Alias for field number 0"""),
-    'lino_welfare.projects.eupen.scramble_tx25.Search.replacements' : _("""Alias for field number 2"""),
     'lino_welfare.projects.std.settings.Site' : _("""The base class for all Lino Welfare applications."""),
 }

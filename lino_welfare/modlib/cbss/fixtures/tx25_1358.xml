@@ -1,0 +1,774 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+<soapenv:Body xmlns:applId="http://kszbcss.fgov.be/appliance" applId:engine="P3S">
+<v1:retrieveTIGroupsResponse xmlns:v1="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v1"><informationCustomer><ticket>1358</ticket><timestampSent>2016-07-26T12:29:36.777824+01:00</timestampSent><customerIdentification><cbeNumber>0212344876</cbeNumber></customerIdentification></informationCustomer><informationCBSS><ticketCBSS>fc9b0c4a-ed38-4938-bb17-ea8f05be90bc</ticketCBSS><timestampReceive>2016-07-26T10:28:44.344Z</timestampReceive><timestampReply>2016-07-26T10:28:44.878Z</timestampReply></informationCBSS>
+
+
+<status xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<value>DATA_FOUND</value>
+<code>MSG00000</code>
+<description>Treatment completed successfully.</description></status>
+<searchInformation xmlns:ns0="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v1" xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+<ssin>68120926606</ssin>
+<language>de</language>
+<history>true</history></searchInformation>
+<rrn_it_implicit xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<r:NationalNumber xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema" Type="000" Structure="A1">
+<r:NationalNumber>
+<r:NationalNumber>980526 001-51</r:NationalNumber>
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>98</r:Year>
+<r:Month>5</r:Month>
+<r:Day>26</r:Day></r:Date>
+<r:Sex>1</r:Sex></r:NationalNumber></r:NationalNumber>
+<r:FileOwner xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:Residences Type="001" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>04</r:Month>
+<r:Day>01</r:Day></r:Date>
+<r:Residence>
+<r:Code>63067</r:Code>
+<r:Label>Sankt Vith</r:Label></r:Residence>
+<r:Fusion>0</r:Fusion>
+<r:Language>2</r:Language></r:Residences>
+<r:Residences Type="001" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>03</r:Month>
+<r:Day>31</r:Day></r:Date>
+<r:Residence>
+<r:Code>99991</r:Code>
+<r:Label>Streichung von Amtswegen</r:Label></r:Residence>
+<r:Fusion>0</r:Fusion>
+<r:Language>2</r:Language></r:Residences>
+<r:Residences Type="001" Structure="A1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>77</r:Year>
+<r:Month>01</r:Month>
+<r:Day>01</r:Day></r:Date>
+<r:Residence>
+<r:Code>63067</r:Code>
+<r:Label>Sankt Vith</r:Label></r:Residence>
+<r:Fusion>1</r:Fusion>
+<r:Language>2</r:Language></r:Residences>
+<r:Residences Type="001" Structure="A1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>69</r:Year>
+<r:Month>09</r:Month>
+<r:Day>29</r:Day></r:Date>
+<r:Residence>
+<r:Code>63047</r:Code>
+<r:Label>Lommersweiler</r:Label></r:Residence>
+<r:Fusion>0</r:Fusion>
+<r:Language>2</r:Language></r:Residences></r:FileOwner>
+<r:AscertainedLegalMainAddresses xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:AscertainedLegalMainAddress Type="003" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>03</r:Month>
+<r:Day>31</r:Day></r:Date>
+<r:DelDate>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>04</r:Month>
+<r:Day>01</r:Day></r:DelDate>
+<r:Graphic1>Décision du Collège</r:Graphic1></r:AscertainedLegalMainAddress></r:AscertainedLegalMainAddresses>
+<r:AddressChangeIntention xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:Address Type="005" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>04</r:Month>
+<r:Day>01</r:Day></r:Date>
+<r:DestinationPlace>
+<r:Code>63067</r:Code>
+<r:Label>Sankt Vith</r:Label></r:DestinationPlace></r:Address>
+<r:Address Type="005" Structure="A1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>69</r:Year>
+<r:Month>09</r:Month>
+<r:Day>11</r:Day></r:Date>
+<r:OriginPlace>
+<r:Code>63063</r:Code>
+<r:Label>Recht</r:Label></r:OriginPlace></r:Address></r:AddressChangeIntention>
+<r:Names xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:Name Type="010" Structure="A1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>68</r:Year>
+<r:Month>12</r:Month>
+<r:Day>09</r:Day></r:Date>
+<r:Name>
+<r:LastName>
+<r:Code>10598298</r:Code>
+<r:Label>Abbas</r:Label></r:LastName>
+<r:FirstName>
+<r:Code>00022108</r:Code>
+<r:Label>Ambroise</r:Label></r:FirstName>
+<r:FirstName>
+<r:Code>00022172</r:Code>
+<r:Label>Adélaïde</r:Label></r:FirstName></r:Name></r:Name></r:Names>
+<r:LegalMainAddresses xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:LegalMainAddress Type="020" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>04</r:Month>
+<r:Day>01</r:Day></r:Date>
+<r:Address>
+<r:ZipCode>4783</r:ZipCode>
+<r:Street>
+<r:Code>47834060</r:Code>
+<r:Label>Wiesenbach</r:Label></r:Street>
+<r:HouseNumber>12</r:HouseNumber></r:Address></r:LegalMainAddress>
+<r:LegalMainAddress Type="020" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>14</r:Year>
+<r:Month>04</r:Month>
+<r:Day>18</r:Day></r:Date>
+<r:Address>
+<r:ZipCode>4780</r:ZipCode>
+<r:Street>
+<r:Code>47804265</r:Code>
+<r:Label>Roderstal,Galhausen</r:Label></r:Street>
+<r:HouseNumber>13</r:HouseNumber></r:Address></r:LegalMainAddress>
+<r:LegalMainAddress Type="020" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>13</r:Year>
+<r:Month>06</r:Month>
+<r:Day>10</r:Day></r:Date>
+<r:Address>
+<r:ZipCode>4780</r:ZipCode>
+<r:Street>
+<r:Code>47801175</r:Code>
+<r:Label>von-Dhaem-Strasse</r:Label></r:Street>
+<r:HouseNumber>14</r:HouseNumber></r:Address></r:LegalMainAddress>
+<r:LegalMainAddress Type="020" Structure="B1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>04</r:Year>
+<r:Month>11</r:Month>
+<r:Day>26</r:Day></r:Date>
+<r:Address>
+<r:ZipCode>4780</r:ZipCode>
+<r:Street>
+<r:Code>47804265</r:Code>
+<r:Label>Roderstal,Galhausen</r:Label></r:Street>
+<r:HouseNumber>15</r:HouseNumber>
+<r:Box>A000</r:Box></r:Address></r:LegalMainAddress>
+<r:LegalMainAddress Type="020" Structure="A1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>96</r:Year>
+<r:Month>02</r:Month>
+<r:Day>01</r:Day></r:Date>
+<r:Address>
+<r:ZipCode>4780</r:ZipCode>
+<r:Street>
+<r:Code>47804275</r:Code>
+<r:Label>Steinefeld,Galhausen</r:Label></r:Street>
+<r:HouseNumber>16</r:HouseNumber></r:Address></r:LegalMainAddress>
+<r:LegalMainAddress Type="020" Structure="A1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>92</r:Year>
+<r:Month>06</r:Month>
+<r:Day>01</r:Day></r:Date>
+<r:Address>
+<r:ZipCode>4780</r:ZipCode>
+<r:Street>
+<r:Code>47801100</r:Code>
+<r:Label>Luxemburger Strasse</r:Label></r:Street>
+<r:HouseNumber>17</r:HouseNumber></r:Address></r:LegalMainAddress>
+<r:LegalMainAddress Type="020" Structure="A1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>72</r:Year>
+<r:Month>01</r:Month>
+<r:Day>01</r:Day></r:Date>
+<r:Address>
+<r:ZipCode>4780</r:ZipCode>
+<r:Street>
+<r:Code>47804265</r:Code>
+<r:Label>Roderstal,Galhausen</r:Label></r:Street>
+<r:HouseNumber>18</r:HouseNumber></r:Address></r:LegalMainAddress>
+<r:LegalMainAddress Type="020" Structure="B1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>72</r:Year>
+<r:Month>01</r:Month>
+<r:Day>01</r:Day></r:Date>
+<r:Address>
+<r:ZipCode>4780</r:ZipCode>
+<r:Street>
+<r:Code>47804265</r:Code>
+<r:Label>Roderstal,Galhausen</r:Label></r:Street>
+<r:HouseNumber>19</r:HouseNumber>
+<r:Box>A000</r:Box></r:Address></r:LegalMainAddress>
+<r:LegalMainAddress Type="020" Structure="A1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>69</r:Year>
+<r:Month>09</r:Month>
+<r:Day>29</r:Day></r:Date>
+<r:Address>
+<r:ZipCode>4780</r:ZipCode>
+<r:Street>
+<r:Code>47804255</r:Code>
+<r:Label>Braunlaufweg,Galhausen</r:Label></r:Street>
+<r:HouseNumber>20</r:HouseNumber></r:Address></r:LegalMainAddress></r:LegalMainAddresses>
+<r:AddressReferences xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:AddressReference Type="024" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>04</r:Month>
+<r:Day>01</r:Day></r:Date></r:AddressReference></r:AddressReferences>
+<r:Nationalities xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:Nationality Type="031" Structure="B1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>68</r:Year>
+<r:Month>12</r:Month>
+<r:Day>09</r:Day></r:Date>
+<r:Nationality>
+<r:Code>150</r:Code>
+<r:Label>Belgier/in/</r:Label></r:Nationality></r:Nationality></r:Nationalities>
+<r:BirthPlace xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema" Type="100" Structure="A1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>68</r:Year>
+<r:Month>12</r:Month>
+<r:Day>09</r:Day></r:Date>
+<r:ActNumber>00000</r:ActNumber>
+<r:Place1>
+<r:Code>63067</r:Code>
+<r:Label>Sankt Vith</r:Label></r:Place1></r:BirthPlace>
+<r:Filiations xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:Filiation Type="110" Structure="C1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>68</r:Year>
+<r:Month>12</r:Month>
+<r:Day>09</r:Day></r:Date>
+<r:FiliationType>
+<r:Code>00</r:Code>
+<r:Label>Kind</r:Label></r:FiliationType>
+<r:Parent1>
+<r:NationalNumber>
+<r:NationalNumber>971207 001-67</r:NationalNumber>
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>97</r:Year>
+<r:Month>12</r:Month>
+<r:Day>7</r:Day></r:Date>
+<r:Sex>1</r:Sex></r:NationalNumber>
+<r:Name>
+<r:LastName>
+<r:Code>10598298</r:Code>
+<r:Label>Abbas</r:Label></r:LastName>
+<r:FirstName>
+<r:Code>00015769</r:Code>
+<r:Label>Amédée</r:Label></r:FirstName>
+<r:FirstName>
+<r:Code>00019908</r:Code>
+<r:Label>Adèle</r:Label></r:FirstName></r:Name></r:Parent1>
+<r:Parent2>
+<r:NationalNumber>
+<r:NationalNumber>960715 002-61</r:NationalNumber>
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>96</r:Year>
+<r:Month>7</r:Month>
+<r:Day>15</r:Day></r:Date>
+<r:Sex>2</r:Sex></r:NationalNumber>
+<r:Name>
+<r:LastName>
+<r:Code>10453452</r:Code>
+<r:Label>Bah</r:Label></r:LastName>
+<r:FirstName>
+<r:Code>00021708</r:Code>
+<r:Label>Anastase</r:Label></r:FirstName>
+<r:FirstName>
+<r:Code>00017251</r:Code>
+<r:Label>Agnès</r:Label></r:FirstName></r:Name></r:Parent2></r:Filiation></r:Filiations>
+<r:ParentalAuthorities xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:ParentalAuthority Type="111" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>05</r:Month>
+<r:Day>13</r:Day></r:Date>
+<r:Situation>
+<r:Code>70</r:Code>
+<r:Label>Rechtliche Betreuung</r:Label></r:Situation>
+<r:Justification>
+<r:Code>5</r:Code>
+<r:Label>Verfügung den Friedensrichters</r:Label></r:Justification></r:ParentalAuthority>
+<r:ParentalAuthority Type="111" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>03</r:Month>
+<r:Day>27</r:Day></r:Date>
+<r:Situation>
+<r:Code>70</r:Code>
+<r:Label>Rechtliche Betreuung</r:Label></r:Situation>
+<r:Justification>
+<r:Code>5</r:Code>
+<r:Label>Verfügung den Friedensrichters</r:Label></r:Justification></r:ParentalAuthority>
+<r:ParentalAuthority Type="111" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>13</r:Year>
+<r:Month>03</r:Month>
+<r:Day>19</r:Day></r:Date>
+<r:Situation>
+<r:Code>68</r:Code>
+<r:Label>Unter vorläufiger Verwaltung</r:Label></r:Situation>
+<r:Justification>
+<r:Code>5</r:Code>
+<r:Label>Verfügung den Friedensrichters</r:Label></r:Justification></r:ParentalAuthority></r:ParentalAuthorities>
+<r:Guardians xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:Guardian Type="113" Structure="B2">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>05</r:Month>
+<r:Day>13</r:Day></r:Date>
+<r:Status>
+<r:Code>31</r:Code>
+<r:Label>Betreuer für die Person</r:Label></r:Status>
+<r:Justification>
+<r:Code>5</r:Code>
+<r:Label>Verfügung des Friedenrechters</r:Label></r:Justification>
+<r:NationalNumber>
+<r:NationalNumber>970101 001-73</r:NationalNumber>
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>97</r:Year>
+<r:Month>1</r:Month>
+<r:Day>1</r:Day></r:Date>
+<r:Sex>1</r:Sex></r:NationalNumber>
+<r:Graphic2>Vliegen Louis</r:Graphic2></r:Guardian>
+<r:Guardian Type="113" Structure="B2">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>03</r:Month>
+<r:Day>27</r:Day></r:Date>
+<r:Status>
+<r:Code>30</r:Code>
+<r:Label>Betreuer für das Vermögen</r:Label></r:Status>
+<r:Justification>
+<r:Code>5</r:Code>
+<r:Label>Verfügung des Friedenrechters</r:Label></r:Justification>
+<r:NationalNumber>
+<r:NationalNumber>950221 001-20</r:NationalNumber>
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>95</r:Year>
+<r:Month>2</r:Month>
+<r:Day>21</r:Day></r:Date>
+<r:Sex>1</r:Sex></r:NationalNumber>
+<r:Graphic2>Katharina Schmitz</r:Graphic2></r:Guardian>
+<r:Guardian Type="113" Structure="B1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>13</r:Year>
+<r:Month>03</r:Month>
+<r:Day>19</r:Day></r:Date>
+<r:Status>
+<r:Code>24</r:Code>
+<r:Label>Vorläufiger Verwalter</r:Label></r:Status>
+<r:Justification>
+<r:Code>5</r:Code>
+<r:Label>Verfügung des Friedenrechters</r:Label></r:Justification>
+<r:NationalNumber>
+<r:NationalNumber>950221 001-20</r:NationalNumber>
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>95</r:Year>
+<r:Month>2</r:Month>
+<r:Day>21</r:Day></r:Date>
+<r:Sex>1</r:Sex></r:NationalNumber></r:Guardian></r:Guardians>
+<r:CivilStates xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:CivilState Type="120" Structure="A1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>68</r:Year>
+<r:Month>12</r:Month>
+<r:Day>09</r:Day></r:Date>
+<r:CivilState>
+<r:Code>10</r:Code>
+<r:Label>Unverheiratet</r:Label></r:CivilState></r:CivilState></r:CivilStates>
+<r:FamilyMembers xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:FamilyMember Type="140" Structure="A2">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>14</r:Year>
+<r:Month>04</r:Month>
+<r:Day>18</r:Day></r:Date>
+<r:Housing>
+<r:Code>00</r:Code></r:Housing>
+<r:FamilyRole>
+<r:Code>01</r:Code>
+<r:Label>Alleinstehende</r:Label></r:FamilyRole></r:FamilyMember>
+<r:FamilyMember Type="140" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>05</r:Year>
+<r:Month>09</r:Month>
+<r:Day>21</r:Day></r:Date>
+<r:DelDate>
+<r:Century>20</r:Century>
+<r:Year>11</r:Year>
+<r:Month>06</r:Month>
+<r:Day>27</r:Day></r:DelDate>
+<r:FamilyRole>
+<r:Code>01</r:Code>
+<r:Label>Alleinstehende</r:Label></r:FamilyRole></r:FamilyMember>
+<r:FamilyMember Type="140" Structure="A1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>92</r:Year>
+<r:Month>06</r:Month>
+<r:Day>01</r:Day></r:Date>
+<r:DelDate>
+<r:Century>19</r:Century>
+<r:Year>94</r:Year>
+<r:Month>11</r:Month>
+<r:Day>28</r:Day></r:DelDate>
+<r:FamilyRole>
+<r:Code>01</r:Code>
+<r:Label>Alleinstehende</r:Label></r:FamilyRole></r:FamilyMember>
+<r:FamilyMember Type="140" Structure="B2">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>12</r:Year>
+<r:Month>12</r:Month>
+<r:Day>11</r:Day></r:Date>
+<r:DelDate>
+<r:Century>20</r:Century>
+<r:Year>13</r:Year>
+<r:Month>06</r:Month>
+<r:Day>10</r:Day></r:DelDate>
+<r:Housing>
+<r:Code>00</r:Code></r:Housing>
+<r:FamilyRole>
+<r:Code>03</r:Code>
+<r:Label>Sohn</r:Label></r:FamilyRole>
+<r:NationalNumber>
+<r:NationalNumber>900627 002-53</r:NationalNumber>
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>90</r:Year>
+<r:Month>6</r:Month>
+<r:Day>27</r:Day></r:Date>
+<r:Sex>2</r:Sex></r:NationalNumber>
+<r:Name>
+<r:LastName>
+<r:Code>10693920</r:Code>
+<r:Label>Adriaen</r:Label></r:LastName>
+<r:FirstName>
+<r:Code>00134867</r:Code>
+<r:Label>Arthur</r:Label></r:FirstName></r:Name></r:FamilyMember>
+<r:FamilyMember Type="140" Structure="B1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>94</r:Year>
+<r:Month>11</r:Month>
+<r:Day>28</r:Day></r:Date>
+<r:DelDate>
+<r:Century>20</r:Century>
+<r:Year>05</r:Year>
+<r:Month>09</r:Month>
+<r:Day>21</r:Day></r:DelDate>
+<r:FamilyRole>
+<r:Code>03</r:Code>
+<r:Label>Sohn</r:Label></r:FamilyRole>
+<r:NationalNumber>
+<r:NationalNumber>900627 002-53</r:NationalNumber>
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>90</r:Year>
+<r:Month>6</r:Month>
+<r:Day>27</r:Day></r:Date>
+<r:Sex>2</r:Sex></r:NationalNumber>
+<r:Name>
+<r:LastName>
+<r:Code>10693920</r:Code>
+<r:Label>Adriaen</r:Label></r:LastName>
+<r:FirstName>
+<r:Code>00134867</r:Code>
+<r:Label>Arthur</r:Label></r:FirstName></r:Name></r:FamilyMember>
+<r:FamilyMember Type="140" Structure="B2">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>11</r:Year>
+<r:Month>06</r:Month>
+<r:Day>27</r:Day></r:Date>
+<r:DelDate>
+<r:Century>20</r:Century>
+<r:Year>13</r:Year>
+<r:Month>06</r:Month>
+<r:Day>10</r:Day></r:DelDate>
+<r:Housing>
+<r:Code>00</r:Code></r:Housing>
+<r:FamilyRole>
+<r:Code>06</r:Code>
+<r:Label>Mutter</r:Label></r:FamilyRole>
+<r:NationalNumber>
+<r:NationalNumber>960715 002-61</r:NationalNumber>
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>96</r:Year>
+<r:Month>7</r:Month>
+<r:Day>15</r:Day></r:Date>
+<r:Sex>2</r:Sex></r:NationalNumber>
+<r:Name>
+<r:LastName>
+<r:Code>10453452</r:Code>
+<r:Label>Bah</r:Label></r:LastName>
+<r:FirstName>
+<r:Code>00021708</r:Code>
+<r:Label>Anastase</r:Label></r:FirstName>
+<r:FirstName>
+<r:Code>00017251</r:Code>
+<r:Label>Agnès</r:Label></r:FirstName></r:Name></r:FamilyMember></r:FamilyMembers>
+<r:HeadOfFamily xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:HeadOfFamily Type="141" Structure="A2">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>13</r:Year>
+<r:Month>06</r:Month>
+<r:Day>10</r:Day></r:Date>
+<r:DelDate>
+<r:Century>20</r:Century>
+<r:Year>14</r:Year>
+<r:Month>04</r:Month>
+<r:Day>18</r:Day></r:DelDate>
+<r:Housing>
+<r:Code>00</r:Code></r:Housing>
+<r:FamilyRole>
+<r:Code>12</r:Code>
+<r:Label>nicht verwandt</r:Label></r:FamilyRole>
+<r:NationalNumber>
+<r:NationalNumber>890722 001-93</r:NationalNumber>
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>89</r:Year>
+<r:Month>7</r:Month>
+<r:Day>22</r:Day></r:Date>
+<r:Sex>1</r:Sex></r:NationalNumber>
+<r:Name>
+<r:LastName>
+<r:Code>12039881</r:Code>
+<r:Label>Abbasi</r:Label></r:LastName>
+<r:FirstName>
+<r:Code>00016673</r:Code>
+<r:Label>Alix</r:Label></r:FirstName></r:Name></r:HeadOfFamily>
+<r:HeadOfFamily Type="141" Structure="A1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>68</r:Year>
+<r:Month>12</r:Month>
+<r:Day>09</r:Day></r:Date>
+<r:DelDate>
+<r:Century>19</r:Century>
+<r:Year>92</r:Year>
+<r:Month>06</r:Month>
+<r:Day>01</r:Day></r:DelDate>
+<r:FamilyRole>
+<r:Code>03</r:Code>
+<r:Label>Tochter</r:Label></r:FamilyRole>
+<r:NationalNumber>
+<r:NationalNumber>971207 001-67</r:NationalNumber>
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>97</r:Year>
+<r:Month>12</r:Month>
+<r:Day>7</r:Day></r:Date>
+<r:Sex>1</r:Sex></r:NationalNumber>
+<r:Name>
+<r:LastName>
+<r:Code>10598298</r:Code>
+<r:Label>Abbas</r:Label></r:LastName>
+<r:FirstName>
+<r:Code>00015769</r:Code>
+<r:Label>Amédée</r:Label></r:FirstName>
+<r:FirstName>
+<r:Code>00019908</r:Code>
+<r:Label>Adèle</r:Label></r:FirstName></r:Name></r:HeadOfFamily></r:HeadOfFamily>
+<r:IdentityCards xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:IdentityCard Type="195" Structure="F1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>10</r:Month>
+<r:Day>22</r:Day></r:Date>
+<r:TypeOfCard>
+<r:Code>0000</r:Code>
+<r:Label>P.A.</r:Label></r:TypeOfCard>
+<r:CardNumber>595488123456</r:CardNumber>
+<r:Delivery>
+<r:Place>
+<r:Code>63067</r:Code>
+<r:Label>Sankt Vith</r:Label></r:Place></r:Delivery>
+<r:ExpiryDate>
+<r:Century>20</r:Century>
+<r:Year>25</r:Year>
+<r:Month>04</r:Month>
+<r:Day>17</r:Day></r:ExpiryDate></r:IdentityCard>
+<r:IdentityCard Type="195" Structure="F1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>13</r:Year>
+<r:Month>05</r:Month>
+<r:Day>02</r:Day></r:Date>
+<r:DelDate>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>04</r:Month>
+<r:Day>17</r:Day></r:DelDate>
+<r:TypeOfCard>
+<r:Code>0000</r:Code>
+<r:Label>P.A.</r:Label></r:TypeOfCard>
+<r:CardNumber>427003123456</r:CardNumber>
+<r:Delivery>
+<r:Place>
+<r:Code>63067</r:Code>
+<r:Label>Sankt Vith</r:Label></r:Place></r:Delivery>
+<r:ExpiryDate>
+<r:Century>20</r:Century>
+<r:Year>18</r:Year>
+<r:Month>03</r:Month>
+<r:Day>01</r:Day></r:ExpiryDate></r:IdentityCard>
+<r:IdentityCard Type="195" Structure="F1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>08</r:Year>
+<r:Month>04</r:Month>
+<r:Day>25</r:Day></r:Date>
+<r:DelDate>
+<r:Century>20</r:Century>
+<r:Year>13</r:Year>
+<r:Month>03</r:Month>
+<r:Day>01</r:Day></r:DelDate>
+<r:TypeOfCard>
+<r:Code>0000</r:Code>
+<r:Label>P.A.</r:Label></r:TypeOfCard>
+<r:CardNumber>427003123455</r:CardNumber>
+<r:Delivery>
+<r:Place>
+<r:Code>63067</r:Code>
+<r:Label>Sankt Vith</r:Label></r:Place></r:Delivery>
+<r:ExpiryDate>
+<r:Century>20</r:Century>
+<r:Year>13</r:Year>
+<r:Month>03</r:Month>
+<r:Day>19</r:Day></r:ExpiryDate></r:IdentityCard>
+<r:IdentityCard Type="195" Structure="A2">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>01</r:Year>
+<r:Month>02</r:Month>
+<r:Day>09</r:Day></r:Date>
+<r:TypeOfCard>
+<r:Code>0000</r:Code>
+<r:Label>P.A.</r:Label></r:TypeOfCard>
+<r:CardNumber>427003123454</r:CardNumber></r:IdentityCard>
+<r:IdentityCard Type="195" Structure="A2">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>91</r:Year>
+<r:Month>05</r:Month>
+<r:Day>23</r:Day></r:Date>
+<r:TypeOfCard>
+<r:Code>0000</r:Code>
+<r:Label>P.A.</r:Label></r:TypeOfCard>
+<r:CardNumber>427003123453</r:CardNumber></r:IdentityCard>
+<r:IdentityCard Type="195" Structure="A2">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>86</r:Year>
+<r:Month>07</r:Month>
+<r:Day>04</r:Day></r:Date>
+<r:TypeOfCard>
+<r:Code>0000</r:Code>
+<r:Label>P.A.</r:Label></r:TypeOfCard>
+<r:CardNumber>427003123452</r:CardNumber></r:IdentityCard>
+<r:IdentityCard Type="195" Structure="A1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>81</r:Year>
+<r:Month>03</r:Month>
+<r:Day>31</r:Day></r:Date>
+<r:TypeOfCard>
+<r:Code>0000</r:Code>
+<r:Label>P.A.</r:Label></r:TypeOfCard>
+<r:CardNumber>427003123451</r:CardNumber>
+<r:Delivery>
+<r:Place>
+<r:Code>63067</r:Code>
+<r:Label>Sankt Vith</r:Label></r:Place></r:Delivery></r:IdentityCard></r:IdentityCards>
+<r:Passports xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:Passport Type="199" Structure="A2">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>88</r:Year>
+<r:Month>09</r:Month>
+<r:Day>12</r:Day></r:Date>
+<r:Status>
+<r:Code>0</r:Code>
+<r:Label>Austel.</r:Label></r:Status>
+<r:PassportIdent>
+<r:PassportType>
+<r:Code>0</r:Code>
+<r:Label>Reisepass</r:Label></r:PassportType>
+<r:PassportNumber>AE 123456</r:PassportNumber></r:PassportIdent>
+<r:Issuer>
+<r:Place>
+<r:Code>63067</r:Code>
+<r:Label>Sankt Vith</r:Label></r:Place></r:Issuer>
+<r:RenewalNumber>00</r:RenewalNumber>
+<r:SerialNumber>00002616</r:SerialNumber>
+<r:ExpiryDate>
+<r:Century>19</r:Century>
+<r:Year>93</r:Year>
+<r:Month>09</r:Month>
+<r:Day>11</r:Day></r:ExpiryDate></r:Passport></r:Passports>
+<r:ResidenceUpdateDates xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema">
+<r:ResidenceUpdateDate Type="251" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>04</r:Month>
+<r:Day>29</r:Day></r:Date></r:ResidenceUpdateDate>
+<r:ResidenceUpdateDate Type="251" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>15</r:Year>
+<r:Month>04</r:Month>
+<r:Day>29</r:Day></r:Date></r:ResidenceUpdateDate></r:ResidenceUpdateDates>
+<r:CreationDate xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema" Type="253" Structure="A1">
+<r:Date>
+<r:Century>19</r:Century>
+<r:Year>72</r:Year>
+<r:Month>03</r:Month>
+<r:Day>30</r:Day></r:Date></r:CreationDate>
+<r:LastUpdateDate xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema" Type="254" Structure="A1">
+<r:Date>
+<r:Century>20</r:Century>
+<r:Year>16</r:Year>
+<r:Month>06</r:Month>
+<r:Day>26</r:Day></r:Date></r:LastUpdateDate></rrn_it_implicit></v1:retrieveTIGroupsResponse></soapenv:Body></soapenv:Envelope>

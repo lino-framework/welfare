@@ -19,6 +19,17 @@
 """Fills in a suite of fictive CBSS requests using simulated responses
 in order to avoid live requests to the CBSS.
 
+
+.. rubric:: Files
+
+.. xfile:: garble_tx25.py
+
+    A utility file used to garble the content of real Tx25 responses so
+    that they can be used as test samples without disclosing any
+    confidential data.
+
+
+
 """
 
 import os
@@ -69,7 +80,13 @@ def objects():
          'demo_tx25_3.xml'],
         [cbss.RetrieveTIGroupsRequest,
          dict(national_id='980526 001-51', history=True),
-         'tx25_1107.xml'],
+         'tx25_1107.xml'], # Type not found: 'r:CourtName'
+        [cbss.RetrieveTIGroupsRequest,
+         dict(national_id='980526 001-51', history=True),
+         'tx25_1358.xml'],  # No handler for ParentalAuthorities
+        [cbss.RetrieveTIGroupsRequest,
+         dict(national_id='980526 001-51', history=True),
+         'tx25_1373.xml'],  # DeliveryType206 instance has no attribute 'Place'
     ]
 
     User = settings.SITE.user_model

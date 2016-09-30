@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2015 Luc Saffre
+# Copyright 2012-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -36,7 +36,6 @@ See :ref:`welfare.specs.cbss`.
 
 .. rubric:: Plugin configuration
 
-
 """
 
 from lino import ad
@@ -44,6 +43,10 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Plugin(ad.Plugin):
+    """The descriptor for this plugin. See
+    :class:`lino.core.plugin.Plugin`.
+
+    """
     verbose_name = _("CBSS")
 
     needs_plugins = ['lino_welfare.modlib.integ']
