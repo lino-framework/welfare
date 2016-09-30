@@ -474,7 +474,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
         verbose_name = _("Tx25 Request")
         verbose_name_plural = _('Tx25 Requests')
 
-    wsdl_parts = ('cache', 'wsdl', 'RetrieveTIGroupsV3.wsdl')
+    wsdl_parts = ('cache', 'wsdl', 'RetrieveTIGroups.wsdl')
 
     language = RequestLanguages.field(
         blank=True,
@@ -714,13 +714,14 @@ def setup_site_cache(self, force):
         open(fn, 'wt').write(s)
         logger.info("Generated %s for environment %r.", fn, environment)
 
-    make_wsdl('RetrieveTIGroupsV3.wsdl', RetrieveTIGroupsRequest.wsdl_parts)
+    # make_wsdl('RetrieveTIGroupsV3.wsdl', RetrieveTIGroupsRequest.wsdl_parts)
+    make_wsdl('RetrieveTIGroups.wsdl', RetrieveTIGroupsRequest.wsdl_parts)
     make_wsdl('WebServiceConnector.wsdl', SSDNRequest.wsdl_parts)
     # make_wsdl('TestConnectionService.wsdl',TestConnectionRequest.wsdl_parts)
 
     # The following xsd files are needed, unmodified but in the same directory
     # for fn in 'RetrieveTIGroupsV3.xsd', 'rn25_Release201104.xsd', 'TestConnectionServiceV1.xsd':
-    for fn in 'RetrieveTIGroupsV3.xsd', 'rn25_Release201104.xsd':
+    for fn in 'RetrieveTIGroupsV5.xsd', 'rn25_Release201411.xsd':
         src = os.path.join(os.path.dirname(__file__), 'XSD', fn)
         target = os.path.join(settings.MEDIA_ROOT, 'cache', 'wsdl', fn)
         if not os.path.exists(target):

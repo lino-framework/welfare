@@ -74,7 +74,7 @@ The following table gives an overview of these things.
  cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     21        5
  cbss.ManageAccessRequest       cbss.ManageAccessRequests       24        1
  cbss.Purpose                   cbss.Purposes                   7         106
- cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        3
+ cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        4
  cbss.Sector                    cbss.Sectors                    11        209
  changes.Change                 changes.Changes                 9         0
  contacts.Company               contacts.Companies              29        51

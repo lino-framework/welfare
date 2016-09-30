@@ -4,19 +4,21 @@
          * Author :                    	Davy Tielens
          * Owner :                    	CBSS
          * Creation date :          	29-04-10
-         * Last revision date :    	09/03/2011
+         * Last revision date :     
          * Status :                    	Planned
          * Description :             	WSDL for webservice enabling the PCSA's to fetch TI's from the NR
          * Current version :        	0.2
          * Revision History : 		0.1 - 29-04-10 - DTI - Initial version
 												0.2 - 29-07-10 - MDS - Completion of first version of WSDL
 												0.3  09/03/2011  ATI change schema RRN 2009 vs 2011
-												0.4  17/11/2011 ATI change schema RRN 201104 vs 20103
+												0.4  17/11/2011 ATI change schema RRN 2011.04 vs 2011.03
+												0.5  27/09/2012 AT change schema RRN 2012.00 vs 2011.04
+ 		23/11/2014 : (ATI) schema rn25_Release201400.xsd
 ============================================================================================================= -->
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RetrieveTIGroupsService" targetNamespace="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v1">
 	<wsdl:types>
-		<xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" xmlns:rtg="http://kszbcss.fgov.be/types/RetrieveTIGroups/v1" targetNamespace="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v1">
-			<xsd:import namespace="http://kszbcss.fgov.be/types/RetrieveTIGroups/v1" schemaLocation="RetrieveTIGroupsV3.xsd"/>
+		<xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" xmlns:rtg="http://kszbcss.fgov.be/types/RetrieveTIGroups/v1" targetNamespace="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v1" version="2014-11-23">
+			<xsd:import namespace="http://kszbcss.fgov.be/types/RetrieveTIGroups/v1" schemaLocation="RetrieveTIGroupsV5.xsd"/>
 			<xsd:element name="retrieveTIGroupsRequest" type="rtg:RetrieveTIGroupsRequestType"/>
 			<xsd:element name="retrieveTIGroupsResponse" type="rtg:RetrieveTIGroupsResponseType"/>
 			<xsd:element name="retrieveTIGroupsFault" type="rtg:RetrieveTIGroupsFaultType"/>
@@ -55,11 +57,11 @@
 	</wsdl:binding>
 	<wsdl:service name="RetrieveTIGroupsService">
 		<wsdl:port binding="tns:RetrieveTIGroupsServiceHTTPBinding" name="RetrieveTIGroupsService">
-		<!-- soap:address location -->
+			<!-- soap:address location -->
 			<!--dvlp : bcssksz-services-test.smals.be -->
-			<!--acpt: bcssksz-services-acc.smals.be -->
-			<!-- prod: bcssksz-services-prod.smals.be-->
-			<soap:address location="https://bcssksz-services-%(cbss_environment)s.smals.be:443/SOA4520/RetrieveTIGroupsService/retrieveTI"/>
+			<!--acpt:bcssksz-services-acc.smals.be -->
+			<!-- prod:bcssksz-servicesprod.smals.be-->
+			<soap:address location="https://b2b-%(cbss_environment)s.ksz-bcss.fgov.be:4520/RetrieveTIGroupsService/retrieveTI"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

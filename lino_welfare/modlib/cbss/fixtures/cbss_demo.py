@@ -67,6 +67,9 @@ def objects():
         [cbss.RetrieveTIGroupsRequest,
          dict(national_id='680307 001-74', history=True),
          'demo_tx25_3.xml'],
+        [cbss.RetrieveTIGroupsRequest,
+         dict(national_id='980526 001-51', history=True),
+         'tx25_1107.xml'],
     ]
 
     User = settings.SITE.user_model
@@ -82,7 +85,7 @@ def objects():
         obj = model(**kw)
         if fn:
             fn = os.path.join(os.path.dirname(__file__), fn)
-            xml = open(fn).read()
+            xml = open(fn).read().decode('utf-8')
             obj.execute_request(simulate_response=xml)
             #~ print obj.debug_messages
         yield obj
