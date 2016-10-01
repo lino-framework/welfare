@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre.
+# Copyright 2015-2016 Luc Saffre.
 # License: BSD, see LICENSE for more details.
 
 """This is the :xfile:`make_screenshots.py` script for `docs_de`.

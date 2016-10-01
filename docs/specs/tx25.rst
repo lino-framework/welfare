@@ -1,0 +1,404 @@
+.. _tx25:
+.. _welfare.specs.tx25:
+
+=============
+Tx25 requests
+=============
+
+.. to test only this document:
+
+    $ python setup.py test -s tests.SpecsTests.test_tx25
+
+    doctest init:
+
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
+    >>> from lino.api.doctest import *
+
+  
+"Transaction 25" or "Tx25" is an alias for the rather complicated name
+"RetrieveTIGroupsRequest" service at the :ref:`CBSS <cbss>`.  The short description of this :ref:`cbss`
+service is "Interrogation sur certains types d’informations légales"
+(in `Codes d'interrogations
+<http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/fr/instructions/instr_annexe3_liste_interrogations.pdf>`_).
+
+Table of contents:
+
+.. contents::
+   :local:
+
+
+Supported information groups
+============================
+
+Here is an incomplete list of the supported TIs (incomplete because
+the first handlers were written with an older syntax which did not
+worry about how to generate a documentation page for them):
+
+.. py2rst::
+
+    from lino_welfare.modlib.cbss.tx25 import HANDLERS
+    tpl = "- {0} ({1}) : {2} "
+    for name, v in HANDLERS.items():
+        label, subname, itname = v
+        print(tpl.format(name, itname, unicode(label)))
+
+
+
+The history of requests
+=======================
+
+Lino keeps track of every Tx25 request made. 
+
+>>> rt.show(cbss.RetrieveTIGroupsRequests,
+...     column_names='user person environment status ticket')
+... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
+================= ========================= ======= ========= ======================================
+ Autor             Klient                    T/A/B   Zustand   Ticket
+----------------- ------------------------- ------- --------- --------------------------------------
+ Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK        db1521da-3a61-43c0-b500-e96e9dd5c0ee
+ Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK        770c5e7d-8555-4ddd-9787-4e4f416c3d21
+ Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK        cd241a8b-2092-4f0c-b9d9-53a3707cdc3d
+ Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK        5448d29b-7098-478c-b3ac-f3d51a86f658
+ Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK        fc9b0c4a-ed38-4938-bb17-ea8f05be90bc
+ Hubert Huppertz   AUSDEMWALD Alfons (116)   demo    OK        42aa2b95-e25d-47a5-beb1-4e3aebc4f09e
+================= ========================= ======= ========= ======================================
+<BLANKLINE>
+
+
+Since the responses of many CBSS requests contain confidential data
+about citizens, we have some rules for accessing this data.
+
+- Only the user who initiated the request can see the results.
+- Even the System Administrator cannot print nor see the detail of a
+  CBSS request of other users.
+- Only a *Security advisor* can see all data. Lino keeps a journal of
+  every login as a security advisor.
+
+
+We retrieve Tx25 no. 1 from the database. User Hubert (the social
+agent who issued the request) can see the result:
+
+>>> obj = cbss.RetrieveTIGroupsRequest.objects.get(pk=1)
+>>> ses = rt.login('hubert')
+>>> with translation.override('de'):
+...    ses.show(cbss.RetrieveTIGroupsResult, obj)
+============================== ===== ========== ====================================================================================================================================================================
+ Gruppe                         TI    Seit       Information
+------------------------------ ----- ---------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ NR-Nummer                            02.07.68   **68070201351** (Männlich)
+ Wohnsitze                      001   18.10.01   **Estland** (136), Fusion: **0**, Sprache: **2**
+                                      02.07.68   **Eupen** (63023), Fusion: **0**, Sprache: **2**
+ Namen                          010   02.07.68   **Mustermann**, Max Moritz
+ Legale Hauptadressen           020   30.07.97   **4700**, **Gülcherstrasse**, Nr. **21**
+ Wohnsitz im Ausland            022   30.12.06   Address, PosteDiplomatique **Tallinn** (1418) **Estland** (136) **Estland** (136), **Bussijaama 2**, **10115 Tallinn**, **ESTONIA**
+ Nationalitäten                 031   02.07.68   **Belgien** (150)
+ Beschäftigungen                070   07.10.00   **Programmierer(in)** (09617) (SC  (9))
+ Geburtsort                     100   02.07.68   in **Eupen** (63023), Akte Nr. **00000**
+ Abstammung                     110   02.07.68   **Eheliches Kind** (00), von **Mustermann**, Michel Victor Edouard Henri (**33072102106**), und **Ausdemwald**, Anneliese (**34080402453**)
+ Zivilstände                    120   07.10.00   **Verheiratet** (20), mit **Kasemets**, Kati (68042700000), in Place1 **Eupen** (63023), Akte Nr. **0098**
+ Familienmitglieder             140   19.10.01   **Alleinstehend** (01)
+ Familienoberhaupt              141   01.06.68   **Mustermann**, Michel Victor Edouard Henri (**33072102106**), als **Sohn** (03) (bis 30.10.96)
+ Führerscheine (altes Modell)   194   06.02.87   **Zuteil.** (00), Kategorien B, Nr. **A043127**, ausgestellt in in **Eupen** (63023)
+ Personalausweise               195   26.10.11   **P.A.** (0000) Nr. **591413288107**, gültig bis 19.08.16, ausgestellt in **Tallinn** (1418)
+ Reisepässe                     199   23.09.02   Status: **Austel.** (0), Typ **Reisepass** (0), Nr. **EC51643900**, ausgestellt durch **Helsinki** (1262) (Botschaft), Erneuerungsnr.: **00**, gültig bis 22.09.07
+ Erstelldatum                   253   05.09.15
+ Zuletzt geändert               254   26.10.11
+============================== ===== ========== ====================================================================================================================================================================
+<BLANKLINE>
+
+Any other user, even a site admin, cannot see the result:
+
+>>> ses = rt.login('rolf')
+>>> with translation.override('de'):
+...    ses.show(cbss.RetrieveTIGroupsResult, obj, limit=5)
+Confidential data
+
+Except for users of the special user type who can see results of all
+requests (but the Lino log files keep track of when that user logged
+in).
+
+
+Printing a Tx25
+===============
+
+
+>>> ses = rt.login('hubert')
+>>> rv = ses.run(obj.do_print)
+>>> print(rv['success'])
+True
+>>> print(rv['open_url'])
+... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+/.../cbss.RetrieveTIGroupsRequest-1.odt
+
+
+
+More examples of Tx25 results
+=============================
+
+This section is mostly for testing purposes.
+
+>>> ses = rt.login('hubert')
+>>> def showit(pk):
+...     obj = cbss.RetrieveTIGroupsRequest.objects.get(pk=pk)
+...     with translation.override('de'):
+...         ses.show(cbss.RetrieveTIGroupsResult, obj)
+>>> showit(2)  #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+============================== ===== ========== ===============================================================================================================================================================================
+ Gruppe                         TI    Seit       Information
+------------------------------ ----- ---------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ NR-Nummer                            07.03.68   **68030700123** (Männlich)
+ Wohnsitze                      001   07.03.68   **Eupen** (63023), Fusion: **0**, Sprache: **2**
+ Namen                          010   07.03.68   **Mustermann**, Frédéric Franz
+ Legale Hauptadressen           020   17.11.04   **4701**, **Aachener Strasse**, Nr. **123**
+                                      17.12.98   **4700**, **Binsterweg**, Nr. **12**
+                                      02.12.97   **4700**, **Maria-Theresia-Strasse**, Nr. **12**
+                                      12.01.97   **4701**, **Feldstrasse**, Nr. **12**
+                                      10.05.95   **4700**, **Bahnhofstrasse**, Nr. **1**
+                                      25.06.73   **4700**, **Maria-Theresia-Strasse**, Nr. **12**
+                                      06.10.70   **4700**, **Obere Ibern**, Nr. **12**
+                                      15.06.00   **4700**, **Monschauer Strasse**, Nr. **12**
+ Nationalitäten                 031   07.03.68   **Belgien** (150)
+ Beschäftigungen                070   06.06.06   **Informatiker(in)** (09620) (SC **(Gehalt.)** (4))
+                                      02.12.93   **Angestellte(r)** (20928) (SC **(Gehalt.)** (4))
+                                      22.03.84   **Schüler(in)** (04001) (SC  (9))
+                                      07.03.80   **Ohne Beruf** (00002) (SC  (9))
+ Geburtsort                     100   07.03.68   in **Eupen** (63023), Akte Nr. **00000**
+ Abstammung                     110   07.03.68   **Eheliches Kind** (00), von **Mustermann**, Olivier Franz Frédéric (**40032303737**), und **Ausdemwald**, Maria Magdalena (**40010400251**)
+ Zivilstände                    120   06.06.06   **Verheiratet** (20), mit **Mergelsberg**, Mélanie Anna (75081900208), in Place1 **Eupen** (63023), Akte Nr. **0055**
+                                      08.06.98   **Geschieden** (41), in Tribunal **Entscheid des erstinstanzlichen Gerichtes** (01), Date 08.05.98, Place **Eupen** (63023), Akte Nr. **0063**
+                                      30.12.95   **Verheiratet** (20), mit **Keutgens**, Claudia (70042500230), in Place1 **Eupen** (63023), Akte Nr. **0159**
+                                      07.03.68   **Unverheiratet** (10)
+ Legale Kohabitationen          123   06.06.06   Beendigung: Begründung: **Eheschliessung** (01), in **Eupen** (63023)
+                                      20.11.03   Deklaration: 21.11.03, mit **75081900208** **Mergelsberg**, Mélanie Anna, in **Eupen** (63023)
+ Familienmitglieder             140   02.12.97   **Alleinstehend** (01) (bis 18.11.03)
+                                      30.12.95   **Gemahlin** (02), in Familie mit Vorstand **Keutgens**, Claudia (**70042500230**) (bis 02.12.97)
+                                      06.06.06   **Gemahlin** (02), in Familie mit Vorstand **Mergelsberg**, Mélanie Anna (**75081900208**)
+                                      10.05.95   **nicht verwandt** (12), in Familie mit Vorstand **Keutgens**, Claudia (**70042500230**) (bis 30.12.95)
+                                      18.11.03   **nicht verwandt** (12), in Familie mit Vorstand **Mergelsberg**, Mélanie Anna (**75081900208**) (bis 06.06.06)
+ Familienoberhaupt              141   07.03.68   **Mustermann**, Olivier Franz Frédéric (**40032303737**), als **Sohn** (03) (bis 10.05.95)
+ Organspenden                   192   27.04.12   **Ausdrückliches Einverständnis** (20), in **Eupen** (63023)
+ Führerscheine (altes Modell)   194   01.10.86   **Zuteil.** (00), Kategorien B, Nr. **A043009**, ausgestellt in in **Eupen** (63023)
+                                      06.06.86   **Zuteil.** (00), Kategorien AGFS kl. B, Nr. **J000730**, ausgestellt in in **Eupen** (63023)
+ Personalausweise               195   09.02.10   **P.A.** (0000) Nr. **591020075668**, gültig bis 16.01.15, ausgestellt in **Eupen** (63023)
+                                      19.04.05   **P.A.** (0000) Nr. **590057563866**
+                                      05.02.01   **P.A.** (0000) Nr. **427003700404**
+                                      10.05.91   **P.A.** (0000) Nr. **427001773336**
+                                      18.08.86   **P.A.** (0000) Nr. **427000131309**
+                                      22.03.84   **P.A.** (0000) Nr. **AL 093189**, ausgestellt in **Eupen** (63023)
+                                      11.03.80   **P.A.** (0000) Nr. **AL 011283**, ausgestellt in **Eupen** (63023)
+                                      08.03.68   **P.A. Kd. ** (0060) Nr. **   005749**, ausgestellt in **Eupen** (63023)
+ Reisepässe                     199   31.01.11   Status: **Ausstellung** (0), Typ **Reisepass** (0), Nr. **EH960150  **, ausgestellt durch **Eupen** (63023), Erneuerungsnr.: **00**, prodziert: 21.01.11, gültig bis 20.01.16
+ Erstelldatum                   253   05.09.15
+ Zuletzt geändert               254   27.04.12
+============================== ===== ========== ===============================================================================================================================================================================
+<BLANKLINE>
+
+
+>>> showit(3)  #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS +REPORT_UDIFF
+======================== ===== ========== ======================================================================================================================================================================================
+ Gruppe                   TI    Seit       Information
+------------------------ ----- ---------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ NR-Nummer                      26.05.98   **980526 001-51** (Männlich)
+ Wohnsitze                001   16.11.15   **Eupen** (63023), Fusion: **0**, Sprache: **2**
+                                23.07.92   **Deutschland (Bundesrep.)** (103), Fusion: **0**, Sprache: **2**
+                                20.12.91   **Kelmis** (63040), Fusion: **0**, Sprache: **2**
+                                20.01.88   **Deutschland (Bundesrep.)** (103), Fusion: **0**, Sprache: **2**
+                                09.05.72   **Limbourg** (63046), Fusion: **0**, Sprache: **2**
+                                17.12.70   **Membach** (63051), Fusion: **0**, Sprache: **2**
+                                20.12.67   **Henri-Chapelle** (63032), Fusion: **0**, Sprache: **2**
+ Adressänderungsabsicht   005   16.11.15   Umziehen nach **Eupen** (63023)
+                                25.04.72   Wegziehen aus **Membach** (63051)
+ Ursprungsländer          006   16.11.15   **Deutschland (Bundesrep.)** (103) **Niederkassel,Bergtraße**
+                                20.12.91   **Deutschland (Bundesrep.)** (103) **Niederkassel,Bahnhofstr.7**
+ Namen                    010   13.10.53   **Adam**, Albert
+ Legale Hauptadressen     020   16.11.15   **4700**, **Hütte**, Nr. **12**
+                                20.12.91   **4720**, **Kirchstrasse**, Nr. **33**
+                                14.04.82   **4830**, **Rue Oscar Thimus**, Nr. **123**
+                                09.05.72   **4830**, **Avenue Victor David**, Nr. **31**
+                                17.12.70   **4837**, **Rue du Moulin(MCH)**, Nr. **112** **A000**
+ Wohnsitz im Ausland      022   30.05.15   Address, PosteDiplomatique **Berlin** (1202) **Deutschland (Bundesrep.)** (103) **Deutschland (Bundesrep.)** (103), **Kirchstr. 38**, **53859 Niederkassel-Lulsdorf** (bis 16.11.15)
+                                16.04.07   Address, PosteDiplomatique **Köln** (1207) **Deutschland (Bundesrep.)** (103) **Deutschland (Bundesrep.)** (103), **Kirchstr. 123**, **53859 Niederkassel**, **GERMANY**
+                                13.12.06   Address, PosteDiplomatique **Köln** (1207) **Deutschland (Bundesrep.)** (103) **Deutschland (Bundesrep.)** (103), **Bonner Str. 12**, **53842 Troisdorf**, **GERMANY**
+                                22.06.99   Address, PosteDiplomatique **Köln** (1207) **Deutschland (Bundesrep.)** (103) **Adenauerstrasse 12 - 53842 Troisdorf**
+                                30.11.81   Address, PosteDiplomatique **Frankfurt am Main** (1204) **Deutschland (Bundesrep.)** (103) ** D 5300 BONN,IN DER WEHRHECKE 12** (bis 08.01.92)
+                                05.03.81   Address, PosteDiplomatique **Frankfurt am Main** (1204) **Deutschland (Bundesrep.)** (103) ** 5841 KRAELINGEN,VILMAHOHE 123**
+ Postadresse im Ausland   023   30.11.81   Datum: 30.11.81, **D 5300 BONN,IN DER WEHRHEDKE 12 ** (bis 08.01.92)
+                                05.03.81   Datum: 05.03.81, **D 5841 KRAELINGEN,VILMAHOHE 123 **
+ Nationalitäten           031   13.10.53   **Belgier/in/** (150)
+ Beschäftigungen          070   18.02.02   **Kellner(in)** (91401) (SC **(Lohn.)** (3))
+                                22.06.99   **Hausfrau** (91102) (SC  (9))
+                                20.12.91   **Kabarettier** (30228) (SC **(Selbst.)** (2))
+                                01.03.81   **Tagelöhner(in)** (89915) (SC **(Lohn.)** (3))
+                                09.05.72   **Ohne Beruf** (00002) (SC  (9))
+ Geburtsort               100   13.10.53   in **Raeren** (63061), Akte Nr. **00000**
+ Abstammung               110   13.10.53   **Kind** (00), von **Adam**, Ilja Noémie Odette Pascale (**971207 001-67**), und **Adam**, Alicia Hans (**960715 002-61**)
+ Zivilstände              120   15.09.94   **Geschieden** (40), mit **Adam**, Andreas (970101 001-73), in Place2 **Deutschland (Bundesrep.)** (103), **Siegburg**, Akte Nr. **0254**
+                                04.12.84   **Verheiratet** (20), mit **Adam**, Annette (950221 001-20), in Place2 **Deutschland (Bundesrep.)** (103), **Niederkassel**
+                                24.11.83   **Geschieden** (40), in Place2 **Deutschland (Bundesrep.)** (103)
+                                03.06.72   **Verheiratet** (20), mit **Adam**, Alfons Laurent Bernard Bruno (900627 002-53), in Place1 **Eupen** (63023)
+                                13.10.53   **Unverheiratet** (10)
+ Familienmitglieder       140   16.11.15   Housing  (00), **Alleinstehende** (01)
+                                04.11.81   **Alleinstehende** (01) (bis 05.01.84)
+                                11.02.92   **Sohn** (03), in Familie mit Vorstand **Adam**, Jan Bruno (**890722 001-93**) (bis 23.07.92)
+                                11.02.92   **Sohn** (03), in Familie mit Vorstand **Adam**, Kevin (**900108 001-07**) (bis 17.07.92)
+                                20.12.91   **Tochter** (03), in Familie mit Vorstand **Adam**, Lars (**921024 001-20**) (bis 16.11.15)
+                                20.12.91   **Tochter** (03), in Familie mit Vorstand **Adam**, Monique (**901214 001-01**) (bis 16.11.15)
+ Familienoberhaupt        141   05.01.84   **Adam**, Alicia Hans (**960715 002-61**), als **Tochter** (03) (bis 20.12.91)
+                                03.06.72   **Adam**, Alfons Laurent Bernard Bruno (**900627 002-53**), als **Gemahlin** (02) (bis 04.11.81)
+ Personalausweise         195   14.06.72   **P.A.** (0000) Nr. **AE 123456**, ausgestellt in **Limbourg** (63046)
+ Reisepässe               199   25.07.00   Status: **Austel.** (0), Typ **Reisepass** (0), Nr. **AE 234567**, ausgestellt durch **Köln** (1207) (Botschaft), Erneuerungsnr.: **00**, gültig bis 24.07.05
+ Wohnsitzänderungen       251   19.11.15
+ Erstelldatum             253   12.03.71
+ Zuletzt geändert         254   19.11.15
+======================== ===== ========== ======================================================================================================================================================================================
+<BLANKLINE>
+
+
+>>> showit(4)  #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+============================= ===== ========== ==========================================================================================================================
+ Gruppe                        TI    Seit       Information
+----------------------------- ----- ---------- --------------------------------------------------------------------------------------------------------------------------
+ NR-Nummer                           26.05.98   **980526 001-51** (Männlich)
+ Wohnsitze                     001   13.02.84   **Eupen** (63023), Fusion: **0**, Sprache: **2**
+ Namen                         010   13.02.84   **Abbas**, Ambroise
+ Adressänderungs-Deklaration   019   14.10.15   **4700(2901) Nöretherstrasse,14**
+ Legale Hauptadressen          020   06.01.15   **4700**, **Bergkapellstrasse**, Nr. **12**
+                                     24.05.12   **4700**, **Hostert**, Nr. **13**
+                                     29.03.11   **4700**, **Hochstrasse**, Nr. **14**
+                                     24.04.08   **4700**, **Kaperberg**, Nr. **15**
+                                     03.12.02   **4700**, **Herbesthaler Strasse**, Nr. **16** **   B**
+                                     14.05.85   **4700**, **Nöretherstrasse**, Nr. **17**
+                                     13.02.84   **4700**, **Werthplatz**, Nr. **18**
+ Nationalitäten                031   13.02.84   **Belgier/in/** (150)
+ Beschäftigungen               070   25.03.06   **Ohne Beruf** (00002) (SC  (9))
+ Geburtsort                    100   13.02.84   in **Eupen** (63023), Akte Nr. **00000**
+ Abstammung                    110   13.02.84   **Kind** (00), von **Abbas**, Adélaïde Amédée (**971207 001-67**), und **Bah**, Adèle Anastase Agnès (**960715 002-61**)
+ Zivilstände                   120   20.01.15   **Geschieden** (41), mit **Adriaen**, Arthur Alix (970101 001-73), in Date 27.11.14, Akte Nr. **0011**
+                                     25.03.06   **Verheiratet** (20), mit **Adriaen**, Arthur Alix (970101 001-73), in Place1 **Eupen** (63023), Akte Nr. **0030**
+                                     13.02.84   **Unverheiratet** (10)
+ Familienoberhaupt             141   24.05.12   **Abbasi**, Augustin (**950221 001-20**), als **nicht verwandt** (12), Housing  (00)
+                                     25.03.06   **Adriaen**, Arthur Alix (**970101 001-73**), als **Gemahlin** (02) (bis 24.05.12)
+                                     03.12.02   **Adriaen**, Arthur Alix (**970101 001-73**), als **nicht verwandt** (12)
+                                     13.02.84   **Abbas**, Adélaïde Amédée (**971207 001-67**), als **Tochter** (03)
+ Personalausweise              195   31.08.15   **P.A.** (0000) Nr. **AE 123456**, gültig bis 07.07.25, ausgestellt in **Eupen** (63023)
+                                     07.07.15   **Anlage 12-Bescheinigung ** (0120) Nr. **AE 234567**, gültig bis 07.08.15, ausgestellt in **Eupen** (63023)
+                                     10.05.10   **P.A.** (0000) Nr. **AE 345678**, gültig bis 21.04.15, ausgestellt in **Eupen** (63023)
+                                     26.05.05   **P.A.** (0000) Nr. **AE 456789**
+                                     23.05.01   **P.A.** (0000) Nr. **AE 567890**
+                                     09.02.96   **P.A.** (0000) Nr. **AE 123456**
+                                     13.02.92   **P.A. Kd. ** (0060) Nr. **AE 234567**, ausgestellt in **Eupen** (63023)
+                                     14.02.84   **P.A. Kd. ** (0060) Nr. **AE 345678**, ausgestellt in **Eupen** (63023)
+ Erstelldatum                  253   14.02.84
+ Zuletzt geändert              254   14.10.15
+============================= ===== ========== ==========================================================================================================================
+<BLANKLINE>
+
+>>> showit(5)  #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+=============================== ===== ========== ===================================================================================================================================================================================
+ Gruppe                          TI    Seit       Information
+------------------------------- ----- ---------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ NR-Nummer                             26.05.98   **980526 001-51** (Männlich)
+ Wohnsitze                       001   01.04.15   **Sankt Vith** (63067), Fusion: **0**, Sprache: **2**
+                                       31.03.15   **Streichung von Amtswegen** (99991), Fusion: **0**, Sprache: **2**
+                                       01.01.77   **Sankt Vith** (63067), Fusion: **1**, Sprache: **2**
+                                       29.09.69   **Lommersweiler** (63047), Fusion: **0**, Sprache: **2**
+ Geprüfte legale Hauptadressen   003   31.03.15   **Décision du Collège** (bis 01.04.15)
+ Adressänderungsabsicht          005   01.04.15   Umziehen nach **Sankt Vith** (63067)
+                                       11.09.69   Wegziehen aus **Recht** (63063)
+ Namen                           010   09.12.68   **Abbas**, Ambroise Adélaïde
+ Legale Hauptadressen            020   01.04.15   **4783**, **Wiesenbach**, Nr. **12**
+                                       18.04.14   **4780**, **Roderstal,Galhausen**, Nr. **13**
+                                       10.06.13   **4780**, **von-Dhaem-Strasse**, Nr. **14**
+                                       26.11.04   **4780**, **Roderstal,Galhausen**, Nr. **15** **A000**
+                                       01.02.96   **4780**, **Steinefeld,Galhausen**, Nr. **16**
+                                       01.06.92   **4780**, **Luxemburger Strasse**, Nr. **17**
+                                       01.01.72   **4780**, **Roderstal,Galhausen**, Nr. **18**
+                                       01.01.72   **4780**, **Roderstal,Galhausen**, Nr. **19** **A000**
+                                       29.09.69   **4780**, **Braunlaufweg,Galhausen**, Nr. **20**
+ Referenzadressen                024   01.04.15
+ Nationalitäten                  031   09.12.68   **Belgier/in/** (150)
+ Geburtsort                      100   09.12.68   in **Sankt Vith** (63067), Akte Nr. **00000**
+ Abstammung                      110   09.12.68   **Kind** (00), von **Abbas**, Amédée Adèle (**971207 001-67**), und **Bah**, Anastase Agnès (**960715 002-61**)
+ Parental authorities            111   13.05.15   Datum: 13.05.15, **Verfügung den Friedensrichters** (5), **Rechtliche Betreuung** (70)
+                                       27.03.15   Datum: 27.03.15, **Verfügung den Friedensrichters** (5), **Rechtliche Betreuung** (70)
+                                       19.03.13   Datum: 19.03.13, **Verfügung den Friedensrichters** (5), **Unter vorläufiger Verwaltung** (68)
+ Guardians                       113   13.05.15   Datum: 13.05.15, Status: **Betreuer für die Person** (31), Begründung: **Verfügung des Friedenrechters** (5)
+                                       27.03.15   Datum: 27.03.15, Status: **Betreuer für das Vermögen** (30), Begründung: **Verfügung des Friedenrechters** (5)
+                                       19.03.13   Datum: 19.03.13, Status: **Vorläufiger Verwalter** (24), Begründung: **Verfügung des Friedenrechters** (5)
+ Zivilstände                     120   09.12.68   **Unverheiratet** (10)
+ Familienmitglieder              140   18.04.14   Housing  (00), **Alleinstehende** (01)
+                                       21.09.05   **Alleinstehende** (01) (bis 27.06.11)
+                                       01.06.92   **Alleinstehende** (01) (bis 28.11.94)
+                                       11.12.12   Housing  (00), **Sohn** (03), in Familie mit Vorstand **Adriaen**, Arthur (**900627 002-53**) (bis 10.06.13)
+                                       28.11.94   **Sohn** (03), in Familie mit Vorstand **Adriaen**, Arthur (**900627 002-53**) (bis 21.09.05)
+                                       27.06.11   Housing  (00), **Mutter** (06), in Familie mit Vorstand **Bah**, Anastase Agnès (**960715 002-61**) (bis 10.06.13)
+ Familienoberhaupt               141   10.06.13   **Abbasi**, Alix (**890722 001-93**), als **nicht verwandt** (12), Housing  (00) (bis 18.04.14)
+                                       09.12.68   **Abbas**, Amédée Adèle (**971207 001-67**), als **Tochter** (03) (bis 01.06.92)
+ Personalausweise                195   22.10.15   **P.A.** (0000) Nr. **595488123456**, gültig bis 17.04.25, ausgestellt in **Sankt Vith** (63067)
+                                       02.05.13   **P.A.** (0000) Nr. **427003123456**, gültig bis 01.03.18, ausgestellt in **Sankt Vith** (63067)
+                                       25.04.08   **P.A.** (0000) Nr. **427003123455**, gültig bis 19.03.13, ausgestellt in **Sankt Vith** (63067)
+                                       09.02.01   **P.A.** (0000) Nr. **427003123454**
+                                       23.05.91   **P.A.** (0000) Nr. **427003123453**
+                                       04.07.86   **P.A.** (0000) Nr. **427003123452**
+                                       31.03.81   **P.A.** (0000) Nr. **427003123451**, ausgestellt in **Sankt Vith** (63067)
+ Reisepässe                      199   12.09.88   Status: **Austel.** (0), Typ **Reisepass** (0), Nr. **AE 123456**, ausgestellt durch **Sankt Vith** (63067), Erneuerungsnr.: **00**, Seriennr.: **00002616**, gültig bis 11.09.93
+ Wohnsitzänderungen              251   29.04.15
+                                       29.04.15
+ Erstelldatum                    253   30.03.72
+ Zuletzt geändert                254   26.06.16
+=============================== ===== ========== ===================================================================================================================================================================================
+<BLANKLINE>
+
+>>> showit(6)  #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+======================== ===== ========== =====================================================================================================================================================================================
+ Gruppe                   TI    Seit       Information
+------------------------ ----- ---------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ NR-Nummer                      26.05.98   **980526 001-51** (Männlich)
+ Wohnsitze                001   21.06.07   **Eupen** (63023), Fusion: **0**, Sprache: **2**
+                                31.01.06   **Bastogne** (82003), Fusion: **0**, Sprache: **2**
+                                31.07.84   **Deutschland (Bundesrep.)** (103), Fusion: **0**, Sprache: **2**
+                                25.06.79   **Ninove** (41048), Fusion: **0**, Sprache: **2**
+                                17.02.70   **Deutschland (Bundesrep.)** (103), Fusion: **0**, Sprache: **2**
+                                15.06.00   **Bouffioulx** (52007), Fusion: **0**, Sprache: **2**
+ Adressänderungsabsicht   005   19.06.07   Umziehen nach **Eupen** (63023)
+                                27.01.06   Umziehen nach **Bastogne** (82003)
+ Namen                    010   21.01.52   **Adriaen**, Ambroise
+ Legale Hauptadressen     020   19.07.07   **4700**, **Am Berg**, Nr. **12**
+                                21.06.07   **4700**, **Pfarrer-Henreco-Strasse**, Nr. **13**
+                                31.01.06   **6600**, **Bois-d'Hazy**, Nr. **14** **B  1**
+                                29.05.80   **9400**, **Inschrijving zonder adres**, Nr. **15**
+                                25.06.79   **9400**, **Hulststraat**, Nr. **16**
+                                15.06.70   **6200**, **Avenue Emile Vandervelde**, Nr. **17**
+ Wohnsitz im Ausland      022   24.02.03   Address, PosteDiplomatique **Köln** (1207) **Deutschland (Bundesrep.)** (103) **Deutschland (Bundesrep.)** (103), **Thomas-Esser-Strasse 46**, **53879 Euskirchen ** (bis 31.01.06)
+                                30.03.01   Address, PosteDiplomatique **Köln** (1207) **Deutschland (Bundesrep.)** (103) **Thomas-Esserstr46-53879Euskirchen**
+                                25.11.99   Address, PosteDiplomatique **Köln** (1207) **Deutschland (Bundesrep.)** (103) ** Welkenbergstr.1 47139 Duisburg**
+                                01.01.78   Address, PosteDiplomatique **Düsseldorf** (1203) **000** (000) **0013 SCHELLINGWEG,4300 ESSEN 14** (bis 25.06.79)
+                                09.10.72   Address, PosteDiplomatique **Düsseldorf** (1203) **000** (000) **0133 FRIEDRICH EBERTSTRASSE 4250 BOTTROP**
+ Nationalitäten           031   21.01.52   **Belgier/in/** (150)
+ Geburtsort               100   21.01.52   in **Deutschland (Bundesrep.)** (103), **SIEGEN**, Akte Nr. **00059**
+ Abstammung               110   21.01.52   **Kind** (00), von **Adriaen**, Adélaïde (**971207 001-67**), und **Abbasi**, Amédée (**960715 002-61**)
+ Zivilstände              120   26.09.08   **Geschieden** (41), in Tribunal **Entscheid des erstinstanzlichen Gerichtes** (01), Date 26.08.08, Place **Eupen** (63023), Akte Nr. **3737**
+                                23.05.03   **Verheiratet** (20), mit **Ballo**, Adèle Anastase Agnès (970101 001-73), in Place2 **Deutschland (Bundesrep.)** (103), **Schleiden**
+                                05.09.95   **Geschieden** (40), mit **Adriaensen**, Arthur (950221 001-20), in Place2 **Deutschland (Bundesrep.)** (103), **Erfstadt**
+                                30.12.83   **Verheiratet** (20), mit **Adriaensen**, Arthur (950221 001-20), in Place2 **Deutschland (Bundesrep.)** (103), **Erfstadt**, Akte Nr. **0220**
+                                23.02.82   **Geschieden** (40), mit **Abdalla**, Alix Augustin (900627 002-53), in Place2 **Deutschland (Bundesrep.)** (103), **KEULEN**
+                                17.04.70   **Verheiratet** (20), mit **Abdalla**, Alix Béatrice (900627 002-53), in Place2 **Deutschland (Bundesrep.)** (103), **ESSEN STOPPENBERG**, Akte Nr. **0132**
+                                21.01.52   **Unverheiratet** (10)
+ Familienmitglieder       140   19.07.07   **Alleinstehende** (01)
+                                03.07.81   **Tochter** (03), in Familie mit Vorstand **Abdalla**, Aymeric (**890722 001-93**) (bis 31.01.06)
+                                06.05.82   **Tochter** (03), in Familie mit Vorstand **Abdalla**, Beatrix Béranger (**900108 001-07**) (bis 31.01.06)
+ Familienoberhaupt        141   21.06.07   **Chahine**, Elizabeth Adélaïde Geoffroy (**921024 001-20**), als **Schwägerin** (10) (bis 19.07.07)
+                                31.01.06   **Ballo**, Adèle Anastase Agnès (**970101 001-73**), als **Gemahlin** (02) (bis 21.06.07)
+ Personalausweise         195   04.07.12   **P.A.** (0000) Nr. **595488123456**, gültig bis 14.06.17, ausgestellt in **Eupen** (63023)
+                                16.07.07   **P.A.** (0000) Nr. **427003123456**, gültig bis 28.06.12, ausgestellt in **Eupen** (63023)
+                                02.06.06   **P.A.** (0000) Nr. **427003123455**
+                                08.12.04   **P.A.** (0000) Nr. **427003123454**, gültig bis 07.12.14, ausgestellt in **Deutschland (Bundesrep.)** (103)
+                                20.10.82   **P.A.** (0000) Nr. **427003123453**, ausgestellt in **Ninove** (41048)
+                                25.06.79   **P.A.** (0000) Nr. **427003123452**, ausgestellt in **Ninove** (41048)
+                                26.02.75   **Im. K. B.** (0050) Nr. **427003123451**, gültig bis 25.02.80, ausgestellt in **Deutschland (Bundesrep.)** (103)
+ Reisepässe               199   08.12.04   Status: **Austel.** (0), Typ **Reisepass** (0), Nr. **AE 123456**, ausgestellt durch **Köln** (1207) (Botschaft), Erneuerungsnr.: **00**, gültig bis 07.12.09
+ Erstelldatum             253   14.04.70
+ Zuletzt geändert         254   28.05.15
+======================== ===== ========== =====================================================================================================================================================================================
+<BLANKLINE>

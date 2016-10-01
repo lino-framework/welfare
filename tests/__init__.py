@@ -188,6 +188,9 @@ class SpecsTests(TestCase):
     def test_cbss(self):
         return self.run_simple_doctests('docs/specs/cbss.rst')
 
+    def test_tx25(self):
+        return self.run_simple_doctests('docs/specs/tx25.rst')
+
 
 class DocsTests(BaseTestCase):
     

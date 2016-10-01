@@ -16,25 +16,12 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""This implements the "transaction 25", called also "Interrogation
-sur certains types d’informations légales" (in `Codes d'interrogations
-<http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/fr/instructions/instr_annexe3_liste_interrogations.pdf>`_).
+"""This implements 
 
-See also :ref:`welfare.specs.cbss`
+See also :ref:`welfare.specs.tx25`
 
-Incomplete list of the supported TIs (incomplete because the first
-handlers were written with an older syntax which did not worry about
-how to generate a documentation page for them):
-
-.. py2rst::
-
-    from lino_welfare.modlib.cbss.tx25 import HANDLERS
-    tpl = "- {0} ({1}) : {2} "
-    for name, v in HANDLERS.items():
-        label, subname, itname = v
-        print(tpl.format(name, itname, unicode(label)))
-
-All common information types are being handled.
+This module is being used in production since 2014 and handles all
+common information types.
 
 This is a masterpiece of untransparent code, difficult to understand
 and maintain.  But I didn't find a better solution.  Maybe an XSLT

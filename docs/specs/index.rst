@@ -28,6 +28,7 @@ General
    checkdata
    aids
    cbss
+   tx25
    courses
    debts
    excerpts
