@@ -13,7 +13,6 @@ The admin main page
     >>> from lino import startup
     >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
-    >>> from lino.utils.html2text import html2text
 
 
 A technical tour into the :mod:`lino_welfare.modlib.main` module.
