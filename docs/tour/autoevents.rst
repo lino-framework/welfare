@@ -40,6 +40,8 @@ The :class:`cal.EventsByController
 <lino.modlib.cal.models.EventsByController>` table shows the
 evaluation events which have been generated.
 
+>>> settings.SITE.site_config.hide_events_before = None
+
 For example let's look at ISIP contract #26 of the demo database.
 
 >>> obj = isip.Contract.objects.get(pk=26)
