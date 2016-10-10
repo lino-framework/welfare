@@ -534,14 +534,14 @@ Each window layout is **viewable** by a given set of user profiles.
 - immersion.Goals.insert : visible for 110 admin 910
 - integ.ActivityReport.show : visible for 100 110 120 admin 910
 - isip.ContractEndings.insert : visible for 110 410 admin 910
-- isip.ContractPartners.insert : visible for 110 admin 910
+- isip.ContractPartners.insert : visible for 110 410 admin 910
 - isip.ContractTypes.insert : visible for 110 410 admin 910
-- isip.Contracts.detail : visible for 100 110 120 admin 910
-- isip.Contracts.insert : visible for 100 110 120 admin 910
+- isip.Contracts.detail : visible for 100 110 120 200 300 400 410 admin 910
+- isip.Contracts.insert : visible for 100 110 120 200 300 400 410 admin 910
 - isip.ExamPolicies.insert : visible for 110 410 admin 910
 - jobs.ContractTypes.insert : visible for 110 410 admin 910
-- jobs.Contracts.detail : visible for 100 110 120 admin 910
-- jobs.Contracts.insert : visible for 100 110 120 admin 910
+- jobs.Contracts.detail : visible for 100 110 120 200 300 400 410 admin 910
+- jobs.Contracts.insert : visible for 100 110 120 200 300 400 410 admin 910
 - jobs.JobProviders.detail : visible for 100 110 120 admin 910
 - jobs.JobTypes.insert : visible for 110 410 admin 910
 - jobs.Jobs.insert : visible for 100 110 120 admin 910

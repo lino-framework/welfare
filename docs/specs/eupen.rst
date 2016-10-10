@@ -229,6 +229,7 @@ Schuldenberater
   - Schuldnerberatung : Budget-Kopiervorlage
 - Explorer :
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - DSBE : VSEs, Art.60§7-Konventionen
 - Site : Info
 
 
@@ -261,6 +262,7 @@ Berater Erstempfang
   - Lebenslauf : Sprachen
 - Explorer :
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
+  - DSBE : VSEs, Art.60§7-Konventionen
 - Site : Info
 
 
@@ -604,14 +606,14 @@ Each window layout is **viewable** by a given set of user profiles.
 - humanlinks.Links.insert : visible for 110 210 410 800 admin 910
 - integ.ActivityReport.show : visible for 100 110 120 admin 910
 - isip.ContractEndings.insert : visible for 110 410 admin 910
-- isip.ContractPartners.insert : visible for 110 admin 910
+- isip.ContractPartners.insert : visible for 110 410 admin 910
 - isip.ContractTypes.insert : visible for 110 410 admin 910
-- isip.Contracts.detail : visible for 100 110 120 admin 910
-- isip.Contracts.insert : visible for 100 110 120 admin 910
+- isip.Contracts.detail : visible for 100 110 120 200 300 400 410 admin 910
+- isip.Contracts.insert : visible for 100 110 120 200 300 400 410 admin 910
 - isip.ExamPolicies.insert : visible for 110 410 admin 910
 - jobs.ContractTypes.insert : visible for 110 410 admin 910
-- jobs.Contracts.detail : visible for 100 110 120 admin 910
-- jobs.Contracts.insert : visible for 100 110 120 admin 910
+- jobs.Contracts.detail : visible for 100 110 120 200 300 400 410 admin 910
+- jobs.Contracts.insert : visible for 100 110 120 200 300 400 410 admin 910
 - jobs.JobProviders.detail : visible for 100 110 120 admin 910
 - jobs.JobTypes.insert : visible for 110 410 admin 910
 - jobs.Jobs.insert : visible for 100 110 120 admin 910

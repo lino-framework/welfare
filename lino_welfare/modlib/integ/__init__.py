@@ -23,6 +23,7 @@
    :toctree:
 
    models
+   roles
    fixtures.demo
 
 

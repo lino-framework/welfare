@@ -40,8 +40,8 @@ config = dd.plugins.isip
 from lino_welfare.modlib.pcsw.choicelists import (
     ClientEvents, ObservedEvent, has_contracts_filter)
 
-from lino_welfare.modlib.pcsw.roles import SocialStaff
-from lino_welfare.modlib.integ.roles import IntegrationAgent, IntegrationStaff
+from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
+from lino_welfare.modlib.integ.roles import IntegrationAgent
 
 
 class ClientHasContract(ObservedEvent):
@@ -187,7 +187,7 @@ class ContractPartner(ContractPartnerBase):
 
 
 class ContractPartners(dd.Table):
-    required_roles = dd.login_required(IntegrationStaff)
+    required_roles = dd.login_required(SocialStaff)
     model = 'isip.ContractPartner'
     columns = 'contract company contact_person contact_role'
     detail_layout = """
@@ -197,7 +197,7 @@ class ContractPartners(dd.Table):
 
 
 class PartnersByContract(ContractPartners):
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(SocialAgent)
     master_key = 'contract'
     columns = 'company contact_person contact_role duties_company'
 
@@ -287,7 +287,7 @@ class ContractDetail(dd.FormLayout):
 
 
 class Contracts(ContractBaseTable):
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(SocialAgent)
     model = 'isip.Contract'
     column_names = 'id applies_from applies_until client user type *'
     order_by = ['id']
@@ -329,6 +329,8 @@ class Contracts(ContractBaseTable):
 
 class MyContracts(Contracts):
 
+    required_roles = dd.login_required(IntegrationAgent)
+    
     @classmethod
     def param_defaults(self, ar, **kw):
         kw = super(MyContracts, self).param_defaults(ar, **kw)
