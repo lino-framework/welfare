@@ -27,7 +27,7 @@ from lino.utils import Cycler
 from lino.api.dd import babel_values
 
 from lino.api import dd
-from lino.modlib.users.choicelists import UserProfiles
+from lino.modlib.users.choicelists import UserTypes
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 
 
@@ -55,9 +55,9 @@ def objects():
     #~ User = resolve_model('users.User')
     #~ yield User(username="caroline",
         #~ first_name="Caroline",last_name="Carnol",
-        # ~ profile='200') # UserProfiles.caroline)
+        # ~ profile='200') # UserTypes.caroline)
     #~ FACULTIES = Cycler(Faculty.objects.all())
-    #~ profiles = [p for p in UserProfiles.items() if p.integ_level]
+    #~ profiles = [p for p in UserTypes.items() if p.integ_level]
     #~ USERS = Cycler(User.objects.filter(profile__in=profiles))
     #~ for i in range(7):
         #~ yield Competence(user=USERS.pop(),faculty=FACULTIES.pop())
@@ -71,7 +71,7 @@ def objects():
     FACULTIES = Cycler(newcomers.Faculty.objects.all())
 
     profiles = [
-        p for p in UserProfiles.items()
+        p for p in UserTypes.items()
         if isinstance(p.role, IntegrationAgent)
         and not isinstance(p.role, dd.SiteStaff)]
     qs = users.User.objects.filter(profile__in=profiles)

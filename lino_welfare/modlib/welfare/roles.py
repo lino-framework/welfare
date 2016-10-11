@@ -129,12 +129,12 @@ class Supervisor(Supervisor, CoursesUser):
     pass
 
 
-from lino.modlib.users.choicelists import UserProfiles
+from lino.modlib.users.choicelists import UserTypes
 from lino.api import _
 
-UserProfiles.clear()
+UserTypes.clear()
 
-add = UserProfiles.add_item
+add = UserTypes.add_item
 
 add('000', _("Anonymous"), UserRole, name='anonymous',
     readonly=True, authenticated=False)

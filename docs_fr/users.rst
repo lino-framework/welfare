@@ -12,7 +12,7 @@ valeurs suivantes:
 .. py2rst::
 
     from lino.api import rt
-    rt.show('users.UserProfiles', stripped=False)
+    rt.show('users.UserTypes', stripped=False)
     
 
 Détails techniques
@@ -20,5 +20,5 @@ Détails techniques
 
 La liste des profils utilisateurs disponible est définie dans
 :mod:`lino_welfare.modlib.welfare.roles` (sauf si
-:attr:`user_profiles_module <lino.core.site.Site.user_profiles_module`
+:attr:`user_types_module <lino.core.site.Site.user_types_module`
 a été changé).

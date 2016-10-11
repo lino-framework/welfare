@@ -46,7 +46,7 @@ from lino import mixins
 from django.conf import settings
 from lino_xl.lib.cal.choicelists import amonthago
 from lino_xl.lib.notes.actions import NotableAction
-from lino.modlib.users.choicelists import UserProfiles
+from lino.modlib.users.choicelists import UserTypes
 from lino.modlib.users.mixins import ByUser, UserAuthored
 
 from lino.core.utils import ChangeWatcher
@@ -302,7 +302,7 @@ class AvailableCoaches(users.Users):
 
     @classmethod
     def get_request_queryset(self, ar):
-        profiles = [p for p in UserProfiles.items()
+        profiles = [p for p in UserTypes.items()
                     if isinstance(p.role, SocialAgent)]
         return super(AvailableCoaches, self, ar).filter(
             models.Q(profile__in=profiles))

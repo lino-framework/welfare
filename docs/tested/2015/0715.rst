@@ -37,11 +37,11 @@ A reception clerk is not an integration agent:
 >>> isinstance(ReceptionClerk, IntegrationAgent)
 False
 
->>> ia_profile = users.UserProfiles.get_by_value('100')
+>>> ia_profile = users.UserTypes.get_by_value('100')
 >>> print(ia_profile)
 Integration agent
 
->>> rc_profile = users.UserProfiles.get_by_value('210')
+>>> rc_profile = users.UserTypes.get_by_value('210')
 >>> print(rc_profile)
 Reception clerk
 

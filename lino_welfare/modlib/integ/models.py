@@ -20,7 +20,7 @@ from django.conf import settings
 from lino.utils.xmlgen.html import E
 from lino.utils.report import Report
 from lino.mixins import ObservedPeriod
-from lino.modlib.users.choicelists import UserProfiles
+from lino.modlib.users.choicelists import UserTypes
 from lino.modlib.system.choicelists import PeriodEvents
 
 from lino.api import dd
@@ -159,12 +159,12 @@ class UsersWithClients(dd.VirtualTable):
         """
         u = ar.get_user()
         if u is None or not isinstance(u.profile.role, dd.SiteAdmin):
-            profiles = [p for p in UserProfiles.items()
+            profiles = [p for p in UserTypes.items()
                         if isinstance(p.role, IntegrationAgent)
                         and not isinstance(p.role, dd.SiteAdmin)]
         else:
             profiles = [
-                p for p in UserProfiles.items()
+                p for p in UserTypes.items()
                 if isinstance(p.role, IntegrationAgent)]
 
         qs = users.User.objects.filter(profile__in=profiles)
@@ -389,7 +389,7 @@ class CoachingEndingsByUser(dd.VentilatingTable, pcsw.CoachingEndings):
                 return pcsw.Coachings.request(param_values=pv)
             return func
 
-        profiles = [p for p in UserProfiles.items()
+        profiles = [p for p in UserTypes.items()
                     if p.has_required_roles([IntegrationAgent])]
         for u in settings.SITE.user_model.objects.filter(profile__in=profiles):
             yield dd.RequestField(w(u), verbose_name=unicode(u.username))

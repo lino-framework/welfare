@@ -274,6 +274,8 @@ columns (coachings per PersonGroup table."""),
     'lino_welfare.modlib.integ.models.JobProvidersAndContracts.model' : _("""alias of Company"""),
     'lino_welfare.modlib.integ.models.ActivityReport' : _("""Gives an overview about the work of the Integration Service during
 a given period."""),
+    'lino_welfare.modlib.integ.roles.IntegrationAgent' : _("""A social agent who can see database content specific to
+integration work: CV, language courses, workshops, ..."""),
     'lino_welfare.modlib.isip.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.isip.choicelists.OverlapGroups' : _("""The list of all known overlap groups to be selected for the
 overlap_group

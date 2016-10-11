@@ -1149,7 +1149,7 @@ def migrate_from_1_4_3(globals_dict):
     """
     from lino.core.utils import resolve_model
     from lino.utils.mti import create_child
-    from lino.modlib.users.models import UserProfiles
+    from lino.modlib.users.models import UserTypes
     #~ from lino.utils import mti
     #~ from lino.utils import dblogger
 
@@ -1247,7 +1247,7 @@ def migrate_from_1_4_3(globals_dict):
         kw = dict()
         #~ if is_staff or is_expert or is_superuser:
             # level = UserLevels.manager
-            #~ kw.update(profile=UserProfiles.gerd)
+            #~ kw.update(profile=UserTypes.gerd)
             # kw.update(level=level)
         #~ else:
             #~ level = UserLevel.user
@@ -1259,15 +1259,15 @@ def migrate_from_1_4_3(globals_dict):
             #~ kw.update(level=level)
             #~ kw.update(newcomers_level = level)
         if username in ('gerd', 'lsaffre'):
-            kw.update(profile='900')  # UserProfiles.admin)
+            kw.update(profile='900')  # UserTypes.admin)
         elif username in ('hubert', 'alicia', 'uwe'):
-            kw.update(profile='100')  # UserProfiles.hubert)
+            kw.update(profile='100')  # UserTypes.hubert)
         #~ elif username == 'gerd':
             #~ kw.update(debts_level=UserLevel.manager)
         elif username == 'kerstin':
-            kw.update(profile='300')  # UserProfiles.kerstin)
+            kw.update(profile='300')  # UserTypes.kerstin)
         elif username == 'caroline':
-            kw.update(profile='200')  # UserProfiles.caroline)
+            kw.update(profile='200')  # UserTypes.caroline)
             #~ kw.update(debts_level=UserLevel.user)
             #~ kw.update(level=UserLevel.user)
         #~ return create_child(contacts_Contact,contact_ptr_id,users_User,

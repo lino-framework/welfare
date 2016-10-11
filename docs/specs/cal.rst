@@ -30,21 +30,21 @@ functionality.  All users with one of the following profiles can see
 each other's calendars:
 
 >>> from lino.modlib.office.roles import OfficeUser
->>> for p in users.UserProfiles.items():
+>>> for p in users.UserTypes.items():
 ...     if isinstance(p.role, OfficeUser):
 ...         print repr(p), unicode(p)
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
-users.UserProfiles:100 Begleiter im DSBE
-users.UserProfiles:110 Begleiter im DSBE (Manager)
-users.UserProfiles:120 Begleiter im DSBE (+Erstempfang)
-users.UserProfiles:200 Berater Erstempfang
-users.UserProfiles:300 Schuldenberater
-users.UserProfiles:400 Sozi
-users.UserProfiles:410 Sozi (Manager)
-users.UserProfiles:500 Buchhalter
-users.UserProfiles:510 Accountant (Manager)
-users.UserProfiles.admin:900 Verwalter
-users.UserProfiles:910 Security advisor
+users.UserTypes:100 Begleiter im DSBE
+users.UserTypes:110 Begleiter im DSBE (Manager)
+users.UserTypes:120 Begleiter im DSBE (+Erstempfang)
+users.UserTypes:200 Berater Erstempfang
+users.UserTypes:300 Schuldenberater
+users.UserTypes:400 Sozi
+users.UserTypes:410 Sozi (Manager)
+users.UserTypes:500 Buchhalter
+users.UserTypes:510 Accountant (Manager)
+users.UserTypes.admin:900 Verwalter
+users.UserTypes:910 Security advisor
 
 
 

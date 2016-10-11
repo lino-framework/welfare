@@ -199,9 +199,9 @@ User profiles
 We use the user profiles defined in
 :mod:`lino_welfare.modlib.welfare.roles`:
 
->>> settings.SITE.user_profiles_module
+>>> settings.SITE.user_types_module
 'lino_welfare.modlib.welfare.roles'
->>> rt.show(users.UserProfiles)
+>>> rt.show(users.UserTypes)
 ======= =========== ============================================
  value   name        text
 ------- ----------- --------------------------------------------
