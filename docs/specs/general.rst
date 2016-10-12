@@ -74,7 +74,7 @@ The following table gives an overview of these things.
  cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     21        5
  cbss.ManageAccessRequest       cbss.ManageAccessRequests       24        1
  cbss.Purpose                   cbss.Purposes                   7         106
- cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        3
+ cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        6
  cbss.Sector                    cbss.Sectors                    11        209
  changes.Change                 changes.Changes                 9         0
  contacts.Company               contacts.Companies              29        51
@@ -188,7 +188,7 @@ The following table gives an overview of these things.
  properties.PropType            properties.PropTypes            9         3
  properties.Property            properties.Properties           7         0
  sepa.Account                   sepa.Accounts                   8         51
- system.SiteConfig              system.SiteConfigs              30        1
+ system.SiteConfig              system.SiteConfigs              31        1
  tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9

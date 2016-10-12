@@ -54,7 +54,7 @@ class Site(Site):
     default_build_method = "appyodt"
     uppercase_last_name = True
 
-    user_profiles_module = 'lino_welfare.modlib.welfare.roles'
+    user_types_module = 'lino_welfare.modlib.welfare.roles'
 
     def setup_plugins(self):
         """

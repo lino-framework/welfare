@@ -35,7 +35,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 
 from lino.api import dd, rt
 from lino import mixins
@@ -51,7 +51,7 @@ from lino_welfare.modlib.pcsw.utils import only_coached_on
 from lino_welfare.modlib.isip.mixins import (
     ContractTypeBase, ContractPartnerBase, ContractBase)
 
-from lino_welfare.modlib.pcsw.roles import SocialStaff
+from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 
 from .mixins import JobSupplyment
@@ -328,7 +328,7 @@ class ContractDetail(dd.FormLayout):
 class Contracts(isip.ContractBaseTable):
     #~ debug_permissions = "20130222"
 
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.required(SocialAgent)
     model = 'jobs.Contract'
     column_names = 'id client client__national_id ' \
                    'applies_from applies_until job user type *'
@@ -413,6 +413,9 @@ class ContractsBySchedule(Contracts):
 
 
 class MyContracts(Contracts):
+    
+    required_roles = dd.required(IntegrationAgent)    
+    
     column_names = "applies_from client job type company applies_until date_ended ending *"
     #~ label = _("My contracts")
     #~ order_by = "reminder_date"
@@ -678,7 +681,7 @@ class Candidature(SectorFunction):
         return s
 
     def __str__(self):
-        return force_unicode(_('Candidature by %(person)s') % dict(
+        return force_text(_('Candidature by %(person)s') % dict(
             person=self.person.get_full_name(salutation=False)))
 
     #~ @dd.chooser()
@@ -713,7 +716,7 @@ class CandidaturesByPerson(Candidatures):
     """
     ...
     """
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.required(SocialAgent)
     master_key = 'person'
     column_names = 'date_submitted job:25 sector function ' \
                    'art60 art61 remark state *'

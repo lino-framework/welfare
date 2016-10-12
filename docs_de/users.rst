@@ -11,7 +11,7 @@ Damit ein Benutzer sich anmelden kann, muss sein
 .. py2rst::
 
     from lino.api import rt
-    rt.show('users.UserProfiles', stripped=False)
+    rt.show('users.UserTypes', stripped=False)
     
 
 Technisches
@@ -21,5 +21,5 @@ Technische Details unter :ref:`welfare.specs.users`.
 
 .. Die Liste der Benutzerprofile ist definiert in
    :mod:`lino_welfare.modlib.welfare.roles` (außer wenn
-   :attr:`user_profiles_module
-   <lino.core.site.Site.user_profiles_module>` verändert wurde).
+   :attr:`user_types_module
+   <lino.core.site.Site.user_types_module>` verändert wurde).

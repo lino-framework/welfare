@@ -54,7 +54,7 @@ from lino.utils import i2d
 from lino.core.utils import resolve_model
 
 from lino.utils.instantiator import Instantiator
-from lino.modlib.users.choicelists import UserProfiles
+from lino.modlib.users.choicelists import UserTypes
 
 
 #~ def create_user(*args):

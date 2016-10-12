@@ -37,16 +37,16 @@ This client has the following appointments.
 ============ ============ ================= ================ =======================================================
  Start date   Start time   Managed by        Summary          Workflow
 ------------ ------------ ----------------- ---------------- -------------------------------------------------------
- 15/05/2014   09:00:00     Caroline Carnol   Auswertung 2     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 22/05/2014                Mélanie Mélard    Urgent problem   **Waiting** → [Receive] [Checkout]
- 27/05/2014   13:30:00     Hubert Huppertz   Abendessen       **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 16/06/2014   09:00:00     Caroline Carnol   Auswertung 3     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 16/07/2014   09:00:00     Caroline Carnol   Auswertung 4     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 18/08/2014   09:00:00     Caroline Carnol   Auswertung 5     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 18/09/2014   09:00:00     Caroline Carnol   Auswertung 6     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 20/10/2014   09:00:00     Caroline Carnol   Auswertung 7     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 20/11/2014   09:00:00     Caroline Carnol   Auswertung 8     **Accepted** → [Excused] [Absent] [Present] [Checkin]
- 22/12/2014   09:00:00     Caroline Carnol   Auswertung 9     **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ 15/05/2014   09:00:00     Caroline Carnol   Auswertung 2     [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ 22/05/2014                Mélanie Mélard    Urgent problem   [Receive] [Checkout] **Waiting**
+ 27/05/2014   13:30:00     Hubert Huppertz   Abendessen       [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ 16/06/2014   09:00:00     Caroline Carnol   Auswertung 3     [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ 16/07/2014   09:00:00     Caroline Carnol   Auswertung 4     [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ 18/08/2014   09:00:00     Caroline Carnol   Auswertung 5     [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ 18/09/2014   09:00:00     Caroline Carnol   Auswertung 6     [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ 20/10/2014   09:00:00     Caroline Carnol   Auswertung 7     [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ 20/11/2014   09:00:00     Caroline Carnol   Auswertung 8     [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ 22/12/2014   09:00:00     Caroline Carnol   Auswertung 9     [Checkin] **Accepted** → [Excused] [Absent] [Present]
 ============ ============ ================= ================ =======================================================
 <BLANKLINE>
 
@@ -58,16 +58,16 @@ functionality can click on the dates to see their detail:
 ====================================== ================= =======================================================
  When                                   Managed by        Workflow
 -------------------------------------- ----------------- -------------------------------------------------------
- `Thu 15/05/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
- `Thu 22/05/2014 <Detail>`__            Mélanie Mélard    **Waiting** → [Receive] [Checkout]
- `Tue 27/05/2014 at 13:30 <Detail>`__   Hubert Huppertz   **Accepted** → [Excused] [Absent] [Present] [Checkin]
- `Mon 16/06/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
- `Wed 16/07/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
- `Mon 18/08/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
- `Thu 18/09/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
- `Mon 20/10/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
- `Thu 20/11/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
- `Mon 22/12/2014 at 09:00 <Detail>`__   Caroline Carnol   **Accepted** → [Excused] [Absent] [Present] [Checkin]
+ `Thu 15/05/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ `Thu 22/05/2014 <Detail>`__            Mélanie Mélard    [Receive] [Checkout] **Waiting**
+ `Tue 27/05/2014 at 13:30 <Detail>`__   Hubert Huppertz   [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ `Mon 16/06/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ `Wed 16/07/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ `Mon 18/08/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ `Thu 18/09/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ `Mon 20/10/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ `Thu 20/11/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
+ `Mon 22/12/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
 ====================================== ================= =======================================================
 <BLANKLINE>
 
@@ -214,23 +214,23 @@ the lounge:
 
 >>> rt.login('alicia').show(reception.MyWaitingVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-========================= ========== ====================================
+========================= ========== ==================================
  Client                    Position   Workflow
-------------------------- ---------- ------------------------------------
- HILGERS Hildegard (133)   1          **Waiting** → [Receive] [Checkout]
- KAIVERS Karl (141)        2          **Waiting** → [Receive] [Checkout]
-========================= ========== ====================================
+------------------------- ---------- ----------------------------------
+ HILGERS Hildegard (133)   1          [Receive] [Checkout] **Waiting**
+ KAIVERS Karl (141)        2          [Receive] [Checkout] **Waiting**
+========================= ========== ==================================
 <BLANKLINE>
 
 >>> rt.login('hubert').show(reception.MyWaitingVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-===================== ========== ====================================
+===================== ========== ==================================
  Client                Position   Workflow
---------------------- ---------- ------------------------------------
- EMONTS Daniel (128)   1          **Waiting** → [Receive] [Checkout]
- JONAS Josef (139)     2          **Waiting** → [Receive] [Checkout]
- LAZARUS Line (144)    3          **Waiting** → [Receive] [Checkout]
-===================== ========== ====================================
+--------------------- ---------- ----------------------------------
+ EMONTS Daniel (128)   1          [Receive] [Checkout] **Waiting**
+ JONAS Josef (139)     2          [Receive] [Checkout] **Waiting**
+ LAZARUS Line (144)    3          [Receive] [Checkout] **Waiting**
+===================== ========== ==================================
 <BLANKLINE>
 
 Theresia is the reception clerk. She has no visitors on her own.
@@ -246,30 +246,30 @@ Theresia is rather going to use the overview tables:
 >>> kwargs.update(column_names="client event__user workflow_buttons")
 >>> rt.login('theresia').show(reception.WaitingVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-========================= ================= ====================================
+========================= ================= ==================================
  Client                    Managed by        Workflow
-------------------------- ----------------- ------------------------------------
- EMONTS Daniel (128)       Hubert Huppertz   **Waiting** → [Receive] [Checkout]
- EVERS Eberhart (127)      Mélanie Mélard    **Waiting** → [Receive] [Checkout]
- HILGERS Hildegard (133)   Alicia Allmanns   **Waiting** → [Receive] [Checkout]
- JACOBS Jacqueline (137)   Judith Jousten    **Waiting** → [Receive] [Checkout]
- JONAS Josef (139)         Hubert Huppertz   **Waiting** → [Receive] [Checkout]
- KAIVERS Karl (141)        Alicia Allmanns   **Waiting** → [Receive] [Checkout]
- LAMBERTZ Guido (142)      Mélanie Mélard    **Waiting** → [Receive] [Checkout]
- LAZARUS Line (144)        Hubert Huppertz   **Waiting** → [Receive] [Checkout]
-========================= ================= ====================================
+------------------------- ----------------- ----------------------------------
+ EMONTS Daniel (128)       Hubert Huppertz   [Receive] [Checkout] **Waiting**
+ EVERS Eberhart (127)      Mélanie Mélard    [Receive] [Checkout] **Waiting**
+ HILGERS Hildegard (133)   Alicia Allmanns   [Receive] [Checkout] **Waiting**
+ JACOBS Jacqueline (137)   Judith Jousten    [Receive] [Checkout] **Waiting**
+ JONAS Josef (139)         Hubert Huppertz   [Receive] [Checkout] **Waiting**
+ KAIVERS Karl (141)        Alicia Allmanns   [Receive] [Checkout] **Waiting**
+ LAMBERTZ Guido (142)      Mélanie Mélard    [Receive] [Checkout] **Waiting**
+ LAZARUS Line (144)        Hubert Huppertz   [Receive] [Checkout] **Waiting**
+========================= ================= ==================================
 <BLANKLINE>
 
 >>> rt.login('theresia').show(reception.BusyVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-========================= ================= =======================
+========================= ================= =====================
  Client                    Managed by        Workflow
-------------------------- ----------------- -----------------------
- BRECHT Bernd (177)        Hubert Huppertz   **Busy** → [Checkout]
- COLLARD Charlotte (118)   Alicia Allmanns   **Busy** → [Checkout]
- DUBOIS Robin (179)        Mélanie Mélard    **Busy** → [Checkout]
- ENGELS Edgar (129)        Judith Jousten    **Busy** → [Checkout]
-========================= ================= =======================
+------------------------- ----------------- ---------------------
+ BRECHT Bernd (177)        Hubert Huppertz   [Checkout] **Busy**
+ COLLARD Charlotte (118)   Alicia Allmanns   [Checkout] **Busy**
+ DUBOIS Robin (179)        Mélanie Mélard    [Checkout] **Busy**
+ ENGELS Edgar (129)        Judith Jousten    [Checkout] **Busy**
+========================= ================= =====================
 <BLANKLINE>
 
 

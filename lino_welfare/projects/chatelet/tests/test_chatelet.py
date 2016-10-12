@@ -40,7 +40,7 @@ from lino.utils.djangotest import TestCase
 from lino.utils import i2d
 from lino.core import constants
 
-from lino.modlib.users.choicelists import UserProfiles
+from lino.modlib.users.choicelists import UserTypes
 
 
 class TestCase(TestCase):
@@ -58,7 +58,7 @@ class TestCase(TestCase):
         Client = rt.modules.pcsw.Client
         User = settings.SITE.user_model
 
-        User(username='robin', profile=UserProfiles.admin).save()
+        User(username='robin', profile=UserTypes.admin).save()
         ObstacleType(name='Alcohol').save()
 
         obj = Client(first_name="First", last_name="Last")
@@ -105,7 +105,7 @@ class TestCase(TestCase):
         Client = rt.modules.pcsw.Client
         User = settings.SITE.user_model
 
-        User(username='robin', profile=UserProfiles.admin).save()
+        User(username='robin', profile=UserTypes.admin).save()
 
         Client(first_name="First", last_name="Last").save()
 
@@ -143,7 +143,7 @@ class TestCase(TestCase):
         EnrolmentStates = rt.models.courses.EnrolmentStates
         Pupil = rt.modules.pcsw.Client
 
-        robin = User(username='robin', profile=UserProfiles.admin)
+        robin = User(username='robin', profile=UserTypes.admin)
         robin.save()
         ar = rt.login('robin')
         settings.SITE.verbose_client_info_message = False

@@ -70,6 +70,7 @@ countries.Place country
 cv.Experience country
 cv.Study country
 cv.Training country
+pcsw.Client birth_country
 pcsw.Client nationality
 
 

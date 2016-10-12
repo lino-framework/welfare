@@ -41,7 +41,7 @@ from lino.utils import i2d, AttrDict
 
 from lino.api import rt
 
-from lino.modlib.users.choicelists import UserProfiles
+from lino.modlib.users.choicelists import UserTypes
 
 
 class TestCase(TestCase):
@@ -89,7 +89,7 @@ class TestCase(TestCase):
         ContentType = rt.models.contenttypes.ContentType
 
         self.create_obj(
-            User, username='robin', profile=UserProfiles.admin)
+            User, username='robin', profile=UserTypes.admin)
         caroline = self.create_obj(
             User, username='caroline', profile='200')
         alicia = self.create_obj(

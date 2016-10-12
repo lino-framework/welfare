@@ -1,0 +1,3027 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Created 26/01/2015 by RRN Belgium. Tous droits réservés.
+ 
+ DRAFT
+
+ MENTIONS LEGALES A INSERER ICI
+
+-->
+<xs:schema xmlns:r="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="25.2014.1.1">
+    <xs:element name="Document" type="r:DocumentType">
+        <xs:annotation>
+            <xs:documentation>Racine</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="IT000">
+        <xs:annotation>
+            <xs:documentation>Numéro d'identification</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="NationalNumber">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="NationalNumber" type="r:NationalNumberRestriction"/>
+                        <xs:element name="Date" type="r:DateType"/>
+                        <xs:element name="Sex">
+                            <xs:annotation>
+                                <xs:documentation>1: Male, 2: Female</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="1"/>
+                                    <xs:enumeration value="2"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="000"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT001">
+        <xs:annotation>
+            <xs:documentation>Commune de résidence</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Residence" type="r:ResidenceType"/>
+            <xs:element name="Fusion">
+                <xs:annotation>
+                    <xs:documentation>0: no, 1: yes</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="0"/>
+                        <xs:enumeration value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Language">
+                <xs:annotation>
+                    <xs:documentation>1: french, 2: dutch/german</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="1"/>
+                        <xs:enumeration value="2"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="001"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT002">
+        <xs:annotation>
+            <xs:documentation>Dossier de référence</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="NationalNumber" type="r:NationalNumberType"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="002"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT003">
+        <xs:annotation>
+            <xs:documentation>Détermination de résidence</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:choice>
+                <xs:element name="InvestigationResult">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Code">
+                                <xs:annotation>
+                                    <xs:documentation>1: positive, 2: negative</xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="1"/>
+                                        <xs:enumeration value="2"/>
+                                        <xs:enumeration value="3"/>
+                                        <xs:enumeration value="4"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="Label" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:sequence>
+                    <xs:element name="Graphic1" type="xs:string" minOccurs="0"/>
+                    <xs:element name="Graphic2" type="xs:string" minOccurs="0"/>
+                </xs:sequence>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="003"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT004">
+        <xs:annotation>
+            <xs:documentation>Changement de sexe</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Sex">
+                <xs:annotation>
+                    <xs:documentation>1: Male, 2: Female</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="1"/>
+                        <xs:enumeration value="2"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Graphic" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="004"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT005">
+        <xs:annotation>
+            <xs:documentation>Intention de changer l'adresse</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:choice>
+                <xs:element name="OriginPlace" type="r:PlaceType"/>
+                <xs:element name="DestinationPlace" type="r:PlaceType"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="005"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT006">
+        <xs:annotation>
+            <xs:documentation>Pays d'origine</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Country" type="r:CountryType"/>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="006"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT007">
+        <xs:annotation>
+            <xs:documentation>Presence temporaire pour etudes</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="TypeOfStudent" type="r:TypeOfStudentType" minOccurs="0"/>
+            <xs:element name="ExpiryDate" type="r:DateType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="007"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT008">
+        <xs:annotation>
+            <xs:documentation>Permission de retour</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="ExpiryDate" type="r:DateType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="008"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT010">
+        <xs:annotation>
+            <xs:documentation>Changement noms prénoms</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Name">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="r:NameType">
+                            <xs:attribute name="Group1" type="xs:string" use="optional">
+                                <xs:annotation>
+                                    <xs:documentation>Contains number of names in group #1</xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="010"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT011">
+        <xs:annotation>
+            <xs:documentation>Pseudonymes</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Name" type="r:NameType"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="011"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT012">
+        <xs:annotation>
+            <xs:documentation>Titre de noblesse</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="NobilityTitle" type="r:NobilityTitleType"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="012"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT013">
+        <xs:annotation>
+            <xs:documentation>Modification de nom</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="ModificationType" type="r:TypeOfModificationType"/>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="013"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT018">
+        <xs:annotation>
+            <xs:documentation>Adresse déclarée à l'étranger</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Address" type="r:AddressType"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="018"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT019">
+        <xs:annotation>
+            <xs:documentation>Déclaration de changement d'adresse</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Address">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Graphic" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="019"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT020">
+        <xs:annotation>
+            <xs:documentation>Adresse</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Address">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ZipCode" type="xs:string"/>
+                        <xs:element name="Street" type="r:StreetType"/>
+                        <xs:element name="HouseNumber" type="xs:string"/>
+                        <xs:element name="Box" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="020"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT022">
+        <xs:annotation>
+            <xs:documentation>Résidence à l'étranger</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Address" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="PosteDiplomatique" type="r:DiplomaticPostType"/>
+                        <xs:element name="Territory" type="r:TerritoryType"/>
+                        <xs:element name="Address" type="r:AddressType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="022"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT023">
+        <xs:annotation>
+            <xs:documentation>Adresse postale à l'étranger</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Address" type="r:AddressType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="023"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT024">
+        <xs:annotation>
+            <xs:documentation>Adresse de référence</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="024"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT026">
+        <xs:annotation>
+            <xs:documentation>Absence temporaire</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="TypeOfAbsence" type="r:TypeOfAbsenceType" minOccurs="0"/>
+            <xs:element name="Graphic1" type="xs:string" minOccurs="0"/>
+            <xs:element name="Graphic2" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="026"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT027">
+        <xs:annotation>
+            <xs:documentation>Résidence légale</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Graphic" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="027"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT028">
+        <xs:annotation>
+            <xs:documentation>Inscription Temporaire</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="LegalFact">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Code" type="xs:string"/>
+                        <xs:element name="Label" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+            <xs:element name="ExpiryDate" type="r:DateType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="028"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT031">
+        <xs:annotation>
+            <xs:documentation>Nationalité</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Nationality" type="r:NationalityType"/>
+            <xs:element name="Reason" minOccurs="0">
+                <xs:complexType>
+                    <xs:choice>
+                        <xs:element name="Graphic" type="xs:string"/>
+                        <xs:sequence>
+                            <xs:element name="Justification" type="r:JustificationType"/>
+                            <xs:element name="Place" type="r:PlaceType"/>
+                            <xs:choice>
+                                <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+                                <xs:element name="Country" type="r:CountryType" minOccurs="0"/>
+                            </xs:choice>
+                        </xs:sequence>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="031"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT032">
+        <xs:annotation>
+            <xs:documentation>PLURINATIONALITE</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Nationality" type="r:NationalityType"/>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="032"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT040">
+        <xs:annotation>
+            <xs:documentation>Sexe a verifier</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DateEntered" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DateValidated" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Validation" type="r:ValidationType"/>
+            <xs:element name="Gender">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Code">
+                            <xs:annotation>
+                                <xs:documentation>1: Male, 2: Female</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="1"/>
+                                    <xs:enumeration value="2"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="Label" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="040"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT041">
+        <xs:annotation>
+            <xs:documentation>Nom a verifier</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DateEntered" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DateValidated" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Validation" type="r:ValidationType"/>
+            <xs:element name="Graphic" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="041"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT042">
+        <xs:annotation>
+            <xs:documentation>Adresse a verifier</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DateEntered" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DateValidated" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Validation" type="r:ValidationType"/>
+            <xs:element name="Place" type="r:PlaceType"/>
+            <xs:element name="Address">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ZipCode" type="xs:string"/>
+                        <xs:element name="Street" type="r:StreetType"/>
+                        <xs:element name="HouseNumber" type="xs:string"/>
+                        <xs:element name="Box" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="042"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT043">
+        <xs:annotation>
+            <xs:documentation>Nationalite a verifier</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DateEntered" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DateValidated" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Validation" type="r:ValidationType"/>
+            <xs:element name="Nationality" type="r:NationalityType"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="043"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT044">
+        <xs:annotation>
+            <xs:documentation>Lieu de naissance a verifier</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DateEntered" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DateValidated" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Validation" type="r:ValidationType"/>
+            <xs:element name="Place" type="r:PlaceType"/>
+            <xs:element name="Graphic" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="044"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT045">
+        <xs:annotation>
+            <xs:documentation>Etat civil a verifier</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DateEntered" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DateValidated" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Validation" type="r:ValidationType"/>
+            <xs:element name="CivilState" type="r:CivilStateType"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="045"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT046">
+        <xs:annotation>
+            <xs:documentation>Décès a verifier</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DateEntered" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DateValidated" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Validation" type="r:ValidationType"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="046"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT070">
+        <xs:annotation>
+            <xs:documentation>Profession</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Occupation" type="r:OccupationType"/>
+            <xs:element name="SocialCategory" type="r:SocialCategoryType"/>
+            <xs:element name="Graphic1" type="xs:string" minOccurs="0"/>
+            <xs:element name="Graphic2" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="070"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT073">
+        <xs:annotation>
+            <xs:documentation>Certificat de Pension</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Category" type="r:CategoryType" minOccurs="0"/>
+            <xs:element name="CertificateNumber" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="073"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT074">
+        <xs:annotation>
+            <xs:documentation>Certificat de Pension Speciale</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="SerialNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="IdentificationNumber" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="074"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT100">
+        <xs:annotation>
+            <xs:documentation>Lieu de naissance</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="ActNumber" type="xs:string"/>
+            <xs:element name="SuppletoryRegister" type="xs:string" minOccurs="0"/>
+            <xs:choice>
+                <xs:element name="Place1" type="r:PlaceType"/>
+                <xs:element name="Place2" type="r:GraphicPlaceType"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="100"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT101">
+        <xs:annotation>
+            <xs:documentation>Date de naissance déclarée</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="DeclaredBirthDate" type="r:DateType"/>
+            <xs:element name="Certificate" type="r:CertificateType"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="101"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT110">
+        <xs:annotation>
+            <xs:documentation>Filiation ascendante</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="FiliationType" type="r:FiliationType"/>
+            <xs:element name="Parent1" type="r:ParentType" minOccurs="0"/>
+            <xs:element name="Parent2" type="r:ParentType" minOccurs="0"/>
+            <xs:element name="ActNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="110"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT111">
+        <xs:annotation>
+            <xs:documentation>Statut de la personne représentée ou assistée</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Situation" type="r:SituationType111" minOccurs="1"/>
+            <xs:element name="Justification" type="r:JustificationType" minOccurs="1"/>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="111"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT113">
+        <xs:annotation>
+            <xs:documentation>Personne qui représente ou assiste</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Status" type="r:StatusType113" minOccurs="1"/>
+            <xs:element name="Justification" type="r:JustificationType" minOccurs="0"/>
+            <xs:choice>
+                <xs:element name="NationalNumber" type="r:NationalNumberType" minOccurs="0"/>
+                <xs:element name="Graphic1" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            </xs:choice>
+            <xs:element name="Graphic2" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="113"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT114">
+        <xs:annotation>
+            <xs:documentation>Filiation descendante</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="FiliationType" type="r:FiliationType"/>
+            <xs:element name="Child" type="r:ChildType"/>
+            <xs:element name="Justification" type="r:JustificationType" minOccurs="0"/>
+            <xs:element name="ActNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="114"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT120">
+        <xs:annotation>
+            <xs:documentation>Etat civil</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="CivilState" type="r:CivilStateType"/>
+            <xs:element name="Spouse" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="NationalNumber" type="r:NationalNumberType"/>
+                        <xs:element name="Name" type="r:NameType" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Lieu" type="r:LieuType" minOccurs="0"/>
+            <xs:element name="ActNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="SuppletoryRegister" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="120"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT121">
+        <xs:annotation>
+            <xs:documentation>Lieu de naissance du partenaire</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:choice>
+                <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+                <xs:element name="Country" type="r:CountryType" minOccurs="0"/>
+            </xs:choice>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="121"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT122">
+        <xs:annotation>
+            <xs:documentation>Contrat de mariage</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="TypeOfContract" type="r:TypeOfContractType" minOccurs="0"/>
+            <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="122"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT123">
+        <xs:annotation>
+            <xs:documentation>Cohabitation legale</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:choice>
+                <xs:element name="Declaration">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="RegistrationDate" type="r:DateType"/>
+                            <xs:element name="Partner" type="r:PartnerType123"/>
+                            <xs:element name="Place" type="r:PlaceType"/>
+                            <xs:element name="Notary" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="NameNotary" type="xs:string" minOccurs="0"/>
+                                        <xs:choice minOccurs="0">
+                                            <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+                                            <xs:element name="Country" type="r:CountryType" minOccurs="0"/>
+                                        </xs:choice>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Cessation">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Reason" type="r:Reason"/>
+                            <xs:choice>
+                                <xs:element name="Place" type="r:PlaceType"/>
+                                <xs:element name="Country" type="r:CountryType"/>
+                            </xs:choice>
+                            <xs:element name="Notification" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="NotificationDate" type="r:DateType" minOccurs="0"/>
+                                        <xs:choice minOccurs="0">
+                                            <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+                                            <xs:element name="Country" type="r:CountryType" minOccurs="0"/>
+                                        </xs:choice>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Partner" type="r:PartnerType123" minOccurs="0"/>
+                            <xs:element name="BelgianJudgement" type="r:BelgianJudgementTypeVC" minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="123"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT124">
+        <xs:annotation>
+            <xs:documentation>Mariage de complaisance</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Decision" type="r:DecisionType124"/>
+            <xs:element name="Place" type="r:PlaceType"/>
+            <xs:element name="Partner" type="r:PartnerType"/>
+            <xs:element name="NotificationDate" type="r:DateType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="124"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT125">
+        <xs:annotation>
+            <xs:documentation>Cohabitation legale de complaisance</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Decision" type="r:DecisionType125"/>
+            <xs:element name="Place" type="r:PlaceType"/>
+            <xs:element name="Partner" type="r:PartnerType"/>
+            <xs:element name="NotificationDate" type="r:DateType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="125"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT130">
+        <xs:annotation>
+            <xs:documentation>Elections</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:choice>
+                <xs:element name="ElectoralFunction" type="r:ElectoralFunctionType" minOccurs="0"/>
+                <xs:element name="Voter" type="r:VoterType" minOccurs="0"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="130"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT131">
+        <xs:annotation>
+            <xs:documentation>Electeurs EEC</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Category" type="r:CategoryType" minOccurs="0"/>
+            <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+            <xs:element name="Country" type="r:CountryType" minOccurs="0"/>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="131"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT132">
+        <xs:annotation>
+            <xs:documentation>Electeurs Belges a l'etranger</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="TypeOfVoting" type="r:TypeOfVotingType" minOccurs="0"/>
+            <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+            <xs:element name="Criteria" type="r:CriteriaType" minOccurs="0"/>
+            <xs:element name="Post" type="r:PostType" minOccurs="0"/>
+            <xs:element name="ChoiceOfAddress" type="r:ChoiceOfAddressType" minOccurs="0"/>
+            <xs:choice minOccurs="0">
+                <xs:element name="Proxy">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="NationalNumber" type="r:NationalNumberType" minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="AbsenteeVoter">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="NationalNumber" type="r:NationalNumberType" minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:element name="ValidityDate" type="r:DateType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="132"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT140">
+        <xs:annotation>
+            <xs:documentation>Chef de ménage</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Housing" type="r:HousingType" minOccurs="0"/>
+            <xs:element name="FamilyRole" type="r:FamilyRoleType"/>
+            <xs:element name="NationalNumber" type="r:NationalNumberType" minOccurs="0"/>
+            <xs:element name="Name" type="r:NameType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="140"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT141">
+        <xs:annotation>
+            <xs:documentation>Membre d'un ménage</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Housing" type="r:HousingType" minOccurs="0"/>
+            <xs:element name="FamilyRole" type="r:FamilyRoleType"/>
+            <xs:element name="NationalNumber" type="r:NationalNumberType" minOccurs="0"/>
+            <xs:element name="Name" type="r:NameType" minOccurs="0"/>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="141"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT150">
+        <xs:annotation>
+            <xs:documentation>Décès, décision rectificative de l'acte d'état civil ou décision judiciaire déclarative de décès</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:choice>
+                <xs:element name="Decease" type="r:DeceaseType"/>
+                <xs:element name="Decision" type="r:DecisionType150"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="150"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT151">
+        <xs:annotation>
+            <xs:documentation>Absence</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Decision" type="r:DecisionType" minOccurs="0"/>
+            <xs:element name="Graphic" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="151"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT152">
+        <xs:annotation>
+            <xs:documentation>Mode de sépulture</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="TypeOfBurial" type="r:TypeOfBurialType" minOccurs="1"/>
+            <xs:element name="LegalRepresentative" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="NationalNumber" type="r:NationalNumberType" minOccurs="0"/>
+                        <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="152"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT153">
+        <xs:annotation>
+            <xs:documentation>Mode de sépulture et rites</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="TypeOfFuneral" type="r:TypeOfFuneralType" minOccurs="0"/>
+            <xs:element name="Rite" type="r:RiteType" minOccurs="0"/>
+            <xs:element name="Place" type="r:PlaceType"/>
+            <xs:element name="DocumentDate" type="r:DateType"/>
+            <xs:element name="LegalRepresentative" type="r:LegalRepresentativeType" minOccurs="0"/>
+            <xs:element name="Contract" type="r:ContractType" minOccurs="0"/>
+            <xs:choice>
+                <xs:element name="Place2" type="r:PlaceType" minOccurs="0"/>
+                <xs:element name="Place3" type="r:GraphicPlaceType" minOccurs="0"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="153"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT160">
+        <xs:annotation>
+            <xs:documentation>Service Militaire</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Situation" type="r:SituationType160" minOccurs="0"/>
+            <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+            <xs:element name="Class" type="r:ClassType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="160"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT180">
+        <xs:annotation>
+            <xs:documentation>Certificats carte EID</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="IdentityCard" type="xs:string"/>
+            <xs:element name="Certificate1" type="r:Certificate"/>
+            <xs:element name="Certificate2" type="r:Certificate"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="180"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT190">
+        <xs:annotation>
+            <xs:documentation>Reconnaissance de titre</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="WarTitle" type="r:WarTitleType" minOccurs="0"/>
+            <xs:element name="Graphic1" type="xs:string" minOccurs="0"/>
+            <xs:element name="Graphic2" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="190"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT191">
+        <xs:annotation>
+            <xs:documentation>Permis de conduire</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="TypeOfLicense" type="r:TypeOfLicenseType"/>
+            <xs:element name="LicenseNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+            <xs:element name="DeliveryCountry" type="r:CountryType" minOccurs="0"/>
+            <xs:element name="ForfeitureReason" type="r:ForfeitureReasonType" minOccurs="0"/>
+            <xs:element name="ForfeitureDate" type="r:ForfeitureDateType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="191"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT192">
+        <xs:annotation>
+            <xs:documentation>Don d'organes</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Declaration" type="r:DeclarationType" minOccurs="0"/>
+            <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="192"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT193">
+        <xs:annotation>
+            <xs:documentation>Commerçant ambulant</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Card" type="r:CardType" minOccurs="0"/>
+            <xs:element name="Categories" type="r:HawkerCategoriesType" minOccurs="0"/>
+            <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+            <xs:element name="ExpiryDate" type="r:DateType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="193"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT194">
+        <xs:annotation>
+            <xs:documentation>Ancien Permis de conduire</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="TypeOfLicense" type="r:TypeOfLicenseType194" minOccurs="0"/>
+            <xs:element name="Categories" type="r:LicenseCategoriesType" minOccurs="0"/>
+            <xs:element name="LicenseNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="Delivery" type="r:DeliveryType194" minOccurs="0"/>
+            <xs:element name="GearBox" type="r:GearBoxType" minOccurs="0"/>
+            <xs:element name="Medical" type="r:MedicalType" minOccurs="0"/>
+            <xs:element name="ExpiryDate" type="r:ExpiryDateType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="194"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT195">
+        <xs:annotation>
+            <xs:documentation>Carte d'identite</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="TypeOfCard" type="r:TypeOfCardType"/>
+            <xs:element name="Duplicate" type="xs:string" minOccurs="0"/>
+            <xs:element name="CardNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="Delivery" type="r:DeliveryType206" minOccurs="0"/>
+            <xs:element name="ExpiryDate" type="r:ExpiryDateType" minOccurs="0"/>
+            <xs:element name="Renewal" type="xs:string" minOccurs="0"/>
+            <xs:element name="Duration" type="r:DurationType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="195"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT196">
+        <xs:annotation>
+            <xs:documentation>Carte de sécurité sociale</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Category">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Code" type="xs:string"/>
+                        <xs:element name="Label" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CardNumber" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="196"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT197">
+        <xs:annotation>
+            <xs:documentation>Carte Professionnelle</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="CardNumber" type="xs:string"/>
+            <xs:element name="ExpiryDate" type="r:ExpiryDateType"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="197"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT198">
+        <xs:annotation>
+            <xs:documentation>Permis de travail</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="PermitNumber" type="xs:string"/>
+            <xs:element name="ExpiryDate" type="r:ExpiryDateType"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="198"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT199">
+        <xs:annotation>
+            <xs:documentation>Passeport</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Status" type="r:StatusType"/>
+            <xs:element name="PassportIdent" type="r:PassportIdentType"/>
+            <xs:element name="Issuer" type="r:IssuerType"/>
+            <xs:element name="RenewalNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="SerialNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="SecondNumber" type="xs:string" minOccurs="0"/>
+            <xs:choice minOccurs="0">
+                <xs:element name="ReplacementOf" type="xs:string" minOccurs="0"/>
+                <xs:element name="AdditionTo" type="xs:string" minOccurs="0"/>
+            </xs:choice>
+            <xs:element name="ProductionDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="ExpiryDate" type="r:DateType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="199"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT200">
+        <xs:annotation>
+            <xs:documentation>No de securite publique</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="PublicSecurityNumber" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="200"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT202">
+        <xs:annotation>
+            <xs:documentation>Information Speciale</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Graphic1" type="xs:string" minOccurs="0"/>
+            <xs:element name="Graphic2" type="xs:string" minOccurs="0"/>
+            <xs:element name="Limosa" type="r:LimosaType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="202"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT205">
+        <xs:annotation>
+            <xs:documentation>Type de Personne dans le registre d'attente</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="205"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT206">
+        <xs:annotation>
+            <xs:documentation>Statut de refugie</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="GeneralInfo" type="r:GeneralInfoType" minOccurs="0"/>
+            <xs:choice>
+                <xs:element name="Procedure" type="r:ProcedureType"/>
+                <xs:element name="StrikingOut" type="r:StrikingOutType"/>
+                <xs:element name="DecisionCancelled" type="r:DecisionCancelledType"/>
+                <xs:element name="Protection" type="r:ProtectionType"/>
+                <xs:element name="DelayLeaveGranted" type="r:DelayLeaveGrantedType"/>
+                <xs:element name="Escape">
+                    <xs:complexType>
+                        <xs:attribute name="Status" type="xs:string"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="UnrestrictedStay">
+                    <xs:complexType>
+                        <xs:attribute name="Status" type="xs:string"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ApplicationRenounced">
+                    <xs:complexType>
+                        <xs:attribute name="Status" type="xs:string"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="TerritoryLeft" type="r:TerritoryLeftType"/>
+                <xs:element name="AdviceFromCGVS" type="r:AdviceFromCGVSType"/>
+                <xs:element name="Decision" type="r:DecisionType206"/>
+                <xs:element name="ApplicationFiled" type="r:ApplicationFiledType"/>
+                <xs:element name="NotificationByDVZ" type="r:NotificationByDVZType"/>
+                <xs:element name="NotificationByOrg" type="r:NotificationByOrgType"/>
+                <xs:element name="AppealLodged" type="r:AppealLodgedType"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="206"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT207">
+        <xs:annotation>
+            <xs:documentation>Identification du CPAS</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:choice>
+                <xs:element name="SocialWelfare" type="r:SocialWelfareType"/>
+                <xs:element name="RefugeeCentre" type="r:RefugeeCentreType"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="207"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT208">
+        <xs:annotation>
+            <xs:documentation>Pseudo-numéro national</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="PseudoNationalNumber" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="208"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT210">
+        <xs:annotation>
+            <xs:documentation>Registre d'inscription</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="RegistrationRegister" type="r:RegistrationRegisterType"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="210"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT211">
+        <xs:annotation>
+            <xs:documentation>Type de document pour déterminer identité</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="TypeOfDocument" type="r:IdentificationType"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="211"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT212">
+        <xs:annotation>
+            <xs:documentation>Domicile élu</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:choice>
+                <xs:element name="Residence" type="r:ChoosenResidenceType"/>
+                <xs:element name="Graphic" type="xs:string"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="212"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT213">
+        <xs:annotation>
+            <xs:documentation>Alias</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Type" type="xs:string" minOccurs="0"/>
+            <xs:element name="BirthDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Nationality" type="r:NationalityType" minOccurs="0"/>
+            <xs:element name="Name" type="r:NameType" minOccurs="0"/>
+            <xs:element name="BirthPlace" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="213"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT214">
+        <xs:annotation>
+            <xs:documentation>Adresse déclarée</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Organization" type="r:OrganizationType"/>
+            <xs:element name="Address">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ZipCode" type="xs:string"/>
+                        <xs:element name="Street" type="r:StreetType"/>
+                        <xs:element name="HouseNumber" type="xs:string"/>
+                        <xs:element name="Box" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="214"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT240">
+        <xs:annotation>
+            <xs:documentation>Local Registers</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="NumberRegister" type="xs:string" minOccurs="0"/>
+            <xs:element name="NumberFolio" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="240"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT246">
+        <xs:annotation>
+            <xs:documentation>Info Manager</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Graphic1" type="xs:string" minOccurs="0"/>
+            <xs:element name="Graphic2" type="xs:string" minOccurs="0"/>
+            <xs:element name="Contacts" type="r:ContactsType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="246"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT250">
+        <xs:annotation>
+            <xs:documentation>Dossier référencé</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="NationalNumber" type="r:NationalNumberType"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="250"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT251">
+        <xs:annotation>
+            <xs:documentation>Date mise à jour de la résidence principale</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="251"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT252">
+        <xs:annotation>
+            <xs:documentation>Adresse non communicable</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+            <xs:element name="StartDate" type="r:DateType"/>
+            <xs:element name="EndDate" type="r:DateType"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="252"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT253">
+        <xs:annotation>
+            <xs:documentation>Date de collecte</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="253"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="IT254">
+        <xs:annotation>
+            <xs:documentation>Date de la dernière MAJ</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="DelDate" type="r:DateType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Type" type="xs:string" default="254"/>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="Structure" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="AddressType">
+        <xs:sequence>
+            <xs:element name="Country" type="r:CountryType" minOccurs="0"/>
+            <xs:element name="Graphic1" type="xs:string" minOccurs="0"/>
+            <xs:element name="Graphic2" type="xs:string" minOccurs="0"/>
+            <xs:element name="Graphic3" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AdviceFromCGVSType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+            <xs:element name="Reference" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AppealLodgedType">
+        <xs:sequence>
+            <xs:element name="Reference" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AppealType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ApplicationFiledType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string" minOccurs="0"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+            <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BelgianJudgementType">
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:choice>
+                <xs:sequence>
+                    <xs:element name="Tribunal" type="r:TribunalType" minOccurs="0"/>
+                    <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+                </xs:sequence>
+                <xs:sequence>
+                    <xs:element name="CourtName" type="r:CourtNameType" minOccurs="0"/>
+                </xs:sequence>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BelgianJudgementTypeVC">
+        <xs:all>
+            <xs:element name="Tribunal" type="r:TribunalType" minOccurs="0"/>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+            <xs:element name="CourtName" type="r:CourtNameType" minOccurs="0"/>
+        </xs:all>
+    </xs:complexType>
+    <xs:complexType name="CardType">
+        <xs:sequence>
+            <xs:element name="CardNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="SerialNumber" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CategoryType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CategoryType130">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string" minOccurs="0"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Certificate">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="Number" type="xs:string"/>
+                <xs:element name="Presence" type="r:PresenceType"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CertificateType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ChildType">
+        <xs:sequence>
+            <xs:element name="NationalNumber" type="r:NationalNumberType" minOccurs="0"/>
+            <xs:element name="Name" type="r:NameType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ChoiceOfAddressType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ChoosenResidenceType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CivilStateType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ClassType">
+        <xs:sequence>
+            <xs:element name="Year" type="xs:string"/>
+            <xs:element name="Qualification" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ContactsType">
+        <xs:sequence>
+            <xs:element name="EmailAddress" type="xs:string" minOccurs="0"/>
+            <xs:element name="MobileNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="PhoneNumber" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ContractType">
+        <xs:sequence>
+            <xs:element name="Situation" type="r:SituationType153"/>
+            <xs:element name="Date" type="r:DateType" minOccurs="0"/>
+            <xs:element name="Number" type="xs:string" minOccurs="0"/>
+            <xs:element name="CBENumber" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CountryType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CourtNameType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CriteriaType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DateType">
+        <xs:annotation>
+            <xs:documentation>Century, Year, Month, Day</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Century" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="18"/>
+                        <xs:enumeration value="19"/>
+                        <xs:enumeration value="20"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Year" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\d{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Month" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\d{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Day" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\d{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DeceaseType">
+        <xs:annotation>
+            <xs:documentation>Décès</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="ActNumber" type="xs:string"/>
+            <xs:element name="SuppletoryRegister" type="xs:string" minOccurs="0"/>
+            <xs:choice>
+                <xs:element name="Place1" type="r:PlaceType"/>
+                <xs:element name="Place2" type="r:GraphicPlaceType"/>
+            </xs:choice>
+            <xs:element name="Origin" type="r:OriginType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DecisionCancelledType">
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="Reference" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DecisionType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+            <xs:element name="NationalNumber" type="r:NationalNumberType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DecisionType124">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DecisionType125">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DecisionType150">
+        <xs:sequence>
+            <xs:element name="Type">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Code" type="xs:string"/>
+                        <xs:element name="Label" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Transcription">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Date" type="r:DateType" minOccurs="0"/>
+                        <xs:element name="Place" type="r:PlaceType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DecisionType206">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string" minOccurs="0"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+            <xs:element name="Reference" type="xs:string" minOccurs="0"/>
+            <xs:element name="OpenClose" type="r:OpenCloseType" minOccurs="0"/>
+            <xs:element name="Comments" type="xs:string" minOccurs="0"/>
+            <xs:element name="Term" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DeclarationType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DelayLeaveGrantedType">
+        <xs:sequence>
+            <xs:element name="Date" type="r:DateType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DeliveryType">
+        <xs:sequence>
+            <xs:element name="Place" type="r:PlaceType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DeliveryType194">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="Place" type="r:PlaceType"/>
+                <xs:sequence>
+                    <xs:element name="Code" type="xs:string"/>
+                    <xs:element name="Label" type="xs:string"/>
+                </xs:sequence>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DeliveryType206">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="Place" type="r:PlaceType"/>
+                <xs:element name="Country" type="r:CountryType" minOccurs="0"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DiplomaticPostType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DocumentType">
+        <xs:sequence>
+            <xs:element name="ResponseDateTime" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="FileInfo" type="r:FileInfoType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="Status" type="xs:string"/>
+        <xs:attribute name="SchemaVersion" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="DurationType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ElectoralFunctionType">
+        <xs:sequence>
+            <xs:element name="Situation" type="r:SituationType130"/>
+            <xs:element name="Category" type="r:CategoryType130" minOccurs="0"/>
+            <xs:element name="Modified" type="xs:string" minOccurs="0"/>
+            <xs:element name="Volunteer" type="r:VolunteerType" minOccurs="0"/>
+            <xs:element name="CODNBSC" type="xs:string" minOccurs="0"/>
+            <xs:element name="Place" type="r:PlaceType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ExpiryDateType">
+        <xs:annotation>
+            <xs:documentation>Format acceptant les dates fictives éventuelles</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Century" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\d{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Year" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\d{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Month" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\d{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Day" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\d{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FamilyRoleType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FiliationType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ForeignJudgementType">
+        <xs:sequence>
+            <xs:element name="Place" type="r:GraphicPlaceType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ForfeitureDateType">
+        <xs:sequence>
+            <xs:element name="Century" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\d{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Year" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\d{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Month" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\d{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Day" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\d{2}"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ForfeitureReasonType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GearBoxType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GeneralInfoType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+            <xs:element name="Organization" type="r:OrganizationType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GraphicPlaceType">
+        <xs:sequence>
+            <xs:element name="Country" type="r:CountryType"/>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="HawkerCategoriesType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Category" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="HousingType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="IdentificationType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="InitiativeType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="IssuerType">
+        <xs:sequence minOccurs="0">
+            <xs:choice minOccurs="0">
+                <xs:element name="Place" type="r:PlaceType"/>
+                <xs:element name="Province" type="r:ProvinceType"/>
+                <xs:element name="PosteDiplomatique" type="r:DiplomaticPostType"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="JustificationType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="LegalRepresentativeType">
+        <xs:sequence>
+            <xs:element name="NationalNumber" type="r:NationalNumberType" minOccurs="0"/>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="LicenseCategoriesType">
+        <xs:sequence>
+            <xs:element name="Category" type="r:CategoryType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="LieuType">
+        <xs:choice>
+            <xs:element name="Place1" type="r:PlaceType"/>
+            <xs:element name="Place2" type="r:GraphicPlaceType"/>
+            <xs:element name="Place3">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:choice>
+                            <xs:element name="BelgianJudgement" type="r:BelgianJudgementTypeVC" minOccurs="0"/>
+                            <xs:element name="ForeignJudgement" type="r:ForeignJudgementType" minOccurs="0"/>
+                        </xs:choice>
+                        <xs:element name="Transcription" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="Date" type="r:DateType"/>
+                                    <xs:element name="Place" type="r:PlaceType"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="LimosaReasonType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="LimosaType">
+        <xs:sequence>
+            <xs:element name="Reason1" type="r:LimosaReasonType"/>
+            <xs:element name="Reason2" type="r:LimosaReasonType"/>
+            <xs:element name="NationalNumber" type="r:NationalNumberType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MedicalType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="NameType">
+        <xs:sequence>
+            <xs:element name="LastName" maxOccurs="15">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Code" type="xs:string" maxOccurs="unbounded"/>
+                        <xs:element name="Label" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="FirstName" minOccurs="0" maxOccurs="14">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Code" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="Label" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                    <xs:attribute name="UsedFirstName" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>Contains "YES" if this attribute si present</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="NationalityType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="NationalNumberRestriction">
+        <xs:annotation>
+            <xs:documentation>11 chifres</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{11}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="NationalNumberType">
+        <xs:sequence>
+            <xs:element name="NationalNumber" type="r:NationalNumberRestriction"/>
+            <xs:element name="Date" type="r:DateType"/>
+            <xs:element name="Sex">
+                <xs:annotation>
+                    <xs:documentation>1: Male, 2: Female</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="1"/>
+                        <xs:enumeration value="2"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="NobilityTitleType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="NotificationByDVZType">
+        <xs:sequence>
+            <xs:element name="Reference" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="NotificationByOrgType">
+        <xs:sequence>
+            <xs:element name="Place" type="r:PlaceType"/>
+            <xs:element name="Reference" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OccupationType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OpenCloseType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OrganizationType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OriginType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OrigineType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ParentType">
+        <xs:sequence>
+            <xs:element name="NationalNumber" type="r:NationalNumberType" minOccurs="0"/>
+            <xs:element name="Name" type="r:NameType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PartnerType">
+        <xs:sequence>
+            <xs:element name="NationalNumber" type="r:NationalNumberType"/>
+            <xs:element name="Name" type="r:NameType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PartnerType123">
+        <xs:sequence>
+            <xs:element name="NationalNumber" type="r:NationalNumberType"/>
+            <xs:element name="Name" type="r:NameType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PassportIdentType">
+        <xs:sequence>
+            <xs:element name="PassportType" type="r:TypeOfPassportType"/>
+            <xs:element name="PassportNumber" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PlaceType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PostType">
+        <xs:sequence>
+            <xs:element name="DiplomaticPost" type="r:DiplomaticPostType"/>
+            <xs:element name="Territory" type="r:TerritoryType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PresenceType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProcedureType">
+        <xs:sequence>
+            <xs:element name="Origine" type="r:OrigineType"/>
+            <xs:element name="Reference" type="xs:string"/>
+            <xs:choice>
+                <xs:element name="Appeal" type="r:AppealType"/>
+                <xs:element name="OpenClose" type="r:StatusAppealType"/>
+            </xs:choice>
+            <xs:element name="Date" type="r:DateType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProvinceType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProtectionType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+            <xs:element name="Reference" type="xs:string" minOccurs="0"/>
+            <xs:element name="Term" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Reason">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RefugeeCentreType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RegistrationRegisterType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RenewalType">
+        <xs:sequence>
+            <xs:element name="Number" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ResidenceType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RiteType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SituationType111">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SituationType130">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string" minOccurs="0"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SituationType153">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SituationType160">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SocialCategoryType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SocialWelfareType">
+        <xs:sequence>
+            <xs:element name="Place" type="r:PlaceType"/>
+            <xs:element name="Initiative" type="r:InitiativeType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="StatusAppealType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="StatusType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="StatusType113">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="StreetType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="Graphic" type="xs:string"/>
+                <xs:sequence>
+                    <xs:element name="Code" type="xs:string"/>
+                    <xs:element name="Label" type="xs:string"/>
+                </xs:sequence>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="StrikingOutType">
+        <xs:sequence>
+            <xs:element name="Reference" type="xs:string"/>
+            <xs:element name="Status" type="r:StrikingStatusType"/>
+            <xs:element name="OpenClose" type="r:OpenCloseType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="StrikingStatusType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TerritoryLeftType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TerritoryType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TribunalType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeOfAbsenceType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeOfBurialType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeOfCardType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeOfContractType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeOfFuneralType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeOfLicenseType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeOfLicenseType194">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeOfModificationType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeOfPassportType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeOfStudentType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeOfVotingType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ValidationType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="VolunteerType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string" minOccurs="0"/>
+            <xs:element name="Label" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="VoterType">
+        <xs:annotation>
+            <xs:documentation>Contains information of a voter</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Situation" type="r:SituationType130" minOccurs="0"/>
+            <xs:element name="ExpiryDate" type="r:ExpiryDateType" minOccurs="0"/>
+            <xs:element name="Graphic" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="WarTitleType">
+        <xs:sequence>
+            <xs:element name="Code" type="xs:string"/>
+            <xs:element name="Label" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FileInfoType">
+        <xs:all>
+            <xs:element name="NationalNumber" type="r:IT000" minOccurs="0"/>
+            <xs:element name="FileOwner" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Residences" type="r:IT001" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="FileReference" type="r:IT002" minOccurs="0"/>
+            <xs:element name="AscertainedLegalMainAddresses" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="AscertainedLegalMainAddress" type="r:IT003" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="NewGender" type="r:IT004" minOccurs="0"/>
+            <xs:element name="AddressChangeIntention" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Address" type="r:IT005" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Names" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Name" type="r:IT010" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Pseudonyms" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Pseudonym" type="r:IT011" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="NobilityTitles" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="NobilityTitle" type="r:IT012" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="NameModifications" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="NameModification" type="r:IT013" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="AddressDeclarationAbroad" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Address" type="r:IT018" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="AddressChangeDeclaration" type="r:IT019" minOccurs="0"/>
+            <xs:element name="LegalMainAddresses" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="LegalMainAddress" type="r:IT020" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ResidenceAbroad" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ResidenceAbroad" type="r:IT022" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PostalAddressAbroad" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="PostalAddressAbroad" type="r:IT023" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="AddressReferences" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="AddressReference" type="r:IT024" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="TemporaryAbsences" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="TemporaryAbsence" type="r:IT026" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="LegalResidences" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="LegalResidence" type="r:IT027" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Nationalities" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Nationality" type="r:IT031" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MultipleNationalities" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="MultipleNationality" type="r:IT032" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Occupations" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Occupation" type="r:IT070" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BirthPlace" type="r:IT100" minOccurs="0"/>
+            <xs:element name="DeclaredBirthDate" type="r:IT101" minOccurs="0"/>
+            <xs:element name="CivilStates" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="CivilState" type="r:IT120" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="LegalCohabitations" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="LegalCohabitation" type="r:IT123" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="FamilyMembers" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="FamilyMember" type="r:IT140" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="HeadOfFamily" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="HeadOfFamily" type="r:IT141" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Deceases" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Decease" type="r:IT150" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Disappearences" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Disappearence" type="r:IT151" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EIDCertificates" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="EIDCertificate" type="r:IT180" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="IdentityCards" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="IdentityCard" type="r:IT195" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EmploymentCards" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="EmploymentCard" type="r:IT197" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="WorkPermits" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="WorkPermit" type="r:IT198" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PublicSecurityNumbers" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="PublicSecurityNumber" type="r:IT200" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="SpecialInfos" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="SpecialInfo" type="r:IT202" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="RefugeeTypes" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="RefugeeType" type="r:IT205" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="StatusOfRefugee" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="StatusOfRefugee" type="r:IT206" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="OrganizationsInCharge" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="OrganizationInCharge" type="r:IT207" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PseudoNationalNumbers" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="PseudoNationalNumber" type="r:IT208" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="RegistrationRegisters" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="RegistrationRegister" type="r:IT210" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="DocumentTypes" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="DocumentType" type="r:IT211" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ChoosenResidences" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ChoosenResidence" type="r:IT212" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Aliases" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Alias" type="r:IT213" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="StatedAddresses" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="StatedAddress" type="r:IT214" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ReferencedFiles" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ReferencedFile" type="r:IT250" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ResidenceUpdateDates" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ResidenceUpdateDate" type="r:IT251" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="NotCommunicable" type="r:IT252" minOccurs="0"/>
+            <xs:element name="CreationDate" type="r:IT253" minOccurs="0"/>
+            <xs:element name="LastUpdateDate" type="r:IT254" minOccurs="0"/>
+            <xs:element name="CountriesOfOrigin" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="CountryOfOrigin" type="r:IT006" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="TemporaryStudyPresences" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="TemporaryStudyPresence" type="r:IT007" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ReturnPermissions" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ReturnPermission" type="r:IT008" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="TemporaryRegistrations" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="TemporaryRegistration" type="r:IT028" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GendersToVerify" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="GenderToVerify" type="r:IT040" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="NamesToVerify" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="NameToVerify" type="r:IT041" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="AddressesToVerify" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="AddressToVerify" type="r:IT042" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="NationalitiesToVerify" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="NationalityToVerify" type="r:IT043" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BirthPlacesToVerify" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="BirthPlaceToVerify" type="r:IT044" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CivilStatesToVerify" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="CivilStateToVerify" type="r:IT045" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="DeceasesToVerify" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="DeceaseToVerify" type="r:IT046" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="RetirementCertificates" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="RetirementCertificate" type="r:IT073" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="SpecialRetirementCertificates" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="SpecialRetirementCertificate" type="r:IT074" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Filiations" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Filiation" type="r:IT110" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ParentalAuthorities" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ParentalAuthority" type="r:IT111" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Guardians" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Guardian" type="r:IT113" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="DescendentFiliations" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="DescendentFiliation" type="r:IT114" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PartnerBirthPlaces" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="PartnerBirthPlace" type="r:IT121" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MarriageContracts" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="MarriageContract" type="r:IT122" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ConvenienceMarriages" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ConvenienceMarriage" type="r:IT124" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ConvenienceLegalCohabitations" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ConvenienceLegalCohabitation" type="r:IT125" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Elections" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Election" type="r:IT130" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EECVoters" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="EECVoter" type="r:IT131" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BelgianVotersAbroad" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="BelgianVoterAbroad" type="r:IT132" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BurialModes" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="BurialMode" type="r:IT152" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Funeral" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Funeral" type="r:IT153" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MilitaryServices" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="MilitaryService" type="r:IT160" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="AcknowledgedWarTitles" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="AcknowledgedWarTitle" type="r:IT190" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="DrivingLicenses" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="DrivingLicense" type="r:IT191" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="OrganDonations" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="OrganDonation" type="r:IT192" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="HawkersCards" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="HawkersCard" type="r:IT193" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="DrivingLicensesOldModel" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="DrivingLicense" type="r:IT194" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="SocialSecurityCards" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="SocialSecurityCard" type="r:IT196" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Passports" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Passport" type="r:IT199" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="LocalRegisters" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="LocalRegister" type="r:IT240" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ManagersInfo" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ManagerInfo" type="r:IT246" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+</xs:schema>

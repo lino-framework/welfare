@@ -104,7 +104,7 @@ Lino Welfare à la Eupen.
       - (competences_2) [visible for all]:
         - **Hindernisse** (cv.ObstaclesByPerson) [visible for 100 110 120 admin 910]
         - **Sonstige Hindernisse** (obstacles)
-    - **Verträge** (contracts) [visible for 100 110 120 admin 910]:
+    - **Verträge** (contracts) [visible for 100 110 120 200 300 400 410 admin 910]:
       - **VSEs** (isip.ContractsByClient)
       - **Stellenanfragen** (jobs.CandidaturesByPerson)
       - **Art.60§7-Konventionen** (jobs.ContractsByClient)

@@ -49,7 +49,7 @@ def objects():
                    profile='300')
     yield kerstin
     profiles = [
-        p for p in rt.modules.users.UserProfiles.get_list_items()
+        p for p in rt.modules.users.UserTypes.get_list_items()
         if p.has_required_roles([DebtsUser])]
     USERS = Cycler(User.objects.filter(profile__in=profiles))
 

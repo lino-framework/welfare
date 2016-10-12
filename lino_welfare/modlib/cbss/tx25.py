@@ -16,25 +16,12 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""This implements the "transaction 25", called also "Interrogation
-sur certains types d’informations légales" (in `Codes d'interrogations
-<http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/fr/instructions/instr_annexe3_liste_interrogations.pdf>`_).
+"""This implements 
 
-See also :ref:`welfare.specs.cbss`
+See also :ref:`welfare.specs.tx25`
 
-Incomplete list of the supported TIs (incomplete because the first
-handlers were written with an older syntax which did not worry about
-how to generate a documentation page for them):
-
-.. py2rst::
-
-    from lino_welfare.modlib.cbss.tx25 import HANDLERS
-    tpl = "- {0} ({1}) : {2} "
-    for name, v in HANDLERS.items():
-        label, subname, itname = v
-        print(tpl.format(name, itname, unicode(label)))
-
-All common information types are being handled.
+This module is being used in production since 2014 and handles all
+common information types.
 
 This is a masterpiece of untransparent code, difficult to understand
 and maintain.  But I didn't find a better solution.  Maybe an XSLT
@@ -65,7 +52,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 
 from lino.api import dd
 from lino.utils import AttrDict, IncompleteDate
@@ -125,7 +112,7 @@ class Info(object):
         if prefix is None:
             prefix = '%s ' % name
         else:
-            prefix = force_unicode(prefix)
+            prefix = force_text(prefix)
             if prefix and prefix[-1] not in ' :(':
                 prefix += ': '
         if len(self.chunks):
@@ -133,7 +120,7 @@ class Info(object):
                 prefix = ', ' + prefix
         self.chunks += [prefix] + fmt(v).chunks
         if suffix:
-            self.chunks.append(force_unicode(suffix))
+            self.chunks.append(force_text(suffix))
         return self
 
     def add_deldate(self, n):
@@ -180,9 +167,9 @@ def NameType(n):
     # if not v: return []
     # if prefix is None:
         # prefix = ', %s ' % name
-    # info = [force_unicode(prefix)] + fmt(v)
+    # info = [force_text(prefix)] + fmt(v)
     # if suffix:
-        # info.append(force_unicode(suffix))
+        # info.append(force_text(suffix))
     # return info
 def DateType(n):
     return Info(dd.dtos(rn2date(n)))
@@ -207,6 +194,12 @@ def TribunalType(n):
 def PlaceType(n):
     return code_label(n)
 
+
+def SituationType111(n):
+    return code_label(n)
+
+def JustificationType(n):
+    return code_label(n)
 
 def GraphicPlaceType(n):
     info = CountryType(n.Country)
@@ -252,10 +245,6 @@ def LieuType(n):
         # else:
             # info += ForeignJudgementType(place.ForeignJudgement)
     return info
-
-
-def DeliveryType(n):
-    return PlaceType(n.Place)
 
 
 def DiplomaticPostType(n):
@@ -502,6 +491,7 @@ def IT020(n):
 
 
 def IT110(n):
+    # Filiation ascendante
     info = Info()
     info.addfrom(n, 'FiliationType', '', FiliationType)
     info.addfrom(n, 'Parent1', _('of '), ParentType)
@@ -510,6 +500,20 @@ def IT110(n):
     info.addfrom(n, 'Place', _("in "), PlaceType)
     info.addfrom(n, 'Graphic', " ")
     info.add_deldate(n)
+    return info
+
+
+def IT111(n):
+    # Statut de la personne représentée ou assistée
+
+    info = Info()
+    info.addfrom(n, 'Date', _("Date"), DateType)
+    
+    info.addfrom(n, 'Justification', '', JustificationType)
+    info.addfrom(n, 'Situation', '', SituationType111)
+    info.addfrom(n, 'Graphic', " ")
+    info.add_deldate(n)
+    
     return info
 
 
@@ -565,6 +569,13 @@ def TypeOfLicenseType(n):
 
 def TypeOfLicenseType194(n):
     return code_label(n)
+
+
+def DeliveryType206(n):
+    v = getattr(n, 'Place', None)
+    if v:
+        return PlaceType(v)
+    return CountryType(n.Country)
 
 
 def DeliveryType194(n):
@@ -1017,6 +1028,8 @@ register_it_handler('BurialModes',
                     _("Burial modes"), 'BurialMode', 'IT152')
 register_it_handler('PostalAddressAbroad',
                     _("Postal address abroad"), 'PostalAddressAbroad', 'IT023')
+register_it_handler('ParentalAuthorities',
+                    _("Parental authorities"), 'ParentalAuthority', 'IT111')
 
 
 class RowFactory(object):
@@ -1245,7 +1258,7 @@ class RowFactory(object):
             info.chunks.append(E.b(n.CardNumber))
             info.addfrom(n, 'ExpiryDate', _('expires '), DateType)
             # info.chunks.append(E.b(dd.dtos(rn2date(n.ExpiryDate))))
-            info.addfrom(n, 'Delivery', _('delivered in '), DeliveryType)
+            info.addfrom(n, 'Delivery', _('delivered in '), DeliveryType206)
             # info.chunks.append(', delivered in ')
             # info += code_label(n.Delivery.Place)
             yield self.datarow(n, n.Date, info)

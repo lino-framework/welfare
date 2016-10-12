@@ -94,7 +94,7 @@ class User(User):
             return
 
         coaching_profiles = set()
-        for p in UserProfiles.items():
+        for p in UserTypes.items():
             if isinstance(p.role, SocialAgent):
                 coaching_profiles.add(p)
         for u in User.objects.filter(

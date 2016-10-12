@@ -87,7 +87,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     21        5
  cbss.ManageAccessRequest       cbss.ManageAccessRequests       24        1
  cbss.Purpose                   cbss.Purposes                   7         106
- cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        3
+ cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        6
  cbss.Sector                    cbss.Sectors                    11        209
  changes.Change                 changes.Changes                 9         0
  contacts.Company               contacts.Companies              28        39
@@ -183,7 +183,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  polls.Poll                     polls.Polls                     11        2
  polls.Question                 polls.Questions                 9         38
  polls.Response                 polls.Responses                 7         6
- system.SiteConfig              system.SiteConfigs              28        1
+ system.SiteConfig              system.SiteConfigs              29        1
  tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
@@ -199,9 +199,9 @@ User profiles
 We use the user profiles defined in
 :mod:`lino_welfare.modlib.welfare.roles`:
 
->>> settings.SITE.user_profiles_module
+>>> settings.SITE.user_types_module
 'lino_welfare.modlib.welfare.roles'
->>> rt.show(users.UserProfiles)
+>>> rt.show(users.UserTypes)
 ======= =========== ============================================
  value   name        text
 ------- ----------- --------------------------------------------
@@ -534,14 +534,14 @@ Each window layout is **viewable** by a given set of user profiles.
 - immersion.Goals.insert : visible for 110 admin 910
 - integ.ActivityReport.show : visible for 100 110 120 admin 910
 - isip.ContractEndings.insert : visible for 110 410 admin 910
-- isip.ContractPartners.insert : visible for 110 admin 910
+- isip.ContractPartners.insert : visible for 110 410 admin 910
 - isip.ContractTypes.insert : visible for 110 410 admin 910
-- isip.Contracts.detail : visible for 100 110 120 admin 910
-- isip.Contracts.insert : visible for 100 110 120 admin 910
+- isip.Contracts.detail : visible for 100 110 120 200 300 400 410 admin 910
+- isip.Contracts.insert : visible for 100 110 120 200 300 400 410 admin 910
 - isip.ExamPolicies.insert : visible for 110 410 admin 910
 - jobs.ContractTypes.insert : visible for 110 410 admin 910
-- jobs.Contracts.detail : visible for 100 110 120 admin 910
-- jobs.Contracts.insert : visible for 100 110 120 admin 910
+- jobs.Contracts.detail : visible for 100 110 120 200 300 400 410 admin 910
+- jobs.Contracts.insert : visible for 100 110 120 200 300 400 410 admin 910
 - jobs.JobProviders.detail : visible for 100 110 120 admin 910
 - jobs.JobTypes.insert : visible for 110 410 admin 910
 - jobs.Jobs.insert : visible for 100 110 120 admin 910

@@ -20,7 +20,7 @@ visitors.
 The reception clerk asks questions like
 "What's your name?" or 
 "Do you have an appointment with a social agent?".
-See :ddref:`lino.UserProfiles`.
+See :ddref:`lino.UserTypes`.
 
  
 

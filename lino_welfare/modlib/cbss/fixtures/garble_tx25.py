@@ -1,17 +1,16 @@
 """Reads the file `FILE.xml` specified as command-line parameter,
 replaces all sensitive data by fictive data and writes the result to
-`FILE_scrambled.xml`.
+`FILE_garbled.xml`.
 
 Typical usage::
 
-  $ go eupen
-  $ python manage.py run scramble_tx25.py FILE.xml
+  $ python scramble_tx25.py FILE.xml
 
 After running the script, you must still manually:
 
-- verify that no sensitive data has been left unscrambled
+- verify that no sensitive data has been left ungarbled
 
-- add the scrambled file to :mod:`lino_welfare.modlib.cbss.fixtures`
+- add the garbled file to :mod:`lino_welfare.modlib.cbss.fixtures`
   directory
 
 - modify :mod:`lino_welfare.modlib.cbss.fixtures.cbss_demo` to load
@@ -27,11 +26,16 @@ Where ID is the primary key of the
 for your xml file.
 
 """
+from lino import startup
+startup('lino_welfare.projects.eupen.settings.demo')
+
 import sys
+
 from collections import namedtuple
 from lxml import etree
 from lino.utils import Cycler
 from lino.api import rt, dd
+from lino.utils import demonames
 
 Search = namedtuple('Search', ('expr', 'cycler', 'replacements'))
 
@@ -41,7 +45,7 @@ def main():
     searches = []
     infile = sys.argv[1]
     assert infile.endswith('.xml')
-    outfile = infile[:-4] + '_scrambled.xml'
+    outfile = infile[:-4] + '_garbled.xml'
 
     qs = rt.modules.pcsw.Client.objects.filter(national_id__isnull=False)
     qs = qs.exclude(birth_date='')
@@ -49,24 +53,39 @@ def main():
     CLIENTS = Cycler(qs)
 
     assert len(CLIENTS)
-
-    FIRST_NAMES = Cycler(
-        rt.modules.contacts.Person.objects.all().values_list(
-            'first_name', flat=True))
+    
+    # first_names = set(demonames.MALE_FIRST_NAMES_FRANCE + demonames.FEMALE_FIRST_NAMES_FRANCE)
+    FIRST_NAMES = Cycler(demonames.MALE_FIRST_NAMES_FRANCE,
+                         demonames.FEMALE_FIRST_NAMES_FRANCE)
+    
+    # rt.modules.contacts.Person.objects.all().values_list(
+    #         'first_name', flat=True))
     # FIRST_NAMES = Cycler(['FIRST_NAME'])
     searches.append(Search("//r:FirstName/r:Label", FIRST_NAMES, dict()))
 
+    # last_names = set(demonames.LAST_NAMES_BELGIUM +
+    #                  demonames.LAST_NAMES_MUSLIM + demonames.LAST_NAMES_AFRICAN)
     LAST_NAMES = Cycler(
-        rt.modules.contacts.Person.objects.all().values_list(
-            'last_name', flat=True))
+        demonames.LAST_NAMES_BELGIUM,
+        demonames.LAST_NAMES_MUSLIM, demonames.LAST_NAMES_AFRICAN)
+    # LAST_NAMES = Cycler(
+    #     rt.modules.contacts.Person.objects.all().values_list(
+    #         'last_name', flat=True))
     # LAST_NAMES = Cycler(['LAST_NAME'])
 
     CARD_NUMBERS = Cycler([
+        '595488123456', '427003123456', '427003123455', '427003123454',
+        '427003123453', '427003123452', '427003123451'])
+    
+    PASSPORT_NUMBERS = Cycler([
         'AE 123456', 'AE 234567', 'AE 345678', 'AE 456789', 'AE 567890'])
+    HOUSE_NUMBERS = Cycler([str(i) for i in range(12, 123)])
+
     searches.append(Search("//r:LastName/r:Label", LAST_NAMES, dict()))
     searches.append(Search("//r:LastName/r:Label", LAST_NAMES, dict()))
     searches.append(Search("//r:CardNumber", CARD_NUMBERS, dict()))
-    searches.append(Search("//r:PassportNumber", CARD_NUMBERS, dict()))
+    searches.append(Search("//r:PassportNumber", PASSPORT_NUMBERS, dict()))
+    searches.append(Search("//r:Address/r:HouseNumber", HOUSE_NUMBERS, dict()))
 
     tree = etree.parse(infile)
 
@@ -117,7 +136,7 @@ def main():
     for search in searches:
         for e in tree.xpath(search.expr, namespaces=ns):
             changes += 1
-            if e.text not in search.replacements:
+            if not e.text in search.replacements:
                 search.replacements[e.text] = search.cycler.pop()
             e.text = search.replacements[e.text]
 
@@ -140,8 +159,10 @@ def main():
         sys.exit(-1)
 
     for search in searches:
-        print "{0} : {1} replacements".format(
-            search.expr, len(search.replacements))
+        rep = u", ".join([
+            u"{0} -> {1}".format(*i) for i in search.replacements.items()])
+        print u"{0} : {2} ({1} replacements)".format(
+            search.expr, len(search.replacements), rep)
 
     print "Writing {0} changes to {1} ...".format(changes, outfile)
     f = open(outfile, 'wt')
