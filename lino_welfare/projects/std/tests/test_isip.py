@@ -120,7 +120,7 @@ class QuickTest(RemoteAuthTestCase):
         # guest.
         expected = """\
 Update Events for ISIP#1 (Max MUSTERMANN)...
-Generating events between 2014-07-01 and 2015-03-31.
+Generating events between 2014-07-01 and 2015-03-31 (max. 10).
 Reached upper date limit 2015-03-31
 Update Guests for Event #1 Evaluation 1 (01.07.2014)...
 0 row(s) have been updated.

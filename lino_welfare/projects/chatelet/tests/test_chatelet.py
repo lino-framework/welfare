@@ -190,7 +190,7 @@ class TestCase(TestCase):
         wanted = course.get_wanted_auto_events(ar)
         self.assertEqual(
             ar.response['info_message'],
-            'Generating events between 2015-04-13 and 2019-05-22.')
+            'Generating events between 2015-04-13 and 2019-05-22 (max. 4).')
         self.assertEqual(len(wanted), 4)
 
         course.do_update_events.run_from_ui(ar)
