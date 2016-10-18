@@ -244,7 +244,7 @@ Auswertung
 >>> [str(i.start_date) for i in wanted.values()]
 ['2013-03-04', '2013-06-04', '2013-09-04', '2013-12-04', '2014-03-04', '2014-06-04', '2014-09-04']
 >>> print(ses.response['info_message'])
-Generating events between 2013-03-04 and 2014-12-02.
+Generating events between 2013-03-04 and 2014-12-02 (max. 72).
 Reached upper date limit 2014-12-02
 
 
