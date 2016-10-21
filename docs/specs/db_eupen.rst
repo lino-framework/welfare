@@ -39,16 +39,16 @@ Database structure
 - boards.Board : id, start_date, end_date, name, name_fr, name_en
 - boards.Member : id, board, person, role
 - cal.Calendar : id, name, description, color, name_fr, name_en
-- cal.Event : id, modified, created, project, build_time, build_method, user, assigned_to, owner_type, owner_id, start_date, start_time, end_date, end_time, summary, description, access_class, sequence, auto_type, event_type, transparent, room, priority, state
+- cal.Event : id, modified, created, project, start_date, start_time, end_date, end_time, build_time, build_method, user, assigned_to, owner_type, owner_id, summary, description, access_class, sequence, auto_type, event_type, transparent, room, priority, state
 - cal.EventType : id, seqno, name, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, start_date, event_label, max_conflicting, invite_client, name_fr, name_en, event_label_fr, event_label_en, esf_field
 - cal.Guest : id, event, partner, role, state, remark, waiting_since, busy_since, gone_since
 - cal.GuestRole : id, name, name_fr, name_en
 - cal.Priority : id, name, ref, name_fr, name_en
-- cal.RecurrentEvent : id, name, user, start_date, start_time, end_date, end_time, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_events, event_type, description, name_fr, name_en
+- cal.RecurrentEvent : id, start_date, start_time, end_date, end_time, name, user, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_events, event_type, description, name_fr, name_en
 - cal.RemoteCalendar : id, seqno, type, url_template, username, password, readonly
 - cal.Room : id, name, name_fr, name_en
 - cal.Subscription : id, user, calendar, is_hidden
-- cal.Task : id, modified, created, project, user, owner_type, owner_id, start_date, start_time, summary, description, access_class, sequence, auto_type, due_date, due_time, percent, state, delegated
+- cal.Task : id, modified, created, project, start_date, start_time, user, owner_type, owner_id, summary, description, access_class, sequence, auto_type, due_date, due_time, percent, state, delegated
 - cbss.IdentifyPersonRequest : id, user, printed_by, person, sent, status, environment, ticket, request_xml, response_xml, debug_messages, info_messages, national_id, birth_date, sis_card_no, id_card_no, first_name, last_name, middle_name, gender, tolerance
 - cbss.ManageAccessRequest : id, user, printed_by, person, sent, status, environment, ticket, request_xml, response_xml, debug_messages, info_messages, national_id, birth_date, sis_card_no, id_card_no, first_name, last_name, sector, purpose, start_date, end_date, action, query_register
 - cbss.Purpose : id, name, sector_code, code, name_fr, name_en
@@ -104,7 +104,7 @@ Database structure
 - isip.ContractEnding : id, name, use_in_isip, use_in_jobs, is_success, needs_date_ended
 - isip.ContractPartner : id, company, contact_person, contact_role, contract, duties_company
 - isip.ContractType : id, name, full_name, exam_policy, overlap_group, template, ref, needs_study_type, name_fr, name_en
-- isip.ExamPolicy : id, name, start_date, start_time, end_date, end_time, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_events, event_type, name_fr, name_en
+- isip.ExamPolicy : id, start_date, start_time, end_date, end_time, name, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_events, event_type, name_fr, name_en
 - jobs.Candidature : id, sector, function, person, job, date_submitted, remark, state, art60, art61
 - jobs.Contract : id, signer1, signer2, company, contact_person, contact_role, user, printed_by, client, language, applies_from, applies_until, date_decided, date_issued, user_asd, exam_policy, ending, date_ended, duration, reference_person, responsibilities, remark, type, job, regime, schedule, hourly_rate, refund_rate
 - jobs.ContractType : id, ref, name, full_name, exam_policy, overlap_group, template, name_fr, name_en
