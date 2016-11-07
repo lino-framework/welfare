@@ -202,3 +202,4 @@ class Site(Site):
         yield self.modules.cal.MyTasks
         yield self.modules.reception.WaitingVisitors
         #~ yield self.modules.reception.ReceivedVisitors
+
