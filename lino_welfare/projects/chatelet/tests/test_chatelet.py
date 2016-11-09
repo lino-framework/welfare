@@ -187,7 +187,7 @@ class TestCase(TestCase):
                         state=EnrolmentStates.confirmed,
                         pupil=pupil)
 
-        wanted = course.get_wanted_auto_events(ar)
+        wanted, unwanted = course.get_wanted_auto_events(ar)
         self.assertEqual(
             ar.response['info_message'],
             'Generating events between 2015-04-13 and 2019-05-22 (max. 4).')

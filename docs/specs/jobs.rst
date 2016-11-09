@@ -240,9 +240,9 @@ Auswertung
 >>> print(obj.update_cal_rset().event_type.max_conflicting)
 4
 >>> settings.SITE.verbose_client_info_message = True
->>> wanted = obj.get_wanted_auto_events(ses)
->>> [str(i.start_date) for i in wanted.values()]
+>>> [str(i.start_date) for i in obj.get_existing_auto_events()]
 ['2013-03-04', '2013-06-04', '2013-09-04', '2013-12-04', '2014-03-04', '2014-06-04', '2014-09-04']
+>>> wanted, unwanted = obj.get_wanted_auto_events(ses)
 >>> print(ses.response['info_message'])
 Generating events between 2013-03-04 and 2014-12-02 (max. 72).
 Reached upper date limit 2014-12-02

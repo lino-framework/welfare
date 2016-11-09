@@ -29,8 +29,10 @@ import six
 
 requires = ['lino-cosi',
             # 'vobject',
-            'pytidylib',
-            'django-iban', 'metafone', 'weasyprint', 'cairocffi<0.7']
+            'pytidylib', 'channels',
+            'django-iban', 'metafone', 'weasyprint',
+            # 'cairocffi<0.7'] # seems that < 0.7 no longer required
+            'cairocffi']
 if six.PY2:
     requires.append('suds')
 else:
