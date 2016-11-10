@@ -17,7 +17,8 @@
 # <http://www.gnu.org/licenses/>.
 
 """Miscellaneous tests about the notification framework
-(:mod:`lino.modlib.notify` and :mod:`lino_xl.lib.notes`).
+(:mod:`lino.modlib.notify` and :mod:`lino_xl.lib.notes`). Consult the
+source code of this module.
 
 You can run these tests individually by issuing::
 
@@ -47,7 +48,11 @@ from lino.modlib.users.choicelists import UserTypes
 class TestCase(TestCase):
     maxDiff = None
 
-    def check_notifications(self, expected):
+    def check_notifications(self, expected=None):
+        """Hint: when `expected` is empty, then the found result is being
+        printed to stdout so you can copy it into your code.
+
+        """
         ar = rt.actors.notify.Notifications.request()
         rst = ar.to_rst(column_names="subject owner user")
         if not expected:
@@ -180,11 +185,11 @@ class TestCase(TestCase):
         self.assertEqual(res.status_code, 200)
 
         self.check_notifications("""
-================================== ==================== ===========
- Subject                            About                Recipient
----------------------------------- -------------------- -----------
- Alicia modified roger / Client S   *roger / Client S*   roger
-================================== ==================== ===========
+================================== ======================== ===========
+ Subject                            About                    Recipient
+---------------------------------- ------------------------ -----------
+ Alicia modified roger / Client S   *CLIENT Seconda (101)*   roger
+================================== ======================== ===========
 """)
 
         # AssignCoach. we are going to Assign caroline as coach for
