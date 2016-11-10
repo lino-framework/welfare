@@ -76,8 +76,6 @@ private company..."""),
     'lino_welfare.modlib.badges.Plugin.holder_model' : _("""A string referring to the model which represents the badge holder in
 your application.  Default value is 'contacts.Person'."""),
     'lino_welfare.modlib.cal.Plugin' : _("""See lino.core.plugin.Plugin."""),
-    'lino_welfare.modlib.cal.models.CloseMeeting' : _("""Close the meeting (mark it as "took place") and check out all
-guests. Ask confirmation naming the guests who need to check out."""),
     'lino_welfare.modlib.cal.models.EventsByClient' : _("""Events where Event.project or one guest is this client."""),
     'lino_welfare.modlib.cal.models.EventsByClient.master' : _("""alias of Client"""),
     'lino_welfare.modlib.cal.models.EventsByClient.model' : _("""alias of Event"""),
