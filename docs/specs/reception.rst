@@ -32,22 +32,22 @@ EVERS Eberhart (127)
 This client has the following appointments. 
 
 >>> rt.login('romain').show(reception.AppointmentsByPartner, obj,
-...     column_names="event__start_date event__start_time event__user event__summary workflow_buttons",
+...     column_names="event__start_date event__start_time event__user event__summary event__state workflow_buttons",
 ...     language="en")  #doctest: +REPORT_UDIFF
-============ ============ ================= ================ =======================================================
- Start date   Start time   Managed by        Summary          Workflow
------------- ------------ ----------------- ---------------- -------------------------------------------------------
- 15/05/2014   09:00:00     Caroline Carnol   Auswertung 2     [Checkin] **Accepted** → [Excused] [Absent] [Present]
- 22/05/2014                Mélanie Mélard    Urgent problem   [Receive] [Checkout] **Waiting**
- 27/05/2014   13:30:00     Hubert Huppertz   Abendessen       [Checkin] **Accepted** → [Excused] [Absent] [Present]
- 16/06/2014   09:00:00     Caroline Carnol   Auswertung 3     [Checkin] **Accepted** → [Excused] [Absent] [Present]
- 16/07/2014   09:00:00     Caroline Carnol   Auswertung 4     [Checkin] **Accepted** → [Excused] [Absent] [Present]
- 18/08/2014   09:00:00     Caroline Carnol   Auswertung 5     [Checkin] **Accepted** → [Excused] [Absent] [Present]
- 18/09/2014   09:00:00     Caroline Carnol   Auswertung 6     [Checkin] **Accepted** → [Excused] [Absent] [Present]
- 20/10/2014   09:00:00     Caroline Carnol   Auswertung 7     [Checkin] **Accepted** → [Excused] [Absent] [Present]
- 20/11/2014   09:00:00     Caroline Carnol   Auswertung 8     [Checkin] **Accepted** → [Excused] [Absent] [Present]
- 22/12/2014   09:00:00     Caroline Carnol   Auswertung 9     [Checkin] **Accepted** → [Excused] [Absent] [Present]
-============ ============ ================= ================ =======================================================
+============ ============ ================= ================ =========== ==================================
+ Start date   Start time   Managed by        Summary          State       Workflow
+------------ ------------ ----------------- ---------------- ----------- ----------------------------------
+ 15/05/2014   09:00:00     Caroline Carnol   Auswertung 2     Suggested   [Checkin] **Accepted**
+ 22/05/2014                Mélanie Mélard    Urgent problem   Notified    [Receive] [Checkout] **Waiting**
+ 27/05/2014   13:30:00     Hubert Huppertz   Abendessen       Draft       [Checkin] **Accepted**
+ 16/06/2014   09:00:00     Caroline Carnol   Auswertung 3     Suggested   [Checkin] **Accepted**
+ 16/07/2014   09:00:00     Caroline Carnol   Auswertung 4     Suggested   [Checkin] **Accepted**
+ 18/08/2014   09:00:00     Caroline Carnol   Auswertung 5     Suggested   [Checkin] **Accepted**
+ 18/09/2014   09:00:00     Caroline Carnol   Auswertung 6     Suggested   [Checkin] **Accepted**
+ 20/10/2014   09:00:00     Caroline Carnol   Auswertung 7     Suggested   [Checkin] **Accepted**
+ 20/11/2014   09:00:00     Caroline Carnol   Auswertung 8     Suggested   [Checkin] **Accepted**
+ 22/12/2014   09:00:00     Caroline Carnol   Auswertung 9     Suggested   [Checkin] **Accepted**
+============ ============ ================= ================ =========== ==================================
 <BLANKLINE>
 
 Note that even Theresia who is a reception clerk and has no calendar
@@ -55,21 +55,22 @@ functionality can click on the dates to see their detail:
 
 >>> rt.login('theresia').show(reception.AppointmentsByPartner, obj,
 ...     language="en")  #doctest: +REPORT_UDIFF
-====================================== ================= =======================================================
+====================================== ================= ==================================
  When                                   Managed by        Workflow
--------------------------------------- ----------------- -------------------------------------------------------
- `Thu 15/05/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
+-------------------------------------- ----------------- ----------------------------------
+ `Thu 15/05/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
  `Thu 22/05/2014 <Detail>`__            Mélanie Mélard    [Receive] [Checkout] **Waiting**
- `Tue 27/05/2014 at 13:30 <Detail>`__   Hubert Huppertz   [Checkin] **Accepted** → [Excused] [Absent] [Present]
- `Mon 16/06/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
- `Wed 16/07/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
- `Mon 18/08/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
- `Thu 18/09/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
- `Mon 20/10/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
- `Thu 20/11/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
- `Mon 22/12/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Excused] [Absent] [Present]
-====================================== ================= =======================================================
+ `Tue 27/05/2014 at 13:30 <Detail>`__   Hubert Huppertz   [Checkin] **Accepted**
+ `Mon 16/06/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
+ `Wed 16/07/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
+ `Mon 18/08/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
+ `Thu 18/09/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
+ `Mon 20/10/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
+ `Thu 20/11/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
+ `Mon 22/12/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
+====================================== ================= ==================================
 <BLANKLINE>
+
 
 
 

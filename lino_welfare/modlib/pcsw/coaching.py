@@ -227,11 +227,11 @@ class Coaching(mixins.DatePeriod, dd.ImportedFields, ChangeObservable):
     def summary_row(self, ar, **kw):
         return [ar.href_to(self.client), " (%s)" % self.state.text]
 
-    # def get_notify_owner(self, ar):
-    #     return self.client
-
     # def get_related_project(self):
     #     return self.client
+
+    def get_notify_owner(self, ar):
+        return self.client
 
     def get_change_observers(self):
         return self.client.get_change_observers()
