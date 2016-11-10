@@ -55,6 +55,7 @@ class Site(Site):
     uppercase_last_name = True
 
     user_types_module = 'lino_welfare.modlib.welfare.roles'
+    workflows_module = 'lino_xl.lib.reception.workflows'
 
     def setup_plugins(self):
         """
@@ -80,10 +81,13 @@ class Site(Site):
     def setup_choicelists(self):
         """Adds two shortcut fields and a special note type."""
 
-        super(Site, self).setup_choicelists()
-
         from django.utils.translation import ugettext_lazy as _
         from lino_xl.lib.excerpts.choicelists import Shortcuts
+        
+        # self.actors.cal.EventStates.published.text = _("Notified")
+        
+        super(Site, self).setup_choicelists()
+
         Shortcuts.add_item('pcsw.Client', 'cvs_emitted', _("CVs emitted"))
 
         from lino.modlib.uploads.choicelists import add_shortcut as add
@@ -97,6 +101,7 @@ class Site(Site):
         from lino_xl.lib.notes.choicelists import SpecialTypes
         add = SpecialTypes.add_item
         add('100', _("First meeting"), 'first_meeting')
+
 
     def setup_quicklinks(self, ar, tb):
         # tb.add_action(self.modules.pcsw.Clients.detail_action)

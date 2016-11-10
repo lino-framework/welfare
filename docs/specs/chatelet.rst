@@ -74,9 +74,9 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  boards.Board                   boards.Boards                   7         3
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         12
- cal.Event                      cal.OneEvent                    24        581
+ cal.Event                      cal.OneEvent                    24        586
  cal.EventType                  cal.EventTypes                  20        11
- cal.Guest                      cal.Guests                      9         535
+ cal.Guest                      cal.Guests                      9         570
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15

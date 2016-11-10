@@ -16,18 +16,15 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""
-Database models for :mod:`lino_welfare.modlib.cal`.
+"""Database models for :mod:`lino_welfare.modlib.cal`.
+
 """
 
 from __future__ import unicode_literals
 
-import datetime
-
-
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import pgettext_lazy
-from django.contrib.humanize.templatetags.humanize import naturalday
+from django.utils.translation import pgettext_lazy as pgettext
+# from django.contrib.humanize.templatetags.humanize import naturalday
 
 from django.db.models import Q
 
@@ -38,47 +35,8 @@ from lino.utils.xmlgen.html import E
 from lino_xl.lib.cal.models import *
 
 from lino_xl.lib.cal.utils import format_date
-from lino_xl.lib.cal.workflows import feedback
-from lino_xl.lib.reception.models import checkout_guest
 from lino.modlib.office.roles import OfficeUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
-
-
-EventStates.published.text = _("Notified")
-
-
-class CloseMeeting(feedback.CloseMeeting):
-    """Close the meeting (mark it as "took place") and check out all
-    guests. Ask confirmation naming the guests who need to check out.
-
-    """
-    def execute(self, ar, obj):
-
-        def yes(ar):
-            if not obj.end_time:
-                obj.end_time = datetime.datetime.now()
-                ar.info("event.end_time has been set by CloseMeeting")
-            return super(CloseMeeting, self).execute(ar, obj)
-
-        guests = obj.guest_set.filter(gone_since__isnull=True,
-                                      waiting_since__isnull=False)
-        num = len(guests)
-        if num == 0:
-            return yes(ar)  # no confirmation
-        msg = _("This will checkout {num} guests: {guests}".format(
-            num=num,
-            guests=', '.join([unicode(g.partner) for g in guests])))
-        rv = ar.confirm(yes, msg)
-        for g in guests:
-            checkout_guest(g, ar)
-
-        return rv
-
-
-@dd.receiver(dd.pre_analyze)
-def my_event_workflows(sender=None, **kw):
-
-    EventStates.override_transition(close_meeting=CloseMeeting)
 
 
 def you_are_busy_messages(ar):
@@ -202,7 +160,7 @@ class Event(Event):
         txt += dd.fds(self.start_date)
         if self.start_time is not None:
             txt = "%s %s %s" % (
-                txt, pgettext_lazy("(time)", "at"),
+                txt, pgettext("(time)", "at"),
                 self.start_time.strftime(settings.SITE.time_format_strftime))
 
         #~ logger.info("20130802a when_text %r",txt)

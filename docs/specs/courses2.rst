@@ -1,7 +1,7 @@
 .. _welfare.specs.courses2:
 
 ================
-Internal courses
+Workshops
 ================
 
 .. to test only this document:
@@ -19,7 +19,6 @@ Internal courses
     :local:
     :depth: 1
 
-
 This is about *internal* courses
 (:mod:`lino_welfare.projects.chatelet.modlib.courses.models`), not
 :doc:`courses`.
@@ -27,6 +26,11 @@ This is about *internal* courses
 >>> rt.modules.courses.__name__
 'lino_welfare.projects.chatelet.modlib.courses.models'
 
+We call them "workshops":
+
+>>> with translation.override('en'):
+...     print(dd.plugins.courses.verbose_name)
+Workshops
 
 >>> rt.show(rt.actors.courses.Activities)
 ============ ======================= ============================ ============= ======= ===============
@@ -49,10 +53,43 @@ topic line teacher state can_enroll:10     start_date end_date
 >>> demo_get('robin', 'choices/courses/Courses/teacher', 'count rows', 102)
 >>> demo_get('robin', 'choices/courses/Courses/user', 'count rows', 12)
 
-
 Yes, the demo database has no topics defined:
 
 >>> rt.show(rt.actors.courses.Topics)
 No data to display
 
 
+>>> course = rt.models.courses.Course.objects.get(pk=1)
+>>> print(course)
+Kitchen (12/05/2014)
+
+>>> # rt.show(rt.actors.cal.EventsByController, course)
+>>> ar = rt.actors.cal.EventsByController.request(master_instance=course)
+>>> rt.show(ar)
+============================ ========= ================= ============= ===============
+ When                         Summary   Managed by        Assigned to   Workflow
+---------------------------- --------- ----------------- ------------- ---------------
+ **Mon 12/05/2014 (08:00)**   1         Hubert Huppertz                 **Suggested**
+ **Mon 19/05/2014 (08:00)**   2         Hubert Huppertz                 **Suggested**
+ **Mon 26/05/2014 (08:00)**   3         Hubert Huppertz                 **Suggested**
+ **Mon 02/06/2014 (08:00)**   4         Hubert Huppertz                 **Suggested**
+ **Mon 16/06/2014 (08:00)**   5         Hubert Huppertz                 **Suggested**
+============================ ========= ================= ============= ===============
+<BLANKLINE>
+
+>>> event = ar[0]
+>>> print(event)
+Event #474  1 (12.05.2014 08:00)
+>>> rt.show(rt.actors.cal.GuestsByEvent, event)
+==================== ========= =============
+ Partner              Role      Workflow
+-------------------- --------- -------------
+ Emonts Erich         Visitor   **Invited**
+ Ernst Berta          Visitor   **Invited**
+ Groteclaes Gregory   Visitor   **Invited**
+ Jansen Jérémy        Visitor   **Invited**
+ Jousten Jan          Visitor   **Invited**
+ Kaivers Karl         Visitor   **Invited**
+ Meier Marie-Louise   Visitor   **Invited**
+==================== ========= =============
+<BLANKLINE>

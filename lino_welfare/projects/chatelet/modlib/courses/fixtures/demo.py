@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014 Luc Saffre
+# Copyright 2014-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
+"""Creates some workshops.
+"""
 
 from __future__ import unicode_literals
 from __future__ import print_function
 
-import logging
-logger = logging.getLogger(__name__)
 
 from django.conf import settings
 from lino.api import dd, rt, _
@@ -36,6 +36,8 @@ def objects():
     Enrolment = rt.models.courses.Enrolment
     EnrolmentStates = rt.models.courses.EnrolmentStates
 
+    ses = settings.SITE.login('hubert')
+    
     kw = dd.str2kw('name', _("Workshop"))
     event_type = EventType(**kw)
     yield event_type
@@ -53,9 +55,18 @@ def objects():
     kw.update(body_template="enrolment.body.html")
     kw.update(dd.str2kw(
         'excerpt_title', _("Request for enrolment")))
+    role = rt.models.cal.GuestRole.objects.get(pk=2)
+    # **dd.str2kw('name', _("Visitor")))
+    kw.update(guest_role=role)
     obj = line(CourseAreas.default, _("Kitchen"), **kw)
     yield obj
-    yield Course(line=obj, start_date=dd.demo_date(-10))
+    
+    kitchen_course = Course(
+        line=obj, start_date=dd.demo_date(-10),
+        monday=True, start_time="8:00", end_time="12:00",
+        user=ses.get_user(),
+        max_events=5)
+    yield kitchen_course
     
     kw.update(dd.str2kw('description', ""))
     obj = line(CourseAreas.default, _("Creativity"), **kw)
@@ -107,3 +118,31 @@ def objects():
         kw.update(request_date=dd.demo_date(-i))
         kw.update(state=STATES.pop())
         yield Enrolment(**kw)
+
+    # this will generate 5 events, and for each event one
+    # guest.
+    
+    res = ses.run(kitchen_course.do_update_events)
+    if not res['success']:
+        raise Exception("oops")
+
+    expected = """\
+Générer les évènements for Cuisine (12/05/2014)...
+Generating events between 2014-05-12 and 2019-05-22 (max. 5).
+Générer les participants for Évènement #474  1 (12.05.2014 08:00)...
+7 row(s) have been updated.
+Générer les participants for Évènement #475  2 (19.05.2014 08:00)...
+7 row(s) have been updated.
+Générer les participants for Évènement #476  3 (26.05.2014 08:00)...
+7 row(s) have been updated.
+Générer les participants for Évènement #477  4 (02.06.2014 08:00)...
+7 row(s) have been updated.
+Générer les participants for Évènement #478  5 (16.06.2014 08:00)...
+7 row(s) have been updated.
+5 row(s) have been updated."""
+    if res['info_message'] != expected:
+        msg = "Expected:\n{0}\nGOT:\n{1}".format(
+            expected, res['info_message'])
+        print(msg)
+        raise Exception(msg)
+
