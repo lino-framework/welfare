@@ -71,10 +71,9 @@ class Site(Site):
         See :meth:`lino.core.site.Site.get_admin_main_items`.
         """
 
-        # Mathieu: je remarque que le module "Visiteurs qui
-        # m'attendent" ne fonctionne plus. Hors, c'est surtout ce
-        # système qui est intéressant pour les travailleurs sociaux
-        # qui attendent leurs rdv ou qui tiennent des permanences.
+        # "Visiteurs qui m'attendent" est intéressant pour les
+        # travailleurs sociaux qui attendent leurs rdv ou qui tiennent
+        # des permanences.
 
         yield self.modules.reception.MyWaitingVisitors
         yield self.modules.cal.MyEventsToday
@@ -97,27 +96,6 @@ class Site(Site):
 
         wc(self.modules.pcsw.Coaching, master_key='client__partner_ptr')
         wc(self.modules.pcsw.ClientContact, master_key='client__partner_ptr')
-
-        # from lino.utils.sendchanges import register, subscribe
-        # e = register('notes.Note', 'subject body',
-        #              update_tpl='note_updated.eml')
-        # e.updated_subject = "Changement dans {obj}"
-        # subscribe('john.doe@example.org')
-
-        # from lino.core.signals import receiver, on_ui_updated
-
-        # def immersion_template(obj, bm):
-        #     # Use a custom template for immersion trainings with
-        #     # external partner.
-
-        #     if bm.template_ext != '.odt':
-        #         raise Exception("Not supported")
-        #     if obj.company is None:
-        #         return "Default.odt"
-        #     return "StageForem.odt"
-
-        # self.plugins.excerpts.register_default_template_handler(
-        #     self.modules.immersion.Contract, immersion_template)
 
 
 # the following line should not be active in a checked-in version

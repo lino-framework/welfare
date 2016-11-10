@@ -692,7 +692,7 @@ Voici une liste des actions qui ont un dialogue, càd pour lesquelles,
 avant de les exécuter, Lino ouvre une fenêtre à part pour demander des
 options.
 
->>> show_dialog_actions()
+>>> show_dialog_actions()  #doctest: +REPORT_UDIFF
 - polls.AllResponses.toggle_choice : toggle_choice
   (main) [visible for all]: **Question** (question), **Choix** (choice)
 - polls.MyResponses.toggle_choice : toggle_choice
@@ -704,11 +704,11 @@ options.
 - polls.ResponsesByPoll.toggle_choice : toggle_choice
   (main) [visible for all]: **Question** (question), **Choix** (choice)
 - cal.GuestStates.wf1 : Accepter
-  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Don't send email notification** (notify_silent)
+  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Pas de notification par mail** (notify_silent)
 - cal.GuestStates.wf2 : Rejeter
-  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Don't send email notification** (notify_silent)
+  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Pas de notification par mail** (notify_silent)
 - cal.Guests.checkin : Arriver
-  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Don't send email notification** (notify_silent)
+  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Pas de notification par mail** (notify_silent)
 - contacts.Companies.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Adresses** (addresses_Address), **Raison** (reason)
 - contacts.Persons.create_household : Créer un ménage
@@ -716,7 +716,7 @@ options.
 - countries.Places.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - newcomers.AvailableCoachesByClient.assign_coach : Attribuer
-  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Don't send email notification** (notify_silent)
+  (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Pas de notification par mail** (notify_silent)
 - pcsw.Clients.create_visit : Enregistrer consultation
   (main) [visible for all]: **Utilisateur** (user), **Raison** (summary)
 - pcsw.Clients.merge_row : Fusionner

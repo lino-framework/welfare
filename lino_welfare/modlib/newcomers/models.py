@@ -49,7 +49,7 @@ from lino_xl.lib.notes.actions import NotableAction
 from lino.modlib.users.choicelists import UserTypes
 from lino.modlib.users.mixins import ByUser, UserAuthored
 
-from lino.core.utils import ChangeWatcher
+from lino.core.diff import ChangeWatcher
 
 from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
 # from lino_welfare.modlib.integ.roles import IntegrationAgent
