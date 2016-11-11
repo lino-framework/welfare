@@ -63,6 +63,8 @@ class Site(Site):
         return kw
 
     def get_admin_main_items(self, ar):
+        if ar.get_user().authenticated:
+            yield self.actors.notify.MyNotifications
         yield self.modules.integ.UsersWithClients
         yield self.modules.reception.MyWaitingVisitors
         yield self.modules.cal.MyEvents
