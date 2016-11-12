@@ -32,6 +32,10 @@ We call them "workshops":
 ...     print(dd.plugins.courses.verbose_name)
 Workshops
 
+>>> with translation.override('fr'):
+...     print(dd.plugins.courses.verbose_name)
+Ateliers
+
 >>> rt.show(rt.actors.courses.Activities)
 ============ ======================= ============================ ============= ======= ===============
  Date début   Inscriptions jusqu'au   Série d'ateliers             Instructeur   Local   État
@@ -93,3 +97,6 @@ Event #474  1 (12.05.2014 08:00)
  Meier Marie-Louise   Visitor   **Invited**
 ==================== ========= =============
 <BLANKLINE>
+
+
+

@@ -75,6 +75,9 @@ class Site(Site):
         # travailleurs sociaux qui attendent leurs rdv ou qui tiennent
         # des permanences.
 
+        if ar.get_user().authenticated:
+            yield self.actors.notify.MyNotifications
+            
         yield self.modules.reception.MyWaitingVisitors
         yield self.modules.cal.MyEventsToday
         yield self.modules.cal.MyTasks
