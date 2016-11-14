@@ -84,7 +84,7 @@ class RefuseClient(ChangeStateAction):
         kw.update(alert=_("Success"))
         obj.emit_system_note(
             ar, subject=subject, body=body)
-        rt.models.notify.Notification.emit_notification(
+        rt.models.notify.Message.emit_message(
             ar, obj, subject, body, recipients)
         ar.success(**kw)
 
@@ -116,7 +116,7 @@ class MarkClientFormer(ChangeStateAction):
             kw.update(message=subject)
             kw.update(alert=_("Success"))
             obj.emit_system_note(ar, subject=subject)
-            rt.models.notify.Notification.emit_notification(
+            rt.models.notify.Message.emit_message(
                 ar, obj, subject, "", recipients)
             ar.success(**kw)
             

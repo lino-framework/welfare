@@ -30,7 +30,7 @@ Test the content of the admin main page.
 >>> result['success']
 True
 >>> # print(html2text(result['html']))
->>> soup = BeautifulSoup(result['html'])
+>>> soup = BeautifulSoup(result['html'], 'lxml')
 
 We might test the complete content here, but currently we skip this as
 it is much work to maintain.
@@ -40,18 +40,32 @@ it is much work to maintain.
 
 >>> links = soup.find_all('a')
 >>> len(links)
-131
+134
 
 >>> print(links[0].text)
 Kalender
 
 >>> tables = soup.find_all('table')
 >>> len(tables)
-3
+4
 
 >>> for h in soup.find_all('h2'):
 ...     print(h.text.strip())
+Meine Mitteilungen 🗗
 Benutzer und ihre Klienten 🗗
 Meine Termine 🗗
 Wartende Besucher 🗗
+
+
+>>> res = test_client.get('/api/main_html', REMOTE_USER='robin')
+>>> print(res.status_code)
+200
+>>> result = json.loads(res.content)
+>>> soup = BeautifulSoup(result['html'], 'lxml')
+>>> for h in soup.find_all('h2'):
+...     print(h.text.strip())
+My Messages 🗗
+Users with their Clients 🗗
+My appointments 🗗
+Waiting visitors 🗗
 

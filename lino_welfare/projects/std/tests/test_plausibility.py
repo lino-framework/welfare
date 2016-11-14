@@ -56,7 +56,7 @@ class TestCase(RemoteAuthTestCase):
         Address = rt.models.addresses.Address
         Place = rt.models.countries.Place
         Problem = rt.models.plausibility.Problem
-        Notification = rt.models.notify.Notification
+        Message = rt.models.notify.Message
         eupen = Place.objects.get(name="Eupen")
 
         def assert_check(obj, *expected):
@@ -75,7 +75,7 @@ class TestCase(RemoteAuthTestCase):
         self.assertEqual(Address.objects.count(), 0)
 
         # no notifications because there are no coachings:
-        self.assertEqual(Notification.objects.count(), 0)
+        self.assertEqual(Message.objects.count(), 0)
 
         # "Owner with address, but no address record"
         # Detect problems for one client:

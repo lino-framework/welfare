@@ -157,7 +157,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  notes.EventType                notes.EventTypes                10        10
  notes.Note                     notes.Notes                     18        111
  notes.NoteType                 notes.NoteTypes                 12        13
- notify.Notification            notify.Notifications            9         3
+ notify.Message                 notify.Messages                 9         3
  outbox.Attachment              outbox.Attachments              4         0
  outbox.Mail                    outbox.Mails                    9         0
  outbox.Recipient               outbox.Recipients               6         0
@@ -376,7 +376,6 @@ Each window layout defines a given set of fields.
 - notes.NoteTypes.insert : name, name_nl, name_de, name_en, build_method
 - notes.Notes.detail : date, time, event_type, type, project, subject, important, company, contact_person, user, language, build_time, id, body, UploadsByController
 - notes.Notes.insert : event_type, type, subject, project
-- notify.Notifications.insert : created, user, seen, sent, owner, overview
 - outbox.Mails.detail : subject, project, date, user, sent, id, owner, AttachmentsByMail, UploadsByController, body
 - outbox.Mails.insert : project, subject, body
 - pcsw.ClientContactTypes.insert : id, name, name_nl, name_de, name_en
@@ -557,7 +556,6 @@ Each window layout is **viewable** by a given set of user profiles.
 - notes.NoteTypes.insert : visible for 110 410 admin 910
 - notes.Notes.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- notify.Notifications.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - outbox.Mails.detail : visible for 110 410 admin 910
 - outbox.Mails.insert : visible for 110 410 admin 910
 - pcsw.ClientContactTypes.insert : visible for 110 410 admin 910
@@ -607,7 +605,7 @@ Romain
 >>> rt.login('romain').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Office : Mes Notifications, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
+- Office : Mes Messages, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
 - Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Mes tâches, Mes visiteurs, Mes présences
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis, Visiteurs qui m'attendent
 - CPAS : Bénéficiaires, Mes Interventions, Octrois à confirmer
@@ -645,7 +643,7 @@ Romain
   - Questionnaires : Listes de choix
 - Explorateur :
   - Contacts : Personnes de contact, Types d'adresses, Adresses, Membres du conseil, Household member roles, Membres de ménage, Personal Links, Type de parenté
-  - Système : Procurations, Types d'utilisateur, types de contenu, Notifications, Changes, Tests de données, Problèmes de données
+  - Système : Procurations, Types d'utilisateur, types de contenu, Messages, Changes, Tests de données, Problèmes de données
   - Office : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations, Text Field Templates
   - Calendrier : Tâches, Présences, Abonnements, Event states, Guest states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription

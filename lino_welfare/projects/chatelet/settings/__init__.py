@@ -76,7 +76,7 @@ class Site(Site):
         # des permanences.
 
         if ar.get_user().authenticated:
-            yield self.actors.notify.MyNotifications
+            yield self.actors.notify.MyMessages
             
         yield self.modules.reception.MyWaitingVisitors
         yield self.modules.cal.MyEventsToday
