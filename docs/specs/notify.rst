@@ -131,8 +131,8 @@ EndCoaching
 Managing Notifications
 ======================
 
-I added filter parameters for :class:`Notifications
-<lino.modlib.notify.models.Notifications>`.
+I added filter parameters for :class:`Messages
+<lino.modlib.notify.models.Messages>`.
 
 I was not possible until now to override the `verbose_name` of the
 :attr:`owner` field of a :class:`Controllable
@@ -142,7 +142,7 @@ I was not possible until now to override the `verbose_name` of the
 
 
 >>> ses = rt.login("robin")
->>> ses.show(rt.actors.notify.AllNotifications)
+>>> ses.show(rt.actors.notify.AllMessages)
 ===================== ====================== ================= ====== =====================
  Created               Subject                Recipient         seen   sent
 --------------------- ---------------------- ----------------- ------ ---------------------
@@ -152,10 +152,12 @@ I was not possible until now to override the `verbose_name` of the
 ===================== ====================== ================= ====== =====================
 <BLANKLINE>
 
->>> ses.show(rt.actors.notify.MyNotifications)
-========================================== ==========
- Subject                                    Workflow
------------------------------------------- ----------
- Database initialized `(more) <Detail>`__   [✉] [✓]
-========================================== ==========
+>>> ses.show(rt.actors.notify.MyMessages)
++-----------------------+----------+
+| Subject               | Workflow |
++=======================+==========+
+| Database initialized  | [✉] [✓]  |
+|                       |          |
+| Hello world           |          |
++-----------------------+----------+
 <BLANKLINE>

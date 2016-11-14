@@ -202,7 +202,7 @@ class Site(Site):
 
         """
         if ar.get_user().authenticated:
-            yield self.actors.notify.MyNotifications
+            yield self.actors.notify.MyMessages
         yield self.modules.integ.UsersWithClients
         yield self.modules.reception.MyWaitingVisitors
         yield self.modules.cal.MyEvents

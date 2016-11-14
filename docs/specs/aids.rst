@@ -208,17 +208,19 @@ We test whether Theresia is allowed to create an income confirmation.
 The page header includes a lot of scripts:
 
 >>> len(scripts)
-22
+24
 
 Here are the default values for their source URLs:
 
 >>> for s in scripts:
-...     print(s.get('src', '(inline)'))
+...     print(s.get('src', '(inline)'))  #doctest: +REPORT_UDIFF
 /static/ext-3.3.1/adapter/ext/ext-base-debug.js
 /static/ext-3.3.1/ext-all-debug.js
 /static/ext-3.3.1/src/locale/ext-lang-de.js
 /static/ext-3.3.1/examples/ux/statusbar/StatusBar.js
 /static/extjs/Ext.ux.form.DateTime.js
+/static/js/reconnecting-websocket/reconnecting-websocket.min.js
+/static/js/push.js/push.min.js
 /static/extensible-1.0.1/extensible-all-debug.js
 /static/extensible-1.0.1/src/locale/extensible-lang-de.js
 /static/tinymce-3.5.11/tiny_mce.js

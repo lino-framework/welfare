@@ -64,7 +64,7 @@ class Site(Site):
 
     def get_admin_main_items(self, ar):
         if ar.get_user().authenticated:
-            yield self.actors.notify.MyNotifications
+            yield self.actors.notify.MyMessages
         yield self.modules.integ.UsersWithClients
         yield self.modules.reception.MyWaitingVisitors
         yield self.modules.cal.MyEvents

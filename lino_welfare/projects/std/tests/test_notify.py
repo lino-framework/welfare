@@ -53,7 +53,7 @@ class TestCase(TestCase):
         printed to stdout so you can copy it into your code.
 
         """
-        ar = rt.actors.notify.Notifications.request()
+        ar = rt.actors.notify.Messages.request()
         rst = ar.to_rst(column_names="subject owner user")
         if not expected:
             print rst
@@ -83,7 +83,7 @@ class TestCase(TestCase):
 
         """
         User = settings.SITE.user_model
-        Notification = rt.models.notify.Notification
+        Message = rt.models.notify.Message
         Note = rt.models.notes.Note
         NoteType = rt.models.notes.EventType
         Guest = rt.models.cal.Guest
@@ -142,7 +142,7 @@ class TestCase(TestCase):
         self.assertEqual(res, {
             'message': '', 'success': True, 'refresh': True})
         
-        self.assertEqual(Notification.objects.count(), 1)
+        self.assertEqual(Message.objects.count(), 1)
 
         # checkin doesn't cause a system note
         self.assertEqual(Note.objects.count(), 0)
@@ -160,7 +160,7 @@ class TestCase(TestCase):
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)
 
-        self.assertEqual(Notification.objects.count(), 2)
+        self.assertEqual(Message.objects.count(), 2)
 
         self.check_notifications("""
 ====================================== ============================ ===========
@@ -174,7 +174,7 @@ class TestCase(TestCase):
         # When a coaching is modified, all active coaches of that
         # client get a notification.
 
-        Notification.objects.all().delete()
+        Message.objects.all().delete()
         data = dict(start_date="02.05.2014", an="grid_put")
         data.update(mt=51)
         data.update(mk=second.pk)
@@ -206,7 +206,7 @@ class TestCase(TestCase):
         # an:assign_coach
         # sr:5
 
-        Notification.objects.all().delete()
+        Message.objects.all().delete()
         # self.assertEqual(Coaching.objects.count(), 1)
         self.check_coachings("""
 ==== ====================== ============== ============ ========== =========
@@ -266,7 +266,7 @@ class TestCase(TestCase):
         # Request Method:GET
         # an:mark_former
 
-        Notification.objects.all().delete()
+        Message.objects.all().delete()
         Note.objects.all().delete()
 
         data = dict(an="mark_former")
@@ -323,7 +323,7 @@ class TestCase(TestCase):
         # RefuseClient
         #
 
-        Notification.objects.all().delete()
+        Message.objects.all().delete()
         Note.objects.all().delete()
 
         data = dict(fv=["20", ""], an="refuse_client")
