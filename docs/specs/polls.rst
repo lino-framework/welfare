@@ -1,8 +1,8 @@
 .. _welfare.specs.polls:
 
-==================
-Polls tested tour
-==================
+=====================
+Polls in Lino Welfare
+=====================
 
 A tested tour into the :mod:`lino_welfare.modlib.polls` plugin.
 
@@ -56,6 +56,25 @@ Configuration
  RAE         Recherche active d'emploi   Robin Rood   Publié
 =========== =========================== ============ ========
 <BLANKLINE>
+
+This is the list of choice sets:
+
+>>> rt.show(polls.ChoiceSets)
+==== ===================== ===================== =====================
+ ID   Désignation           Désignation (de)      Désignation (en)
+---- --------------------- --------------------- ---------------------
+ 1    Yes/No                Yes/No                Yes/No
+ 2    Oui/Peut-être/Non     Oui/Peut-être/Non     Yes/Maybe/No
+ 3    That's it!...Never!   That's it!...Never!   That's it!...Never!
+ 4    -1..+1                -1..+1                -1..+1
+ 5    Acquis                Acquis                Acquired
+ 6    1...5                 1...5                 1...5
+ 7    1...10                1...10                1...10
+ 8    Temps de travail
+==== ===================== ===================== =====================
+<BLANKLINE>
+
+For every poll, we configure a series of questions.
 
 >>> obj = polls.Poll.get_by_ref('INI')
 >>> rt.show(polls.QuestionsByPoll, obj)
@@ -113,25 +132,6 @@ Configuration
 ======== ==== ======================================================== =======
 <BLANKLINE>
 
-This is the list of choice sets:
-
->>> rt.show(polls.ChoiceSets)
-==== ===================== ===================== =====================
- ID   Désignation           Désignation (de)      Désignation (en)
----- --------------------- --------------------- ---------------------
- 1    Yes/No                Yes/No                Yes/No
- 2    Oui/Peut-être/Non     Oui/Peut-être/Non     Yes/Maybe/No
- 3    That's it!...Never!   That's it!...Never!   That's it!...Never!
- 4    -1..+1                -1..+1                -1..+1
- 5    Acquis                Acquis                Acquired
- 6    1...5                 1...5                 1...5
- 7    1...10                1...10                1...10
- 8    Temps de travail
-==== ===================== ===================== =====================
-<BLANKLINE>
-
-
-
 
 Responses
 =========
@@ -149,6 +149,9 @@ Responses
  6    Alicia Allmanns   RAE             02/05/2014   Enregistré                       Bastiaensen Laurent
 ==== ================= =============== ============ ============ =================== =====================
 <BLANKLINE>
+
+Here is how Alicia enters the results of her interview on 2014-05-02
+with client Alfons about poll RAE:
 
 >>> obj = polls.Response.objects.get(id=3)
 >>> rt.login('alicia').show(polls.AnswersByResponse, obj)
@@ -186,6 +189,9 @@ Temps de travail acceptés 3/4
  **temps-plein** ****[3/4]**** **1/2** **quelques heures par semaine** (**Remarque**)
  3/4
 
+Here is the same data when opened it its own window (i.e. not using
+the summary):
+
 >>> rt.login('alicia').show(polls.AnswersByResponse, obj, nosummary=True)
 =========================================================== ======================================================================= =============
  Question                                                    Ma réponse                                                              Ma remarque
@@ -201,8 +207,8 @@ Temps de travail acceptés 3/4
 =========================================================== ======================================================================= =============
 <BLANKLINE>
 
-When Hubert looks at the same response, he cannot edit it because he
-is not the author:
+Hubert can see the same response, but he cannot edit it because he is
+not the author:
 
 >>> rt.login('hubert').show(polls.AnswersByResponse, obj)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
@@ -256,3 +262,60 @@ Temps de travail acceptés 3/4
  Temps de travail acceptés                                   3/4
 =========================================================== ============ =============
 <BLANKLINE>
+
+
+Results
+=======
+
+The results of a poll is the set of all responses.
+
+>>> ses = rt.login('robin')
+>>> ses.show(polls.MyPolls)
+=========== =========================== ========
+ Référence   Titre                       État
+----------- --------------------------- --------
+ INI         Interview initial           Publié
+ RAE         Recherche active d'emploi   Publié
+=========== =========================== ========
+<BLANKLINE>
+
+>>> obj = polls.Poll.get_by_ref('INI')
+>>> ses.show("polls.PollResult", obj)
+============================================================================================================ ================ ============ ========
+ Question                                                                                                     Liste de choix   # réponses   A1
+------------------------------------------------------------------------------------------------------------ ---------------- ------------ --------
+ Pour commencer ma recherche d'emploi, je dois
+ 1) Avoir une farde de recherche d’emploi organisée                                                                            **2**        **2**
+ 2) Réaliser mon curriculum vitae                                                                                              **2**
+ 3) Savoir faire une lettre de motivation adaptée au poste de travail visé                                                     **2**
+ 4) Respecter les modalités de candidature                                                                                     **2**        **2**
+ 5) Me créer une boite e-mail appropriée à la recherche d’emploi                                                               **2**
+ 6) Créer mon compte sur le site de Forem                                                                                      **2**
+ 7) Mettre mon curriculum vitae sur le site du Forem                                                                           **2**        **2**
+ 8) Connaître les aides à l’embauche qui me concernent                                                                         **2**
+ 9) Etre préparé à l’entretien d’embauche ou téléphonique                                                                      **2**
+ Est-ce que je sais...
+ 1) Utiliser le site du Forem pour consulter les offres d’emploi                                                               **2**        **2**
+ 2) Décoder une offre d’emploi                                                                                                 **2**
+ 3) Adapter mon curriculum vitae par rapport à une offre ou pour une candidature spontanée                                     **2**
+ 4) Réaliser une lettre de motivation suite à une offre d’emploi                                                               **2**        **2**
+ 5) Adapter une lettre de motivation par rapport à l’offre d’emploi                                                            **2**
+ 6) Réaliser une lettre de motivation spontanée                                                                                **2**
+ 7) Utiliser le fax pour envoyer mes candidatures                                                                              **2**        **2**
+ 8) Utiliser ma boite e-mail pour envoyer mes candidatures                                                                     **2**
+ 9) Mettre mon curriculum vitae en ligne sur des sites d’entreprise                                                            **2**
+ 10) Compléter en ligne les formulaires de candidature                                                                         **2**        **2**
+ 11) M’inscrire aux agences intérim via Internet                                                                               **2**
+ 12) M’inscrire auprès d’agence de recrutement via Internet                                                                    **2**
+ 13) Utiliser Internet pour faire des recherches sur une entreprise                                                            **2**        **2**
+ 14) Préparer un entretien d’embauche (questions, argumentation du C.V.,…)                                                     **2**
+ 15) Utiliser Internet pour gérer ma mobilité (transport en commun ou itinéraire voiture)                                      **2**
+ 16) Utiliser la photocopieuse (ex : copie de lettre de motivation que j’envoie par courrier)                                  **2**        **2**
+ 17) Utiliser le téléphone pour poser ma candidature                                                                           **2**
+ 18) Utiliser le téléphone pour relancer ma candidature                                                                        **2**
+ 19) Trouver et imprimer les formulaires de demandes d’aides à l’embauche se trouvant sur le site de l’ONEm                    **2**        **2**
+ **Total (30 lignes)**                                                                                                         **56**       **20**
+============================================================================================================ ================ ============ ========
+<BLANKLINE>
+
+

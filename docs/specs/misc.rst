@@ -327,3 +327,5 @@ see it.
 - vatless.ItemsByInvoice.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - vatless.ItemsByProjectInvoice.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 <BLANKLINE>
+
+
