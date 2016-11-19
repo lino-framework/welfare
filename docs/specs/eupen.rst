@@ -768,7 +768,7 @@ Menu walk
 Here is the output of :func:`walk_menu_items
 <lino.api.doctests.walk_menu_items>` for this database:
 
->>> walk_menu_items('romain')
+>>> walk_menu_items('rolf')
 ... #doctest: -ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte --> Personen : 103
 - Kontakte -->  Klienten : 58
@@ -780,7 +780,7 @@ Here is the output of :func:`walk_menu_items
 - Büro --> Meine Uploads : 1
 - Büro --> Mein E-Mail-Ausgang : 1
 - Büro --> Meine Auszüge : 0
-- Büro --> Meine Ereignisse/Notizen : 10
+- Büro --> Meine Ereignisse/Notizen : 9
 - Büro --> Meine Datenkontrollliste : 0
 - Kalender --> Meine Termine : 13
 - Kalender --> Überfällige Termine : 34
@@ -812,7 +812,7 @@ Here is the output of :func:`walk_menu_items
 - DSBE --> ZDSS --> Meine Tx25-Anfragen : 1
 - Kurse --> Kursanbieter : 3
 - Kurse --> Kursangebote : 4
-- Kurse --> Offene Kursanfragen : 18
+- Kurse --> Offene Kursanfragen : 20
 - Erstempfang --> Neue Klienten : 23
 - Erstempfang --> Verfügbare Begleiter : 3
 - Schuldnerberatung --> Klienten : 0
@@ -893,8 +893,8 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Vollmachten : 4
 - Explorer --> System --> Benutzerarten : 15
 - Explorer --> System --> Datenbankmodelle : 139
-- Explorer --> System --> Mitteilungen : 6
-- Explorer --> System --> Änderungen : 2
+- Explorer --> System --> Mitteilungen : 4
+- Explorer --> System --> Änderungen : 0
 - Explorer --> System --> Datentests : 14
 - Explorer --> System --> Datenprobleme : 59
 - Explorer --> Eigenschaften --> Eigenschaften : 24
