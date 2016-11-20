@@ -762,3 +762,199 @@ Some choices lists:
 >>> demo_get('rolf', 'choices/cv/ObstaclesByPerson/property', fields, 15, **kw)
 
 
+Menu walk
+=========
+
+Here is the output of :func:`walk_menu_items
+<lino.api.doctests.walk_menu_items>` for this database:
+
+>>> walk_menu_items('rolf')
+... #doctest: -ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+- Kontakte --> Personen : 103
+- Kontakte -->  Klienten : 58
+- Kontakte --> Organisationen : 52
+- Kontakte --> Partner (alle) : 175
+- Kontakte --> Haushalte : 15
+- Büro --> Meine Mitteilungen : 2
+- Büro --> Ablaufende Uploads : 1
+- Büro --> Meine Uploads : 1
+- Büro --> Mein E-Mail-Ausgang : 1
+- Büro --> Meine Auszüge : 0
+- Büro --> Meine Ereignisse/Notizen : 9
+- Büro --> Meine Datenkontrollliste : 0
+- Kalender --> Meine Termine : 13
+- Kalender --> Überfällige Termine : 34
+- Kalender --> Meine Aufgaben : 1
+- Kalender --> Meine Gäste : 1
+- Kalender --> Meine Anwesenheiten : 1
+- Empfang --> Klienten : 30
+- Empfang --> Termine heute : 10
+- Empfang --> Wartende Besucher : 8
+- Empfang --> Beschäftigte Besucher : 4
+- Empfang --> Gegangene Besucher : 7
+- Empfang --> Meine Warteschlange : 0
+- ÖSHZ --> Klienten : 30
+- ÖSHZ --> Meine Begleitungen : 1
+- ÖSHZ --> Zu bestätigende Hilfebeschlüsse : 1
+- Buchhaltung --> Rechnungseingänge --> Rechnungseingänge (REG) : 0
+- Buchhaltung --> Rechnungseingänge --> Sammelrechnungen (SREG) : 0
+- Buchhaltung --> Ausgabeanweisungen --> Ausgabeanweisungen (AAW) : 0
+- Buchhaltung --> Zahlungsaufträge --> KBC Zahlungsaufträge (ZKBC) : 0
+- DSBE --> Klienten : 0
+- DSBE --> VSEs : 1
+- DSBE --> Art.60§7-Konventionen : 1
+- DSBE --> Stellenanbieter : 4
+- DSBE --> Stellen : 9
+- DSBE --> Stellenangebote : 2
+- DSBE --> Art.61-Konventionen : 1
+- DSBE --> ZDSS --> Meine IdentifyPerson-Anfragen : 1
+- DSBE --> ZDSS --> Meine ManageAccess-Anfragen : 1
+- DSBE --> ZDSS --> Meine Tx25-Anfragen : 1
+- Kurse --> Kursanbieter : 3
+- Kurse --> Kursangebote : 4
+- Kurse --> Offene Kursanfragen : 20
+- Erstempfang --> Neue Klienten : 23
+- Erstempfang --> Verfügbare Begleiter : 3
+- Schuldnerberatung --> Klienten : 0
+- Schuldnerberatung --> Meine Budgets : 4
+- Berichte --> System --> Broken GFKs : 0
+- Berichte --> Buchhaltung --> Schuldner : 5
+- Berichte --> Buchhaltung --> Gläubiger : 10
+- Berichte --> DSBE --> Benutzer und ihre Klienten : 3
+- Konfigurierung --> System --> Benutzer : 14
+- Konfigurierung --> System --> Hilfetexte : 6
+- Konfigurierung --> Orte --> Länder : 271
+- Konfigurierung --> Orte --> Orte : 79
+- Konfigurierung --> Kontakte --> Organisationsarten : 15
+- Konfigurierung --> Kontakte --> Funktionen : 6
+- Konfigurierung --> Kontakte --> Gremien : 4
+- Konfigurierung --> Kontakte --> Haushaltsarten : 7
+- Konfigurierung --> Eigenschaften --> Eigenschaftsgruppen : 4
+- Konfigurierung --> Eigenschaften --> Eigenschafts-Datentypen : 4
+- Konfigurierung --> Eigenschaften --> Fachkompetenzen : 0
+- Konfigurierung --> Eigenschaften --> Sozialkompetenzen : 0
+- Konfigurierung --> Eigenschaften --> Hindernisse : 0
+- Konfigurierung --> Büro --> Upload-Arten : 10
+- Konfigurierung --> Büro --> Auszugsarten : 21
+- Konfigurierung --> Büro --> Notizarten : 14
+- Konfigurierung --> Büro --> Ereignisarten : 11
+- Konfigurierung --> Büro --> Meine Einfügetexte : 1
+- Konfigurierung --> Kalender --> Kalenderliste : 13
+- Konfigurierung --> Kalender --> Räume : 1
+- Konfigurierung --> Kalender --> Prioritäten : 5
+- Konfigurierung --> Kalender --> Periodische Terminregeln : 16
+- Konfigurierung --> Kalender --> Gastrollen : 5
+- Konfigurierung --> Kalender --> Kalendereintragsarten : 11
+- Konfigurierung --> Kalender --> Externe Kalender : 1
+- Konfigurierung --> Buchhaltung --> Kontengruppen : 7
+- Konfigurierung --> Buchhaltung --> Haushaltsartikel : 27
+- Konfigurierung --> Buchhaltung --> Journale : 5
+- Konfigurierung --> Buchhaltung --> Buchungsperioden : 7
+- Konfigurierung --> Buchhaltung --> Zahlungsbedingungen : 9
+- Konfigurierung --> ÖSHZ --> Integrationsphasen : 1
+- Konfigurierung --> ÖSHZ --> Berufe : 1
+- Konfigurierung --> ÖSHZ --> AG-Sperrgründe : 3
+- Konfigurierung --> ÖSHZ --> Dienste : 4
+- Konfigurierung --> ÖSHZ --> Begleitungsbeendigungsgründe : 1
+- Konfigurierung --> ÖSHZ --> Dispenzgründe : 1
+- Konfigurierung --> ÖSHZ --> Klientenkontaktarten : 11
+- Konfigurierung --> ÖSHZ --> Hilfearten : 12
+- Konfigurierung --> ÖSHZ --> Kategorien : 4
+- Konfigurierung --> Lebenslauf --> Sprachen : 6
+- Konfigurierung --> Lebenslauf --> Bildungsarten : 12
+- Konfigurierung --> Lebenslauf --> Akademische Grade : 6
+- Konfigurierung --> Lebenslauf --> Sektoren : 15
+- Konfigurierung --> Lebenslauf --> Funktionen : 5
+- Konfigurierung --> Lebenslauf --> Arbeitsregimes : 4
+- Konfigurierung --> Lebenslauf --> Statuus : 8
+- Konfigurierung --> Lebenslauf --> Vertragsdauern : 6
+- Konfigurierung --> DSBE --> VSE-Arten : 6
+- Konfigurierung --> DSBE --> Vertragsbeendigungsgründe : 5
+- Konfigurierung --> DSBE --> Auswertungsstrategien : 7
+- Konfigurierung --> DSBE --> Art.60§7-Konventionsarten : 6
+- Konfigurierung --> DSBE --> Stellenarten : 6
+- Konfigurierung --> DSBE --> Stundenpläne : 4
+- Konfigurierung --> DSBE --> Art.61-Konventionsarten : 2
+- Konfigurierung --> Kurse --> Kursinhalte : 3
+- Konfigurierung --> Erstempfang --> Vermittler : 3
+- Konfigurierung --> Erstempfang --> Fachbereiche : 6
+- Konfigurierung --> ZDSS --> Sektoren : 210
+- Konfigurierung --> ZDSS --> Eigenschafts-Codes : 107
+- Konfigurierung --> Schuldnerberatung --> Kontengruppen : 9
+- Konfigurierung --> Schuldnerberatung --> Konten : 52
+- Explorer --> Kontakte --> Kontaktpersonen : 11
+- Explorer --> Kontakte --> Adressenarten : 6
+- Explorer --> Kontakte --> Adressen : 180
+- Explorer --> Kontakte --> Gremienmitglieder : 1
+- Explorer --> Kontakte --> Haushaltsmitgliedsrollen : 8
+- Explorer --> Kontakte --> Mitglieder : 64
+- Explorer --> Kontakte --> Verwandtschaftsbeziehungen : 60
+- Explorer --> Kontakte --> Verwandschaftsarten : 13
+- Explorer --> System --> Vollmachten : 4
+- Explorer --> System --> Benutzerarten : 15
+- Explorer --> System --> Datenbankmodelle : 139
+- Explorer --> System --> Mitteilungen : 4
+- Explorer --> System --> Änderungen : 0
+- Explorer --> System --> Datentests : 14
+- Explorer --> System --> Datenprobleme : 59
+- Explorer --> Eigenschaften --> Eigenschaften : 24
+- Explorer --> Büro --> Uploads : 12
+- Explorer --> Büro --> Upload-Bereiche : 1
+- Explorer --> Büro --> E-Mail-Ausgänge : 1
+- Explorer --> Büro --> Anhänge : 1
+- Explorer --> Büro --> Auszüge : 68
+- Explorer --> Büro --> Ereignisse/Notizen : 112
+- Explorer --> Büro --> Einfügetexte : 3
+- Explorer --> Kalender --> Aufgaben : 36
+- Explorer --> Kalender --> Anwesenheiten : 633
+- Explorer --> Kalender --> Abonnements : 10
+- Explorer --> Kalender --> Termin-Zustände : 6
+- Explorer --> Kalender --> Gast-Zustände : 9
+- Explorer --> Kalender --> Aufgaben-Zustände : 4
+- Explorer --> ÖSHZ --> Begleitungen : 91
+- Explorer --> ÖSHZ --> Klientenkontakte : 15
+- Explorer --> ÖSHZ --> AG-Sperren : 1
+- Explorer --> ÖSHZ --> Vorstrafen : 1
+- Explorer --> ÖSHZ --> Klienten : 58
+- Explorer --> ÖSHZ --> Zivilstände : 7
+- Explorer --> ÖSHZ --> Bearbeitungszustände Klienten : 4
+- Explorer --> ÖSHZ --> eID-Kartenarten : 10
+- Explorer --> ÖSHZ --> Hilfebeschlüsse : 59
+- Explorer --> ÖSHZ --> Einkommensbescheinigungen : 59
+- Explorer --> ÖSHZ --> Kostenübernahmescheine : 13
+- Explorer --> ÖSHZ --> Einfache Bescheinigungen : 20
+- Explorer --> ÖSHZ --> Phonetische Wörter : 132
+- Explorer --> Buchhaltung --> Ausgleichungsregeln : 3
+- Explorer --> Buchhaltung --> Belege : 53
+- Explorer --> Buchhaltung --> Belegarten : 6
+- Explorer --> Buchhaltung --> Bewegungen : 451
+- Explorer --> Buchhaltung --> Geschäftsjahre : 8
+- Explorer --> Buchhaltung --> Handelsarten : 3
+- Explorer --> Buchhaltung --> Journalgruppen : 5
+- Explorer --> Buchhaltung --> Rechnungen : 31
+- Explorer --> SEPA --> Bankkonten : 52
+- Explorer --> SEPA --> Importierte  Bankkonten : 34
+- Explorer --> SEPA --> Kontoauszüge : 34
+- Explorer --> SEPA --> Transaktionen : 57
+- Explorer --> Finanzjournale --> Kontoauszüge : 1
+- Explorer --> Finanzjournale --> Diverse Buchungen : 1
+- Explorer --> Finanzjournale --> Zahlungsaufträge : 24
+- Explorer --> Lebenslauf --> Sprachkenntnisse : 120
+- Explorer --> Lebenslauf --> Ausbildungen : 21
+- Explorer --> Lebenslauf --> Studien : 23
+- Explorer --> Lebenslauf --> Berufserfahrungen : 31
+- Explorer --> DSBE --> VSEs : 34
+- Explorer --> DSBE --> Art.60§7-Konventionen : 17
+- Explorer --> DSBE --> Stellenanfragen : 75
+- Explorer --> DSBE --> Vertragspartner : 39
+- Explorer --> DSBE --> Art.61-Konventionen : 8
+- Explorer --> DSBE --> ESF Summaries : 0
+- Explorer --> Kurse --> Kurse : 4
+- Explorer --> Kurse --> Kursanfragen : 20
+- Explorer --> Erstempfang --> Kompetenzen : 8
+- Explorer --> ZDSS --> IdentifyPerson-Anfragen : 6
+- Explorer --> ZDSS --> ManageAccess-Anfragen : 2
+- Explorer --> ZDSS --> Tx25-Anfragen : 7
+- Explorer --> Schuldnerberatung --> Budgets : 15
+- Explorer --> Schuldnerberatung --> Einträge : 717
+<BLANKLINE>

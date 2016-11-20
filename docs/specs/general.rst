@@ -250,3 +250,4 @@ The following test verifies this rule:
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 /.../welfare/config/excerpts/Default.odt
 
+

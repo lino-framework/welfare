@@ -754,3 +754,194 @@ value in chatelet is `True`.
 >>> dd.plugins.integ.only_primary
 True
 
+
+Menu walk
+=========
+
+Here is the output of :func:`walk_menu_items
+<lino.api.doctests.walk_menu_items>` for this database:
+
+>>> walk_menu_items('romain')
+... #doctest: -ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+- Contacts --> Personnes : 103
+- Contacts -->  Bénéficiaires : 58
+- Contacts --> Organisations : 40
+- Contacts --> Partenaires (tous) : 163
+- Contacts --> Ménages : 15
+- Office --> Mes Messages : 2
+- Office --> Mes téléchargements à renouveler : 1
+- Office --> Mes Fichiers téléchargés : 1
+- Office --> Mon courrier sortant : 1
+- Office --> Mes Extraits : 0
+- Office --> Mes Observations : 10
+- Office --> Mes problèmes de données : 0
+- Calendrier --> Mes rendez-vous : 13
+- Calendrier --> Rendez-vous dépassés : 31
+- Calendrier --> Mes tâches : 1
+- Calendrier --> Mes visiteurs : 1
+- Calendrier --> Mes présences : 1
+- Réception --> Bénéficiaires : 30
+- Réception --> Rendez-vous aujourd'hui : 10
+- Réception --> Salle d'attente : 8
+- Réception --> Visiteurs occupés : 4
+- Réception --> Visiteurs repartis : 7
+- Réception --> Visiteurs qui m'attendent : 0
+- CPAS --> Bénéficiaires : 30
+- CPAS --> Mes Interventions : 1
+- CPAS --> Octrois à confirmer : 1
+- Intégration --> Bénéficiaires : 0
+- Intégration --> PIISs : 1
+- Intégration --> Mises à l'emploi art60§7 : 1
+- Intégration --> Services utilisateurs : 4
+- Intégration --> Postes de travail : 9
+- Intégration --> Offres d'emploi : 2
+- Intégration --> Mises à l'emploi art61 : 1
+- Intégration --> Stages d'immersion : 1
+- Intégration --> BCSS --> Mes Requêtes IdentifyPerson : 1
+- Intégration --> BCSS --> Mes Requêtes ManageAccess : 1
+- Intégration --> BCSS --> Mes Requêtes Tx25 : 1
+- Ateliers --> Ateliers d'insertion sociale : 6
+- Ateliers --> Ateliers d'Insertion socioprofessionnelle : 3
+- Ateliers --> Séries d'ateliers : 8
+- Ateliers --> Demandes d’inscription en attente : 21
+- Ateliers --> Demandes d’inscription confirmées : 21
+- Nouvelles demandes --> Nouveaux bénéficiaires : 23
+- Nouvelles demandes --> Agents disponibles : 3
+- Médiation de dettes --> Bénéficiaires : 0
+- Médiation de dettes --> Mes Budgets : 4
+- Questionnaires --> Mes Questionnaires : 1
+- Questionnaires --> Mes Interviews : 1
+- Rapports --> Système --> Broken GFKs : 0
+- Rapports --> Intégration --> Agents et leurs clients : 3
+- Configuration --> Système --> Utilisateurs : 13
+- Configuration --> Système --> Textes d'aide : 6
+- Configuration --> Endroits --> Pays : 271
+- Configuration --> Endroits --> Endroits : 79
+- Configuration --> Contacts --> Types d'organisation : 17
+- Configuration --> Contacts --> Fonctions : 6
+- Configuration --> Contacts --> Conseils : 4
+- Configuration --> Contacts --> Types de ménage : 7
+- Configuration --> Office --> Types de fichiers téléchargés : 10
+- Configuration --> Office --> Types d'extrait : 19
+- Configuration --> Office --> Types d'observation : 14
+- Configuration --> Office --> Types d'événements : 11
+- Configuration --> Calendrier --> Calendriers : 13
+- Configuration --> Calendrier --> Locaux : 1
+- Configuration --> Calendrier --> Priorités : 5
+- Configuration --> Calendrier --> Recurrent event rules : 16
+- Configuration --> Calendrier --> Rôles de participants : 5
+- Configuration --> Calendrier --> Types d'entrée calendrier : 12
+- Configuration --> Calendrier --> Remote Calendars : 1
+- Configuration --> Comptabilité --> Groupes de comptes : 1
+- Configuration --> Comptabilité --> Comptes : 1
+- Configuration --> Ateliers --> Savoirs de base : 1
+- Configuration --> Ateliers --> Topics : 1
+- Configuration --> Ateliers --> Timetable Slots : 1
+- Configuration --> CPAS --> Phases d'intégration : 6
+- Configuration --> CPAS --> Activités : 1
+- Configuration --> CPAS --> types d'exclusions : 3
+- Configuration --> CPAS --> Services : 4
+- Configuration --> CPAS --> Raisons d’arrêt d'intervention : 5
+- Configuration --> CPAS --> Motifs de dispense : 5
+- Configuration --> CPAS --> Types de contact client : 11
+- Configuration --> CPAS --> Types d'aide sociale : 12
+- Configuration --> CPAS --> Catégories : 4
+- Configuration --> Parcours --> Langues : 6
+- Configuration --> Parcours --> Types d'éducation : 12
+- Configuration --> Parcours --> Niveaux académiques : 6
+- Configuration --> Parcours --> Secteurs : 15
+- Configuration --> Parcours --> Fonctions : 5
+- Configuration --> Parcours --> Régimes de travail : 4
+- Configuration --> Parcours --> Statuts : 8
+- Configuration --> Parcours --> Types de contrat : 6
+- Configuration --> Parcours --> Types de compétence sociale : 1
+- Configuration --> Parcours --> Types de freins : 5
+- Configuration --> Parcours --> Preuves de qualification : 5
+- Configuration --> Intégration --> Types de PIIS : 6
+- Configuration --> Intégration --> Motifs d’arrêt de contrat : 5
+- Configuration --> Intégration --> Régimes d'évaluation : 7
+- Configuration --> Intégration --> Types de mise à l'emploi art60§7 : 6
+- Configuration --> Intégration --> Types de poste : 6
+- Configuration --> Intégration --> Horaires : 4
+- Configuration --> Intégration --> Types de mise à l'emploi art.61 : 2
+- Configuration --> Intégration --> Types de stage d'immersion : 4
+- Configuration --> Intégration --> Objectifs : 5
+- Configuration --> Nouvelles demandes --> Intermédiaires : 3
+- Configuration --> Nouvelles demandes --> Spécificités : 6
+- Configuration --> BCSS --> Secteurs : 210
+- Configuration --> BCSS --> Codes fonction : 107
+- Configuration --> Médiation de dettes --> Groupes de comptes : 9
+- Configuration --> Médiation de dettes --> Comptes : 52
+- Configuration --> Questionnaires --> Listes de choix : 9
+- Explorateur --> Contacts --> Personnes de contact : 11
+- Explorateur --> Contacts --> Types d'adresses : 6
+- Explorateur --> Contacts --> Adresses : 91
+- Explorateur --> Contacts --> Membres du conseil : 1
+- Explorateur --> Contacts --> Household member roles : 8
+- Explorateur --> Contacts --> Membres de ménage : 64
+- Explorateur --> Contacts --> Personal Links : 60
+- Explorateur --> Contacts --> Type de parenté : 13
+- Explorateur --> Système --> Procurations : 4
+- Explorateur --> Système --> Types d'utilisateur : 15
+- Explorateur --> Système --> types de contenu : 133
+- Explorateur --> Système --> Messages : 4
+- Explorateur --> Système --> Changes : 0
+- Explorateur --> Système --> Tests de données : 11
+- Explorateur --> Système --> Problèmes de données : 0
+- Explorateur --> Office --> Fichiers téléchargés : 12
+- Explorateur --> Office --> Upload Areas : 1
+- Explorateur --> Office --> Mails envoyés : 1
+- Explorateur --> Office --> Pièces jointes : 1
+- Explorateur --> Office --> Extraits : 70
+- Explorateur --> Office --> Observations : 112
+- Explorateur --> Calendrier --> Tâches : 35
+- Explorateur --> Calendrier --> Présences : 571
+- Explorateur --> Calendrier --> Abonnements : 10
+- Explorateur --> Calendrier --> Event states : 6
+- Explorateur --> Calendrier --> Guest states : 9
+- Explorateur --> Calendrier --> Task states : 4
+- Explorateur --> Ateliers --> Tests de niveau : 1
+- Explorateur --> Ateliers --> Ateliers : 8
+- Explorateur --> Ateliers --> Inscriptions : 81
+- Explorateur --> Ateliers --> États d'inscription : 5
+- Explorateur --> CPAS --> Interventions : 91
+- Explorateur --> CPAS --> Contacts client : 15
+- Explorateur --> CPAS --> Exclusions : 1
+- Explorateur --> CPAS --> Antécédents judiciaires : 1
+- Explorateur --> CPAS --> Bénéficiaires : 58
+- Explorateur --> CPAS --> Etats civils : 7
+- Explorateur --> CPAS --> Etats bénéficiaires : 4
+- Explorateur --> CPAS --> Type de carte eID : 10
+- Explorateur --> CPAS --> Octrois d'aide : 56
+- Explorateur --> CPAS --> Certificats de revenu : 55
+- Explorateur --> CPAS --> Refund confirmations : 13
+- Explorateur --> CPAS --> Confirmations simple : 20
+- Explorateur --> Parcours --> Connaissances de langue : 120
+- Explorateur --> Parcours --> Formations : 21
+- Explorateur --> Parcours --> Études : 23
+- Explorateur --> Parcours --> Expériences professionnelles : 31
+- Explorateur --> Parcours --> Connaissances de langue : 120
+- Explorateur --> Parcours --> Compétences professionnelles : 1
+- Explorateur --> Parcours --> Compétences sociales : 1
+- Explorateur --> Parcours --> Freins : 21
+- Explorateur --> Intégration --> PIISs : 31
+- Explorateur --> Intégration --> Mises à l'emploi art60§7 : 14
+- Explorateur --> Intégration --> Candidatures : 75
+- Explorateur --> Intégration --> Services utilisateurs : 36
+- Explorateur --> Intégration --> Mises à l'emploi art61 : 8
+- Explorateur --> Intégration --> Stages d'immersion : 7
+- Explorateur --> Intégration --> Preuves de recherche : 11
+- Explorateur --> Intégration --> Fiches FSE : 189
+- Explorateur --> Nouvelles demandes --> Compétences : 8
+- Explorateur --> BCSS --> Requêtes IdentifyPerson : 6
+- Explorateur --> BCSS --> Requêtes ManageAccess : 2
+- Explorateur --> BCSS --> Requêtes Tx25 : 7
+- Explorateur --> Médiation de dettes --> Budgets : 15
+- Explorateur --> Médiation de dettes --> Entrées : 717
+- Explorateur --> Questionnaires --> Questionnaires : 3
+- Explorateur --> Questionnaires --> Questions : 39
+- Explorateur --> Questionnaires --> Choix : 36
+- Explorateur --> Questionnaires --> Interviews : 7
+- Explorateur --> Questionnaires --> Choix de réponse : 89
+- Explorateur --> Questionnaires --> Answer Remarks : 1
+<BLANKLINE>
