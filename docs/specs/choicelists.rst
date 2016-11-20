@@ -86,6 +86,7 @@ name to read the documentation):
     ledger.VoucherStates : States
     ledger.VoucherTypes : Voucher types
     notes.SpecialTypes : Special note types
+    notify.MessageTypes : Message Types
     outbox.RecipientTypes : RecipientTypes
     pcsw.CivilState : Civil states
     pcsw.ClientEvents : Observed events

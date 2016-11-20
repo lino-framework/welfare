@@ -430,7 +430,7 @@ class AssignCoach(NotableAction):
         # obj is a User instance
         client = ar.master_instance
         if client:
-            return _('%(client)s assigned to %(coach)s ') % dict(
+            return _('%(client)s assigned to %(coach)s') % dict(
                 client=client, coach=obj)
 
     def get_notify_body(self, ar, obj, **kw):

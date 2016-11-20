@@ -52,8 +52,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-58 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, countries, contacts, appypod, humanize, users, contenttypes, gfks, channels, notify, changes, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, export_excel, plausibility.
-131 models:
+59 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, countries, contacts, appypod, humanize, users, contenttypes, gfks, channels, notify, changes, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, export_excel, plausibility, tinymce.
+132 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -96,7 +96,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  contacts.Person                contacts.Persons                31        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               3         132
+ contenttypes.ContentType       gfks.ContentTypes               3         133
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Activities              30        7
@@ -157,7 +157,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  notes.EventType                notes.EventTypes                10        10
  notes.Note                     notes.Notes                     18        111
  notes.NoteType                 notes.NoteTypes                 12        13
- notify.Message                 notify.Messages                 9         3
+ notify.Message                 notify.Messages                 10        12
  outbox.Attachment              outbox.Attachments              4         0
  outbox.Mail                    outbox.Mails                    9         0
  outbox.Recipient               outbox.Recipients               6         0
@@ -184,6 +184,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  polls.Question                 polls.Questions                 9         38
  polls.Response                 polls.Responses                 7         6
  system.SiteConfig              system.SiteConfigs              29        1
+ tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
@@ -399,6 +400,8 @@ Each window layout defines a given set of fields.
 - reception.MyWaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.WaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
 - system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
+- tinymce.TextFieldTemplates.detail : id, name, user, description, text
+- tinymce.TextFieldTemplates.insert : name, user
 - uploads.AllUploads.detail : file, user, upload_area, type, description, owner
 - uploads.AllUploads.insert : type, description, file, user
 - uploads.UploadTypes.detail : id, upload_area, shortcut, name, name_nl, name_de, name_en, warn_expiry_unit, warn_expiry_value, wanted, max_number
@@ -577,6 +580,8 @@ Each window layout is **viewable** by a given set of user profiles.
 - reception.MyWaitingVisitors.detail : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - reception.WaitingVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - system.SiteConfigs.detail : visible for admin 910
+- tinymce.TextFieldTemplates.detail : visible for admin 910
+- tinymce.TextFieldTemplates.insert : visible for admin 910
 - uploads.AllUploads.detail : visible for 110 410 admin 910
 - uploads.AllUploads.insert : visible for 110 410 admin 910
 - uploads.UploadTypes.detail : visible for 110 410 admin 910
@@ -625,7 +630,7 @@ Romain
   - Système : Paramètres du Site, Utilisateurs, Textes d'aide, Update all summary data
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
-  - Office : Types de fichiers téléchargés, Types d'extrait, Types d'observation, Types d'événements
+  - Office : Types de fichiers téléchargés, Types d'extrait, Types d'observation, Types d'événements, Mes Text Field Templates
   - Calendrier : Calendriers, Locaux, Priorités, Recurrent event rules, Rôles de participants, Types d'entrée calendrier, Remote Calendars
   - Comptabilité : Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
@@ -639,7 +644,7 @@ Romain
 - Explorateur :
   - Contacts : Personnes de contact, Types d'adresses, Adresses, Membres du conseil, Household member roles, Membres de ménage, Personal Links, Type de parenté
   - Système : Procurations, Types d'utilisateur, types de contenu, Messages, Changes, Tests de données, Problèmes de données
-  - Office : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations
+  - Office : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations, Text Field Templates
   - Calendrier : Tâches, Présences, Abonnements, Event states, Guest states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
   - CPAS : Interventions, Contacts client, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Type de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
@@ -825,6 +830,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Office --> Types d'extrait : 19
 - Configuration --> Office --> Types d'observation : 14
 - Configuration --> Office --> Types d'événements : 11
+- Configuration --> Office --> Mes Text Field Templates : 1
 - Configuration --> Calendrier --> Calendriers : 13
 - Configuration --> Calendrier --> Locaux : 1
 - Configuration --> Calendrier --> Priorités : 5
@@ -883,8 +889,8 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Contacts --> Type de parenté : 13
 - Explorateur --> Système --> Procurations : 4
 - Explorateur --> Système --> Types d'utilisateur : 15
-- Explorateur --> Système --> types de contenu : 133
-- Explorateur --> Système --> Messages : 4
+- Explorateur --> Système --> types de contenu : 134
+- Explorateur --> Système --> Messages : 13
 - Explorateur --> Système --> Changes : 0
 - Explorateur --> Système --> Tests de données : 11
 - Explorateur --> Système --> Problèmes de données : 0
@@ -894,6 +900,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Office --> Pièces jointes : 1
 - Explorateur --> Office --> Extraits : 70
 - Explorateur --> Office --> Observations : 112
+- Explorateur --> Office --> Text Field Templates : 3
 - Explorateur --> Calendrier --> Tâches : 35
 - Explorateur --> Calendrier --> Présences : 571
 - Explorateur --> Calendrier --> Abonnements : 10

@@ -54,9 +54,10 @@ class TestCase(TestCase):
 
         """
         ar = rt.actors.notify.Messages.request()
-        rst = ar.to_rst(column_names="subject owner user")
+        rst = ar.to_rst(column_names="body owner user")
         if not expected:
             print rst
+        # print rst  # handy when something fails
         self.assertEquivalent(expected, rst)
 
     def check_notes(self, expected):
@@ -163,12 +164,17 @@ class TestCase(TestCase):
         self.assertEqual(Message.objects.count(), 2)
 
         self.check_notifications("""
-====================================== ============================ ===========
- Subject                                About                        Recipient
--------------------------------------- ---------------------------- -----------
-                                        *Presence #1 (22.05.2014)*   caroline
- Alicia modified CLIENT Seconda (101)   *CLIENT Seconda (101)*       roger
-====================================== ============================ ===========
++------------------------------------------------------------------------+----------------------------+-----------+
+| Body                                                                   | About                      | Recipient |
++========================================================================+============================+===========+
+|                                                                        | *Presence #1 (22.05.2014)* | caroline  |
++------------------------------------------------------------------------+----------------------------+-----------+
+| [CLIENT Seconda (101)](javascript:Lino.pcsw.Clients.detail.run\(null,{ | *CLIENT Seconda (101)*     | roger     |
+| "record_id": 101 }\)) has been modified by Alicia:                     |                            |           |
+|                                                                        |                            |           |
+|   * **Name** : 'Client Second' --&gt; 'Client Seconda'                 |                            |           |
+|   * **First name** : 'Second' --&gt; 'Seconda'                         |                            |           |
++------------------------------------------------------------------------+----------------------------+-----------+
 """)
 
         # When a coaching is modified, all active coaches of that
@@ -185,11 +191,13 @@ class TestCase(TestCase):
         self.assertEqual(res.status_code, 200)
 
         self.check_notifications("""
-================================== ======================== ===========
- Subject                            About                    Recipient
----------------------------------- ------------------------ -----------
- Alicia modified roger / Client S   *CLIENT Seconda (101)*   roger
-================================== ======================== ===========
++-----------------------------------------------------+------------------------+-----------+
+| Body                                                | About                  | Recipient |
++=====================================================+========================+===========+
+| **roger / Client S** has been modified by Alicia:   | *CLIENT Seconda (101)* | roger     |
+|                                                     |                        |           |
+|   * **Coached from** : 2014-05-01 --&gt; 2014-05-02 |                        |           |
++-----------------------------------------------------+------------------------+-----------+
 """)
 
         # AssignCoach. we are going to Assign caroline as coach for
@@ -234,11 +242,11 @@ class TestCase(TestCase):
         self.assertEqual(res.status_code, 200)
 
         self.check_notifications("""
-=================================== ====================== ===========
- Subject                             About                  Recipient
------------------------------------ ---------------------- -----------
- First CLIENT assigned to caroline   *CLIENT First (100)*   caroline
-=================================== ====================== ===========
+======================================== ====================== ===========
+ Body                                     About                  Recipient
+---------------------------------------- ---------------------- -----------
+ First CLIENT assigned to caroline Body   *CLIENT First (100)*   caroline
+======================================== ====================== ===========
 """)
 
         self.check_coachings("""
@@ -293,11 +301,11 @@ class TestCase(TestCase):
         self.assertTrue(res.success)
 
         self.check_notifications("""
-====================================================== ======================== ===========
- Subject                                                About                    Recipient
------------------------------------------------------- ------------------------ -----------
- Alicia marked CLIENT Seconda (101) as <b>Former</b>.   *CLIENT Seconda (101)*   roger
-====================================================== ======================== ===========
+=================================================== ======================== ===========
+ Body                                                About                    Recipient
+--------------------------------------------------- ------------------------ -----------
+ Alicia marked CLIENT Seconda (101) as **Former**.   *CLIENT Seconda (101)*   roger
+=================================================== ======================== ===========
 """)
 
         # check two coachings have now an end_date set:
@@ -334,11 +342,11 @@ class TestCase(TestCase):
         res = self.client.get(url, **kwargs)
         self.assertEqual(res.status_code, 200)
         self.check_notifications("""
-===================================================== ====================== ===========
- Subject                                               About                  Recipient
------------------------------------------------------ ---------------------- -----------
- Alicia marked CLIENT First (100) as <b>Refused</b>.   *CLIENT First (100)*   caroline
-===================================================== ====================== ===========
+======================================================================== ====================== ===========
+ Body                                                                     About                  Recipient
+------------------------------------------------------------------------ ---------------------- -----------
+ Alicia marked CLIENT First (100) as **Refused**. PCSW is not competent   *CLIENT First (100)*   caroline
+======================================================================== ====================== ===========
 """)
         self.check_notes("""
 ==== ======== ==================== =====================================================

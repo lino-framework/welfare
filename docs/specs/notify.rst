@@ -143,21 +143,29 @@ I was not possible until now to override the `verbose_name` of the
 
 >>> ses = rt.login("robin")
 >>> ses.show(rt.actors.notify.AllMessages)
-===================== ====================== ================= ====== =====================
- Created               Subject                Recipient         seen   sent
---------------------- ---------------------- ----------------- ------ ---------------------
- 2014-05-22 05:48:00   Database initialized   Romain Raffault          2014-05-22 05:48:00
- 2014-05-22 05:48:00   Database initialized   Rolf Rompen              2014-05-22 05:48:00
- 2014-05-22 05:48:00   Database initialized   Robin Rood               2014-05-22 05:48:00
-===================== ====================== ================= ====== =====================
+===================== ======================================= ================== ====== =====================
+ Created               Body                                    Recipient          seen   sent
+--------------------- --------------------------------------- ------------------ ------ ---------------------
+ 2014-05-22 05:48:00   The database has been initialized.      nicolas                   2014-05-22 05:48:00
+ 2014-05-22 05:48:00   La base de données a été initialisée.   Alicia Allmanns           2014-05-22 05:48:00
+ 2014-05-22 05:48:00   The database has been initialized.      Caroline Carnol           2014-05-22 05:48:00
+ 2014-05-22 05:48:00   The database has been initialized.      Hubert Huppertz           2014-05-22 05:48:00
+ 2014-05-22 05:48:00   The database has been initialized.      Judith Jousten            2014-05-22 05:48:00
+ 2014-05-22 05:48:00   The database has been initialized.      Kerstin Kerres            2014-05-22 05:48:00
+ 2014-05-22 05:48:00   La base de données a été initialisée.   Mélanie Mélard            2014-05-22 05:48:00
+ 2014-05-22 05:48:00   The database has been initialized.      Patrick Paraneau          2014-05-22 05:48:00
+ 2014-05-22 05:48:00   La base de données a été initialisée.   Romain Raffault           2014-05-22 05:48:00
+ 2014-05-22 05:48:00   Die Datenbank wurde initialisiert.      Rolf Rompen               2014-05-22 05:48:00
+ 2014-05-22 05:48:00   The database has been initialized.      Robin Rood                2014-05-22 05:48:00
+ 2014-05-22 05:48:00   The database has been initialized.      Theresia Thelen           2014-05-22 05:48:00
+ 2014-05-22 05:48:00   The database has been initialized.      Wilfried Willems          2014-05-22 05:48:00
+===================== ======================================= ================== ====== =====================
 <BLANKLINE>
 
 >>> ses.show(rt.actors.notify.MyMessages)
-+-----------------------+----------+
-| Subject               | Workflow |
-+=======================+==========+
-| Database initialized  | [✉] [✓]  |
-|                       |          |
-| Hello world           |          |
-+-----------------------+----------+
+==================================== ===================== ============== ==========
+ Body                                 Created               Message Type   Workflow
+------------------------------------ --------------------- -------------- ----------
+ The database has been initialized.   2014-05-22 05:48:00   System event   [✓]
+==================================== ===================== ============== ==========
 <BLANKLINE>
