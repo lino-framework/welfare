@@ -80,12 +80,14 @@ class Site(Site):
             yield self.actors.notify.MyMessages
             
         yield self.modules.reception.MyWaitingVisitors
+        yield self.modules.cal.MyUnconfirmedAppointments
         yield self.modules.cal.MyEventsToday
         yield self.modules.cal.MyTasks
         
         yield self.modules.reception.WaitingVisitors
         # yield self.modules.integ.UsersWithClients
         #~ yield self.modules.reception.ReceivedVisitors
+        
 
     def do_site_startup(self):
         

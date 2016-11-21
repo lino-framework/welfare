@@ -704,7 +704,7 @@ def setup_site_cache(self, force):
         fn = os.path.join(settings.MEDIA_ROOT, *parts)
         if not force and os.path.exists(fn):
             if os.stat(fn).st_mtime > self.kernel.code_mtime:
-                logger.info(
+                logger.debug(
                     "NOT generating %s because it is newer than the code.", fn)
                 return
         s = file(os.path.join(os.path.dirname(__file__), 'WSDL', template)
