@@ -27,7 +27,7 @@ from django.db import models
 from lino.api import dd, _
 from lino.utils.dates import weekdays
 from lino.utils.quantities import Duration
-from lino_xl.lib.cal.choicelists import GuestStates
+from lino_xl.lib.cal.workflows import GuestStates
 
 ZERO = Duration("0:00")
 
