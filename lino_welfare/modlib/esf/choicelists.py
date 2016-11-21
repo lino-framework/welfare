@@ -27,6 +27,7 @@ from django.db import models
 from lino.api import dd, _
 from lino.utils.dates import weekdays
 from lino.utils.quantities import Duration
+from lino_xl.lib.cal.choicelists import GuestStates
 
 ZERO = Duration("0:00")
 
@@ -107,6 +108,20 @@ class GuestHours(HoursField):
         return Duration(obj.gone_since - obj.busy_since)
 
 
+class GuestHoursEvent(HoursField):
+    """Count the event's duration for each presence."""
+    
+    def collect_from_guest(self, obj, summary):
+        if obj.event.event_type is None:
+            return
+        sf = obj.event.event_type.esf_field
+        if sf is None or sf.value != self.value:
+            return
+        if obj.state != GuestStates.present:
+            return
+        return obj.event.get_duration()
+
+
 class GuestHoursFixed(HoursField):
     """Count a fixed time for each presence."""
     
@@ -171,7 +186,7 @@ add(GuestHoursFixed('42', _("Mobility")))
 add(GuestHoursFixed('43', _("Remedial teaching")))
 
 # Activons-nous
-add(GuestHours('44', _("Wake up!")))
+add(GuestHoursEvent('44', _("Wake up!")))
 
 # Mise en situation professionnelle : calculer les heures par stage
 # d'immersion, en fonction des dates de début et de fin et de
@@ -181,7 +196,7 @@ add(ImmersionHours('50', _("Getting a professional situation")))
 # Cyber-employ : Somme des présences aux ateliers "Cyber-emploi", mais
 # pour ces ateliers on note les heures d'arrivée et de départ par
 # participation.
-add(GuestHours('60', _("Cyber Job")))
+add(GuestHoursEvent('60', _("Cyber Job")))
 
 # Mise à l’emploi sous contrat art.60§7
 add(Art60Hours('70', _("Art 60§7 job supplyment")))
