@@ -70,7 +70,7 @@ class RefuseClient(ChangeStateAction):
 
         # obj is a Client instance
         obj.refusal_reason = ar.action_param_values.reason
-        obj.state = ClientStates.refused
+        obj.client_state = ClientStates.refused
         obj.full_clean()
         obj.save()
 
@@ -84,8 +84,9 @@ class RefuseClient(ChangeStateAction):
         kw.update(alert=_("Success"))
         obj.emit_system_note(
             ar, subject=subject, body=body)
+        mt = rt.models.notify.MessageTypes.action
         rt.models.notify.Message.emit_message(
-            ar, obj, subject, body, recipients)
+            ar, obj, mt, subject+"\n"+body, recipients)
         ar.success(**kw)
 
 
@@ -106,18 +107,19 @@ class MarkClientFormer(ChangeStateAction):
         # run the query before we end the coachings:
         recipients = list(obj.get_change_observers())
 
+        mt = rt.models.notify.MessageTypes.action
         def doit(ar):
-            obj.state = self.target_state
+            obj.client_state = self.target_state
             obj.full_clean()
             obj.save()
-            subject = self.done_msg.format(
+            body = self.done_msg.format(
                 client=obj, user=ar.get_user(), state=self.target_state)
             kw = dict()
-            kw.update(message=subject)
+            kw.update(message=body)
             kw.update(alert=_("Success"))
-            obj.emit_system_note(ar, subject=subject)
+            obj.emit_system_note(ar, subject=body)
             rt.models.notify.Message.emit_message(
-                ar, obj, subject, "", recipients)
+                ar, obj, mt, body, recipients)
             ar.success(**kw)
             
         qs = obj.coachings_by_client.filter(end_date__isnull=True)

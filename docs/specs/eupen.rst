@@ -893,7 +893,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Vollmachten : 4
 - Explorer --> System --> Benutzerarten : 15
 - Explorer --> System --> Datenbankmodelle : 139
-- Explorer --> System --> Mitteilungen : 4
+- Explorer --> System --> Mitteilungen : 14
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> Datentests : 14
 - Explorer --> System --> Datenprobleme : 59
