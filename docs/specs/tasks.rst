@@ -39,7 +39,7 @@ For example Hubert has some tasks in that table:
 
 >>> rt.login('hubert').show(cal.MyTasks)
 ============ ============================= ==================================== ==========================
- Date début   Résumé                        État                                 Bénéficiaire
+ Date début   Résumé                        Actions                              Bénéficiaire
 ------------ ----------------------------- ------------------------------------ --------------------------
  27/05/2014   Projet termine dans un mois   **à faire** → [accomplie] [Annulé]   RADERMACHER Edgard (157)
  12/06/2014   Projet termine dans un mois   **à faire** → [accomplie] [Annulé]   RADERMACHER Hedi (161)
@@ -59,7 +59,7 @@ Actually Alice *does* have quite some tasks, but they are all more than
 >>> pv = dict(end_date=None)
 >>> rt.login('alicia').show(cal.MyTasks, param_values=pv)
 ============ ============================= ==================================== ============================
- Date début   Résumé                        État                                 Bénéficiaire
+ Date début   Résumé                        Actions                              Bénéficiaire
 ------------ ----------------------------- ------------------------------------ ----------------------------
  30/06/2014   Permis de travail expire le   **à faire** → [accomplie] [Annulé]   DOBBELSTEIN Dorothée (124)
  02/08/2014   Projet termine dans un mois   **à faire** → [accomplie] [Annulé]   VAN VEEN Vincent (166)

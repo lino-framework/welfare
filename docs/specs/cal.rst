@@ -60,7 +60,7 @@ Here is what the :class:`lino.modlib.cal.ui.EventsByDay` table gives:
 Thu 22/05/2014 (22.05.2014)
 ===========================
 ============ ============================ ============= ================== ============= ======================= ====== ============================
- Start time   Client                       Summary       Managed by         Assigned to   Calendar Event Type     Room   Workflow
+ Start time   Client                       Summary       Managed by         Assigned to   Calendar Event Type     Room   Actions
 ------------ ---------------------------- ------------- ------------------ ------------- ----------------------- ------ ----------------------------
  08:30:00                                  Diner         Alicia Allmanns                  Meeting                        **Suggested**
  08:30:00     MEIER Marie-Louise (149)     Evaluation    Romain Raffault                  Informational meeting          **Suggested**
@@ -94,7 +94,7 @@ Here is what it says for Alicia.
 >>> rt.login('alicia').show(cal.MyEvents, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ====================================== ========================================= ======================= ==================== =================================
- When                                   Client                                    Calendar Event Type     Summary              Workflow
+ When                                   Client                                    Calendar Event Type     Summary              Actions
 -------------------------------------- ----------------------------------------- ----------------------- -------------------- ---------------------------------
  `Thu 22/05/2014 at 08:30 <Detail>`__                                             Meeting                 Diner                **Suggested** → [Notified]
  `Fri 23/05/2014 at 09:40 <Detail>`__   AUSDEMWALD Alfons (116)                   Appointment             Souper               **Draft** → [Notified] [Cancel]
@@ -130,7 +130,7 @@ These are for Hubert:
 >>> rt.login('hubert').show(cal.MyEvents, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ====================================== ============================ ======================= =============== =================================
- When                                   Client                       Calendar Event Type     Summary         Workflow
+ When                                   Client                       Calendar Event Type     Summary         Actions
 -------------------------------------- ---------------------------- ----------------------- --------------- ---------------------------------
  `Thu 22/05/2014 at 10:20 <Detail>`__   DOBBELSTEIN Dorothée (124)   Informational meeting   Treffen         **Suggested** → [Notified]
  `Fri 23/05/2014 at 11:10 <Detail>`__                                Internal meeting        Beratung        **Draft** → [Notified] [Cancel]
@@ -184,7 +184,7 @@ And these for Mélanie:
 >>> rt.login('melanie').show(cal.MyEvents, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ====================================== ============================= ======================= ==================== =================================
- When                                   Client                        Calendar Event Type     Summary              Workflow
+ When                                   Client                        Calendar Event Type     Summary              Actions
 -------------------------------------- ----------------------------- ----------------------- -------------------- ---------------------------------
  `Thu 22/05/2014 at 09:40 <Detail>`__   JANSEN Jérémy (136)           Informational meeting   Diner                **Suggested** → [Notified]
  `Fri 23/05/2014 at 10:20 <Detail>`__                                 Internal meeting        Souper               **Draft** → [Notified] [Cancel]
@@ -269,7 +269,7 @@ These are Alicia's calendar appointments of the last two months:
 >>> rt.login('alicia').show(cal.MyEvents, language='en',
 ...     param_values=last_week)
 ====================================== ========================= ===================== =============== ================================
- When                                   Client                    Calendar Event Type   Summary         Workflow
+ When                                   Client                    Calendar Event Type   Summary         Actions
 -------------------------------------- ------------------------- --------------------- --------------- --------------------------------
  `Wed 07/05/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 15   [▽] **Suggested** → [Notified]
  `Wed 14/05/2014 <Detail>`__            HILGERS Hildegard (133)   Evaluation            Évaluation 6    [▽] **Suggested** → [Notified]
@@ -338,7 +338,7 @@ datetime.date(2014, 4, 1)
 Events of EVERS Eberhart (127) (Dates 01.04.2014 to ...)
 ========================================================
 ============================ ================= ================ ===============
- When                         Managed by        Summary          Workflow
+ When                         Managed by        Summary          Actions
 ---------------------------- ----------------- ---------------- ---------------
  **Tue 15/04/2014 (09:00)**   Caroline Carnol   Auswertung 1     **Suggested**
  **Thu 15/05/2014 (09:00)**   Caroline Carnol   Auswertung 2     **Suggested**
@@ -365,7 +365,7 @@ Events generated by a contract
 Events of ISIP#18 (Edgard RADERMACHER)
 ======================================
 ============================ =============== ================= ============= ===============
- When                         Summary         Managed by        Assigned to   Workflow
+ When                         Summary         Managed by        Assigned to   Actions
 ---------------------------- --------------- ----------------- ------------- ---------------
  **Thu 07/02/2013 (09:00)**   Évaluation 1    Alicia Allmanns                 **Suggested**
  **Thu 07/03/2013 (09:00)**   Évaluation 2    Alicia Allmanns                 **Suggested**

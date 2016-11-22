@@ -606,7 +606,7 @@ Romain
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
 - Office : Mes Messages, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
-- Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Mes tâches, Mes visiteurs, Mes présences
+- Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Rendez-vous à confirmer, Mes tâches, Mes visiteurs, Mes présences
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis, Visiteurs qui m'attendent
 - CPAS : Bénéficiaires, Mes Interventions, Octrois à confirmer
 - Intégration :
@@ -782,6 +782,7 @@ Here is the output of :func:`walk_menu_items
 - Office --> Mes problèmes de données : 0
 - Calendrier --> Mes rendez-vous : 13
 - Calendrier --> Rendez-vous dépassés : 31
+- Calendrier --> Rendez-vous à confirmer : 3
 - Calendrier --> Mes tâches : 1
 - Calendrier --> Mes visiteurs : 1
 - Calendrier --> Mes présences : 1

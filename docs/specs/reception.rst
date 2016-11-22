@@ -35,7 +35,7 @@ This client has the following appointments.
 ...     column_names="event__start_date event__start_time event__user event__summary event__state workflow_buttons",
 ...     language="en")  #doctest: +REPORT_UDIFF
 ============ ============ ================= ================ =========== ==================================
- Start date   Start time   Managed by        Summary          State       Workflow
+ Start date   Start time   Managed by        Summary          State       Actions
 ------------ ------------ ----------------- ---------------- ----------- ----------------------------------
  15/05/2014   09:00:00     Caroline Carnol   Auswertung 2     Suggested   [Checkin] **Accepted**
  22/05/2014                Mélanie Mélard    Urgent problem   Notified    [Receive] [Checkout] **Waiting**
@@ -56,7 +56,7 @@ functionality can click on the dates to see their detail:
 >>> rt.login('theresia').show(reception.AppointmentsByPartner, obj,
 ...     language="en")  #doctest: +REPORT_UDIFF
 ====================================== ================= ==================================
- When                                   Managed by        Workflow
+ When                                   Managed by        Actions
 -------------------------------------- ----------------- ----------------------------------
  `Thu 15/05/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
  `Thu 22/05/2014 <Detail>`__            Mélanie Mélard    [Receive] [Checkout] **Waiting**
@@ -216,7 +216,7 @@ the lounge:
 >>> rt.login('alicia').show(reception.MyWaitingVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ========================= ========== ==================================
- Client                    Position   Workflow
+ Client                    Position   Actions
 ------------------------- ---------- ----------------------------------
  HILGERS Hildegard (133)   1          [Receive] [Checkout] **Waiting**
  KAIVERS Karl (141)        2          [Receive] [Checkout] **Waiting**
@@ -226,7 +226,7 @@ the lounge:
 >>> rt.login('hubert').show(reception.MyWaitingVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ===================== ========== ==================================
- Client                Position   Workflow
+ Client                Position   Actions
 --------------------- ---------- ----------------------------------
  EMONTS Daniel (128)   1          [Receive] [Checkout] **Waiting**
  JONAS Josef (139)     2          [Receive] [Checkout] **Waiting**
@@ -248,7 +248,7 @@ Theresia is rather going to use the overview tables:
 >>> rt.login('theresia').show(reception.WaitingVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ========================= ================= ==================================
- Client                    Managed by        Workflow
+ Client                    Managed by        Actions
 ------------------------- ----------------- ----------------------------------
  EMONTS Daniel (128)       Hubert Huppertz   [Receive] [Checkout] **Waiting**
  EVERS Eberhart (127)      Mélanie Mélard    [Receive] [Checkout] **Waiting**
@@ -264,7 +264,7 @@ Theresia is rather going to use the overview tables:
 >>> rt.login('theresia').show(reception.BusyVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ========================= ================= =====================
- Client                    Managed by        Workflow
+ Client                    Managed by        Actions
 ------------------------- ----------------- ---------------------
  BRECHT Bernd (177)        Hubert Huppertz   [Checkout] **Busy**
  COLLARD Charlotte (118)   Alicia Allmanns   [Checkout] **Busy**
@@ -277,7 +277,7 @@ Theresia is rather going to use the overview tables:
 >>> rt.login('theresia').show(reception.GoneVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ============================ ================= ==========
- Client                       Managed by        Workflow
+ Client                       Managed by        Actions
 ---------------------------- ----------------- ----------
  MALMENDIER Marc (146)        Alicia Allmanns   **Gone**
  KELLER Karl (178)            Judith Jousten    **Gone**
