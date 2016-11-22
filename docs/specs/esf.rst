@@ -201,9 +201,9 @@ lequel seront totalisés les heures.
  41             Initiation informatique             GuestHoursFixed
  42             Mobilité                            GuestHoursFixed
  43             Remédiation                         GuestHoursFixed
- 44             Activons-nous!                      GuestHours
+ 44             Activons-nous!                      GuestHoursEvent
  50             Mise en situation professionnelle   ImmersionHours
- 60             Cyber Emploi                        GuestHours
+ 60             Cyber Emploi                        GuestHoursEvent
  70             Mise à l’emploi art.60§7            Art60Hours
 ======= ====== =================================== =================
 <BLANKLINE>

@@ -52,7 +52,7 @@ The REG journal contains the following invoices:
 
 >>> rt.show(REG.voucher_type.table_class, REG)
 ========= ============ ============================ =============================== ============ ============== ================== =================
- Nr.       Belegdatum   Klient                       Zahlungsempfänger               Betrag       Zahlungsziel   Autor              Arbeitsablauf
+ Nr.       Belegdatum   Klient                       Zahlungsempfänger               Betrag       Zahlungsziel   Autor              Aktionen
 --------- ------------ ---------------------------- ------------------------------- ------------ -------------- ------------------ -----------------
  20        27.12.13     EVERS Eberhart (127)         Leffin Electronics              12,50        27.01.14       Wilfried Willems   **Registriert**
  19        06.01.14     EVERS Eberhart (127)         Ethias s.a.                     5,33         06.02.14       Wilfried Willems   **Registriert**
@@ -87,7 +87,7 @@ The SREG journal contains the following invoices:
 
 >>> rt.show(SREG.voucher_type.table_class, SREG)
 ======== ============ =============================== ============== ============== ================== =================
- Nr.      Belegdatum   Zahlungsempfänger               Betrag         Zahlungsziel   Autor              Arbeitsablauf
+ Nr.      Belegdatum   Zahlungsempfänger               Betrag         Zahlungsziel   Autor              Aktionen
 -------- ------------ ------------------------------- -------------- -------------- ------------------ -----------------
  10       01.01.14     Niederau Eupen AG               212,78         01.02.14       Wilfried Willems   **Registriert**
  9        16.01.14     Ragn-Sells AS                   82,78          16.02.14       Wilfried Willems   **Registriert**

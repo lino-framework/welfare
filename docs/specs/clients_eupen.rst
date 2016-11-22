@@ -61,7 +61,7 @@ Lino Welfare à la Eupen.
     - **Begleiter** (coaching) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
       - (coaching_1) [visible for 110 120 200 220 300 800 admin 910]:
         - (newcomers_left):
-          - (newcomers_left_1) [visible for all]: **Arbeitsablauf** (workflow_buttons), **Identifizierendes Dokument** (id_document)
+          - (newcomers_left_1) [visible for all]: **Aktionen** (workflow_buttons), **Identifizierendes Dokument** (id_document)
           - **Vermittler** (broker) [visible for all]
           - **Fachbereich** (faculty) [visible for all]
           - **Ablehnungsgrund** (refusal_reason) [visible for all]
