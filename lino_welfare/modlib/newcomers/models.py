@@ -407,7 +407,13 @@ Mehrbelastung, die dieser Neuantrag im Falle einer Zuweisung diesem Benutzer ver
 
 
 class AssignCoach(NotableAction):
-    """Assign this agent as coach for this client.
+    """Assign this agent as coach for this client.  This will set the
+    client's state to `Coached` and send a notification to the new
+    coach.
+
+    Diesen Benutzer als Begleiter für diesen Klienten eintragen und
+    den Zustand des Klienten auf "Begleitet" setzen.  Anschließend
+    wird der Klient in der Liste "Neue Klienten" nicht mehr angezeigt.
 
     This action is available only in the
     :class:`AvailableCoachesByClient` table.
@@ -417,13 +423,6 @@ class AssignCoach(NotableAction):
     required_roles = dd.required((NewcomersAgent, NewcomersOperator))
     # required_roles = dd.required(NewcomersAgent)
     show_in_workflow = True
-    help_text = _("Assign this agent as coach for this client. "
-                  "This will set the client's state to `Coached` "
-                  "and send a notification to the new coach.")
-# Diesen Benutzer als Begleiter für diesen Klienten eintragen
-# und den Zustand des Klienten auf "Begleitet" setzen.
-# Anschließend wird der Klient in der Liste "Neue Klienten"
-# nicht mehr angezeigt."""
 
     def get_notify_subject(self, ar, obj, **kw):
         # return _('New client for %s') % obj
@@ -441,17 +440,17 @@ class AssignCoach(NotableAction):
             return tpl % dict(
                 client=client, coach=obj, faculty=client.faculty)
 
-    def get_notify_recipients(self, ar, owner):
+    def get_notify_recipients(self, ar, obj):
         """Yield a list of users to be notified.
 
         """
-        # obj = ar.selected_rows[0]
         # obj is a User instance
         client = ar.master_instance
-        return client.get_change_observers()
+        if client:
+            return client.get_change_observers()
 
-    def get_notify_owner(self, ar, obj):
-        return ar.master_instance
+    # def get_notify_owner(self, ar, obj):
+    #     return ar.master_instance
 
     def run_from_ui(self, ar, **kw):
         # replaces the default implementation

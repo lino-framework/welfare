@@ -31,7 +31,7 @@ name to read the documentation):
 .. py2rst::
 
     from lino.core.choicelists import CHOICELISTS
-    for cls in sorted(CHOICELISTS.values(), lambda a, b: cmp(str(a), str(b))):
+    for cls in sorted(CHOICELISTS.values(), key=lambda a: str(a)):
         print("- {0} (:class:`{1} <{2}.{3}>`)".format(
             cls.verbose_name_plural or cls.verbose_name, 
             cls, cls.__module__, cls.__name__))
@@ -86,6 +86,7 @@ name to read the documentation):
     ledger.VoucherStates : States
     ledger.VoucherTypes : Voucher types
     notes.SpecialTypes : Special note types
+    notify.MailModes : Email notification modes
     notify.MessageTypes : Message Types
     outbox.RecipientTypes : RecipientTypes
     pcsw.CivilState : Civil states

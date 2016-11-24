@@ -137,15 +137,16 @@ class TestCase(TestCase):
 
         self.assertEqual(str(guest), 'Presence #1 (22.05.2014)')
 
-        # Checkin a guest of an event
+        # Checkin a guest
 
         res = ses.run(guest.checkin)
         self.assertEqual(res, {
             'message': '', 'success': True, 'refresh': True})
-        
+
+        # it has caused a notification message:
         self.assertEqual(Message.objects.count(), 1)
 
-        # checkin doesn't cause a system note
+        # id does *not* cause a system note:
         self.assertEqual(Note.objects.count(), 0)
 
         # When a client is modified, all active coaches get a
@@ -163,18 +164,19 @@ class TestCase(TestCase):
 
         self.assertEqual(Message.objects.count(), 2)
 
+        # self.check_notifications()
         self.check_notifications("""
-+------------------------------------------------------------------------+----------------------------+-----------+
-| Body                                                                   | About                      | Recipient |
-+========================================================================+============================+===========+
-|                                                                        | *Presence #1 (22.05.2014)* | caroline  |
-+------------------------------------------------------------------------+----------------------------+-----------+
-| [CLIENT Seconda (101)](javascript:Lino.pcsw.Clients.detail.run\(null,{ | *CLIENT Seconda (101)*     | roger     |
-| "record_id": 101 }\)) has been modified by Alicia:                     |                            |           |
-|                                                                        |                            |           |
-|   * **Name** : 'Client Second' --&gt; 'Client Seconda'                 |                            |           |
-|   * **First name** : 'Second' --&gt; 'Seconda'                         |                            |           |
-+------------------------------------------------------------------------+----------------------------+-----------+
++------------------------------------------------------------------------+------------------------+-----------+
+| Body                                                                   | Controlled by          | Recipient |
++========================================================================+========================+===========+
+|                                                                        |                        | caroline  |
++------------------------------------------------------------------------+------------------------+-----------+
+| [CLIENT Seconda (101)](javascript:Lino.pcsw.Clients.detail.run\(null,{ | *CLIENT Seconda (101)* | roger     |
+| "record_id": 101 }\)) has been modified by Alicia:                     |                        |           |
+|                                                                        |                        |           |
+|   * **Name** : 'Client Second' --&gt; 'Client Seconda'                 |                        |           |
+|   * **First name** : 'Second' --&gt; 'Seconda'                         |                        |           |
++------------------------------------------------------------------------+------------------------+-----------+
 """)
 
         # When a coaching is modified, all active coaches of that
@@ -192,7 +194,7 @@ class TestCase(TestCase):
 
         self.check_notifications("""
 +-----------------------------------------------------+------------------------+-----------+
-| Body                                                | About                  | Recipient |
+| Body                                                | Controlled by          | Recipient |
 +=====================================================+========================+===========+
 | **roger / Client S** has been modified by Alicia:   | *CLIENT Seconda (101)* | roger     |
 |                                                     |                        |           |
@@ -241,12 +243,13 @@ class TestCase(TestCase):
         res = self.client.get(url, **kwargs)
         self.assertEqual(res.status_code, 200)
 
+        # self.check_notifications()
         self.check_notifications("""
-======================================== ====================== ===========
- Body                                     About                  Recipient
----------------------------------------- ---------------------- -----------
- First CLIENT assigned to caroline Body   *CLIENT First (100)*   caroline
-======================================== ====================== ===========
+======================================== =============== ===========
+ Body                                     Controlled by   Recipient
+---------------------------------------- --------------- -----------
+ First CLIENT assigned to caroline Body                   caroline
+======================================== =============== ===========
 """)
 
         self.check_coachings("""
@@ -302,7 +305,7 @@ class TestCase(TestCase):
 
         self.check_notifications("""
 =================================================== ======================== ===========
- Body                                                About                    Recipient
+ Body                                                Controlled by            Recipient
 --------------------------------------------------- ------------------------ -----------
  Alicia marked CLIENT Seconda (101) as **Former**.   *CLIENT Seconda (101)*   roger
 =================================================== ======================== ===========
@@ -343,7 +346,7 @@ class TestCase(TestCase):
         self.assertEqual(res.status_code, 200)
         self.check_notifications("""
 ======================================================================== ====================== ===========
- Body                                                                     About                  Recipient
+ Body                                                                     Controlled by          Recipient
 ------------------------------------------------------------------------ ---------------------- -----------
  Alicia marked CLIENT First (100) as **Refused**. PCSW is not competent   *CLIENT First (100)*   caroline
 ======================================================================== ====================== ===========
