@@ -322,11 +322,13 @@ Each window layout defines a given set of fields.
 - cv.Durations.insert : id, name, name_nl, name_de, name_en
 - cv.EducationLevels.insert : name, name_nl, name_de, name_en, is_study, is_training
 - cv.Experiences.insert : person, start_date, end_date, termination_reason, company, country, city, sector, function, title, status, duration, regime, is_training, remarks
+- cv.ExperiencesByPerson.insert : start_date, end_date, company, function  
 - cv.Functions.insert : id, name, name_nl, name_de, name_en, sector, remark
 - cv.Regimes.insert : id, name, name_nl, name_de, name_en
 - cv.Sectors.insert : id, name, name_nl, name_de, name_en, remark
 - cv.Statuses.insert : id, name, name_nl, name_de, name_en
 - cv.Studies.insert : person, start_date, end_date, type, content, education_level, state, school, country, city, remarks
+- cv.StudiesByPerson.insert : start_date, end_date, type, content  
 - cv.StudyTypes.detail : name, name_nl, name_de, name_en, id, education_level, is_study, is_training
 - cv.StudyTypes.insert : name, name_nl, name_de, name_en, is_study, is_training, education_level
 - cv.Trainings.detail : person, start_date, end_date, type, state, certificates, sector, function, school, country, city, remarks
@@ -502,11 +504,13 @@ Each window layout is **viewable** by a given set of user profiles.
 - cv.Durations.insert : visible for 110 admin 910
 - cv.EducationLevels.insert : visible for 110 admin 910
 - cv.Experiences.insert : visible for 110 admin 910
+- cv.ExperiencesByPerson.insert : visible for 100 110 120 admin 910  
 - cv.Functions.insert : visible for 110 admin 910
 - cv.Regimes.insert : visible for 110 admin 910
 - cv.Sectors.insert : visible for 110 admin 910
 - cv.Statuses.insert : visible for 110 admin 910
 - cv.Studies.insert : visible for 110 admin 910
+- cv.StudiesByPerson.insert : visible for 100 110 120 admin 910  
 - cv.StudyTypes.detail : visible for 110 admin 910
 - cv.StudyTypes.insert : visible for 110 admin 910
 - cv.Trainings.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
