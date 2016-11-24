@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2015 Luc Saffre
+# Copyright 2013-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -113,6 +113,13 @@ class UserDetail(UserDetail, cal.UserDetailMixin):
     box1 #MembershipsByUser:20
     remarks:40 AuthoritiesGiven:20
     """, label=_("General"))
+
+    box1 = """
+    username profile:20 partner
+    first_name last_name initials
+    email language mail_mode
+    id created modified
+    """
 
     coaching_a = """
     newcomer_quota
