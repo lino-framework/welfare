@@ -388,7 +388,7 @@ Each window layout defines a given set of fields.
 - cv.Durations.insert : id, name, name_fr, name_en
 - cv.EducationLevels.insert : name, name_fr, name_en, is_study, is_training
 - cv.Experiences.insert : person, start_date, end_date, termination_reason, company, country, city, sector, function, title, status, duration, regime, is_training, remarks
-- cv.ExperiencesByPerson.insert : start_date, end_date, company, function  
+- cv.ExperiencesByPerson.insert : start_date, end_date, company, function
 - cv.Functions.insert : id, name, name_fr, name_en, sector, remark
 - cv.Regimes.insert : id, name, name_fr, name_en
 - cv.Sectors.insert : id, name, name_fr, name_en, remark
@@ -482,7 +482,7 @@ Each window layout defines a given set of fields.
 - uploads.UploadsByClient.insert : file, type, end_date, description
 - uploads.UploadsByController.insert : file, type, end_date, description
 - users.Users.change_password : current, new1, new2
-- users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, timezone, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
+- users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert : username, email, first_name, last_name, partner, language, profile
 - vatless.Invoices.detail : journal, number, voucher_date, entry_date, accounting_period, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, match, state, user, id, MovementsByVoucher
 - vatless.Invoices.insert : journal, partner, voucher_date

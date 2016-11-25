@@ -322,13 +322,13 @@ Each window layout defines a given set of fields.
 - cv.Durations.insert : id, name, name_nl, name_de, name_en
 - cv.EducationLevels.insert : name, name_nl, name_de, name_en, is_study, is_training
 - cv.Experiences.insert : person, start_date, end_date, termination_reason, company, country, city, sector, function, title, status, duration, regime, is_training, remarks
-- cv.ExperiencesByPerson.insert : start_date, end_date, company, function  
+- cv.ExperiencesByPerson.insert : start_date, end_date, company, function
 - cv.Functions.insert : id, name, name_nl, name_de, name_en, sector, remark
 - cv.Regimes.insert : id, name, name_nl, name_de, name_en
 - cv.Sectors.insert : id, name, name_nl, name_de, name_en, remark
 - cv.Statuses.insert : id, name, name_nl, name_de, name_en
 - cv.Studies.insert : person, start_date, end_date, type, content, education_level, state, school, country, city, remarks
-- cv.StudiesByPerson.insert : start_date, end_date, type, content  
+- cv.StudiesByPerson.insert : start_date, end_date, type, content
 - cv.StudyTypes.detail : name, name_nl, name_de, name_en, id, education_level, is_study, is_training
 - cv.StudyTypes.insert : name, name_nl, name_de, name_en, is_study, is_training, education_level
 - cv.Trainings.detail : person, start_date, end_date, type, state, certificates, sector, function, school, country, city, remarks
@@ -413,7 +413,7 @@ Each window layout defines a given set of fields.
 - uploads.UploadsByClient.insert : file, type, end_date, description
 - uploads.UploadsByController.insert : file, type, end_date, description
 - users.Users.change_password : current, new1, new2
-- users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, timezone, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
+- users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert : username, email, first_name, last_name, partner, language, profile
 <BLANKLINE>
 
