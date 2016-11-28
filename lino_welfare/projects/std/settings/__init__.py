@@ -184,13 +184,14 @@ class Site(Site):
 
         yield 'lino_xl.lib.beid'
         yield 'lino.modlib.davlink'
+        yield 'lino.modlib.dashboard'
 
         yield 'lino.modlib.export_excel'
         yield 'lino_welfare.modlib.dupable_clients'
         yield 'lino.modlib.plausibility'
         yield 'lino.modlib.tinymce'
 
-    def get_admin_main_items(self, ar):
+    def get_admin_main_items(self, user):
         """Returns the items of the admin index page:
 
         - :class:`lino_welfare.modlib.integ.models.UsersWithClients`
@@ -201,7 +202,7 @@ class Site(Site):
 
 
         """
-        if ar.get_user().authenticated:
+        if user.authenticated:
             yield self.actors.notify.MyMessages
         yield self.modules.integ.UsersWithClients
         yield self.modules.reception.MyWaitingVisitors

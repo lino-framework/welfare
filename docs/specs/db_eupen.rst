@@ -80,6 +80,7 @@ Database structure
 - cv.Study : id, start_date, end_date, country, city, zip_code, person, language, school, state, remarks, type, education_level, content
 - cv.StudyType : id, name, is_study, is_training, education_level, name_fr, name_en
 - cv.Training : id, start_date, end_date, country, city, zip_code, sector, function, person, language, school, state, remarks, type, content, certificates
+- dashboard.Widget : id, seqno, user, item_name, visible
 - debts.Account : id, ref, seqno, name, group, type, required_for_household, required_for_person, periods, default_amount, name_fr, name_en
 - debts.Actor : id, seqno, budget, partner, header, remark
 - debts.Budget : id, user, printed_by, date, partner, print_todos, print_empty_rows, include_yearly_incomes, intro, conclusion, dist_amount

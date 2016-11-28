@@ -107,11 +107,11 @@ class User(User):
 class UserDetail(UserDetail, cal.UserDetailMixin):
     """Layout of User Detail in Lino Welfare."""
 
-    main = "general cal coaching"
+    main = "general cal coaching dashboard.WidgetsByUser"
 
     general = dd.Panel("""
-    box1 #MembershipsByUser:20
-    remarks:40 AuthoritiesGiven:20
+    box1:40 #MembershipsByUser:20 AuthoritiesGiven:20
+    remarks:40 AuthoritiesTaken:20
     """, label=_("General"))
 
     box1 = """

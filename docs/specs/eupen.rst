@@ -45,7 +45,7 @@ Rolf is the local system administrator, he has a complete menu:
 >>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Mitteilungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Überfällige Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -86,7 +86,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Schuldnerberatung : Kontengruppen, Konten, Budget-Kopiervorlage
 - Explorer :
   - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
-  - System : Vollmachten, Benutzerarten, Datenbankmodelle, Mitteilungen, Änderungen, Datentests, Datenprobleme
+  - System : Vollmachten, Benutzerarten, Datenbankmodelle, Benachrichtigungen, Änderungen, All dashboard widgets, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Aufgaben, Anwesenheiten, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
@@ -113,7 +113,7 @@ Hubert is an Integration agent.
 ...     rt.login('hubert').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Mitteilungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -160,7 +160,7 @@ to explicitly override the language of :meth:`show_menu
 >>> rt.login('melanie').show_menu(language="de")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Mitteilungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Überfällige Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -214,7 +214,7 @@ Schuldenberater
 ...     rt.login('kerstin').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Mitteilungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -249,7 +249,7 @@ Berater Erstempfang
 ...     rt.login('caroline').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Mitteilungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -779,7 +779,7 @@ Here is the output of :func:`walk_menu_items
 - Kontakte --> Organisationen : 52
 - Kontakte --> Partner (alle) : 175
 - Kontakte --> Haushalte : 15
-- Büro --> Meine Mitteilungen : 2
+- Büro --> Meine Benachrichtigungen : 2
 - Büro --> Ablaufende Uploads : 1
 - Büro --> Meine Uploads : 1
 - Büro --> Mein E-Mail-Ausgang : 1
@@ -897,9 +897,10 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Kontakte --> Verwandschaftsarten : 13
 - Explorer --> System --> Vollmachten : 4
 - Explorer --> System --> Benutzerarten : 15
-- Explorer --> System --> Datenbankmodelle : 139
-- Explorer --> System --> Mitteilungen : 14
+- Explorer --> System --> Datenbankmodelle : 140
+- Explorer --> System --> Benachrichtigungen : 14
 - Explorer --> System --> Änderungen : 0
+- Explorer --> System --> All dashboard widgets : 'NoneType' object has no attribute 'get_request_queryset'
 - Explorer --> System --> Datentests : 14
 - Explorer --> System --> Datenprobleme : 59
 - Explorer --> Eigenschaften --> Eigenschaften : 24

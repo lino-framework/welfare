@@ -267,6 +267,8 @@ see it.
 - countries.PlacesByCountry.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - countries.PlacesByPlace.duplicate : visible for 110 210 410 800 admin 910
 - cv.EducationLevels.duplicate : visible for 110 admin 910
+- dashboard.Widgets.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- dashboard.WidgetsByUser.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910  
 - debts.Accounts.duplicate : visible for admin 910
 - debts.AccountsByGroup.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - debts.Actors.duplicate : visible for admin 910

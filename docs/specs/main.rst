@@ -40,18 +40,18 @@ it is much work to maintain.
 
 >>> links = soup.find_all('a')
 >>> len(links)
-129
+128
 
 >>> print(links[0].text)
 Kalender
 
 >>> tables = soup.find_all('table')
 >>> len(tables)
-4
+3
 
 >>> for h in soup.find_all('h2'):
 ...     print(h.text.strip())
-Meine Mitteilungen 🗗
+Meine Benachrichtigungen 🗗
 Benutzer und ihre Klienten 🗗
 Meine Termine 🗗
 Wartende Besucher 🗗
@@ -64,7 +64,7 @@ Wartende Besucher 🗗
 >>> soup = BeautifulSoup(result['html'], 'lxml')
 >>> for h in soup.find_all('h2'):
 ...     print(h.text.strip())
-My Messages 🗗
+My Notification messages 🗗
 Users with their Clients 🗗
 My appointments 🗗
 Waiting visitors 🗗

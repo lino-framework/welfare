@@ -62,8 +62,8 @@ class Site(Site):
         kw.update(cv='lino_welfare.modlib.cv')
         return kw
 
-    def get_admin_main_items(self, ar):
-        if ar.get_user().authenticated:
+    def get_admin_main_items(self, user):
+        if user.authenticated:
             yield self.actors.notify.MyMessages
         yield self.modules.integ.UsersWithClients
         yield self.modules.reception.MyWaitingVisitors

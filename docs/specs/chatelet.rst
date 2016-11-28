@@ -52,8 +52,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-59 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, countries, contacts, appypod, humanize, users, contenttypes, gfks, channels, notify, changes, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, export_excel, plausibility, tinymce.
-132 models:
+60 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, countries, contacts, appypod, humanize, users, contenttypes, gfks, channels, notify, changes, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, plausibility, tinymce.
+133 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -96,7 +96,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  contacts.Person                contacts.Persons                31        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               3         133
+ contenttypes.ContentType       gfks.ContentTypes               3         134
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Activities              30        7
@@ -121,6 +121,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cv.Study                       cv.Studies                      14        22
  cv.StudyType                   cv.StudyTypes                   8         11
  cv.Training                    cv.Trainings                    16        20
+ dashboard.Widget               dashboard.Widgets               5         0
  debts.Account                  debts.Accounts                  13        51
  debts.Actor                    debts.Actors                    6         63
  debts.Budget                   debts.Budgets                   11        14
@@ -609,7 +610,7 @@ Romain
 >>> rt.login('romain').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Office : Mes Messages, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
+- Office : Mes Notifications, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
 - Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Rendez-vous à confirmer, Mes tâches, Mes visiteurs, Mes présences
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis, Visiteurs qui m'attendent
 - CPAS : Bénéficiaires, Mes Interventions, Octrois à confirmer
@@ -647,7 +648,7 @@ Romain
   - Questionnaires : Listes de choix
 - Explorateur :
   - Contacts : Personnes de contact, Types d'adresses, Adresses, Membres du conseil, Household member roles, Membres de ménage, Personal Links, Type de parenté
-  - Système : Procurations, Types d'utilisateur, types de contenu, Messages, Changes, Tests de données, Problèmes de données
+  - Système : Procurations, Types d'utilisateur, types de contenu, Notifications, Changes, All dashboard widgets, Tests de données, Problèmes de données
   - Office : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations, Text Field Templates
   - Calendrier : Tâches, Présences, Abonnements, Event states, Guest states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
@@ -777,7 +778,7 @@ Here is the output of :func:`walk_menu_items
 - Contacts --> Organisations : 40
 - Contacts --> Partenaires (tous) : 163
 - Contacts --> Ménages : 15
-- Office --> Mes Messages : 2
+- Office --> Mes Notifications : 2
 - Office --> Mes téléchargements à renouveler : 1
 - Office --> Mes Fichiers téléchargés : 1
 - Office --> Mon courrier sortant : 1
@@ -894,9 +895,10 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Contacts --> Type de parenté : 13
 - Explorateur --> Système --> Procurations : 4
 - Explorateur --> Système --> Types d'utilisateur : 15
-- Explorateur --> Système --> types de contenu : 134
-- Explorateur --> Système --> Messages : 13
+- Explorateur --> Système --> types de contenu : 135
+- Explorateur --> Système --> Notifications : 13
 - Explorateur --> Système --> Changes : 0
+- Explorateur --> Système --> All dashboard widgets : 'NoneType' object has no attribute 'get_request_queryset'
 - Explorateur --> Système --> Tests de données : 11
 - Explorateur --> Système --> Problèmes de données : 0
 - Explorateur --> Office --> Fichiers téléchargés : 12
