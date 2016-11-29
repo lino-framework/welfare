@@ -389,7 +389,9 @@ consultants."""),
     'lino_welfare.modlib.newcomers.models.NewClients.model' : _("""alias of Client"""),
     'lino_welfare.modlib.newcomers.models.AvailableCoaches' : _("""List of users available for new coachings."""),
     'lino_welfare.modlib.newcomers.models.AvailableCoaches.model' : _("""alias of User"""),
-    'lino_welfare.modlib.newcomers.models.AssignCoach' : _("""Assign this agent as coach for this client."""),
+    'lino_welfare.modlib.newcomers.models.AssignCoach' : _("""Assign this agent as coach for this client.  This will set the
+client's state to Coached and send a notification to the new
+coach."""),
     'lino_welfare.modlib.newcomers.models.AvailableCoachesByClient' : _("""List of users available for coaching this client.  Visible only to
 Newcomers consultants."""),
     'lino_welfare.modlib.newcomers.models.AvailableCoachesByClient.master' : _("""alias of Client"""),

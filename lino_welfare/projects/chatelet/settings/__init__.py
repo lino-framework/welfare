@@ -67,7 +67,7 @@ class Site(Site):
     # def get_default_language(self):
     #     return 'fr'
 
-    def get_admin_main_items(self, ar):
+    def get_admin_main_items(self, user):
         """Defines the items to show in :xfile:`admin_main.html`.
         See :meth:`lino.core.site.Site.get_admin_main_items`.
         """
@@ -76,7 +76,7 @@ class Site(Site):
         # travailleurs sociaux qui attendent leurs rdv ou qui tiennent
         # des permanences.
 
-        if ar.get_user().authenticated:
+        if user.authenticated:
             yield self.actors.notify.MyMessages
             
         yield self.modules.reception.MyWaitingVisitors

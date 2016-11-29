@@ -36,8 +36,8 @@ The following table gives an overview of these things.
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-66 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, countries, contacts, appypod, humanize, users, contenttypes, gfks, channels, notify, changes, properties, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, weasyprint, ledger, sepa, b2c, finan, vatless, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, esf, beid, davlink, export_excel, dupable_clients, plausibility, tinymce.
-155 models:
+67 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, countries, contacts, appypod, humanize, users, contenttypes, gfks, channels, notify, changes, properties, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, weasyprint, ledger, sepa, b2c, finan, vatless, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, esf, beid, davlink, dashboard, export_excel, dupable_clients, plausibility, tinymce.
+156 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -83,7 +83,7 @@ The following table gives an overview of these things.
  contacts.Person                contacts.Persons                32        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               3         156
+ contenttypes.ContentType       gfks.ContentTypes               3         157
  countries.Country              countries.Countries             9         8
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Courses                 5         3
@@ -108,6 +108,7 @@ The following table gives an overview of these things.
  cv.Study                       cv.Studies                      14        22
  cv.StudyType                   cv.StudyTypes                   8         11
  cv.Training                    cv.Trainings                    16        20
+ dashboard.Widget               dashboard.Widgets               5         0
  debts.Account                  debts.Accounts                  13        51
  debts.Actor                    debts.Actors                    6         63
  debts.Budget                   debts.Budgets                   11        14
