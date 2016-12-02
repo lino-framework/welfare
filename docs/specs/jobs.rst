@@ -374,7 +374,9 @@ Printing this report caused a "NotImplementedError: <i> inside
 
 >>> settings.SITE.default_build_method = "appyodt"
 >>> obj = ses.spawn(jobs.JobsOverview).create_instance()
->>> rv = ses.run(obj.do_print)
+>>> rv = ses.run(obj.do_print)  #doctest: +ELLIPSIS
+appy.pod render .../lino/modlib/printing/config/report/Default.odt -> .../media/webdav/userdocs/appyodt/jobs.JobsOverview.odt (language='de',params={'raiseOnError': True, 'ooPort': 8100, 'pythonWithUnoPath': ...}
+
 >>> print(rv['success'])
 True
 >>> print(rv['open_url'])

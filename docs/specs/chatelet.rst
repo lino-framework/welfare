@@ -898,7 +898,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> types de contenu : 135
 - Explorateur --> Système --> Notifications : 13
 - Explorateur --> Système --> Changes : 0
-- Explorateur --> Système --> All dashboard widgets : 'NoneType' object has no attribute 'get_request_queryset'
+- Explorateur --> Système --> All dashboard widgets : 1
 - Explorateur --> Système --> Tests de données : 11
 - Explorateur --> Système --> Problèmes de données : 0
 - Explorateur --> Office --> Fichiers téléchargés : 12

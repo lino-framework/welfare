@@ -147,7 +147,7 @@ the :class:`AssignCoach
 <lino_welfare.modlib.newcomers.models.AssignCoach>` action:
 
 >>> html = d['rows'][0][1]
->>> soup = BeautifulSoup(html)
+>>> soup = BeautifulSoup(html, 'lxml')
 >>> print(soup.get_text(' ', strip=True))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF
 Zuweisen
