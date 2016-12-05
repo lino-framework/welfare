@@ -712,7 +712,7 @@ def setup_site_cache(self, force):
         s = s % context
         settings.SITE.makedirs_if_missing(os.path.dirname(fn))
         open(fn, 'wt').write(s)
-        logger.info("Generated %s for environment %r.", fn, environment)
+        logger.debug("Generated %s for environment %r.", fn, environment)
 
     # make_wsdl('RetrieveTIGroupsV3.wsdl', RetrieveTIGroupsRequest.wsdl_parts)
     make_wsdl('RetrieveTIGroups.wsdl', RetrieveTIGroupsRequest.wsdl_parts)

@@ -900,7 +900,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Datenbankmodelle : 140
 - Explorer --> System --> Benachrichtigungen : 14
 - Explorer --> System --> Änderungen : 0
-- Explorer --> System --> All dashboard widgets : 'NoneType' object has no attribute 'get_request_queryset'
+- Explorer --> System --> All dashboard widgets : 1
 - Explorer --> System --> Datentests : 14
 - Explorer --> System --> Datenprobleme : 59
 - Explorer --> Eigenschaften --> Eigenschaften : 24

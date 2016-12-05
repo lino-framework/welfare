@@ -21,7 +21,7 @@ This module contains "quick" tests that are run on a demo database
 without any fixture. You can run only these tests by issuing::
 
   $ python manage.py test cbss.QuickTest
-  $ django-admin.py test --settings=lino_welfare.demo.settings cbss.QuickTest
+  $ django-admin.py test --settings=lino_welfare.projects.eupen.settings.demo cbss.QuickTest
 
   
 """
@@ -40,6 +40,7 @@ from lino_welfare.modlib.cbss import models as cbss
 
 from lino.utils import IncompleteDate
 from lino.utils.instantiator import create_and_get
+from lino.api import rt
 
 NOW = datetime.datetime(2015, 5, 11, 18, 31, 1)
 
@@ -55,7 +56,7 @@ class QuickTest(TestCase):
         root = create_and_get(settings.SITE.user_model, username='root')
 
         luc = create_and_get(
-            'pcsw.Client', first_name='Luc', last_name='Saffre')
+            rt.models.pcsw.Client, first_name='Luc', last_name='Saffre')
 
         # First IdentifyPersonRequest
         # Create an IPR with NISS just to have the XML validated.

@@ -51,7 +51,7 @@ Mr Paul FRISCH
 ...     d = json.loads(res.content)
 ...     return d['data'][fieldname]
 
->>> soup = BeautifulSoup(check('contacts/Persons/240', 'LinksByHuman'))
+>>> soup = BeautifulSoup(check('contacts/Persons/240', 'LinksByHuman'), 'lxml')
 >>> links = soup.find_all('a')
 >>> len(links)
 23
@@ -189,7 +189,7 @@ We test the MembersByPerson panel. It contains a summary:
 Since this is not very human-readable, we are going to analyze it with
 `BeautifulSoup <http://beautiful-soup-4.readthedocs.org/en/latest>`_.
 
->>> soup = BeautifulSoup(d['data']['MembersByPerson'])
+>>> soup = BeautifulSoup(d['data']['MembersByPerson'], 'lxml')
 
 >>> print(soup.get_text(' ', strip=True))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF
