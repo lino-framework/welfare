@@ -38,7 +38,7 @@ This client has the following appointments.
  Start date   Start time   Managed by        Summary          State       Actions
 ------------ ------------ ----------------- ---------------- ----------- ----------------------------------
  15/05/2014   09:00:00     Caroline Carnol   Auswertung 2     Suggested   [Checkin] **Accepted**
- 22/05/2014                Mélanie Mélard    Urgent problem   Notified    [Receive] [Checkout] **Waiting**
+ 22/05/2014                Mélanie Mélard    Urgent problem   Published   [Receive] [Checkout] **Waiting**
  27/05/2014   13:30:00     Hubert Huppertz   Abendessen       Draft       [Checkin] **Accepted**
  16/06/2014   09:00:00     Caroline Carnol   Auswertung 3     Suggested   [Checkin] **Accepted**
  16/07/2014   09:00:00     Caroline Carnol   Auswertung 4     Suggested   [Checkin] **Accepted**
