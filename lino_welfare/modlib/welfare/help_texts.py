@@ -521,9 +521,9 @@ warn_expiry_unit."""),
     'lino_welfare.modlib.uploads.models.UploadsByClient' : _("""Uploads by Client"""),
     'lino_welfare.modlib.uploads.models.UploadsByClient.master' : _("""alias of Client"""),
     'lino_welfare.modlib.uploads.models.UploadsByClient.model' : _("""alias of Upload"""),
+    'lino_welfare.modlib.users.desktop.UserDetail' : _("""Layout of User Detail in Lino Welfare."""),
     'lino_welfare.modlib.users.models.User' : _("""The users.User model used in Lino Welfare.  We add a few fields
 to the standard models (lino.modlib.users.models.User)."""),
-    'lino_welfare.modlib.users.models.UserDetail' : _("""Layout of User Detail in Lino Welfare."""),
     'lino_welfare.modlib.welfare.roles.AccountantManager' : _("""Like an accountant, but also has access to configuration."""),
     'lino_welfare.modlib.welfare.roles.SiteAdmin' : _("""The site adminstrator has permission for everything."""),
     'lino_welfare.modlib.welfare.roles.ReceptionClerk' : _("""A reception clerk is a user who is not a social agent but

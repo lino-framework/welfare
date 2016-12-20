@@ -1,4 +1,4 @@
-# Copyright 2014 Luc Saffre
+# Copyright 2014-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -22,6 +22,7 @@ Lino-Welfare extension of :mod:`lino.modlib.users`.
    :toctree:
 
     models
+    desktop
     fixtures.demo
     fixtures.demo2
 

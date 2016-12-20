@@ -415,6 +415,7 @@ Each window layout defines a given set of fields.
 - uploads.UploadsByController.insert : file, type, end_date, description
 - users.Users.change_password : current, new1, new2
 - users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
+- users.Users.do_send_email : verification_code, email
 - users.Users.insert : username, email, first_name, last_name, partner, language, profile
 <BLANKLINE>
 
@@ -487,8 +488,8 @@ Each window layout is **viewable** by a given set of user profiles.
 - contacts.Persons.create_household : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Persons.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Persons.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- countries.Countries.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- countries.Countries.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- countries.Countries.detail : visible for 110 210 410 800 admin 910
+- countries.Countries.insert : visible for 110 210 410 800 admin 910
 - countries.Places.insert : visible for 110 210 410 800 admin 910
 - countries.Places.merge_row : visible for 110 210 410 800 admin 910
 - courses.Activities.detail : visible for 100 110 120 200 210 300 400 410 800 admin 910
@@ -505,13 +506,13 @@ Each window layout is **viewable** by a given set of user profiles.
 - cv.Durations.insert : visible for 110 admin 910
 - cv.EducationLevels.insert : visible for 110 admin 910
 - cv.Experiences.insert : visible for 110 admin 910
-- cv.ExperiencesByPerson.insert : visible for 100 110 120 admin 910  
+- cv.ExperiencesByPerson.insert : visible for 100 110 120 admin 910
 - cv.Functions.insert : visible for 110 admin 910
 - cv.Regimes.insert : visible for 110 admin 910
 - cv.Sectors.insert : visible for 110 admin 910
 - cv.Statuses.insert : visible for 110 admin 910
 - cv.Studies.insert : visible for 110 admin 910
-- cv.StudiesByPerson.insert : visible for 100 110 120 admin 910  
+- cv.StudiesByPerson.insert : visible for 100 110 120 admin 910
 - cv.StudyTypes.detail : visible for 110 admin 910
 - cv.StudyTypes.insert : visible for 110 admin 910
 - cv.Trainings.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
@@ -595,9 +596,10 @@ Each window layout is **viewable** by a given set of user profiles.
 - uploads.Uploads.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - uploads.UploadsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- users.Users.change_password : visible for admin 910
-- users.Users.detail : visible for admin 910
-- users.Users.insert : visible for admin 910
+- users.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.Users.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.Users.do_send_email : visible for admin 910
+- users.Users.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 <BLANKLINE>
 
 
@@ -738,6 +740,8 @@ options.
   (main) [visible for all]: **Utilisateur** (user), **Raison** (summary)
 - users.Users.change_password : Changer mot de passe
   (main) [visible for all]: **Mot de passe actuel** (current), **Nouveau mot de passe** (new1), **Encore une fois** (new2)
+- users.Users.do_send_email : Welcome mail
+  (main) [visible for all]: **Verification code** (verification_code), **adresse e-mail** (email)
 <BLANKLINE>
 
 
