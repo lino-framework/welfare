@@ -339,7 +339,7 @@ Each window layout defines a given set of fields.
 - boards.Boards.insert : name, name_fr, name_en
 - cal.Calendars.detail : name, name_fr, name_en, color, id, description
 - cal.Calendars.insert : name, name_fr, name_en, color
-- cal.EventTypes.detail : name, name_fr, name_en, event_label, event_label_fr, event_label_en, max_conflicting, all_rooms, locks_user, esf_field, id, invite_client, is_appointment, email_template, attach_to_email
+- cal.EventTypes.detail : name, name_fr, name_en, event_label, event_label_fr, event_label_en, max_conflicting, max_days, esf_field, email_template, id, all_rooms, locks_user, invite_client, is_appointment, attach_to_email
 - cal.EventTypes.insert : name, name_fr, name_en, invite_client
 - cal.Events.detail : event_type, summary, project, start_date, start_time, end_date, end_time, user, assigned_to, room, priority, access_class, transparent, owner, workflow_buttons, description, id, created, modified, state
 - cal.Events.insert : summary, start_date, start_time, end_date, end_time, event_type, project
@@ -787,7 +787,7 @@ Here is the output of :func:`walk_menu_items
 - Büro --> Meine Ereignisse/Notizen : 9
 - Büro --> Meine Datenkontrollliste : 0
 - Kalender --> Meine Termine : 13
-- Kalender --> Überfällige Termine : 34
+- Kalender --> Überfällige Termine : 29
 - Kalender --> Unbestätigte Termine : 3
 - Kalender --> Meine Aufgaben : 1
 - Kalender --> Meine Gäste : 1
@@ -901,8 +901,8 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Benachrichtigungen : 14
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> All dashboard widgets : 1
-- Explorer --> System --> Datentests : 14
-- Explorer --> System --> Datenprobleme : 59
+- Explorer --> System --> Datentests : 15
+- Explorer --> System --> Datenprobleme : 68
 - Explorer --> Eigenschaften --> Eigenschaften : 24
 - Explorer --> Büro --> Uploads : 12
 - Explorer --> Büro --> Upload-Bereiche : 1
@@ -912,9 +912,9 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Büro --> Ereignisse/Notizen : 112
 - Explorer --> Büro --> Einfügetexte : 3
 - Explorer --> Kalender --> Aufgaben : 36
-- Explorer --> Kalender --> Anwesenheiten : 633
+- Explorer --> Kalender --> Anwesenheiten : 643
 - Explorer --> Kalender --> Abonnements : 10
-- Explorer --> Kalender --> Termin-Zustände : 6
+- Explorer --> Kalender --> Termin-Zustände : 5
 - Explorer --> Kalender --> Gast-Zustände : 9
 - Explorer --> Kalender --> Aufgaben-Zustände : 4
 - Explorer --> ÖSHZ --> Begleitungen : 91

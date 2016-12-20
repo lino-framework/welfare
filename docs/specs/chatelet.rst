@@ -75,8 +75,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         12
  cal.Event                      cal.OneEvent                    24        586
- cal.EventType                  cal.EventTypes                  20        11
- cal.Guest                      cal.Guests                      9         570
+ cal.EventType                  cal.EventTypes                  21        11
+ cal.Guest                      cal.Guests                      9         578
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15
@@ -273,7 +273,7 @@ Each window layout defines a given set of fields.
 - boards.Boards.insert : name, name_nl, name_de, name_en
 - cal.Calendars.detail : name, name_nl, name_de, name_en, color, id, description
 - cal.Calendars.insert : name, name_nl, name_de, name_en, color
-- cal.EventTypes.detail : name, name_nl, name_de, name_en, event_label, event_label_nl, event_label_de, event_label_en, max_conflicting, all_rooms, locks_user, esf_field, id, invite_client, is_appointment, email_template, attach_to_email
+- cal.EventTypes.detail : name, name_nl, name_de, name_en, event_label, event_label_nl, event_label_de, event_label_en, max_conflicting, max_days, esf_field, email_template, id, all_rooms, locks_user, invite_client, is_appointment, attach_to_email
 - cal.EventTypes.insert : name, name_nl, name_de, name_en, invite_client
 - cal.Events.detail : event_type, summary, project, start_date, start_time, end_date, end_time, user, assigned_to, room, priority, access_class, transparent, owner, workflow_buttons, description, id, created, modified, state
 - cal.Events.insert : summary, start_date, start_time, end_date, end_time, event_type, project
@@ -638,7 +638,7 @@ Romain
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
   - Office : Types de fichiers téléchargés, Types d'extrait, Types d'observation, Types d'événements, Mes Text Field Templates
-  - Calendrier : Calendriers, Locaux, Priorités, Recurrent event rules, Rôles de participants, Types d'entrée calendrier, Remote Calendars
+  - Calendrier : Calendriers, Locaux, Priorités, Règles d'évènements récurrents, Rôles de participants, Types d'entrée calendrier, Remote Calendars
   - Comptabilité : Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
   - CPAS : Phases d'intégration, Activités, types d'exclusions, Services, Raisons d’arrêt d'intervention, Motifs de dispense, Types de contact client, Types d'aide sociale, Catégories 
@@ -790,8 +790,8 @@ Here is the output of :func:`walk_menu_items
 - Office --> Mes Observations : 10
 - Office --> Mes problèmes de données : 0
 - Calendrier --> Mes rendez-vous : 13
-- Calendrier --> Rendez-vous dépassés : 31
-- Calendrier --> Rendez-vous à confirmer : 3
+- Calendrier --> Rendez-vous dépassés : 26
+- Calendrier --> Rendez-vous à confirmer : 4
 - Calendrier --> Mes tâches : 1
 - Calendrier --> Mes visiteurs : 1
 - Calendrier --> Mes présences : 1
@@ -844,7 +844,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Calendrier --> Calendriers : 13
 - Configuration --> Calendrier --> Locaux : 1
 - Configuration --> Calendrier --> Priorités : 5
-- Configuration --> Calendrier --> Recurrent event rules : 16
+- Configuration --> Calendrier --> Règles d'évènements récurrents : 16
 - Configuration --> Calendrier --> Rôles de participants : 5
 - Configuration --> Calendrier --> Types d'entrée calendrier : 12
 - Configuration --> Calendrier --> Remote Calendars : 1
@@ -903,7 +903,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> Notifications : 13
 - Explorateur --> Système --> Changes : 0
 - Explorateur --> Système --> All dashboard widgets : 1
-- Explorateur --> Système --> Tests de données : 11
+- Explorateur --> Système --> Tests de données : 12
 - Explorateur --> Système --> Problèmes de données : 0
 - Explorateur --> Office --> Fichiers téléchargés : 12
 - Explorateur --> Office --> Upload Areas : 1
@@ -913,9 +913,9 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Office --> Observations : 112
 - Explorateur --> Office --> Text Field Templates : 3
 - Explorateur --> Calendrier --> Tâches : 35
-- Explorateur --> Calendrier --> Présences : 571
+- Explorateur --> Calendrier --> Présences : 579
 - Explorateur --> Calendrier --> Abonnements : 10
-- Explorateur --> Calendrier --> Event states : 6
+- Explorateur --> Calendrier --> Event states : 5
 - Explorateur --> Calendrier --> Guest states : 9
 - Explorateur --> Calendrier --> Task states : 4
 - Explorateur --> Ateliers --> Tests de niveau : 1

@@ -62,8 +62,8 @@ The following table gives an overview of these things.
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         12
  cal.Event                      cal.OneEvent                    24        581
- cal.EventType                  cal.EventTypes                  20        10
- cal.Guest                      cal.Guests                      9         540
+ cal.EventType                  cal.EventTypes                  21        10
+ cal.Guest                      cal.Guests                      9         550
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15
@@ -176,7 +176,7 @@ The following table gives an overview of these things.
  pcsw.Exclusion                 pcsw.Exclusions                 6         0
  pcsw.ExclusionType             pcsw.ExclusionTypes             2         2
  pcsw.PersonGroup               pcsw.PersonGroups               4         5
- plausibility.Problem           plausibility.Problems           6         60
+ plausibility.Problem           plausibility.Problems           6         69
  polls.AnswerChoice             polls.AnswerChoices             4         88
  polls.AnswerRemark             polls.AnswerRemarks             4         0
  polls.Choice                   polls.Choices                   7         35

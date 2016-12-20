@@ -264,23 +264,39 @@ class Guest(Guest):
 
 EventTypes.column_names = 'name invite_client esf_field *'
 
+EventTypes.detail_layout = """
+name
+event_label
+max_conflicting:10 max_days:10 esf_field:20 email_template:20 id
+all_rooms locks_user invite_client is_appointment attach_to_email
+EventsByType
+"""
+
+EventTypes.insert_layout = """
+name
+# invite_team_members
+invite_client
+"""
+
+
+
 @dd.receiver(dd.post_analyze)
 def customize_cal(sender, **kw):
     site = sender
 
-    site.modules.cal.EventTypes.set_detail_layout("""
-    name
-    event_label
-    max_conflicting all_rooms locks_user esf_field
-    id invite_client is_appointment email_template attach_to_email
-    EventsByType
-    """)
+    # site.modules.cal.EventTypes.set_detail_layout("""
+    # name
+    # event_label
+    # max_conflicting all_rooms locks_user esf_field
+    # id invite_client is_appointment email_template attach_to_email
+    # EventsByType
+    # """)
 
-    site.modules.cal.EventTypes.set_insert_layout("""
-    name
-    # invite_team_members
-    invite_client
-    """, window_size=(60, 'auto'))
+    # site.modules.cal.EventTypes.set_insert_layout("""
+    # name
+    # # invite_team_members
+    # invite_client
+    # """, window_size=(60, 'auto'))
 
     rt.modules.cal.Guests.set_detail_layout("""
     event partner role
