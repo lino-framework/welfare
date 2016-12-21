@@ -4,20 +4,22 @@
 Lino pour CPAS
 ==============
 
-Bienvenue sur le **guide de l'utilisateur** de `Lino Welfare
-<http://www.saffre-rumma.net/fr/welfare/>`_.
+Bienvenue sur le **site de documentation en français** de `Lino
+Welfare <http://www.saffre-rumma.net/fr/welfare/>`_.
 
-Un document similaire existe en `allemand
+Un site similaire existe en `allemand
 <http://de.welfare.lino-framework.org/>`_.  Pour des informations plus
 *techniques* veuillez consulter la version `anglaise
 <http://welfare.lino-framework.org/>`_.  
 Pour des questions *commerciales* veuillez consulter
 `www.saffre-rumma.net <http://www.saffre-rumma.net/welfare/>`_.
 
-A côté de ces sites web maintenus par les auteurs du logiciel il
-existe un document 
-`Tutoriel Lino <dl/Tutoriel_Lino.pdf>`__
-maintenu par les centres qui utilisent Lino.
+Documents imprimables:
+
+- `Fiche technique Lino Welfare <dl/fiche_lino_welfare.pdf>`__
+- `Tutoriel Lino <dl/Tutoriel_Lino.pdf>`__
+  maintenu par les centres qui utilisent Lino.
+- `Présentation Lino Welfare <dl/tour_lino_welfare.pdf>`__
 
 
 
