@@ -158,7 +158,7 @@ The following table gives an overview of these things.
  notes.EventType                notes.EventTypes                10        10
  notes.Note                     notes.Notes                     18        111
  notes.NoteType                 notes.NoteTypes                 12        13
- notify.Message                 notify.Messages                 10        13
+ notify.Message                 notify.Messages                 11        13
  outbox.Attachment              outbox.Attachments              4         0
  outbox.Mail                    outbox.Mails                    9         0
  outbox.Recipient               outbox.Recipients               6         0
