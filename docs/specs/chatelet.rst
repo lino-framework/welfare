@@ -612,7 +612,7 @@ Romain
 >>> rt.login('romain').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Office : Mes Notifications, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
+- Bureau : Mes Notifications, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
 - Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Rendez-vous à confirmer, Mes tâches, Mes visiteurs, Mes présences
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis, Visiteurs qui m'attendent
 - CPAS : Bénéficiaires, Mes Interventions, Octrois à confirmer
@@ -637,7 +637,7 @@ Romain
   - Système : Paramètres du Site, Utilisateurs, Textes d'aide, Update all summary data
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
-  - Office : Types de fichiers téléchargés, Types d'extrait, Types d'observation, Types d'événements, Mes Text Field Templates
+  - Bureau : Types de fichiers téléchargés, Types d'extrait, Types d'observation, Types d'événements, Mes Text Field Templates
   - Calendrier : Calendriers, Locaux, Priorités, Règles d'évènements récurrents, Rôles de participants, Types d'entrée calendrier, Remote Calendars
   - Comptabilité : Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
@@ -651,8 +651,8 @@ Romain
 - Explorateur :
   - Contacts : Personnes de contact, Types d'adresses, Adresses, Membres du conseil, Household member roles, Membres de ménage, Personal Links, Type de parenté
   - Système : Procurations, Types d'utilisateur, types de contenu, Notifications, Changes, All dashboard widgets, Tests de données, Problèmes de données
-  - Office : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations, Text Field Templates
-  - Calendrier : Tâches, Présences, Abonnements, Event states, Guest states, Task states
+  - Bureau : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations, Text Field Templates
+  - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
   - CPAS : Interventions, Contacts client, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Type de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
   - Parcours : Connaissances de langue, Formations, Études, Expériences professionnelles, Connaissances de langue, Compétences professionnelles, Compétences sociales, Freins
@@ -674,7 +674,7 @@ sociales, freins. Elle peut faire des requètes CBSS.
 >>> rt.login('theresia').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Office : Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Extraits, Mes Observations
+- Bureau : Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Extraits, Mes Observations
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis
 - Intégration :
   - BCSS : Mes Requêtes IdentifyPerson, Mes Requêtes ManageAccess, Mes Requêtes Tx25
@@ -782,13 +782,13 @@ Here is the output of :func:`walk_menu_items
 - Contacts --> Organisations : 40
 - Contacts --> Partenaires (tous) : 163
 - Contacts --> Ménages : 15
-- Office --> Mes Notifications : 2
-- Office --> Mes téléchargements à renouveler : 1
-- Office --> Mes Fichiers téléchargés : 1
-- Office --> Mon courrier sortant : 1
-- Office --> Mes Extraits : 0
-- Office --> Mes Observations : 10
-- Office --> Mes problèmes de données : 0
+- Bureau --> Mes Notifications : 2
+- Bureau --> Mes téléchargements à renouveler : 1
+- Bureau --> Mes Fichiers téléchargés : 1
+- Bureau --> Mon courrier sortant : 1
+- Bureau --> Mes Extraits : 0
+- Bureau --> Mes Observations : 10
+- Bureau --> Mes problèmes de données : 0
 - Calendrier --> Mes rendez-vous : 13
 - Calendrier --> Rendez-vous dépassés : 26
 - Calendrier --> Rendez-vous à confirmer : 4
@@ -836,11 +836,11 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Contacts --> Fonctions : 6
 - Configuration --> Contacts --> Conseils : 4
 - Configuration --> Contacts --> Types de ménage : 7
-- Configuration --> Office --> Types de fichiers téléchargés : 10
-- Configuration --> Office --> Types d'extrait : 19
-- Configuration --> Office --> Types d'observation : 14
-- Configuration --> Office --> Types d'événements : 11
-- Configuration --> Office --> Mes Text Field Templates : 1
+- Configuration --> Bureau --> Types de fichiers téléchargés : 10
+- Configuration --> Bureau --> Types d'extrait : 19
+- Configuration --> Bureau --> Types d'observation : 14
+- Configuration --> Bureau --> Types d'événements : 11
+- Configuration --> Bureau --> Mes Text Field Templates : 1
 - Configuration --> Calendrier --> Calendriers : 13
 - Configuration --> Calendrier --> Locaux : 1
 - Configuration --> Calendrier --> Priorités : 5
@@ -905,13 +905,14 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> All dashboard widgets : 1
 - Explorateur --> Système --> Tests de données : 12
 - Explorateur --> Système --> Problèmes de données : 0
-- Explorateur --> Office --> Fichiers téléchargés : 12
-- Explorateur --> Office --> Upload Areas : 1
-- Explorateur --> Office --> Mails envoyés : 1
-- Explorateur --> Office --> Pièces jointes : 1
-- Explorateur --> Office --> Extraits : 70
-- Explorateur --> Office --> Observations : 112
-- Explorateur --> Office --> Text Field Templates : 3
+- Explorateur --> Bureau --> Fichiers téléchargés : 12
+- Explorateur --> Bureau --> Upload Areas : 1
+- Explorateur --> Bureau --> Mails envoyés : 1
+- Explorateur --> Bureau --> Pièces jointes : 1
+- Explorateur --> Bureau --> Extraits : 70
+- Explorateur --> Bureau --> Observations : 112
+- Explorateur --> Bureau --> Text Field Templates : 3
+- Explorateur --> Calendrier --> Entrées calendrier : 338
 - Explorateur --> Calendrier --> Tâches : 35
 - Explorateur --> Calendrier --> Présences : 579
 - Explorateur --> Calendrier --> Abonnements : 10

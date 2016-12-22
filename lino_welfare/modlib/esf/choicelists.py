@@ -40,7 +40,22 @@ add('10', _("Epreuve d’évaluation réussie sans titre spécifique"))
 
 
 class StatisticalField(dd.Choice):
+    """Base class for all statistical fields.
 
+    .. attribute:: short_name
+
+        Used as the verbose_name of :attr:`field`.
+
+    .. attribute:: field_name
+
+        The internal field name.
+
+    .. attribute:: field
+
+        The field descriptor (an instance of a Django Field)
+
+
+    """
     field_name = None
     field = None
     short_name = None
