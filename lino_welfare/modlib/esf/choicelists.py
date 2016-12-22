@@ -43,11 +43,13 @@ class StatisticalField(dd.Choice):
 
     field_name = None
     field = None
+    short_name = None
 
-    def __init__(self, value, text, name=None, **kwargs):
+    def __init__(self, value, short_name, text, name=None, **kwargs):
         super(StatisticalField, self).__init__(
             value, text, name, **kwargs)
         self.field_name = "esf" + value
+        self.short_name = short_name
         self.field = self.create_field()
 
     def collect_from_guest(self, obj, summary):
@@ -64,7 +66,7 @@ class GuestCount(StatisticalField):
     """Not used in reality."""
     def create_field(self):
         return models.IntegerField(
-            self.value, default=0, help_text=self.text)
+            self.short_name, default=0, help_text=self.text)
 
     def collect_from_guest(self, obj, summary):
         if obj.event.event_type is None:
@@ -78,7 +80,7 @@ from atelier.utils import last_day_of_month
 class HoursField(StatisticalField):
     def create_field(self):
         return dd.DurationField(
-            self.value, default=ZERO,
+            self.short_name, default=ZERO,
             help_text=self.text)
 
     def daterange2hours(self, sd, ed, summary):
@@ -161,45 +163,45 @@ class StatisticalFields(dd.ChoiceList):
 add = StatisticalFields.add_item_instance
 
 # Séance d'info
-add(GuestHoursFixed('10', _("Informative sessions"),
+add(GuestHoursFixed('10', "S.Inf", _("Informative sessions"),
                     hours_per_guest=Duration('2:00')))
 
 # Entretien individuel
-add(GuestHoursFixed('20', _("Individual consultation")))
+add(GuestHoursFixed('20', "E.Ind", _("Individual consultation")))
 
 # Evaluation formation externe et art.61
-add(GuestHoursFixed('21', _("Evaluation of external training")))
+add(GuestHoursFixed('21', "E.For", _("Evaluation of external training")))
 
 # S.I.S. agréé
-add(GuestHoursFixed('30', _("Certified integration service")))
+add(GuestHoursFixed('30', "SIS", _("Certified integration service")))
 
 # Tests de niveau
-add(GuestHoursFixed('40', _("Level tests")))
+add(GuestHoursFixed('40', "Tst", _("Level tests")))
 
 # Initiation informatique
-add(GuestHoursFixed('41', _("IT basics")))
+add(GuestHoursFixed('41', "Info", _("IT basics")))
 
 # Mobilité
-add(GuestHoursFixed('42', _("Mobility")))
+add(GuestHoursFixed('42', "Mob", _("Mobility")))
 
 # Remédiation mathématique et français
-add(GuestHoursFixed('43', _("Remedial teaching")))
+add(GuestHoursFixed('43', "Rem", _("Remedial teaching")))
 
 # Activons-nous
-add(GuestHoursEvent('44', _("Wake up!")))
+add(GuestHoursEvent('44', "AN!", _("Wake up!")))
 
 # Mise en situation professionnelle : calculer les heures par stage
 # d'immersion, en fonction des dates de début et de fin et de
 # l'horaire de travail.
-add(ImmersionHours('50', _("Getting a professional situation")))
+add(ImmersionHours('50', "MSP", _("Getting a professional situation")))
 
 # Cyber-employ : Somme des présences aux ateliers "Cyber-emploi", mais
 # pour ces ateliers on note les heures d'arrivée et de départ par
 # participation.
-add(GuestHoursEvent('60', _("Cyber Job")))
+add(GuestHoursEvent('60', "CyE", _("Cyber Job")))
 
 # Mise à l’emploi sous contrat art.60§7
-add(Art60Hours('70', _("Art 60§7 job supplyment")))
+add(Art60Hours('70', "60§7", _("Art 60§7 job supplyment")))
 
 
 @dd.receiver(dd.pre_analyze)
