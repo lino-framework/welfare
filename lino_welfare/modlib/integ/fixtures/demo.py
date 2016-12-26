@@ -223,7 +223,7 @@ def objects():
                       aid_type=INTEG_DUTIES.pop())
             kw.update(client=ctr.client)
             g = Granting(**kw)
-            g.after_ui_create(None)
+            g.after_ui_save(None, None)
             yield g
         
     if dd.is_installed('immersion'):

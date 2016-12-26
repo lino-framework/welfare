@@ -89,7 +89,7 @@ Rolf is the local system administrator, he has a complete menu:
   - System : Vollmachten, Benutzerarten, Datenbankmodelle, Benachrichtigungen, Änderungen, All dashboard widgets, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
-  - Kalender : Aufgaben, Anwesenheiten, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
+  - Kalender : Kalendereinträge, Aufgaben, Anwesenheiten, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
   - Buchhaltung : Ausgleichungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Journalgruppen, Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
@@ -130,7 +130,6 @@ Hubert is an Integration agent.
 - Berichte :
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
-  - Orte : Länder
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
 - Explorer :
@@ -189,7 +188,7 @@ to explicitly override the language of :meth:`show_menu
 - Explorer :
   - Kontakte : Kontaktpersonen, Adressenarten, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
-  - Kalender : Aufgaben, Abonnements
+  - Kalender : Kalendereinträge, Aufgaben, Abonnements
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
@@ -223,7 +222,6 @@ Schuldenberater
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
 - Konfigurierung :
-  - Orte : Länder
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
   - Schuldnerberatung : Budget-Kopiervorlage
@@ -257,7 +255,6 @@ Berater Erstempfang
   - ZDSS : Meine IdentifyPerson-Anfragen, Meine ManageAccess-Anfragen, Meine Tx25-Anfragen
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Konfigurierung :
-  - Orte : Länder
   - Büro : Meine Einfügetexte
   - Lebenslauf : Sprachen
 - Explorer :
@@ -342,7 +339,7 @@ Each window layout defines a given set of fields.
 - boards.Boards.insert : name, name_fr, name_en
 - cal.Calendars.detail : name, name_fr, name_en, color, id, description
 - cal.Calendars.insert : name, name_fr, name_en, color
-- cal.EventTypes.detail : name, name_fr, name_en, event_label, event_label_fr, event_label_en, max_conflicting, all_rooms, locks_user, esf_field, id, invite_client, is_appointment, email_template, attach_to_email
+- cal.EventTypes.detail : name, name_fr, name_en, event_label, event_label_fr, event_label_en, max_conflicting, max_days, esf_field, email_template, id, all_rooms, locks_user, invite_client, is_appointment, attach_to_email
 - cal.EventTypes.insert : name, name_fr, name_en, invite_client
 - cal.Events.detail : event_type, summary, project, start_date, start_time, end_date, end_time, user, assigned_to, room, priority, access_class, transparent, owner, workflow_buttons, description, id, created, modified, state
 - cal.Events.insert : summary, start_date, start_time, end_date, end_time, event_type, project
@@ -483,6 +480,7 @@ Each window layout defines a given set of fields.
 - uploads.UploadsByController.insert : file, type, end_date, description
 - users.Users.change_password : current, new1, new2
 - users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
+- users.Users.do_send_email : verification_code, email
 - users.Users.insert : username, email, first_name, last_name, partner, language, profile
 - vatless.Invoices.detail : journal, number, voucher_date, entry_date, accounting_period, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, match, state, user, id, MovementsByVoucher
 - vatless.Invoices.insert : journal, partner, voucher_date
@@ -560,8 +558,8 @@ Each window layout is **viewable** by a given set of user profiles.
 - contacts.Persons.create_household : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Persons.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Persons.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- countries.Countries.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- countries.Countries.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- countries.Countries.detail : visible for 110 210 410 800 admin 910
+- countries.Countries.insert : visible for 110 210 410 800 admin 910
 - countries.Places.insert : visible for 110 210 410 800 admin 910
 - countries.Places.merge_row : visible for 110 210 410 800 admin 910
 - courses.CourseContents.insert : visible for 110 admin 910
@@ -574,7 +572,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - cv.Durations.insert : visible for 110 admin 910
 - cv.EducationLevels.insert : visible for 110 admin 910
 - cv.Experiences.insert : visible for 110 admin 910
-- cv.ExperiencesByPerson.insert : visible for 100 110 120 admin 910  
+- cv.ExperiencesByPerson.insert : visible for 100 110 120 admin 910
 - cv.Functions.insert : visible for 110 admin 910
 - cv.Regimes.insert : visible for 110 admin 910
 - cv.Sectors.insert : visible for 110 admin 910
@@ -667,9 +665,10 @@ Each window layout is **viewable** by a given set of user profiles.
 - uploads.Uploads.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - uploads.UploadsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- users.Users.change_password : visible for admin 910
-- users.Users.detail : visible for admin 910
-- users.Users.insert : visible for admin 910
+- users.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.Users.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.Users.do_send_email : visible for admin 910
+- users.Users.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - vatless.Invoices.detail : visible for 500 510 admin 910
 - vatless.Invoices.insert : visible for 500 510 admin 910
 - vatless.InvoicesByJournal.insert : visible for 500 510 admin 910
@@ -750,7 +749,8 @@ Global list of all actions that have a parameter dialog.
   (main) [visible for all]: **Benutzer** (user), **Begründung** (summary)
 - users.Users.change_password : Passwort ändern
   (main) [visible for all]: **Aktuelles Passwort** (current), **Neues Passwort** (new1), **Neues Passwort nochmal** (new2)
-  
+- users.Users.do_send_email : Welcome mail
+  (main) [visible for all]: **Verification code** (verification_code), **E-Mail-Adresse** (email)
 <BLANKLINE>
 
 
@@ -785,9 +785,9 @@ Here is the output of :func:`walk_menu_items
 - Büro --> Mein E-Mail-Ausgang : 1
 - Büro --> Meine Auszüge : 0
 - Büro --> Meine Ereignisse/Notizen : 9
-- Büro --> Meine Datenkontrollliste : 0
+- Büro --> Meine Datenkontrollliste : 1
 - Kalender --> Meine Termine : 13
-- Kalender --> Überfällige Termine : 34
+- Kalender --> Überfällige Termine : 29
 - Kalender --> Unbestätigte Termine : 3
 - Kalender --> Meine Aufgaben : 1
 - Kalender --> Meine Gäste : 1
@@ -901,8 +901,8 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Benachrichtigungen : 14
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> All dashboard widgets : 1
-- Explorer --> System --> Datentests : 14
-- Explorer --> System --> Datenprobleme : 59
+- Explorer --> System --> Datentests : 15
+- Explorer --> System --> Datenprobleme : 68
 - Explorer --> Eigenschaften --> Eigenschaften : 24
 - Explorer --> Büro --> Uploads : 12
 - Explorer --> Büro --> Upload-Bereiche : 1
@@ -911,10 +911,11 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Büro --> Auszüge : 68
 - Explorer --> Büro --> Ereignisse/Notizen : 112
 - Explorer --> Büro --> Einfügetexte : 3
+- Explorer --> Kalender --> Kalendereinträge : 349
 - Explorer --> Kalender --> Aufgaben : 36
-- Explorer --> Kalender --> Anwesenheiten : 633
+- Explorer --> Kalender --> Anwesenheiten : 643
 - Explorer --> Kalender --> Abonnements : 10
-- Explorer --> Kalender --> Termin-Zustände : 6
+- Explorer --> Kalender --> Termin-Zustände : 5
 - Explorer --> Kalender --> Gast-Zustände : 9
 - Explorer --> Kalender --> Aufgaben-Zustände : 4
 - Explorer --> ÖSHZ --> Begleitungen : 91

@@ -230,7 +230,7 @@ It is not allowed to delete a person who is being used as the
 :attr:`partner <lino.modlib.users.models.User.partner>` of a user
 (although that field is nullable).
 
->>> rt.show(users.Users, column_names="id username partner partner__id")
+>>> rt.show('users.Users', column_names="id username partner partner__id")
 ==== ========== ================= =====
  ID   Username   Partner           ID
 ---- ---------- ----------------- -----

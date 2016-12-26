@@ -29,14 +29,12 @@ logger = logging.getLogger(__name__)
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from lino.api import dd
+from lino.api import dd, rt
 
 from lino.modlib.users.models import *
 
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 from lino.modlib.office.roles import OfficeUser
-
-cal = dd.resolve_app('cal')
 
 
 class User(User):
@@ -86,7 +84,7 @@ class User(User):
             return
 
         if not settings.SITE.loading_from_dump:
-            cal.check_subscription(self, self.calendar)
+            rt.models.cal.check_subscription(self, self.calendar)
 
     def check_all_subscriptions(self):
 
@@ -99,41 +97,8 @@ class User(User):
                 coaching_profiles.add(p)
         for u in User.objects.filter(
                 profile__in=coaching_profiles).exclude(id=self.id):
-            cal.check_subscription(self, u.calendar)
-            cal.check_subscription(u, self.calendar)
+            rt.models.cal.check_subscription(self, u.calendar)
+            rt.models.cal.check_subscription(u, self.calendar)
         # logger.info("20140403 wrote subscriptions for %s", self)
 
 
-class UserDetail(UserDetail, cal.UserDetailMixin):
-    """Layout of User Detail in Lino Welfare."""
-
-    main = "general cal coaching dashboard.WidgetsByUser"
-
-    general = dd.Panel("""
-    box1:40 #MembershipsByUser:20 AuthoritiesGiven:20
-    remarks:40 AuthoritiesTaken:20
-    """, label=_("General"))
-
-    box1 = """
-    username profile:20 partner
-    first_name last_name initials
-    email language mail_mode
-    id created modified
-    """
-
-    coaching_a = """
-    newcomer_quota
-    coaching_type
-    coaching_supervisor
-    newcomer_consultations
-    newcomer_appointments
-    newcomers.CompetencesByUser
-    """
-
-    coaching = dd.Panel("""
-    coaching_a:20 pcsw.CoachingsByUser:40
-    """, label=_("Coaching"))
-
-
-def site_setup(site):
-    site.modules.users.Users.set_detail_layout(UserDetail())

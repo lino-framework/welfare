@@ -85,7 +85,7 @@ Monday.
     200
     >>> d = AttrDict(json.loads(res.content))
     >>> print(d.title)
-    Events of ISIP#26 (David DA VINCI)
+    Calendar entries of ISIP#26 (David DA VINCI)
     >>> print(len(d.rows))
     16
 

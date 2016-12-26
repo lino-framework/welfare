@@ -51,11 +51,12 @@ from lino.modlib.users.mixins import ByUser, UserAuthored
 
 from lino.core.diff import ChangeWatcher
 
+from lino_welfare.modlib.users.desktop import Users
 from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
 # from lino_welfare.modlib.integ.roles import IntegrationAgent
 from .roles import NewcomersAgent, NewcomersOperator
 
-users = dd.resolve_app('users')
+# users = dd.resolve_app('users')
 pcsw = dd.resolve_app('pcsw', strict=True)
 
 WORKLOAD_BASE = decimal.Decimal('10')  # normal number of newcomers per month
@@ -275,7 +276,7 @@ class ClientsByFaculty(pcsw.Clients):
     column_names = "name_column broker address_column *"
 
 
-class AvailableCoaches(users.Users):
+class AvailableCoaches(Users):
     """List of users available for new coachings."""
     help_text = _("List of users available for new coachings")
     use_as_default_table = False

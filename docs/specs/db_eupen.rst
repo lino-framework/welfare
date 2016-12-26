@@ -40,7 +40,7 @@ Database structure
 - boards.Member : id, board, person, role
 - cal.Calendar : id, name, description, color, name_fr, name_en
 - cal.Event : id, modified, created, project, start_date, start_time, end_date, end_time, build_time, build_method, user, assigned_to, owner_type, owner_id, summary, description, access_class, sequence, auto_type, event_type, transparent, room, priority, state
-- cal.EventType : id, seqno, name, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, start_date, event_label, max_conflicting, invite_client, name_fr, name_en, event_label_fr, event_label_en, esf_field
+- cal.EventType : id, seqno, name, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, start_date, event_label, max_conflicting, max_days, invite_client, name_fr, name_en, event_label_fr, event_label_en, esf_field
 - cal.Guest : id, event, partner, role, state, remark, waiting_since, busy_since, gone_since
 - cal.GuestRole : id, name, name_fr, name_en
 - cal.Priority : id, name, ref, name_fr, name_en
@@ -127,7 +127,7 @@ Database structure
 - notes.EventType : id, name, remark, body, body_fr, body_en, name_fr, name_en
 - notes.Note : id, project, build_time, build_method, company, contact_person, contact_role, user, owner_type, owner_id, date, time, type, event_type, subject, body, language, important
 - notes.NoteType : id, name, build_method, template, attach_to_email, email_template, important, remark, special_type, name_fr, name_en
-- notify.Message : id, created, user, owner_type, owner_id, message_type, seen, sent, subject, body
+- notify.Message : id, created, user, owner_type, owner_id, message_type, seen, sent, body, mail_mode, subject
 - outbox.Attachment : id, owner_type, owner_id, mail
 - outbox.Mail : id, project, user, owner_type, owner_id, date, subject, body, sent
 - outbox.Recipient : id, mail, partner, type, address, name
@@ -157,7 +157,7 @@ Database structure
 - uploads.Upload : id, project, start_date, end_date, file, mimetype, company, contact_person, contact_role, user, owner_type, owner_id, upload_area, type, description, remark, needed
 - uploads.UploadType : id, name, upload_area, max_number, wanted, shortcut, warn_expiry_unit, warn_expiry_value, name_fr, name_en
 - users.Authority : id, user, authorized
-- users.User : id, modified, created, username, password, profile, initials, first_name, last_name, email, remarks, language, partner, access_class, event_type, calendar, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments, mail_mode, newcomer_quota
+- users.User : id, modified, created, username, password, profile, initials, first_name, last_name, email, remarks, language, partner, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments, mail_mode, access_class, event_type, calendar, newcomer_quota
 - vatless.AccountInvoice : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, project, partner, payment_term, match, bank_account, your_ref, due_date, amount
 - vatless.InvoiceItem : id, seqno, project, account, voucher, title, amount
 <BLANKLINE>

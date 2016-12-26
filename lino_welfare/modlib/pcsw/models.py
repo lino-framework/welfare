@@ -520,11 +520,11 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient,
     def get_change_observers(self):
         for u in settings.SITE.user_model.objects.filter(
                 coaching_supervisor=True):
-            yield u
+            yield (u, u.mail_mode)
         today = dd.today()
         period = (today, today)
         for obj in self.get_coachings(period):
-            yield obj.user
+            yield (obj.user, obj.user.mail_mode)
 
     @dd.displayfield(_("Find appointment"))
     def find_appointment(self, ar):

@@ -459,8 +459,9 @@ class JobsContractEndingsByType(ContractEndingsByType):
     contracts_table = jobs.Contracts
     contract_type_model = jobs.ContractType
 
+from lino_welfare.modlib.users.desktop import Users
 
-class ContractsPerUserAndContractType(ContractsByType, users.Users):
+class ContractsPerUserAndContractType(ContractsByType, Users):
     label = _("PIIS par agent et type")
     #~ filter = Q(coaching_type=isip.COACHINGTYPE_DSBE)
     contracts_table = isip.Contracts
@@ -622,14 +623,14 @@ il vient.
         for A in (ContractsPerUserAndContractType, CompaniesAndContracts,
                   ContractEndingsByType, StudyTypesAndContracts):
             yield E.h2(A.label)
-            if A.help_text:
-                yield E.p(unicode(A.help_text))
+            # if A.help_text:
+            #     yield E.p(unicode(A.help_text))
             yield A
 
         yield E.h1(jobs.Contract._meta.verbose_name_plural)
         for A in (JobsContractsPerUserAndContractType,
                   JobProvidersAndContracts, JobsContractEndingsByType):
             yield E.h2(A.label)
-            if A.help_text:
-                yield E.p(unicode(A.help_text))
+            # if A.help_text:
+            #     yield E.p(unicode(A.help_text))
             yield A

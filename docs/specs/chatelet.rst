@@ -75,8 +75,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         12
  cal.Event                      cal.OneEvent                    24        586
- cal.EventType                  cal.EventTypes                  20        11
- cal.Guest                      cal.Guests                      9         570
+ cal.EventType                  cal.EventTypes                  21        11
+ cal.Guest                      cal.Guests                      9         578
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15
@@ -158,7 +158,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  notes.EventType                notes.EventTypes                10        10
  notes.Note                     notes.Notes                     18        111
  notes.NoteType                 notes.NoteTypes                 12        13
- notify.Message                 notify.Messages                 10        12
+ notify.Message                 notify.Messages                 11        12
  outbox.Attachment              outbox.Attachments              4         0
  outbox.Mail                    outbox.Mails                    9         0
  outbox.Recipient               outbox.Recipients               6         0
@@ -273,7 +273,7 @@ Each window layout defines a given set of fields.
 - boards.Boards.insert : name, name_nl, name_de, name_en
 - cal.Calendars.detail : name, name_nl, name_de, name_en, color, id, description
 - cal.Calendars.insert : name, name_nl, name_de, name_en, color
-- cal.EventTypes.detail : name, name_nl, name_de, name_en, event_label, event_label_nl, event_label_de, event_label_en, max_conflicting, all_rooms, locks_user, esf_field, id, invite_client, is_appointment, email_template, attach_to_email
+- cal.EventTypes.detail : name, name_nl, name_de, name_en, event_label, event_label_nl, event_label_de, event_label_en, max_conflicting, max_days, esf_field, email_template, id, all_rooms, locks_user, invite_client, is_appointment, attach_to_email
 - cal.EventTypes.insert : name, name_nl, name_de, name_en, invite_client
 - cal.Events.detail : event_type, summary, project, start_date, start_time, end_date, end_time, user, assigned_to, room, priority, access_class, transparent, owner, workflow_buttons, description, id, created, modified, state
 - cal.Events.insert : summary, start_date, start_time, end_date, end_time, event_type, project
@@ -415,6 +415,7 @@ Each window layout defines a given set of fields.
 - uploads.UploadsByController.insert : file, type, end_date, description
 - users.Users.change_password : current, new1, new2
 - users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
+- users.Users.do_send_email : verification_code, email
 - users.Users.insert : username, email, first_name, last_name, partner, language, profile
 <BLANKLINE>
 
@@ -487,8 +488,8 @@ Each window layout is **viewable** by a given set of user profiles.
 - contacts.Persons.create_household : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Persons.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Persons.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- countries.Countries.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- countries.Countries.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- countries.Countries.detail : visible for 110 210 410 800 admin 910
+- countries.Countries.insert : visible for 110 210 410 800 admin 910
 - countries.Places.insert : visible for 110 210 410 800 admin 910
 - countries.Places.merge_row : visible for 110 210 410 800 admin 910
 - courses.Activities.detail : visible for 100 110 120 200 210 300 400 410 800 admin 910
@@ -505,13 +506,13 @@ Each window layout is **viewable** by a given set of user profiles.
 - cv.Durations.insert : visible for 110 admin 910
 - cv.EducationLevels.insert : visible for 110 admin 910
 - cv.Experiences.insert : visible for 110 admin 910
-- cv.ExperiencesByPerson.insert : visible for 100 110 120 admin 910  
+- cv.ExperiencesByPerson.insert : visible for 100 110 120 admin 910
 - cv.Functions.insert : visible for 110 admin 910
 - cv.Regimes.insert : visible for 110 admin 910
 - cv.Sectors.insert : visible for 110 admin 910
 - cv.Statuses.insert : visible for 110 admin 910
 - cv.Studies.insert : visible for 110 admin 910
-- cv.StudiesByPerson.insert : visible for 100 110 120 admin 910  
+- cv.StudiesByPerson.insert : visible for 100 110 120 admin 910
 - cv.StudyTypes.detail : visible for 110 admin 910
 - cv.StudyTypes.insert : visible for 110 admin 910
 - cv.Trainings.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
@@ -595,9 +596,10 @@ Each window layout is **viewable** by a given set of user profiles.
 - uploads.Uploads.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - uploads.UploadsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- users.Users.change_password : visible for admin 910
-- users.Users.detail : visible for admin 910
-- users.Users.insert : visible for admin 910
+- users.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.Users.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.Users.do_send_email : visible for admin 910
+- users.Users.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 <BLANKLINE>
 
 
@@ -610,7 +612,7 @@ Romain
 >>> rt.login('romain').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Office : Mes Notifications, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
+- Bureau : Mes Notifications, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
 - Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Rendez-vous à confirmer, Mes tâches, Mes visiteurs, Mes présences
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis, Visiteurs qui m'attendent
 - CPAS : Bénéficiaires, Mes Interventions, Octrois à confirmer
@@ -635,8 +637,8 @@ Romain
   - Système : Paramètres du Site, Utilisateurs, Textes d'aide, Update all summary data
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
-  - Office : Types de fichiers téléchargés, Types d'extrait, Types d'observation, Types d'événements, Mes Text Field Templates
-  - Calendrier : Calendriers, Locaux, Priorités, Recurrent event rules, Rôles de participants, Types d'entrée calendrier, Remote Calendars
+  - Bureau : Types de fichiers téléchargés, Types d'extrait, Types d'observation, Types d'événements, Mes Text Field Templates
+  - Calendrier : Calendriers, Locaux, Priorités, Règles d'évènements récurrents, Rôles de participants, Types d'entrée calendrier, Remote Calendars
   - Comptabilité : Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
   - CPAS : Phases d'intégration, Activités, types d'exclusions, Services, Raisons d’arrêt d'intervention, Motifs de dispense, Types de contact client, Types d'aide sociale, Catégories 
@@ -649,8 +651,8 @@ Romain
 - Explorateur :
   - Contacts : Personnes de contact, Types d'adresses, Adresses, Membres du conseil, Household member roles, Membres de ménage, Personal Links, Type de parenté
   - Système : Procurations, Types d'utilisateur, types de contenu, Notifications, Changes, All dashboard widgets, Tests de données, Problèmes de données
-  - Office : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations, Text Field Templates
-  - Calendrier : Tâches, Présences, Abonnements, Event states, Guest states, Task states
+  - Bureau : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations, Text Field Templates
+  - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
   - CPAS : Interventions, Contacts client, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Type de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
   - Parcours : Connaissances de langue, Formations, Études, Expériences professionnelles, Connaissances de langue, Compétences professionnelles, Compétences sociales, Freins
@@ -672,7 +674,7 @@ sociales, freins. Elle peut faire des requètes CBSS.
 >>> rt.login('theresia').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Office : Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Extraits, Mes Observations
+- Bureau : Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Extraits, Mes Observations
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis
 - Intégration :
   - BCSS : Mes Requêtes IdentifyPerson, Mes Requêtes ManageAccess, Mes Requêtes Tx25
@@ -738,6 +740,8 @@ options.
   (main) [visible for all]: **Utilisateur** (user), **Raison** (summary)
 - users.Users.change_password : Changer mot de passe
   (main) [visible for all]: **Mot de passe actuel** (current), **Nouveau mot de passe** (new1), **Encore une fois** (new2)
+- users.Users.do_send_email : Welcome mail
+  (main) [visible for all]: **Verification code** (verification_code), **adresse e-mail** (email)
 <BLANKLINE>
 
 
@@ -778,16 +782,16 @@ Here is the output of :func:`walk_menu_items
 - Contacts --> Organisations : 40
 - Contacts --> Partenaires (tous) : 163
 - Contacts --> Ménages : 15
-- Office --> Mes Notifications : 2
-- Office --> Mes téléchargements à renouveler : 1
-- Office --> Mes Fichiers téléchargés : 1
-- Office --> Mon courrier sortant : 1
-- Office --> Mes Extraits : 0
-- Office --> Mes Observations : 10
-- Office --> Mes problèmes de données : 0
+- Bureau --> Mes Notifications : 2
+- Bureau --> Mes téléchargements à renouveler : 1
+- Bureau --> Mes Fichiers téléchargés : 1
+- Bureau --> Mon courrier sortant : 1
+- Bureau --> Mes Extraits : 0
+- Bureau --> Mes Observations : 10
+- Bureau --> Mes problèmes de données : 0
 - Calendrier --> Mes rendez-vous : 13
-- Calendrier --> Rendez-vous dépassés : 31
-- Calendrier --> Rendez-vous à confirmer : 3
+- Calendrier --> Rendez-vous dépassés : 26
+- Calendrier --> Rendez-vous à confirmer : 4
 - Calendrier --> Mes tâches : 1
 - Calendrier --> Mes visiteurs : 1
 - Calendrier --> Mes présences : 1
@@ -832,15 +836,15 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Contacts --> Fonctions : 6
 - Configuration --> Contacts --> Conseils : 4
 - Configuration --> Contacts --> Types de ménage : 7
-- Configuration --> Office --> Types de fichiers téléchargés : 10
-- Configuration --> Office --> Types d'extrait : 19
-- Configuration --> Office --> Types d'observation : 14
-- Configuration --> Office --> Types d'événements : 11
-- Configuration --> Office --> Mes Text Field Templates : 1
+- Configuration --> Bureau --> Types de fichiers téléchargés : 10
+- Configuration --> Bureau --> Types d'extrait : 19
+- Configuration --> Bureau --> Types d'observation : 14
+- Configuration --> Bureau --> Types d'événements : 11
+- Configuration --> Bureau --> Mes Text Field Templates : 1
 - Configuration --> Calendrier --> Calendriers : 13
 - Configuration --> Calendrier --> Locaux : 1
 - Configuration --> Calendrier --> Priorités : 5
-- Configuration --> Calendrier --> Recurrent event rules : 16
+- Configuration --> Calendrier --> Règles d'évènements récurrents : 16
 - Configuration --> Calendrier --> Rôles de participants : 5
 - Configuration --> Calendrier --> Types d'entrée calendrier : 12
 - Configuration --> Calendrier --> Remote Calendars : 1
@@ -899,19 +903,20 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> Notifications : 13
 - Explorateur --> Système --> Changes : 0
 - Explorateur --> Système --> All dashboard widgets : 1
-- Explorateur --> Système --> Tests de données : 11
+- Explorateur --> Système --> Tests de données : 12
 - Explorateur --> Système --> Problèmes de données : 0
-- Explorateur --> Office --> Fichiers téléchargés : 12
-- Explorateur --> Office --> Upload Areas : 1
-- Explorateur --> Office --> Mails envoyés : 1
-- Explorateur --> Office --> Pièces jointes : 1
-- Explorateur --> Office --> Extraits : 70
-- Explorateur --> Office --> Observations : 112
-- Explorateur --> Office --> Text Field Templates : 3
+- Explorateur --> Bureau --> Fichiers téléchargés : 12
+- Explorateur --> Bureau --> Upload Areas : 1
+- Explorateur --> Bureau --> Mails envoyés : 1
+- Explorateur --> Bureau --> Pièces jointes : 1
+- Explorateur --> Bureau --> Extraits : 70
+- Explorateur --> Bureau --> Observations : 112
+- Explorateur --> Bureau --> Text Field Templates : 3
+- Explorateur --> Calendrier --> Entrées calendrier : 338
 - Explorateur --> Calendrier --> Tâches : 35
-- Explorateur --> Calendrier --> Présences : 571
+- Explorateur --> Calendrier --> Présences : 579
 - Explorateur --> Calendrier --> Abonnements : 10
-- Explorateur --> Calendrier --> Event states : 6
+- Explorateur --> Calendrier --> Event states : 5
 - Explorateur --> Calendrier --> Guest states : 9
 - Explorateur --> Calendrier --> Task states : 4
 - Explorateur --> Ateliers --> Tests de niveau : 1

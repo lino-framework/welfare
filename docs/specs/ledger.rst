@@ -140,7 +140,6 @@ Here is the main menu for accountants:
 - Berichte :
   - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
 - Konfigurierung :
-  - Orte : Länder
   - Büro : Meine Einfügetexte
   - ÖSHZ : Hilfearten, Kategorien
   - Lebenslauf : Sprachen
@@ -354,8 +353,6 @@ not complete (it is just a *Nebenbuchhaltung*), there are no debtors
 Schuldner
 ---------
 <BLANKLINE>
-List of partners who are in debt towards us (usually customers).
-<BLANKLINE>
 ========= ============== ====================== ========= =============== ===============================
  Alter     Zahlungsziel   Partner                ID        Saldo           Aktionen
 --------- -------------- ---------------------- --------- --------------- -------------------------------
@@ -370,8 +367,6 @@ List of partners who are in debt towards us (usually customers).
 ---------
 Gläubiger
 ---------
-<BLANKLINE>
-List of partners who are giving credit to us (usually suppliers).
 <BLANKLINE>
 ========== ============== =============================== ========== ============== ===============================
  Alter      Zahlungsziel   Partner                         ID         Saldo          Aktionen

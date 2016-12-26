@@ -205,9 +205,6 @@ PIIS par agent et type
 Organisations externes et contrats
 ----------------------------------
 <BLANKLINE>
-Nombre de PIIS actifs par 
-    organisation externe et type de contrat.
-<BLANKLINE>
 ======================== ================ ================== =========== ===================== ================ =======
  Organisation             VSE Ausbildung   VSE Arbeitssuche   VSE Lehre   VSE Vollzeitstudium   VSE Sprachkurs   Total
 ------------------------ ---------------- ------------------ ----------- --------------------- ---------------- -------
@@ -234,9 +231,6 @@ Contract endings by type
 --------------------------
 PIIS et types de formation
 --------------------------
-<BLANKLINE>
-Nombre de PIIS actifs par 
-    type de formation et type de contrat.
 <BLANKLINE>
 ================= ================ ===================== =======
  Education Type    VSE Ausbildung   VSE Vollzeitstudium   Total
@@ -283,8 +277,6 @@ Art60§7 par agent et type
 --------------------------
 Job providers and contrats
 --------------------------
-<BLANKLINE>
-Ventilates number of job supplyments by provider and type.
 <BLANKLINE>
 ================================ ================ ============================ ======================= ============================ ====== =======
  Organisation                     social economy   social economy - increased   social economy school   social economy with refund   town   Total

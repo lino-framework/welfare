@@ -56,8 +56,8 @@ class Household(Household):
         # skip the is_imported_partner test
         return super(Partner, self).disable_delete(ar)
 
-    def after_ui_create(self, ar):
-        super(Household, self).after_ui_create(ar)
+    def after_ui_save(self, ar, cw):
+        super(Household, self).after_ui_save(ar, cw)
         self.populate_members.run_from_code(ar)
 
 

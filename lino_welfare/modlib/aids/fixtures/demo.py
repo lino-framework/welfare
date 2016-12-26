@@ -78,7 +78,6 @@ def objects():
             if duration is not None:
                 kw.update(end_date=sd+datetime.timedelta(days=duration))
             g = Granting(**kw)
-            # g.after_ui_create(None)
             g.full_clean()
             if g.signer is not None:
                 g.state = CONFIRMSTATES.pop()

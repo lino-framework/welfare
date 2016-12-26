@@ -112,7 +112,7 @@ Lino Welfare à la Eupen.
       - **Ereignisse/Notizen** (notes.NotesByProject)
       - **Bestehende Auszüge** (ExcerptsByProject)
     - **Kalender** (calendar) [visible for 100 110 120 200 300 400 410 500 510 admin 910]:
-      - **Termine** (cal.EventsByClient)
+      - **Kalendereinträge** (cal.EventsByClient)
       - **Aufgaben** (cal.TasksByProject)
     - **Bewegungen** (MovementsByProject) [visible for 500 510 admin 910]
     - **Sonstiges** (misc) [visible for 110 210 410 800 admin 910]:
