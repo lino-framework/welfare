@@ -40,6 +40,7 @@ class Site(Site):
     languages = 'de fr en'
     hidden_languages = None
     help_url = "http://de.welfare.lino-framework.org"
+    use_websockets = True
 
     demo_fixtures = """std std2 few_languages props all_countries
     demo payments demo2 cbss checkdata""".split()
