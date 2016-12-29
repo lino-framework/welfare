@@ -189,7 +189,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
- users.User                     users.Users                     22        12
+ users.User                     users.Users                     23        12
 ============================== =============================== ========= =======
 <BLANKLINE>
 

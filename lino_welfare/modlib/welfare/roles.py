@@ -25,6 +25,7 @@ See :ref:`welfare.specs.users`
 from lino.core.roles import UserRole, SiteAdmin, Supervisor
 from lino.modlib.users.roles import AuthorshipTaker
 from lino.modlib.office.roles import OfficeOperator, OfficeStaff
+from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsStaff, ContactsUser, SimpleContactsUser
 from lino.modlib.office.roles import OfficeUser
 from lino_cosi.lib.ledger.roles import LedgerStaff, LedgerUser
@@ -43,7 +44,7 @@ from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
 
 
 class AccountantManager(LedgerStaff, ContactsUser, OfficeUser,
-                        AidsStaff, SepaStaff):
+                        ExcerptsUser, AidsStaff, SepaStaff):
     """Like an **accountant**, but also has access to configuration.
 
     """
@@ -58,6 +59,7 @@ class SiteAdmin(
         LedgerStaff,
         OfficeStaff,
         NewcomersAgent,
+        ExcerptsStaff,
         #SocialAgent,
         AidsStaff, SepaStaff):
     """The site adminstrator has permission for everything."""
@@ -65,7 +67,7 @@ class SiteAdmin(
 
 class ReceptionClerk(AuthorshipTaker, OfficeOperator, ContactsStaff,
                      AidsStaff, CBSSUser, BeIdUser, SepaUser,
-                     CoursesUser):
+                     CoursesUser, ExcerptsUser):
     """A **reception clerk** is a user who is not a *social agent* but
     receives clients and does certain administrative tasks (in Eupen
     they call them `back office
@@ -77,6 +79,7 @@ class ReceptionClerk(AuthorshipTaker, OfficeOperator, ContactsStaff,
 
 class ReceptionClerkNewcomers(AuthorshipTaker, SimpleContactsUser,
                               OfficeOperator,
+                              ExcerptsUser,
                               # OfficeUser,
                               # SocialAgent,
                               # CoursesUser,
@@ -93,13 +96,6 @@ class ReceptionClerkNewcomers(AuthorshipTaker, SimpleContactsUser,
     pass
 
 
-class Supervisor(Supervisor, AuthorshipTaker, OfficeOperator,
-                 ContactsStaff, AidsStaff, NewcomersOperator,
-                 SepaUser):
-    """A backoffice user who can act as others."""
-    pass
-
-
 class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator,
                                 DebtsUser):
     """A **newcomers integration agent** is an *integration agent* who
@@ -110,8 +106,8 @@ class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator,
     pass
 
 
-class LedgerUser(LedgerUser, ContactsUser, OfficeUser, AidsStaff,
-                 SepaStaff):
+class LedgerUser(LedgerUser, ContactsUser, OfficeUser, ExcerptsUser,
+                 AidsStaff, SepaStaff):
     """An **accountant** is a user who enters invoices, bank statements,
     payment orders and other ledger operations.
 
@@ -125,7 +121,10 @@ class SecurityAdvisor(SiteAdmin, SecurityAdvisor):
 class NewcomersConsultant(NewcomersAgent, SocialAgent):
     pass
 
-class Supervisor(Supervisor, CoursesUser):
+class Supervisor(Supervisor, AuthorshipTaker, OfficeOperator,
+                 ContactsStaff, AidsStaff, NewcomersOperator,
+                 ExcerptsUser, SepaUser, CoursesUser):
+    """A backoffice user who can act as others."""
     pass
 
 

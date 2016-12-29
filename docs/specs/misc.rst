@@ -333,3 +333,53 @@ see it.
 <BLANKLINE>
 
 
+Permissions
+===========
+
+Test whether everybody can display the detail of a client:
+
+>>> o = pcsw.Client.objects.get(id=177)
+>>> r = dd.plugins.extjs.renderer
+>>> for u in 'robin', 'alicia', 'theresia', 'caroline', 'kerstin':
+...     print(E.tostring(rt.login(u, renderer=r).obj2html(o)))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
+<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
+<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
+<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
+<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
+
+Miscellaneous tests
+===================
+
+See :blogref:`20130508`:
+
+>>> for model in (debts.Entry,):
+...     for o in model.objects.all():
+...         o.full_clean()
+
+Default template for excerpts
+=============================
+
+Check whether Lino returns the right default template for excerpts.
+
+In :mod:`lino.modlib.excerpts` we define a template
+:xfile:`excerpts/Default.odt`, but :mod:`lino_welfare.modlib.welfare`
+overrides this template.
+
+The rule is that **the *last* plugin wins** when Lino searches for
+templates.
+
+This means that if we want to see the welfare-specific version, our
+:meth:`get_installed_apps <lino.core.site.Site.get_installed_apps>` in
+:mod:`lino_welare.projects.std.settings` must yield
+:mod:`lino_welfare.modlib.welfare` **after**
+:mod:`lino.modlib.excerpts`.
+
+The following test verifies this rule:
+
+>>> print(settings.SITE.find_config_file('Default.odt', 'excerpts'))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
+/.../welfare/config/excerpts/Default.odt
+
+
