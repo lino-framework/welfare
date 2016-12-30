@@ -52,7 +52,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-60 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, countries, contacts, appypod, humanize, users, contenttypes, gfks, channels, notify, changes, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, plausibility, tinymce.
+59 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, uploads, outbox, xl, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, plausibility, tinymce.
 133 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -189,7 +189,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
- users.User                     users.Users                     22        12
+ users.User                     users.Users                     23        12
 ============================== =============================== ========= =======
 <BLANKLINE>
 
