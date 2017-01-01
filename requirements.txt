@@ -3,6 +3,3 @@
 -e git+https://github.com/lino-framework/xl.git#egg=lino_xl
 -e git+https://github.com/lino-framework/cosi.git#egg=lino_cosi
 -e git+https://github.com/eliben/pycparser@release_v2.14#egg=pycparser
-
-
-
