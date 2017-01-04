@@ -413,9 +413,9 @@ Each window layout defines a given set of fields.
 - uploads.Uploads.insert : type, file, start_date, end_date, description
 - uploads.UploadsByClient.insert : file, type, end_date, description
 - uploads.UploadsByController.insert : file, type, end_date, description
+- users.AllUsers.send_welcome_email : email, subject
 - users.Users.change_password : current, new1, new2
 - users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
-- users.Users.do_send_email : verification_code, email
 - users.Users.insert : username, email, first_name, last_name, partner, language, profile
 <BLANKLINE>
 
@@ -596,9 +596,9 @@ Each window layout is **viewable** by a given set of user profiles.
 - uploads.Uploads.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - uploads.UploadsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.AllUsers.send_welcome_email : visible for admin 910
 - users.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - users.Users.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- users.Users.do_send_email : visible for admin 910
 - users.Users.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 <BLANKLINE>
 
@@ -738,10 +738,10 @@ options.
   (main) [visible for all]: **Raison de refus** (reason), **Remarque** (remark)
 - pcsw.Coachings.create_visit : Enregistrer consultation
   (main) [visible for all]: **Utilisateur** (user), **Raison** (summary)
+- users.AllUsers.send_welcome_email : Welcome mail
+  (main) [visible for all]: **adresse e-mail** (email), **Subject** (subject)
 - users.Users.change_password : Changer mot de passe
   (main) [visible for all]: **Mot de passe actuel** (current), **Nouveau mot de passe** (new1), **Encore une fois** (new2)
-- users.Users.do_send_email : Welcome mail
-  (main) [visible for all]: **Verification code** (verification_code), **adresse e-mail** (email)
 <BLANKLINE>
 
 
