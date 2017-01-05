@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2016 Luc Saffre
+# Copyright 2011-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -33,7 +33,7 @@ import os
 import datetime
 from decimal import Decimal
 from django.conf import settings
-from lino.utils.dpy import Migrator
+from lino.utils.dpy import Migrator, override
 from lino.core.utils import resolve_model
 from lino.api import dd, rt
 from lino_cosi.lib.sepa.utils import belgian_nban_to_iban_bic
@@ -252,12 +252,41 @@ class Migrator(Migrator):
   (please run yourself checkdata after migration)
 
         """
-        globals_dict.update(create_plausibility_problem=noop)
-        if not dd.is_installed('ledger'):
-            return '1.1.26'
-        ledger_Journal = rt.modules.ledger.Journal
         bv2kw = globals_dict['bv2kw']
+        globals_dict.update(create_plausibility_problem=noop)
+        cal_EventType = rt.models.cal.EventType
 
+        # the following migration was done manually (before it was
+        # inserted here) at welcht which is now at version 1.1.26. In
+        # weleup they are still at 1.1.25 and therefore need it.
+        
+        @override(globals_dict)
+        def create_cal_eventtype(id, seqno, name, attach_to_email, email_template, description, is_appointment, 
+          all_rooms, locks_user, start_date, event_label, max_conflicting, invite_client, fse_field):
+            kw = dict()
+            kw.update(id=id)
+            kw.update(seqno=seqno)
+            if name is not None: kw.update(bv2kw('name',name))
+            kw.update(attach_to_email=attach_to_email)
+            kw.update(email_template=email_template)
+            kw.update(description=description)
+            kw.update(is_appointment=is_appointment)
+            kw.update(all_rooms=all_rooms)
+            kw.update(locks_user=locks_user)
+            kw.update(start_date=start_date)
+            if event_label is not None: kw.update(bv2kw('event_label',event_label))
+            kw.update(max_conflicting=max_conflicting)
+            kw.update(invite_client=invite_client)
+            kw.update(esf_field=fse_field)
+            return cal_EventType(**kw)
+
+        if not dd.is_installed('ledger'):
+            # installed in weleup, not installed in welcht
+            return '1.1.26'
+        
+        ledger_Journal = rt.models.ledger.Journal
+
+        @override(globals_dict)
         def create_ledger_journal(id, ref, build_method, template, seqno, name, trade_type, voucher_type, journal_group, auto_check_clearings, force_sequence, account_id, printed_name, dc):
             kw = dict()
             kw.update(id=id)
@@ -277,7 +306,7 @@ class Migrator(Migrator):
             if printed_name is not None: kw.update(bv2kw('printed_name',printed_name))
             kw.update(dc=dc)
             return ledger_Journal(**kw)
-        globals_dict.update(create_ledger_journal=create_ledger_journal)
+        #globals_dict.update(create_ledger_journal=create_ledger_journal)
 
         globals_dict.update(create_ledger_voucher=noop)
         globals_dict.update(create_ledger_movement=noop)
@@ -289,5 +318,5 @@ class Migrator(Migrator):
         globals_dict.update(create_finan_paymentorderitem=noop)
         globals_dict.update(create_vatless_accountinvoice=noop)
         globals_dict.update(create_vatless_invoiceitem=noop)
-
         return '1.1.26'
+
