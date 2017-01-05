@@ -246,6 +246,7 @@ class Migrator(Migrator):
 
     def migrate_from_1_1_25(self, globals_dict):
         """
+- rename fields cal.EventType.fse_field to esf_field andpcsw.Client.has_fse to has_esf
 - rename PaymentInstructionsByJournal to DisbursementOrdersByJournal
 - remove all ledger vouchers
 - remove all plausibility problems because checker names have changed
@@ -255,6 +256,9 @@ class Migrator(Migrator):
         bv2kw = globals_dict['bv2kw']
         globals_dict.update(create_plausibility_problem=noop)
         cal_EventType = rt.models.cal.EventType
+        contacts_Person = rt.models.contacts.Person
+        pcsw_Client = rt.models.pcsw.Client
+        create_mti_child = globals_dict['create_mti_child']
 
         # the following migration was done manually (before it was
         # inserted here) at welcht which is now at version 1.1.26. In
@@ -279,6 +283,26 @@ class Migrator(Migrator):
             kw.update(invite_client=invite_client)
             kw.update(esf_field=fse_field)
             return cal_EventType(**kw)
+
+        @override(globals_dict)
+        def create_pcsw_client(person_ptr_id, national_id, nationality_id, card_number, card_valid_from, card_valid_until, card_type, 
+            card_issuer, noble_condition, group_id, birth_place, birth_country_id, civil_state, residence_type, in_belgium_since, 
+            residence_until, unemployed_since, seeking_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, 
+            aid_type_id, declared_name, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_office_contact_id, 
+            client_state, refusal_reason, remarks2, gesdos_id, tim_id, is_cpas, is_senior, health_insurance_id, pharmacy_id, income_ag, 
+            income_wg, income_kg, income_rente, income_misc, job_agents, broker_id, faculty_id, has_fse):
+            return create_mti_child(contacts_Person,person_ptr_id,pcsw_Client,person_ptr_id=person_ptr_id,national_id=national_id,
+                nationality_id=nationality_id,card_number=card_number,card_valid_from=card_valid_from,card_valid_until=card_valid_until,
+                card_type=card_type,card_issuer=card_issuer,noble_condition=noble_condition,group_id=group_id,birth_place=birth_place,
+                birth_country_id=birth_country_id,civil_state=civil_state,residence_type=residence_type,in_belgium_since=in_belgium_since,
+                residence_until=residence_until,unemployed_since=unemployed_since,seeking_since=seeking_since,needs_residence_permit=needs_residence_permit,
+                needs_work_permit=needs_work_permit,work_permit_suspended_until=work_permit_suspended_until,aid_type_id=aid_type_id,
+                declared_name=declared_name,is_seeking=is_seeking,unavailable_until=unavailable_until,unavailable_why=unavailable_why,
+                obstacles=obstacles,skills=skills,job_office_contact_id=job_office_contact_id,client_state=client_state,refusal_reason=refusal_reason,
+                remarks2=remarks2,gesdos_id=gesdos_id,tim_id=tim_id,is_cpas=is_cpas,is_senior=is_senior,health_insurance_id=health_insurance_id,
+                pharmacy_id=pharmacy_id,income_ag=income_ag,income_wg=income_wg,income_kg=income_kg,income_rente=income_rente,income_misc=income_misc,
+                job_agents=job_agents,broker_id=broker_id,faculty_id=faculty_id,has_esf=has_fse)
+
 
         if not dd.is_installed('ledger'):
             # installed in weleup, not installed in welcht
