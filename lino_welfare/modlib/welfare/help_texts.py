@@ -536,6 +536,7 @@ also can assign coaches to clients and create budgets for debts
 mediation."""),
     'lino_welfare.modlib.welfare.roles.LedgerUser' : _("""An accountant is a user who enters invoices, bank statements,
 payment orders and other ledger operations."""),
+    'lino_welfare.modlib.welfare.roles.Supervisor' : _("""A backoffice user who can act as others."""),
     'lino_welfare.projects.chatelet.modlib.courses.models.Enrolment' : _("""Adds two text fields motivation and problems."""),
     'lino_welfare.projects.chatelet.modlib.cv.models.ClientIsLearning' : _("""Select only clients who are "learning" during the given date.
 That is, who have an active Study, Training or
