@@ -246,7 +246,7 @@ class Migrator(Migrator):
 
     def migrate_from_1_1_25(self, globals_dict):
         """
-- rename fields cal.EventType.fse_field to esf_field andpcsw.Client.has_fse to has_esf
+- rename fields cal.EventType.fse_field to esf_field andpcsw.Client.has_fse to has_esf, ignore fse.client_summary
 - rename PaymentInstructionsByJournal to DisbursementOrdersByJournal
 - remove all ledger vouchers
 - remove all plausibility problems because checker names have changed
