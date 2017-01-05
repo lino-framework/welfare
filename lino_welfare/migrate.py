@@ -255,10 +255,12 @@ class Migrator(Migrator):
         """
         bv2kw = globals_dict['bv2kw']
         globals_dict.update(create_plausibility_problem=noop)
+        globals_dict.update(create_fse_clientsummary=noop)
         cal_EventType = rt.models.cal.EventType
         contacts_Person = rt.models.contacts.Person
         pcsw_Client = rt.models.pcsw.Client
         create_mti_child = globals_dict['create_mti_child']
+        
 
         # the following migration was done manually (before it was
         # inserted here) at welcht which is now at version 1.1.26. In
