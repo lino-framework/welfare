@@ -85,8 +85,12 @@ class RefuseClient(ChangeStateAction):
         obj.emit_system_note(
             ar, subject=subject, body=body)
         mt = rt.models.notify.MessageTypes.action
+        
+        def msg(user, mm):
+            return subject + "\n" + body
+        
         rt.models.notify.Message.emit_message(
-            ar, obj, mt, subject+"\n"+body, recipients)
+            ar, obj, mt, msg, recipients)
         ar.success(**kw)
 
 
@@ -118,8 +122,11 @@ class MarkClientFormer(ChangeStateAction):
             kw.update(message=body)
             kw.update(alert=_("Success"))
             obj.emit_system_note(ar, subject=body)
+            
+            def msg(user, mm):
+                return body
             rt.models.notify.Message.emit_message(
-                ar, obj, mt, body, recipients)
+                ar, obj, mt, msg, recipients)
             ar.success(**kw)
             
         qs = obj.coachings_by_client.filter(end_date__isnull=True)
