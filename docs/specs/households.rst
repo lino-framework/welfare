@@ -11,7 +11,6 @@ Households
 
     doctest init:
 
-    >>> from __future__ import print_function
     >>> from lino import startup
     >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
@@ -158,6 +157,25 @@ Here is their :class:`welfare.households.RefundsByPerson`:
  **Total (4 rows)**                             **60,00**
 ==================== ======== ================ ===========
 <BLANKLINE>
+
+Here is what Ludwig's LinksByHuman panel shows:
+
+>>> ses.show(humanlinks.LinksByHuman, master_instance=obj)
+Ludwig is
+Father of `Irma <Detail>`__ (6 years)
+Father of `Melba <Detail>`__ (12 years)
+Husband of `Laura LOSLEVER <Detail>`__ (46 years)
+Son of `Gaby FROGEMUTH <Detail>`__ (79 years)
+Son of `Hubert <Detail>`__ (80 years)
+<BLANKLINE>
+Create relationship as **Father**/**Son** **Adoptive father**/**Adopted son** **Foster father**/**Foster son** **Husband** **Partner** **Stepfather**/**Stepson** **Brother** **Cousin** **Uncle**/**Nephew** **Relative** **Other**
+
+
+.. The following edge case failed before 20170206:
+   
+    >>> ses.show(humanlinks.LinksByHuman)
+    <BLANKLINE>
+
 
 
 Inspecting the MembersByPerson panel

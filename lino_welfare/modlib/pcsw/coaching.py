@@ -31,7 +31,8 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 from lino import mixins
 
-from lino.modlib.users.mixins import ByUser
+from lino.modlib.users.mixins import My
+from lino.modlib.users.mixins import UserAuthored
 from lino.modlib.notify.mixins import ChangeObservable
 from lino_welfare.modlib.pcsw.roles import SocialAgent, SocialStaff
 
@@ -102,9 +103,8 @@ class CoachingEndings(dd.Table):
     CoachingsByEnding
     """
 
-
 @dd.python_2_unicode_compatible
-class Coaching(mixins.DatePeriod, dd.ImportedFields, ChangeObservable):
+class Coaching(UserAuthored, mixins.DatePeriod, dd.ImportedFields, ChangeObservable):
 
     """A Coaching (Begleitung, intervention) is when a Client is being
     coached by a User (a social assistant) during a given period.
@@ -116,11 +116,11 @@ class Coaching(mixins.DatePeriod, dd.ImportedFields, ChangeObservable):
         verbose_name = _("Coaching")
         verbose_name_plural = _("Coachings")
 
-    user = models.ForeignKey(
-        settings.SITE.user_model,
-        verbose_name=_("Coach"),
-        related_name="%(app_label)s_%(class)s_set_by_user",
-    )
+    # user = models.ForeignKey(
+    #     settings.SITE.user_model,
+    #     verbose_name=_("Coach"),
+    #     related_name="%(app_label)s_%(class)s_set_by_user",
+    # )
 
     allow_cascaded_delete = ['client']
     workflow_state_field = 'state'
@@ -245,6 +245,9 @@ class Coaching(mixins.DatePeriod, dd.ImportedFields, ChangeObservable):
 
 dd.update_field(Coaching, 'start_date', verbose_name=_("Coached from"))
 dd.update_field(Coaching, 'end_date', verbose_name=_("until"))
+dd.update_field(
+    Coaching, 'user', verbose_name=_("Coach"),
+    related_name="%(app_label)s_%(class)s_set_by_user")
 
 
 class Coachings(dd.Table):
@@ -374,13 +377,13 @@ class CoachingsByUser(Coachings):
     column_names = 'start_date end_date client type primary id'
 
 
-class MyCoachings(CoachingsByUser, ByUser):
+class MyCoachings(My, CoachingsByUser):
     column_names = 'client start_date end_date type primary id'
     order_by = ['client__name']
 
     @classmethod
     def param_defaults(self, ar, **kw):
-        kw = super(CoachingsByUser, self).param_defaults(ar, **kw)
+        kw = super(MyCoachings, self).param_defaults(ar, **kw)
         kw.update(start_date=dd.today())
         kw.update(end_date=dd.today())
         return kw

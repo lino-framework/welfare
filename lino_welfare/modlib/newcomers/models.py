@@ -47,7 +47,7 @@ from django.conf import settings
 from lino_xl.lib.cal.choicelists import amonthago
 from lino_xl.lib.notes.actions import NotableAction
 from lino.modlib.users.choicelists import UserTypes
-from lino.modlib.users.mixins import ByUser, UserAuthored
+from lino.modlib.users.mixins import My, UserAuthored
 
 from lino.core.diff import ChangeWatcher
 
@@ -178,7 +178,7 @@ class CompetencesByFaculty(Competences):
     order_by = ["user"]
 
 
-class MyCompetences(ByUser, CompetencesByUser):
+class MyCompetences(My, CompetencesByUser):
     pass
 
 
