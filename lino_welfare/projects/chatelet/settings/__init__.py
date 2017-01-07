@@ -67,18 +67,15 @@ class Site(Site):
     # def get_default_language(self):
     #     return 'fr'
 
-    def get_admin_main_items(self, user):
+    def get_dashboard_items(self, user):
         """Defines the items to show in :xfile:`admin_main.html`.
-        See :meth:`lino.core.site.Site.get_admin_main_items`.
+        See :meth:`lino.core.site.Site.get_dashboard_items`.
         """
 
         # "Visiteurs qui m'attendent" est intéressant pour les
         # travailleurs sociaux qui attendent leurs rdv ou qui tiennent
         # des permanences.
 
-        if user.authenticated:
-            yield self.actors.notify.MyMessages
-            
         yield self.modules.reception.MyWaitingVisitors
         yield self.modules.cal.MyUnconfirmedAppointments
         yield self.modules.cal.MyEventsToday
@@ -88,6 +85,9 @@ class Site(Site):
         # yield self.modules.integ.UsersWithClients
         #~ yield self.modules.reception.ReceivedVisitors
         
+        if user.authenticated:
+            yield self.actors.notify.MyMessages
+            
 
     def do_site_startup(self):
         

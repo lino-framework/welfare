@@ -63,15 +63,16 @@ class Site(Site):
         kw.update(cv='lino_welfare.modlib.cv')
         return kw
 
-    def get_admin_main_items(self, user):
-        if user.authenticated:
-            yield self.actors.notify.MyMessages
+    def get_dashboard_items(self, user):
         yield self.modules.integ.UsersWithClients
         yield self.modules.reception.MyWaitingVisitors
         yield self.modules.cal.MyEvents
         yield self.modules.cal.MyTasks
         yield self.modules.reception.WaitingVisitors
         #~ yield self.modules.reception.ReceivedVisitors
+        
+        if user.authenticated:
+            yield self.actors.notify.MyMessages
 
     def do_site_startup(self):
         super(Site, self).do_site_startup()

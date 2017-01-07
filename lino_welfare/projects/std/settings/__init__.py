@@ -125,6 +125,7 @@ class Site(Site):
         yield 'lino_xl.lib.appypod'
         yield 'django.contrib.humanize'  # translations for
         yield 'lino_welfare.modlib.users'
+        yield 'lino.modlib.notify'
         yield 'lino.modlib.changes'
 
         yield 'lino_xl.lib.properties'
@@ -191,7 +192,7 @@ class Site(Site):
         yield 'lino.modlib.plausibility'
         yield 'lino.modlib.tinymce'
 
-    def get_admin_main_items(self, user):
+    def get_dashboard_items(self, user):
         """Returns the items of the admin index page:
 
         - :class:`lino_welfare.modlib.integ.models.UsersWithClients`
@@ -202,8 +203,6 @@ class Site(Site):
 
 
         """
-        if user.authenticated:
-            yield self.actors.notify.MyMessages
         yield self.modules.integ.UsersWithClients
         yield self.modules.reception.MyWaitingVisitors
         yield self.modules.cal.MyEvents
@@ -211,3 +210,6 @@ class Site(Site):
         yield self.modules.reception.WaitingVisitors
         #~ yield self.modules.reception.ReceivedVisitors
 
+        if user.authenticated:
+            yield self.actors.notify.MyMessages
+            
