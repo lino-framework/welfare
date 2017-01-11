@@ -312,8 +312,6 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient,
             self.last_name.upper(), self.first_name, self.pk)
 
     def get_overview_elems(self, ar):
-        if ar is None:
-            return []
         elems = super(Client, self).get_overview_elems(ar)
         # elems.append(E.br())
         elems.append(ar.get_data_value(self, 'eid_info'))
