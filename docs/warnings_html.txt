@@ -1,0 +1,2 @@
+[31m/media/dell1tb/work/welfare/docs/specs/clients_chatelet.rst:48: WARNING: Inline strong start-string without end-string.
+[39;49;00m
