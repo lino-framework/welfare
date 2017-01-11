@@ -34,20 +34,20 @@ This client has the following appointments.
 >>> rt.login('romain').show(reception.AppointmentsByPartner, obj,
 ...     column_names="event__start_date event__start_time event__user event__summary event__state workflow_buttons",
 ...     language="en")  #doctest: +REPORT_UDIFF
-============ ============ ================= ================ =========== ===================================
+============ ============ ================= ================ =========== =======================================================
  Start date   Start time   Managed by        Summary          State       Actions
------------- ------------ ----------------- ---------------- ----------- -----------------------------------
- 15/05/2014   09:00:00     Caroline Carnol   Auswertung 2     Suggested   [Checkin] **Accepted**
- 22/05/2014                Mélanie Mélard    Urgent problem   Published   [Receive] [Checkout] **Waiting**
- 27/05/2014   13:30:00     Hubert Huppertz   Abendessen       Published   [Checkin] **Accepted** → [Reject]
- 16/06/2014   09:00:00     Caroline Carnol   Auswertung 3     Suggested   [Checkin] **Accepted**
- 16/07/2014   09:00:00     Caroline Carnol   Auswertung 4     Suggested   [Checkin] **Accepted**
- 18/08/2014   09:00:00     Caroline Carnol   Auswertung 5     Suggested   [Checkin] **Accepted**
- 18/09/2014   09:00:00     Caroline Carnol   Auswertung 6     Suggested   [Checkin] **Accepted**
- 20/10/2014   09:00:00     Caroline Carnol   Auswertung 7     Suggested   [Checkin] **Accepted**
- 20/11/2014   09:00:00     Caroline Carnol   Auswertung 8     Suggested   [Checkin] **Accepted**
- 22/12/2014   09:00:00     Caroline Carnol   Auswertung 9     Suggested   [Checkin] **Accepted**
-============ ============ ================= ================ =========== ===================================
+------------ ------------ ----------------- ---------------- ----------- -------------------------------------------------------
+ 15/05/2014   09:00:00     Caroline Carnol   Auswertung 2     Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 22/05/2014                Mélanie Mélard    Urgent problem   Published   [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ 27/05/2014   13:30:00     Hubert Huppertz   Abendessen       Published   [Checkin] **Accepted** → [Reject] [Absent] [Excused]
+ 16/06/2014   09:00:00     Caroline Carnol   Auswertung 3     Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 16/07/2014   09:00:00     Caroline Carnol   Auswertung 4     Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 18/08/2014   09:00:00     Caroline Carnol   Auswertung 5     Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 18/09/2014   09:00:00     Caroline Carnol   Auswertung 6     Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 20/10/2014   09:00:00     Caroline Carnol   Auswertung 7     Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 20/11/2014   09:00:00     Caroline Carnol   Auswertung 8     Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 22/12/2014   09:00:00     Caroline Carnol   Auswertung 9     Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+============ ============ ================= ================ =========== =======================================================
 <BLANKLINE>
 
 Note that even Theresia who is a reception clerk and has no calendar
@@ -55,20 +55,20 @@ functionality can click on the dates to see their detail:
 
 >>> rt.login('theresia').show(reception.AppointmentsByPartner, obj,
 ...     language="en")  #doctest: +REPORT_UDIFF
-====================================== ================= ===================================
+====================================== ================= =======================================================
  When                                   Managed by        Actions
--------------------------------------- ----------------- -----------------------------------
- `Thu 15/05/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
- `Thu 22/05/2014 <Detail>`__            Mélanie Mélard    [Receive] [Checkout] **Waiting**
- `Tue 27/05/2014 at 13:30 <Detail>`__   Hubert Huppertz   [Checkin] **Accepted** → [Reject]
- `Mon 16/06/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
- `Wed 16/07/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
- `Mon 18/08/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
- `Thu 18/09/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
- `Mon 20/10/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
- `Thu 20/11/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
- `Mon 22/12/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted**
-====================================== ================= ===================================
+-------------------------------------- ----------------- -------------------------------------------------------
+ `Thu 15/05/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Thu 22/05/2014 <Detail>`__            Mélanie Mélard    [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ `Tue 27/05/2014 at 13:30 <Detail>`__   Hubert Huppertz   [Checkin] **Accepted** → [Reject] [Absent] [Excused]
+ `Mon 16/06/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Wed 16/07/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Mon 18/08/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Thu 18/09/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Mon 20/10/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Thu 20/11/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Mon 22/12/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+====================================== ================= =======================================================
 <BLANKLINE>
 
 
@@ -215,23 +215,23 @@ the lounge:
 
 >>> rt.login('alicia').show(reception.MyWaitingVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-========================= ========== ==================================
+========================= ========== =======================================================
  Client                    Position   Actions
-------------------------- ---------- ----------------------------------
- HILGERS Hildegard (133)   1          [Receive] [Checkout] **Waiting**
- KAIVERS Karl (141)        2          [Receive] [Checkout] **Waiting**
-========================= ========== ==================================
+------------------------- ---------- -------------------------------------------------------
+ HILGERS Hildegard (133)   1          [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ KAIVERS Karl (141)        2          [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+========================= ========== =======================================================
 <BLANKLINE>
 
 >>> rt.login('hubert').show(reception.MyWaitingVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-===================== ========== ==================================
+===================== ========== =======================================================
  Client                Position   Actions
---------------------- ---------- ----------------------------------
- EMONTS Daniel (128)   1          [Receive] [Checkout] **Waiting**
- JONAS Josef (139)     2          [Receive] [Checkout] **Waiting**
- LAZARUS Line (144)    3          [Receive] [Checkout] **Waiting**
-===================== ========== ==================================
+--------------------- ---------- -------------------------------------------------------
+ EMONTS Daniel (128)   1          [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ JONAS Josef (139)     2          [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ LAZARUS Line (144)    3          [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+===================== ========== =======================================================
 <BLANKLINE>
 
 Theresia is the reception clerk. She has no visitors on her own.
@@ -247,46 +247,46 @@ Theresia is rather going to use the overview tables:
 >>> kwargs.update(column_names="client event__user workflow_buttons")
 >>> rt.login('theresia').show(reception.WaitingVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-========================= ================= ==================================
+========================= ================= =======================================================
  Client                    Managed by        Actions
-------------------------- ----------------- ----------------------------------
- EMONTS Daniel (128)       Hubert Huppertz   [Receive] [Checkout] **Waiting**
- EVERS Eberhart (127)      Mélanie Mélard    [Receive] [Checkout] **Waiting**
- HILGERS Hildegard (133)   Alicia Allmanns   [Receive] [Checkout] **Waiting**
- JACOBS Jacqueline (137)   Judith Jousten    [Receive] [Checkout] **Waiting**
- JONAS Josef (139)         Hubert Huppertz   [Receive] [Checkout] **Waiting**
- KAIVERS Karl (141)        Alicia Allmanns   [Receive] [Checkout] **Waiting**
- LAMBERTZ Guido (142)      Mélanie Mélard    [Receive] [Checkout] **Waiting**
- LAZARUS Line (144)        Hubert Huppertz   [Receive] [Checkout] **Waiting**
-========================= ================= ==================================
+------------------------- ----------------- -------------------------------------------------------
+ EMONTS Daniel (128)       Hubert Huppertz   [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ EVERS Eberhart (127)      Mélanie Mélard    [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ HILGERS Hildegard (133)   Alicia Allmanns   [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ JACOBS Jacqueline (137)   Judith Jousten    [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ JONAS Josef (139)         Hubert Huppertz   [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ KAIVERS Karl (141)        Alicia Allmanns   [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ LAMBERTZ Guido (142)      Mélanie Mélard    [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ LAZARUS Line (144)        Hubert Huppertz   [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+========================= ================= =======================================================
 <BLANKLINE>
 
 >>> rt.login('theresia').show(reception.BusyVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-========================= ================= =====================
+========================= ================= ==========================================
  Client                    Managed by        Actions
-------------------------- ----------------- ---------------------
- BRECHT Bernd (177)        Hubert Huppertz   [Checkout] **Busy**
- COLLARD Charlotte (118)   Alicia Allmanns   [Checkout] **Busy**
- DUBOIS Robin (179)        Mélanie Mélard    [Checkout] **Busy**
- ENGELS Edgar (129)        Judith Jousten    [Checkout] **Busy**
-========================= ================= =====================
+------------------------- ----------------- ------------------------------------------
+ BRECHT Bernd (177)        Hubert Huppertz   [Checkout] **Busy** → [Absent] [Excused]
+ COLLARD Charlotte (118)   Alicia Allmanns   [Checkout] **Busy** → [Absent] [Excused]
+ DUBOIS Robin (179)        Mélanie Mélard    [Checkout] **Busy** → [Absent] [Excused]
+ ENGELS Edgar (129)        Judith Jousten    [Checkout] **Busy** → [Absent] [Excused]
+========================= ================= ==========================================
 <BLANKLINE>
 
 
 >>> rt.login('theresia').show(reception.GoneVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-============================ ================= ==========
+============================ ================= ===============================
  Client                       Managed by        Actions
----------------------------- ----------------- ----------
- MALMENDIER Marc (146)        Alicia Allmanns   **Gone**
- KELLER Karl (178)            Judith Jousten    **Gone**
- JEANÉMART Jérôme (181)       Mélanie Mélard    **Gone**
- GROTECLAES Gregory (132)     Hubert Huppertz   **Gone**
- EMONTS-GAST Erna (152)       Alicia Allmanns   **Gone**
- DOBBELSTEIN Dorothée (124)   Judith Jousten    **Gone**
- AUSDEMWALD Alfons (116)      Mélanie Mélard    **Gone**
-============================ ================= ==========
+---------------------------- ----------------- -------------------------------
+ MALMENDIER Marc (146)        Alicia Allmanns   **Gone** → [Absent] [Excused]
+ KELLER Karl (178)            Judith Jousten    **Gone** → [Absent] [Excused]
+ JEANÉMART Jérôme (181)       Mélanie Mélard    **Gone** → [Absent] [Excused]
+ GROTECLAES Gregory (132)     Hubert Huppertz   **Gone** → [Absent] [Excused]
+ EMONTS-GAST Erna (152)       Alicia Allmanns   **Gone** → [Absent] [Excused]
+ DOBBELSTEIN Dorothée (124)   Judith Jousten    **Gone** → [Absent] [Excused]
+ AUSDEMWALD Alfons (116)      Mélanie Mélard    **Gone** → [Absent] [Excused]
+============================ ================= ===============================
 <BLANKLINE>
 
 

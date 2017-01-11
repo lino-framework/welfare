@@ -72,6 +72,7 @@ Châtelet
 .. toctree::
    :maxdepth: 2
   
+   clients_chatelet
    chatelet
    art61
    immersion

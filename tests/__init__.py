@@ -128,6 +128,9 @@ class SpecsTests(TestCase):
     def test_clients_eupen(self):
         return self.run_simple_doctests('docs/specs/clients_eupen.rst')
 
+    def test_clients_chatelet(self):
+        return self.run_simple_doctests('docs/specs/clients_chatelet.rst')
+
     def test_cv2(self):
         return self.run_simple_doctests('docs/specs/cv2.rst')
 
