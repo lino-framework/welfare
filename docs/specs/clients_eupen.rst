@@ -56,7 +56,7 @@ Lino Welfare à la Eupen.
     - **Beziehungen** (contact):
       - (contact_1): **Ähnliche Klienten** (SimilarClients) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910], **Beziehungen** (LinksByHuman) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910], **ZDSS** (cbss_relations)
       - (contact_2) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]:
-        - **Mitgliedschaft in Haushalten** (MembersByPerson) [visible for 110 210 410 800 admin 910]
+        - **Mitgliedschaft in Haushalten** (MembersByPerson)
         - **Haushaltszusammensetzung** (households.SiblingsByPerson)
     - **Begleiter** (coaching) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
       - (coaching_1) [visible for 110 120 200 220 300 800 admin 910]:
