@@ -91,7 +91,7 @@ class TestCase(TestCase):
             """Obstacle "Obstacle object" has been created.""")
         self.assertEqual(result['rows'], [
             ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
-             '<span />', '<b>Obstacle object</b>',
+             '<div />', '<span />', '<b>Obstacle object</b>',
              'First LAST', 100,
              {'id': True}, {}, False]])
 

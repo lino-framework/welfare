@@ -111,7 +111,8 @@ declare_vars:
 ...             print(ln)
 >>> with_user_profile(theresia.profile, f)
 ... #doctest: +NORMALIZE_WHITESPACE
-[ general_panel877, contact_panel903, coaching_panel1126, aids_tab_panel1220, work_tab_1_panel1249, history_panel1959 ]
+[ general_panel877, contact_panel904, coaching_panel1132, aids_tab_panel1227, work_tab_1_panel1256, history_panel1979 ]
+
 
 I can even render the :file:`lino*.js` files (at least once):
 
