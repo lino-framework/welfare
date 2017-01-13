@@ -414,7 +414,8 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient,
                 })
             for obj in model.objects.filter(q, **filterkw).order_by(fieldname):
                 linkkw.update(fmt='detail')
-                url = ui.get_detail_url(obj, **linkkw)
+                ba = obj.get_detail_action()
+                url = ui.get_detail_url(ba.actor, obj.pk, **linkkw)
                 html = '<a href="%s">%s</a>&nbsp;: %s' % (
                     url, unicode(obj), cgi.escape(msg))
                 yield ReminderEntry(getattr(obj, fieldname), html)
