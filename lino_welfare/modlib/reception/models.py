@@ -185,11 +185,7 @@ class CreateCoachingVisit(CreateClientVisit):
             ar.action_param_values.user,
             ar.action_param_values.summary,
             settings.SITE.site_config.client_guestrole)
-        #~ kw = super(CreateVisit,self).run_from_ui(obj,ar,**kw)
-        #~ kw.update(success=True)
-        #~ kw.update(eval_js=ar.renderer.instance_handler(ar,event))
         ar.success(refresh=True)
-        #~ return kw
 
 
 class CreateNote(dd.Action):

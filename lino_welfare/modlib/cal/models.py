@@ -370,10 +370,7 @@ if False:
             event = Event(**ekw)
             event.full_clean()
             event.save()
-            #~ print 20130722, ekw, ar.action_param_values.user, ar.get_user()
-            #~ kw = super(CreateClientEvent,self).run_from_ui(obj,ar,**kw)
-            #~ kw.update(success=True)
-            kw.update(eval_js=ar.renderer.instance_handler(ar, event))
+            ar.goto_instance(event)
             ar.success(**kw)
 
 EventsByDay.column_names = 'start_time project summary user \
