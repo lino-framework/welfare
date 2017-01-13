@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016 Luc Saffre
+# Copyright 2016-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -166,17 +166,16 @@ class TestCase(TestCase):
 
         # self.check_notifications()
         self.check_notifications("""
-+------------------------------------------------------------------------+------------------------+-----------+
-| Body                                                                   | Controlled by          | Recipient |
-+========================================================================+========================+===========+
-|                                                                        |                        | caroline  |
-+------------------------------------------------------------------------+------------------------+-----------+
-| [CLIENT Seconda (101)](javascript:Lino.pcsw.Clients.detail.run\(null,{ | *CLIENT Seconda (101)* | roger     |
-| "record_id": 101 }\)) has been modified by Alicia:                     |                        |           |
-|                                                                        |                        |           |
-|   * **Name** : 'Client Second' --&gt; 'Client Seconda'                 |                        |           |
-|   * **First name** : 'Second' --&gt; 'Seconda'                         |                        |           |
-+------------------------------------------------------------------------+------------------------+-----------+
++--------------------------------------------------------+------------------------+-----------+
+| Body                                                   | Controlled by          | Recipient |
++========================================================+========================+===========+
+|                                                        |                        | caroline  |
++--------------------------------------------------------+------------------------+-----------+
+| **CLIENT Seconda (101)** has been modified by Alicia:  | *CLIENT Seconda (101)* | roger     |
+|                                                        |                        |           |
+|   * **Name** : 'Client Second' --&gt; 'Client Seconda' |                        |           |
+|   * **First name** : 'Second' --&gt; 'Seconda'         |                        |           |
++--------------------------------------------------------+------------------------+-----------+
 """)
 
         # When a coaching is modified, all active coaches of that
@@ -192,6 +191,7 @@ class TestCase(TestCase):
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)
 
+        # self.check_notifications("")
         self.check_notifications("""
 +-----------------------------------------------------+------------------------+-----------+
 | Body                                                | Controlled by          | Recipient |
