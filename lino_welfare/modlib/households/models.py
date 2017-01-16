@@ -122,7 +122,7 @@ person_fields = dd.fields_list(
     Member, 'first_name last_name gender birth_date')
 
 
-class HouseholdDetail(dd.FormLayout):
+class HouseholdDetail(dd.DetailLayout):
 
     # window_size = (90, 20)
 

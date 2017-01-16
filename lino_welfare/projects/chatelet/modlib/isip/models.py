@@ -29,7 +29,7 @@ from lino.api import dd, rt
 from lino_welfare.modlib.isip.models import *
 
 
-class ContractDetail(dd.FormLayout):
+class ContractDetail(dd.DetailLayout):
     general = dd.Panel("""
     id:8 client:25 type user:15 user_asd:15
     study_type applies_from applies_until exam_policy language:8

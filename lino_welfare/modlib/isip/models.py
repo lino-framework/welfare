@@ -265,7 +265,7 @@ dd.update_field(
     verbose_name=_("Integration agent"))
 
 
-class ContractDetail(dd.FormLayout):
+class ContractDetail(dd.DetailLayout):
     general = dd.Panel("""
     id:8 client:25 type user:15 user_asd:15
     study_type applies_from applies_until exam_policy language:8
@@ -292,7 +292,7 @@ class Contracts(ContractBaseTable):
     column_names = 'id applies_from applies_until client user type *'
     order_by = ['id']
     detail_layout = ContractDetail()
-    insert_layout = dd.FormLayout("""
+    insert_layout = dd.InsertLayout("""
     client
     type
     """, window_size=(60, 'auto'))

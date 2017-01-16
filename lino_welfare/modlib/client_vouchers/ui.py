@@ -42,7 +42,7 @@ class ItemsByVoucher(VoucherItems):
     order_by = ["seqno"]
 
 
-class ClientVoucherDetail(dd.FormLayout):
+class ClientVoucherDetail(dd.DetailLayout):
     main = "general ledger"
 
     general = dd.Panel("""

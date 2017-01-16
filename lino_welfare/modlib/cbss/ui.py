@@ -42,7 +42,7 @@ class Purposes(dd.Table):
     order_by = ['sector_code', 'code']
 
 
-class CBSSRequestDetail(dd.FormLayout):
+class CBSSRequestDetail(dd.DetailLayout):
     main = 'request technical'
 
     request = dd.Panel("""
@@ -85,7 +85,7 @@ class IdentifyPersonRequestDetail(CBSSRequestDetail):
     result = "IdentifyPersonResult"
 
 
-class IdentifyPersonRequestInsert(IdentifyPersonRequestDetail):
+class IdentifyPersonRequestInsert(dd.InsertLayout, IdentifyPersonRequestDetail):
     window_size = (60, 'auto')
 
     main = """
@@ -243,7 +243,7 @@ class ManageAccessRequestDetail(CBSSRequestDetail):
     #     CBSSRequestDetail.setup_handle(self,lh)
 
 
-class ManageAccessRequestInsert(dd.FormLayout):
+class ManageAccessRequestInsert(dd.InsertLayout):
     window_size = (60, 'auto')
 
     p1 = dd.Panel("""
@@ -298,21 +298,13 @@ class RetrieveTIGroupsRequestDetail(CBSSRequestDetail):
     # def setup_handle(self,lh):
         # CBSSRequestDetail.setup_handle(self,lh)
 
-# class RetrieveTIGroupsRequestInsert(dd.FormLayout):
-    # window_size = (40,'auto')
-    # main = """
-    # person
-    # national_id language
-    # history
-    # """
-
 
 class RetrieveTIGroupsRequests(CBSSRequests):
     # debug_permissions = True
     required_roles = dd.login_required(CBSSUser)
     model = 'cbss.RetrieveTIGroupsRequest'
     detail_layout = RetrieveTIGroupsRequestDetail()
-    insert_layout = dd.FormLayout("""
+    insert_layout = dd.InsertLayout("""
     person
     national_id language
     history
