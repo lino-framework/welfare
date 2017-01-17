@@ -149,7 +149,7 @@ removed at the same time:
 
 >>> print(E.tostring(ar.obj2html(cli)))
 <a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 178 })">KELLER Karl (178)</a>
->>> print(settings.SITE.kernel.extjs_renderer.instance_handler(ar, cli))
+>>> print(settings.SITE.kernel.extjs_renderer.instance_handler(ar, cli, None))
 Lino.pcsw.Clients.detail.run(null,{ "record_id": 178 })
 >>> print(E.tostring(p.get_mti_buttons(ar)))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
