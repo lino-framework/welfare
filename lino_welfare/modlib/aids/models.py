@@ -664,7 +664,7 @@ simple aid during a given period.
 class SimpleConfirmations(Confirmations):
     model = 'aids.SimpleConfirmation'
     required_roles = dd.required(AidsUser)
-    detail_layout = dd.FormLayout("""
+    detail_layout = dd.DetailLayout("""
     id client user signer workflow_buttons
     granting start_date end_date
     # confirmation_text
@@ -683,7 +683,7 @@ class AllSimpleConfirmations(SimpleConfirmations):
 
 class SimpleConfirmationsByGranting(SimpleConfirmations):
     master_key = 'granting'
-    insert_layout = dd.FormLayout("""
+    insert_layout = dd.InsertLayout("""
     start_date end_date
     company contact_person language
     remark
@@ -733,7 +733,7 @@ class IncomeConfirmations(Confirmations):
     model = 'aids.IncomeConfirmation'
     required_roles = dd.required(AidsUser)
 
-    detail_layout = dd.FormLayout("""
+    detail_layout = dd.DetailLayout("""
     client user signer workflow_buttons printed
     company contact_person language
     granting:25 start_date end_date
@@ -757,7 +757,7 @@ class IncomeConfirmationsByGranting(IncomeConfirmations):
     """
     master_key = 'granting'
 
-    insert_layout = dd.FormLayout("""
+    insert_layout = dd.InsertLayout("""
     client granting:25
     start_date end_date
     category amount
@@ -917,7 +917,7 @@ class RefundConfirmations(Confirmations):
     model = 'aids.RefundConfirmation'
     required_roles = dd.required(AidsUser)
 
-    detail_layout = dd.FormLayout("""
+    detail_layout = dd.DetailLayout("""
     id client user signer workflow_buttons
     granting:25 start_date end_date
     doctor_type doctor pharmacy
@@ -937,7 +937,7 @@ class AllRefundConfirmations(RefundConfirmations):
 
 class RefundConfirmationsByGranting(RefundConfirmations):
     master_key = 'granting'
-    insert_layout = dd.FormLayout("""
+    insert_layout = dd.InsertLayout("""
     # client granting:25
     start_date end_date
     doctor_type doctor pharmacy

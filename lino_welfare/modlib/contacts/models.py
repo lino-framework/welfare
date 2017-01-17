@@ -115,6 +115,11 @@ für neue Operationen nicht benutzt werden können.""")
     #     return "%s (%s)" % (s, self.pk)
 
 
+# Lino Welfare uses the `overview` field only in detail forms, and we
+# don't want it to have a label "Description":
+dd.update_field(Partner, 'overview', verbose_name=None)    
+
+
 class PartnerDetail(PartnerDetailMixin, PartnerDetail):
 
     main = "general contact ledger misc"

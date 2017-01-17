@@ -134,9 +134,9 @@ to not work (bug has been fixed :blogref:`20150227`) :
 >>> ses = rt.login('robin')
 >>> ar = contacts.Partners.request_from(ses)
 >>> print(cli.get_detail_action(ses))
-<BoundAction(pcsw.Clients, <ShowDetailAction detail ('Detail')>)>
+<BoundAction(pcsw.Clients, <ShowDetail detail ('Detail')>)>
 >>> print(cli.get_detail_action(ar))
-<BoundAction(pcsw.Clients, <ShowDetailAction detail ('Detail')>)>
+<BoundAction(pcsw.Clients, <ShowDetail detail ('Detail')>)>
 
 And this tests a potential source of problems in `E.tostring` which I
 removed at the same time:
@@ -149,7 +149,7 @@ removed at the same time:
 
 >>> print(E.tostring(ar.obj2html(cli)))
 <a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 178 })">KELLER Karl (178)</a>
->>> print(settings.SITE.kernel.extjs_renderer.instance_handler(ar, cli))
+>>> print(settings.SITE.kernel.extjs_renderer.instance_handler(ar, cli, None))
 Lino.pcsw.Clients.detail.run(null,{ "record_id": 178 })
 >>> print(E.tostring(p.get_mti_buttons(ar)))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF

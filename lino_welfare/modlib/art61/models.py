@@ -152,7 +152,7 @@ dd.update_field(Contract, 'user', verbose_name=_("responsible (IS)"))
 dd.update_field(Contract, 'company', blank=False, null=False)
 
 
-class ContractDetail(dd.FormLayout):
+class ContractDetail(dd.DetailLayout):
     box1 = """
     id:8 client:25 user:15 language:8
     type company contact_person contact_role

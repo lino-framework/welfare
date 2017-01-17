@@ -135,7 +135,7 @@ dd.update_field(Upload, 'end_date', verbose_name=_("Valid until"))
 #     Upload, 'upload_area', default=UploadAreas.job_search.as_callable)
 
 
-class UploadDetail(dd.FormLayout):
+class UploadDetail(dd.DetailLayout):
     "The Detail layout for Upload"
 
     main = """

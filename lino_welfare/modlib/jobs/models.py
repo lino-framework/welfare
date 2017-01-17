@@ -303,7 +303,7 @@ class Contract(JobSupplyment):
 dd.update_field(Contract, 'user', verbose_name=_("responsible (IS)"))
 
 
-class ContractDetail(dd.FormLayout):
+class ContractDetail(dd.DetailLayout):
     box1 = """
     id:8 client:25 user:15 user_asd:15 language:8
     job type company contact_person contact_role
@@ -335,7 +335,7 @@ class Contracts(isip.ContractBaseTable):
     order_by = ['id']
     active_fields = 'job company contact_person contact_role'
     detail_layout = ContractDetail()
-    insert_layout = dd.FormLayout("""
+    insert_layout = dd.InsertLayout("""
     client
     job
     """, window_size=(60, 'auto'))

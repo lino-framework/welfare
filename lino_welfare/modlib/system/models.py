@@ -101,7 +101,7 @@ dd.update_field(SiteConfig, 'signer1', blank=True, null=True)
 dd.update_field(SiteConfig, 'signer2', blank=True, null=True)
 
 
-class SiteConfigDetail(dd.FormLayout):
+class SiteConfigDetail(dd.DetailLayout):
 
     main = "general constants cbss"
 

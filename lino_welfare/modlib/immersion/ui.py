@@ -62,7 +62,7 @@ class ContractTypes(dd.Table):
     """
 
 
-class ContractDetail(dd.FormLayout):
+class ContractDetail(dd.DetailLayout):
     box1 = """
     id:8 client:25 user:15 language:8
     type goal company contact_person contact_role

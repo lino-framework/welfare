@@ -129,7 +129,7 @@ class ActorsByPartner(Actors):
     editable = False
 
 
-class BudgetDetail(dd.FormLayout):
+class BudgetDetail(dd.DetailLayout):
     """Defines the Detail form of a :class:`Budget`.
 
     """

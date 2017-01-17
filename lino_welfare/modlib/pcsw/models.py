@@ -749,7 +749,7 @@ class Clients(contacts.Persons):
     model = 'pcsw.Client'
     params_panel_hidden = True
 
-    insert_layout = dd.FormLayout("""
+    insert_layout = dd.InsertLayout("""
     first_name last_name
     national_id
     gender language

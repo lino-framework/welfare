@@ -74,10 +74,10 @@ Let's have a closer look the `insert_layout` in question.
 
 >>> layout = aids.IncomeConfirmationsByGranting.insert_layout
 
-Yes it is a :class:`lino.core.layouts.FormLayout`:
+Yes it is a :class:`lino.core.layouts.InsertLayout`:
 
 >>> layout.__class__
-<class 'lino.core.layouts.FormLayout'>
+<class 'lino.core.layouts.InsertLayout'>
 
 And its `hidden_elements` has only those fields which I actually want
 to be hidden:
@@ -102,7 +102,7 @@ been "compiled" for a given user interface, in our case
 
 >>> lh = layout.get_layout_handle(dd.plugins.extjs)
 >>> print(lh)
-LayoutHandle for FormLayout on aids.IncomeConfirmationsByGranting
+LayoutHandle for InsertLayout on aids.IncomeConfirmationsByGranting
 
 >>> lh.main.__class__
 <class 'lino.modlib.extjs.elems.DetailMainPanel'>
