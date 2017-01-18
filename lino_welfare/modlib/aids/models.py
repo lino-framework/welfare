@@ -589,8 +589,8 @@ class ConfirmationsByGranting(dd.VirtualTable):
             return []
         ct = mi.aid_type.confirmation_type
         if not ct:
-            return []
-        return ct.model.objects.filter(granting=mi).order_by()
+            return ct.model.objects.none()
+        return ct.model.objects.filter(granting=mi).order_by('-created')
 
     @classmethod
     def get_pk_field(self):
