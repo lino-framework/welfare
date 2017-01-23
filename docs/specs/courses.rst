@@ -1,4 +1,4 @@
-.. _welfare.specs.courses:
+.. _welfare.specs.xcourses:
 
 ================
 External courses
@@ -11,7 +11,7 @@ External courses
     doctest init:
     
     >>> from lino import startup
-    >>> startup('lino_welfare.projects.std.settings.doctests')
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
     >>> ses = settings.SITE.login('rolf')
 
@@ -22,42 +22,42 @@ External courses
 
 
 This is about *external* courses
-:mod:`lino_welfare.modlib.courses.models` (not :doc:`courses2`).
+:mod:`lino_welfare.modlib.xcourses.models` (not :doc:`courses2`).
 
->>> rt.models.courses.__name__
-'lino_welfare.modlib.courses.models'
+>>> rt.models.xcourses.__name__
+'lino_welfare.modlib.xcourses.models'
 
 Requesting for JSON data
 ========================
 
 >>> json_fields = 'count rows title success no_data_text param_values'
 >>> kw = dict(fmt='json', limit=10, start=0)
->>> demo_get('rolf', 'api/courses/CourseProviders', json_fields, 3, **kw)
+>>> demo_get('rolf', 'api/xcourses/CourseProviders', json_fields, 3, **kw)
 
 >>> json_fields = 'count rows title success no_data_text'
->>> demo_get('rolf', 'api/courses/CourseOffers', json_fields, 4, **kw)
+>>> demo_get('rolf', 'api/xcourses/CourseOffers', json_fields, 4, **kw)
 
 >>> ContentType = rt.modules.contenttypes.ContentType
 >>> json_fields = 'count rows title success no_data_text param_values'
->>> demo_get('rolf', 'api/courses/PendingCourseRequests', json_fields, 19, **kw)
+>>> demo_get('rolf', 'api/xcourses/PendingCourseRequests', json_fields, 20, **kw)
 
 
 Course providers
 ================
 
->>> ses.show(courses.CourseProviders)
-======= ============ ======== ========= ===== ===== =========
- Name    Adresse      E-Mail   Telefon   GSM   ID    Sprache
-------- ------------ -------- --------- ----- ----- ---------
- KAP     4700 Eupen                            231
- Oikos   4700 Eupen                            230
-======= ============ ======== ========= ===== ===== =========
+>>> ses.show(xcourses.CourseProviders)
+======= ============ ================ ========= ===== ===== =========
+ Name    Adresse      E-Mail-Adresse   Telefon   GSM   ID    Sprache
+------- ------------ ---------------- --------- ----- ----- ---------
+ KAP     4700 Eupen                                    231
+ Oikos   4700 Eupen                                    230
+======= ============ ================ ========= ===== ===== =========
 <BLANKLINE>
 
 Course offers
 =============
 
->>> ses.show(courses.CourseOffers)
+>>> ses.show(xcourses.CourseOffers)
 ==== ========================= =========== ============= ============== ==============
  ID   Name                      Gastrolle   Kursinhalt    Kursanbieter   Beschreibung
 ---- ------------------------- ----------- ------------- -------------- --------------
@@ -67,17 +67,17 @@ Course offers
 ==== ========================= =========== ============= ============== ==============
 <BLANKLINE>
 
->>> ses.show(courses.CourseRequests)  #doctest: +ELLIPSIS
-==== ============================ ============= ============= ============== ============================== ========= =============== =========== ==========
- ID   Klient                       Kursangebot   Kursinhalt    Anfragedatum   professionelle Eingliederung   Zustand   Kurs gefunden   Bemerkung   Enddatum
----- ---------------------------- ------------- ------------- -------------- ------------------------------ --------- --------------- ----------- ----------
- 20   LAZARUS Line (144)                         Französisch   14.04.14       Nein                           Offen
- 19   LAMBERTZ Guido (142)                       Deutsch       16.04.14       Nein                           Offen
- 18   KELLER Karl (178)                          Französisch   18.04.14       Nein                           Offen
+>>> ses.show(xcourses.CourseRequests)  #doctest: +ELLIPSIS
+==== ============================= ============= ============= ============== ============================== ========= =============== =========== ==========
+ ID   Klient                        Kursangebot   Kursinhalt    Anfragedatum   professionelle Eingliederung   Zustand   Kurs gefunden   Bemerkung   Enddatum
+---- ----------------------------- ------------- ------------- -------------- ------------------------------ --------- --------------- ----------- ----------
+ 20   RADERMACHER Edgard (157)                    Französisch   14.04.14       Nein                           Offen
+ 19   RADERMACHER Christian (155)                 Deutsch       16.04.14       Nein                           Offen
+ 18   RADERMACHER Alfons (153)                    Französisch   18.04.14       Nein                           Offen
  ...
- 2    BRECHT Bernd (177)                         Französisch   20.05.14       Nein                           Offen
- 1    AUSDEMWALD Alfons (116)                    Deutsch       22.05.14       Nein                           Offen
-==== ============================ ============= ============= ============== ============================== ========= =============== =========== ==========
+ 2    COLLARD Charlotte (118)                     Französisch   20.05.14       Nein                           Offen
+ 1    AUSDEMWALD Alfons (116)                     Deutsch       22.05.14       Nein                           Offen
+==== ============================= ============= ============= ============== ============================== ========= =============== =========== ==========
 <BLANKLINE>
 
 
@@ -102,28 +102,28 @@ the bug is hidden.
 
 For example:
 
->>> ses.show(courses.PendingCourseRequests,
+>>> ses.show(xcourses.PendingCourseRequests,
 ...      column_names="personX content urgent address person.coachings")
 Traceback (most recent call last):
   ...
-Exception: ColumnsLayout on courses.PendingCourseRequests has no data element 'personX'
+Exception: ColumnsLayout on xcourses.PendingCourseRequests has no data element 'personX'
 
 
->>> ses.show(courses.PendingCourseRequests,
+>>> ses.show(xcourses.PendingCourseRequests,
 ...      column_names="person__foo content urgent address person.coachings")
 Traceback (most recent call last):
   ...
-Exception: ColumnsLayout on courses.PendingCourseRequests has no data element 'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))'
+Exception: ColumnsLayout on xcourses.PendingCourseRequests has no data element 'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))'
 
 
->>> ses.show(courses.PendingCourseRequests,
+>>> ses.show(xcourses.PendingCourseRequests,
 ...      column_names="person content urgent address person__foo")
 Traceback (most recent call last):
   ...
-Exception: ColumnsLayout on courses.PendingCourseRequests has no data element 'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))'
+Exception: ColumnsLayout on xcourses.PendingCourseRequests has no data element 'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))'
 
 >>> settings.SITE.catch_layout_exceptions = False
->>> ses.show(courses.PendingCourseRequests,
+>>> ses.show(xcourses.PendingCourseRequests,
 ...      column_names="person content urgent address person__foo")
 Traceback (most recent call last):
   ...
@@ -137,44 +137,44 @@ Yes it was a nice feature to silently ignore non installed app_labels
 but mistakenly specifying "person.first_name" instead of
 "person__first_name" did not raise an error. Now it does:
 
->>> ses.show(courses.PendingCourseRequests,
+>>> ses.show(xcourses.PendingCourseRequests,
 ...      column_names="person.first_name content urgent address")
 Traceback (most recent call last):
   ...
-Exception: ColumnsLayout on courses.PendingCourseRequests has no data element 'person.first_name'
+Exception: ColumnsLayout on xcourses.PendingCourseRequests has no data element 'person.first_name'
 
 And then the following example failed because Lino simply wasn't yet 
 able to render RemoteFields as rst.
 
 >>> with translation.override('fr'):
-...    ses.show(courses.PendingCourseRequests, limit=5,
+...    ses.show(xcourses.PendingCourseRequests, limit=5,
 ...       column_names="person__first_name content urgent address")
-======== ============= ======================= ===========================
- Prénom   Contenu       cause professionnelle   Adresse
--------- ------------- ----------------------- ---------------------------
- Line     Französisch   Non                     Heidberg, 4700 Eupen
- Guido    Deutsch       Non                     Haasstraße, 4700 Eupen
- Karl     Französisch   Non                     Allemagne
- Karl     Deutsch       Non                     Haasberg, 4700 Eupen
- Josef    Französisch   Non                     Gülcherstraße, 4700 Eupen
-======== ============= ======================= ===========================
+=========== ============= ======================= =================================
+ Prénom      Contenu       cause professionnelle   Adresse
+----------- ------------- ----------------------- ---------------------------------
+ Edgard      Französisch   Non                     4730 Raeren
+ Christian   Deutsch       Non                     4730 Raeren
+ Alfons      Französisch   Non                     4730 Raeren
+ Erna        Deutsch       Non                     4730 Raeren
+ Melissa     Französisch   Non                     Herbesthaler Straße, 4700 Eupen
+=========== ============= ======================= =================================
 <BLANKLINE>
 
 The virtual field `dsbe.Client.coachings` shows all active coachings
 of a client:
 
 >>> with translation.override('fr'):
-...    ses.show(courses.PendingCourseRequests,limit=5,
+...    ses.show(xcourses.PendingCourseRequests,limit=5,
 ...      column_names="person content person__coaches")
-====================== ============= =================================================
- Bénéficiaire           Contenu       Intervenants
----------------------- ------------- -------------------------------------------------
- LAZARUS Line (144)     Französisch   Mélanie Mélard, Hubert Huppertz, Mélanie Mélard
- LAMBERTZ Guido (142)   Deutsch       Mélanie Mélard, Hubert Huppertz
- KELLER Karl (178)      Französisch   Hubert Huppertz
- KAIVERS Karl (141)     Deutsch       Mélanie Mélard, Alicia Allmanns
- JONAS Josef (139)      Französisch   Caroline Carnol, Hubert Huppertz
-====================== ============= =================================================
+============================= ============= ==================================================
+ Bénéficiaire                  Contenu       Intervenants
+----------------------------- ------------- --------------------------------------------------
+ RADERMACHER Edgard (157)      Französisch   Hubert Huppertz, Mélanie Mélard, Alicia Allmanns
+ RADERMACHER Christian (155)   Deutsch       Caroline Carnol, Mélanie Mélard
+ RADERMACHER Alfons (153)      Französisch   Mélanie Mélard
+ EMONTS-GAST Erna (152)        Deutsch       Alicia Allmanns, Hubert Huppertz
+ MEESSEN Melissa (147)         Französisch   Hubert Huppertz, Mélanie Mélard
+============================= ============= ==================================================
 <BLANKLINE>
 
 The last column `coachings` ("Interventants") is also a new feature:

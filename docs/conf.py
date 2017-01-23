@@ -21,10 +21,6 @@ extensions = []
 from atelier.sphinxconf import configure
 configure(globals(), 'lino_welfare.projects.std.settings.doctests')
 
-# Building the docs for Lino Welfare requires a development version of
-# Lino because we often use :rst:role:`ref` for refering to general
-# Lino docs.
-
 
 from importlib import import_module
 intersphinx_mapping = {}

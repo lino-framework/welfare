@@ -55,6 +55,7 @@ class Site(Site):
         # kw.update(esf=None)
         # kw.update(projects=None)
         kw.update(immersion=None)
+        kw.update(courses=None)
         # kw.update(ledger=None)
         # kw.update(finan=None)
         # kw.update(vatless=None)

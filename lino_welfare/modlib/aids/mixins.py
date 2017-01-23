@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2015 Luc Saffre
+# Copyright 2014-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -79,7 +79,7 @@ class SignConfirmation(dd.Action):
     def get_action_permission(self, ar, obj, state):
         user = ar.get_user()
         if obj.signer_id and obj.signer != user \
-           and not isinstance(user.profile.role, AidsStaff):
+           and not user.profile.has_required_roles([AidsStaff]):
             return False
         return super(SignConfirmation,
                      self).get_action_permission(ar, obj, state)
@@ -110,8 +110,7 @@ class RevokeConfirmation(dd.Action):
 
     def get_action_permission(self, ar, obj, state):
         user = ar.get_user()
-        if obj.signer != user and not isinstance(
-                user.profile.role, AidsStaff):
+        if obj.signer != user and not user.profile.has_required_roles([AidsStaff]):
             return False
         return super(RevokeConfirmation,
                      self).get_action_permission(ar, obj, state)

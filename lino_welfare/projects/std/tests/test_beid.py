@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2016 Luc Saffre
+# Copyright 2014-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -41,7 +41,7 @@ import os
 from lino.utils.djangotest import RemoteAuthTestCase
 from django.utils.datastructures import MultiValueDict
 from lino.utils import ssin
-from lino.api import rt
+from lino.api import dd, rt
 
 
 def readfile(name):
@@ -67,10 +67,9 @@ class BeIdTests(RemoteAuthTestCase):
         from lino.core import constants
         from django.conf import settings
         from lino.modlib.users.choicelists import UserTypes
-        from lino_xl.lib.beid.mixins import holder_model
-        Holder = holder_model()
-        
         from lino.api.shell import countries, addresses, pcsw, users
+        
+        Holder = dd.plugins.beid.holder_model
 
         # is it the right settings module?
         self.assertEqual(os.environ['DJANGO_SETTINGS_MODULE'],

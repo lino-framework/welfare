@@ -40,7 +40,7 @@ Lino Welfare à la Chatelet.
       - **Nom de famille** (last_name)
       - (general2_3): **Prénom** (first_name), **Deuxième prénom** (middle_name)
       - (general2_4): **Date de naissance** (birth_date), **Âge** (age), **Langue** (language)
-    - (general3): **E-mail** (email), **Téléphone** (phone), **Fax** (fax), **GSM** (gsm)
+    - (general3): **adresse e-mail** (email), **Téléphone** (phone), **Fax** (fax), **GSM** (gsm)
     - **None** (image)
   - (general_2): **NISS** (national_id), **Etat civil** (civil_state), **Pays de naissance** (birth_country), **Lieu de naissance** (birth_place), **Nom déclaré** (declared_name), **besoin permis de séjour** (needs_residence_permit), **besoin permis de travail** (needs_work_permit)
   - (general_3): **en Belgique depuis** (in_belgium_since), **Titre de séjour** (residence_type), **Inscription jusque** (residence_until), **Phase d'insertion** (group), **Type d'aide sociale** (aid_type)

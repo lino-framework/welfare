@@ -8,8 +8,8 @@ Choicelists in Lino Welfare
 
     doctest initializations:
 
-    >>> import lino
-    >>> lino.startup('lino_welfare.projects.std.settings.doctests')
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
     
 This document is an overview on the choicelists used in Lino Welfare.
@@ -43,30 +43,31 @@ name to read the documentation):
     ...     print "%s : %s" % (value, unicode(text))
     ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
     accounts.AccountTypes : AccountTypes
-    addresses.AddressTypes : Address types
-    addresses.DataSources : Data sources
+    addresses.AddressTypes : Adressenarten
+    addresses.DataSources : Datenquellen
     aids.AidRegimes : AidRegimes
-    aids.ConfirmationStates : Aid confirmation states
-    aids.ConfirmationTypes : Aid confirmation types
+    aids.ConfirmationStates : Hilfebestätigungszustände
+    aids.ConfirmationTypes : Hilfebescheinigungsarten
     art61.Subsidizations : Subsidizations
-    beid.BeIdCardTypes : eID card types
+    beid.BeIdCardTypes : eID-Kartenarten
+    beid.CivilStates : Zivilstände
+    beid.ResidenceTypes : Residence types
     cal.AccessClasses : AccessClasses
     cal.DurationUnits : DurationUnits
-    cal.EventEvents : Observed events
-    cal.EventStates : Event states
-    cal.GuestStates : Guest states
+    cal.EventEvents : Beobachtungskriterium
+    cal.EventStates : Termin-Zustände
+    cal.GuestStates : Gast-Zustände
     cal.Recurrencies : Recurrencies
-    cal.TaskStates : Task states
+    cal.TaskStates : Aufgaben-Zustände
     cal.Weekdays : Weekdays
     cbss.ManageActions : ManageActions
     cbss.QueryRegisters : QueryRegisters
     cbss.RequestLanguages : RequestLanguages
-    cbss.RequestStates : States
-    changes.ChangeTypes : Change Types
-    contacts.PartnerEvents : Observed events
+    cbss.RequestStates : Zustände
+    changes.ChangeTypes : Änderungsarten
+    contacts.PartnerEvents : Beobachtungskriterium
     countries.PlaceTypes : PlaceTypes
-    courses.CourseRequestStates : States
-    cv.CefLevel : CEF levels
+    cv.CefLevel : CEF-Kategorien
     cv.EducationEntryStates : EducationEntryStates
     cv.HowWell : HowWell
     debts.TableLayouts : Table layouts
@@ -74,38 +75,35 @@ name to read the documentation):
     esf.StatisticalFields : ESF fields
     excerpts.Shortcuts : Excerpt shortcuts
     households.MemberDependencies : Household Member Dependencies
-    households.MemberRoles : Household member roles
-    humanlinks.LinkTypes : Parency types
-    isip.ContractEvents : Observed events
-    isip.OverlapGroups : Overlap groups
-    jobs.CandidatureStates : Candidature states
-    ledger.FiscalYears : Fiscal Years
-    ledger.JournalGroups : Journal groups
-    ledger.PeriodStates : States
-    ledger.TradeTypes : Trade types
-    ledger.VoucherStates : States
-    ledger.VoucherTypes : Voucher types
+    households.MemberRoles : Haushaltsmitgliedsrollen
+    humanlinks.LinkTypes : Verwandschaftsarten
+    isip.ContractEvents : Beobachtungskriterium
+    isip.OverlapGroups : Überlappungsgruppen
+    jobs.CandidatureStates : Kandidatur-Zustände
+    ledger.FiscalYears : Geschäftsjahre
+    ledger.JournalGroups : Journalgruppen
+    ledger.PeriodStates : Zustände
+    ledger.TradeTypes : Handelsarten
+    ledger.VoucherStates : Zustände
+    ledger.VoucherTypes : Belegarten
     notes.SpecialTypes : Special note types
-    notify.MailModes : Email notification modes
+    notify.MailModes : E-Mail-Benachrichtigungsmodi
     notify.MessageTypes : Message Types
     outbox.RecipientTypes : RecipientTypes
-    pcsw.CivilState : Civil states
-    pcsw.ClientEvents : Observed events
-    pcsw.ClientStates : Client states
-    pcsw.RefusalReasons : Refusal reasons
-    pcsw.ResidenceType : ResidenceType
-    plausibility.Checkers : Plausibility checkers
-    polls.PollStates : Poll States
-    polls.ResponseStates : Response States
+    pcsw.ClientEvents : Beobachtungskriterium
+    pcsw.ClientStates : Bearbeitungszustände Klienten
+    pcsw.RefusalReasons : Ablehnungsgründe
+    plausibility.Checkers : Datentests
     printing.BuildMethods : BuildMethods
     properties.DoYouLike : DoYouLike
     properties.HowWell : HowWell
-    sepa.AccountTypes : Account types
+    sepa.AccountTypes : Kontoarten
     system.Genders : Genders
-    system.PeriodEvents : Observed events
-    system.YesNo : Yes or no
+    system.PeriodEvents : Beobachtungskriterium
+    system.YesNo : Ja oder Nein
     uploads.Shortcuts : Upload shortcuts
-    uploads.UploadAreas : Upload Areas
-    users.UserTypes : User types
+    uploads.UploadAreas : Upload-Bereiche
+    users.UserTypes : Benutzerarten
+    xcourses.CourseRequestStates : Zustände
 
 

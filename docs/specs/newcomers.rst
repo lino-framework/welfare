@@ -10,10 +10,8 @@ Newcomers (tested tour)
     
     doctest init:
 
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.eupen.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
 
 This is a tested tour about the :mod:`lino_welfare.modlib.newcomers`
@@ -85,9 +83,9 @@ The newcomers table
 
 >>> rt.show('newcomers.NewClients')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-==================================== =========== ============ ================================ =============== ===== ================================= =========== ======== =========
- Name                                 Zustand     Vermittler   Fachbereich                      NR-Nummer       GSM   Adresse                           Alter       E-Mail   Telefon
------------------------------------- ----------- ------------ -------------------------------- --------------- ----- --------------------------------- ----------- -------- ---------
+==================================== =========== ============ ================================ =============== ===== ================================= =========== ================ =========
+ Name                                 Zustand     Vermittler   Fachbereich                      NR-Nummer       GSM   Adresse                           Alter       E-Mail-Adresse   Telefon
+------------------------------------ ----------- ------------ -------------------------------- --------------- ----- --------------------------------- ----------- ---------------- ---------
  BASTIAENSEN Laurent (117)            Neuantrag                Finanzielle Begleitung           971207 001-67         Am Berg, 4700 Eupen               16 Jahre
  BRAUN Bruno (259)                    Neuantrag                                                                                                         40 Jahre
  DEMEULENAERE Dorothée (122)          Neuantrag                Ausländerbeihilfe                                      Auf'm Rain, 4700 Eupen            unbekannt
@@ -110,7 +108,7 @@ The newcomers table
  RADERMACHER Inge (162)               Neuantrag                DSBE                             730924 002-01         4730 Raeren                       40 Jahre
  VANDENMEULENBOS Marie-Louise (174)   Neuantrag                Finanzielle Begleitung           721019 002-40         Amsterdam, Niederlande            41 Jahre
  DI RUPO Didier (164)                 Neuantrag                Ausländerbeihilfe                711114 001-80         4730 Raeren                       42 Jahre
-==================================== =========== ============ ================================ =============== ===== ================================= =========== ======== =========
+==================================== =========== ============ ================================ =============== ===== ================================= =========== ================ =========
 <BLANKLINE>
 
 

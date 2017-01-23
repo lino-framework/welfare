@@ -169,8 +169,8 @@ class Site(Site):
         yield 'lino_welfare.modlib.art61'
         yield 'lino_welfare.modlib.immersion'
         yield 'lino_welfare.modlib.active_job_search'
-        # chatelet replaces courses by
-        yield 'lino_welfare.modlib.courses'
+        yield 'lino_welfare.projects.chatelet.modlib.courses'
+        yield 'lino_welfare.modlib.xcourses'
         yield 'lino_welfare.modlib.newcomers'
         yield 'lino_welfare.modlib.cbss'  # must come after pcsw
         yield 'lino_welfare.modlib.households'  # must come after pcsw

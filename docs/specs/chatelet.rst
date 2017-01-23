@@ -18,8 +18,8 @@ This document describes the *Châtelet* variant of Lino Welfare.
 
 - uses **internal courses**
   (:mod:`lino_welfare.projects.chatelet.modlib.courses`, a sub-plugin
-  of :mod:`lino.modlib.courses`) instead of **external courses**
-  (:mod:`lino_welfare.modlib.courses`). And the "Courses" are labelled
+  of :mod:`lino_xl.lib.courses`) instead of **external courses**
+  (:mod:`lino_welfare.modlib.xcourses`). And the "Courses" are labelled
   "Workshops" ("Ateliers").
     
 .. contents:: 
@@ -319,7 +319,8 @@ Each window layout defines a given set of fields.
 - courses.Lines.insert : name, name_nl, name_de, name_en, ref, topic, every_unit, every, event_type, description, description_nl, description_de, description_en
 - courses.Slots.detail : name, start_time, end_time
 - courses.Slots.insert : start_time, end_time, name
-- courses.Topics.insert : id, name, name_nl, name_de, name_en
+- courses.Topics.detail : id, name, name_nl, name_de, name_en
+- courses.Topics.insert : name, name_nl, name_de, name_en, id
 - cv.Durations.insert : id, name, name_nl, name_de, name_en
 - cv.EducationLevels.insert : name, name_nl, name_de, name_en, is_study, is_training
 - cv.Experiences.insert : person, start_date, end_date, termination_reason, company, country, city, sector, function, title, status, duration, regime, is_training, remarks
@@ -502,6 +503,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - courses.Lines.insert : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.Slots.detail : visible for admin 910
 - courses.Slots.insert : visible for admin 910
+- courses.Topics.detail : visible for admin 910
 - courses.Topics.insert : visible for admin 910
 - cv.Durations.insert : visible for 110 admin 910
 - cv.EducationLevels.insert : visible for 110 admin 910

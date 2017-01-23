@@ -17,7 +17,7 @@
 # <http://www.gnu.org/licenses/>.
 
 from lino.api import _
-from lino_cosi.lib.courses.desktop import *
+from lino_xl.lib.courses.desktop import *
 
 Enrolments.detail_layout = """
 request_date user

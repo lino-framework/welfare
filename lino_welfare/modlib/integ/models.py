@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2016 Luc Saffre
+# Copyright 2013-2017 Luc Saffre
 
 """
 The :xfile:`models` module for the :mod:`lino_welfare.modlib.integ` app.
@@ -158,14 +158,14 @@ class UsersWithClients(dd.VirtualTable):
 
         """
         u = ar.get_user()
-        if u is None or not isinstance(u.profile.role, dd.SiteAdmin):
+        if u is None or not u.profile.has_required_roles([dd.SiteAdmin]):
             profiles = [p for p in UserTypes.items()
-                        if isinstance(p.role, IntegrationAgent)
-                        and not isinstance(p.role, dd.SiteAdmin)]
+                        if p.has_required_roles([IntegrationAgent])
+                        and not p.has_required_roles([dd.SiteAdmin])]
         else:
             profiles = [
                 p for p in UserTypes.items()
-                if isinstance(p.role, IntegrationAgent)]
+                if p.has_required_roles([IntegrationAgent])]
 
         qs = users.User.objects.filter(profile__in=profiles)
         for user in qs.order_by('username'):

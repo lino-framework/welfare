@@ -69,7 +69,7 @@ class Plugin(ad.Plugin):
         m.add_action('pcsw.Convictions')
         m.add_action('pcsw.AllClients')
         #~ m.add_action(PersonSearches)
-        m.add_action('pcsw.CivilState')
+        m.add_action('beid.CivilStates')
         m.add_action('pcsw.ClientStates')
         m.add_action('beid.BeIdCardTypes')
 

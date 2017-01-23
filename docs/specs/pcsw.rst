@@ -12,8 +12,8 @@ General PCSW
 
   doctest init:
 
-    >>> import lino
-    >>> lino.startup('lino_welfare.projects.std.settings.doctests')
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
 
 A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
@@ -23,6 +23,101 @@ A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
    :depth: 2
 
 
+
+
+Choicelists
+===========
+
+ClientStates
+============
+
+The list of possible choices for the :attr:`Client.client_state` field.
+Default configuration is as follows:
+
+>>> rt.show(pcsw.ClientStates)
+======= ========== ==========
+ value   name       text
+------- ---------- ----------
+ 10      newcomer   Newcomer
+ 20      refused    Refused
+ 30      coached    Coached
+ 50      former     Former
+======= ========== ==========
+<BLANKLINE>
+
+Any person who asks to meet with an agent for consultation will be
+registered into the database.  At the beginning the client is a
+**newcomer**. When the client introduces an application for a
+specific help, he can become **refused** or **coached**. When a
+coached client has no more active coaching, or when a newcomer does
+not come back after his first visit, then somebody with appropriate
+rights should mark the client as **former**.
+
+CivilStates
+===========
+
+>>> rt.show(beid.CivilStates)
+======= ==================== ====================
+ value   name                 text
+------- -------------------- --------------------
+ 10      single               Single
+ 20      married              Married
+ 30      widowed              Widowed
+ 40      divorced             Divorced
+ 50      separated            Separated
+ 51      separated_de_facto   De facto separated
+ 60      cohabitating         Cohabitating
+======= ==================== ====================
+<BLANKLINE>
+
+ResidenceType
+=============
+
+>>> rt.show(beid.ResidenceTypes)
+======= ====== ========================
+ value   name   text
+------- ------ ------------------------
+ 1              Registry of citizens
+ 2              Registry of foreigners
+ 3              Waiting for registry
+======= ====== ========================
+<BLANKLINE>
+
+
+ClientEvents
+============
+
+>>> rt.show(pcsw.ClientEvents)
+=========== =========== ========================
+ value       name        text
+----------- ----------- ------------------------
+ active      active      Coaching
+ created     created     Created
+ modified    modified    Modified
+ dispense    dispense    Dispense
+ penalty     penalty     Penalty
+ note        note        Note
+ learning    learning    Learning
+ isip        isip        ISIP
+ jobs        jobs        Art60§7 job supplyment
+ available   available   Available
+ art61       art61       Art61 job supplyment
+ immersion   immersion   Immersion training
+=========== =========== ========================
+<BLANKLINE>
+
+RefusalReasons
+==============
+
+>>> rt.show(pcsw.RefusalReasons)
+======= ====== ==========================================
+ value   name   text
+------- ------ ------------------------------------------
+ 10             Information request (No coaching needed)
+ 20             PCSW is not competent
+ 30             Client did not return
+======= ====== ==========================================
+<BLANKLINE>
 
 
 

@@ -41,6 +41,7 @@ primitive direct printing method (see :ref:`lino.admin.printing`):
     >>> for m in rt.models_by_base(Printable):
     ...     print m
     <class 'lino_welfare.modlib.cal.models.Event'>
+    <class 'lino_xl.lib.courses.models.Topic'>
     <class 'lino_xl.lib.excerpts.models.Excerpt'>
     <class 'lino_welfare.modlib.notes.models.Note'>
     <class 'lino_xl.lib.outbox.models.Mail'>
@@ -92,6 +93,7 @@ This is the list of excerpt types:
  ManageAccess Request     Yes       Yes
  Tx25 Request             Yes       Yes
  Partner                  No        No           payment_reminder.weasy.html
+ Enrolment                Yes       Yes                                        enrolment.body.html
  Budget                   Yes       Yes
  ESF Summary              Yes       Yes
  Bank Statement           Yes       Yes

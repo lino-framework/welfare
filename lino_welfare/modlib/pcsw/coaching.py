@@ -348,7 +348,7 @@ class Coachings(dd.Table):
 
         """
         
-        if not isinstance(ar.get_user().profile.role, SocialAgent):
+        if not ar.get_user().profile.has_required_roles([SocialAgent]):
         #if not ar.get_user().profile.coaching_level:
             return False
         return super(Coachings, self).get_create_permission(ar)

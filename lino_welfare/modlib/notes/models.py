@@ -57,7 +57,8 @@ class Note(Note):
 
     def get_person(self):
         return self.project
-    Note.person = property(get_person)
+    
+    person = property(get_person)
 
 
 class NoteDetail(NoteDetail):

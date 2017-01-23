@@ -77,7 +77,7 @@ class User(User):
         if not self.profile:
             return
 
-        if not isinstance(self.profile.role, OfficeUser):
+        if not self.profile.has_required_roles([OfficeUser]):
             return
 
         if not self.calendar:
@@ -88,12 +88,12 @@ class User(User):
 
     def check_all_subscriptions(self):
 
-        if not isinstance(self.profile.role, SocialAgent):
+        if not self.profile.has_required_roles([SocialAgent]):
             return
 
         coaching_profiles = set()
         for p in UserTypes.items():
-            if isinstance(p.role, SocialAgent):
+            if p.has_required_roles([SocialAgent]):
                 coaching_profiles.add(p)
         for u in User.objects.filter(
                 profile__in=coaching_profiles).exclude(id=self.id):

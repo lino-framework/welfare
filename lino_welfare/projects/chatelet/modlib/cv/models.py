@@ -110,6 +110,7 @@ class Proof(mixins.BabelNamed):
     """A **proof** is some document which certifies that a given person
     has a given skill."""
     class Meta:
+        app_label = 'cv'
         verbose_name = _("Skill proof")
         verbose_name_plural = _("Skill proofs")
 
@@ -147,6 +148,7 @@ class PropsByPerson(dd.Table):
 class Skill(PersonProperty, SectorFunction):
 
     class Meta:
+        app_label = 'cv'
         verbose_name = _("Skill")
         verbose_name_plural = _("Skills")
 
@@ -172,6 +174,7 @@ class SkillsByPerson(PropsByPerson, Skills):
 
 class SoftSkillType(mixins.BabelNamed):
     class Meta:
+        app_label = 'cv'
         verbose_name = _("Soft skill type")
         verbose_name_plural = _("Soft skill types")
 
@@ -183,6 +186,7 @@ class SoftSkillTypes(dd.Table):
     
 class SoftSkill(PersonProperty):
     class Meta:
+        app_label = 'cv'
         verbose_name = _("Soft skill")
         verbose_name_plural = _("Soft skills")
     type = dd.ForeignKey('cv.SoftSkillType', verbose_name=_("Type"))
@@ -205,6 +209,7 @@ class SoftSkillsByPerson(PropsByPerson, SoftSkills):
 
 class ObstacleType(mixins.BabelNamed):
     class Meta:
+        app_label = 'cv'
         verbose_name = _("Obstacle type")
         verbose_name_plural = _("Obstacle types")
 
@@ -232,6 +237,7 @@ class Obstacle(PersonProperty):
 
     """
     class Meta:
+        app_label = 'cv'
         verbose_name = _("Obstacle")
         verbose_name_plural = _("Obstacles")
     type = dd.ForeignKey('cv.ObstacleType', verbose_name=_("Type"))

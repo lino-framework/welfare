@@ -17,7 +17,7 @@ Plugins which have been written specifically for Lino Welfare:
     welfare
 
     cbss
-    courses
+    xcourses
     debts
     active_job_search
     aids

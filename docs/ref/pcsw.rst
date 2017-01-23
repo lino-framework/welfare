@@ -110,50 +110,6 @@ ClientContact
 
 
 
-Choicelists
-===========
-
-.. class:: ClientStates
-
-  The list of possible choices for the :attr:`Client.client_state` field.
-  Default configuration is as follows:
-
-  .. django2rst:: rt.show(pcsw.ClientStates)
-
-  Any person who asks to meet with an agent for consultation will be
-  registered into the database.  At the beginning the client is a
-  **newcomer**. When the client introduces an application for a
-  specific help, he can become **refused** or **coached**. When a
-  coached client has no more active coaching, or when a newcomer does
-  not come back after his first visit, then somebody with appropriate
-  rights should mark the client as **former**.
-
-.. class:: CivilState
-
-  .. django2rst:: 
-
-      rt.show(pcsw.CivilState)
-
-.. class:: ResidenceType
-
-  .. django2rst:: 
-
-      rt.show(pcsw.ResidenceType)
-
-
-.. class:: ClientEvents
-
-  .. django2rst:: 
-
-      rt.show(pcsw.ClientEvents)
-
-.. class:: RefusalReasons
-
-  .. django2rst:: 
-
-      rt.show(pcsw.RefusalReasons)
-
-
 
 
 Tables and Layouts

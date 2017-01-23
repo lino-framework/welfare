@@ -72,8 +72,8 @@ def objects():
 
     profiles = [
         p for p in UserTypes.items()
-        if isinstance(p.role, IntegrationAgent)
-        and not isinstance(p.role, dd.SiteStaff)]
+        if p.has_required_roles([IntegrationAgent])
+        and not p.has_required_roles([dd.SiteStaff])]
     qs = users.User.objects.filter(profile__in=profiles)
     for u in qs:
         u.newcomer_quota = QUOTAS.pop()

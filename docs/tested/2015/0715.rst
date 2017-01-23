@@ -10,7 +10,6 @@ Reception clerk sees "Career" tab
     
     doctest init:
 
-    >>> from __future__ import print_function
     >>> from lino import startup
     >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.utils.xmlgen.html import E
@@ -78,8 +77,8 @@ Theresia is a reception clerk
 (:class:`lino_welfare.modlib.welfare.roles.ReceptionClerk`):
 
 >>> theresia = users.User.objects.get(username="theresia")
->>> theresia.profile.role.__class__
-<class 'lino_welfare.modlib.welfare.roles.ReceptionClerk'>
+>>> theresia.profile.roles  #doctest: +ELLIPSIS
+set([<lino_welfare.modlib.welfare.roles.ReceptionClerk object at ...>])
 
 And that's not the role required to view this panel:
 
@@ -111,7 +110,7 @@ declare_vars:
 ...             print(ln)
 >>> with_user_profile(theresia.profile, f)
 ... #doctest: +NORMALIZE_WHITESPACE
-[ general_panel877, contact_panel904, coaching_panel1132, aids_tab_panel1227, work_tab_1_panel1256, history_panel1979 ]
+[ general_panel916, contact_panel943, coaching_panel1171, aids_tab_panel1266, work_tab_1_panel1295, history_panel2018 ]
 
 
 I can even render the :file:`lino*.js` files (at least once):
