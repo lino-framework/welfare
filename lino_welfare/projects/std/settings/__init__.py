@@ -103,10 +103,10 @@ class Site(Site):
         add('100', _("First meeting"), 'first_meeting')
 
 
-    def setup_quicklinks(self, ar, tb):
+    def setup_quicklinks(self, user, tb):
         # tb.add_action(self.modules.pcsw.Clients.detail_action)
 
-        super(Site, self).setup_quicklinks(ar, tb)
+        super(Site, self).setup_quicklinks(user, tb)
 
         tb.add_action(self.modules.pcsw.Clients, 'find_by_beid')
         tb.add_action(self.modules.integ.Clients)
