@@ -78,13 +78,13 @@ class ClientDetail(ClientDetail):
 
     coaching = dd.Panel("""
     newcomers_left:20 newcomers.AvailableCoachesByClient:40
-    pcsw.CoachingsByClient:40
+    coachings.CoachingsByClient:40
     """, label=_("Coaches"))
 
     newcomers_left = dd.Panel("""
     workflow_buttons id_document
     faculty:12
-    pcsw.ContactsByClient:20
+    coachings.ContactsByClient:20
     """, required_roles=dd.required((NewcomersAgent, NewcomersOperator)))
 
     suche = dd.Panel("""
@@ -199,8 +199,8 @@ households.SiblingsByPerson.slave_grid_format = 'grid'
 # cv.StudiesByPerson.column_names = "type content start_date end_date \
 # school country success language remarks *"
 
-ContactsByClient.column_names = 'company contact_person remark'
-dd.update_field(ClientContact, 'remark', verbose_name=_("Contact details"))
+# ContactsByClient.column_names = 'company contact_person remark'
+# dd.update_field(ClientContact, 'remark', verbose_name=_("Contact details"))
 
 
 aids = dd.resolve_app('aids')

@@ -36,30 +36,6 @@ Coaching
     Enabling this field will automatically make the other coachings
     non-primary.
 
-ClientContact
--------------
-
-.. class:: ClientContact
-
-    A typed link between a :class:`Client` and a an external partner
-    (a :class:`ml.contacts.Company` and/or a
-    :class:`ml.contacts.Person`).
-
-    Inherits from :class:`ml.contacts.ContactRelated`.
-
-    .. attribute:: client
-
-    The client who uses this link. Pointer to :class:`Client`.
-
-    .. attribute:: company
-
-    The company being linked. 
-
-    .. attribute:: type
-
-    The type of this link. Pointer to :class:`ClientContactType`.
-
-
 .. class:: Dispense
 
 .. class:: Exclusion
@@ -94,19 +70,6 @@ ClientContact
 .. class:: AidType
 
   TODO: Remove this table and replace it by :mod:`welfare.aids`.
-
-.. class:: ClientContactType
-
-  .. django2rst:: rt.show(pcsw.ClientContactTypes)
-
-.. class:: CoachingType
-
-  .. django2rst:: rt.show(pcsw.CoachingTypes)
-
-.. class:: CoachingEnding
-
-  .. django2rst:: rt.show(pcsw.CoachingEndings)
-
 
 
 

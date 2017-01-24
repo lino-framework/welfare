@@ -35,7 +35,6 @@ def objects():
     Upload = rt.modules.uploads.Upload
     UploadType = rt.modules.uploads.UploadType
     Client = rt.modules.pcsw.Client
-    ClientStates = rt.modules.pcsw.ClientStates
 
     # create some random uploads, all uploaded by hubert
     hubert = rt.login('hubert')

@@ -19,6 +19,7 @@ General
    general
    choicelists
    clients
+   coachings
    users
    pcsw
    clients

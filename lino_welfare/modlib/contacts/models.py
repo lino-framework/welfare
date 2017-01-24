@@ -65,8 +65,8 @@ für neue Operationen nicht benutzt werden können.""")
 
     hidden_columns = 'created modified activity'
 
-    client_contact_type = dd.ForeignKey(
-        'pcsw.ClientContactType', blank=True, null=True)
+    # client_contact_type = dd.ForeignKey(
+    #     'coachings.ClientContactType', blank=True, null=True)
 
     def get_overview_elems(self, ar):
         # In the base classes, Partner must come first because
@@ -326,11 +326,6 @@ class CompanyDetail(CompanyDetail, PartnerDetailMixin):
 class Companies(Companies):
     detail_layout = CompanyDetail()
 
-
-class PartnersByClientContactType(Partners):
-    master_key = 'client_contact_type'
-    column_names = "name address_column phone gsm email *"
-    auto_fit_column_widths = True
 
 Partners.set_detail_layout(PartnerDetail())
 Companies.set_detail_layout(CompanyDetail())

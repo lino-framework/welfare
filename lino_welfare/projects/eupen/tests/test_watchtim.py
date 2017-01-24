@@ -112,7 +112,7 @@ Partner = dd.resolve_model('contacts.Partner')
 Company = dd.resolve_model('contacts.Company')
 Person = dd.resolve_model('contacts.Person')
 Client = dd.resolve_model('pcsw.Client')
-Coaching = dd.resolve_model('pcsw.Coaching')
+Coaching = dd.resolve_model('coachings.Coaching')
 Household = dd.resolve_model('households.Household')
 households_Type = dd.resolve_model("households.Type")
 pcsw = dd.resolve_app("pcsw")
@@ -127,10 +127,12 @@ class TestCase(TestCase):
 
     def test00(self):
 
-        ASD = pcsw.CoachingType(id=isip.COACHINGTYPE_ASD, name="ASD")
+        ASD = rt.models.coachings.CoachingType(
+            id=isip.COACHINGTYPE_ASD, name="ASD")
         ASD.save()
 
-        DSBE = pcsw.CoachingType(id=isip.COACHINGTYPE_DSBE, name="DSBE")
+        DSBE = rt.models.coachings.CoachingType(
+            id=isip.COACHINGTYPE_DSBE, name="DSBE")
         DSBE.save()
 
         User(username='watch_tim').save()
@@ -485,7 +487,7 @@ class TestCase(TestCase):
             Dann wird Kunde in TIM (1) zurück nach S versetzt und (2) 
             von ALICIA zu ROGER.
             """
-            coaching = pcsw.Coaching.objects.get(client=obj, primary=True)
+            coaching = rt.models.coachings.Coaching.objects.get(client=obj, primary=True)
             coaching.primary = False
             coaching.save()
             s = coachings_to_rst(obj)
@@ -638,5 +640,5 @@ def changes_to_rst(master):
 
 
 def coachings_to_rst(master):
-    A = settings.SITE.modules.pcsw.CoachingsByClient
+    A = settings.SITE.actors.coachings.CoachingsByClient
     return A.request(master).to_rst()

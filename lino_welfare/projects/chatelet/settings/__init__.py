@@ -21,6 +21,7 @@ The settings.py used for building both `/docs` and `/userdocs`
 """
 
 from lino_welfare.projects.std.settings import *
+from lino.api import _
 
 
 class Site(Site):
@@ -95,18 +96,24 @@ class Site(Site):
             
 
     def do_site_startup(self):
-        
         super(Site, self).do_site_startup()
 
+        from lino.core.inject import update_field
+        # ctt = self.actors.coachings.ClientContactTypes
+        ct = self.models.coachings.ClientContact
+        ct.column_names = "company contact_person remark"
+        update_field(ct, 'remark', verbose_name=_("Contact details"))
+
         from lino.modlib.changes.models import watch_changes as wc
+        
 
         wc(self.modules.contacts.Partner)
         wc(self.modules.contacts.Person, master_key='partner_ptr')
         wc(self.modules.contacts.Company, master_key='partner_ptr')
         wc(self.modules.pcsw.Client, master_key='partner_ptr')
 
-        wc(self.modules.pcsw.Coaching, master_key='client__partner_ptr')
-        wc(self.modules.pcsw.ClientContact, master_key='client__partner_ptr')
+        wc(self.modules.coachings.Coaching, master_key='client__partner_ptr')
+        wc(self.modules.coachings.ClientContact, master_key='client__partner_ptr')
 
 
 # the following line should not be active in a checked-in version

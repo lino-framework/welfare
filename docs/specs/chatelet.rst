@@ -52,7 +52,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-59 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, plausibility, tinymce.
+60 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, uploads, outbox, excerpts, extensible, cal, reception, cosi, accounts, badges, boards, welfare, sales, coachings, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, plausibility, tinymce.
 133 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -90,6 +90,11 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        6
  cbss.Sector                    cbss.Sectors                    11        209
  changes.Change                 changes.Changes                 9         0
+ coachings.ClientContact        coachings.ClientContacts        7         14
+ coachings.ClientContactType    coachings.ClientContactTypes    7         10
+ coachings.Coaching             coachings.Coachings             8         90
+ coachings.CoachingEnding       coachings.CoachingEndings       7         4
+ coachings.CoachingType         coachings.CoachingTypes         8         3
  contacts.Company               contacts.Companies              28        39
  contacts.CompanyType           contacts.CompanyTypes           9         16
  contacts.Partner               contacts.Partners               24        162
@@ -108,7 +113,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cv.EducationLevel              cv.EducationLevels              8         5
  cv.Experience                  cv.Experiences                  17        30
  cv.Function                    cv.Functions                    7         4
- cv.LanguageKnowledge           cv.LanguageKnowledges           9         119
+ cv.LanguageKnowledge           cv.LanguageKnowledges           9         114
  cv.Obstacle                    cv.Obstacles                    6         20
  cv.ObstacleType                cv.ObstacleTypes                5         4
  cv.Proof                       cv.Proofs                       5         4
@@ -165,11 +170,6 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  pcsw.Activity                  pcsw.Activities                 3         0
  pcsw.AidType                   pcsw.AidTypes                   5         0
  pcsw.Client                    pcsw.Clients                    67        63
- pcsw.ClientContact             pcsw.ClientContacts             7         14
- pcsw.ClientContactType         pcsw.ClientContactTypes         7         10
- pcsw.Coaching                  pcsw.Coachings                  8         90
- pcsw.CoachingEnding            pcsw.CoachingEndings            7         4
- pcsw.CoachingType              pcsw.CoachingTypes              8         3
  pcsw.Conviction                pcsw.Convictions                5         0
  pcsw.Dispense                  pcsw.Dispenses                  6         0
  pcsw.DispenseReason            pcsw.DispenseReasons            6         4
@@ -297,6 +297,9 @@ Each window layout defines a given set of fields.
 - cbss.RetrieveTIGroupsRequests.detail : id, person, user, sent, status, printed, national_id, language, history, environment, ticket, info_messages, debug_messages
 - cbss.RetrieveTIGroupsRequests.insert : person, national_id, language, history
 - changes.Changes.detail : time, user, type, master, object, id, diff
+- coachings.ClientContactTypes.insert : id, name, name_nl, name_de, name_en
+- coachings.CoachingEndings.insert : id, name, name_nl, name_de, name_en, seqno
+- coachings.Coachings.create_visit : user, summary
 - contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, id, language, activity, is_obsolete, created, modified
 - contacts.Companies.insert : name, language, email, type, id
 - contacts.Companies.merge_row : merge_to, addresses_Address, reason
@@ -383,14 +386,11 @@ Each window layout defines a given set of fields.
 - notes.Notes.insert : event_type, type, subject, project
 - outbox.Mails.detail : subject, project, date, user, sent, id, owner, AttachmentsByMail, UploadsByController, body
 - outbox.Mails.insert : project, subject, body
-- pcsw.ClientContactTypes.insert : id, name, name_nl, name_de, name_en
 - pcsw.Clients.create_visit : user, summary
 - pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, MembersByPerson, child_custody, LinksByHuman, LanguageKnowledgesByPerson, skills, obstacles, is_seeking, unemployed_since, seeking_since, work_permit_suspended_until, ResponsesByPartner, ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, has_esf, created, modified, remarks
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
-- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, pcsw_Coaching, pcsw_Dispense, cv_LanguageKnowledge, cv_Obstacle, cv_Skill, cv_SoftSkill, addresses_Address, reason
+- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, pcsw_Dispense, cv_LanguageKnowledge, cv_Obstacle, cv_Skill, cv_SoftSkill, addresses_Address, reason
 - pcsw.Clients.refuse_client : reason, remark
-- pcsw.CoachingEndings.insert : id, name, name_nl, name_de, name_en, seqno
-- pcsw.Coachings.create_visit : user, summary
 - plausibility.Checkers.detail : value, text
 - plausibility.Problems.detail : user, owner, checker, id, message
 - polls.AnswerRemarks.insert : remark, response, question
@@ -482,6 +482,9 @@ Each window layout is **viewable** by a given set of user profiles.
 - cbss.RetrieveTIGroupsRequests.detail : visible for 100 110 120 200 210 300 400 410 admin 910
 - cbss.RetrieveTIGroupsRequests.insert : visible for 100 110 120 200 210 300 400 410 admin 910
 - changes.Changes.detail : visible for admin 910
+- coachings.ClientContactTypes.insert : visible for 110 410 admin 910
+- coachings.CoachingEndings.insert : visible for 110 410 admin 910
+- coachings.Coachings.create_visit : visible for 110 410 admin 910
 - contacts.Companies.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Companies.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Companies.merge_row : visible for 110 210 410 800 admin 910
@@ -568,14 +571,11 @@ Each window layout is **viewable** by a given set of user profiles.
 - notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - outbox.Mails.detail : visible for 110 410 admin 910
 - outbox.Mails.insert : visible for 110 410 admin 910
-- pcsw.ClientContactTypes.insert : visible for 110 410 admin 910
 - pcsw.Clients.create_visit : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.Clients.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.Clients.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.Clients.merge_row : visible for 110 210 410 800 admin 910
 - pcsw.Clients.refuse_client : visible for 120 200 220 300 admin 910
-- pcsw.CoachingEndings.insert : visible for 110 410 admin 910
-- pcsw.Coachings.create_visit : visible for 110 410 admin 910
 - plausibility.Checkers.detail : visible for admin 910
 - plausibility.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - polls.AnswerRemarks.insert : visible for 100 110 120 200 300 400 410 admin 910
@@ -645,7 +645,7 @@ Romain
   - Calendrier : Calendriers, Locaux, Priorités, Règles d'évènements récurrents, Rôles de participants, Types d'entrée calendrier, Remote Calendars
   - Comptabilité : Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
-  - CPAS : Phases d'intégration, Activités, types d'exclusions, Services, Raisons d’arrêt d'intervention, Motifs de dispense, Types de contact client, Types d'aide sociale, Catégories 
+  - CPAS : Services, Raisons d’arrêt d'intervention, Types de contact client, Phases d'intégration, Activités, types d'exclusions, Motifs de dispense, Types d'aide sociale, Catégories
   - Parcours : Langues, Types d'éducation, Niveaux académiques, Secteurs, Fonctions, Régimes de travail, Statuts, Types de contrat, Types de compétence sociale, Types de freins, Preuves de qualification
   - Intégration : Types de PIIS, Motifs d’arrêt de contrat, Régimes d'évaluation, Types de mise à l'emploi art60§7, Types de poste, Horaires, Types de mise à l'emploi art.61, Types de stage d'immersion, Objectifs
   - Nouvelles demandes : Intermédiaires, Spécificités
@@ -718,6 +718,8 @@ options.
   (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Ne pas avertir les autres** (notify_silent)
 - cal.Guests.checkin : Arriver
   (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Ne pas avertir les autres** (notify_silent)
+- coachings.Coachings.create_visit : Enregistrer consultation
+  (main) [visible for all]: **Utilisateur** (user), **Raison** (summary)
 - contacts.Companies.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Adresses** (addresses_Address), **Raison** (reason)
 - contacts.Persons.create_household : Créer un ménage
@@ -733,15 +735,13 @@ options.
   - **vers...** (merge_to)
   - **Also reassign volatile related objects** (keep_volatiles):
     - (keep_volatiles_1): **Certificats de revenu** (aids_IncomeConfirmation), **Refund confirmations** (aids_RefundConfirmation)
-    - (keep_volatiles_2): **Confirmations simple** (aids_SimpleConfirmation), **Interventions** (pcsw_Coaching)
+    - (keep_volatiles_2): **Confirmations simple** (aids_SimpleConfirmation), **Interventions** (coachings_Coaching)
     - (keep_volatiles_3): **Dispenses** (pcsw_Dispense), **Connaissances de langue** (cv_LanguageKnowledge)
     - (keep_volatiles_4): **Freins** (cv_Obstacle), **Compétences professionnelles** (cv_Skill)
     - (keep_volatiles_5): **Compétences sociales** (cv_SoftSkill), **Adresses** (addresses_Address)
   - **Raison** (reason)
 - pcsw.Clients.refuse_client : Refuser
   (main) [visible for all]: **Raison de refus** (reason), **Remarque** (remark)
-- pcsw.Coachings.create_visit : Enregistrer consultation
-  (main) [visible for all]: **Utilisateur** (user), **Raison** (summary)
 - users.AllUsers.send_welcome_email : Welcome mail
   (main) [visible for all]: **adresse e-mail** (email), **Subject** (subject)
 - users.Users.change_password : Changer mot de passe
@@ -857,13 +857,13 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Ateliers --> Savoirs de base : 1
 - Configuration --> Ateliers --> Topics : 1
 - Configuration --> Ateliers --> Timetable Slots : 1
+- Configuration --> CPAS --> Services : 4
+- Configuration --> CPAS --> Raisons d’arrêt d'intervention : 5
+- Configuration --> CPAS --> Types de contact client : 11
 - Configuration --> CPAS --> Phases d'intégration : 6
 - Configuration --> CPAS --> Activités : 1
 - Configuration --> CPAS --> types d'exclusions : 3
-- Configuration --> CPAS --> Services : 4
-- Configuration --> CPAS --> Raisons d’arrêt d'intervention : 5
 - Configuration --> CPAS --> Motifs de dispense : 5
-- Configuration --> CPAS --> Types de contact client : 11
 - Configuration --> CPAS --> Types d'aide sociale : 12
 - Configuration --> CPAS --> Catégories : 4
 - Configuration --> Parcours --> Langues : 6
@@ -939,11 +939,11 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> CPAS --> Certificats de revenu : 55
 - Explorateur --> CPAS --> Refund confirmations : 13
 - Explorateur --> CPAS --> Confirmations simple : 20
-- Explorateur --> Parcours --> Connaissances de langue : 120
+- Explorateur --> Parcours --> Connaissances de langue : 115
 - Explorateur --> Parcours --> Formations : 21
 - Explorateur --> Parcours --> Études : 23
 - Explorateur --> Parcours --> Expériences professionnelles : 31
-- Explorateur --> Parcours --> Connaissances de langue : 120
+- Explorateur --> Parcours --> Connaissances de langue : 115
 - Explorateur --> Parcours --> Compétences professionnelles : 1
 - Explorateur --> Parcours --> Compétences sociales : 1
 - Explorateur --> Parcours --> Freins : 21

@@ -50,6 +50,8 @@ reception = dd.resolve_app('reception')
 cal = dd.resolve_app('cal')
 cv = dd.resolve_app('cv')
 
+from lino_xl.lib.coachings.choicelists import ClientStates
+
 Company = dd.resolve_model('contacts.Company')
 
 #~ dblogger.info('Loading')
@@ -59,7 +61,7 @@ CT_GSS = 1
 CT_INTEG = 2
 CT_OTHER = 3
 COACHING_STORIES = dict()
-COACHING_STORIES[pcsw.ClientStates.former] = Cycler(
+COACHING_STORIES[ClientStates.former] = Cycler(
     [
         (-1000, -500, True, CT_GSS)
     ], [
@@ -68,7 +70,7 @@ COACHING_STORIES[pcsw.ClientStates.former] = Cycler(
         (-900, -430, False, CT_GSS),
         (-430, -200, True, CT_GSS),
     ])
-COACHING_STORIES[pcsw.ClientStates.coached] = Cycler(
+COACHING_STORIES[ClientStates.coached] = Cycler(
     # start end primary
     [   # hintereinander betreut durch drei verschiedene Benutzer
         (-810, None, False, CT_GSS),
@@ -150,29 +152,9 @@ Wyggeston and Queen Elizabeth I College
 # taken from https://en.wikipedia.org/wiki/List_of_schools_in_Leicester
 
 
-def unused_coachings(p, type, coach1, coach2, coached_from, coached_until=None):
-    if coach1:
-        yield pcsw.Coaching(
-            project=p,
-            type=type,
-            primary=True,
-            #~ state=pcsw.CoachingStates.active,
-            user=coach1,
-            start_date=coached_from,
-            end_date=coached_until)
-    if coach2:
-        yield pcsw.Coaching(
-            project=p,
-            type=type,
-            #~ state=pcsw.CoachingStates.active,
-            user=coach2,
-            start_date=coached_from,
-            end_date=coached_until)
-
-
 def objects():
 
-    ClientContactType = rt.modules.pcsw.ClientContactType
+    ClientContactType = rt.models.coachings.ClientContactType
 
     Person = resolve_model('contacts.Person')
     Company = resolve_model('contacts.Company')
@@ -220,7 +202,7 @@ def objects():
     yield COLLEAGUE
 
     # id must match `isip.ContactBase.person_changed`
-    ASD = pcsw.CoachingType(
+    ASD = rt.models.coachings.CoachingType(
         id=isip.COACHINGTYPE_ASD,
         does_integ=False,
         does_gss=True,
@@ -234,7 +216,7 @@ def objects():
         ))
     yield ASD
 
-    DSBE = pcsw.CoachingType(
+    DSBE = rt.models.coachings.CoachingType(
         id=isip.COACHINGTYPE_DSBE,
         does_gss=False,
         does_integ=True,
@@ -247,7 +229,7 @@ def objects():
         ))
     yield DSBE
 
-    DEBTS = pcsw.CoachingType(
+    DEBTS = rt.models.coachings.CoachingType(
         does_gss=False,
         does_integ=False,
         **dd.babelkw(
@@ -337,7 +319,7 @@ def objects():
         last_name="Paraneau", profile='910',
         email=settings.SITE.demo_email)
 
-    # for obj in pcsw.CoachingType.objects.all():
+    # for obj in rt.models.coachings.CoachingType.objects.all():
     #     yield users.Team(**dd.babelkw('name', **field2kw(obj, 'name')))
 
     obj = cal.GuestRole(
@@ -556,7 +538,7 @@ def objects():
     yield company(name="Solidaris - Mutualité socialiste et syndicale de la province de Liège", **kw)
 
     fkw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
-    cct = rt.modules.pcsw.ClientContactType.objects.get(**fkw)
+    cct = rt.models.coachings.ClientContactType.objects.get(**fkw)
     kw = dict(client_contact_type=cct, country=belgium, city=eupen)
     yield company(
         name="Apotheke Reul",
@@ -610,7 +592,7 @@ def objects():
         c = mti.insert_child(p, Client)
         for k, v in kw.items():
             setattr(c, k, v)
-        c.client_state = pcsw.ClientStates.coached
+        c.client_state = ClientStates.coached
         c.save()
         return Client.objects.get(pk=p.pk)
 
@@ -649,7 +631,7 @@ def objects():
         city=kettenis, country='BE',
         #~ national_id='1237',
         birth_place="Moskau",  # birth_country='SUHH',
-        client_state=pcsw.ClientStates.newcomer,
+        client_state=ClientStates.newcomer,
         #~ newcomer=True,
         gender=dd.Genders.female)
     yield tatjana
@@ -742,7 +724,7 @@ def objects():
 
     #~ USERS = Cycler(root,melanie,hubert,alicia)
     AGENTS = Cycler(melanie, hubert, alicia, judith)
-    COACHINGTYPES = Cycler(pcsw.CoachingType.objects.filter(
+    COACHINGTYPES = Cycler(rt.models.coachings.CoachingType.objects.filter(
         does_gss=False, does_integ=False))
 
     #~ CLIENTS = Cycler(andreas,annette,hans,ulrike,erna,tatjana)
@@ -762,11 +744,11 @@ def objects():
 
                     count += 1
                     if count % 2:
-                        client.client_state = pcsw.ClientStates.coached
+                        client.client_state = ClientStates.coached
                     elif count % 5:
-                        client.client_state = pcsw.ClientStates.newcomer
+                        client.client_state = ClientStates.newcomer
                     else:
-                        client.client_state = pcsw.ClientStates.former
+                        client.client_state = ClientStates.former
 
                     # Dorothée is three times in our database
                     if client.first_name == "Dorothée":
@@ -778,13 +760,29 @@ def objects():
 
     #~ CLIENTS = Cycler(Client.objects.filter(is_active=True,newcomer=False))
     CLIENTS = Cycler(
-        Client.objects.filter(client_state=pcsw.ClientStates.coached))
+        Client.objects.filter(client_state=ClientStates.coached))
 
     #~ oshz = Company.objects.get(name=u"ÖSHZ Eupen")
 
     #~ project = Instantiator('projects.Project').build
     #~ note = Instantiator('notes.Note').build
-    langk = Instantiator('cv.LanguageKnowledge').build
+    LanguageKnowledge = rt.models.cv.LanguageKnowledge
+    Language = rt.models.languages.Language
+    # langk = Instantiator('cv.LanguageKnowledge').build
+    
+    def langk(person=None, language=None, **kwargs):
+        language = Language.objects.get(pk=language)
+        try:
+            obj = LanguageKnowledge.objects.get(
+                person=person, language=language)
+            for k, v in kwargs.items():
+                setattr(obj, k, v)
+        except LanguageKnowledge.DoesNotExist:
+            obj = LanguageKnowledge(
+                person=person, language=language, **kwargs)
+        obj.full_clean()
+        obj.save()
+        return obj
 
     #~ prj = project(name="Testprojekt",company=oshz)
     #~ yield prj
@@ -1018,19 +1016,16 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         p.nationality_id = country
 
         if i % 3:
-            p.languageknowledge_set.create(
-                language_id='eng', written='3', spoken='3')
+            langk(p, 'eng', written='3', spoken='3')
         elif i % 5:
-            p.languageknowledge_set.create(
-                language_id='eng', written='4', spoken='4')
+            langk(p, 'eng', written='4', spoken='4')
         if p.zip_code == '4700':
-            p.languageknowledge_set.create(language_id='ger', native=True)
+            langk(p,'ger',native=True)
             if i % 2:
-                p.languageknowledge_set.create(
-                    language_id='fre', written='2', spoken='2')
+                langk(p, 'fre', written='2', spoken='2')
             p.is_cpas = True
             #~ p.is_active = True
-            #~ p.client_state = pcsw.ClientStates.coached
+            #~ p.client_state = ClientStates.coached
             #~ p.native_language_id = 'ger'
         p.save()
 
@@ -1056,7 +1051,7 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     PERSONGROUPS = Cycler(pcsw.PersonGroup.objects.all())
     AGENTS_SCATTERED = Cycler(
         alicia, hubert, melanie, caroline, hubert, melanie, hubert, melanie)
-    ENDINGS = Cycler(pcsw.CoachingEnding.objects.all())
+    ENDINGS = Cycler(rt.models.coachings.CoachingEnding.objects.all())
     for client in pcsw.Client.objects.all():
         story = COACHING_STORIES.get(client.client_state)
         if story:
@@ -1083,7 +1078,7 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
                 if b is not None:
                     kw.update(end_date=settings.SITE.demo_date(b))
                     kw.update(ending=ENDINGS.pop())
-                yield pcsw.Coaching(**kw)
+                yield rt.models.coachings.Coaching(**kw)
 
     # every 10th partner is obsolete
 

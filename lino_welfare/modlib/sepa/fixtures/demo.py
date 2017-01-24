@@ -29,13 +29,13 @@ from lino.utils import Cycler
 from lino.api import dd, rt
 
 from django.conf import settings
+from lino_xl.lib.coachings.choicelists import ClientStates
 
 
 def objects():
     yield lib_objects()
 
     Client = rt.modules.pcsw.Client
-    ClientStates = rt.modules.pcsw.ClientStates
     Company = rt.modules.contacts.Company
     Journal = rt.modules.ledger.Journal
     AccountInvoice = rt.modules.vatless.AccountInvoice

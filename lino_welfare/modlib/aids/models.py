@@ -167,7 +167,7 @@ class AidType(ContactRelated, ExcerptTitle):
         help_text=_("Whether grantings for this aid type are to be signed by the client's primary coach."))
 
     pharmacy_type = dd.ForeignKey(
-        'pcsw.ClientContactType', blank=True, null=True)
+        'coachings.ClientContactType', blank=True, null=True)
 
     address_type = AddressTypes.field(
         blank=True, null=True,
@@ -779,7 +779,7 @@ ConfirmationTypes.add_item(IncomeConfirmation, IncomeConfirmationsByGranting)
 
 
 dd.inject_field(
-    'pcsw.ClientContactType',
+    'coachings.ClientContactType',
     'can_refund',
     models.BooleanField(
         _("Can refund"), default=False,
@@ -823,7 +823,7 @@ class RefundConfirmation(Confirmation):
         verbose_name_plural = _("Refund confirmations")
 
     doctor_type = dd.ForeignKey(
-        'pcsw.ClientContactType', verbose_name=_("Doctor type"), blank=True)
+        'coachings.ClientContactType', verbose_name=_("Doctor type"), blank=True)
     doctor = dd.ForeignKey(
         'contacts.Person', verbose_name=_("Doctor"),
         blank=True, null=True)
@@ -858,7 +858,7 @@ class RefundConfirmation(Confirmation):
         if doctor_type:
             fkw.update(client_contact_type=doctor_type)
         else:
-            qs = rt.modules.pcsw.ClientContactType.objects.filter(
+            qs = rt.modules.coachings.ClientContactType.objects.filter(
                 can_refund=True)
             fkw.update(client_contact_type__in=qs)
             
@@ -902,7 +902,7 @@ class RefundConfirmation(Confirmation):
 
     @dd.chooser()
     def doctor_type_choices(cls):
-        return rt.modules.pcsw.ClientContactType.objects.filter(
+        return rt.modules.coachings.ClientContactType.objects.filter(
             can_refund=True)
 
     def full_clean(self):

@@ -205,7 +205,7 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
         obj.national_id = "68060105329"
         obj.first_name = "Jean-Jacques"
         obj.middle_name = ""
-        # obj.client_state = pcsw.ClientStates.coached
+        # obj.client_state = ClientStates.coached
         obj.update_dupable_words()  # avoid repairable message
         obj.full_clean()
         obj.save()

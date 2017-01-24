@@ -32,7 +32,8 @@ from lino.api import dd, rt
 
 from lino_welfare.modlib.newcomers.roles import NewcomersAgent
 
-from .choicelists import RefusalReasons, ClientStates
+from lino_xl.lib.coachings.choicelists import ClientStates
+from .choicelists import RefusalReasons
 
 
 class ChangeStateAction(dd.Action):

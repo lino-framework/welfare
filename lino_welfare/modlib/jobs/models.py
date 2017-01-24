@@ -46,7 +46,8 @@ from lino.utils.report import Report
 
 from lino_xl.lib.cv.mixins import SectorFunction
 
-from lino_welfare.modlib.pcsw.utils import only_coached_on
+from lino_xl.lib.coachings.utils import only_coached_on, has_contracts_filter
+from lino_xl.lib.coachings.choicelists import ClientEvents, ObservedEvent
 
 from lino_welfare.modlib.isip.mixins import (
     ContractTypeBase, ContractPartnerBase, ContractBase)
@@ -60,8 +61,6 @@ contacts = dd.resolve_app('contacts')
 isip = dd.resolve_app('isip')
 
 
-from lino_welfare.modlib.pcsw.choicelists import (
-    ClientEvents, ObservedEvent, has_contracts_filter)
 
 
 class ClientHasContract(ObservedEvent):

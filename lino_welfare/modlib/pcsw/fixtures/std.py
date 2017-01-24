@@ -15,9 +15,8 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
-"""
-Adds default data for `PersonGroup`, `CoachingEnding` and
-`DispenseReason`.
+"""Adds default data for `PersonGroup` and `DispenseReason`.
+
 """
 
 from __future__ import unicode_literals
@@ -45,23 +44,6 @@ def objects():
     #~ yield persongroup(u"Recherche",ref_name='4')
     #~ yield persongroup(u"Travail",ref_name='4bis')
     #~ yield persongroup(u"Standby",ref_name='9',active=False)
-
-    yield pcsw.CoachingEnding(**babelkw('name',
-                                        de="Übergabe an Kollege",
-                                        fr="Transfert vers collègue",
-                                        en="Transfer to colleague",))
-    yield pcsw.CoachingEnding(**babelkw('name',
-                                        de="Einstellung des Anrechts auf SH",
-                                        fr="Arret du droit à l'aide sociale",
-                                        en="End of right on social aid"))
-    yield pcsw.CoachingEnding(**babelkw('name',
-                                        de="Umzug in andere Gemeinde",
-                                        fr="Déménagement vers autre commune",
-                                        en="Moved to another town"))
-    yield pcsw.CoachingEnding(**babelkw('name',
-                                        de="Hat selber Arbeit gefunden",
-                                        fr="A trouvé du travail",
-                                        en="Found a job"))
 
     yield pcsw.DispenseReason(**babelkw('name', de="Gesundheitlich", fr="Santé", en="Health"))
     yield pcsw.DispenseReason(**babelkw('name', de="Studium/Ausbildung", fr="Etude/Formation", en="Studies"))

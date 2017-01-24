@@ -44,7 +44,7 @@ checkers.
  mixins.DupableChecker                   Check for missing phonetic words
  beid.BeIdCardHolderChecker              Check for invalid SSINs
  pcsw.SSINChecker                        Check for valid identification
- pcsw.ClientCoachingsChecker             Check coachings
+ coachings.ClientCoachingsChecker        Check coachings
  isip.OverlappingContractsChecker        Check for overlapping contracts
  ledger.VoucherChecker                   Check integrity of ledger movements
  sepa.BankAccountChecker                 Check for partner mismatches in bank accounts

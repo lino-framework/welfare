@@ -154,7 +154,7 @@ coach to assign?
 
 To find an answer, we must look at the coachings of this client:
 
->>> rt.show(pcsw.CoachingsByClient, obj.client)
+>>> rt.show('coachings.CoachingsByClient', obj.client)
 ============== ============ ================= ========= =============== ============================
  Coached from   until        Coach             Primary   Coaching type   Reason of termination
 -------------- ------------ ----------------- --------- --------------- ----------------------------
@@ -192,7 +192,7 @@ coaching whose type has its :attr:`does_integ
 to `True`. You can configure this via :menuselection:`Configure -->
 PCSW --> Coaching types`. The default configuration is as follows:
 
->>> ses.show(pcsw.CoachingTypes)
+>>> ses.show('coachings.CoachingTypes')
 ================= ===================== =================== ============= ===== =====================
  Designation       Designation (fr)      Designation (de)    Integration   GSS   Role in evaluations
 ----------------- --------------------- ------------------- ------------- ----- ---------------------
@@ -212,10 +212,10 @@ The above is coded in
 
     List of coaches who ended at least one integration coaching:
 
-    >>> integ = pcsw.CoachingType.objects.filter(does_integ=True)
+    >>> integ = coachings.CoachingType.objects.filter(does_integ=True)
     >>> l = []
     >>> for u in users.User.objects.all():
-    ...     qs = pcsw.Coaching.objects.filter(user=u,
+    ...     qs = coachings.Coaching.objects.filter(user=u,
     ...             type__in=integ, end_date__isnull=False)
     ...     if qs.count():
     ...         l.append("%s (%s)" % (u.username, qs[0].end_date))

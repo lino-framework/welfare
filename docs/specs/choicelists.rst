@@ -65,6 +65,8 @@ name to read the documentation):
     cbss.RequestLanguages : RequestLanguages
     cbss.RequestStates : Zustände
     changes.ChangeTypes : Änderungsarten
+    coachings.ClientEvents : Beobachtungskriterium
+    coachings.ClientStates : Bearbeitungszustände Klienten
     contacts.PartnerEvents : Beobachtungskriterium
     countries.PlaceTypes : PlaceTypes
     cv.CefLevel : CEF-Kategorien
@@ -90,8 +92,6 @@ name to read the documentation):
     notify.MailModes : E-Mail-Benachrichtigungsmodi
     notify.MessageTypes : Message Types
     outbox.RecipientTypes : RecipientTypes
-    pcsw.ClientEvents : Beobachtungskriterium
-    pcsw.ClientStates : Bearbeitungszustände Klienten
     pcsw.RefusalReasons : Ablehnungsgründe
     plausibility.Checkers : Datentests
     printing.BuildMethods : BuildMethods

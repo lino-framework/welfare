@@ -34,12 +34,12 @@ lino_welfare.projects.eupen.settings.doctests
 >>> dd.today()
 datetime.date(2014, 5, 22)
 
-Some of the following tests rely on the right value for the
-contenttype id of `pcsw.Client` model. If the following line changes,
-subsequent snippets need to get adapted:
+.. Some of the following tests rely on the right value for the
+   contenttype id of `pcsw.Client` model. If the following line
+   changes, subsequent snippets need to get adapted:
 
->>> contenttypes.ContentType.objects.get_for_model(pcsw.Client).id
-51
+    >>> contenttypes.ContentType.objects.get_for_model(pcsw.Client).id
+    54
 
 Configuring upload types
 ========================
@@ -223,7 +223,7 @@ It has 3 keys:
 >>> d.record_id
 8
 >>> d.base_params
-{u'mt': 51, u'type': 4, u'mk': 121}
+{u'mt': 54, u'type': 4, u'mk': 121}
 >>> print(json.dumps(d.param_values))  #doctest: +NORMALIZE_WHITESPACE
 {"userHidden": null, "upload_typeHidden": null, "end_date": null,
 "observed_eventHidden": "20", "observed_event": "Est active",
@@ -304,7 +304,7 @@ It has 3 keys:
 10
 
 >>> d.base_params
-{u'mt': 51, u'mk': 177, u'type_id': 1}
+{u'mt': 54, u'mk': 177, u'type_id': 1}
 
 >>> d.data_record.keys()
 [u'phantom', u'data', u'title']

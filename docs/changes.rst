@@ -269,7 +269,7 @@ Version 1.1.6 (released :blogref:`20130527`)
   und 
   :ddref:`Art.60§7-Konventionen  <jobs.Contract>`.
   Neues Parameter-Panel für Tabelle
-  :ddref:`Begleitungen <pcsw.Coaching>`, 
+  `Begleitungen`(`pcsw.Coaching`,)
   
   Theoretisch müssten alle besprochenen Datenbank-Abfragen 
   :blogref:`20130516` jetzt machbar sein.

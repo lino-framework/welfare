@@ -659,7 +659,7 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
 
 
 dd.inject_field(
-    'pcsw.ClientContactType',
+    'coachings.ClientContactType',
     'is_bailiff',
     models.BooleanField(
         _("Debt collection agency"), default=False))
@@ -667,7 +667,7 @@ dd.inject_field(
 # dd.inject_field(
 #     'system.SiteConfig',
 #     'debts_bailiff_type',
-#     models.ForeignKey("pcsw.ClientContactType",
+#     models.ForeignKey("coachings.ClientContactType",
 #                       blank=True, null=True,
 #                       verbose_name=_("Bailiff"),
 #                       related_name='bailiff_type_sites',

@@ -23,7 +23,7 @@ from lino.mixins import ObservedPeriod
 from lino.modlib.users.choicelists import UserTypes
 from lino.modlib.system.choicelists import PeriodEvents
 
-from lino.api import dd
+from lino.api import dd, rt
 from .roles import IntegrationAgent
 
 config = dd.plugins.integ
@@ -37,8 +37,10 @@ users = dd.resolve_app('users')
 cv = dd.resolve_app('cv')
 # properties = dd.resolve_app('properties')
 
-from lino_welfare.modlib.pcsw.choicelists import (
-    ClientEvents, ObservedEvent, has_contracts_filter)
+from lino_xl.lib.coachings.utils import has_contracts_filter
+from lino_xl.lib.coachings.choicelists import ClientEvents, ObservedEvent
+from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.coachings.desktop import CoachingEndings
 
 
 class ClientIsAvailable(ObservedEvent):
@@ -98,7 +100,7 @@ class Clients(pcsw.CoachedClients):
     @classmethod
     def param_defaults(self, ar, **kw):
         kw = super(Clients, self).param_defaults(ar, **kw)
-        kw.update(client_state=pcsw.ClientStates.coached)
+        kw.update(client_state=ClientStates.coached)
         kw.update(coached_by=ar.get_user())
         # kw.update(only_primary=True)
         return kw
@@ -174,7 +176,7 @@ class UsersWithClients(dd.VirtualTable):
                 user.my_persons = r
                 yield user
 
-    @dd.virtualfield('pcsw.Coaching.user')
+    @dd.virtualfield('coachings.Coaching.user')
     def user(self, obj, ar):
         return obj
 
@@ -324,7 +326,8 @@ class PeriodicNumbers(dd.VirtualTable):
         if mi is None:
             return
 
-        DSBE = pcsw.CoachingType.objects.get(pk=isip.COACHINGTYPE_DSBE)
+        DSBE = rt.models.coachings.CoachingType.objects.get(
+            pk=isip.COACHINGTYPE_DSBE)
 
         def add(A, **pva):
             #~ pva = dict(**kw)
@@ -343,13 +346,13 @@ class PeriodicNumbers(dd.VirtualTable):
             #~ cells.append(ar)
             #~ return cells
         yield add(
-            pcsw.Coachings,
+            rt.actors.coachings.Coachings,
             observed_event=PeriodEvents.started, coaching_type=DSBE)
         yield add(
-            pcsw.Coachings,
+            rt.actors.coachings.Coachings,
             observed_event=PeriodEvents.active, coaching_type=DSBE)
         yield add(
-            pcsw.Coachings,
+            rt.actors.coachings.Coachings,
             observed_event=PeriodEvents.ended, coaching_type=DSBE)
 
         yield add(pcsw.Clients, observed_event=pcsw.ClientEvents.active)
@@ -364,15 +367,16 @@ class PeriodicNumbers(dd.VirtualTable):
             yield add(A, observed_event=isip.ContractEvents.issued)
 
 
-class CoachingEndingsByUser(dd.VentilatingTable, pcsw.CoachingEndings):
+class CoachingEndingsByUser(dd.VentilatingTable, CoachingEndings):
     label = _("Coaching endings by user")
     hide_zero_rows = True
 
     @classmethod
     def get_ventilated_columns(self):
         try:
-            DSBE = pcsw.CoachingType.objects.get(pk=isip.COACHINGTYPE_DSBE)
-        except pcsw.CoachingType.DoesNotExist:
+            DSBE = rt.models.coachings.CoachingType.objects.get(
+                pk=isip.COACHINGTYPE_DSBE)
+        except rt.models.coachings.CoachingType.DoesNotExist:
             DSBE = None
 
         def w(user):
@@ -386,7 +390,7 @@ class CoachingEndingsByUser(dd.VentilatingTable, pcsw.CoachingEndings):
                 if user is not None:
                     pv.update(coached_by=user)
                 pv.update(ending=obj)
-                return pcsw.Coachings.request(param_values=pv)
+                return rt.actors.coachings.Coachings.request(param_values=pv)
             return func
 
         profiles = [p for p in UserTypes.items()
@@ -397,7 +401,7 @@ class CoachingEndingsByUser(dd.VentilatingTable, pcsw.CoachingEndings):
 
 
 # not currently used
-class CoachingEndingsByType(dd.VentilatingTable, pcsw.CoachingEndings):
+class CoachingEndingsByType(dd.VentilatingTable, CoachingEndings):
 
     label = _("Coaching endings by type")
 
@@ -413,9 +417,10 @@ class CoachingEndingsByType(dd.VentilatingTable, pcsw.CoachingEndings):
                 if ct is not None:
                     pv.update(coaching_type=ct)
                 pv.update(ending=obj)
-                return pcsw.Coachings.request(param_values=pv)
+                return rt.actors.coachings.Coachings.request(
+                    param_values=pv)
             return func
-        for ct in pcsw.CoachingType.objects.all():
+        for ct in rt.models.coachings.CoachingType.objects.all():
             yield dd.RequestField(w(ct), verbose_name=unicode(ct))
         yield dd.RequestField(w(None), verbose_name=_("Total"))
 

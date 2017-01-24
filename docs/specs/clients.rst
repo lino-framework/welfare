@@ -125,7 +125,7 @@ Robin is coached:
 Here are Robin's coachings. Note that Mélanie stopped to coach Robin
 on 08.03.2013:
 
->>> ses.show(pcsw.CoachingsByClient, master_instance=obj, column_names="start_date end_date user primary")
+>>> ses.show('coachings.CoachingsByClient', master_instance=obj, column_names="start_date end_date user primary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ================ ========== ================= ========
  Begleitet seit   bis        Begleiter         Primär 
@@ -143,7 +143,7 @@ different agents at the same time:
 >>> obj = pcsw.Client.objects.get(pk=124)
 >>> obj
 Client #124 ('DOBBELSTEIN Doroth\xe9e (124)')
->>> ses.show(pcsw.CoachingsByClient, master_instance=obj, column_names="start_date end_date user primary")
+>>> ses.show('coachings.CoachingsByClient', master_instance=obj, column_names="start_date end_date user primary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ================ ===== ================= ========
  Begleitet seit   bis   Begleiter         Primär
@@ -159,7 +159,7 @@ A third client is David DA VINCI:
 >>> obj = pcsw.Client.objects.get(pk=165)
 >>> print(obj)
 DA VINCI David (165)
->>> ses.show(pcsw.CoachingsByClient, master_instance=obj, column_names="start_date end_date user primary")
+>>> ses.show('coachings.CoachingsByClient', master_instance=obj, column_names="start_date end_date user primary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ================ ========== ================= ========
  Begleitet seit   bis        Begleiter         Primär

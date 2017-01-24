@@ -19,7 +19,8 @@ Glossaire
 
  
   Titulaire d'un dossier
-    cfr :attr:`welfare.pcsw.Coaching.primary`
+  
+    cfr :attr:`welfare.coachings.Coaching.primary`
 
 
   Parcours d'insertion

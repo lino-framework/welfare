@@ -35,8 +35,9 @@ from lino_xl.lib.cv.mixins import SectorFunction
 from lino_welfare.modlib.isip.mixins import (
     ContractTypeBase, ContractBase, ContractPartnerBase)
 
-from lino_welfare.modlib.pcsw.choicelists import (
-    ClientEvents, ObservedEvent, has_contracts_filter)
+from lino_xl.lib.coachings.choicelists import (
+    ClientEvents, ObservedEvent )
+from lino_xl.lib.coachings.utils import has_contracts_filter
 
 
 class ClientHasContract(ObservedEvent):

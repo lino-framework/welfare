@@ -200,7 +200,7 @@ Some choices lists:
 >>> kw = dict()
 >>> fields = 'count rows'
 >>> demo_get(
-...    'rolf', 'choices/pcsw/ContactsByClient/company?type=1', fields, 4, **kw)
+...    'rolf', 'choices/coachings/ContactsByClient/company?type=1', fields, 4, **kw)
 
 >>> demo_get(
 ...    'rolf', 'choices/aids/IncomeConfirmations/aid_type', fields, 11, **kw)
@@ -298,6 +298,7 @@ see it.
 - cbss.MyRetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
 - cbss.RetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
 - cbss.RetrieveTIGroupsRequestsByPerson.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
+- coachings.CoachingEndings.duplicate : visible for 110 410 admin 910
 - countries.Places.duplicate : visible for 110 210 410 800 admin 910
 - countries.PlacesByCountry.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - countries.PlacesByPlace.duplicate : visible for 110 210 410 800 admin 910
@@ -365,7 +366,6 @@ see it.
 - notes.NotesByProject.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - notes.NotesByType.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - notes.NotesByX.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- pcsw.CoachingEndings.duplicate : visible for 110 410 admin 910
 - pcsw.DispenseReasons.duplicate : visible for 110 410 admin 910
 - polls.Choices.duplicate : visible for 110 410 admin 910
 - polls.ChoicesBySet.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910

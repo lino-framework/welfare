@@ -29,6 +29,7 @@ from lino.api.dd import babel_values
 from lino.api import dd
 from lino.modlib.users.choicelists import UserTypes
 from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino_xl.lib.coachings.choicelists import ClientStates
 
 
 def objects():
@@ -61,7 +62,7 @@ def objects():
     #~ USERS = Cycler(User.objects.filter(profile__in=profiles))
     #~ for i in range(7):
         #~ yield Competence(user=USERS.pop(),faculty=FACULTIES.pop())
-    #~ for p in pcsw.Client.objects.filter(client_state=pcsw.ClientStates.new):
+    #~ for p in pcsw.Client.objects.filter(client_state=ClientStates.new):
         #~ p.faculty = FACULTIES.pop()
         #~ p.save()
     newcomers = dd.resolve_app('newcomers')
@@ -84,6 +85,6 @@ def objects():
         yield newcomers.Competence(user=USERS.pop(), faculty=FACULTIES.pop())
 
         for p in pcsw.Client.objects.exclude(
-                client_state=pcsw.ClientStates.former):
+                client_state=ClientStates.former):
             p.faculty = FACULTIES.pop()
             p.save()

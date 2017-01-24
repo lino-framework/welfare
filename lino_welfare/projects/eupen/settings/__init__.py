@@ -76,6 +76,14 @@ class Site(Site):
             yield self.actors.notify.MyMessages
 
     def do_site_startup(self):
+        ctt = self.actors.coachings.ClientContactTypes
+        ctt.set_detail_layout("""
+        id name can_refund is_bailiff
+        coachings.PartnersByClientContactType
+        coachings.ClientContactsByType
+        """)
+        ctt.column_names = "id name can_refund is_bailiff"
+            
         super(Site, self).do_site_startup()
 
         from lino.modlib.changes.models import watch_changes as wc
@@ -85,8 +93,8 @@ class Site(Site):
         wc(self.modules.contacts.Company, master_key='partner_ptr')
         wc(self.modules.pcsw.Client, master_key='partner_ptr')
 
-        wc(self.modules.pcsw.Coaching, master_key='client__partner_ptr')
-        wc(self.modules.pcsw.ClientContact, master_key='client__partner_ptr')
+        wc(self.modules.coachings.Coaching, master_key='client__partner_ptr')
+        wc(self.modules.coachings.ClientContact, master_key='client__partner_ptr')
         wc(self.modules.jobs.Candidature, master_key='person__partner_ptr')
 
         # ContractBase is abstract, so it's not under self.modules
