@@ -192,11 +192,12 @@ Einfügen in Klienten (Begleitet)
 There are a lot of data fields:
 
 >>> len(d.data.keys())
-69
+70
 
 >>> print(' '.join(sorted(d.data.keys())))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
-AgentsByClient ExcerptsByProject LinksByHuman MembersByPerson
+AgentsByClient ExcerptsByProject LanguageKnowledgesByPerson
+LinksByHuman MembersByPerson
 MovementsByProject SimilarClients UploadsByClient activity
 activityHidden age birth_country birth_countryHidden birth_date
 birth_place broker brokerHidden cbss_relations civil_state

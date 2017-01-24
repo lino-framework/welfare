@@ -375,6 +375,7 @@ Each window layout defines a given set of fields.
 - cv.Experiences.insert : person, start_date, end_date, termination_reason, company, country, city, sector, function, title, status, duration, regime, is_training, remarks
 - cv.ExperiencesByPerson.insert : start_date, end_date, company, function
 - cv.Functions.insert : id, name, name_fr, name_en, sector, remark
+- cv.LanguageKnowledgesByPerson.insert : language, native, cef_level, spoken_passively, spoken, written
 - cv.Regimes.insert : id, name, name_fr, name_en
 - cv.Sectors.insert : id, name, name_fr, name_en, remark
 - cv.Statuses.insert : id, name, name_fr, name_en
@@ -440,7 +441,7 @@ Each window layout defines a given set of fields.
 - outbox.Mails.insert : project, subject, body
 - pcsw.ClientContactTypes.insert : id, name, name_fr, name_en, can_refund, is_bailiff
 - pcsw.Clients.create_visit : user, summary
-- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, SimilarClients, LinksByHuman, cbss_relations, MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, aid_type, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, UploadsByClient, cvs_emitted, skills, obstacles, ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
+- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, SimilarClients, LinksByHuman, cbss_relations, MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, aid_type, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, UploadsByClient, cvs_emitted, LanguageKnowledgesByPerson, skills, obstacles, ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, cv_LanguageKnowledge, dupable_clients_Word, pcsw_Coaching, pcsw_Dispense, properties_PersonProperty, addresses_Address, sepa_Account, reason
 - pcsw.Clients.refuse_client : reason, remark
@@ -562,6 +563,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - cv.Experiences.insert : visible for 110 admin 910
 - cv.ExperiencesByPerson.insert : visible for 100 110 120 admin 910
 - cv.Functions.insert : visible for 110 admin 910
+- cv.LanguageKnowledgesByPerson.insert : visible for 100 110 120 admin 910
 - cv.Regimes.insert : visible for 110 admin 910
 - cv.Sectors.insert : visible for 110 admin 910
 - cv.Statuses.insert : visible for 110 admin 910

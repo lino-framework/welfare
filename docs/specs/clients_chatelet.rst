@@ -70,9 +70,7 @@ Lino Welfare à la Chatelet.
     - **Compétences professionnelles** (cv.SkillsByPerson) [visible for 100 110 120 admin 910]
     - **Tests de niveau** (badges.AwardsByHolder)
     - **Compétences sociales** (cv.SoftSkillsByPerson) [visible for 100 110 120 admin 910]
-  - (competences_2) [visible for all]:
-    - **Connaissances de langue** (cv.LanguageKnowledgesByPerson) [visible for 100 110 120 admin 910]
-    - **Autres atouts** (skills)
+  - (competences_2) [visible for all]: **Connaissances de langue** (LanguageKnowledgesByPerson) [visible for 100 110 120 admin 910], **Autres atouts** (skills)
 - **Freins** (obstacles_tab) [visible for 100 110 120 admin 910]:
   - (obstacles_tab_1) [visible for 100 110 120 200 300 400 410 admin 910]:
     - **Freins** (cv.ObstaclesByPerson) [visible for 100 110 120 admin 910]

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2016 Luc Saffre
+# Copyright 2014-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -51,15 +51,14 @@ class JobEnrolmentsByPupil(EnrolmentsByPupil):
 
 
 class ActiveCourses(ActiveCourses):
-
     label = _("Active workshops")
-    column_names = 'info enrolments free_places teacher room description *'
+    column_names = 'overview enrolments free_places room description *'
     hide_sums = True
 
 
 class DraftCourses(DraftCourses):
     label = _("Draft workshops")
-    column_names = 'info teacher room description *'
+    column_names = 'overview room description *'
 
 
 class InactiveCourses(InactiveCourses):

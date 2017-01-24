@@ -94,7 +94,7 @@ Lino Welfare à la Eupen.
       - **Ausbildungen** (cv.TrainingsByPerson)
       - **Berufserfahrungen** (cv.ExperiencesByPerson)
     - **Sprachen** (languages) [visible for 100 110 120 200 300 400 410 admin 910]:
-      - **Sprachkenntnisse** (cv.LanguageKnowledgesByPerson) [visible for 100 110 120 admin 910]
+      - **Sprachkenntnisse** (LanguageKnowledgesByPerson) [visible for 100 110 120 admin 910]
       - **Kursanfragen** (xcourses.CourseRequestsByPerson)
     - **Kompetenzen** (competences) [visible for 100 110 120 admin 910]:
       - (competences_1) [visible for all]:
