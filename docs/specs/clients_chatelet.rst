@@ -40,7 +40,7 @@ Lino Welfare à la Chatelet.
       - **Nom de famille** (last_name)
       - (general2_3): **Prénom** (first_name), **Deuxième prénom** (middle_name)
       - (general2_4): **Date de naissance** (birth_date), **Âge** (age), **Langue** (language)
-    - (general3): **E-mail** (email), **Téléphone** (phone), **Fax** (fax), **GSM** (gsm)
+    - (general3): **adresse e-mail** (email), **Téléphone** (phone), **Fax** (fax), **GSM** (gsm)
     - **None** (image)
   - (general_2): **NISS** (national_id), **Etat civil** (civil_state), **Pays de naissance** (birth_country), **Lieu de naissance** (birth_place), **Nom déclaré** (declared_name), **besoin permis de séjour** (needs_residence_permit), **besoin permis de travail** (needs_work_permit)
   - (general_3): **en Belgique depuis** (in_belgium_since), **Titre de séjour** (residence_type), **Inscription jusque** (residence_until), **Phase d'insertion** (group), **Type d'aide sociale** (aid_type)
@@ -70,9 +70,7 @@ Lino Welfare à la Chatelet.
     - **Compétences professionnelles** (cv.SkillsByPerson) [visible for 100 110 120 admin 910]
     - **Tests de niveau** (badges.AwardsByHolder)
     - **Compétences sociales** (cv.SoftSkillsByPerson) [visible for 100 110 120 admin 910]
-  - (competences_2) [visible for all]:
-    - **Connaissances de langue** (cv.LanguageKnowledgesByPerson) [visible for 100 110 120 admin 910]
-    - **Autres atouts** (skills)
+  - (competences_2) [visible for all]: **Connaissances de langue** (LanguageKnowledgesByPerson) [visible for 100 110 120 admin 910], **Autres atouts** (skills)
 - **Freins** (obstacles_tab) [visible for 100 110 120 admin 910]:
   - (obstacles_tab_1) [visible for 100 110 120 200 300 400 410 admin 910]:
     - **Freins** (cv.ObstaclesByPerson) [visible for 100 110 120 admin 910]

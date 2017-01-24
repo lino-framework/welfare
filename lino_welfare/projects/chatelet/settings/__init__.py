@@ -47,15 +47,20 @@ class Site(Site):
         # kw.update(aids=None)
         kw.update(sepa=None)
         kw.update(b2c=None)
+        kw.update(xcourses=None)
+        kw.update(courses='lino_welfare.projects.chatelet.modlib.courses')
         # kw.update(badges=None)
         kw.update(properties=None)
         kw.update(dupable_clients=None)
         # alternative implementations:
-        kw.update(courses='lino_welfare.projects.chatelet.modlib.courses')
         kw.update(pcsw='lino_welfare.projects.chatelet.modlib.pcsw')
         kw.update(isip='lino_welfare.projects.chatelet.modlib.isip')
         return kw
 
+    # def get_installed_apps(self):
+    #     yield super(Site, self).get_installed_apps()
+    #     yield 'lino_welfare.projects.chatelet.modlib.courses'
+        
     def setup_plugins(self):
         """
         Change the default value of certain plugin settings.

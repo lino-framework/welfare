@@ -48,7 +48,7 @@ Lino Welfare à la Eupen.
           - (general2_3): **Geburtsdatum** (birth_date), **Alter** (age), **NR-Nummer** (national_id)
           - (general2_4): **Staatsangehörigkeit** (nationality), **Deklarierter Name** (declared_name)
           - (general2_5): **Zivilstand** (civil_state), **Geburtsland** (birth_country), **Geburtsort** (birth_place)
-        - (general3): **Sprache** (language), **E-Mail** (email), **Telefon** (phone), **Fax** (fax), **GSM** (gsm)
+        - (general3): **Sprache** (language), **E-Mail-Adresse** (email), **Telefon** (phone), **Fax** (fax), **GSM** (gsm)
         - **None** (image)
       - (general_2) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
         - **Termine** (reception.AppointmentsByPartner)
@@ -94,8 +94,8 @@ Lino Welfare à la Eupen.
       - **Ausbildungen** (cv.TrainingsByPerson)
       - **Berufserfahrungen** (cv.ExperiencesByPerson)
     - **Sprachen** (languages) [visible for 100 110 120 200 300 400 410 admin 910]:
-      - **Sprachkenntnisse** (cv.LanguageKnowledgesByPerson) [visible for 100 110 120 admin 910]
-      - **Kursanfragen** (courses.CourseRequestsByPerson)
+      - **Sprachkenntnisse** (LanguageKnowledgesByPerson) [visible for 100 110 120 admin 910]
+      - **Kursanfragen** (xcourses.CourseRequestsByPerson)
     - **Kompetenzen** (competences) [visible for 100 110 120 admin 910]:
       - (competences_1) [visible for all]:
         - **Fachkompetenzen** (cv.SkillsByPerson) [visible for 100 110 120 admin 910]

@@ -148,8 +148,9 @@ Mélanie is a manager of the Integration service.
 >>> p = rt.login('melanie').get_user().profile
 >>> print(p)
 Begleiter im DSBE (Manager)
->>> p.role.__class__
-<class 'lino_welfare.modlib.integ.roles.IntegrationStaff'>
+>>> p.roles  #doctest: +ELLIPSIS
+set([<lino_welfare.modlib.integ.roles.IntegrationStaff object at ...>])
+
 
 Because Mélanie has her :attr:`language
 <lino.modlib.users.models.User.language>` field set to French, we need
@@ -189,7 +190,7 @@ to explicitly override the language of :meth:`show_menu
   - Kontakte : Kontaktpersonen, Adressenarten, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - Kalender : Kalendereinträge, Aufgaben, Abonnements
-  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
@@ -206,8 +207,6 @@ Kerstin is a debts consultant.
 >>> p = rt.login('kerstin').get_user().profile
 >>> print(p)
 Schuldenberater
->>> p.role.__class__
-<class 'lino_welfare.modlib.debts.roles.DebtsUser'>
 
 >>> with translation.override('de'):
 ...     rt.login('kerstin').show_menu()
@@ -240,8 +239,6 @@ Caroline is a newcomers consultant.
 >>> p = rt.login('caroline').get_user().profile
 >>> print(p)
 Berater Erstempfang
->>> p.role.__class__
-<class 'lino_welfare.modlib.welfare.roles.NewcomersConsultant'>
 
 >>> with translation.override('de'):
 ...     rt.login('caroline').show_menu()
@@ -273,8 +270,6 @@ Theresia is a reception clerk.
 >>> p = rt.login('theresia').get_user().profile
 >>> print(p)
 Empfangsschalter
->>> p.role.__class__
-<class 'lino_welfare.modlib.welfare.roles.ReceptionClerk'>
 
 
 >>> rt.login('theresia').show_menu(language="de")
@@ -375,18 +370,12 @@ Each window layout defines a given set of fields.
 - countries.Countries.insert : isocode, inscode, name, name_fr, name_en
 - countries.Places.insert : name, name_fr, name_en, country, type, parent, zip_code, id
 - countries.Places.merge_row : merge_to, reason
-- courses.CourseContents.insert : id, name
-- courses.CourseOffers.detail : id, title, content, provider, guest_role, description
-- courses.CourseOffers.insert : provider, content, title
-- courses.CourseProviders.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax
-- courses.CourseRequests.insert : date_submitted, person, content, offer, urgent, course, state, date_ended, id, remark, UploadsByController
-- courses.Courses.detail : id, start_date, offer, title, remark
-- courses.Courses.insert : start_date, offer, title
 - cv.Durations.insert : id, name, name_fr, name_en
 - cv.EducationLevels.insert : name, name_fr, name_en, is_study, is_training
 - cv.Experiences.insert : person, start_date, end_date, termination_reason, company, country, city, sector, function, title, status, duration, regime, is_training, remarks
 - cv.ExperiencesByPerson.insert : start_date, end_date, company, function
 - cv.Functions.insert : id, name, name_fr, name_en, sector, remark
+- cv.LanguageKnowledgesByPerson.insert : language, native, cef_level, spoken_passively, spoken, written
 - cv.Regimes.insert : id, name, name_fr, name_en
 - cv.Sectors.insert : id, name, name_fr, name_en, remark
 - cv.Statuses.insert : id, name, name_fr, name_en
@@ -452,7 +441,7 @@ Each window layout defines a given set of fields.
 - outbox.Mails.insert : project, subject, body
 - pcsw.ClientContactTypes.insert : id, name, name_fr, name_en, can_refund, is_bailiff
 - pcsw.Clients.create_visit : user, summary
-- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, SimilarClients, LinksByHuman, cbss_relations, MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, aid_type, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, UploadsByClient, cvs_emitted, skills, obstacles, ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
+- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, SimilarClients, LinksByHuman, cbss_relations, MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, aid_type, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, UploadsByClient, cvs_emitted, LanguageKnowledgesByPerson, skills, obstacles, ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, cv_LanguageKnowledge, dupable_clients_Word, pcsw_Coaching, pcsw_Dispense, properties_PersonProperty, addresses_Address, sepa_Account, reason
 - pcsw.Clients.refuse_client : reason, remark
@@ -487,6 +476,13 @@ Each window layout defines a given set of fields.
 - vatless.InvoicesByJournal.insert : partner, voucher_date
 - vatless.ProjectInvoicesByJournal.detail : journal, number, voucher_date, entry_date, accounting_period, workflow_buttons, project, narration, partner, your_ref, payment_term, due_date, bank_account, amount, match, state, user, id, MovementsByVoucher
 - vatless.ProjectInvoicesByJournal.insert : project, partner, voucher_date
+- xcourses.CourseContents.insert : id, name
+- xcourses.CourseOffers.detail : id, title, content, provider, guest_role, description
+- xcourses.CourseOffers.insert : provider, content, title
+- xcourses.CourseProviders.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax
+- xcourses.CourseRequests.insert : date_submitted, person, content, offer, urgent, course, state, date_ended, id, remark, UploadsByController
+- xcourses.Courses.detail : id, start_date, offer, title, remark
+- xcourses.Courses.insert : start_date, offer, title
 <BLANKLINE>
 
 Windows and permissions
@@ -562,18 +558,12 @@ Each window layout is **viewable** by a given set of user profiles.
 - countries.Countries.insert : visible for 110 210 410 800 admin 910
 - countries.Places.insert : visible for 110 210 410 800 admin 910
 - countries.Places.merge_row : visible for 110 210 410 800 admin 910
-- courses.CourseContents.insert : visible for 110 admin 910
-- courses.CourseOffers.detail : visible for 100 110 120 admin 910
-- courses.CourseOffers.insert : visible for 100 110 120 admin 910
-- courses.CourseProviders.detail : visible for 100 110 120 admin 910
-- courses.CourseRequests.insert : visible for 110 admin 910
-- courses.Courses.detail : visible for 110 admin 910
-- courses.Courses.insert : visible for 110 admin 910
 - cv.Durations.insert : visible for 110 admin 910
 - cv.EducationLevels.insert : visible for 110 admin 910
 - cv.Experiences.insert : visible for 110 admin 910
 - cv.ExperiencesByPerson.insert : visible for 100 110 120 admin 910
 - cv.Functions.insert : visible for 110 admin 910
+- cv.LanguageKnowledgesByPerson.insert : visible for 100 110 120 admin 910
 - cv.Regimes.insert : visible for 110 admin 910
 - cv.Sectors.insert : visible for 110 admin 910
 - cv.Statuses.insert : visible for 110 admin 910
@@ -674,6 +664,13 @@ Each window layout is **viewable** by a given set of user profiles.
 - vatless.InvoicesByJournal.insert : visible for 500 510 admin 910
 - vatless.ProjectInvoicesByJournal.detail : visible for 500 510 admin 910
 - vatless.ProjectInvoicesByJournal.insert : visible for 500 510 admin 910
+- xcourses.CourseContents.insert : visible for 110 admin 910
+- xcourses.CourseOffers.detail : visible for 100 110 120 admin 910
+- xcourses.CourseOffers.insert : visible for 100 110 120 admin 910
+- xcourses.CourseProviders.detail : visible for 100 110 120 admin 910
+- xcourses.CourseRequests.insert : visible for 110 admin 910
+- xcourses.Courses.detail : visible for 110 admin 910
+- xcourses.Courses.insert : visible for 110 admin 910
 <BLANKLINE>
 
 
@@ -683,7 +680,7 @@ Visibility of eID reader actions
 Here is a list of the eid card reader actions and their availability
 per user profile.
 
->>> from lino_xl.lib.beid.mixins import BaseBeIdReadCardAction
+>>> from lino_xl.lib.beid.actions import BaseBeIdReadCardAction
 >>> print(analyzer.show_action_permissions(BaseBeIdReadCardAction))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - debts.Clients.find_by_beid : visible for 120 300 admin 910

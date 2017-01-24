@@ -70,6 +70,7 @@ class ContractType(ContractTypeBase):
     templates_group = 'immersion/Contract'
 
     class Meta:
+        app_label = 'immersion'
         verbose_name = _("Immersion training type")
         verbose_name_plural = _('Immersion training types')
         ordering = ['name']
@@ -80,6 +81,7 @@ class Goal(mixins.BabelNamed):
     preferred_foreignkey_width = 20
 
     class Meta:
+        app_label = 'immersion'
         verbose_name = _("Immersion training goal")
         verbose_name_plural = _('Immersion training goals')
         ordering = ['name']
@@ -91,6 +93,7 @@ class Contract(ContractBase, ContractPartnerBase, SectorFunction):
     """
 
     class Meta:
+        app_label = 'immersion'
         verbose_name = _("Immersion training")
         verbose_name_plural = _('Immersion trainings')
 

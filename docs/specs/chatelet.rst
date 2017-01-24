@@ -18,8 +18,8 @@ This document describes the *Châtelet* variant of Lino Welfare.
 
 - uses **internal courses**
   (:mod:`lino_welfare.projects.chatelet.modlib.courses`, a sub-plugin
-  of :mod:`lino.modlib.courses`) instead of **external courses**
-  (:mod:`lino_welfare.modlib.courses`). And the "Courses" are labelled
+  of :mod:`lino_xl.lib.courses`) instead of **external courses**
+  (:mod:`lino_welfare.modlib.xcourses`). And the "Courses" are labelled
   "Workshops" ("Ateliers").
     
 .. contents:: 
@@ -319,12 +319,14 @@ Each window layout defines a given set of fields.
 - courses.Lines.insert : name, name_nl, name_de, name_en, ref, topic, every_unit, every, event_type, description, description_nl, description_de, description_en
 - courses.Slots.detail : name, start_time, end_time
 - courses.Slots.insert : start_time, end_time, name
-- courses.Topics.insert : id, name, name_nl, name_de, name_en
+- courses.Topics.detail : id, name, name_nl, name_de, name_en
+- courses.Topics.insert : name, name_nl, name_de, name_en, id
 - cv.Durations.insert : id, name, name_nl, name_de, name_en
 - cv.EducationLevels.insert : name, name_nl, name_de, name_en, is_study, is_training
 - cv.Experiences.insert : person, start_date, end_date, termination_reason, company, country, city, sector, function, title, status, duration, regime, is_training, remarks
 - cv.ExperiencesByPerson.insert : start_date, end_date, company, function
 - cv.Functions.insert : id, name, name_nl, name_de, name_en, sector, remark
+- cv.LanguageKnowledgesByPerson.insert : language, native, cef_level, spoken_passively, spoken, written
 - cv.Regimes.insert : id, name, name_nl, name_de, name_en
 - cv.Sectors.insert : id, name, name_nl, name_de, name_en, remark
 - cv.Statuses.insert : id, name, name_nl, name_de, name_en
@@ -383,7 +385,7 @@ Each window layout defines a given set of fields.
 - outbox.Mails.insert : project, subject, body
 - pcsw.ClientContactTypes.insert : id, name, name_nl, name_de, name_en
 - pcsw.Clients.create_visit : user, summary
-- pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, MembersByPerson, child_custody, LinksByHuman, skills, obstacles, is_seeking, unemployed_since, seeking_since, work_permit_suspended_until, ResponsesByPartner, ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, has_esf, created, modified, remarks
+- pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, MembersByPerson, child_custody, LinksByHuman, LanguageKnowledgesByPerson, skills, obstacles, is_seeking, unemployed_since, seeking_since, work_permit_suspended_until, ResponsesByPartner, ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, has_esf, created, modified, remarks
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, pcsw_Coaching, pcsw_Dispense, cv_LanguageKnowledge, cv_Obstacle, cv_Skill, cv_SoftSkill, addresses_Address, reason
 - pcsw.Clients.refuse_client : reason, remark
@@ -502,12 +504,14 @@ Each window layout is **viewable** by a given set of user profiles.
 - courses.Lines.insert : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.Slots.detail : visible for admin 910
 - courses.Slots.insert : visible for admin 910
+- courses.Topics.detail : visible for admin 910
 - courses.Topics.insert : visible for admin 910
 - cv.Durations.insert : visible for 110 admin 910
 - cv.EducationLevels.insert : visible for 110 admin 910
 - cv.Experiences.insert : visible for 110 admin 910
 - cv.ExperiencesByPerson.insert : visible for 100 110 120 admin 910
 - cv.Functions.insert : visible for 110 admin 910
+- cv.LanguageKnowledgesByPerson.insert : visible for 100 110 120 admin 910
 - cv.Regimes.insert : visible for 110 admin 910
 - cv.Sectors.insert : visible for 110 admin 910
 - cv.Statuses.insert : visible for 110 admin 910

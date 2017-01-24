@@ -16,7 +16,7 @@
 # <http://www.gnu.org/licenses/>.
 
 """
-The Chatelet extension of :mod:`lino_cosi.lib.courses`
+The Chatelet extension of :mod:`lino_xl.lib.courses`
 
 .. autosummary::
    :toctree:
@@ -27,7 +27,7 @@ The Chatelet extension of :mod:`lino_cosi.lib.courses`
 
 """
 
-from lino_cosi.lib.courses import Plugin
+from lino_xl.lib.courses import Plugin
 from django.utils.translation import ugettext_lazy as _
 
 

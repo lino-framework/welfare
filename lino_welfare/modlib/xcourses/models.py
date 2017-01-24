@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2014 Luc Saffre
+# Copyright 2008-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -16,10 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""The :xfile:`models` module for the :mod:`lino_welfare.modlib.courses` app.
-
-This module requires a model `courses.CourseProvider` to be defined by
-the application.
+"""The :xfile:`models` module for this plugin.
 
 """
 
@@ -73,7 +70,7 @@ class CourseProviders(contacts.Companies):
 
     """
     required_roles = dd.required(CoursesUser)
-    model = 'courses.CourseProvider'
+    model = 'xcourses.CourseProvider'
     detail_layout = CourseProviderDetail()
 
 
@@ -101,12 +98,12 @@ class CourseContent(dd.Model):
 
 class CourseContents(dd.Table):
     required_roles = dd.required(CoursesStaff)
-    model = 'courses.CourseContent'
+    model = 'xcourses.CourseContent'
     order_by = ['name']
     detail_layout = """
     id name
-    courses.CourseOffersByContent
-    courses.CourseRequestsByContent
+    xcourses.CourseOffersByContent
+    xcourses.CourseRequestsByContent
     """
 
 
@@ -129,12 +126,12 @@ class CourseOffer(dd.Model):
         "cal.GuestRole", blank=True, null=True,
         help_text=_("Default guest role for particpants of events."))
 
-    content = dd.ForeignKey("courses.CourseContent")
+    content = dd.ForeignKey("xcourses.CourseContent")
     """
     Der Inhalt des Kurses (ein :class:`CourseContent`)
     """
 
-    provider = dd.ForeignKey('courses.CourseProvider')
+    provider = dd.ForeignKey('xcourses.CourseProvider')
     #~ provider = models.ForeignKey(CourseProvider,
         #~ verbose_name=_("Course provider"))
     #~ """
@@ -149,7 +146,7 @@ class CourseOffer(dd.Model):
 
 class CourseOffers(dd.Table):
     required_roles = dd.required(CoursesUser)
-    model = 'courses.CourseOffer'
+    model = 'xcourses.CourseOffer'
 
     insert_layout = """
     provider
@@ -186,7 +183,7 @@ class Course(dd.Model):
         verbose_name = _("Course")
         verbose_name_plural = _('Courses')
 
-    offer = models.ForeignKey("courses.CourseOffer")
+    offer = models.ForeignKey("xcourses.CourseOffer")
 
     title = models.CharField(
         max_length=200,
@@ -237,7 +234,7 @@ class Course(dd.Model):
 class Courses(dd.Table):
     # ~ debug_permissions = 20130429 # Melanie doesn't see :menulabel:`Explorer --> Courses`
     required_roles = dd.required(CoursesStaff)
-    model = 'courses.Course'
+    model = 'xcourses.Course'
     order_by = ['start_date']
 
     insert_layout = """
@@ -248,8 +245,8 @@ class Courses(dd.Table):
     detail_layout = """
     id:8 start_date offer title
     remark
-    courses.ParticipantsByCourse
-    courses.CandidatesByCourse
+    xcourses.ParticipantsByCourse
+    xcourses.CandidatesByCourse
     """
 
 
@@ -348,9 +345,9 @@ class CourseRequest(dd.Model):
     person = models.ForeignKey("pcsw.Client",
                                help_text="Le client qui désire suivre un cours.")
 
-    offer = models.ForeignKey("courses.CourseOffer", blank=True, null=True)
+    offer = models.ForeignKey("xcourses.CourseOffer", blank=True, null=True)
 
-    content = models.ForeignKey("courses.CourseContent",
+    content = models.ForeignKey("xcourses.CourseContent",
                                 verbose_name=_("Course content"),
                                 help_text=u"Der gewünschte Kursinhalt.)")
 
@@ -369,7 +366,7 @@ class CourseRequest(dd.Model):
         default=CourseRequestStates.candidate.as_callable)
 
     course = models.ForeignKey(
-        "courses.Course", blank=True, null=True,
+        "xcourses.Course", blank=True, null=True,
         help_text=_("The course which satisfies this request. "
                     "Leave blank on open requests."),
         verbose_name=_("Course found"))
@@ -423,10 +420,10 @@ class CourseRequest(dd.Model):
         fields.update(
             request_state=CourseRequestStates.field(blank=True),
             course_content=models.ForeignKey(
-                "courses.CourseContent", blank=True),
-            course_offer=models.ForeignKey("courses.CourseOffer", blank=True),
+                "xcourses.CourseContent", blank=True),
+            course_offer=models.ForeignKey("xcourses.CourseOffer", blank=True),
             course_provider=models.ForeignKey(
-                'courses.CourseProvider', blank=True))
+                'xcourses.CourseProvider', blank=True))
         fields.update(CLIENTS_TABLE.parameters)
         return super(CourseRequest, cls).get_parameter_fields(**fields)
 
@@ -465,7 +462,7 @@ class CourseRequest(dd.Model):
 
 class CourseRequests(dd.Table):
     #~ debug_permissions = 20130424
-    model = 'courses.CourseRequest'
+    model = 'xcourses.CourseRequest'
     required_roles = dd.required(CoursesStaff)
     detail_layout = """
     date_submitted person content offer urgent 

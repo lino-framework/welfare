@@ -77,8 +77,9 @@ from .utils import (only_coached_by, only_coached_on,
                     add_coachings_filter, daterange_text,
                     has_contracts_filter)
 from .roles import SocialAgent, SocialStaff
-from .choicelists import (CivilState, ResidenceType, ClientEvents,
+from .choicelists import (ClientEvents,
                           ClientStates, RefusalReasons)
+from lino_xl.lib.beid.choicelists import CivilStates, ResidenceTypes
 
 from .actions import RefuseClient, MarkClientFormer
 
@@ -133,7 +134,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient,
 
        The civil state of this client. Allowed choices are defined in
        :class:`CivilState
-       <lino_welfare.modlib.pcsw.choicelists.CivilState>`.
+       <lino_xl.lib.beid.choicelists.CivilStates>`.
 
     .. attribute:: client_state
     
@@ -180,9 +181,9 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient,
         blank=True, null=True,
         verbose_name=_("Birth country"), related_name='by_birth_place')
 
-    civil_state = CivilState.field(blank=True)
+    civil_state = CivilStates.field(blank=True)
 
-    residence_type = ResidenceType.field(blank=True)
+    residence_type = ResidenceTypes.field(blank=True)
 
     in_belgium_since = models.DateField(
         _("Lives in Belgium since"), blank=True, null=True)
@@ -252,8 +253,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient,
 
     def disabled_fields(self, ar):
         rv = super(Client, self).disabled_fields(ar)
-        if not isinstance(ar.get_user().profile.role,
-                          (NewcomersOperator, NewcomersAgent)):
+        if not ar.get_user().profile.has_required_roles([(NewcomersOperator, NewcomersAgent)]):
             rv = rv | set(['broker', 'faculty', 'refusal_reason'])
         #~ logger.info("20130808 pcsw %s", rv)
         return rv
@@ -712,7 +712,7 @@ class ClientDetail(dd.DetailLayout):
 
     languages = dd.Panel("""
     cv.LanguageKnowledgesByPerson
-    courses.CourseRequestsByPerson
+    xcourses.CourseRequestsByPerson
     """, label=_("Languages"))
 
     competences = dd.Panel("""

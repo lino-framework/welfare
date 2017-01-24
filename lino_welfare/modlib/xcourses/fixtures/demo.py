@@ -56,14 +56,14 @@ def objects():
 
     Place = resolve_model('countries.Place')
     Client = resolve_model('pcsw.Client')
-    CourseContent = resolve_model('courses.CourseContent')
+    CourseContent = resolve_model('xcourses.CourseContent')
 
     CLIENTS = Cycler(
         Client.objects.filter(client_state=pcsw.ClientStates.coached))
 
     eupen = Place.objects.get(name__exact='Eupen')
 
-    courseprovider = Instantiator('courses.CourseProvider').build
+    courseprovider = Instantiator('xcourses.CourseProvider').build
     oikos = courseprovider(name=u"Oikos", city=eupen, country='BE')
     yield oikos
     # oikos.repairdata()
@@ -77,7 +77,7 @@ def objects():
 
     COURSECONTENTS = Cycler(CourseContent.objects.all())
 
-    creq = Instantiator('courses.CourseRequest').build
+    creq = Instantiator('xcourses.CourseRequest').build
     for i in range(20):
         yield creq(
             person=CLIENTS.pop(), content=COURSECONTENTS.pop(),
@@ -86,8 +86,8 @@ def objects():
     #~ yield creq(person=tatjana,content=1,date_submitted=settings.SITE.demo_date(-30))
     #~ yield creq(person=erna,content=2,date_submitted=settings.SITE.demo_date(-30))
 
-    offer = Instantiator('courses.CourseOffer').build
-    course = Instantiator('courses.Course').build
+    offer = Instantiator('xcourses.CourseOffer').build
+    course = Instantiator('xcourses.Course').build
     yield offer(provider=oikos, title=u"Deutsch für Anfänger", content=1)
     #~ yield course(offer=1,start_date=i2d(20110110))
     yield course(offer=1, start_date=settings.SITE.demo_date(+30))

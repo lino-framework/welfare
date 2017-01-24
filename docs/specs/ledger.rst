@@ -113,8 +113,6 @@ profile of an accountant
 >>> p = rt.login('wilfried').get_user().profile
 >>> print(p)
 Buchhalter
->>> p.role.__class__
-<class 'lino_welfare.modlib.welfare.roles.LedgerUser'>
 
 Accountants have no direct contact with clients and probably won't use
 the calendar.  But for the first prototype they get :class:`OfficeUser

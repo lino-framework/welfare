@@ -186,7 +186,7 @@ class ClientDetail(ClientDetail, PartnerDetailMixin):
 
     languages = dd.Panel("""
     cv.LanguageKnowledgesByPerson
-    courses.CourseRequestsByPerson
+    xcourses.CourseRequestsByPerson
     """, label=_("Languages"))
 
     competences = dd.Panel("""

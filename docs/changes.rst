@@ -198,7 +198,7 @@ Version 1.1.8 (released :blogref:`20130723`)
 -  Menübefehle :menuselection:`Konfigurierung --> DSBE --> Funktionen` 
    und einige andere jetzt auch für Melanie wieder sichtbar.
 
-- :ddref:`courses.PendingCourseRequests`: 
+- `courses.PendingCourseRequests`: 
   Fixed a bug which caused a traceback 
   "Cannot resolve keyword 'provider' into field."
   when filtering on course provider in PendingCourseRequests.
@@ -404,7 +404,7 @@ Version 1.1.3 (released :blogref:`20130505`)
 - Im "Resultat" einer Tx25 (:class:`cbss.RetrieveTIGroupsRequest`  
   wurde nichts angezeigt. Behoben.
 
-- :ddref:`courses.PendingCourseRequests`. 
+- `courses.PendingCourseRequests`. 
   (:menuselection:`Kurse --> Offene Kursanfragen`) 
   hat jetzt zwei neue Kolonnen "Arbeitsablauf" und "Begleiter".
   Ausserdem ein umfangreiches Panel für Filterkriterien. 

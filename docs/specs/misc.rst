@@ -12,7 +12,7 @@ Miscellaneous
     
     >>> import os
     >>> from lino import startup
-    >>> startup('lino_welfare.projects.std.settings.doctests')
+    >>> startup('lino_welfare.projects.chatelet.settings.doctests')
     >>> from lino.api.doctest import *
     >>> ses = rt.login('rolf')
 
@@ -61,12 +61,48 @@ Build all excerpts
     to see how we generated the following list:
 
 
+Default template for excerpts
+=============================
+
+Check whether Lino returns the right default template for excerpts.
+
+In :mod:`lino_xl.lib.excerpts` we define a template
+:xfile:`excerpts/Default.odt`, but :mod:`lino_welfare.modlib.welfare`
+overrides this template.
+
+The rule is that **the *last* plugin wins** when Lino searches for
+templates.
+
+This means that if we want to see the welfare-specific version, our
+:meth:`get_installed_apps <lino.core.site.Site.get_installed_apps>` in
+:mod:`lino_welare.projects.std.settings` must yield
+:mod:`lino_welfare.modlib.welfare` **after**
+:mod:`lino_xl.lib.excerpts`.
+
+The following test verifies this rule:
+
+>>> print(settings.SITE.find_config_file('Default.odt', 'excerpts'))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
+/.../welfare/config/excerpts/Default.odt
+
+
 Editing the print template of an excerpt
 ========================================
 
 Here we want to see what the :class:`EditTemplate
 <lino.modlib.printing.mixins.EditTemplate>` action says, especially
 when called on an excerpt where Lino has two possible locations.
+
+Note that we need a local config directory for the following test to
+work:
+
+>>> # lcd = os.path.join(settings.SITE.cache_dir, 'config')
+>>> lcd = settings.SITE.cache_dir.child('config')
+>>> rt.makedirs_if_missing(lcd)
+
+(And these tests are the reason why `is_local_project_dir` is `True`
+in `lino_welfare.projects.std.settings.doctests`.)
+
 
 Excerpts are printables with *two* template groups.  The first
 template group is given by the owner (e.g. `"immersion/Contract"`) and
@@ -84,11 +120,9 @@ When creating a local copy of the factory template, Lino copies the
 factory file to the directory given by the *first* group. Before doing
 so, it will ask for user confirmation.
 
->>> lcd = os.path.join(settings.SITE.project_dir, 'config')
->>> # rt.makedirs_if_missing(lcd)
 >>> obj = excerpts.Excerpt.objects.get(pk=2)
 >>> obj.owner
-Contract #2 ('Immersion training#2 (Daniel EMONTS)')
+Contract #2 ("Stage d'immersion#2 (Daniel EMONTS)")
 
 >>> ses.set_confirm_answer(False)
 >>> rv = ses.run(obj.edit_template)
@@ -98,7 +132,8 @@ Gonna copy ...welfare/config/excerpts/Default.odt to $(PRJ)/config/immersion/Con
 >>> print(rv['message'])
 ...     #doctest: +NORMALIZE_WHITESPACE
 Before you can edit this template we must create a local copy on the server. This will exclude the template from future updates.
-Are you sure?
+D'accord ?
+
 
 Another thing is the location of the factory template. 
 
@@ -107,11 +142,11 @@ Another thing is the location of the factory template.
 >>> rv = ses.run(obj.edit_template)
 >>> print(rv['info_message'])
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-Gonna copy ...lino_welfare/modlib/immersion/config/immersion/Contract/StageForem.odt to $(PRJ)/config/immersion/Contract/StageForem.odt
+Gonna copy .../lino_welfare/modlib/welfare/config/excerpts/Default.odt to $(PRJ)/config/immersion/Contract/Default.odt
 
+.. until 20170122:
+   Gonna copy ...lino_welfare/modlib/immersion/config/immersion/Contract/StageForem.odt to $(PRJ)/config/immersion/Contract/StageForem.odt
 
-(Note: the above tests are the reason why `is_local_project_dir` is
-`True` in `lino_welfare.projects.std.settings.doctests`.)
 
 
 
@@ -123,14 +158,14 @@ Yet another series of GET requests
 
 >>> json_fields = 'count rows title success no_data_text param_values'
 >>> kw = dict(fmt='json', limit=10, start=0)
->>> demo_get('rolf', 'api/contacts/Companies', json_fields, 52, **kw)
+>>> demo_get('rolf', 'api/contacts/Companies', json_fields, 40, **kw)
 >>> demo_get('rolf', 'api/households/Households', json_fields, 15, **kw)
->>> demo_get('rolf', 'api/contacts/Partners', json_fields, 175, **kw)
+>>> demo_get('rolf', 'api/contacts/Partners', json_fields, 163, **kw)
 
 >>> demo_get('rolf', 'api/jobs/JobProviders', json_fields, 4, **kw)
 
 >>> json_fields = 'count rows title success no_data_text'
->>> demo_get('rolf', 'api/countries/Countries', json_fields, 9, **kw)
+>>> demo_get('rolf', 'api/countries/Countries', json_fields, 271, **kw)
 >>> demo_get('rolf', 'api/jobs/Jobs', json_fields, 9, **kw)
 
 >>> mt = ContentType.objects.get_for_model(RetrieveTIGroupsRequest).pk
@@ -177,7 +212,7 @@ Some choices lists:
 ...    'rolf', 'apchoices/pcsw/Clients/create_visit/user', fields, 4, **kw)
 
 >>> demo_get(
-...    'robin', 'choices/countries/Countries/actual_country', fields, 8, **kw)
+...    'robin', 'choices/countries/Countries/actual_country', fields, 266, **kw)
 
 
 Visibility of eID reader action
@@ -266,6 +301,24 @@ see it.
 - countries.Places.duplicate : visible for 110 210 410 800 admin 910
 - countries.PlacesByCountry.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - countries.PlacesByPlace.duplicate : visible for 110 210 410 800 admin 910
+- courses.ActiveCourses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.Activities.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.AllActivities.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.BasicCourses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.ClosedCourses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.Courses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.CoursesByLine.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.CoursesBySlot.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.CoursesByTeacher.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.CoursesByTopic.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.DraftCourses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.EventsByTeacher.duplicate : visible for 110 410 admin 910
+- courses.InactiveCourses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.JobCourses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.Lines.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.LinesByTopic.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.Slots.duplicate : visible for admin 910
+- courses.Topics.duplicate : visible for admin 910
 - cv.EducationLevels.duplicate : visible for 110 admin 910
 - dashboard.AllWidgets.duplicate : visible for admin 910
 - dashboard.Widgets.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
@@ -294,18 +347,10 @@ see it.
 - excerpts.ExcerptsByType.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - excerpts.MyExcerpts.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - extensible.PanelEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
-- finan.BankStatementItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- finan.ItemsByBankStatement.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- finan.ItemsByDisbursementOrder.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- finan.ItemsByJournalEntry.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- finan.ItemsByPaymentOrder.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- finan.JournalEntryItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- finan.PaymentOrderItemTable.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - integ.CoachingEndingsByType.duplicate : visible for 110 410 admin 910
 - integ.CoachingEndingsByUser.duplicate : visible for 110 410 admin 910
 - isip.EventsByContract.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - jobs.JobTypes.duplicate : visible for 110 410 admin 910
-- ledger.Journals.duplicate : visible for 510 admin 910
 - newcomers.Competences.duplicate : visible for 110 410 admin 910
 - newcomers.CompetencesByFaculty.duplicate : visible for 110 410 admin 910
 - newcomers.CompetencesByUser.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
@@ -327,9 +372,6 @@ see it.
 - polls.PollResult.duplicate : visible for 110 410 admin 910
 - polls.Questions.duplicate : visible for 110 410 admin 910
 - polls.QuestionsByPoll.duplicate : visible for 100 110 120 200 300 400 410 admin 910
-- vatless.InvoiceItems.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- vatless.ItemsByInvoice.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- vatless.ItemsByProjectInvoice.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 <BLANKLINE>
 
 
@@ -357,29 +399,4 @@ See :blogref:`20130508`:
 >>> for model in (debts.Entry,):
 ...     for o in model.objects.all():
 ...         o.full_clean()
-
-Default template for excerpts
-=============================
-
-Check whether Lino returns the right default template for excerpts.
-
-In :mod:`lino.modlib.excerpts` we define a template
-:xfile:`excerpts/Default.odt`, but :mod:`lino_welfare.modlib.welfare`
-overrides this template.
-
-The rule is that **the *last* plugin wins** when Lino searches for
-templates.
-
-This means that if we want to see the welfare-specific version, our
-:meth:`get_installed_apps <lino.core.site.Site.get_installed_apps>` in
-:mod:`lino_welare.projects.std.settings` must yield
-:mod:`lino_welfare.modlib.welfare` **after**
-:mod:`lino.modlib.excerpts`.
-
-The following test verifies this rule:
-
->>> print(settings.SITE.find_config_file('Default.odt', 'excerpts'))
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-/.../welfare/config/excerpts/Default.odt
-
 

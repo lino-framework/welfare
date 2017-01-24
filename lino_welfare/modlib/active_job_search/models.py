@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2015 Luc Saffre
+# Copyright 2014-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -33,6 +33,7 @@ from lino_welfare.modlib.integ.roles import IntegrationStaff, IntegrationAgent
 class Proof(dd.Model):
     
     class Meta:
+        app_label = 'active_job_search'
         verbose_name = _("Proof of search")
         verbose_name_plural = _("Proofs of search")
 

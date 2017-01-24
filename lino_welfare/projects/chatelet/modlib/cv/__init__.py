@@ -43,7 +43,7 @@ class Plugin(Plugin):
     def setup_explorer_menu(self, site, profile, m):
         super(Plugin, self).setup_explorer_menu(site, profile, m)
         m = m.add_menu(self.app_label, self.verbose_name)
-        m.add_action('cv.LanguageKnowledges')
+        m.add_action('cv.AllLanguageKnowledges')
         m.add_action('cv.Skills')
         m.add_action('cv.SoftSkills')
         m.add_action('cv.Obstacles')

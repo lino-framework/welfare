@@ -71,13 +71,13 @@ Job providers
 
 >>> ses.show(jobs.JobProviders)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-================================ ============ ======== ========= ===== ===== =========
- Name                             Adresse      E-Mail   Telefon   GSM   ID    Sprache
--------------------------------- ------------ -------- --------- ----- ----- ---------
- BISA                             4700 Eupen                            188   de
- Pro Aktiv V.o.G.                 4700 Eupen                            191   de
- R-Cycle Sperrgutsortierzentrum   4700 Eupen                            189   de
-================================ ============ ======== ========= ===== ===== =========
+================================ ============ ================ ========= ===== ===== =========
+ Name                             Adresse      E-Mail-Adresse   Telefon   GSM   ID    Sprache
+-------------------------------- ------------ ---------------- --------- ----- ----- ---------
+ BISA                             4700 Eupen                                    188   de
+ Pro Aktiv V.o.G.                 4700 Eupen                                    191   de
+ R-Cycle Sperrgutsortierzentrum   4700 Eupen                                    189   de
+================================ ============ ================ ========= ===== ===== =========
 <BLANKLINE>
 
 .. _welfare.jobs.Offers:

@@ -31,7 +31,7 @@ from lino.modlib.office.roles import OfficeUser
 from lino_cosi.lib.ledger.roles import LedgerStaff, LedgerUser
 from lino_cosi.lib.sepa.roles import SepaStaff
 from lino_cosi.lib.sepa.roles import SepaUser
-from lino_cosi.lib.courses.roles import CoursesUser
+from lino_xl.lib.courses.roles import CoursesUser
 from lino_xl.lib.beid.roles import BeIdUser
 from lino_welfare.modlib.cbss.roles import CBSSUser, SecurityAdvisor
 from lino_welfare.modlib.pcsw.roles import SocialAgent

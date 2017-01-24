@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 from lino.api import dd, _
 
-from lino_cosi.lib.courses.models import *
+from lino_xl.lib.courses.models import *
 
 CourseAreas.clear()
 add = CourseAreas.add_item
@@ -95,7 +95,7 @@ class Enrolment(Enrolment):
 
     # default state is always "requested". In Welfare we do not want
     # to automatically confirm enrolments, so we deactivate
-    # ConfirmedSubmitInsert set by `lino_cosi.lib.courses`
+    # ConfirmedSubmitInsert set by `lino_xl.lib.courses`
     submit_insert = dd.SubmitInsert()
 
 

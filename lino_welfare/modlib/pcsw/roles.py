@@ -23,7 +23,7 @@ from lino.modlib.plausibility.roles import PlausibilityUser
 from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.aids.roles import AidsStaff, AidsUser
 from lino_cosi.lib.sepa.roles import SepaUser, SepaStaff
-from lino_cosi.lib.courses.roles import CoursesUser
+from lino_xl.lib.courses.roles import CoursesUser
 from lino_xl.lib.excerpts.roles import ExcerptsUser
 
 

@@ -152,40 +152,6 @@ as a table."""),
     'lino_welfare.modlib.client_vouchers.ui.ClientVouchersByJournal' : _("""Shows all simple invoices of a given journal (whose
 Journal.voucher_type must be
 lino_cosi.lib.sales.models.ClientVoucher)."""),
-    'lino_welfare.modlib.courses.models.CourseProvider' : _("""A CourseProvider is a Company that offers Courses."""),
-    'lino_welfare.modlib.courses.models.CourseProviderDetail' : _("""Same as CompanyDetail, except that we add a tab
-Courses."""),
-    'lino_welfare.modlib.courses.models.CourseProviders' : _("""Table of all course providers"""),
-    'lino_welfare.modlib.courses.models.CourseProviders.model' : _("""alias of CourseProvider"""),
-    'lino_welfare.modlib.courses.models.CourseContent' : _("""Ein Kursinhalt (z.B. "Französisch", "Deutsch", "Alphabétisation",...)"""),
-    'lino_welfare.modlib.courses.models.CourseContent.name' : _("""Bezeichnung des Kursinhalts (nach Konvention des DSBE)."""),
-    'lino_welfare.modlib.courses.models.CourseOffer.title' : _("""Der Titel des Kurses. Maximal 200 Zeichen."""),
-    'lino_welfare.modlib.courses.models.Course' : _("""Ein konkreter Kurs, der an einem bestimmten Datum beginnt.
-Für jeden Kurs muss ein entsprechendes Angebot existieren, 
-das u.A. den Kursinhalt 
-und Kursanbieter 
-detailliert. Also selbst für einen einmalig stattfindenden 
-Kurs muss ein Angebot erstellt werden."""),
-    'lino_welfare.modlib.courses.models.Course.remark' : _("""Bemerkung über diesen konkreten Kurs. Maximal 200 Zeichen."""),
-    'lino_welfare.modlib.courses.models.CourseRequest' : _("""A Course Request is created when a certain Person expresses her
-wish to participate in a Course with a certain CourseContent."""),
-    'lino_welfare.modlib.courses.models.CourseRequest.remark' : _("""Bemerkung zu dieser konkreten Kursanfrage oder -teilnahme."""),
-    'lino_welfare.modlib.courses.models.CourseRequest.date_ended' : _("""Datum der effektives Beendigung dieser Kursteilname."""),
-    'lino_welfare.modlib.courses.models.CourseRequestsByPerson' : _("""Shows the course requests of a client."""),
-    'lino_welfare.modlib.courses.models.CourseRequestsByPerson.master' : _("""alias of Client"""),
-    'lino_welfare.modlib.courses.models.CourseRequestsByPerson.model' : _("""alias of CourseRequest"""),
-    'lino_welfare.modlib.courses.models.RequestsByCourse' : _("""Table of CourseRequest instances of a Course."""),
-    'lino_welfare.modlib.courses.models.RequestsByCourse.master' : _("""alias of Course"""),
-    'lino_welfare.modlib.courses.models.RequestsByCourse.model' : _("""alias of CourseRequest"""),
-    'lino_welfare.modlib.courses.models.ParticipantsByCourse' : _("""List of participating candidates for the given Course."""),
-    'lino_welfare.modlib.courses.models.ParticipantsByCourse.master' : _("""alias of Course"""),
-    'lino_welfare.modlib.courses.models.ParticipantsByCourse.model' : _("""alias of CourseRequest"""),
-    'lino_welfare.modlib.courses.models.CandidatesByCourse' : _("""List of Candidates for the given Course
-which are not registiered."""),
-    'lino_welfare.modlib.courses.models.CandidatesByCourse.master' : _("""alias of Course"""),
-    'lino_welfare.modlib.courses.models.CandidatesByCourse.model' : _("""alias of CourseRequest"""),
-    'lino_welfare.modlib.courses.models.PendingCourseRequests' : _("""List of pending course requests."""),
-    'lino_welfare.modlib.courses.models.PendingCourseRequests.model' : _("""alias of CourseRequest"""),
     'lino_welfare.modlib.debts.fields.PeriodsField' : _("""Used for Entry.periods and Account.periods
 (the latter holds simply the default value for the former).
 It means: for how many months the entered amount counts.
@@ -411,20 +377,6 @@ the person linked to this note."""),
     'lino_welfare.modlib.pcsw.actions.RefuseClient' : _("""Refuse this newcomer request."""),
     'lino_welfare.modlib.pcsw.actions.MarkClientFormer' : _("""Change client's state to 'former'. This will also end any active
 coachings."""),
-    'lino_welfare.modlib.pcsw.choicelists.CivilState' : _("""The global list of civil states that a client can have.  This
-is the list of choices for the civil_state field of a
-Client."""),
-    'lino_welfare.modlib.pcsw.choicelists.CivilState.single' : _("""célibataire : vous n’avez pas de partenaire auquel vous êtes
-officiellement lié"""),
-    'lino_welfare.modlib.pcsw.choicelists.CivilState.married' : _("""marié(e) : vous êtes légalement marié"""),
-    'lino_welfare.modlib.pcsw.choicelists.CivilState.widowed' : _("""veuf (veuve) / Verwitwet : vous êtes légalement marié mais
-votre partenaire est décédé"""),
-    'lino_welfare.modlib.pcsw.choicelists.CivilState.divorced' : _("""divorcé(e) (Geschieden) : votre mariage a été juridiquement dissolu"""),
-    'lino_welfare.modlib.pcsw.choicelists.CivilState.de_facto_separated' : _("""De facto separated (Séparé de fait, faktisch getrennt)"""),
-    'lino_welfare.modlib.pcsw.choicelists.CivilState.separated' : _("""Legally separated, aka "Separated as to property" (Séparé de
-corps et de biens, Getrennt von Tisch und Bett)"""),
-    'lino_welfare.modlib.pcsw.choicelists.CivilState.cohabitating' : _("""Cohabitating (cohabitant, zusammenlebend)"""),
-    'lino_welfare.modlib.pcsw.choicelists.ResidenceType' : _("""Types of registries for the Belgian residence."""),
     'lino_welfare.modlib.pcsw.choicelists.ClientEvents' : _("""A choicelist of observable client events."""),
     'lino_welfare.modlib.pcsw.choicelists.ClientCreated' : _("""The choice for ClientEvents which
 selects clients whose record has been created during the observed
@@ -537,6 +489,40 @@ mediation."""),
     'lino_welfare.modlib.welfare.roles.LedgerUser' : _("""An accountant is a user who enters invoices, bank statements,
 payment orders and other ledger operations."""),
     'lino_welfare.modlib.welfare.roles.Supervisor' : _("""A backoffice user who can act as others."""),
+    'lino_welfare.modlib.xcourses.models.CourseProvider' : _("""A CourseProvider is a Company that offers Courses."""),
+    'lino_welfare.modlib.xcourses.models.CourseProviderDetail' : _("""Same as CompanyDetail, except that we add a tab
+Courses."""),
+    'lino_welfare.modlib.xcourses.models.CourseProviders' : _("""Table of all course providers"""),
+    'lino_welfare.modlib.xcourses.models.CourseProviders.model' : _("""alias of CourseProvider"""),
+    'lino_welfare.modlib.xcourses.models.CourseContent' : _("""Ein Kursinhalt (z.B. "Französisch", "Deutsch", "Alphabétisation",...)"""),
+    'lino_welfare.modlib.xcourses.models.CourseContent.name' : _("""Bezeichnung des Kursinhalts (nach Konvention des DSBE)."""),
+    'lino_welfare.modlib.xcourses.models.CourseOffer.title' : _("""Der Titel des Kurses. Maximal 200 Zeichen."""),
+    'lino_welfare.modlib.xcourses.models.Course' : _("""Ein konkreter Kurs, der an einem bestimmten Datum beginnt.
+Für jeden Kurs muss ein entsprechendes Angebot existieren, 
+das u.A. den Kursinhalt 
+und Kursanbieter 
+detailliert. Also selbst für einen einmalig stattfindenden 
+Kurs muss ein Angebot erstellt werden."""),
+    'lino_welfare.modlib.xcourses.models.Course.remark' : _("""Bemerkung über diesen konkreten Kurs. Maximal 200 Zeichen."""),
+    'lino_welfare.modlib.xcourses.models.CourseRequest' : _("""A Course Request is created when a certain Person expresses her
+wish to participate in a Course with a certain CourseContent."""),
+    'lino_welfare.modlib.xcourses.models.CourseRequest.remark' : _("""Bemerkung zu dieser konkreten Kursanfrage oder -teilnahme."""),
+    'lino_welfare.modlib.xcourses.models.CourseRequest.date_ended' : _("""Datum der effektives Beendigung dieser Kursteilname."""),
+    'lino_welfare.modlib.xcourses.models.CourseRequestsByPerson' : _("""Shows the course requests of a client."""),
+    'lino_welfare.modlib.xcourses.models.CourseRequestsByPerson.master' : _("""alias of Client"""),
+    'lino_welfare.modlib.xcourses.models.CourseRequestsByPerson.model' : _("""alias of CourseRequest"""),
+    'lino_welfare.modlib.xcourses.models.RequestsByCourse' : _("""Table of CourseRequest instances of a Course."""),
+    'lino_welfare.modlib.xcourses.models.RequestsByCourse.master' : _("""alias of Course"""),
+    'lino_welfare.modlib.xcourses.models.RequestsByCourse.model' : _("""alias of CourseRequest"""),
+    'lino_welfare.modlib.xcourses.models.ParticipantsByCourse' : _("""List of participating candidates for the given Course."""),
+    'lino_welfare.modlib.xcourses.models.ParticipantsByCourse.master' : _("""alias of Course"""),
+    'lino_welfare.modlib.xcourses.models.ParticipantsByCourse.model' : _("""alias of CourseRequest"""),
+    'lino_welfare.modlib.xcourses.models.CandidatesByCourse' : _("""List of Candidates for the given Course
+which are not registiered."""),
+    'lino_welfare.modlib.xcourses.models.CandidatesByCourse.master' : _("""alias of Course"""),
+    'lino_welfare.modlib.xcourses.models.CandidatesByCourse.model' : _("""alias of CourseRequest"""),
+    'lino_welfare.modlib.xcourses.models.PendingCourseRequests' : _("""List of pending course requests."""),
+    'lino_welfare.modlib.xcourses.models.PendingCourseRequests.model' : _("""alias of CourseRequest"""),
     'lino_welfare.projects.chatelet.modlib.courses.models.Enrolment' : _("""Adds two text fields motivation and problems."""),
     'lino_welfare.projects.chatelet.modlib.cv.models.ClientIsLearning' : _("""Select only clients who are "learning" during the given date.
 That is, who have an active Study, Training or

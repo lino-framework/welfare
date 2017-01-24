@@ -1338,7 +1338,7 @@ def migrate_from_1_4_3(globals_dict):
     globals_dict.update(
         create_bcss_identifypersonrequest=create_bcss_identifypersonrequest)
 
-    from lino_cosi.lib.courses.models import CourseRequestStates
+    from lino_xl.lib.courses.models import CourseRequestStates
     #~ courses_CourseRequest = resolve_model("courses.CourseRequest")
     dsbe_CourseRequest = resolve_model("courses.CourseRequest")
 
@@ -3358,7 +3358,7 @@ def doit(a, b):
 
     def migrate_from_1_1_16(self, globals_dict):
         """\
-- lino_cosi.lib.courses.CourseStates : state 40 (Ended) no longer exists
+- lino_xl.lib.courses.CourseStates : state 40 (Ended) no longer exists
 - excerpts.Excerpt: remove fields language, company, contact_person
   and contact_role
 - cal.GuestRole is no longer a PrintableType

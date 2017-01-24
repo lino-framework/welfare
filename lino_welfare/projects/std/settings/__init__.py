@@ -103,10 +103,10 @@ class Site(Site):
         add('100', _("First meeting"), 'first_meeting')
 
 
-    def setup_quicklinks(self, ar, tb):
+    def setup_quicklinks(self, user, tb):
         # tb.add_action(self.modules.pcsw.Clients.detail_action)
 
-        super(Site, self).setup_quicklinks(ar, tb)
+        super(Site, self).setup_quicklinks(user, tb)
 
         tb.add_action(self.modules.pcsw.Clients, 'find_by_beid')
         tb.add_action(self.modules.integ.Clients)
@@ -169,8 +169,8 @@ class Site(Site):
         yield 'lino_welfare.modlib.art61'
         yield 'lino_welfare.modlib.immersion'
         yield 'lino_welfare.modlib.active_job_search'
-        # chatelet replaces courses by
-        yield 'lino_welfare.modlib.courses'
+        yield 'lino_welfare.projects.chatelet.modlib.courses'
+        yield 'lino_welfare.modlib.xcourses'
         yield 'lino_welfare.modlib.newcomers'
         yield 'lino_welfare.modlib.cbss'  # must come after pcsw
         yield 'lino_welfare.modlib.households'  # must come after pcsw
