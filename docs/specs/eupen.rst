@@ -409,7 +409,7 @@ Each window layout defines a given set of fields.
 - households.Households.detail : type, prefix, name, id
 - households.HouseholdsByType.detail : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
 - households.Types.insert : name, name_fr, name_en
-- humanlinks.Links.insert : parent, child, type
+- humanlinks.Links.insert : parent, type, child
 - integ.ActivityReport.show : body
 - isip.ContractEndings.insert : name, use_in_isip, use_in_jobs, is_success, needs_date_ended
 - isip.ContractPartners.insert : company, contact_person, contact_role, duties_company

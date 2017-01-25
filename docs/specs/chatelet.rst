@@ -353,7 +353,7 @@ Each window layout defines a given set of fields.
 - households.Households.detail : type, prefix, name, id
 - households.HouseholdsByType.detail : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
 - households.Types.insert : name, name_nl, name_de, name_en
-- humanlinks.Links.insert : parent, child, type
+- humanlinks.Links.insert : parent, type, child
 - immersion.ContractTypes.detail : id, name, name_nl, name_de, name_en, exam_policy, template, overlap_group, full_name
 - immersion.ContractTypes.insert : name, name_nl, name_de, name_en, exam_policy
 - immersion.Contracts.detail : id, client, user, language, type, goal, company, contact_person, contact_role, applies_from, applies_until, exam_policy, sector, function, reference_person, printed, date_decided, date_issued, date_ended, ending, responsibilities

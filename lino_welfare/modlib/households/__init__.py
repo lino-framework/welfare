@@ -1,4 +1,4 @@
-# Copyright 2012-2014 Luc Saffre
+# Copyright 2012-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -22,8 +22,4 @@ from lino_xl.lib.households import Plugin
 
 class Plugin(Plugin):
 
-    extends_models = ['Household', 'Member']
-    adult_age = 18
-    """The age (in years) a person needs to have in order to be considered
-    adult."""
-    # adult_age = datetime.timedelta(days=18*365)
+    extends_models = ['Household']

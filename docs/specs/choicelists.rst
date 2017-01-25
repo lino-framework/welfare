@@ -76,7 +76,7 @@ name to read the documentation):
     esf.ParticipationCertificates : Participation Certificates
     esf.StatisticalFields : ESF fields
     excerpts.Shortcuts : Excerpt shortcuts
-    households.MemberDependencies : Household Member Dependencies
+    households.MemberDependencies : Haushaltsmitgliedsabhängigkeiten
     households.MemberRoles : Haushaltsmitgliedsrollen
     humanlinks.LinkTypes : Verwandschaftsarten
     isip.ContractEvents : Beobachtungskriterium
@@ -88,7 +88,7 @@ name to read the documentation):
     ledger.TradeTypes : Handelsarten
     ledger.VoucherStates : Zustände
     ledger.VoucherTypes : Belegarten
-    notes.SpecialTypes : Special note types
+    notes.SpecialTypes : Sondernotizarten
     notify.MailModes : E-Mail-Benachrichtigungsmodi
     notify.MessageTypes : Message Types
     outbox.RecipientTypes : RecipientTypes

@@ -98,7 +98,7 @@ Database structure
 - finan.PaymentOrderItem : id, seqno, project, match, amount, dc, remark, account, partner, bank_account, voucher
 - gfks.HelpText : id, content_type, field, help_text
 - households.Household : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, prefix, type
-- households.Member : id, start_date, end_date, title, first_name, middle_name, last_name, gender, birth_date, role, person, household, primary, dependency
+- households.Member : id, start_date, end_date, title, first_name, middle_name, last_name, gender, birth_date, role, person, household, dependency, primary
 - households.Type : id, name, name_fr, name_en
 - humanlinks.Link : id, type, parent, child
 - isip.Contract : id, signer1, signer2, user, printed_by, client, language, applies_from, applies_until, date_decided, date_issued, user_asd, exam_policy, ending, date_ended, type, study_type, stages, goals, duties_asd, duties_dsbe, duties_person

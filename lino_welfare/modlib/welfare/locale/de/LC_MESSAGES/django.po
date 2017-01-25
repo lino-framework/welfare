@@ -6,18 +6,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version:  Lino-DSBE\n"
+"Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-25 00:56+0200\n"
-"PO-Revision-Date: 2016-11-20 19:47+0100\n"
+"PO-Revision-Date: 2017-01-26 00:06+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: de\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: lino_welfare/modlib/active_job_search/__init__.py:34
 #, fuzzy
@@ -245,9 +246,7 @@ msgid "Integration duty"
 msgstr "Verpflichtung DSBE"
 
 #: lino_welfare/modlib/aids/models.py:157
-msgid ""
-"Whether aid grantings of this type are considered as duty for integration"
-" contract."
+msgid "Whether aid grantings of this type are considered as duty for integration contract."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:161
@@ -264,15 +263,11 @@ msgid "Confirmed by primary coach"
 msgstr "Primärbegleiter bestätigt"
 
 #: lino_welfare/modlib/aids/models.py:167
-msgid ""
-"Whether grantings for this aid type are to be signed by the client's "
-"primary coach."
+msgid "Whether grantings for this aid type are to be signed by the client's primary coach."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:174
-msgid ""
-"Which client address to print on confirmations. If this is empty, Lino "
-"will use the primary address."
+msgid "Which client address to print on confirmations. If this is empty, Lino will use the primary address."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:179
@@ -383,9 +378,7 @@ msgid "Can refund"
 msgstr "Kostenrückerstattung"
 
 #: lino_welfare/modlib/aids/models.py:786
-msgid ""
-"Whether persons of this type can be used as doctor of a refund "
-"confirmation."
+msgid "Whether persons of this type can be used as doctor of a refund confirmation."
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:822
@@ -1654,9 +1647,7 @@ msgid "Include yearly incomes"
 msgstr "Jährliche Einkommen berücksichtigen"
 
 #: lino_welfare/modlib/debts/models.py:181
-msgid ""
-"Check this to include yearly incomes in the Debts Overview table of this "
-"Budget."
+msgid "Check this to include yearly incomes in the Debts Overview table of this Budget."
 msgstr ""
 
 #: lino_welfare/modlib/debts/models.py:183
@@ -1757,9 +1748,7 @@ msgid "Debt collection agency"
 msgstr "Schuldeneintreiber"
 
 #: lino_welfare/modlib/debts/models.py:553
-msgid ""
-"Leave empty for simple debts, otherwise select         here the "
-"responsible bailiff or collection agency"
+msgid "Leave empty for simple debts, otherwise select         here the responsible bailiff or collection agency"
 msgstr ""
 
 #: lino_welfare/modlib/debts/models.py:618
@@ -1896,16 +1885,12 @@ msgstr "Schuldenverteilung"
 #, fuzzy
 msgid ""
 "Répartition au marc-le-franc.\n"
-"A table with one row per entry in Liabilities which has \"distribute\" "
-"checked,\n"
-"proportionally distributing the `Distributable amount` among the debtors."
-"\n"
+"A table with one row per entry in Liabilities which has \"distribute\" checked,\n"
+"proportionally distributing the `Distributable amount` among the debtors.\n"
 msgstr ""
 "Répartition au marc-le-franc.\n"
-"Tabelle mit einer Zeile pro Eintrag in \"Verpflichtungen\", dessen Option"
-" \"verteilen\" angekreuzt ist. \n"
-"Der verfügbare Betrag wird dabei proportional zum geschuldeten Betrag "
-"aufgeteilt.\n"
+"Tabelle mit einer Zeile pro Eintrag in \"Verpflichtungen\", dessen Option \"verteilen\" angekreuzt ist. \n"
+"Der verfügbare Betrag wird dabei proportional zum geschuldeten Betrag aufgeteilt.\n"
 
 #: lino_welfare/modlib/debts/ui.py:707
 msgid "%"
@@ -4002,8 +3987,7 @@ msgstr ""
 
 #: lino_welfare/modlib/welfare/help_texts.py:64
 msgid ""
-"A customized variant of the standard SubmitInsert which prints the "
-"Confirmation after\n"
+"A customized variant of the standard SubmitInsert which prints the Confirmation after\n"
 "successful creation (if AidType.print_directly is checked)."
 msgstr ""
 
@@ -5182,9 +5166,7 @@ msgid "alias of CourseProvider"
 msgstr "Kursanbieter"
 
 #: lino_welfare/modlib/welfare/help_texts.py:473
-msgid ""
-"Ein Kursinhalt (z.B. \"Französisch\", \"Deutsch\", "
-"\"Alphabétisation\",...)"
+msgid "Ein Kursinhalt (z.B. \"Französisch\", \"Deutsch\", \"Alphabétisation\",...)"
 msgstr ""
 
 #: lino_welfare/modlib/welfare/help_texts.py:474
@@ -5334,9 +5316,7 @@ msgid "usable in contracts"
 msgstr "erlaubt in Verträgen"
 
 #: lino_welfare/modlib/welfare/models.py:109
-msgid ""
-"Whether Links of this type can be used as contact person of a job "
-"contract."
+msgid "Whether Links of this type can be used as contact person of a job contract."
 msgstr ""
 
 #: lino_welfare/modlib/welfare/roles.py:138
@@ -5441,9 +5421,8 @@ msgid "External meetings"
 msgstr ""
 
 #: lino_welfare/modlib/welfare/fixtures/demo.py:395
-#, fuzzy
 msgid "Private"
-msgstr "Getrennt von Tisch und Bett"
+msgstr "Privat"
 
 #: lino_welfare/modlib/welfare/fixtures/demo.py:529
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:49
@@ -5977,860 +5956,3 @@ msgstr "Interim-Agenturen"
 #: lino_welfare/projects/std/settings/__init__.py:92
 msgid "CVs emitted"
 msgstr "Erstellte Lebensläufe"
-
-#~ msgid "Bilan"
-#~ msgstr "Auswertung"
-
-#~ msgid "Recherche"
-#~ msgstr "Suche"
-
-#~ msgid "Travail"
-#~ msgstr "Arbeit"
-
-#~ msgid "Guest role for clients"
-#~ msgstr "Auch abgelehnte Klienten"
-
-#~ msgid "My menu"
-#~ msgstr "Mein Menü"
-
-#~ msgid "Upcoming reminders"
-#~ msgstr "Begleitung endet"
-
-#~ msgid "Correspondence"
-#~ msgstr "Korrespondenz"
-
-#~ msgid "Also deprecated clients"
-#~ msgstr "Auch veraltete Klienten"
-
-#~ msgid "Also newly coached clients since"
-#~ msgstr "Auch neu begleitete Klienten seit"
-
-#~ msgid "eID card"
-#~ msgstr "eID-Karte"
-
-#~ msgid "number"
-#~ msgstr "Nummer"
-
-#~ msgid "issued by"
-#~ msgstr "Ausgestellt durch"
-
-#~ msgid "eID card type"
-#~ msgstr "eID-Kartenart"
-
-#~ msgid "Must read eID card!"
-#~ msgstr "Muss eID-Karte einlesen!"
-
-#~ msgid "CBSS only"
-#~ msgstr "nur ZDSS"
-
-#~ msgid "INS code"
-#~ msgstr "INS-Code"
-
-#~ msgid "Client contact type for Bailiff."
-#~ msgstr "Klientenkontaktart Gerichtsvollzieher"
-
-#~ msgid "attestation"
-#~ msgstr "Bescheinigung"
-
-#~ msgid "Event type of attestations"
-#~ msgstr "Bescheinigung"
-
-#~ msgid "Birth"
-#~ msgstr "Geburtsangaben"
-
-#~ msgid "Real address"
-#~ msgstr "Reelle Adresse"
-
-#~ msgid "Bank account 1"
-#~ msgstr "Bankkonto 1"
-
-#~ msgid "Bank account 2"
-#~ msgstr "Bankkonto 2"
-
-#~ msgid "Job Requests"
-#~ msgstr "Stellenanfragen"
-
-#~ msgid "exclusion"
-#~ msgstr "AG-Sperre"
-
-#~ msgid "exclusions"
-#~ msgstr "AG-Sperren"
-
-#~ msgid "Education"
-#~ msgstr "Ausbildung"
-
-#~ msgid "Erstattung"
-#~ msgstr "Status"
-
-#~ msgid "responsible (DSBE)"
-#~ msgstr "Verantwortlicher (DSBE)"
-
-#~ msgid "Address type"
-#~ msgstr "Adressenart"
-
-#~ msgid "Address types"
-#~ msgstr "Adressenarten"
-
-#~ msgid "Official address"
-#~ msgstr "Offizielle Addresse"
-
-#~ msgid "Unverified address"
-#~ msgstr "Zu prüfende Adresse"
-
-#~ msgid "Declared address"
-#~ msgstr "Deklarierte Adresse"
-
-#~ msgid "Reference address"
-#~ msgstr "Referenzadresse"
-
-#~ msgid "Data source"
-#~ msgstr "Datenquelle"
-
-#~ msgid "Data sources"
-#~ msgstr "Datenquellen"
-
-#~ msgid "Manually entered"
-#~ msgstr "Manuell erfasst"
-
-#~ msgid "Read from eID"
-#~ msgstr "von eID-Karte"
-
-#~ msgid "Client Address"
-#~ msgstr "Klientenadresse"
-
-#~ msgid "Client Addresses"
-#~ msgstr "Klientenadressen"
-
-#~ msgid "Addresses"
-#~ msgstr "Adressen"
-
-#~ msgid "Issue attestation"
-#~ msgstr "Bescheinigung ausstellen"
-
-#~ msgid "Create a %s for this client."
-#~ msgstr "%s ausstellen für diesen Klienten."
-
-#~ msgid "Liste des types d'accompagnement."
-#~ msgstr "Liste der Begleitungsarten. "
-
-#~ msgid "Decider"
-#~ msgstr "Gremium"
-
-#~ msgid "Deciders"
-#~ msgstr "Gremien"
-
-#~ msgid "Applies until"
-#~ msgstr "Laufzeit bis"
-
-#~ msgid "Coaching period ends before it started."
-#~ msgstr "Begleitungsperiode endet bevor sie startet."
-
-#~ msgid "Santé"
-#~ msgstr "Gesundheit"
-
-#~ msgid "Aid"
-#~ msgstr "Hilfe"
-
-#~ msgid "Sign"
-#~ msgstr "Unterschreiben"
-
-#~ msgid "(Custom text specified as remark)"
-#~ msgstr "(Eigener Text im Feld \"Bemerkung\")"
-
-#~ msgid "Cancelled"
-#~ msgstr "Storniert"
-
-#~ msgid "Cancel"
-#~ msgstr "Stornieren"
-
-#~ msgid "Reopen"
-#~ msgstr "Neu starten"
-
-#~ msgid "Create an aid confirmation:"
-#~ msgstr "Hilfebestätigung erstellen:"
-
-#~ msgid "Refund partner"
-#~ msgstr "Rückerstattungspartner"
-
-#~ msgid "Refund partners"
-#~ msgstr "Rückerstattungspartner"
-
-#~ msgid "%s since %s"
-#~ msgstr "%s seit %s"
-
-#~ msgid "Aid confirmations to sign"
-#~ msgstr "Zu unterschreibende Hilfebescheinigungen"
-
-#~ msgid "Aid confirmation"
-#~ msgstr "Hilfebescheinigung"
-
-#~ msgid "urgent"
-#~ msgstr "dringende medizinische Hilfe"
-
-#~ msgid "at"
-#~ msgstr "um"
-
-#~ msgid "Art.60§7 contracts"
-#~ msgstr "Art.60§7-Konventionen"
-
-#~ msgid "Project type"
-#~ msgstr "Art des Arztes"
-
-#~ msgid "Project types"
-#~ msgstr "Art des Arztes"
-
-#~ msgid "started"
-#~ msgstr "begonnen"
-
-#~ msgid "stopped"
-#~ msgstr "beendet"
-
-#~ msgid "School"
-#~ msgstr "Schule"
-
-#~ msgid "Job search uploads"
-#~ msgstr "Uploads Arbeitssuche"
-
-#~ msgid "Medical uploads"
-#~ msgstr "Uploads Gesundheit"
-
-#~ msgid "Career uploads"
-#~ msgstr "Uploads Gesundheit"
-
-#~ msgid "Partners"
-#~ msgstr "Parameter"
-
-#~ msgid "since"
-#~ msgstr "seit dem"
-
-#~ msgid "received %(what)s %(when)s."
-#~ msgstr "%(when)s %(what)s erhalten hat."
-
-#~ msgid "with amount of"
-#~ msgstr "in Höhe von"
-
-#~ msgid "month"
-#~ msgstr "Monat"
-
-#~ msgid "Recipes issued by"
-#~ msgstr "Rezepte verschrieben durch "
-
-#~ msgid "Drugs delivered by"
-#~ msgstr "Medikamente ausgeliefert in"
-
-#~ msgid "Create %s"
-#~ msgstr "%s erstellen"
-
-#~ msgid "Long name"
-#~ msgstr "Ausführliche Bezeichnung"
-
-#~ msgid "Requested by"
-#~ msgstr "Angefragt von"
-
-#~ msgid "Only for newcomers"
-#~ msgstr "Nur für Neuzugänge"
-
-#~ msgid "CEF level"
-#~ msgstr "CEF-Kategorie"
-
-#~ msgid "CEF levels"
-#~ msgstr "CEF-Kategorien"
-
-#~ msgid "basic language skills"
-#~ msgstr "Elementare Sprachverwendung"
-
-#~ msgid "independent use of language"
-#~ msgstr "Selbstständige Sprachverwendung"
-
-#~ msgid "proficient use of language"
-#~ msgstr "Exzellente Sprachverwendung"
-
-#~ msgid "language knowledge"
-#~ msgstr "Sprachkenntnis"
-
-#~ msgid "language knowledges"
-#~ msgstr "Sprachkenntnisse"
-
-#~ msgid "Spoken"
-#~ msgstr "Wort"
-
-#~ msgid "Written"
-#~ msgstr "Schrift"
-
-#~ msgid "native language"
-#~ msgstr "Muttersprache"
-
-#~ msgid "%s (s/w)"
-#~ msgstr "%s (W/S)"
-
-#~ msgid "%s (s)"
-#~ msgstr "%s (W)"
-
-#~ msgid "%s (w)"
-#~ msgstr "%s (S)"
-
-#~ msgid "Study Regime"
-#~ msgstr "Ausbildungregime"
-
-#~ msgid "Studies"
-#~ msgstr "Ausbildungen und Studien"
-
-#~ msgid "Education Level"
-#~ msgstr "Akademischer Grad"
-
-#~ msgid "Education Levels"
-#~ msgstr "Akademische Grade"
-
-#~ msgid "Study Type"
-#~ msgstr "Ausbildungsart"
-
-#~ msgid "Study Types"
-#~ msgstr "Ausbildungsarten"
-
-#~ msgid "Work Regime"
-#~ msgstr "Regime"
-
-#~ msgid "Work Regimes"
-#~ msgstr "Regimes"
-
-#~ msgid "Status "
-#~ msgstr "Status"
-
-#~ msgid "Statuses"
-#~ msgstr "Status"
-
-#~ msgid "Job Sector"
-#~ msgstr "Sektor"
-
-#~ msgid "Job Sectors"
-#~ msgstr "Sektoren"
-
-#~ msgid "Beginning"
-#~ msgstr "Anfang"
-
-#~ msgid "End"
-#~ msgstr "Ende"
-
-#~ msgid "study or education"
-#~ msgstr "Ausbildung oder Studium"
-
-#~ msgid "Studies & education"
-#~ msgstr "Ausbildungen und Studien"
-
-#~ msgid "Study content"
-#~ msgstr "Ausbildungsinhalt"
-
-#~ msgid "Establishment"
-#~ msgstr "Einrichtung"
-
-#~ msgid "Job Experience"
-#~ msgstr "Berufserfahrung"
-
-#~ msgid "Job Experiences"
-#~ msgstr "Berufserfahrungen"
-
-#~ msgid "company"
-#~ msgstr "Firma"
-
-#~ msgid "job title"
-#~ msgstr "Bezeichnung"
-
-#~ msgid "rather not"
-#~ msgstr "andere Einkommen"
-
-#~ msgid "normally"
-#~ msgstr "Normal"
-
-#~ msgid "Art.60§7"
-#~ msgstr "Art.60§7"
-
-#~ msgid "Residence  permit"
-#~ msgstr "Aufenthaltserlaubnis"
-
-#~ msgid "valid from"
-#~ msgstr "Gültig von"
-
-#~ msgid "valid until"
-#~ msgstr "Gültig bis"
-
-#~ msgid "is Client"
-#~ msgstr "ist Klient"
-
-#~ msgid "Whether this Person is a Client."
-#~ msgstr "Ob diese Person ein Klient ist"
-
-#~ msgid "is Course Provider"
-#~ msgstr "ist Kursanbieter"
-
-#~ msgid "is Job Provider"
-#~ msgstr "Stellenanbieter"
-
-#~ msgid "Whether this Company is also a Job Provider."
-#~ msgstr "Ob diese Person ein Klient ist"
-
-#~ msgid "Master"
-#~ msgstr "Stammdaten"
-
-#~ msgid "Listings"
-#~ msgstr "Listings"
-
-#~ msgid "Configure"
-#~ msgstr "Konfigurierung"
-
-#~ msgid "Explorer"
-#~ msgstr "Explorer"
-
-#~ msgid "Site"
-#~ msgstr "Site"
-
-#~ msgid "not filled in"
-#~ msgstr "nicht ausgefüllt"
-
-#~ msgid "Overview"
-#~ msgstr "Übersicht"
-
-#~ msgid "driving licence"
-#~ msgstr "Führerschein"
-
-#~ msgid "Job supply contract"
-#~ msgstr "Art.60§7-Konvention"
-
-#~ msgid "Job supply contracts"
-#~ msgstr "Art.60§7-Konventionen"
-
-#~ msgid "Job Contract Type"
-#~ msgstr "Art.60§7-Konventionsart"
-
-#~ msgid "Job Contract Types"
-#~ msgstr "Art.60§7-Konventionsarten"
-
-#~ msgid "Orientation interne"
-#~ msgstr "Erstelldatum"
-
-#~ msgid "You confirm that this aid confirmation is correct."
-#~ msgstr "Sie bestätigen die Richtigkeit dieser Hilfebestätigung."
-
-#~ msgid "Data Test Clients"
-#~ msgstr "Datenkontrolle Klienten"
-
-#~ msgid "Also refused clients"
-#~ msgstr "Auch abgelehnte Klienten"
-
-#~ msgid "Also obsolete records"
-#~ msgstr "Auch veraltete Daten"
-
-#~ msgid "Art.60§7 contract"
-#~ msgstr "Art.60§7-Konvention"
-
-#~ msgid "Training"
-#~ msgstr "Ausbildung"
-
-#~ msgctxt "date"
-#~ msgid "on %s"
-#~ msgstr "am %s"
-
-#~ msgctxt "date range"
-#~ msgid "between %(a)s and %(b)s"
-#~ msgstr "vom %(a)s bis zum %(b)s"
-
-#~ msgctxt "date range"
-#~ msgid "from"
-#~ msgstr "vom"
-
-#~ msgctxt "date range"
-#~ msgid "until"
-#~ msgstr "bis"
-
-#~ msgid "Strange Clients"
-#~ msgstr "Aktenkontrollliste"
-
-#~ msgid "Check NISS validity"
-#~ msgstr "auf gültige NISS prüfen"
-
-#~ msgid "Error message"
-#~ msgstr "Fehlermeldung"
-
-#~ msgid "My strange clients"
-#~ msgstr "Meine Aktenkontrollliste"
-
-#~ msgid "Moteurs"
-#~ msgstr "Notiz"
-
-#~ msgid "Objectifs"
-#~ msgstr "Sektoren"
-
-#~ msgid "Bailiff Debts"
-#~ msgstr "Schulden (Gerichtsvollzieher)"
-
-#~ msgid "Excerpt title"
-#~ msgstr "Auszugstitel"
-
-#~ msgid "Default"
-#~ msgstr "Resultat"
-
-#~ msgid "Execute"
-#~ msgstr "Ausführen"
-
-#~ msgid "Liabilities (%s)"
-#~ msgstr "Verpflichtungen (%s)"
-
-#~ msgid "Worker"
-#~ msgstr "Ehemalig"
-
-#~ msgid "Freelancer"
-#~ msgstr "Referenz"
-
-#~ msgid "Voluntary"
-#~ msgstr "Land"
-
-#~ msgid "Student"
-#~ msgstr "Präsident"
-
-#~ msgid "Interim"
-#~ msgstr "Unterschreiber"
-
-#~ msgid "Exclusion"
-#~ msgstr "AG-Sperre"
-
-#~ msgid "Uploaded by"
-#~ msgstr "Hochgeladen durch"
-
-#~ msgid "My %s"
-#~ msgstr " am %s"
-
-#~ msgid "Author"
-#~ msgstr "Autor"
-
-#~ msgid "Signer"
-#~ msgstr "Unterschreiber"
-
-#~ msgid "Single cohabitating"
-#~ msgstr "Ledig zusammenwohnend"
-
-#~ msgid "Single with child"
-#~ msgstr "Ledig mit Kind"
-
-#~ msgid "Married (living alone)"
-#~ msgstr "Verheiratet (allein lebend)"
-
-#~ msgid "Married (living with another partner)"
-#~ msgstr "Verheiratet (mit anderem Partner lebend)"
-
-#~ msgid "Basic skills"
-#~ msgstr "Elementare Sprachverwendung"
-
-#~ msgid "Invoice"
-#~ msgstr "Seit"
-
-#~ msgid "Invoices"
-#~ msgstr "Geschieden"
-
-#~ msgid "Purchase invoices"
-#~ msgstr "Einkaufsrechnungen"
-
-#~ msgid "Disbursment instructions"
-#~ msgstr "Ausgabeanweisungen"
-
-#~ msgid "Financial"
-#~ msgstr "Finanzielle Hilfen"
-
-#~ msgid "Budgetary"
-#~ msgstr "Haushalt und Rechnung"
-
-#~ msgid "Domiciliations"
-#~ msgstr "Domizilierungen"
-
-#~ msgid "Closing entries"
-#~ msgstr "Abschlussbuchungen"
-
-#~ msgid "Aged from"
-#~ msgstr "Alter von"
-
-#~ msgid "Aged to"
-#~ msgstr "Alter bis"
-
-#~ msgid "Aged %(min)s to %(max)s"
-#~ msgstr "Alter %(min)s bis %(max)s"
-
-#~ msgid "FSE"
-#~ msgstr "Ablehnen"
-
-#~ msgid "FSE Summary"
-#~ msgstr "Zusammenfassung ZDSS"
-
-#~ msgid "Signed"
-#~ msgstr "Unterschrieben"
-
-#~ msgid "General integration workshops"
-#~ msgstr "Integrationsphase"
-
-#~ msgid "Evaluation session"
-#~ msgstr "Auswertung"
-
-#~ msgid "You have %s items in "
-#~ msgstr "Du hast %s Einträge in "
-
-#~ msgid "End coaching"
-#~ msgstr "Begleitung beenden"
-
-#~ msgid "%(client)s no longer coached by %(coach)s"
-#~ msgstr "%(client)s wird nicht mehr begleitet durch %(coach)s"
-
-#~ msgid "%(client)s has been refused."
-#~ msgstr "Neuantrag %(client)s wurde abgelehnt."
-
-#~ msgid "A Contract"
-#~ msgstr "Vertrag"
-
-#~ msgid "Pointer to the StudyType"
-#~ msgstr "erfordert Ausbildungsart "
-
-#~ msgid "The responsible integration agent."
-#~ msgstr "Begleiter im DSBE"
-
-#~ msgid "You have "
-#~ msgstr "Du hast"
-
-#~ msgid "{0} items in {1}"
-#~ msgstr "{0} Einträge in {1}"
-
-#~ msgid "Notified"
-#~ msgstr "Mitgeteilt"
-
-#~ msgid "This will checkout {num} guests: {guests}"
-#~ msgstr "Hiermit werden {num} Teilnehmer ausgecheckt: {guests}"
-
-#~ msgid ""
-#~ msgstr ""
-
-#~ msgid "Assign this agent as coach for this client."
-#~ msgstr ""
-
-#~ msgid "Civil states"
-#~ msgstr "Zivilstände"
-
-#~ msgid "Single"
-#~ msgstr "Ledig"
-
-#~ msgid "Married"
-#~ msgstr "Verheiratet"
-
-#~ msgid "Widowed"
-#~ msgstr "Verwitwet"
-
-#~ msgid "Divorced"
-#~ msgstr "Geschieden"
-
-#~ msgid "Separated"
-#~ msgstr "Getrennt von Tisch und Bett"
-
-#~ msgid "De facto separated"
-#~ msgstr "Faktisch getrennt"
-
-#~ msgid "Cohabitating"
-#~ msgstr "Zusammenwohnend"
-
-#~ msgid "Residence type"
-#~ msgstr "Register"
-
-#~ msgid "Registry of citizens"
-#~ msgstr "Bevölkerungsregister"
-
-#~ msgid "Registry of foreigners"
-#~ msgstr "Fremdenregister"
-
-#~ msgid "Waiting for registry"
-#~ msgstr "Warteregister"
-
-#~ msgid "Created"
-#~ msgstr "Erstellt"
-
-#~ msgid "Modified"
-#~ msgstr "Bearbeitet"
-
-#~ msgid "Note"
-#~ msgstr "Notiz"
-
-#~ msgid "Client states"
-#~ msgstr "Bearbeitungszustände Klienten"
-
-#~ msgid "Newcomer"
-#~ msgstr "Neuantrag"
-
-#~ msgid "Refused"
-#~ msgstr "Abgelehnt"
-
-#~ msgid "Coached"
-#~ msgstr "Begleitet"
-
-#~ msgid "GSS"
-#~ msgstr ""
-
-#~ msgid "Coaching types"
-#~ msgstr "Dienste"
-
-#~ msgid "Whether this coaching type does integration."
-#~ msgstr ""
-
-#~ msgid "Whether this coaching type does general social work."
-#~ msgstr ""
-
-#~ msgid "Role in evaluations"
-#~ msgstr "Auswertung"
-
-#~ msgid "Role when participating in evaluation meetings."
-#~ msgstr ""
-
-#~ msgid "Coaching termination reasons"
-#~ msgstr "Begleitungsbeendigungsgründe"
-
-#~ msgid "If not empty, allow this ending only on coachings of specified type."
-#~ msgstr ""
-
-#~ msgid "A list of reasons expressing why a coaching was ended"
-#~ msgstr ""
-
-#~ msgid "Coachings"
-#~ msgstr "Begleitungen"
-
-#~ msgid ""
-#~ "There's at most one primary coach "
-#~ "per client.         Enabling this field "
-#~ "will automatically make the other         "
-#~ "coachings non-primary."
-#~ msgstr ""
-
-#~ msgid "Coached from"
-#~ msgstr "Begleitet seit"
-
-#~ msgid "Liste des accompagnements."
-#~ msgstr "Liste der Begleitungen"
-
-#~ msgid "Primary coachings"
-#~ msgstr "Primäre Begleitungen"
-
-#~ msgid "Check coachings"
-#~ msgstr "Begleitung prüfen"
-
-#~ msgid "Both coached and obsolete."
-#~ msgstr "Begleitet und veraltet zugleich."
-
-#~ msgid "Not coached, but with active coachings."
-#~ msgstr "Nicht begleitet und dennoch aktive Begleitungen."
-
-#~ msgid "Client Contact type"
-#~ msgstr "Klientenkontaktart"
-
-#~ msgid "Client Contact types"
-#~ msgstr "Klientenkontaktarten"
-
-#~ msgid "Liste des types de contacts client."
-#~ msgstr "Liste der Arten von Klientenkontakten."
-
-#~ msgid "Client Contact"
-#~ msgstr "Kontakt"
-
-#~ msgid "Client Contacts"
-#~ msgstr "Klientenkontakte"
-
-#~ msgid "Must fill at least one field."
-#~ msgstr ""
-
-#~ msgid "Contact person"
-#~ msgstr "Kontaktperson"
-
-#~ msgid "Liste des contacts clients."
-#~ msgstr "Liste der Klientenkontakte"
-
-#~ msgid "Contacts"
-#~ msgstr "Kontakte"
-
-#~ msgid ""
-#~ "The global list of civil states that a client can have.  This\n"
-#~ "is the list of choices for the civil_state field of a\n"
-#~ "Client."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "célibataire : vous n’avez pas de partenaire auquel vous êtes\n"
-#~ "officiellement lié"
-#~ msgstr ""
-
-#~ msgid "marié(e) : vous êtes légalement marié"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "veuf (veuve) / Verwitwet : vous êtes légalement marié mais\n"
-#~ "votre partenaire est décédé"
-#~ msgstr ""
-
-#~ msgid "divorcé(e) (Geschieden) : votre mariage a été juridiquement dissolu"
-#~ msgstr ""
-
-#~ msgid "De facto separated (Séparé de fait, faktisch getrennt)"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Legally separated, aka \"Separated as to property\" (Séparé de\n"
-#~ "corps et de biens, Getrennt von Tisch und Bett)"
-#~ msgstr ""
-
-#~ msgid "Cohabitating (cohabitant, zusammenlebend)"
-#~ msgstr ""
-
-#~ msgid "Types of registries for the Belgian residence."
-#~ msgstr ""
-
-#~ msgid "A choicelist of observable client events."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "The choice for ClientEvents which\n"
-#~ "selects clients whose record has been created during the observed\n"
-#~ "period."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "The choice for ClientEvents which selects clients whose\n"
-#~ "main record has been modified during the observed period."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Whether coachings of this type are to be considered as\n"
-#~ "integration work. This is used when generating calendar events\n"
-#~ "for evaluation meetings (see\n"
-#~ "lino_welfare.modlib.isip.mixins.ContractBase.setup_auto_event())"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A Coaching (Begleitung, intervention) is when a Client is being\n"
-#~ "coached by a User (a social assistant) during a given period."
-#~ msgstr ""
-
-#~ msgid "The Coachings table in a Clients detail."
-#~ msgstr ""
-
-#~ msgid "Base class for things that are related to one and only one client."
-#~ msgstr ""
-
-#~ msgid "Pointer to the client."
-#~ msgstr "Beratungen mit Klient"
-
-#~ msgid "Also used by aids.RefundPartner."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Coached clients should not be obsolete.  Only coached clients\n"
-#~ "should have active coachings"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A client contact type is the type or \"role\" which must be\n"
-#~ "specified for a given ClientContact."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "A client contact is when a given partner has a given role for\n"
-#~ "a given client."
-#~ msgstr ""
-
