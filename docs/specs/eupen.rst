@@ -854,7 +854,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Buchhaltung --> Buchungsperioden : 7
 - Konfigurierung --> Buchhaltung --> Zahlungsbedingungen : 9
 - Konfigurierung --> ÖSHZ --> Dienste : 4
-- Konfigurierung --> ÖSHZ --> Begleitungsbeendigungsgründe : 1
+- Konfigurierung --> ÖSHZ --> Begleitungsbeendigungsgründe : 5
 - Konfigurierung --> ÖSHZ --> Klientenkontaktarten : 11
 - Konfigurierung --> ÖSHZ --> Integrationsphasen : 1
 - Konfigurierung --> ÖSHZ --> Berufe : 1
