@@ -41,8 +41,11 @@ from lino.core.tables import ButtonsTable
 from lino_xl.lib.reception.models import *
 
 pcsw = dd.resolve_app('pcsw')
+coachings = dd.resolve_app('coachings')
 extensible = dd.resolve_app('extensible')
-from lino_welfare.modlib.pcsw.models import ClientStates
+
+from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.coachings.desktop import CoachingsByClient
 
 # Make EventsByDay available also for reception agents who are not in
 # office group.
@@ -232,13 +235,12 @@ class CreateNote(dd.Action):
 
 #~ class Clients(dd.Table):
 
-
 class Clients(pcsw.CoachedClients):  # see blog 2013/0817
     """The list that opens by :menuselection:`Reception --> Clients`.
 
     Visible to user profiles in group "reception".
-    It differs from :class:`pcsw.CoachedClients
-    <lino_welfare.modlib.pcsw.models.CoachedClients>` by the visible columns.
+    It differs from :class:`CoachedClients
+    <lino_xl.lib.coachings.desktop.CoachedClients>` by the visible columns.
 
     """
     required_roles = dd.required((OfficeUser, OfficeOperator))
@@ -260,7 +262,7 @@ class Clients(pcsw.CoachedClients):  # see blog 2013/0817
     #     return kw
 
 
-dd.inject_action('pcsw.Coaching', create_visit=CreateCoachingVisit())
+dd.inject_action('coachings.Coaching', create_visit=CreateCoachingVisit())
 dd.inject_action('pcsw.Client', create_visit=CreateClientVisit())
 if False:
     # doesn't work because the combination (dialog action with JS
@@ -272,7 +274,7 @@ dd.inject_action(
     'pcsw.Client', find_date=dd.ShowSlaveTable(FindDateByClientTable))
 
 
-class AgentsByClient(pcsw.CoachingsByClient):
+class AgentsByClient(CoachingsByClient):
     """Shows the users for whom an appointment can be made with this
 client. Per user you have two possible buttons: (1) a prompt
 consultation (client will wait in the lounge until the user receives
@@ -295,7 +297,7 @@ Tested document about :ref:`welfare.tested.reception.AgentsByClient`
         if mi is None:
             return
         if mi.client_state == ClientStates.coached:
-            for obj in pcsw.Coaching.objects.filter(
+            for obj in coachings.Coaching.objects.filter(
                     client=mi, end_date__isnull=True).order_by('start_date'):
                 yield obj
         else:
@@ -306,7 +308,7 @@ Tested document about :ref:`welfare.tested.reception.AgentsByClient`
             # for u in appointable_users(newcomer_quota__gt=0):
                 # Create a temporary coaching. needed for generating
                 # the action buttons below.
-                yield pcsw.Coaching(
+                yield coachings.Coaching(
                     client=mi, user=u, type=u.coaching_type,
                     start_date=dd.today())
 
@@ -363,7 +365,7 @@ Tested document about :ref:`welfare.tested.reception.AgentsByClient`
         return E.div(*elems)
 
 
-class CoachingsByClient(pcsw.CoachingsByClient):
+class CoachingsByClient(CoachingsByClient):
     # obsolete. replaced by AgentsByClient
     label = _("Create appointment with")
     filter = models.Q(end_date__isnull=True)

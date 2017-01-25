@@ -291,11 +291,6 @@ Begleitungsdienst
 
 Jede Begleitung findet zwingend im Rahmen eines bestimmten 
 **Dienstes** statt.
-In der Demo-Datenbank gibt es folgende Begleitungsdienste:
-
-.. django2rst:: 
-
-    settings.SITE.login('rolf').show(pcsw.CoachingTypes)
     
 
 Regeln
@@ -321,11 +316,12 @@ Regeln
 Krankenkassen und Apotheken (Klientenkontakte)
 ==============================================
 
-Die Felder PXS->IdMut (Krankenkasse) und PXS->Apotheke (Apotheke) 
-werden nach Lino synchronisiert als :ddref:`Klientenkontakte <pcsw.ClientContact>`.
+Die Felder PXS->IdMut (Krankenkasse) und PXS->Apotheke (Apotheke)
+werden nach Lino synchronisiert als `Klientenkontakte
+<coachings.ClientContact>`.
 
 *Importierte* Klienten sollten in ihren 
-:ddref:`Klientenkontakten <pcsw.ClientContact>`
+`Klientenkontakten <coachings.ClientContact>`
 deshalb maximal *eine* Krankenkasse und *eine* Apotheke haben.
 Sonst findet `watch_tim`, dass er nicht dafür 
 zuständig ist und synchronisiert nichts 

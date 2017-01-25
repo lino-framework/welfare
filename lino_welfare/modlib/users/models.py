@@ -44,7 +44,7 @@ class User(User):
     """
 
     coaching_type = dd.ForeignKey(
-        'pcsw.CoachingType',
+        'coachings.CoachingType',
         blank=True, null=True,
         help_text=_(
             "The default CoachingType used when "

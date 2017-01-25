@@ -377,24 +377,6 @@ the person linked to this note."""),
     'lino_welfare.modlib.pcsw.actions.RefuseClient' : _("""Refuse this newcomer request."""),
     'lino_welfare.modlib.pcsw.actions.MarkClientFormer' : _("""Change client's state to 'former'. This will also end any active
 coachings."""),
-    'lino_welfare.modlib.pcsw.choicelists.ClientEvents' : _("""A choicelist of observable client events."""),
-    'lino_welfare.modlib.pcsw.choicelists.ClientCreated' : _("""The choice for ClientEvents which
-selects clients whose record has been created during the observed
-period."""),
-    'lino_welfare.modlib.pcsw.choicelists.ClientModified' : _("""The choice for ClientEvents which selects clients whose
-main record has been modified during the observed period."""),
-    'lino_welfare.modlib.pcsw.coaching.CoachingType' : _("""Whether coachings of this type are to be considered as
-integration work. This is used when generating calendar events
-for evaluation meetings (see
-lino_welfare.modlib.isip.mixins.ContractBase.setup_auto_event())"""),
-    'lino_welfare.modlib.pcsw.coaching.Coaching' : _("""A Coaching (Begleitung, intervention) is when a Client is being
-coached by a User (a social assistant) during a given period."""),
-    'lino_welfare.modlib.pcsw.coaching.CoachingsByClient' : _("""The Coachings table in a Clients detail."""),
-    'lino_welfare.modlib.pcsw.coaching.CoachingsByClient.master' : _("""alias of Client"""),
-    'lino_welfare.modlib.pcsw.coaching.CoachingsByClient.model' : _("""alias of Coaching"""),
-    'lino_welfare.modlib.pcsw.mixins.unused_ClientRelated' : _("""Base class for things that are related to one and only one client."""),
-    'lino_welfare.modlib.pcsw.mixins.unused_ClientRelated.client' : _("""Pointer to the client."""),
-    'lino_welfare.modlib.pcsw.mixins.ClientContactBase' : _("""Also used by aids.RefundPartner."""),
     'lino_welfare.modlib.pcsw.models.Client' : _("""Inherits from lino_welfare.modlib.contacts.models.Person and
 lino_xl.lib.beid.models.BeIdCardHolder."""),
     'lino_welfare.modlib.pcsw.models.Client.has_esf' : _("""Whether Lino should make ESF summaries for this client."""),
@@ -421,12 +403,6 @@ the specified value."""),
     'lino_welfare.modlib.pcsw.models.Clients.model' : _("""alias of Client"""),
     'lino_welfare.modlib.pcsw.models.SSINChecker' : _("""Clients must have either valid eId data or an alternative
 identifying document."""),
-    'lino_welfare.modlib.pcsw.models.ClientCoachingsChecker' : _("""Coached clients should not be obsolete.  Only coached clients
-should have active coachings"""),
-    'lino_welfare.modlib.pcsw.models.ClientContactType' : _("""A client contact type is the type or "role" which must be
-specified for a given ClientContact."""),
-    'lino_welfare.modlib.pcsw.models.ClientContact' : _("""A client contact is when a given partner has a given role for
-a given client."""),
     'lino_welfare.modlib.pcsw.roles.SocialAgent' : _("""A social agent is a user who does individual coaching of
 clients.  Certain privacy-relevant client data is visible only
 to social agents."""),

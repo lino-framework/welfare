@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2015 Luc Saffre
+# Copyright 2008-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@ from lino.api import dd, rt
 
 def objects():
 
-    ClientContactType = rt.modules.pcsw.ClientContactType
+    ClientContactType = rt.models.coachings.ClientContactType
     kw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
     cct = ClientContactType(**kw)
     yield cct

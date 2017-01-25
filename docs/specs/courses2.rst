@@ -37,17 +37,17 @@ Workshops
 Ateliers
 
 >>> rt.show(rt.actors.courses.Activities)
-============ ======================= ============================ ============= ======= ===============
- Date début   Inscriptions jusqu'au   Série d'ateliers             Instructeur   Local   Actions
------------- ----------------------- ---------------------------- ------------- ------- ---------------
- 12/05/2014                           Cuisine                                            **Brouillon**
- 12/05/2014                           Créativité                                         **Brouillon**
- 12/05/2014                           Notre premier bébé                                 **Brouillon**
- 12/05/2014                           Mathématiques                                      **Brouillon**
- 12/05/2014                           Français                                           **Brouillon**
- 12/05/2014                           Activons-nous!                                     **Brouillon**
- 03/11/2013                           Psycho-social intervention                         **Brouillon**
-============ ======================= ============================ ============= ======= ===============
+============ ======================= ============================= ============= ======= ===============
+ Date début   Inscriptions jusqu'au   Série d'ateliers              Instructeur   Local   Actions
+------------ ----------------------- ----------------------------- ------------- ------- ---------------
+ 12/05/2014                           Cuisine                                             **Brouillon**
+ 12/05/2014                           Créativité                                          **Brouillon**
+ 12/05/2014                           Notre premier bébé                                  **Brouillon**
+ 12/05/2014                           Mathématiques                                       **Brouillon**
+ 12/05/2014                           Français                                            **Brouillon**
+ 12/05/2014                           Activons-nous!                                      **Brouillon**
+ 03/11/2013                           Intervention psycho-sociale                         **Brouillon**
+============ ======================= ============================= ============= ======= ===============
 <BLANKLINE>
 
 >>> print(rt.actors.courses.Courses.params_layout.main)

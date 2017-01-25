@@ -36,8 +36,8 @@ from lino.api import dd
 from lino_xl.lib.cv.models import *
 from lino.core.signals import pre_ui_save
 
-from lino_welfare.modlib.pcsw.choicelists import (
-    ClientEvents, ObservedEvent, has_contracts_filter)
+from lino_xl.lib.coachings.choicelists import (
+    ClientEvents, ObservedEvent)
 
 from lino_welfare.modlib.integ.roles import IntegrationStaff, IntegrationAgent
 

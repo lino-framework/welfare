@@ -172,7 +172,7 @@ It has 4 keys:
 >>> d.record_id
 127
 >>> d.base_params
-{u'mt': 51, u'mk': 127}
+{u'mt': 54, u'mk': 127}
 
 >>> d.field_values
 {u'userHidden': 5, u'user': u'Hubert Huppertz', u'summary': u''}

@@ -42,7 +42,8 @@ ONE_DAY = datetime.timedelta(days=1)
 
 def objects():
     
-    DSBE = pcsw.CoachingType.objects.get(id=isip.COACHINGTYPE_DSBE)
+    DSBE = rt.models.coachings.CoachingType.objects.get(
+        id=isip.COACHINGTYPE_DSBE)
 
     # isip (VSE)
     ISIP_DURATIONS = Cycler(312, 480, 312, 480, 30)

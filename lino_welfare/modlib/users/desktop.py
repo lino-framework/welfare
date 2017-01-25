@@ -53,7 +53,7 @@ class UserDetail(UserDetail, UserDetailMixin):
     """
 
     coaching = dd.Panel("""
-    coaching_a:20 pcsw.CoachingsByUser:40
+    coaching_a:20 coachings.CoachingsByUser:40
     """, label=_("Coaching"))
 
 

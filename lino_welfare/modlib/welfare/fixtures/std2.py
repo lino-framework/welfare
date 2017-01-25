@@ -89,7 +89,7 @@ def excerpt_types():  # also used for migration to 1.1.11
         yield attType(
             body_template='coaching.body.html',
             content_type=ContentType.objects.get_for_model(
-                dd.resolve_model('pcsw.Coaching')),
+                dd.resolve_model('coachings.Coaching')),
             **dd.str2kw('name', _("Coaching sheet")))
 
     yield ExcerptType.update_for_model(

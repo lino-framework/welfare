@@ -27,6 +27,7 @@ from lino.utils.instantiator import Instantiator
 pcsw = dd.resolve_app('pcsw')
 contacts = dd.resolve_app('contacts')
 active_job_search = dd.resolve_app('active_job_search')
+from lino_xl.lib.coachings.choicelists import ClientStates
 
 
 def create(client, company, date, spontaneous):
@@ -37,7 +38,7 @@ def create(client, company, date, spontaneous):
 
 def objects():
     CLIENTS = Cycler(pcsw.Client.objects.filter(
-        client_state=pcsw.ClientStates.coached))
+        client_state=ClientStates.coached))
     COMPANIES = Cycler(contacts.Company.objects.all())
     for i in range(10):
         yield create(CLIENTS.pop(), COMPANIES.pop(),

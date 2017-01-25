@@ -263,11 +263,13 @@ The demo database has exactly one AidType with a nonempty
 >>> at = aids.AidType.objects.get(pharmacy_type__isnull=False)
 >>> at
 AidType #6 ('\xdcbernahme von Arzt- und/oder Medikamentenkosten')
+>>> at.pharmacy_type
+ClientContactType #1 ('Apotheke')
 
 
 There are 4 pharmacies altogether:
 
->>> rt.show(pcsw.PartnersByClientContactType, at.pharmacy_type)
+>>> rt.show('coachings.PartnersByClientContactType', at.pharmacy_type)
 =================================== ===== ===============================================
  Name                                ID    Ansicht als
 ----------------------------------- ----- -----------------------------------------------
@@ -293,7 +295,7 @@ There are two grantings with this aid type:
 Usually there is at most one pharmacy among the client's client
 contacts:
 
->>> rt.show(pcsw.ContactsByClient, pcsw.Client.objects.get(id=139))
+>>> rt.show('coachings.ContactsByClient', pcsw.Client.objects.get(id=139))
 ==================== =============== =================== =============
  Klientenkontaktart   Organisation    Kontaktperson       Bemerkungen
 -------------------- --------------- ------------------- -------------

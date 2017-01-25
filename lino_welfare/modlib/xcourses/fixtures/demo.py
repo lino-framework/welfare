@@ -49,6 +49,7 @@ from lino.utils.ssin import generate_ssin
 
 Company = dd.resolve_model('contacts.Company')
 
+from lino_xl.lib.coachings.choicelists import ClientStates
 
 def objects():
 
@@ -59,7 +60,7 @@ def objects():
     CourseContent = resolve_model('xcourses.CourseContent')
 
     CLIENTS = Cycler(
-        Client.objects.filter(client_state=pcsw.ClientStates.coached))
+        Client.objects.filter(client_state=ClientStates.coached))
 
     eupen = Place.objects.get(name__exact='Eupen')
 

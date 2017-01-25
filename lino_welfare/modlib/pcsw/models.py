@@ -70,15 +70,17 @@ from lino_welfare.modlib.cbss.choicelists import OK_STATES
 
 from lino.utils import ssin
 
-from .coaching import *
-from .mixins import ClientContactBase
-from .utils import (only_coached_by, only_coached_on,
-                    only_active_coachings_filter,
-                    add_coachings_filter, daterange_text,
-                    has_contracts_filter)
+from lino import mixins
+
+from lino_xl.lib.coachings.utils import (
+    only_active_coachings_filter,
+    add_coachings_filter, daterange_text,
+    has_contracts_filter)
+
+from lino_xl.lib.coachings.choicelists import ClientEvents, ClientStates
+
 from .roles import SocialAgent, SocialStaff
-from .choicelists import (ClientEvents,
-                          ClientStates, RefusalReasons)
+from .choicelists import RefusalReasons
 from lino_xl.lib.beid.choicelists import CivilStates, ResidenceTypes
 
 from .actions import RefuseClient, MarkClientFormer
@@ -643,7 +645,7 @@ class ClientDetail(dd.DetailLayout):
 
     coaching = dd.Panel("""
     newcomers_left:20 newcomers.AvailableCoachesByClient:40
-    pcsw.ContactsByClient:20 pcsw.CoachingsByClient:40
+    coachings.ContactsByClient:20 coachings.CoachingsByClient:40
     """, label=_("Coaches"))
 
     newcomers_left = dd.Panel("""
@@ -991,26 +993,6 @@ class SSINChecker(ClientChecker):
 SSINChecker.activate()
 
 
-class ClientCoachingsChecker(ClientChecker):
-    """Coached clients should not be obsolete.  Only coached clients
-    should have active coachings
-
-    """
-    verbose_name = _("Check coachings")
-
-    def get_plausibility_problems(self, obj, fix=False):
-        if obj.client_state == ClientStates.coached:
-            if obj.is_obsolete:
-                yield (False, _("Both coached and obsolete."))
-        if obj.client_state != ClientStates.coached:
-            today = dd.today()
-            period = (today, today)
-            qs = obj.get_coachings(period)
-            if qs.count():
-                yield (False, _("Not coached, but with active coachings."))
-
-ClientCoachingsChecker.activate()
-
 
 #
 # PERSON GROUP
@@ -1238,111 +1220,6 @@ class AidTypes(dd.Table):
     model = 'pcsw.AidType'
     column_names = 'name *'
     required_roles = dd.required(SocialStaff)
-
-
-class ClientContactType(mixins.BabelNamed):
-    """A **client contact type** is the type or "role" which must be
-    specified for a given :class:`ClientContact`.
-
-    .. attribute:: can_refund
-
-    Whether persons of this type can be used as doctor of a refund
-    confirmation. Injected by :mod:`lino_welfare.modlib.aids`.
-
-    """
-    class Meta:
-        app_label = 'pcsw'
-        verbose_name = _("Client Contact type")
-        verbose_name_plural = _("Client Contact types")
-
-
-class ClientContactTypes(dd.Table):
-    help_text = _("Liste des types de contacts client.")
-    model = 'pcsw.ClientContactType'
-    required_roles = dd.required(SocialStaff)
-
-    # TODO: `can_refund` is injected in aids, `is_bailiff` in debts
-    # NOTE: this is being overridden by lino_welfare.projects.eupen
-    detail_layout = """
-    id name
-    contacts.PartnersByClientContactType
-    pcsw.ClientContactsByType
-    """
-
-    column_names = 'id name *'
-
-    stay_in_grid = True
-
-
-class ClientContact(ClientContactBase):
-    """A **client contact** is when a given partner has a given role for
-    a given client.
-
-    .. attribute:: client
-
-    The :class:`Client`
-
-    .. attribute:: company
-
-    the Company
-
-    .. attribute:: contact_person
-    
-    the Contact person in the Company
-
-    .. attribute:: contact_role
-    
-    the role of the contact person in the Company
-
-    .. attribute:: type
-    
-    The :class:`ClientContactType`.
-
-    """
-    class Meta:
-        app_label = 'pcsw'
-        verbose_name = _("Client Contact")
-        verbose_name_plural = _("Client Contacts")
-    #~ type = ClientContactTypes.field(blank=True)
-    client = dd.ForeignKey('pcsw.Client')
-    remark = models.TextField(_("Remarks"), blank=True)  # ,null=True)
-
-    def full_clean(self, *args, **kw):
-        if not self.remark and not self.type \
-           and not self.company and not self.contact_person:
-            raise ValidationError(_("Must fill at least one field."))
-        super(ClientContact, self).full_clean(*args, **kw)
-
-
-dd.update_field(ClientContact, 'contact_person',
-                verbose_name=_("Contact person"))
-
-
-class ClientContacts(dd.Table):
-    required_roles = dd.required(SocialStaff)
-    help_text = _("Liste des contacts clients.")
-    model = 'pcsw.ClientContact'
-
-
-class ContactsByClient(ClientContacts):
-    required_roles = dd.required()
-    master_key = 'client'
-    column_names = 'type company contact_person remark *'
-    label = _("Contacts")
-    auto_fit_column_widths = True
-
-
-class ClientContactsByType(ClientContacts):
-    required_roles = dd.required()
-    master_key = 'type'
-    column_names = 'company contact_person client remark *'
-    label = _("Contacts")
-    auto_fit_column_widths = True
-
-
-class PartnersByClientContactType(contacts.Partners):
-    master_key = 'client_contact_type'
-    column_names = 'name id mti_navigator *'
 
 
 @dd.receiver(dd.pre_analyze)

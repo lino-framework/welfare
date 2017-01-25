@@ -68,7 +68,7 @@ class TestCase(TestCase):
         self.assertEquivalent(expected, rst)
 
     def check_coachings(self, expected):
-        ar = rt.actors.pcsw.Coachings.request()
+        ar = rt.actors.coachings.Coachings.request()
         rst = ar.to_rst(
             column_names="id client start_date end_date user primary")
         if not expected:
@@ -91,7 +91,7 @@ class TestCase(TestCase):
         Event = rt.models.cal.Event
         EventType = rt.models.cal.EventType
         Client = rt.models.pcsw.Client
-        Coaching = rt.models.pcsw.Coaching
+        Coaching = rt.models.coachings.Coaching
         ContentType = rt.models.contenttypes.ContentType
 
         self.create_obj(
@@ -187,7 +187,7 @@ class TestCase(TestCase):
         data.update(mk=second.pk)
         kwargs = dict(data=urlencode(data))
         kwargs['REMOTE_USER'] = 'alicia'
-        url = '/api/pcsw/CoachingsByClient/{}'.format(second_roger.pk)
+        url = '/api/coachings/CoachingsByClient/{}'.format(second_roger.pk)
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)
 

@@ -53,9 +53,9 @@ Lino Welfare à la Chatelet.
     - (newcomers_left):
       - (newcomers_left_1) [visible for all]: **Actions** (workflow_buttons), **Document identifiant** (id_document)
       - **Spécificité** (faculty) [visible for all]
-      - **Contacts** (pcsw.ContactsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]
+      - **Contacts** (coachings.ContactsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]
     - **Agents disponibles** (newcomers.AvailableCoachesByClient)
-  - **Interventions** (pcsw.CoachingsByClient)
+  - **Interventions** (coachings.CoachingsByClient)
 - **Situation familiale** (family) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]:
   - (family_1) [visible for all]:
     - (family_left): **Appartenance aux ménages** (MembersByPerson) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910], **Garde d'enfant** (child_custody)

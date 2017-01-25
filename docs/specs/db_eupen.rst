@@ -55,6 +55,11 @@ Database structure
 - cbss.RetrieveTIGroupsRequest : id, user, printed_by, person, sent, status, environment, ticket, request_xml, response_xml, debug_messages, info_messages, national_id, language, history
 - cbss.Sector : id, name, code, subcode, abbr, abbr_fr, abbr_en, name_fr, name_en
 - changes.Change : id, time, type, user, object_type, object_id, master_type, master_id, diff
+- coachings.ClientContact : id, company, contact_person, contact_role, type, client, remark
+- coachings.ClientContactType : id, name, name_fr, name_en, is_bailiff, can_refund
+- coachings.Coaching : id, start_date, end_date, user, client, type, primary, ending
+- coachings.CoachingEnding : id, seqno, name, type, name_fr, name_en
+- coachings.CoachingType : id, name, does_integ, does_gss, eval_guestrole, name_fr, name_en
 - contacts.Company : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, prefix, type, vat_id
 - contacts.CompanyType : id, name, abbr, abbr_fr, abbr_en, name_fr, name_en
 - contacts.Partner : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, remarks, is_obsolete, activity, client_contact_type, payment_term
@@ -129,11 +134,6 @@ Database structure
 - pcsw.Activity : id, name, lst104
 - pcsw.AidType : id, name, name_fr, name_en
 - pcsw.Client : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, title, first_name, middle_name, last_name, gender, birth_date, person_ptr, national_id, nationality, card_number, card_valid_from, card_valid_until, card_type, card_issuer, noble_condition, group, birth_place, birth_country, civil_state, residence_type, in_belgium_since, residence_until, unemployed_since, seeking_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type, declared_name, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_office_contact, client_state, refusal_reason, remarks2, gesdos_id, tim_id, is_cpas, is_senior, health_insurance, pharmacy, income_ag, income_wg, income_kg, income_rente, income_misc, job_agents, broker, faculty, has_esf
-- pcsw.ClientContact : id, company, contact_person, contact_role, type, client, remark
-- pcsw.ClientContactType : id, name, name_fr, name_en, is_bailiff, can_refund
-- pcsw.Coaching : id, start_date, end_date, user, client, type, primary, ending
-- pcsw.CoachingEnding : id, seqno, name, type, name_fr, name_en
-- pcsw.CoachingType : id, name, does_integ, does_gss, eval_guestrole, name_fr, name_en
 - pcsw.Conviction : id, client, date, prejudicial, designation
 - pcsw.Dispense : id, client, reason, remarks, start_date, end_date
 - pcsw.DispenseReason : id, seqno, name, name_fr, name_en

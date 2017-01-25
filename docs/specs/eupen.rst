@@ -77,7 +77,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Büro : Upload-Arten, Auszugsarten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Terminregeln, Gastrollen, Kalendereintragsarten, Externe Kalender
   - Buchhaltung : Kontengruppen, Haushaltsartikel, Journale, Buchungsperioden, Zahlungsbedingungen
-  - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien 
+  - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
   - Kurse : Kursinhalte
@@ -181,7 +181,7 @@ to explicitly override the language of :meth:`show_menu
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
   - Büro : Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Terminregeln, Kalendereintragsarten, Externe Kalender
-  - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dienste, Begleitungsbeendigungsgründe, Dispenzgründe, Klientenkontaktarten, Hilfearten, Kategorien
+  - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
   - Kurse : Kursinhalte
@@ -358,6 +358,9 @@ Each window layout defines a given set of fields.
 - cbss.RetrieveTIGroupsRequests.detail : id, person, user, sent, status, printed, national_id, language, history, environment, ticket, info_messages, debug_messages
 - cbss.RetrieveTIGroupsRequests.insert : person, national_id, language, history
 - changes.Changes.detail : time, user, type, master, object, id, diff
+- coachings.ClientContactTypes.insert : id, name, name_fr, name_en, can_refund, is_bailiff
+- coachings.CoachingEndings.insert : id, name, name_fr, name_en, seqno
+- coachings.Coachings.create_visit : user, summary
 - contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, payment_term, VouchersByPartner, MovementsByPartner, id, language, activity, is_obsolete, created, modified
 - contacts.Companies.insert : name, language, email, type, id
 - contacts.Companies.merge_row : merge_to, addresses_Address, sepa_Account, reason
@@ -439,14 +442,11 @@ Each window layout defines a given set of fields.
 - notes.Notes.insert : event_type, type, subject, project
 - outbox.Mails.detail : subject, project, date, user, sent, id, owner, AttachmentsByMail, UploadsByController, body
 - outbox.Mails.insert : project, subject, body
-- pcsw.ClientContactTypes.insert : id, name, name_fr, name_en, can_refund, is_bailiff
 - pcsw.Clients.create_visit : user, summary
 - pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, SimilarClients, LinksByHuman, cbss_relations, MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, aid_type, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, UploadsByClient, cvs_emitted, LanguageKnowledgesByPerson, skills, obstacles, ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
-- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, cv_LanguageKnowledge, dupable_clients_Word, pcsw_Coaching, pcsw_Dispense, properties_PersonProperty, addresses_Address, sepa_Account, reason
+- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, cv_LanguageKnowledge, dupable_clients_Word, pcsw_Dispense, properties_PersonProperty, addresses_Address, sepa_Account, reason
 - pcsw.Clients.refuse_client : reason, remark
-- pcsw.CoachingEndings.insert : id, name, name_fr, name_en, seqno
-- pcsw.Coachings.create_visit : user, summary
 - plausibility.Checkers.detail : value, text
 - plausibility.Problems.detail : user, owner, checker, id, message
 - properties.PropGroups.insert : id, name, name_fr, name_en
@@ -546,6 +546,9 @@ Each window layout is **viewable** by a given set of user profiles.
 - cbss.RetrieveTIGroupsRequests.detail : visible for 100 110 120 200 210 300 400 410 admin 910
 - cbss.RetrieveTIGroupsRequests.insert : visible for 100 110 120 200 210 300 400 410 admin 910
 - changes.Changes.detail : visible for admin 910
+- coachings.ClientContactTypes.insert : visible for 110 410 admin 910
+- coachings.CoachingEndings.insert : visible for 110 410 admin 910
+- coachings.Coachings.create_visit : visible for 110 410 admin 910
 - contacts.Companies.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Companies.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Companies.merge_row : visible for 110 210 410 800 admin 910
@@ -627,14 +630,11 @@ Each window layout is **viewable** by a given set of user profiles.
 - notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - outbox.Mails.detail : visible for 110 410 admin 910
 - outbox.Mails.insert : visible for 110 410 admin 910
-- pcsw.ClientContactTypes.insert : visible for 110 410 admin 910
 - pcsw.Clients.create_visit : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.Clients.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.Clients.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.Clients.merge_row : visible for 110 210 410 800 admin 910
 - pcsw.Clients.refuse_client : visible for 120 200 220 300 admin 910
-- pcsw.CoachingEndings.insert : visible for 110 410 admin 910
-- pcsw.Coachings.create_visit : visible for 110 410 admin 910
 - plausibility.Checkers.detail : visible for admin 910
 - plausibility.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - properties.PropGroups.insert : visible for admin 910
@@ -717,6 +717,8 @@ Global list of all actions that have a parameter dialog.
   (main) [visible for all]: **Kurzbeschreibung** (notify_subject), **Beschreibung** (notify_body), **Keine Mitteilung an andere** (notify_silent)
 - cal.Guests.checkin : Einchecken
   (main) [visible for all]: **Kurzbeschreibung** (notify_subject), **Beschreibung** (notify_body), **Keine Mitteilung an andere** (notify_silent)
+- coachings.Coachings.create_visit : Visite erstellen
+  (main) [visible for all]: **Benutzer** (user), **Begründung** (summary)
 - contacts.Companies.merge_row : Fusionieren
   (main) [visible for all]:
   - **nach...** (merge_to)
@@ -735,15 +737,13 @@ Global list of all actions that have a parameter dialog.
   - **nach...** (merge_to)
   - **Auch vergängliche verknüpfte Objekte überweisen** (keep_volatiles):
     - (keep_volatiles_1): **Einkommensbescheinigungen** (aids_IncomeConfirmation), **Kostenübernahmescheine** (aids_RefundConfirmation)
-    - (keep_volatiles_2): **Einfache Bescheinigungen** (aids_SimpleConfirmation), **Sprachkenntnisse** (cv_LanguageKnowledge)
-    - (keep_volatiles_3): **Phonetische Wörter** (dupable_clients_Word), **Begleitungen** (pcsw_Coaching)
+    - (keep_volatiles_2): **Einfache Bescheinigungen** (aids_SimpleConfirmation), **Begleitungen** (coachings_Coaching)
+    - (keep_volatiles_3): **Sprachkenntnisse** (cv_LanguageKnowledge), **Phonetische Wörter** (dupable_clients_Word)
     - (keep_volatiles_4): **Dispenzen** (pcsw_Dispense), **Eigenschaften** (properties_PersonProperty)
     - (keep_volatiles_5): **Adressen** (addresses_Address), **Bankkonten** (sepa_Account)
   - **Begründung** (reason)
 - pcsw.Clients.refuse_client : Ablehnen
   (main) [visible for all]: **Ablehnungsgrund** (reason), **Bemerkung** (remark)
-- pcsw.Coachings.create_visit : Visite erstellen
-  (main) [visible for all]: **Benutzer** (user), **Begründung** (summary)
 - users.AllUsers.send_welcome_email : Welcome mail
   (main) [visible for all]: **E-Mail-Adresse** (email), **Betreff** (subject)
 - users.Users.change_password : Passwort ändern
@@ -853,13 +853,13 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Buchhaltung --> Journale : 5
 - Konfigurierung --> Buchhaltung --> Buchungsperioden : 7
 - Konfigurierung --> Buchhaltung --> Zahlungsbedingungen : 9
+- Konfigurierung --> ÖSHZ --> Dienste : 4
+- Konfigurierung --> ÖSHZ --> Begleitungsbeendigungsgründe : 5
+- Konfigurierung --> ÖSHZ --> Klientenkontaktarten : 11
 - Konfigurierung --> ÖSHZ --> Integrationsphasen : 1
 - Konfigurierung --> ÖSHZ --> Berufe : 1
 - Konfigurierung --> ÖSHZ --> AG-Sperrgründe : 3
-- Konfigurierung --> ÖSHZ --> Dienste : 4
-- Konfigurierung --> ÖSHZ --> Begleitungsbeendigungsgründe : 1
 - Konfigurierung --> ÖSHZ --> Dispenzgründe : 1
-- Konfigurierung --> ÖSHZ --> Klientenkontaktarten : 11
 - Konfigurierung --> ÖSHZ --> Hilfearten : 12
 - Konfigurierung --> ÖSHZ --> Kategorien : 4
 - Konfigurierung --> Lebenslauf --> Sprachen : 6
@@ -943,7 +943,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Finanzjournale --> Kontoauszüge : 1
 - Explorer --> Finanzjournale --> Diverse Buchungen : 1
 - Explorer --> Finanzjournale --> Zahlungsaufträge : 24
-- Explorer --> Lebenslauf --> Sprachkenntnisse : 120
+- Explorer --> Lebenslauf --> Sprachkenntnisse : 113
 - Explorer --> Lebenslauf --> Ausbildungen : 21
 - Explorer --> Lebenslauf --> Studien : 23
 - Explorer --> Lebenslauf --> Berufserfahrungen : 31

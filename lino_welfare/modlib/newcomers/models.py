@@ -37,7 +37,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import string_concat
 
 
-from lino.api import dd
+from lino.api import dd, rt
 from lino.api.dd import dtos
 
 from lino.utils.choosers import chooser
@@ -58,6 +58,7 @@ from .roles import NewcomersAgent, NewcomersOperator
 
 # users = dd.resolve_app('users')
 pcsw = dd.resolve_app('pcsw', strict=True)
+from lino_xl.lib.coachings.choicelists import ClientStates
 
 WORKLOAD_BASE = decimal.Decimal('10')  # normal number of newcomers per month
 MAX_WEIGHT = decimal.Decimal('10')
@@ -196,7 +197,7 @@ class MyCompetences(My, CompetencesByUser):
     #~ @classmethod
     #~ def param_defaults(self,ar,**kw):
         #~ kw = super(Newcomers,self).param_defaults(ar,**kw)
-        #~ kw.update(client_state=pcsw.ClientStates.newcomer)
+        #~ kw.update(client_state=ClientStates.newcomer)
         #~ kw.update(coached_on=None)
         #~ return kw
 
@@ -248,7 +249,7 @@ eines Begleiters oder Ablehnen des Hilfeantrags."""
     @classmethod
     def param_defaults(self, ar, **kw):
         kw = super(NewClients, self).param_defaults(ar, **kw)
-        kw.update(client_state=pcsw.ClientStates.newcomer)
+        kw.update(client_state=ClientStates.newcomer)
         # kw.update(new_since=amonthago())
         return kw
 
@@ -312,7 +313,7 @@ class AvailableCoaches(Users):
     def get_data_rows(self, ar):
         client = ar.param_values.for_client
         if client:
-            # if client.client_state != pcsw.ClientStates.newcomer:
+            # if client.client_state != ClientStates.newcomer:
             #     raise Warning(_("Only for newcomers"))
             if not client.faculty:
                 raise Warning(_("Only for clients with given `faculty`."))
@@ -331,7 +332,7 @@ class AvailableCoaches(Users):
 
             user.new_clients = NewClients.request(param_values=dict(
                 coached_by=user,
-                client_state=pcsw.ClientStates.coached,
+                client_state=ClientStates.coached,
                 new_since=ar.param_values.since))
 
             user._score = HUNDRED
@@ -368,7 +369,7 @@ class AvailableCoaches(Users):
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self, obj, ar):
         #~ return pcsw.ClientsByCoach1.request(ar.ui,master_instance=obj)
-        return pcsw.CoachingsByUser.request(master_instance=obj)
+        return rt.actors.coachings.CoachingsByUser.request(master_instance=obj)
 
     #~ @dd.requestfield(_("Active clients"))
     #~ def active_clients(self,obj,ar):
@@ -460,14 +461,14 @@ class AssignCoach(NotableAction):
         client = ar.master_instance
         watcher = ChangeWatcher(client)
 
-        coaching = pcsw.Coaching(
+        coaching = rt.models.coachings.Coaching(
             client=client, user=obj,
             start_date=settings.SITE.today(),
             type=obj.coaching_type)
         coaching.full_clean()
         coaching.save()
         dd.on_ui_created.send(coaching, request=ar.request)
-        client.client_state = pcsw.ClientStates.coached
+        client.client_state = ClientStates.coached
         client.full_clean()
         client.save()
         watcher.send_update(ar.request)

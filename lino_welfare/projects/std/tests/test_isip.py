@@ -35,6 +35,7 @@ from lino.utils.djangotest import RemoteAuthTestCase
 
 from lino.utils import i2d
 from lino_xl.lib.cal.choicelists import WORKDAYS
+from lino_xl.lib.coachings.choicelists import ClientStates
 from lino.modlib.users.choicelists import UserTypes
 from lino.modlib.system.choicelists import Genders
 
@@ -75,7 +76,7 @@ class QuickTest(RemoteAuthTestCase):
         kw.update(last_name="Mustermann")
         kw.update(
             gender=Genders.male,
-            client_state=pcsw.ClientStates.coached)
+            client_state=ClientStates.coached)
         client = create(pcsw.Client, **kw)
 
         kw = dict()

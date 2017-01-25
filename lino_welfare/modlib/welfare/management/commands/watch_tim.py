@@ -44,7 +44,7 @@ from django.db import IntegrityError
 from lino.core.utils import is_valid_email
 from lino.core.diff import ChangeWatcher
 
-from lino.api import dd
+from lino.api import dd, rt
 from lino.mixins.human import name2kw
 from lino_xl.lib.contacts.utils import street2kw
 from lino.utils import join_words
@@ -93,6 +93,7 @@ households_Type = dd.resolve_model("households.Type")
 #~ Household = pcsw.Household
 #~ Household = households.Household
 #~ households_Type = households.Type
+from lino_xl.lib.coachings.choicelists import ClientStates
 
 CCTYPE_HEALTH_INSURANCE = 1
 CCTYPE_PHARMACY = 2
@@ -167,14 +168,14 @@ def checkcc(person, pk, nType):
         #~ dblogger.warning(u"%s : Company %s doesn't exist (please create manually in Lino).",
             #~ dd.obj2str(person),pk)
         #~ return
-    qs = pcsw.ClientContact.objects.filter(
+    qs = rt.models.coachings.ClientContact.objects.filter(
         client=person,
         type__id=nType)
     if qs.count() == 0:
-        cc = pcsw.ClientContact(
+        cc = rt.models.coachings.ClientContact(
             client=person,
             company_id=pk,
-            type=pcsw.ClientContactType.objects.get(id=nType))
+            type=rt.models.coachings.ClientContactType.objects.get(id=nType))
         cc.save()
         dd.on_ui_created.send(sender=cc, request=REQUEST)
         #~ changes.log_create(REQUEST,cc)
@@ -572,16 +573,16 @@ class PAR(Controller):
                     #~ if obj.is_deprecated:
                         #~ obj.national_id += ' (A)'
                 if data.has_key('ATTRIB') and "N" in data['ATTRIB']:
-                    obj.client_state = pcsw.ClientStates.newcomer
+                    obj.client_state = ClientStates.newcomer
                 elif data['IDPRT'] == 'I':
-                    obj.client_state = pcsw.ClientStates.former
+                    obj.client_state = ClientStates.former
                 #~
                 else:
-                    obj.client_state = pcsw.ClientStates.coached
+                    obj.client_state = ClientStates.coached
                 #~ elif obj.national_id and is_valid_ssin(obj.national_id):
-                    #~ obj.client_state = pcsw.ClientStates.coached
+                    #~ obj.client_state = ClientStates.coached
                 #~ else:
-                    #~ obj.client_state = pcsw.ClientStates.invalid
+                    #~ obj.client_state = ClientStates.invalid
                 #~ if data.has_key('NB1'):
                     #~ obj.gesdos_id = data['NB1']
                 #~ if not obj.national_id:
@@ -606,20 +607,20 @@ class PAR(Controller):
                         obj.save()
 
                     try:
-                        coaching = pcsw.Coaching.objects.get(
+                        coaching = rt.models.coachings.Coaching.objects.get(
                             client=obj, primary=True)
-                    except pcsw.Coaching.DoesNotExist, e:
+                    except rt.models.coachings.Coaching.DoesNotExist, e:
                         try:
-                            coaching = pcsw.Coaching.objects.get(
+                            coaching = rt.models.coachings.Coaching.objects.get(
                                 client=obj, user=u, end_date__isnull=True)
                             watcher = ChangeWatcher(coaching)
                             coaching.primary = True
                             coaching.save()
                             watcher.send_update(REQUEST)
                             #~ watcher.log_diff(REQUEST)
-                        except pcsw.Coaching.DoesNotExist, e:
+                        except rt.models.coachings.Coaching.DoesNotExist, e:
                             if u is not None:
-                                coaching = pcsw.Coaching(
+                                coaching = rt.models.coachings.Coaching(
                                     client=obj, primary=True, user=u,
                                     type=u.coaching_type,
                                     start_date=obj.created)
@@ -648,7 +649,7 @@ class PAR(Controller):
                             if coaching.start_date is None:
                                 coaching.start_date = obj.created
 
-                            if obj.client_state == pcsw.ClientStates.coached:
+                            if obj.client_state == ClientStates.coached:
                                 coaching.end_date = None  # 1990
                             else:
                                 #~ coaching.end_date = LONG_TIME_AGO
@@ -663,7 +664,7 @@ class PAR(Controller):
                             """
                             create a new coaching 
                             """
-                            coaching = pcsw.Coaching(
+                            coaching = rt.models.coachings.Coaching(
                                 client=obj, primary=True,
                                 user=u,
                                 type=u.coaching_type,

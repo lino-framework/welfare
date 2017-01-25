@@ -34,7 +34,7 @@ ClientStates
 The list of possible choices for the :attr:`Client.client_state` field.
 Default configuration is as follows:
 
->>> rt.show(pcsw.ClientStates)
+>>> rt.show('coachings.ClientStates')
 ======= ========== ==========
  value   name       text
 ------- ---------- ----------
@@ -94,10 +94,10 @@ ClientEvents
  active      active      Coaching
  created     created     Created
  modified    modified    Modified
- dispense    dispense    Dispense
- penalty     penalty     Penalty
  note        note        Note
  learning    learning    Learning
+ dispense    dispense    Dispense
+ penalty     penalty     Penalty
  isip        isip        ISIP
  jobs        jobs        Art60§7 job supplyment
  available   available   Available
@@ -160,7 +160,7 @@ Coaching types
 
 >>> ses = rt.login('robin')
 >>> with translation.override('de'):
-...    ses.show(pcsw.CoachingTypes)
+...    ses.show('coachings.CoachingTypes')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ================= ===================== =================== ====== ====== =====================
  Bezeichnung       Bezeichnung (fr)      Bezeichnung (de)    DSBE   GSS    Role in evaluations
