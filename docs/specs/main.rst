@@ -51,10 +51,10 @@ Kalender
 
 >>> for h in soup.find_all('h2'):
 ...     print(h.text.strip())
-Benutzer und ihre Klienten 🗗
-Meine Termine 🗗
-Wartende Besucher 🗗
-Meine Benachrichtigungen 🗗
+Benutzer und ihre Klienten ⍐
+Meine Termine ⍐
+Wartende Besucher ⍐
+Meine Benachrichtigungen ⍐
 
 
 >>> res = test_client.get('/api/main_html', REMOTE_USER='robin')
@@ -64,8 +64,8 @@ Meine Benachrichtigungen 🗗
 >>> soup = BeautifulSoup(result['html'], 'lxml')
 >>> for h in soup.find_all('h2'):
 ...     print(h.text.strip())
-Users with their Clients 🗗
-My appointments 🗗
-Waiting visitors 🗗
-My Notification messages 🗗
+Users with their Clients ⍐
+My appointments ⍐
+Waiting visitors ⍐
+My Notification messages ⍐
 
