@@ -645,7 +645,7 @@ Romain
   - Calendrier : Calendriers, Locaux, Priorités, Règles d'évènements récurrents, Rôles de participants, Types d'entrée calendrier, Remote Calendars
   - Comptabilité : Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
-  - CPAS : Services, Raisons d’arrêt d'intervention, Types de contact client, Phases d'intégration, Activités, types d'exclusions, Motifs de dispense, Types d'aide sociale, Catégories
+  - CPAS : Services, Raisons d’arrêt d'intervention, Types de contact client, Phases d'intégration, Activités, Types d'exclusion, Motifs de dispense, Types d'aide sociale, Catégories
   - Parcours : Langues, Types d'éducation, Niveaux académiques, Secteurs, Fonctions, Régimes de travail, Statuts, Types de contrat, Types de compétence sociale, Types de freins, Preuves de qualification
   - Intégration : Types de PIIS, Motifs d’arrêt de contrat, Régimes d'évaluation, Types de mise à l'emploi art60§7, Types de poste, Horaires, Types de mise à l'emploi art.61, Types de stage d'immersion, Objectifs
   - Nouvelles demandes : Intermédiaires, Spécificités
@@ -653,7 +653,7 @@ Romain
   - Médiation de dettes : Groupes de comptes, Comptes, Budget modèle
   - Questionnaires : Listes de choix
 - Explorateur :
-  - Contacts : Personnes de contact, Types d'adresses, Adresses, Membres du conseil, Household member roles, Membres de ménage, Personal Links, Type de parenté
+  - Contacts : Personnes de contact, Types d'adresses, Adresses, Membres du conseil, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
   - Système : Procurations, Types d'utilisateur, types de contenu, Notifications, Changes, All dashboard widgets, Tests de données, Problèmes de données
   - Bureau : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations, Text Field Templates
   - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
@@ -688,7 +688,7 @@ sociales, freins. Elle peut faire des requètes CBSS.
   - Contacts : Types d'organisation, Fonctions, Types de ménage
   - CPAS : Types d'aide sociale, Catégories
 - Explorateur :
-  - Contacts : Personnes de contact, Household member roles, Membres de ménage, Personal Links, Type de parenté
+  - Contacts : Personnes de contact, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
   - Ateliers : Ateliers
   - CPAS : Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
 - Site : à propos
@@ -862,7 +862,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> CPAS --> Types de contact client : 11
 - Configuration --> CPAS --> Phases d'intégration : 6
 - Configuration --> CPAS --> Activités : 1
-- Configuration --> CPAS --> types d'exclusions : 3
+- Configuration --> CPAS --> Types d'exclusion : 3
 - Configuration --> CPAS --> Motifs de dispense : 5
 - Configuration --> CPAS --> Types d'aide sociale : 12
 - Configuration --> CPAS --> Catégories : 4
@@ -897,10 +897,10 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Contacts --> Types d'adresses : 6
 - Explorateur --> Contacts --> Adresses : 91
 - Explorateur --> Contacts --> Membres du conseil : 1
-- Explorateur --> Contacts --> Household member roles : 8
+- Explorateur --> Contacts --> Rôles de membres de ménage  : 8
 - Explorateur --> Contacts --> Membres de ménage : 64
-- Explorateur --> Contacts --> Personal Links : 60
-- Explorateur --> Contacts --> Type de parenté : 13
+- Explorateur --> Contacts --> Liens de parenté : 60
+- Explorateur --> Contacts --> Types de parenté : 13
 - Explorateur --> Système --> Procurations : 4
 - Explorateur --> Système --> Types d'utilisateur : 15
 - Explorateur --> Système --> types de contenu : 135

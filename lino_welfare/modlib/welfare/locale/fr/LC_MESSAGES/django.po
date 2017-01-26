@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-25 00:56+0200\n"
-"PO-Revision-Date: 2017-01-25 17:14+0200\n"
+"PO-Revision-Date: 2017-01-26 06:03+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: fr\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
@@ -3431,11 +3431,11 @@ msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:1112
 msgid "Exclusion Type"
-msgstr "type d'exclusion"
+msgstr "Type d'exclusion"
 
 #: lino_welfare/modlib/pcsw/models.py:1113
 msgid "Exclusion Types"
-msgstr "types d'exclusions"
+msgstr "Types d'exclusion"
 
 #: lino_welfare/modlib/pcsw/models.py:1122
 msgid ""
