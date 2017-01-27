@@ -346,3 +346,16 @@ class Migrator(Migrator):
         globals_dict.update(create_vatless_invoiceitem=noop)
         return '1.1.26'
 
+    def migrate_from_1_1_26(self, globals_dict):
+        """
+        - move 5 models from pcsw to coaching
+
+        """
+        globals_dict.update(   
+            pcsw_ClientContact=resolve_model("coaching.ClientContact"),
+            pcsw_ClientContactType=resolve_model("coaching.ClientContactType"),
+            pcsw_Coaching=resolve_model("coaching.Coaching"),
+            pcsw_CoachingEnding=resolve_model("coaching.CoachingEnding"),
+            pcsw_CoachingType=resolve_model("coaching.CoachingType"))
+
+        return "2017.1.0"
