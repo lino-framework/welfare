@@ -349,6 +349,7 @@ class Migrator(Migrator):
     def migrate_from_1_1_26(self, globals_dict):
         """
         - move 5 models from pcsw to coaching
+        - rename courses to xcourses
 
         """
         globals_dict.update(   
@@ -358,4 +359,12 @@ class Migrator(Migrator):
             pcsw_CoachingEnding=resolve_model("coaching.CoachingEnding"),
             pcsw_CoachingType=resolve_model("coaching.CoachingType"))
 
+        if dd.is_installed('xcourses'):
+            globals_dict.update(
+                courses_Course = resolve_model("xcourses.Course"),
+                courses_CourseContent = resolve_model("xcourses.CourseContent"),
+                courses_CourseOffer = resolve_model("xcourses.CourseOffer"),
+                courses_CourseProvider = resolve_model("xcourses.CourseProvider"),
+                courses_CourseRequest = resolve_model("xcourses.CourseRequest"))
+                
         return "2017.1.0"
