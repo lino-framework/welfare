@@ -346,3 +346,25 @@ class Migrator(Migrator):
         globals_dict.update(create_vatless_invoiceitem=noop)
         return '1.1.26'
 
+    def migrate_from_1_1_26(self, globals_dict):
+        """
+        - move 5 models from pcsw to coaching
+        - rename courses to xcourses
+
+        """
+        globals_dict.update(   
+            pcsw_ClientContact=resolve_model("coachings.ClientContact"),
+            pcsw_ClientContactType=resolve_model("coachings.ClientContactType"),
+            pcsw_Coaching=resolve_model("coachings.Coaching"),
+            pcsw_CoachingEnding=resolve_model("coachings.CoachingEnding"),
+            pcsw_CoachingType=resolve_model("coachings.CoachingType"))
+
+        if dd.is_installed('xcourses'):
+            globals_dict.update(
+                courses_Course = resolve_model("xcourses.Course"),
+                courses_CourseContent = resolve_model("xcourses.CourseContent"),
+                courses_CourseOffer = resolve_model("xcourses.CourseOffer"),
+                courses_CourseProvider = resolve_model("xcourses.CourseProvider"),
+                courses_CourseRequest = resolve_model("xcourses.CourseRequest"))
+                
+        return "2017.1.0"
