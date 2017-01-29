@@ -144,7 +144,7 @@ I was not possible until now to override the `verbose_name` of the
 >>> ses = rt.login("robin")
 >>> ses.show(rt.actors.notify.AllMessages)
 ===================== ======================================= ================== ====== =====================
- Created               Body                                    Recipient          seen   sent
+ Created               Subject                                 Recipient          seen   sent
 --------------------- --------------------------------------- ------------------ ------ ---------------------
  2014-05-22 05:48:00   The database has been initialized.      nicolas                   2014-05-22 05:48:00
  2014-05-22 05:48:00   La base de données a été initialisée.   Alicia Allmanns           2014-05-22 05:48:00
@@ -163,9 +163,10 @@ I was not possible until now to override the `verbose_name` of the
 <BLANKLINE>
 
 >>> ses.show(rt.actors.notify.MyMessages)
-==================================== ===================== ============== =========
- Body                                 Created               Message Type   Actions
------------------------------------- --------------------- -------------- ---------
- The database has been initialized.   2014-05-22 05:48:00   System event   [✓]
-==================================== ===================== ============== =========
+===================== ==================================== ============== =========
+ Created               Subject                              Message Type   Actions
+--------------------- ------------------------------------ -------------- ---------
+ 2014-05-22 05:48:00   The database has been initialized.   System event   [✓]
+===================== ==================================== ============== =========
 <BLANKLINE>
+

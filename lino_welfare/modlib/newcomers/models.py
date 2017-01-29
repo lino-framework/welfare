@@ -451,7 +451,7 @@ class AssignCoach(NotableAction):
         if client:
             return client.get_change_observers()
 
-    # def get_notify_owner(self, ar, obj):
+    # def get_change_owner(self, ar, obj):
     #     return ar.master_instance
 
     def run_from_ui(self, ar, **kw):
