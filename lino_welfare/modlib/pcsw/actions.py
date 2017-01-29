@@ -88,7 +88,9 @@ class RefuseClient(ChangeStateAction):
         mt = rt.models.notify.MessageTypes.action
         
         def msg(user, mm):
-            return subject + "\n" + body
+            if not subject:
+                return None
+            return (subject, body)
         
         rt.models.notify.Message.emit_message(
             ar, obj, mt, msg, recipients)
@@ -125,7 +127,7 @@ class MarkClientFormer(ChangeStateAction):
             obj.emit_system_note(ar, subject=body)
             
             def msg(user, mm):
-                return body
+                return (body, body)
             rt.models.notify.Message.emit_message(
                 ar, obj, mt, msg, recipients)
             ar.success(**kw)

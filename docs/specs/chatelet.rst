@@ -89,7 +89,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cbss.Purpose                   cbss.Purposes                   7         106
  cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        6
  cbss.Sector                    cbss.Sectors                    11        209
- changes.Change                 changes.Changes                 9         0
+ changes.Change                 changes.Changes                 10        0
  coachings.ClientContact        coachings.ClientContacts        7         14
  coachings.ClientContactType    coachings.ClientContactTypes    7         10
  coachings.Coaching             coachings.Coachings             8         90

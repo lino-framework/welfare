@@ -48,13 +48,13 @@ from lino.modlib.users.choicelists import UserTypes
 class TestCase(TestCase):
     maxDiff = None
 
-    def check_notifications(self, expected=None):
+    def check_notifications(self, expected=''):
         """Hint: when `expected` is empty, then the found result is being
         printed to stdout so you can copy it into your code.
 
         """
         ar = rt.actors.notify.Messages.request()
-        rst = ar.to_rst(column_names="body owner user")
+        rst = ar.to_rst(column_names="subject owner user")
         if not expected:
             print rst
         # print rst  # handy when something fails
@@ -141,7 +141,8 @@ class TestCase(TestCase):
 
         res = ses.run(guest.checkin)
         self.assertEqual(res, {
-            'message': '', 'success': True, 'refresh': True})
+            'message': 'CLIENT First (100) has started waiting for caroline',
+            'success': True, 'refresh': True})
 
         # it has caused a notification message:
         self.assertEqual(Message.objects.count(), 1)
@@ -166,16 +167,12 @@ class TestCase(TestCase):
 
         # self.check_notifications()
         self.check_notifications("""
-+--------------------------------------------------------+------------------------+-----------+
-| Body                                                   | Controlled by          | Recipient |
-+========================================================+========================+===========+
-|                                                        |                        | caroline  |
-+--------------------------------------------------------+------------------------+-----------+
-| **CLIENT Seconda (101)** has been modified by Alicia:  | *CLIENT Seconda (101)* | roger     |
-|                                                        |                        |           |
-|   * **Name** : 'Client Second' --&gt; 'Client Seconda' |                        |           |
-|   * **First name** : 'Second' --&gt; 'Seconda'         |                        |           |
-+--------------------------------------------------------+------------------------+-----------+
+===================================================== ======================== ===========
+ Subject                                               Controlled by            Recipient
+----------------------------------------------------- ------------------------ -----------
+ CLIENT First (100) has started waiting for caroline                            caroline
+ CLIENT Seconda (101) has been modified by Alicia      *CLIENT Seconda (101)*   roger
+===================================================== ======================== ===========
 """)
 
         # When a coaching is modified, all active coaches of that
@@ -191,15 +188,13 @@ class TestCase(TestCase):
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)
 
-        # self.check_notifications("")
+        # self.check_notifications()
         self.check_notifications("""
-+-----------------------------------------------------+------------------------+-----------+
-| Body                                                | Controlled by          | Recipient |
-+=====================================================+========================+===========+
-| **roger / Client S** has been modified by Alicia:   | *CLIENT Seconda (101)* | roger     |
-|                                                     |                        |           |
-|   * **Coached from** : 2014-05-01 --&gt; 2014-05-02 |                        |           |
-+-----------------------------------------------------+------------------------+-----------+
+============================================== ======================== ===========
+ Subject                                        Controlled by            Recipient
+---------------------------------------------- ------------------------ -----------
+ roger / Client S has been modified by Alicia   *CLIENT Seconda (101)*   roger
+============================================== ======================== ===========
 """)
 
         # AssignCoach. we are going to Assign caroline as coach for
@@ -245,11 +240,11 @@ class TestCase(TestCase):
 
         # self.check_notifications()
         self.check_notifications("""
-======================================== =============== ===========
- Body                                     Controlled by   Recipient
----------------------------------------- --------------- -----------
- First CLIENT assigned to caroline Body                   caroline
-======================================== =============== ===========
+=================================== =============== ===========
+ Subject                             Controlled by   Recipient
+----------------------------------- --------------- -----------
+ First CLIENT assigned to caroline                   caroline
+=================================== =============== ===========
 """)
 
         self.check_coachings("""
@@ -303,12 +298,13 @@ class TestCase(TestCase):
             'Alicia marked CLIENT Seconda (101) as <b>Former</b>.')
         self.assertTrue(res.success)
 
+        # self.check_notifications()
         self.check_notifications("""
-=================================================== ======================== ===========
- Body                                                Controlled by            Recipient
---------------------------------------------------- ------------------------ -----------
- Alicia marked CLIENT Seconda (101) as **Former**.   *CLIENT Seconda (101)*   roger
-=================================================== ======================== ===========
+====================================================== ======================== ===========
+ Subject                                                Controlled by            Recipient
+------------------------------------------------------ ------------------------ -----------
+ Alicia marked CLIENT Seconda (101) as <b>Former</b>.   *CLIENT Seconda (101)*   roger
+====================================================== ======================== ===========
 """)
 
         # check two coachings have now an end_date set:
@@ -344,12 +340,13 @@ class TestCase(TestCase):
         url = '/api/pcsw/Clients/{}'.format(first.pk)
         res = self.client.get(url, **kwargs)
         self.assertEqual(res.status_code, 200)
+        # self.check_notifications()
         self.check_notifications("""
-======================================================================== ====================== ===========
- Body                                                                     Controlled by          Recipient
------------------------------------------------------------------------- ---------------------- -----------
- Alicia marked CLIENT First (100) as **Refused**. PCSW is not competent   *CLIENT First (100)*   caroline
-======================================================================== ====================== ===========
+===================================================== ====================== ===========
+ Subject                                               Controlled by          Recipient
+----------------------------------------------------- ---------------------- -----------
+ Alicia marked CLIENT First (100) as <b>Refused</b>.   *CLIENT First (100)*   caroline
+===================================================== ====================== ===========
 """)
         self.check_notes("""
 ==== ======== ==================== =====================================================

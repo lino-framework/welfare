@@ -54,7 +54,7 @@ Database structure
 - cbss.Purpose : id, name, sector_code, code, name_fr, name_en
 - cbss.RetrieveTIGroupsRequest : id, user, printed_by, person, sent, status, environment, ticket, request_xml, response_xml, debug_messages, info_messages, national_id, language, history
 - cbss.Sector : id, name, code, subcode, abbr, abbr_fr, abbr_en, name_fr, name_en
-- changes.Change : id, time, type, user, object_type, object_id, master_type, master_id, diff
+- changes.Change : id, time, type, user, object_type, object_id, master_type, master_id, diff, changed_fields
 - coachings.ClientContact : id, company, contact_person, contact_role, type, client, remark
 - coachings.ClientContactType : id, name, name_fr, name_en, is_bailiff, can_refund
 - coachings.Coaching : id, start_date, end_date, user, client, type, primary, ending
