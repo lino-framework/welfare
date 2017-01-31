@@ -173,11 +173,6 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient,
     group = models.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
                               verbose_name=_("Integration phase"))
 
-    birth_place = models.CharField(_("Birth place"),
-                                   max_length=200,
-                                   blank=True,
-                                   #~ null=True
-                                   )
     birth_country = dd.ForeignKey(
         "countries.Country",
         blank=True, null=True,
