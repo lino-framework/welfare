@@ -198,10 +198,10 @@ User profiles
 =============
 
 We use the user profiles defined in
-:mod:`lino_welfare.modlib.welfare.roles`:
+:mod:`lino_welfare.modlib.welfare.user_types`:
 
 >>> settings.SITE.user_types_module
-'lino_welfare.modlib.welfare.roles'
+'lino_welfare.modlib.welfare.user_types'
 >>> rt.show(users.UserTypes)
 ======= =========== ============================================
  value   name        text

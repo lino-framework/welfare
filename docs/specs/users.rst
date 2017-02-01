@@ -62,7 +62,7 @@ an arbitrary choice of user roles made available for a given
 application.  Lino defines a lot of user roles.  For example, the
 following diagram visualizes the genealogy of a reception clerk:
 
-.. inheritance-diagram:: lino_welfare.modlib.welfare.roles.ReceptionClerk
+.. inheritance-diagram:: lino_welfare.modlib.welfare.user_types.ReceptionClerk
 
 
 **Remarks:**

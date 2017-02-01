@@ -452,19 +452,19 @@ warn_expiry_unit."""),
     'lino_welfare.modlib.users.desktop.UserDetail' : _("""Layout of User Detail in Lino Welfare."""),
     'lino_welfare.modlib.users.models.User' : _("""The users.User model used in Lino Welfare.  We add a few fields
 to the standard models (lino.modlib.users.models.User)."""),
-    'lino_welfare.modlib.welfare.roles.AccountantManager' : _("""Like an accountant, but also has access to configuration."""),
-    'lino_welfare.modlib.welfare.roles.SiteAdmin' : _("""The site adminstrator has permission for everything."""),
-    'lino_welfare.modlib.welfare.roles.ReceptionClerk' : _("""A reception clerk is a user who is not a social agent but
+    'lino_welfare.modlib.welfare.user_types.AccountantManager' : _("""Like an accountant, but also has access to configuration."""),
+    'lino_welfare.modlib.welfare.user_types.SiteAdmin' : _("""The site adminstrator has permission for everything."""),
+    'lino_welfare.modlib.welfare.user_types.ReceptionClerk' : _("""A reception clerk is a user who is not a social agent but
 receives clients and does certain administrative tasks (in Eupen
 they call them back office)."""),
-    'lino_welfare.modlib.welfare.roles.ReceptionClerkNewcomers' : _("""A newcomers reception clerk is a reception clerk who also
+    'lino_welfare.modlib.welfare.user_types.ReceptionClerkNewcomers' : _("""A newcomers reception clerk is a reception clerk who also
 can assign coaches to clients."""),
-    'lino_welfare.modlib.welfare.roles.IntegrationAgentNewcomers' : _("""A newcomers integration agent is an integration agent who
+    'lino_welfare.modlib.welfare.user_types.IntegrationAgentNewcomers' : _("""A newcomers integration agent is an integration agent who
 also can assign coaches to clients and create budgets for debts
 mediation."""),
-    'lino_welfare.modlib.welfare.roles.LedgerUser' : _("""An accountant is a user who enters invoices, bank statements,
+    'lino_welfare.modlib.welfare.user_types.LedgerUser' : _("""An accountant is a user who enters invoices, bank statements,
 payment orders and other ledger operations."""),
-    'lino_welfare.modlib.welfare.roles.Supervisor' : _("""A backoffice user who can act as others."""),
+    'lino_welfare.modlib.welfare.user_types.Supervisor' : _("""A backoffice user who can act as others."""),
     'lino_welfare.modlib.xcourses.models.CourseProvider' : _("""A CourseProvider is a Company that offers Courses."""),
     'lino_welfare.modlib.xcourses.models.CourseProviderDetail' : _("""Same as CompanyDetail, except that we add a tab
 Courses."""),

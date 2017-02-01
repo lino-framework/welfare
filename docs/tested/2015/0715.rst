@@ -32,7 +32,7 @@ nevertheless:
 
 A reception clerk is not an integration agent:
 
->>> from lino_welfare.modlib.welfare.roles import *
+>>> from lino_welfare.modlib.welfare.user_types import *
 >>> isinstance(ReceptionClerk, IntegrationAgent)
 False
 
@@ -74,11 +74,11 @@ To see this panel, you need to be an integration agent:
 set([<class 'lino_welfare.modlib.integ.roles.IntegrationAgent'>])
 
 Theresia is a reception clerk
-(:class:`lino_welfare.modlib.welfare.roles.ReceptionClerk`):
+(:class:`lino_welfare.modlib.welfare.user_types.ReceptionClerk`):
 
 >>> theresia = users.User.objects.get(username="theresia")
->>> theresia.profile.roles  #doctest: +ELLIPSIS
-set([<lino_welfare.modlib.welfare.roles.ReceptionClerk object at ...>])
+>>> theresia.profile.role  #doctest: +ELLIPSIS
+<lino_welfare.modlib.welfare.user_types.ReceptionClerk object at ...>
 
 And that's not the role required to view this panel:
 

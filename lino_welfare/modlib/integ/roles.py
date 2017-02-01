@@ -23,10 +23,8 @@ from lino_welfare.modlib.pcsw.roles import SocialAgent, SocialStaff
 from lino_xl.lib.cv.roles import CareerUser, CareerStaff
 from lino_welfare.modlib.xcourses.roles import CoursesUser, CoursesStaff
 from lino_welfare.modlib.newcomers.roles import NewcomersOperator
-from lino_xl.lib.courses.roles import CoursesUser as CoursesUser2
 
-
-class IntegrationAgent(SocialAgent, CareerUser, CoursesUser, CoursesUser2):
+class IntegrationAgent(SocialAgent, CareerUser, CoursesUser):
     """A *social agent* who can see database content specific to
     integration work: CV, language courses, workshops, ...
 

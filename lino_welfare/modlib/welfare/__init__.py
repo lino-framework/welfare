@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -21,8 +21,8 @@
 .. autosummary::
    :toctree:
 
-   roles
    models
+   user_types
    management.commands.cpas2lino
    fixtures.std
    fixtures.demo
