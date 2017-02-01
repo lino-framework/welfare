@@ -148,8 +148,8 @@ Mélanie is a manager of the Integration service.
 >>> p = rt.login('melanie').get_user().profile
 >>> print(p)
 Begleiter im DSBE (Manager)
->>> p.roles  #doctest: +ELLIPSIS
-set([<lino_welfare.modlib.integ.roles.IntegrationStaff object at ...>])
+>>> p.role  #doctest: +ELLIPSIS
+<lino_welfare.modlib.integ.roles.IntegrationStaff object at ...>
 
 
 Because Mélanie has her :attr:`language

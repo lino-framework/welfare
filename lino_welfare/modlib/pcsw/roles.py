@@ -26,11 +26,12 @@ from lino_cosi.lib.sepa.roles import SepaUser, SepaStaff
 from lino_xl.lib.courses.roles import CoursesUser
 from lino_xl.lib.excerpts.roles import ExcerptsUser
 from lino_xl.lib.coachings.roles import CoachingsUser, CoachingsStaff
+from lino_xl.lib.contacts.roles import ContactsStaff, ContactsUser
 
 
-class SocialAgent(OfficeUser, CBSSUser, BeIdUser, PlausibilityUser,
-                  AidsUser, PollsUser, SepaUser, CoursesUser,
-                  ExcerptsUser, CoachingsUser):
+class SocialAgent(OfficeUser, ContactsUser, CBSSUser, BeIdUser,
+                  PlausibilityUser, AidsUser, PollsUser, SepaUser,
+                  CoursesUser, ExcerptsUser, CoachingsUser):
     """A **social agent** is a user who does individual coaching of
     clients.  Certain privacy-relevant client data is visible only
     to social agents.
@@ -38,8 +39,8 @@ class SocialAgent(OfficeUser, CBSSUser, BeIdUser, PlausibilityUser,
     """
 
 
-class SocialStaff(OfficeStaff, SocialAgent, AidsStaff, PollsStaff,
-                  SepaStaff, CoachingsStaff):
+class SocialStaff(SocialAgent, OfficeStaff, ContactsStaff, AidsStaff,
+                  PollsStaff, SepaStaff, CoachingsStaff):
     """A **social staff member** is a social agent who has access to more
     technical information about welfare clients.  For example the
     `Miscellaneous` panel.
