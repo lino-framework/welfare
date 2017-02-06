@@ -33,7 +33,7 @@ but similar steps are in :mod:`lino_welfare.projects.chatelet`.
 
 - Install :ref:`welfare`, go to the
   :file:`lino_welfare/projects/eupen` directory, run
-  :manage:`initdb_demo` followed by :manage:`runserver`.
+  :manage:`prep` followed by :manage:`runserver`.
 
 - Instead of logging in as Theresia, Caroline etc, consider logging in
   as Robin and then *act as* Theresia, Caroline.  The advantage is

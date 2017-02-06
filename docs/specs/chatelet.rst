@@ -203,25 +203,25 @@ We use the user profiles defined in
 >>> settings.SITE.user_types_module
 'lino_welfare.modlib.welfare.user_types'
 >>> rt.show(users.UserTypes)
-======= =========== ============================================
- value   name        text
-------- ----------- --------------------------------------------
- 000     anonymous   Anonyme
- 100                 Agent d'insertion
- 110                 Agent d'insertion (chef de service)
- 120                 Agent d'insertion (nouveaux bénéficiaires)
- 200                 Consultant nouveaux bénéficiaires
- 210                 Agent d'accueil
- 220                 Agent d'accueil (nouveaux bénéficiaires)
- 300                 Médiateur de dettes
- 400                 Agent social
- 410                 Agent social (Chef de service)
- 500                 Comptable
- 510                 Accountant (Manager)
- 800                 Supervisor
- 900     admin       Administrateur
- 910                 Security advisor
-======= =========== ============================================
+======= =========== ============================================ ==================================================================
+ value   name        text                                         User role
+------- ----------- -------------------------------------------- ------------------------------------------------------------------
+ 000     anonymous   Anonyme                                      lino.core.roles.UserRole
+ 100                 Agent d'insertion                            lino_welfare.modlib.integ.roles.IntegrationAgent
+ 110                 Agent d'insertion (chef de service)          lino_welfare.modlib.integ.roles.IntegrationStaff
+ 120                 Agent d'insertion (nouveaux bénéficiaires)   lino_welfare.modlib.welfare.user_types.IntegrationAgentNewcomers
+ 200                 Consultant nouveaux bénéficiaires            lino_welfare.modlib.welfare.user_types.NewcomersConsultant
+ 210                 Agent d'accueil                              lino_welfare.modlib.welfare.user_types.ReceptionClerk
+ 220                 Agent d'accueil (nouveaux bénéficiaires)     lino_welfare.modlib.welfare.user_types.ReceptionClerkNewcomers
+ 300                 Médiateur de dettes                          lino_welfare.modlib.debts.roles.DebtsUser
+ 400                 Agent social                                 lino_welfare.modlib.pcsw.roles.SocialAgent
+ 410                 Agent social (Chef de service)               lino_welfare.modlib.pcsw.roles.SocialStaff
+ 500                 Comptable                                    lino_welfare.modlib.welfare.user_types.LedgerUser
+ 510                 Accountant (Manager)                         lino_welfare.modlib.welfare.user_types.AccountantManager
+ 800                 Supervisor                                   lino_welfare.modlib.welfare.user_types.Supervisor
+ 900     admin       Administrateur                               lino_welfare.modlib.welfare.user_types.SiteAdmin
+ 910                 Security advisor                             lino_welfare.modlib.welfare.user_types.SecurityAdvisor
+======= =========== ============================================ ==================================================================
 <BLANKLINE>
 
 Remarques
@@ -286,6 +286,7 @@ Each window layout defines a given set of fields.
 - cal.Guests.insert : event, partner, role
 - cal.RecurrentEvents.detail : name, name_nl, name_de, name_en, id, user, event_type, start_date, start_time, end_date, end_time, every_unit, every, max_events, monday, tuesday, wednesday, thursday, friday, saturday, sunday, description
 - cal.RecurrentEvents.insert : name, name_nl, name_de, name_en, start_date, end_date, every_unit, event_type
+- cal.Rooms.detail : id, name, name_nl, name_de, name_en
 - cal.Rooms.insert : id, name, name_nl, name_de, name_en
 - cal.Tasks.detail : start_date, due_date, id, workflow_buttons, summary, project, user, delegated, owner, created, modified, description
 - cal.Tasks.insert : summary, user, project
@@ -351,7 +352,7 @@ Each window layout defines a given set of fields.
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
 - gfks.ContentTypes.insert : id, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
-- households.HouseholdsByType.detail : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url, remarks
+- households.HouseholdsByType.detail : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url
 - households.Types.insert : name, name_nl, name_de, name_en
 - humanlinks.Links.insert : parent, type, child
 - immersion.ContractTypes.detail : id, name, name_nl, name_de, name_en, exam_policy, template, overlap_group, full_name
@@ -471,6 +472,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - cal.Guests.insert : visible for admin 910
 - cal.RecurrentEvents.detail : visible for 110 410 admin 910
 - cal.RecurrentEvents.insert : visible for 110 410 admin 910
+- cal.Rooms.detail : visible for 110 410 admin 910
 - cal.Rooms.insert : visible for 110 410 admin 910
 - cal.Tasks.detail : visible for 110 410 admin 910
 - cal.Tasks.insert : visible for 110 410 admin 910
