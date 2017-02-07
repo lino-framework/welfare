@@ -635,9 +635,6 @@ class PendingCourseRequests(CourseRequests):
         #~ return obj._age_in_years is None
 
 
-def site_setup(self):
-    pass
-
 
 @dd.receiver(dd.pre_analyze)
 def setup_courses_workflow(sender=None, **kw):

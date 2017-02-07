@@ -83,7 +83,8 @@ Kitchen (12/05/2014)
 
 >>> event = ar[0]
 >>> print(event)
-Calendar entry #474  1 (12.05.2014 08:00)
+ 1 (12.05.2014 08:00)
+
 >>> rt.show(rt.actors.cal.GuestsByEvent, event)
 ==================== ========= =============
  Partner              Role      Actions

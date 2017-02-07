@@ -562,7 +562,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - jobs.JobsOverview.show : visible for 100 110 120 admin 910
 - jobs.Offers.insert : visible for 100 110 120 admin 910
 - jobs.Schedules.insert : visible for 110 410 admin 910
-- languages.Languages.insert : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- languages.Languages.insert : visible for 110 410 admin 910
 - newcomers.AvailableCoachesByClient.assign_coach : visible for 110 120 200 220 300 800 admin 910
 - newcomers.Faculties.detail : visible for 110 410 admin 910
 - newcomers.Faculties.insert : visible for 110 410 admin 910
