@@ -253,7 +253,7 @@ True
 <BLANKLINE>
 
 Running check_summaries will have no effect since data has been
-checked as part of :manage:`initdb_demo`:
+checked as part of :manage:`prep`:
 
 >>> rt.login().run(obj.check_summaries)
 {'refresh': True}

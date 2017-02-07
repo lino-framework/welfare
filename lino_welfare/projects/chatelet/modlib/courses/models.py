@@ -105,3 +105,4 @@ class Line(Line):
         verbose_name_plural = _('Workshop lines')
         abstract = dd.is_abstract_model(__name__, 'Line')
 
+

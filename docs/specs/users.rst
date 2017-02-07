@@ -30,27 +30,26 @@ The default set of user profiles for Lino Welfare is defined in
 list of profiles:
 
 >>> rt.show(users.UserTypes)
-======= =========== ===============================
- value   name        text
-------- ----------- -------------------------------
- 000     anonymous   Anonymous
- 100                 Integration agent
- 110                 Integration agent (Manager)
- 120                 Integration agent (Newcomers)
- 200                 Newcomers consultant
- 210                 Reception clerk
- 220                 Newcomers reception clerk
- 300                 Debts consultant
- 400                 Social agent
- 410                 Social agent (Manager)
- 500                 Accountant
- 510                 Accountant (Manager)
- 800                 Supervisor
- 900     admin       Administrator
- 910                 Security advisor
-======= =========== ===============================
+======= =========== =============================== ==================================================================
+ value   name        text                            User role
+------- ----------- ------------------------------- ------------------------------------------------------------------
+ 000     anonymous   Anonymous                       lino.core.roles.UserRole
+ 100                 Integration agent               lino_welfare.modlib.integ.roles.IntegrationAgent
+ 110                 Integration agent (Manager)     lino_welfare.modlib.integ.roles.IntegrationStaff
+ 120                 Integration agent (Newcomers)   lino_welfare.modlib.welfare.user_types.IntegrationAgentNewcomers
+ 200                 Newcomers consultant            lino_welfare.modlib.welfare.user_types.NewcomersConsultant
+ 210                 Reception clerk                 lino_welfare.modlib.welfare.user_types.ReceptionClerk
+ 220                 Newcomers reception clerk       lino_welfare.modlib.welfare.user_types.ReceptionClerkNewcomers
+ 300                 Debts consultant                lino_welfare.modlib.debts.roles.DebtsUser
+ 400                 Social agent                    lino_welfare.modlib.pcsw.roles.SocialAgent
+ 410                 Social agent (Manager)          lino_welfare.modlib.pcsw.roles.SocialStaff
+ 500                 Accountant                      lino_welfare.modlib.welfare.user_types.LedgerUser
+ 510                 Accountant (Manager)            lino_welfare.modlib.welfare.user_types.AccountantManager
+ 800                 Supervisor                      lino_welfare.modlib.welfare.user_types.Supervisor
+ 900     admin       Administrator                   lino_welfare.modlib.welfare.user_types.SiteAdmin
+ 910                 Security advisor                lino_welfare.modlib.welfare.user_types.SecurityAdvisor
+======= =========== =============================== ==================================================================
 <BLANKLINE>
-
 
 
 Note that local administrators may define their own module, similar to

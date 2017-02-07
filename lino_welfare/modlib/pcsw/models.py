@@ -47,7 +47,6 @@ from lino.core.utils import get_field
 from lino_xl.lib.cal.utils import update_reminder
 from lino_xl.lib.cal.choicelists import DurationUnits
 from lino.modlib.uploads.choicelists import Shortcuts
-from lino.modlib.notify.mixins import ChangeObservable
 from lino_xl.lib.notes.choicelists import SpecialTypes
 from lino_xl.lib.notes.mixins import Notable
 from lino_welfare.modlib.dupable_clients.mixins import DupableClient
@@ -73,11 +72,11 @@ from lino.utils import ssin
 from lino import mixins
 
 from lino_xl.lib.coachings.utils import (
-    only_active_coachings_filter,
     add_coachings_filter, daterange_text,
     has_contracts_filter)
 
 from lino_xl.lib.coachings.choicelists import ClientEvents, ClientStates
+from lino_xl.lib.coachings.mixins import Coachable
 
 from .roles import SocialAgent, SocialStaff
 from .choicelists import RefusalReasons
@@ -88,7 +87,7 @@ from .actions import RefuseClient, MarkClientFormer
 
 @dd.python_2_unicode_compatible
 class Client(contacts.Person, BeIdCardHolder, DupableClient,
-             ChangeObservable, Notable):
+             Coachable, Notable):
 
     """Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
     :class:`lino_xl.lib.beid.models.BeIdCardHolder`.
@@ -142,7 +141,7 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient,
     
         Pointer to :class:`ClientStates`.
 
-    .. attribute:: client_contact_type
+    .. attribute:: group
     
         Pointer to :class:`PersonGroup`.
 
@@ -167,8 +166,6 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient,
         verbose_name_plural = _("Clients")
         abstract = dd.is_abstract_model(__name__, 'Client')
         #~ ordering = ['last_name','first_name']
-
-    workflow_state_field = 'client_state'
 
     group = models.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
                               verbose_name=_("Integration phase"))
@@ -218,9 +215,6 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient,
             "Contact person at local job office"),
         related_name='persons_job_office')
 
-    client_state = ClientStates.field(
-        default=ClientStates.newcomer.as_callable)
-
     refusal_reason = RefusalReasons.field(blank=True)
 
     mark_former = MarkClientFormer()
@@ -258,17 +252,6 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient,
         # Set project field when creating an excerpt from Client.
         kw.update(project=self)
         return super(Client, self).get_excerpt_options(ar, **kw)
-
-    def get_coachings(self, period=None, *args, **flt):
-        """"Return a queryset with the coachings of this client. If `period`
-        is not None, it must be a tuple of two date objects. Any
-        additional arguments are applied as filter of the queryset.
-
-        """
-        qs = self.coachings_by_client.filter(*args, **flt)
-        if period is not None:
-            qs = qs.filter(only_active_coachings_filter(period))
-        return qs
 
     def get_first_meeting(self, today=None):
         """Return the last note of type "First meeting" for this client.
@@ -356,23 +339,6 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient,
         super(Client, self).after_ui_save(ar, cw)
         self.update_reminders(ar)
         #~ return kw
-
-    def get_primary_coach(self):
-        """Return the one and only primary coach of this client (or `None` if
-        there's less or more than one).
-
-        """
-        qs = self.coachings_by_client.filter(primary=True).distinct()
-        if qs.count() == 1:
-            return qs[0].user
-        # logger.info("20140725 qs is %s", qs)
-        return None
-
-    @dd.displayfield(_('Primary coach'))
-    def primary_coach(self, ar=None):
-        return self.get_primary_coach()
-
-    # primary_coach = property(get_primary_coach)
 
     def update_reminders(self, ar):
         """
@@ -500,34 +466,6 @@ class Client(contacts.Person, BeIdCardHolder, DupableClient,
             if ar is None:
                 return txt
             return ar.obj2html(c, txt)
-
-    @dd.displayfield(_("Coaches"))
-    def coaches(self, ar):
-        today = dd.today()
-        period = (today, today)
-        items = [unicode(obj.user) for obj in self.get_coachings(period)]
-        return ', '.join(items)
-
-    def get_change_observers(self):
-        for u in settings.SITE.user_model.objects.filter(
-                coaching_supervisor=True):
-            yield (u, u.mail_mode)
-        today = dd.today()
-        period = (today, today)
-        for obj in self.get_coachings(period):
-            yield (obj.user, obj.user.mail_mode)
-
-    @dd.displayfield(_("Find appointment"))
-    def find_appointment(self, ar):
-        if ar is None:
-            return ''
-        CalendarPanel = rt.modules.extensible.CalendarPanel
-        elems = []
-        for obj in self.coachings_by_client.all():
-            sar = CalendarPanel.request(
-                subst_user=obj.user, current_project=self.pk)
-            elems += [ar.href_to_request(sar, obj.user.username), ' ']
-        return E.div(*elems)
 
     def get_beid_diffs(self, attrs):
         """Overrides

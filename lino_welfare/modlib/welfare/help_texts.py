@@ -391,7 +391,6 @@ The intergration phase of this client."""),
     'lino_welfare.modlib.pcsw.models.Client.civil_state' : _("""The civil state of this client. Allowed choices are defined in
 CivilState."""),
     'lino_welfare.modlib.pcsw.models.Client.client_state' : _("""Pointer to ClientStates."""),
-    'lino_welfare.modlib.pcsw.models.Client.client_contact_type' : _("""Pointer to PersonGroup."""),
     'lino_welfare.modlib.pcsw.models.Client.unemployed_since' : _("""The date when this client got unemployed and stopped to have a
 regular work."""),
     'lino_welfare.modlib.pcsw.models.Client.seeking_since' : _("""The date when this client registered as unemployed and started

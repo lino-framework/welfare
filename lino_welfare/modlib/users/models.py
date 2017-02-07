@@ -43,18 +43,19 @@ class User(User):
 
     """
 
-    coaching_type = dd.ForeignKey(
-        'coachings.CoachingType',
-        blank=True, null=True,
-        help_text=_(
-            "The default CoachingType used when "
-            "creating Coachings."))
-    coaching_supervisor = models.BooleanField(
-        _("Notify me when a coach has been assigned"),
-        default=False,
-        help_text="""Wenn ein Neuantrag einem Begleiter zugewiesen \
-        wurde, wird außer dem Begleiter auch dieser Benutzer \
-        benachrichtigt.""")
+    # coaching_type = dd.ForeignKey(
+    #     'coachings.CoachingType',
+    #     blank=True, null=True,
+    #     help_text=_(
+    #         "The default CoachingType used when "
+    #         "creating Coachings."))
+    
+    # coaching_supervisor = models.BooleanField(
+    #     _("Notify me when a coach has been assigned"),
+    #     default=False,
+    #     help_text="""Wenn ein Neuantrag einem Begleiter zugewiesen \
+    #     wurde, wird außer dem Begleiter auch dieser Benutzer \
+    #     benachrichtigt.""")
 
     newcomer_consultations = models.BooleanField(
         _("Newcomer consultations"),

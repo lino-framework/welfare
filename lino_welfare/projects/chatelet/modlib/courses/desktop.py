@@ -28,6 +28,16 @@ motivation problems
 
 
 EnrolmentsByPupil.column_names = 'request_date course workflow_buttons *'
+EnrolmentsByPupil.insert_layout = """
+course_area
+course
+places option
+remark
+request_date user
+"""
+
+    
+    
 
 
 class BasicCourses(Activities):
@@ -67,3 +77,5 @@ class InactiveCourses(InactiveCourses):
 
 class ClosedCourses(ClosedCourses):
     label = _("Closed workshops")
+    
+

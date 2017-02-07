@@ -63,5 +63,5 @@ in :ref:`lino.dev.install`, then:
 - Initialize the database and run the development server::
 
     $ python manage.py collectstatic
-    $ python manage.py initdb_demo
+    $ python manage.py prep
     $ python manage.py runserver
