@@ -263,6 +263,7 @@ class Guest(Guest):
             return None
 
 EventTypes.column_names = 'name invite_client esf_field *'
+MyEvents.column_names = 'when_text project event_type summary workflow_buttons *'
 
 EventTypes.detail_layout = """
 name

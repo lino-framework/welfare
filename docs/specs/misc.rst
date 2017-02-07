@@ -318,6 +318,7 @@ see it.
 - courses.JobCourses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.Lines.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.LinesByTopic.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.MyCoursesGiven.duplicate : visible for nobody
 - courses.Slots.duplicate : visible for admin 910
 - courses.Topics.duplicate : visible for admin 910
 - cv.EducationLevels.duplicate : visible for 110 admin 910

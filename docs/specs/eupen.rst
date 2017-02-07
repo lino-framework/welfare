@@ -131,7 +131,6 @@ Hubert is an Integration agent.
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - Büro : Meine Einfügetexte
-  - Lebenslauf : Sprachen
 - Explorer :
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - DSBE : VSEs, Art.60§7-Konventionen, Art.61-Konventionen
@@ -222,7 +221,6 @@ Schuldenberater
 - Schuldnerberatung : Klienten, Meine Budgets
 - Konfigurierung :
   - Büro : Meine Einfügetexte
-  - Lebenslauf : Sprachen
   - Schuldnerberatung : Budget-Kopiervorlage
 - Explorer :
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
@@ -253,7 +251,6 @@ Berater Erstempfang
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Konfigurierung :
   - Büro : Meine Einfügetexte
-  - Lebenslauf : Sprachen
 - Explorer :
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - DSBE : VSEs, Art.60§7-Konventionen
@@ -616,7 +613,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - jobs.JobsOverview.show : visible for 100 110 120 admin 910
 - jobs.Offers.insert : visible for 100 110 120 admin 910
 - jobs.Schedules.insert : visible for 110 410 admin 910
-- languages.Languages.insert : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- languages.Languages.insert : visible for 110 410 admin 910
 - ledger.ActivityReport.show : visible for 500 510 admin 910
 - ledger.Journals.detail : visible for 510 admin 910
 - ledger.Journals.insert : visible for 510 admin 910
