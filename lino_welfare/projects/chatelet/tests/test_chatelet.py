@@ -18,7 +18,7 @@
 
 """Miscellaneous tests on an empty database.
 
-You can run only these tests by issuing::
+You can run just these tests by issuing::
 
   $ python setup.py test -s tests.DemoTests.test_chatelet
 
@@ -38,10 +38,12 @@ from lino import AFTER18
 from lino.api import rt
 from lino.utils.djangotest import TestCase
 from lino.utils import i2d
+from lino.utils.instantiator import create_row
 from lino.core import constants
 
 from lino.modlib.users.choicelists import UserTypes
 
+from lino_welfare.modlib.integ.roles import IntegrationAgent
 
 class TestCase(TestCase):
     """Miscellaneous tests on an empty database."""
@@ -58,7 +60,10 @@ class TestCase(TestCase):
         Client = rt.modules.pcsw.Client
         User = settings.SITE.user_model
 
-        User(username='robin', profile=UserTypes.admin).save()
+        robin = create_row(
+            User, username='robin', profile=UserTypes.admin,
+            language='en')
+        robin.profile.has_required_roles([IntegrationAgent])
         ObstacleType(name='Alcohol').save()
 
         obj = Client(first_name="First", last_name="Last")
@@ -67,8 +72,16 @@ class TestCase(TestCase):
         self.assertEqual(obj.first_name, "First")
 
         self.assertEqual(
-            rt.modules.cv.ObstaclesByPerson.column_names,
+            rt.actors.cv.ObstaclesByPerson.column_names,
             "type user detected_date remark  *")
+
+        rh = rt.actors.cv.ObstaclesByPerson.get_handle()
+        colnames = [col.name for col in rh.get_columns()]
+        self.assertEqual(
+            colnames,
+            ['type', 'user', 'detected_date', 'remark', 'id',
+             'workflow_buttons', 'overview', 'description_column',
+             'person'])
 
         url = "/api/cv/ObstaclesByPerson"
         post_data = dict()
@@ -80,8 +93,7 @@ class TestCase(TestCase):
         post_data[constants.URL_PARAM_ACTION_NAME] = 'grid_post'
         response = self.client.post(
             url, post_data,
-            REMOTE_USER='robin',
-            HTTP_ACCEPT_LANGUAGE='en')
+            REMOTE_USER='robin')
         result = self.check_json_result(response, 'rows success message')
         self.assertEqual(result['success'], True)
         self.assertEqual(
@@ -91,7 +103,8 @@ class TestCase(TestCase):
             """Obstacle "Obstacle object" has been created.""")
         self.assertEqual(result['rows'], [
             ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
-             '<span />', '<div />', '<em>Obstacle object</em>',
+             '<span />', '<div><em>Obstacle object</em></div>',
+             '<em>Obstacle object</em>',
              'First LAST', 100,
              {'id': True}, {}, False]])
 
