@@ -471,7 +471,7 @@ class AssignCoach(NotableAction):
         client.client_state = ClientStates.coached
         client.full_clean()
         client.save()
-        watcher.send_update(ar.request)
+        watcher.send_update(ar)
 
         self.emit_message(ar, client)
 
