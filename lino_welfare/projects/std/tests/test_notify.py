@@ -80,7 +80,8 @@ class TestCase(TestCase):
 
         - when a visitor checks in
         - when a client is modified
-        - when a coaching is modified
+        - when a coaching is created or modified
+        - when a note is created or modified
 
         """
         User = settings.SITE.user_model
@@ -152,7 +153,7 @@ class TestCase(TestCase):
 
         # When a client is modified, all active coaches get a
         # notification.
-        # Note that Caroline doesn't get a notification because this
+        # Note that Caroline doesn't get a notification because her
         # coaching is not active.
         # Alicia doesn't get a notification because she did it herself.
 
@@ -171,7 +172,7 @@ class TestCase(TestCase):
  Subject                                               Controlled by            Recipient
 ----------------------------------------------------- ------------------------ -----------
  CLIENT First (100) has started waiting for caroline                            caroline
- CLIENT Seconda (101) has been modified by Alicia      *CLIENT Seconda (101)*   roger
+ Alicia modified CLIENT Seconda (101)                  *CLIENT Seconda (101)*   roger
 ===================================================== ======================== ===========
 """)
 
@@ -190,11 +191,11 @@ class TestCase(TestCase):
 
         # self.check_notifications()
         self.check_notifications("""
-============================================== ======================== ===========
- Subject                                        Controlled by            Recipient
----------------------------------------------- ------------------------ -----------
- roger / Client S has been modified by Alicia   *CLIENT Seconda (101)*   roger
-============================================== ======================== ===========
+================================== ======================== ===========
+ Subject                            Controlled by            Recipient
+---------------------------------- ------------------------ -----------
+ Alicia modified roger / Client S   *CLIENT Seconda (101)*   roger
+================================== ======================== ===========
 """)
 
         # AssignCoach. we are going to Assign caroline as coach for
@@ -356,3 +357,69 @@ class TestCase(TestCase):
 ==== ======== ==================== =====================================================
 """)
 
+        # When a note is created, all active coaches of that
+        # client get a notification.
+
+        Message.objects.all().delete()
+        data = dict()
+        data.update(mt=51)
+        data.update(mk=second.pk)
+        data.update(an='submit_insert')
+        data.update(
+            subject="test",
+            projectHidden=second.pk)
+        
+        kwargs = dict(data=data)
+        kwargs['REMOTE_USER'] = 'alicia'
+        url = '/api/notes/NotesByProject/{}'.format(second.pk)
+        res = self.client.post(url, **kwargs)
+        self.assertEqual(res.status_code, 200)
+        res = AttrDict(json.loads(res.content))
+        self.assertEqual(res.data_record['id'], 4)
+        new_note_pk = res.data_record['id']
+        
+
+        # self.check_notifications()
+        self.check_notifications("""
+============================== ================= ===========
+ Subject                        Controlled by     Recipient
+------------------------------ ----------------- -----------
+ Alicia created Event/Note #4   *Event/Note #4*   roger
+============================== ================= ===========
+""")
+
+
+        Message.objects.all().delete()
+        data = dict()
+        data.update(mt=51)
+        data.update(mk=second.pk)
+        data.update(an='submit_detail')
+        data.update(
+            subject="test 2",
+            body="<p>Bla bla bla</p>",
+            projectHidden=second.pk)
+        
+        kwargs = dict(data=urlencode(data))
+        # kwargs = dict(data=data)
+        kwargs['REMOTE_USER'] = 'alicia'
+        url = '/api/notes/NotesByProject/{}'.format(new_note_pk)
+        res = self.client.put(url, **kwargs)
+        self.assertEqual(res.status_code, 200)
+        # self.check_notifications()
+        self.check_notifications("""
+=============================== ================= ===========
+ Subject                         Controlled by     Recipient
+------------------------------- ----------------- -----------
+ Alicia modified Event/Note #4   *Event/Note #4*   roger
+=============================== ================= ===========
+""")
+
+        
+        msg = Message.objects.all()[0]
+        # print msg.body
+        self.assertEquivalent(msg.body, """
+<div><p>Subject: test 2<br />Client: [client 101] (Seconda CLIENT)</p><p>Alicia modified [note 4] (test 2):</p><ul><li><b>Body</b> : <pre>--- before
++++ after
+@@ -0,0 +1 @@
++&lt;p&gt;Bla bla bla&lt;/p&gt;</pre></li><li><b>Subject</b> : 'test' --&gt; 'test 2'</li></ul></div>
+""")
