@@ -600,7 +600,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - uploads.UploadTypes.insert : visible for 110 410 admin 910
 - uploads.Uploads.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - uploads.Uploads.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- uploads.UploadsByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- uploads.UploadsByClient.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - users.AllUsers.send_welcome_email : visible for admin 910
 - users.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910

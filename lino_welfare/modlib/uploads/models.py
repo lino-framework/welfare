@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2015 Luc Saffre
+# Copyright 2014-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -31,6 +31,7 @@ from lino.modlib.uploads.models import *
 from lino_xl.lib.contacts.mixins import ContactRelated
 from lino_xl.lib.cal.utils import update_reminder
 from lino_xl.lib.cal.choicelists import Recurrencies
+from lino_xl.lib.contacts.roles import ContactsUser
 
 
 # add = UploadAreas.add_item
@@ -270,6 +271,7 @@ class UploadsByClient(AreaUploads, UploadsByController):
     master = 'pcsw.Client'
     master_key = 'project'
     column_names = "type end_date needed description_link user *"
+    required_roles = dd.required(ContactsUser, (OfficeUser, OfficeOperator))
     # auto_fit_column_widths = True
     # debug_sql = "20140519"
 

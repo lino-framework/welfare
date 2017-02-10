@@ -345,7 +345,7 @@ see it.
 - excerpts.AllExcerpts.duplicate : visible for admin 910
 - excerpts.Excerpts.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - excerpts.ExcerptsByOwner.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- excerpts.ExcerptsByProject.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- excerpts.ExcerptsByProject.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - excerpts.ExcerptsByType.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - excerpts.MyExcerpts.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - extensible.PanelEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
@@ -360,11 +360,11 @@ see it.
 - notes.AllNotes.duplicate : visible for 110 410 admin 910
 - notes.MyNotes.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - notes.Notes.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- notes.NotesByCompany.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- notes.NotesByCompany.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - notes.NotesByEventType.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - notes.NotesByOwner.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - notes.NotesByPerson.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- notes.NotesByProject.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- notes.NotesByProject.duplicate : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - notes.NotesByType.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - notes.NotesByX.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.DispenseReasons.duplicate : visible for 110 410 admin 910
