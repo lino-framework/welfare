@@ -131,7 +131,7 @@ class SiteConfigDetail(dd.DetailLayout):
         cbss_http_username cbss_http_password
         """,
         label=dd.apps.cbss.verbose_name,
-        required_roles=dd.required(CBSSUser))
+        required_roles=dd.login_required(CBSSUser))
 
 
 # When a Welfare Site decides to hide the "debts" app (as chatelet does)

@@ -35,7 +35,7 @@ from lino_welfare.modlib.integ.roles import IntegrationAgent, IntegrationStaff
 class Goals(dd.Table):
     """
     """
-    required_roles = dd.required(IntegrationStaff)
+    required_roles = dd.login_required(IntegrationStaff)
     model = 'immersion.Goal'
     column_names = 'name *'
     detail_layout = """
@@ -47,7 +47,7 @@ class Goals(dd.Table):
 class ContractTypes(dd.Table):
     """The default table for :class:`ContractType` instances.
     """
-    required_roles = dd.required(IntegrationStaff)
+    required_roles = dd.login_required(IntegrationStaff)
     model = 'immersion.ContractType'
     column_names = 'name exam_policy template *'
     detail_layout = """
@@ -85,7 +85,7 @@ class ContractDetail(dd.DetailLayout):
 
 class Contracts(ContractBaseTable):
 
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.login_required(IntegrationAgent)
     model = 'immersion.Contract'
     column_names = 'id client company applies_from applies_until user type *'
     order_by = ['id']

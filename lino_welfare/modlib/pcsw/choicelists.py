@@ -61,7 +61,7 @@ ClientEvents.add_item_instance(ClientHasPenalty("penalty"))
 
 
 # class ClientStates(dd.Workflow):
-#     required_roles = dd.required(SocialStaff)
+#     required_roles = dd.login_required(SocialStaff)
 #     verbose_name_plural = _("Client states")
 
 # add = ClientStates.add_item

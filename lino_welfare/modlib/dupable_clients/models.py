@@ -39,11 +39,11 @@ class Word(PhoneticWordBase):
 
 class Words(dd.Table):
     model = 'dupable_clients.Word'
-    required_roles = dd.required(dd.SiteAdmin)
+    required_roles = dd.login_required(dd.SiteAdmin)
 
 
 class WordsByOwner(Words):
-    required_roles = dd.required()
+    required_roles = dd.login_required()
     master_key = 'owner'
     column_names = "word"
 

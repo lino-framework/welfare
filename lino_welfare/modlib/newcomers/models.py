@@ -86,7 +86,7 @@ class Brokers(dd.Table):
     """
     List of Brokers on this site.
     """
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     model = 'newcomers.Broker'
     column_names = 'name *'
     order_by = ["name"]
@@ -112,7 +112,7 @@ Wieviel Aufwand ein Neuantrag in diesem Fachbereich allgemein verursacht
 
 
 class Faculties(dd.Table):
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     #~ required_user_groups = ['newcomers']
     #~ required_user_level = UserLevels.manager
     model = 'newcomers.Faculty'
@@ -160,14 +160,14 @@ dd.update_field(Competence, 'user', verbose_name=_("User"))
 
 
 class Competences(dd.Table):
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     model = 'newcomers.Competence'
     column_names = 'id user faculty weight *'
     order_by = ["id"]
 
 
 class CompetencesByUser(Competences):
-    required_roles = dd.required()
+    required_roles = dd.login_required()
     master_key = 'user'
     column_names = 'seqno faculty weight *'
     order_by = ["seqno"]
@@ -225,7 +225,7 @@ class NewClients(pcsw.CoachedClients):
     consultants.
 
     """
-    required_roles = dd.required(NewcomersAgent)
+    required_roles = dd.login_required(NewcomersAgent)
     label = _("New Clients")
     use_as_default_table = False
 
@@ -281,7 +281,7 @@ class AvailableCoaches(Users):
     """List of users available for new coachings."""
     help_text = _("List of users available for new coachings")
     use_as_default_table = False
-    required_roles = dd.required(NewcomersAgent)
+    required_roles = dd.login_required(NewcomersAgent)
     auto_fit_column_widths = True
     editable = False  # even root should not edit here
     label = _("Available Coaches")
@@ -422,8 +422,8 @@ class AssignCoach(NotableAction):
 
     """
     label = _("Assign")
-    required_roles = dd.required((NewcomersAgent, NewcomersOperator))
-    # required_roles = dd.required(NewcomersAgent)
+    required_roles = dd.login_required((NewcomersAgent, NewcomersOperator))
+    # required_roles = dd.login_required(NewcomersAgent)
     show_in_workflow = True
 
     def get_notify_subject(self, ar, obj, **kw):
@@ -486,7 +486,7 @@ Newcomers consultants.
     """
     master = 'pcsw.Client'
     label = _("Available Coaches")
-    required_roles = dd.required((NewcomersOperator, NewcomersAgent))
+    required_roles = dd.login_required((NewcomersOperator, NewcomersAgent))
 
     assign_coach = AssignCoach()
 

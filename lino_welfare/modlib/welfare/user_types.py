@@ -22,7 +22,7 @@ See :ref:`welfare.specs.users`
 
 """
 
-from lino.core.roles import UserRole, SiteAdmin, Supervisor
+from lino.core.roles import UserRole, SiteAdmin, Supervisor, login_required
 from lino.modlib.users.roles import AuthorshipTaker
 from lino.modlib.office.roles import OfficeOperator, OfficeStaff
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
@@ -155,7 +155,6 @@ add('910', _("Security advisor"),              SecurityAdvisor)
 
 
 # Excerpts must be visible only to ContactsUser
-from lino.api import dd
 from lino_xl.lib.excerpts.models import ExcerptsByProject
-ExcerptsByProject.required_roles = dd.required(
+ExcerptsByProject.required_roles = login_required(
     ContactsUser, (OfficeUser, OfficeOperator))

@@ -69,7 +69,7 @@ class ClientDetail(ClientDetail):
     family_left:20 households.SiblingsByPerson:50
     humanlinks.LinksByHuman:30
     """, label=_("Family situation"),
-    required_roles=dd.required(ContactsUser))
+    required_roles=dd.login_required(ContactsUser))
 
     family_left = """
     households.MembersByPerson
@@ -85,19 +85,19 @@ class ClientDetail(ClientDetail):
     workflow_buttons id_document
     faculty:12
     coachings.ContactsByClient:20
-    """, required_roles=dd.required((NewcomersAgent, NewcomersOperator)))
+    """, required_roles=dd.login_required((NewcomersAgent, NewcomersOperator)))
 
     suche = dd.Panel("""
     is_seeking unemployed_since seeking_since work_permit_suspended_until
     pcsw.DispensesByClient
     pcsw.ExclusionsByClient
     # pcsw.ConvictionsByClient
-    """, required_roles=dd.required(ContactsUser))
+    """, required_roles=dd.login_required(ContactsUser))
 
     papers = dd.Panel("""
     active_job_search.ProofsByClient
     polls.ResponsesByPartner
-    """, required_roles=dd.required(ContactsUser))
+    """, required_roles=dd.login_required(ContactsUser))
 
     job_search = dd.Panel("""
     suche:40 papers:40
@@ -142,7 +142,7 @@ class ClientDetail(ClientDetail):
     is_obsolete has_esf created modified
     remarks
     plausibility.ProblemsByOwner:30 contacts.RolesByPerson:20
-    """, label=_("Miscellaneous"), required_roles=dd.required(SocialStaff))
+    """, label=_("Miscellaneous"), required_roles=dd.login_required(SocialStaff))
 
     contracts = dd.Panel("""
     jobs.CandidaturesByPerson
@@ -177,12 +177,12 @@ class ClientDetail(ClientDetail):
     competences = dd.Panel("""
     cv.SkillsByPerson badges.AwardsByHolder cv.SoftSkillsByPerson
     cv.LanguageKnowledgesByPerson skills
-    """, label=_("Competences"), required_roles=dd.required(IntegrationAgent))
+    """, label=_("Competences"), required_roles=dd.login_required(IntegrationAgent))
 
     obstacles_tab = dd.Panel("""
     cv.ObstaclesByPerson pcsw.ConvictionsByClient
     obstacles
-    """, label=_("Obstacles"), required_roles=dd.required(IntegrationAgent))
+    """, label=_("Obstacles"), required_roles=dd.login_required(IntegrationAgent))
 
 Clients.detail_layout = ClientDetail()
 

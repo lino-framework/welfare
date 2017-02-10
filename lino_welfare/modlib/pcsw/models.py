@@ -581,7 +581,7 @@ class ClientDetail(dd.DetailLayout):
     broker:12
     faculty:12
     refusal_reason
-    """, required_roles=dd.required((NewcomersOperator, NewcomersAgent)))
+    """, required_roles=dd.login_required((NewcomersOperator, NewcomersAgent)))
 
     suche = dd.Panel("""
     # job_office_contact job_agents
@@ -632,13 +632,13 @@ class ClientDetail(dd.DetailLayout):
     remarks
     plausibility.ProblemsByOwner:25 contacts.RolesByPerson:20
     """, label=_("Miscellaneous"),
-        required_roles=dd.required(SocialStaff))
+        required_roles=dd.login_required(SocialStaff))
 
     career = dd.Panel("""
     cv.StudiesByPerson
     # cv.TrainingsByPerson
     cv.ExperiencesByPerson:40
-    """, label=_("Career"), required_roles=dd.required(IntegrationAgent))
+    """, label=_("Career"), required_roles=dd.login_required(IntegrationAgent))
 
     languages = dd.Panel("""
     cv.LanguageKnowledgesByPerson
@@ -648,7 +648,7 @@ class ClientDetail(dd.DetailLayout):
     competences = dd.Panel("""
     cv.SkillsByPerson cv.SoftSkillsByPerson skills
     cv.ObstaclesByPerson obstacles badges.AwardsByHolder
-    """, label=_("Competences"), required_roles=dd.required(IntegrationAgent))
+    """, label=_("Competences"), required_roles=dd.login_required(IntegrationAgent))
 
     contracts = dd.Panel("""
     isip.ContractsByClient
@@ -673,7 +673,7 @@ class Clients(contacts.Persons):
 
     """
     # debug_permissions = '20150129'
-    # required = dd.Required(user_groups='coaching')
+    # required = dd.login_required(user_groups='coaching')
     required_roles = dd.login_required(SimpleContactsUser)
     # required_roles = dd.login_required((SocialAgent, OfficeOperator))
     model = 'pcsw.Client'
@@ -889,7 +889,7 @@ class ClientsByNationality(Clients):
 class AllClients(Clients):
     column_names = "name_column:20 client_state national_id:10 \
     gsm:10 address_column age:10 email phone:10 id *"
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
 
 
 class ClientChecker(Checker):
@@ -944,7 +944,7 @@ class PersonGroup(dd.Model):
 class PersonGroups(dd.Table):
     help_text = _("Liste des phases d'intégration possibles.")
     model = 'pcsw.PersonGroup'
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
 
     order_by = ["ref_name"]
 
@@ -969,7 +969,7 @@ class Activity(dd.Model):
 class Activities(dd.Table):
     help_text = _("""Liste des "activités" ou "codes profession".""")
     model = 'pcsw.Activity'
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
 
 #~ class ActivitiesByPerson(Activities):
     #~ master_key = 'activity'
@@ -993,7 +993,7 @@ class DispenseReason(mixins.BabelNamed, mixins.Sequenced):
 
 class DispenseReasons(dd.Table):
     help_text = _("A list of reasons for being dispensed")
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     model = 'pcsw.DispenseReason'
     column_names = 'seqno name *'
     order_by = ['seqno']
@@ -1020,7 +1020,7 @@ class Dispense(dd.Model):
 class Dispenses(dd.Table):
     order_by = ['start_date']
     help_text = _("Liste de dispenses")
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     model = 'pcsw.Dispense'
 
 
@@ -1029,7 +1029,7 @@ class DispensesByClient(Dispenses):
     column_names = 'start_date end_date reason remarks:10'
     hidden_columns = 'id'
     auto_fit_column_widths = True
-    required_roles = dd.required(SocialAgent)
+    required_roles = dd.login_required(SocialAgent)
 
 
 @dd.python_2_unicode_compatible
@@ -1049,7 +1049,7 @@ class ExclusionType(dd.Model):
 class ExclusionTypes(dd.Table):
     help_text = _("""Liste des raisons possibles d'arrêter temporairement 
     le paiement d'une aide financière prévue.""")
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     model = 'pcsw.ExclusionType'
 
 
@@ -1081,14 +1081,14 @@ class Exclusion(dd.Model):
 
 
 class Exclusions(dd.Table):
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     help_text = _("Liste des exclusions.")
 
     model = 'pcsw.Exclusion'
 
 
 class ExclusionsByClient(Exclusions):
-    required_roles = dd.required(SocialAgent)
+    required_roles = dd.login_required(SocialAgent)
     master_key = 'person'
     column_names = 'excluded_from excluded_until type remark:10'
     auto_fit_column_widths = True
@@ -1121,12 +1121,12 @@ class Conviction(dd.Model):
 
 
 class Convictions(dd.Table):
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     model = 'pcsw.Conviction'
 
 
 class ConvictionsByClient(Convictions):
-    required_roles = dd.required(SocialAgent)
+    required_roles = dd.login_required(SocialAgent)
     master_key = 'client'
     column_names = 'date designation prejudicial'
     auto_fit_column_widths = True
@@ -1147,7 +1147,7 @@ class AidTypes(dd.Table):
     help_text = _("Liste des types d'aide financière.")
     model = 'pcsw.AidType'
     column_names = 'name *'
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
 
 
 @dd.receiver(dd.pre_analyze)
@@ -1160,7 +1160,7 @@ def setup_client_workflow(sender=None, **kw):
     # ClientStates.former.add_transition(MarkClientFormer)
     ClientStates.newcomer.add_transition(
         required_states='former',
-        required_roles=dd.required(NewcomersAgent))
+        required_roles=dd.login_required(NewcomersAgent))
 
 
 

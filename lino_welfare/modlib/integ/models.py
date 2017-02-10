@@ -65,7 +65,7 @@ class Clients(pcsw.CoachedClients):
     help_text = """Wie Kontakte --> Klienten, aber mit \
     DSBE-spezifischen Kolonnen und Filterparametern."""
     #~ detail_layout = IntegClientDetail()
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.login_required(IntegrationAgent)
     params_panel_hidden = True
     title = _("Integration Clients")
     order_by = "last_name first_name id".split()
@@ -141,7 +141,7 @@ class UsersWithClients(dd.VirtualTable):
 
 
     """
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.login_required(IntegrationAgent)
     label = _("Users with their Clients")
 
     slave_grid_format = 'html'
@@ -581,7 +581,7 @@ class ActivityReport(Report):
 
     """
 
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.login_required(IntegrationAgent)
     label = _("Activity Report")
 
     parameters = ObservedPeriod(

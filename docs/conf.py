@@ -18,7 +18,7 @@ import sys, os
 extlinks = {}
 extensions = []
 
-from atelier.sphinxconf import configure
+from lino.sphinxcontrib import configure
 configure(globals(), 'lino_welfare.projects.std.settings.doctests')
 
 

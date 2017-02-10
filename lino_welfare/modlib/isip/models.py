@@ -84,7 +84,7 @@ class ContractType(ContractTypeBase):
 
 
 class ContractTypes(dd.Table):
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     model = 'isip.ContractType'
     column_names = 'name ref exam_policy needs_study_type *'
     detail_layout = """
@@ -119,7 +119,7 @@ class ExamPolicy(mixins.BabelNamed, RecurrenceSet):
 
 
 class ExamPolicies(dd.Table):
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     model = 'isip.ExamPolicy'
     column_names = 'name *'
     detail_layout = """
@@ -160,7 +160,7 @@ class ContractEnding(dd.Model):
 
 
 class ContractEndings(dd.Table):
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     model = 'isip.ContractEnding'
     column_names = 'name use_in_isip use_in_jobs is_success needs_date_ended *'
     order_by = ['name']

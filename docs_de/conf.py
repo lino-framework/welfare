@@ -6,7 +6,7 @@ extlinks = {}
 extensions = []
 templates_path = []
 
-from atelier.sphinxconf import configure
+from lino.sphinxcontrib import configure
 configure(globals(), 'lino_welfare.projects.eupen.settings.doctests')
 
 extensions += ['atelier.sphinxconf.blog']

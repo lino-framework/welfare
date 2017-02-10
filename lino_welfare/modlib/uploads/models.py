@@ -230,14 +230,14 @@ class UploadsByType(Uploads, UploadsByType):
 
 
 class MyUploads(My, Uploads):
-    required_roles = dd.required((OfficeUser, OfficeOperator))
+    required_roles = dd.login_required((OfficeUser, OfficeOperator))
     column_names = "id project type start_date end_date \
     needed description_link file *"
 
 
 class MyExpiringUploads(MyUploads):
     "Expiring uploads for client coached by me"
-    required_roles = dd.required((OfficeUser, OfficeOperator))
+    required_roles = dd.login_required((OfficeUser, OfficeOperator))
     label = _("My expiring uploads")
     help_text = _("Show needed uploads whose validity expires soon")
     column_names = "project type description_link user \
@@ -271,7 +271,7 @@ class UploadsByClient(AreaUploads, UploadsByController):
     master = 'pcsw.Client'
     master_key = 'project'
     column_names = "type end_date needed description_link user *"
-    required_roles = dd.required(ContactsUser, (OfficeUser, OfficeOperator))
+    required_roles = dd.login_required(ContactsUser, (OfficeUser, OfficeOperator))
     # auto_fit_column_widths = True
     # debug_sql = "20140519"
 

@@ -175,14 +175,14 @@ class ClientDetail(ClientDetail, PartnerDetailMixin):
     remarks:30 remarks2:30
     plausibility.ProblemsByOwner:30 contacts.RolesByPerson:20
     """, label=_("Miscellaneous"),
-        required_roles=dd.required((SocialStaff, ContactsStaff)))
+        required_roles=dd.login_required((SocialStaff, ContactsStaff)))
 
     career = dd.Panel("""
     cvs_emitted
     cv.StudiesByPerson
     cv.TrainingsByPerson
     cv.ExperiencesByPerson:40
-    """, label=_("Career"), required_roles=dd.required(IntegrationAgent))
+    """, label=_("Career"), required_roles=dd.login_required(IntegrationAgent))
 
     languages = dd.Panel("""
     cv.LanguageKnowledgesByPerson
@@ -192,7 +192,7 @@ class ClientDetail(ClientDetail, PartnerDetailMixin):
     competences = dd.Panel("""
     cv.SkillsByPerson cv.SoftSkillsByPerson skills
     cv.ObstaclesByPerson obstacles badges.AwardsByHolder
-    """, label=_("Competences"), required_roles=dd.required(IntegrationAgent))
+    """, label=_("Competences"), required_roles=dd.login_required(IntegrationAgent))
 
     contracts = dd.Panel("""
     isip.ContractsByClient
@@ -205,7 +205,7 @@ if settings.SITE.is_installed('cbss'):
     ClientDetail.cbss = dd.Panel("""
 cbss_identify_person cbss_manage_access cbss_retrieve_ti_groups
 cbss_summary
-    """, label=_("CBSS"), required_roles=dd.required(SocialAgent))
+    """, label=_("CBSS"), required_roles=dd.login_required(SocialAgent))
 
 
 Clients.detail_layout = ClientDetail()

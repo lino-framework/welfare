@@ -194,7 +194,7 @@ class EventsByClient(Events):
     """Events where :attr:`Event.project` **or** one guest is this client.
 
     """
-    required_roles = dd.required(OfficeUser)
+    required_roles = dd.login_required(OfficeUser)
     # master_key = 'project'
     # master = 'cal.Event'
     master = 'pcsw.Client'
@@ -228,7 +228,7 @@ class EventsByClient(Events):
 
 
 class TasksByClient(Tasks):
-    required_roles = dd.required(SocialAgent)
+    required_roles = dd.login_required(SocialAgent)
     master_key = 'project'
     column_names = 'start_date due_date summary description notes'
 
