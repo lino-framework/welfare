@@ -42,7 +42,7 @@ class ProjectType(mixins.BabelNamed):
 
 class ProjectTypes(dd.Table):
     model = 'projects.ProjectType'
-    required_roles = dd.required(SiteStaff)
+    required_roles = dd.login_required(SiteStaff)
 
 
 class Project(mixins.DatePeriod, Certifiable):
@@ -61,7 +61,7 @@ class Project(mixins.DatePeriod, Certifiable):
 
 class Projects(dd.Table):
     model = 'projects.Project'
-    required_roles = dd.required(SiteStaff)
+    required_roles = dd.login_required(SiteStaff)
 
     detail_layout = """
     id client project_type start_date end_date
@@ -76,7 +76,7 @@ class Projects(dd.Table):
 
 
 class ProjectsByClient(Projects):
-    required_roles = dd.required()
+    required_roles = dd.login_required()
     master_key = 'client'
     column_names = 'start_date project_type result remark'
     auto_fit_column_widths = True
@@ -88,7 +88,7 @@ class ProjectsByClient(Projects):
 
 
 class ProjectsByType(Projects):
-    required_roles = dd.required()
+    required_roles = dd.login_required()
     master_key = 'project_type'
     column_names = 'start_date client result remark'
     auto_fit_column_widths = True

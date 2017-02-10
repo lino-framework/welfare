@@ -66,7 +66,7 @@ class PersonProperty(properties.PropertyOccurence):
 class PersonProperties(dd.Table):
     model = 'properties.PersonProperty'
     hidden_columns = 'group id'
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
 
 
 class PropsByPerson(PersonProperties):
@@ -77,7 +77,7 @@ class PropsByPerson(PersonProperties):
     """
     master_key = 'person'
     column_names = "property value remark *"
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.login_required(IntegrationAgent)
     #~ hidden_columns = 'id'
     auto_fit_column_widths = True
 

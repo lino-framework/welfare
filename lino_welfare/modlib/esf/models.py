@@ -142,14 +142,14 @@ class Summaries(dd.Table):
 
 class AllSummaries(Summaries):
     """Lists all ESF summaries for all clients."""
-    required_roles = dd.required(dd.SiteStaff)
+    required_roles = dd.login_required(dd.SiteStaff)
 
 
 class SummariesByClient(Summaries):
     """Lists the ESF summaries for a given client."""
     master_key = 'master'
     auto_fit_column_widths = True
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.login_required(IntegrationAgent)
     # slave_grid_format = 'html'
     # insert_layout = """
     # education_level result

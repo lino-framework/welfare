@@ -69,7 +69,7 @@ class CourseProviders(contacts.Companies):
     """Table of all course providers
 
     """
-    required_roles = dd.required(CoursesUser)
+    required_roles = dd.login_required(CoursesUser)
     model = 'xcourses.CourseProvider'
     detail_layout = CourseProviderDetail()
 
@@ -97,7 +97,7 @@ class CourseContent(dd.Model):
 
 
 class CourseContents(dd.Table):
-    required_roles = dd.required(CoursesStaff)
+    required_roles = dd.login_required(CoursesStaff)
     model = 'xcourses.CourseContent'
     order_by = ['name']
     detail_layout = """
@@ -145,7 +145,7 @@ class CourseOffer(dd.Model):
 
 
 class CourseOffers(dd.Table):
-    required_roles = dd.required(CoursesUser)
+    required_roles = dd.login_required(CoursesUser)
     model = 'xcourses.CourseOffer'
 
     insert_layout = """
@@ -233,7 +233,7 @@ class Course(dd.Model):
 
 class Courses(dd.Table):
     # ~ debug_permissions = 20130429 # Melanie doesn't see :menulabel:`Explorer --> Courses`
-    required_roles = dd.required(CoursesStaff)
+    required_roles = dd.login_required(CoursesStaff)
     model = 'xcourses.Course'
     order_by = ['start_date']
 
@@ -252,7 +252,7 @@ class Courses(dd.Table):
 
 
 class CoursesByOffer(Courses):
-    required_roles = dd.required(CoursesUser)
+    required_roles = dd.login_required(CoursesUser)
     master_key = 'offer'
     column_names = 'start_date * id'
 
@@ -463,7 +463,7 @@ class CourseRequest(dd.Model):
 class CourseRequests(dd.Table):
     #~ debug_permissions = 20130424
     model = 'xcourses.CourseRequest'
-    required_roles = dd.required(CoursesStaff)
+    required_roles = dd.login_required(CoursesStaff)
     detail_layout = """
     date_submitted person content offer urgent 
     course state date_ended id:8 
@@ -477,7 +477,7 @@ class CourseRequestsByPerson(CourseRequests):
     """
     Shows the course requests of a client.
     """
-    required_roles = dd.required((CoursesUser, SocialAgent))
+    required_roles = dd.login_required((CoursesUser, SocialAgent))
     master_key = 'person'
     column_names = 'date_submitted:10 content:15 offer:15 course:20 urgent state date_ended remark:15 id'
     hidden_columns = 'id'
@@ -485,7 +485,7 @@ class CourseRequestsByPerson(CourseRequests):
 
 
 class CourseRequestsByContent(CourseRequests):
-    required_roles = dd.required(CoursesUser)
+    required_roles = dd.login_required(CoursesUser)
     master_key = 'content'
 
 
@@ -494,7 +494,7 @@ class RequestsByCourse(CourseRequests):
     """
     Table of :class:`CourseRequest` instances of a :class:`Course`.
     """
-    required_roles = dd.required(CoursesUser)
+    required_roles = dd.login_required(CoursesUser)
     master_key = 'course'
 
     @classmethod
@@ -548,7 +548,7 @@ class PendingCourseRequests(CourseRequests):
     """
     List of pending course requests.
     """
-    required_roles = dd.required(CoursesUser)
+    required_roles = dd.login_required(CoursesUser)
     label = _("Pending Course Requests")
     order_by = ['date_submitted']
     filter = models.Q(course__isnull=True)

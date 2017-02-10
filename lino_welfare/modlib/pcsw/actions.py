@@ -50,7 +50,7 @@ class RefuseClient(ChangeStateAction):
     """
     label = _("Refuse")
     required_states = 'newcomer'
-    required_roles = dd.required(NewcomersAgent)
+    required_roles = dd.login_required(NewcomersAgent)
     target_state = ClientStates.refused
 
     parameters = dict(
@@ -104,7 +104,7 @@ class MarkClientFormer(ChangeStateAction):
     """
     label = _("Former")
     required_states = 'coached'
-    required_roles = dd.required(NewcomersAgent)
+    required_roles = dd.login_required(NewcomersAgent)
     target_state = ClientStates.former
 
     def run_from_ui(self, ar, **kw):

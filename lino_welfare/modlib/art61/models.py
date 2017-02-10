@@ -83,7 +83,7 @@ class ContractType(ContractTypeBase, mixins.Referrable):
 class ContractTypes(dd.Table):
     """
     """
-    required_roles = dd.required(IntegrationStaff)
+    required_roles = dd.login_required(IntegrationStaff)
     model = ContractType
     column_names = 'name ref *'
     detail_layout = """
@@ -177,7 +177,7 @@ class ContractDetail(dd.DetailLayout):
 
 class Contracts(ContractBaseTable):
     #~ debug_permissions = "20130222"
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.login_required(IntegrationAgent)
     model = 'art61.Contract'
     column_names = 'id client client__national_id ' \
                    'applies_from applies_until user type *'

@@ -13,7 +13,7 @@
 
 import sys, os
 
-from atelier.sphinxconf import configure
+from lino.sphinxcontrib import configure
 configure(globals(), 'lino_welfare.projects.docs.settings.doctests')
 
 extensions += ['lino.sphinxcontrib.actordoc']

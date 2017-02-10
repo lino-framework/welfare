@@ -48,7 +48,7 @@ class Clients(pcsw.CoachedClients):
     # ~ Black right-pointing triangle : Unicode number: U+25B6  HTML-code: &#9654;
     # ~ Black right-pointing pointer Unicode number: U+25BA HTML-code: &#9658;
     help_text = u"""Wie Kontakte --> Klienten, aber mit Kolonnen und Filterparametern für Schuldnerberatung."""
-    required_roles = dd.required(DebtsUser)
+    required_roles = dd.login_required(DebtsUser)
     params_panel_hidden = True
     title = _("DM Clients")
     order_by = "last_name first_name id".split()
@@ -66,7 +66,7 @@ class Clients(pcsw.CoachedClients):
 class Groups(dd.Table):
     """The global table of all account groups."""
     model = 'debts.Group'
-    required_roles = dd.required(DebtsStaff)
+    required_roles = dd.login_required(DebtsStaff)
     order_by = ['ref']
     column_names = 'ref name account_type entries_layout *'
 
@@ -84,7 +84,7 @@ class Groups(dd.Table):
 
 class Accounts(dd.Table):
     model = 'debts.Account'
-    required_roles = dd.required(DebtsStaff)
+    required_roles = dd.login_required(DebtsStaff)
     order_by = ['ref']
     column_names = "ref name default_amount periods required_for_household "\
                    "required_for_person group *"
@@ -106,7 +106,7 @@ class AccountsByGroup(Accounts):
 
 
 class Actors(dd.Table):
-    required_roles = dd.required(DebtsStaff)
+    required_roles = dd.login_required(DebtsStaff)
     model = 'debts.Actor'
     column_names = "budget seqno partner header remark *"
 
@@ -115,7 +115,7 @@ class ActorsByBudget(Actors):
     """The table used to edit Actors in a Budget's detail.
 
     """
-    required_roles = dd.required(DebtsUser)
+    required_roles = dd.login_required(DebtsUser)
     master_key = 'budget'
     column_names = "seqno partner header remark *"
     auto_fit_column_widths = True
@@ -123,7 +123,7 @@ class ActorsByBudget(Actors):
 
 
 class ActorsByPartner(Actors):
-    required_roles = dd.required(DebtsUser)
+    required_roles = dd.login_required(DebtsUser)
     master_key = 'partner'
     label = _("Is actor in these budgets:")
     editable = False
@@ -194,7 +194,7 @@ class Budgets(dd.Table):
     but is directly used by :menuselection:`Explorer --> Debts -->Budgets`.
     """
     model = 'debts.Budget'
-    required_roles = dd.required(DebtsStaff)
+    required_roles = dd.login_required(DebtsStaff)
     detail_layout = BudgetDetail()
     insert_layout = """
     partner
@@ -207,11 +207,11 @@ class Budgets(dd.Table):
 
 
 class MyBudgets(My, Budgets):
-    required_roles = dd.required(DebtsUser)
+    required_roles = dd.login_required(DebtsUser)
 
 
 class BudgetsByPartner(Budgets):
-    required_roles = dd.required(DebtsUser)
+    required_roles = dd.login_required(DebtsUser)
     master_key = 'partner'
     label = _("Is partner of these budgets:")
 
@@ -220,12 +220,12 @@ class BudgetsByPartner(Budgets):
 
 class Entries(dd.Table):
     model = 'debts.Entry'
-    required_roles = dd.required(DebtsStaff)
+    required_roles = dd.login_required(DebtsStaff)
 
 
 class EntriesByType(Entries):
     _account_type = None
-    required_roles = dd.required(DebtsUser)
+    required_roles = dd.login_required(DebtsUser)
 
     @classmethod
     def get_known_values(self):  # 20130906
@@ -251,7 +251,7 @@ class EntriesByBudget(Entries):
     column_names = "account description amount actor:10 periods:10 remark move_buttons:8 seqno todo id"
     hidden_columns = "seqno id"
     auto_fit_column_widths = True
-    required_roles = dd.required(DebtsUser)
+    required_roles = dd.login_required(DebtsUser)
     order_by = ['seqno']
 
 
@@ -568,7 +568,7 @@ class SummaryTable(dd.VirtualTable):
 class ResultByBudget(SummaryTable):
     help_text = _("""Shows the Incomes & Expenses for this budget.""")
     label = _("Incomes & Expenses")
-    required_roles = dd.required(DebtsUser)
+    required_roles = dd.login_required(DebtsUser)
     master = 'debts.Budget'
 
     @classmethod
@@ -625,7 +625,7 @@ class ResultByBudget(SummaryTable):
 
 class DebtsByBudget(SummaryTable):
     label = _("Liabilities")
-    required_roles = dd.required(DebtsUser)
+    required_roles = dd.login_required(DebtsUser)
     master = 'debts.Budget'
 
     @classmethod
@@ -646,7 +646,7 @@ class DebtsByBudget(SummaryTable):
 
 class AssetsByBudgetSummary(SummaryTable):
     label = _("Assets")
-    required_roles = dd.required(DebtsUser)
+    required_roles = dd.login_required(DebtsUser)
     master = 'debts.Budget'
 
     @classmethod

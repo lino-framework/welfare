@@ -60,7 +60,7 @@ class Category(mixins.BabelNamed):
 
 class Categories(dd.Table):
     model = 'aids.Category'
-    required_roles = dd.required(AidsStaff)
+    required_roles = dd.login_required(AidsStaff)
     column_names = 'name *'
     order_by = ["name"]
 
@@ -190,7 +190,7 @@ class AidType(ContactRelated, ExcerptTitle):
 
 class AidTypes(dd.Table):
     model = 'aids.AidType'
-    required_roles = dd.required(AidsStaff)
+    required_roles = dd.login_required(AidsStaff)
     column_names = 'name board short_name *'
     order_by = ["name"]
 
@@ -328,7 +328,7 @@ dd.update_field(Granting, 'end_date', verbose_name=_('until'))
 class Grantings(dd.Table):
     """The default table for :class:`Granting`."""
     model = 'aids.Granting'
-    required_roles = dd.required(AidsUser)
+    required_roles = dd.login_required(AidsUser)
     order_by = ['-start_date']
 
     detail_layout = """
@@ -405,11 +405,11 @@ class Grantings(dd.Table):
 
 
 class AllGrantings(Grantings):
-    required_roles = dd.required(AidsStaff)
+    required_roles = dd.login_required(AidsStaff)
 
 
 class MyPendingGrantings(Grantings):
-    required_roles = dd.required(SocialAgent)
+    required_roles = dd.login_required(SocialAgent)
     column_names = "client aid_type start_date " \
                    "end_date user workflow_buttons *"
     label = _("Grantings to confirm")
@@ -462,7 +462,7 @@ class Confirmations(dd.Table):
 
     """
     # model = 'aids.Confirmation'
-    required_roles = dd.required(AidsStaff)
+    required_roles = dd.login_required(AidsStaff)
     order_by = ["-created"]
     column_names = "description_column created user printed " \
                    "start_date end_date *"
@@ -571,7 +571,7 @@ class ConfirmationsByGranting(dd.VirtualTable):
     """
 
     label = _("Issued confirmations")
-    required_roles = dd.required(AidsUser)
+    required_roles = dd.login_required(AidsUser)
     master = 'aids.Granting'
 
     # removed 20150729 because it disturbed after optimization "Cannot
@@ -663,7 +663,7 @@ simple aid during a given period.
 
 class SimpleConfirmations(Confirmations):
     model = 'aids.SimpleConfirmation'
-    required_roles = dd.required(AidsUser)
+    required_roles = dd.login_required(AidsUser)
     detail_layout = dd.DetailLayout("""
     id client user signer workflow_buttons
     granting start_date end_date
@@ -674,7 +674,7 @@ class SimpleConfirmations(Confirmations):
 
 
 class AllSimpleConfirmations(SimpleConfirmations):
-    required_roles = dd.required(AidsStaff)
+    required_roles = dd.login_required(AidsStaff)
     column_names = (
         "id client start_date end_date granting "
         "client__address_column client__gender "
@@ -731,7 +731,7 @@ class IncomeConfirmation(Confirmation):
 
 class IncomeConfirmations(Confirmations):
     model = 'aids.IncomeConfirmation'
-    required_roles = dd.required(AidsUser)
+    required_roles = dd.login_required(AidsUser)
 
     detail_layout = dd.DetailLayout("""
     client user signer workflow_buttons printed
@@ -743,7 +743,7 @@ class IncomeConfirmations(Confirmations):
 
 
 class AllIncomeConfirmations(IncomeConfirmations):
-    required_roles = dd.required(AidsStaff)
+    required_roles = dd.login_required(AidsStaff)
     column_names = (
         "id client start_date end_date granting "
         "client__address_column client__gender "
@@ -915,7 +915,7 @@ class RefundConfirmation(Confirmation):
 
 class RefundConfirmations(Confirmations):
     model = 'aids.RefundConfirmation'
-    required_roles = dd.required(AidsUser)
+    required_roles = dd.login_required(AidsUser)
 
     detail_layout = dd.DetailLayout("""
     id client user signer workflow_buttons
@@ -927,7 +927,7 @@ class RefundConfirmations(Confirmations):
 
 
 class AllRefundConfirmations(RefundConfirmations):
-    required_roles = dd.required(AidsStaff)
+    required_roles = dd.login_required(AidsStaff)
 
     column_names = (
         "id client start_date end_date granting "

@@ -51,7 +51,7 @@ from lino_xl.lib.coachings.desktop import CoachingsByClient
 # office group.
 # cal = dd.resolve_app('cal')
 # cal.EventsByDay.required_roles.add(OfficeUser)
-# cal.EventsByDay.required_roles = dd.required(OfficeUser)
+# cal.EventsByDay.required_roles = dd.login_required(OfficeUser)
 
 # Visitors.required.update(user_groups='coaching reception')
 # WaitingVisitors.required.update(user_groups='coaching reception')
@@ -243,8 +243,8 @@ class Clients(pcsw.CoachedClients):  # see blog 2013/0817
     <lino_xl.lib.coachings.desktop.CoachedClients>` by the visible columns.
 
     """
-    required_roles = dd.required((OfficeUser, OfficeOperator))
-    # required_roles = dd.required((ContactsUser, OfficeOperator))
+    required_roles = dd.login_required((OfficeUser, OfficeOperator))
+    # required_roles = dd.login_required((ContactsUser, OfficeOperator))
     column_names = "name_column address_column national_id workflow_buttons"
     auto_fit_column_widths = True
     use_as_default_table = False

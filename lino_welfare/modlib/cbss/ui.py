@@ -30,14 +30,14 @@ from .utils import (nodetext, cbss2gender, cbss2date, cbss2address,
 
 class Sectors(dd.Table):
     model = 'cbss.Sector'
-    required_roles = dd.required(CBSSUser, dd.SiteStaff)
+    required_roles = dd.login_required(CBSSUser, dd.SiteStaff)
     column_names = 'code subcode abbr name *'
     order_by = ['code', 'subcode']
 
 
 class Purposes(dd.Table):
     model = 'cbss.Purpose'
-    required_roles = dd.required(CBSSUser, dd.SiteStaff)
+    required_roles = dd.login_required(CBSSUser, dd.SiteStaff)
     column_names = 'sector_code code name *'
     order_by = ['sector_code', 'code']
 
@@ -57,7 +57,7 @@ class CBSSRequestDetail(dd.DetailLayout):
     info_messages
     debug_messages
     """, label=_("Technical"),
-        required_roles=dd.required(CBSSUser, dd.SiteStaff))
+        required_roles=dd.login_required(CBSSUser, dd.SiteStaff))
 
     info = dd.Panel("""
     id person user sent status printed
@@ -100,7 +100,7 @@ class IdentifyPersonRequestInsert(dd.InsertLayout, IdentifyPersonRequestDetail):
 
 
 class IdentifyPersonRequests(CBSSRequests):
-    required_roles = dd.required(CBSSUser)
+    required_roles = dd.login_required(CBSSUser)
     model = 'cbss.IdentifyPersonRequest'
     active_fields = 'person'
     detail_layout = IdentifyPersonRequestDetail()
@@ -112,15 +112,15 @@ class IdentifyPersonRequests(CBSSRequests):
 
 
 class AllIdentifyPersonRequests(IdentifyPersonRequests):
-    required_roles = dd.required(dd.SiteStaff, CBSSUser)
+    required_roles = dd.login_required(dd.SiteStaff, CBSSUser)
 
 
 class MyIdentifyPersonRequests(My, IdentifyPersonRequests):
-    required_roles = dd.required(CBSSUser)
+    required_roles = dd.login_required(CBSSUser)
 
 
 class IdentifyRequestsByPerson(IdentifyPersonRequests):
-    required_roles = dd.required(CBSSUser)
+    required_roles = dd.login_required(CBSSUser)
     master_key = 'person'
     column_names = 'user sent status *'
 
@@ -269,7 +269,7 @@ class ManageAccessRequestInsert(dd.InsertLayout):
 
 
 class ManageAccessRequests(CBSSRequests):
-    required_roles = dd.required(CBSSUser)
+    required_roles = dd.login_required(CBSSUser)
     model = 'cbss.ManageAccessRequest'
     detail_layout = ManageAccessRequestDetail()
     insert_layout = ManageAccessRequestInsert()
@@ -277,7 +277,7 @@ class ManageAccessRequests(CBSSRequests):
 
 
 class AllManageAccessRequests(ManageAccessRequests):
-    required_roles = dd.required(dd.SiteStaff, CBSSUser)
+    required_roles = dd.login_required(dd.SiteStaff, CBSSUser)
 
 
 class ManageAccessRequestsByPerson(ManageAccessRequests):
@@ -285,7 +285,7 @@ class ManageAccessRequestsByPerson(ManageAccessRequests):
 
 
 class MyManageAccessRequests(My, ManageAccessRequests):
-    required_roles = dd.required(CBSSUser)
+    required_roles = dd.login_required(CBSSUser)
 
 
 class RetrieveTIGroupsRequestDetail(CBSSRequestDetail):

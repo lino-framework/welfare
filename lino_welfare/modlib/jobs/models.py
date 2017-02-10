@@ -84,7 +84,7 @@ class Schedule(mixins.BabelNamed):
 
 
 class Schedules(dd.Table):
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     model = 'jobs.Schedule'
     order_by = ['name']
     detail_layout = """
@@ -144,7 +144,7 @@ class JobProviders(contacts.Companies, dd.Table):
     """The table of all job providers.
 
     """
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.login_required(IntegrationAgent)
     #~ use_as_default_table = False
     model = 'jobs.JobProvider'
     app_label = 'jobs'
@@ -188,7 +188,7 @@ class ContractType(ContractTypeBase,  # mixins.PrintableType,
 class ContractTypes(dd.Table):
     """
     """
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     model = 'jobs.ContractType'
     column_names = 'name ref *'
     detail_layout = """
@@ -327,7 +327,7 @@ class ContractDetail(dd.DetailLayout):
 class Contracts(isip.ContractBaseTable):
     #~ debug_permissions = "20130222"
 
-    required_roles = dd.required(SocialAgent)
+    required_roles = dd.login_required(SocialAgent)
     model = 'jobs.Contract'
     column_names = 'id client client__national_id ' \
                    'applies_from applies_until job user type *'
@@ -413,7 +413,7 @@ class ContractsBySchedule(Contracts):
 
 class MyContracts(Contracts):
     
-    required_roles = dd.required(IntegrationAgent)    
+    required_roles = dd.login_required(IntegrationAgent)    
     
     column_names = "applies_from client job type company applies_until date_ended ending *"
     #~ label = _("My contracts")
@@ -464,7 +464,7 @@ class Offer(SectorFunction):
 
 
 class Offers(dd.Table):
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.login_required(IntegrationAgent)
     model = 'jobs.Offer'
     column_names = 'name provider sector function '\
                    'selection_from selection_until start_date *'
@@ -705,7 +705,7 @@ class Candidatures(dd.Table):
     """
     List of :class:`Candidatures <Candidature>`.
     """
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     model = 'jobs.Candidature'
     order_by = ['date_submitted']
     column_names = 'date_submitted job:25 function person state * id'
@@ -715,7 +715,7 @@ class CandidaturesByPerson(Candidatures):
     """
     ...
     """
-    required_roles = dd.required(SocialAgent)
+    required_roles = dd.login_required(SocialAgent)
     master_key = 'person'
     column_names = 'date_submitted job:25 sector function ' \
                    'art60 art61 remark state *'
@@ -731,7 +731,7 @@ class CandidaturesByFunction(Candidatures):
 
 
 class CandidaturesByJob(Candidatures):
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.login_required(IntegrationAgent)
     master_key = 'job'
     column_names = 'date_submitted person:25 state * id'
 
@@ -790,7 +790,7 @@ class Jobs(dd.Table):
     help_text = _("""
     Eine Stelle ist ein Arbeitsplatz bei einem Stellenabieter.
     """)
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.login_required(IntegrationAgent)
     model = 'jobs.Job'
     #~ order_by = ['start_date']
     column_names = 'name provider * id'
@@ -834,7 +834,7 @@ class JobType(mixins.Sequenced):
 
 
 class JobTypes(dd.Table):
-    required_roles = dd.required(SocialStaff)
+    required_roles = dd.login_required(SocialStaff)
     model = 'jobs.JobType'
     order_by = ['name']
     detail_layout = """
@@ -880,7 +880,7 @@ if True:  # settings.SITE.user_model:
 class JobsOverviewByType(Jobs):
     """
     """
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.login_required(IntegrationAgent)
     label = _("Contracts Situation")
     column_names = "job_desc:20 working:30 probation:30 candidates:30"
     master_key = 'type'
@@ -1002,7 +1002,7 @@ class JobsOverview(Report):
     applying for it.
 
     """
-    required_roles = dd.required(IntegrationAgent)
+    required_roles = dd.login_required(IntegrationAgent)
     label = _("Contracts Situation")
 
     parameters = dict(
