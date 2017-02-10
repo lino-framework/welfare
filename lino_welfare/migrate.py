@@ -350,6 +350,7 @@ class Migrator(Migrator):
         """
         - move 5 models from pcsw to coaching
         - rename courses to xcourses
+        - new name and plugin for CivilStates and ResidenceTypes
 
         """
         globals_dict.update(   
@@ -358,6 +359,9 @@ class Migrator(Migrator):
             pcsw_Coaching=resolve_model("coachings.Coaching"),
             pcsw_CoachingEnding=resolve_model("coachings.CoachingEnding"),
             pcsw_CoachingType=resolve_model("coachings.CoachingType"))
+
+        settings.SITE.modules.pcsw.CivilState = settings.SITE.modules.beid.CivilStates
+        settings.SITE.modules.pcsw.ResidenceType = settings.SITE.modules.beid.ResidenceTypes
 
         if dd.is_installed('xcourses'):
             globals_dict.update(
