@@ -22,12 +22,12 @@ This document describes how Lino Welfare uses the
 .. contents::
    :depth: 2
 
-User profiles
+User types
 =============
 
-The default set of user profiles for Lino Welfare is defined in
-:mod:`lino_welfare.modlib.welfare.roles` and leads to the following
-list of profiles:
+The default set of user types for Lino Welfare is defined in
+:mod:`lino_welfare.modlib.welfare.user_types` and leads to the
+following list of profiles:
 
 >>> rt.show(users.UserTypes)
 ======= =========== =============================== ==================================================================
@@ -52,14 +52,10 @@ list of profiles:
 <BLANKLINE>
 
 
-Note that local administrators may define their own module, similar to
-this, and have :attr:`lino.core.site.Site.user_types_module` point
-to it.
-
-The user profiles are only the tip of the iceberg.  A user profile is
-an arbitrary choice of user roles made available for a given
-application.  Lino defines a lot of user roles.  For example, the
-following diagram visualizes the genealogy of a reception clerk:
+The user types are only the tip of the iceberg.  A user type is an
+arbitrary choice of user roles made available for a given application.
+Lino defines a lot of user roles.  For example, the following diagram
+visualizes the genealogy of a reception clerk:
 
 .. inheritance-diagram:: lino_welfare.modlib.welfare.user_types.ReceptionClerk
 

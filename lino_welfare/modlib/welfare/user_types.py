@@ -152,3 +152,10 @@ add('510', _("Accountant (Manager)"),          AccountantManager)
 add('800', _("Supervisor"),                    Supervisor)
 add('900', _("Administrator"),                 SiteAdmin, name='admin')
 add('910', _("Security advisor"),              SecurityAdvisor)
+
+
+# Excerpts must be visible only to ContactsUser
+from lino.api import dd
+from lino_xl.lib.excerpts.models import ExcerptsByProject
+ExcerptsByProject.required_roles = dd.required(
+    ContactsUser, (OfficeUser, OfficeOperator))

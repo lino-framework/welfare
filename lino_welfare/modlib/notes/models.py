@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2015 Luc Saffre
+# Copyright 2013-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -30,7 +30,7 @@ from lino.api import dd, rt
 
 from lino_xl.lib.notes.models import *
 from lino.modlib.office.roles import OfficeUser, OfficeOperator
-
+from lino_xl.lib.contacts.roles import ContactsUser
 
 class Note(Note):
     """Overrides the library model, setting an alternative verbose name,
@@ -92,7 +92,7 @@ project #company
 
 
 class NotesByProject(NotesByProject):
-    required_roles = dd.required((OfficeUser, OfficeOperator))
+    required_roles = dd.required(ContactsUser, (OfficeUser, OfficeOperator))
     # required_roles = dd.required()
     column_names = ("date:8 time:5 event_type:10 type:10 "
                     "subject:40 user:10 *")
@@ -100,7 +100,7 @@ class NotesByProject(NotesByProject):
 
 
 class NotesByCompany(NotesByCompany):
-    required_roles = dd.required((OfficeUser, OfficeOperator))
+    required_roles = dd.required(ContactsUser, (OfficeUser, OfficeOperator))
     # required_roles = dd.required()
     column_names = "date time project event_type type subject user *"
 

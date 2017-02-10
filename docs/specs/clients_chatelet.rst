@@ -95,7 +95,7 @@ Lino Welfare à la Chatelet.
   - **Candidatures** (jobs.CandidaturesByPerson)
   - **Mises à l'emploi art60§7** (jobs.ContractsByClient)
   - **Mises à l'emploi art.61 et activations** (art61.ContractsByClient) [visible for 100 110 120 admin 910]
-- **Historique** (history) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
+- **Historique** (history) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]:
   - **Observations** (notes.NotesByProject)
   - (history_right):
     - **Fichiers téléchargés** (uploads.UploadsByClient)
