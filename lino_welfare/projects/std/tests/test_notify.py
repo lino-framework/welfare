@@ -418,8 +418,5 @@ class TestCase(TestCase):
         msg = Message.objects.all()[0]
         # print msg.body
         self.assertEquivalent(msg.body, """
-<div><p>Subject: test 2<br />Client: [client 101] (Seconda CLIENT)</p><p>Alicia modified [note 4] (test 2):</p><ul><li><b>Body</b> : <pre>--- before
-+++ after
-@@ -0,0 +1 @@
-+&lt;p&gt;Bla bla bla&lt;/p&gt;</pre></li><li><b>Subject</b> : 'test' --&gt; 'test 2'</li></ul></div>
+<div><p>Subject: test 2<br />Client: [client 101] (Seconda CLIENT)</p><p>Alicia modified [note 4] (test 2):</p><ul><li><b>Body</b> : 1 lines added</li><li><b>Subject</b> : 'test' --&gt; 'test 2'</li></ul></div>
 """)
