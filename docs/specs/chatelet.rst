@@ -619,7 +619,7 @@ Romain
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
 - Bureau : Mes Notifications, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
-- Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Rendez-vous à confirmer, Mes tâches, Mes visiteurs, Mes présences
+- Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Rendez-vous à confirmer, Mes tâches, Mes visiteurs, Mes présences, Mes rendez-vous dépassés
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis, Visiteurs qui m'attendent
 - CPAS : Bénéficiaires, Mes Interventions, Octrois à confirmer
 - Intégration :
@@ -796,13 +796,14 @@ Here is the output of :func:`walk_menu_items
 - Bureau --> Mes Observations : 10
 - Bureau --> Mes problèmes de données : 0
 - Calendrier --> Mes rendez-vous : 13
-- Calendrier --> Rendez-vous dépassés : 26
-- Calendrier --> Rendez-vous à confirmer : 4
+- Calendrier --> Rendez-vous dépassés : 35
+- Calendrier --> Rendez-vous à confirmer : 1
 - Calendrier --> Mes tâches : 1
 - Calendrier --> Mes visiteurs : 1
 - Calendrier --> Mes présences : 1
+- Calendrier --> Mes rendez-vous dépassés : 1
 - Réception --> Bénéficiaires : 30
-- Réception --> Rendez-vous aujourd'hui : 10
+- Réception --> Rendez-vous aujourd'hui : 3
 - Réception --> Salle d'attente : 8
 - Réception --> Visiteurs occupés : 4
 - Réception --> Visiteurs repartis : 7
@@ -899,7 +900,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Contacts --> Types d'adresses : 6
 - Explorateur --> Contacts --> Adresses : 91
 - Explorateur --> Contacts --> Membres du conseil : 1
-- Explorateur --> Contacts --> Rôles de membres de ménage  : 8
+- Explorateur --> Contacts --> Rôles de membres de ménage : 8
 - Explorateur --> Contacts --> Membres de ménage : 64
 - Explorateur --> Contacts --> Liens de parenté : 60
 - Explorateur --> Contacts --> Types de parenté : 13

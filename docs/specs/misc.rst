@@ -282,6 +282,7 @@ see it.
 - cal.MyAssignedEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.MyEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.MyEventsToday.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- cal.MyOverdueAppointments.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.MyUnconfirmedAppointments.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.OneEvent.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - cal.OverdueAppointments.duplicate : visible for 110 410 admin 910

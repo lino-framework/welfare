@@ -90,6 +90,7 @@ class Site(Site):
         yield self.modules.reception.WaitingVisitors
         # yield self.modules.integ.UsersWithClients
         #~ yield self.modules.reception.ReceivedVisitors
+        yield self.actors.cal.MyOverdueAppointments
         
         if user.authenticated:
             yield self.actors.notify.MyMessages

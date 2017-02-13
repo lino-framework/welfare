@@ -38,8 +38,8 @@ This client has the following appointments.
  Start date   Start time   Managed by        Summary          State       Actions
 ------------ ------------ ----------------- ---------------- ----------- -------------------------------------------------------
  15/05/2014   09:00:00     Caroline Carnol   Auswertung 2     Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 15/05/2014   13:30:00     Hubert Huppertz   Abendessen       Published   [Checkin] **Accepted** → [Reject] [Absent] [Excused]
  22/05/2014                Mélanie Mélard    Urgent problem   Published   [Receive] [Checkout] **Waiting** → [Absent] [Excused]
- 27/05/2014   13:30:00     Hubert Huppertz   Abendessen       Published   [Checkin] **Accepted** → [Reject] [Absent] [Excused]
  16/06/2014   09:00:00     Caroline Carnol   Auswertung 3     Suggested   [Checkin] **Accepted** → [Absent] [Excused]
  16/07/2014   09:00:00     Caroline Carnol   Auswertung 4     Suggested   [Checkin] **Accepted** → [Absent] [Excused]
  18/08/2014   09:00:00     Caroline Carnol   Auswertung 5     Suggested   [Checkin] **Accepted** → [Absent] [Excused]
@@ -59,8 +59,8 @@ functionality can click on the dates to see their detail:
  When                                   Managed by        Actions
 -------------------------------------- ----------------- -------------------------------------------------------
  `Thu 15/05/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Thu 15/05/2014 at 13:30 <Detail>`__   Hubert Huppertz   [Checkin] **Accepted** → [Reject] [Absent] [Excused]
  `Thu 22/05/2014 <Detail>`__            Mélanie Mélard    [Receive] [Checkout] **Waiting** → [Absent] [Excused]
- `Tue 27/05/2014 at 13:30 <Detail>`__   Hubert Huppertz   [Checkin] **Accepted** → [Reject] [Absent] [Excused]
  `Mon 16/06/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
  `Wed 16/07/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
  `Mon 18/08/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
