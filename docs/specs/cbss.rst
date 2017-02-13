@@ -73,28 +73,25 @@ has the following additional fields:
 ..
     >>> show_fields(rt.models.system.SiteConfig, 
     ... "sector cbss_org_unit ssdn_user_id cbss_http_password")
-    +--------------------+-------------------------+-----------------------------------------------------------------------------------------+
-    | Internal name      | Verbose name            | Help text                                                                               |
-    +====================+=========================+=========================================================================================+
-    | sector             | sector                  | The CBSS sector/subsector of the requesting organization.                               |
-    |                    |                         | For PCSWs this is always 17.1.                                                          |
-    |                    |                         | Used in SSDN requests as text of the `MatrixID` and `MatrixSubID`                       |
-    |                    |                         | elements of `AuthorizedUser`.                                                           |
-    |                    |                         | Used in ManageAccess requests as default value                                          |
-    |                    |                         | for the non-editable field `sector`                                                     |
-    |                    |                         | (which defines the choices of the `purpose` field).                                     |
-    +--------------------+-------------------------+-----------------------------------------------------------------------------------------+
-    | cbss_org_unit      | Anfragende Organisation | In CBSS requests, identifies the requesting organization.                               |
-    |                    |                         | For PCSWs this is the enterprise number                                                 |
-    |                    |                         | (CBE, KBO) and should have 10 digits and no formatting characters.                      |
-    |                    |                         |                                                                                         |
-    |                    |                         | Used in SSDN requests as text of the `AuthorizedUser\OrgUnit` element .                 |
-    |                    |                         | Used in new style requests as text of the `CustomerIdentification\cbeNumber` element .  |
-    +--------------------+-------------------------+-----------------------------------------------------------------------------------------+
-    | ssdn_user_id       | SSDN User Id            | Used in SSDN requests as text of the `AuthorizedUser\UserID` element.                   |
-    +--------------------+-------------------------+-----------------------------------------------------------------------------------------+
-    | cbss_http_password | HTTP password           | Used in the http header of new-style requests.                                          |
-    +--------------------+-------------------------+-----------------------------------------------------------------------------------------+
-
-
-
+    +--------------------+-------------------------+----------------------------------------------------------------------------------------+
+    | Internal name      | Verbose name            | Help text                                                                              |
+    +====================+=========================+========================================================================================+
+    | sector             | sector                  | The CBSS sector/subsector of the requesting organization.                              |
+    |                    |                         | For PCSWs this is always 17.1.                                                         |
+    |                    |                         | Used in SSDN requests as text of the `MatrixID` and `MatrixSubID`                      |
+    |                    |                         | elements of `AuthorizedUser`.                                                          |
+    |                    |                         | Used in ManageAccess requests as default value                                         |
+    |                    |                         | for the non-editable field `sector`                                                    |
+    |                    |                         | (which defines the choices of the `purpose` field).                                    |
+    +--------------------+-------------------------+----------------------------------------------------------------------------------------+
+    | cbss_org_unit      | Anfragende Organisation | In CBSS requests, identifies the requesting organization.                              |
+    |                    |                         | For PCSWs this is the enterprise number                                                |
+    |                    |                         | (CBE, KBO) and should have 10 digits and no formatting characters.                     |
+    |                    |                         |                                                                                        |
+    |                    |                         | Used in SSDN requests as text of the `AuthorizedUser\OrgUnit` element .                |
+    |                    |                         | Used in new style requests as text of the `CustomerIdentification\cbeNumber` element . |
+    +--------------------+-------------------------+----------------------------------------------------------------------------------------+
+    | ssdn_user_id       | SSDN User Id            | Used in SSDN requests as text of the `AuthorizedUser\UserID` element.                  |
+    +--------------------+-------------------------+----------------------------------------------------------------------------------------+
+    | cbss_http_password | HTTP password           | Used in the http header of new-style requests.                                         |
+    +--------------------+-------------------------+----------------------------------------------------------------------------------------+
