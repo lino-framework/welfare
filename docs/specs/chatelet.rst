@@ -745,7 +745,7 @@ options.
 - pcsw.Clients.refuse_client : Refuser
   (main) [visible for all]: **Raison de refus** (reason), **Remarque** (remark)
 - users.AllUsers.send_welcome_email : Welcome mail
-  (main) [visible for all]: **adresse e-mail** (email), **Subject** (subject)
+  (main) [visible for all]: **adresse e-mail** (email), **Sujet** (subject)
 - users.Users.change_password : Changer mot de passe
   (main) [visible for all]: **Mot de passe actuel** (current), **Nouveau mot de passe** (new1), **Encore une fois** (new2)
 <BLANKLINE>
