@@ -1,5 +1,6 @@
 .. _welfare.install:
 
+=======================
 Installing Lino Welfare
 =======================
 
@@ -27,22 +28,62 @@ From inside a code repository
     pip install -e cosi
     pip install -e welfare
 
-- Initialize your demo databases as follows:
+- Initialize your demo databases as follows::
 
       $ cd ~/repositories/welfare
       $ inv prep
 
-- How to run demo server::
+- Run the web server::
 
     $ cd ~/repositories/welfare/lino_welfare/projects/eupen
     $ python manage.py runserver
 
-  Alternatively you can do the same using a single command::
+- You might want to replace "eupen" by "chatelet" in above command
+  (:ref:`eupen <welfare.specs.eupen>` and :ref:`chatelet
+  <welfare.specs.chatelet>` are the two main variants of Lino
+  Welfare).
+  
 
-    $ django-admin.py runserver --settings=lino_welfare.projects.eupen.settings.demo
+Shell scripts for running the server
+====================================
 
-  You might want to replace "eupen" by "chatelet" in above commands
-  ("eupen" and "chatelet" are the two main variants of Lino Welfare)
+In order to automate things, let's now write two shell scripts, one
+for every demo site. Create a file :file:`~/eupen.sh` with this
+content::
+  
+    #!/bin/bash
+    set -e  # exit on error
+    . /home/johndoe/virtualenvs/a/bin/activate
+    exec django-admin.py --settings=lino_welfare.projects.eupen.settings.demo runserver 8080
+
+Make it executable::
+
+  $ chmod +x eupen.sh
+
+Do the same for chatelet and any other demo site.  
+
+
+Installing demo web servers automatically at system startup
+===========================================================
+
+On a demo machine you might want to run your sites as a service. We
+recommend using `supervisor <http://supervisord.org/>`_ for this::
+
+    $ sudo apt-get install supervisor
+
+Then write a supervisor script
+:file:`/etc/supervisor/conf.d/eupen.conf` with this content::
+          
+      [program:eupen]
+      command = /home/johndoe/eupen.sh
+      user = johndoe
+      umask = 0007
+
+and a similar script for or any other sites.
+
+To activate them, you must restart supervisor::
+
+  $ sudo service supervisor restart
 
   
 
@@ -53,7 +94,8 @@ You may want to maintain a set of your own configuration contexts.
 
 - Do as above
 
-- Create your project directory and a :xfile:`settings.py` file:
+- Create your project directory containing a :xfile:`settings.py`
+  file:
 
     $ mkdir ~/mysite
     $ cd ~/mysite
