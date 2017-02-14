@@ -180,7 +180,7 @@ Yet another series of GET requests
 >>> demo_get('rolf', 'api/contacts/Persons', json_fields, 103, **kw)
 >>> demo_get('rolf', 'api/pcsw/CoachedClients', json_fields, 30, **kw)
 >>> demo_get('rolf', 'api/debts/Clients', json_fields, 0, **kw)
->>> demo_get('rolf', 'api/cal/MyEvents', json_fields, 13, **kw)
+>>> demo_get('rolf', 'api/cal/MyEvents', json_fields, 4, **kw)
 >>> demo_get('rolf', 'api/newcomers/NewClients', json_fields, 23, **kw)
 >>> demo_get(
 ...    'rolf', 'api/newcomers/AvailableCoachesByClient', json_fields,

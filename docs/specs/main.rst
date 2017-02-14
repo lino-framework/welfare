@@ -40,19 +40,20 @@ it is much work to maintain.
 
 >>> links = soup.find_all('a')
 >>> len(links)
-145
+118
 
 >>> print(links[0].text)
 Kalender
 
 >>> tables = soup.find_all('table')
 >>> len(tables)
-3
+4
 
 >>> for h in soup.find_all('h2'):
 ...     print(h.text.strip())
 Benutzer und ihre Klienten ⍐
 Meine Termine ⍐
+Meine überfälligen Termine ⍐
 Wartende Besucher ⍐
 Meine Benachrichtigungen ⍐
 
@@ -66,6 +67,6 @@ Meine Benachrichtigungen ⍐
 ...     print(h.text.strip())
 Users with their Clients ⍐
 My appointments ⍐
+My overdue appointments ⍐
 Waiting visitors ⍐
 My Notification messages ⍐
-

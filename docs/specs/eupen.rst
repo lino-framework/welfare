@@ -782,13 +782,13 @@ Here is the output of :func:`walk_menu_items
 - Büro --> Meine Auszüge : 0
 - Büro --> Meine Ereignisse/Notizen : 9
 - Büro --> Meine Datenkontrollliste : 0
-- Kalender --> Meine Termine : 13
+- Kalender --> Meine Termine : 4
 - Kalender --> Überfällige Termine : 38
-- Kalender --> Unbestätigte Termine : 1
+- Kalender --> Unbestätigte Termine : 2
 - Kalender --> Meine Aufgaben : 1
 - Kalender --> Meine Gäste : 1
 - Kalender --> Meine Anwesenheiten : 1
-- Kalender --> Meine überfälligen Termine : 1
+- Kalender --> Meine überfälligen Termine : 3
 - Empfang --> Klienten : 30
 - Empfang --> Termine heute : 3
 - Empfang --> Wartende Besucher : 8
@@ -908,9 +908,9 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Büro --> Auszüge : 68
 - Explorer --> Büro --> Ereignisse/Notizen : 112
 - Explorer --> Büro --> Einfügetexte : 3
-- Explorer --> Kalender --> Kalendereinträge : 349
+- Explorer --> Kalender --> Kalendereinträge : 301
 - Explorer --> Kalender --> Aufgaben : 36
-- Explorer --> Kalender --> Anwesenheiten : 643
+- Explorer --> Kalender --> Anwesenheiten : 623
 - Explorer --> Kalender --> Abonnements : 10
 - Explorer --> Kalender --> Termin-Zustände : 5
 - Explorer --> Kalender --> Gast-Zustände : 9

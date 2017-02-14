@@ -74,9 +74,9 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  boards.Board                   boards.Boards                   7         3
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         12
- cal.Event                      cal.OneEvent                    24        586
+ cal.Event                      cal.OneEvent                    24        538
  cal.EventType                  cal.EventTypes                  21        11
- cal.Guest                      cal.Guests                      9         578
+ cal.Guest                      cal.Guests                      9         562
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15
@@ -795,13 +795,13 @@ Here is the output of :func:`walk_menu_items
 - Bureau --> Mes Extraits : 0
 - Bureau --> Mes Observations : 10
 - Bureau --> Mes problèmes de données : 0
-- Calendrier --> Mes rendez-vous : 13
+- Calendrier --> Mes rendez-vous : 5
 - Calendrier --> Rendez-vous dépassés : 35
-- Calendrier --> Rendez-vous à confirmer : 1
+- Calendrier --> Rendez-vous à confirmer : 2
 - Calendrier --> Mes tâches : 1
 - Calendrier --> Mes visiteurs : 1
 - Calendrier --> Mes présences : 1
-- Calendrier --> Mes rendez-vous dépassés : 1
+- Calendrier --> Mes rendez-vous dépassés : 2
 - Réception --> Bénéficiaires : 30
 - Réception --> Rendez-vous aujourd'hui : 3
 - Réception --> Salle d'attente : 8
@@ -919,9 +919,9 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Bureau --> Extraits : 70
 - Explorateur --> Bureau --> Observations : 112
 - Explorateur --> Bureau --> Text Field Templates : 3
-- Explorateur --> Calendrier --> Entrées calendrier : 338
+- Explorateur --> Calendrier --> Entrées calendrier : 290
 - Explorateur --> Calendrier --> Tâches : 35
-- Explorateur --> Calendrier --> Présences : 579
+- Explorateur --> Calendrier --> Présences : 563
 - Explorateur --> Calendrier --> Abonnements : 10
 - Explorateur --> Calendrier --> Event states : 5
 - Explorateur --> Calendrier --> Guest states : 9

@@ -72,9 +72,9 @@ System --> Plausibility problems` to see them.
 ------------------ ------------------------------------------- -------------------------------------------------------------- --------------------------------
  Robin Rood         *Ascension of Jesus (29.05.2014)*           Event conflicts with Consultation (29.05.2014 08:30).          Check for conflicting events
  Robin Rood         *Pentecost (09.06.2014)*                    Event conflicts with 2 other events.                           Check for conflicting events
- Mélanie Mélard     *Consultation (29.05.2014 08:30)*           Event conflicts with Ascension of Jesus (29.05.2014).          Check for conflicting events
- Patrick Paraneau   *Breakfast (09.06.2014 09:40)*              Event conflicts with Pentecost (09.06.2014).                   Check for conflicting events
- Patrick Paraneau   *Meeting (09.06.2014 10:20)*                Event conflicts with Pentecost (09.06.2014).                   Check for conflicting events
+ Patrick Paraneau   *Consultation (29.05.2014 08:30)*           Event conflicts with Ascension of Jesus (29.05.2014).          Check for conflicting events
+ Judith Jousten     *Breakfast (09.06.2014 09:40)*              Event conflicts with Pentecost (09.06.2014).                   Check for conflicting events
+ Mélanie Mélard     *Rencontre (09.06.2014 10:20)*              Event conflicts with Pentecost (09.06.2014).                   Check for conflicting events
  Caroline Carnol    *AUSDEMWALD Alfons (116)*                   Neither valid eId data nor alternative identifying document.   Check for valid identification
                     *BASTIAENSEN Laurent (117)*                 Neither valid eId data nor alternative identifying document.   Check for valid identification
  Hubert Huppertz    *COLLARD Charlotte (118)*                   Neither valid eId data nor alternative identifying document.   Check for valid identification
@@ -147,7 +147,7 @@ given type ("checker"). The following snippet simulates the situation
 of selecting the :class:`SimilarClientsChecker
 <lino_welfare.modlib.dupable_clients.models.SimilarClientsChecker>`.
 
->>> Checkers = rt.modules.plausibility.Checkers
+>>> Checkers = rt.actors.plausibility.Checkers
 >>> rt.show(plausibility.AllProblems,
 ...     param_values=dict(checker=Checkers.get_by_value(
 ...     'dupable_clients.SimilarClientsChecker')))
@@ -178,7 +178,7 @@ assigned to you.
 ================ ====================================================== ============================================================== ================================
  Responsible      Controlled by                                          Message                                                        Plausibility checker
 ---------------- ------------------------------------------------------ -------------------------------------------------------------- --------------------------------
- Mélanie Mélard   `Consultation (29.05.2014 08:30) <Detail>`__           Event conflicts with Ascension of Jesus (29.05.2014).          Check for conflicting events
+ Mélanie Mélard   `Rencontre (09.06.2014 10:20) <Detail>`__              Event conflicts with Pentecost (09.06.2014).                   Check for conflicting events
  Mélanie Mélard   `DOBBELSTEIN-DEMEULENAERE Dorothée (123) <Detail>`__   Similar clients: DEMEULENAERE Dorothée (122)                   Check for similar clients
  Mélanie Mélard   `DOBBELSTEIN Dorothée (124) <Detail>`__                Similar clients: DOBBELSTEIN-DEMEULENAERE Dorothée (123)       Check for similar clients
  Mélanie Mélard   `DOBBELSTEIN Dorothée (124) <Detail>`__                Neither valid eId data nor alternative identifying document.   Check for valid identification
