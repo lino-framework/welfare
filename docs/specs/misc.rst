@@ -180,7 +180,7 @@ Yet another series of GET requests
 >>> demo_get('rolf', 'api/contacts/Persons', json_fields, 103, **kw)
 >>> demo_get('rolf', 'api/pcsw/CoachedClients', json_fields, 30, **kw)
 >>> demo_get('rolf', 'api/debts/Clients', json_fields, 0, **kw)
->>> demo_get('rolf', 'api/cal/MyEvents', json_fields, 13, **kw)
+>>> demo_get('rolf', 'api/cal/MyEvents', json_fields, 4, **kw)
 >>> demo_get('rolf', 'api/newcomers/NewClients', json_fields, 23, **kw)
 >>> demo_get(
 ...    'rolf', 'api/newcomers/AvailableCoachesByClient', json_fields,
@@ -282,6 +282,7 @@ see it.
 - cal.MyAssignedEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.MyEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.MyEventsToday.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- cal.MyOverdueAppointments.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.MyUnconfirmedAppointments.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.OneEvent.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - cal.OverdueAppointments.duplicate : visible for 110 410 admin 910

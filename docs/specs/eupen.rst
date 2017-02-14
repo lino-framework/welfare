@@ -46,7 +46,7 @@ Rolf is the local system administrator, he has a complete menu:
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Überfällige Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
+- Kalender : Kalender, Meine Termine, Überfällige Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - Buchhaltung :
@@ -114,7 +114,7 @@ Hubert is an Integration agent.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
+- Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE :
@@ -160,7 +160,7 @@ to explicitly override the language of :meth:`show_menu
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Überfällige Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
+- Kalender : Kalender, Meine Termine, Überfällige Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE :
@@ -212,7 +212,7 @@ Schuldenberater
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
+- Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE :
@@ -243,7 +243,7 @@ Berater Erstempfang
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
+- Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE :
@@ -781,15 +781,16 @@ Here is the output of :func:`walk_menu_items
 - Büro --> Mein E-Mail-Ausgang : 1
 - Büro --> Meine Auszüge : 0
 - Büro --> Meine Ereignisse/Notizen : 9
-- Büro --> Meine Datenkontrollliste : 1
-- Kalender --> Meine Termine : 13
-- Kalender --> Überfällige Termine : 29
-- Kalender --> Unbestätigte Termine : 3
+- Büro --> Meine Datenkontrollliste : 0
+- Kalender --> Meine Termine : 4
+- Kalender --> Überfällige Termine : 38
+- Kalender --> Unbestätigte Termine : 2
 - Kalender --> Meine Aufgaben : 1
 - Kalender --> Meine Gäste : 1
 - Kalender --> Meine Anwesenheiten : 1
+- Kalender --> Meine überfälligen Termine : 3
 - Empfang --> Klienten : 30
-- Empfang --> Termine heute : 10
+- Empfang --> Termine heute : 3
 - Empfang --> Wartende Besucher : 8
 - Empfang --> Beschäftigte Besucher : 4
 - Empfang --> Gegangene Besucher : 7
@@ -898,7 +899,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> All dashboard widgets : 1
 - Explorer --> System --> Datentests : 15
-- Explorer --> System --> Datenprobleme : 68
+- Explorer --> System --> Datenprobleme : 64
 - Explorer --> Eigenschaften --> Eigenschaften : 24
 - Explorer --> Büro --> Uploads : 12
 - Explorer --> Büro --> Upload-Bereiche : 1
@@ -907,9 +908,9 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Büro --> Auszüge : 68
 - Explorer --> Büro --> Ereignisse/Notizen : 112
 - Explorer --> Büro --> Einfügetexte : 3
-- Explorer --> Kalender --> Kalendereinträge : 349
+- Explorer --> Kalender --> Kalendereinträge : 301
 - Explorer --> Kalender --> Aufgaben : 36
-- Explorer --> Kalender --> Anwesenheiten : 643
+- Explorer --> Kalender --> Anwesenheiten : 623
 - Explorer --> Kalender --> Abonnements : 10
 - Explorer --> Kalender --> Termin-Zustände : 5
 - Explorer --> Kalender --> Gast-Zustände : 9

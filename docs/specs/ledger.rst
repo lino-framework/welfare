@@ -29,7 +29,7 @@ ticket :ticket:`143` ("Nebenbuchhaltung Sozialhilfeausgaben") and
 related tickets. The code examples may contain German texts for
 practical reasons to facilitate analysis.
 
-This document is based on and extends the following specifications:
+This document extends the following specifications:
 
 - :ref:`cosi.specs.accounting`
 - :ref:`cosi.specs.ledger`
@@ -129,7 +129,7 @@ Here is the main menu for accountants:
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen
-- Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten
+- Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - Buchhaltung :
   - Rechnungseingänge : Rechnungseingänge (REG), Sammelrechnungen (SREG)
