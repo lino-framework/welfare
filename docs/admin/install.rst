@@ -14,6 +14,15 @@ From inside a code repository
 - Install Lino (the framework) as documented in
   :ref:`lino.dev.install`.
 
+- Lino Welfare requires some additional system packages (Tidy,
+  LibreOffice and UNO)::
+
+    $ sudo apt-get install -y tidy libreoffice python3-uno
+
+  And LO must be running as a server::
+    
+    $ libreoffice '--accept=socket,host=127.0.0.1,port=8100;urp;' &
+
 - Go to your :xfile:`~/repositories` directory and clone some more
   repositories::
 
