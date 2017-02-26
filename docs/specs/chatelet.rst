@@ -76,7 +76,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cal.Calendar                   cal.Calendars                   7         12
  cal.Event                      cal.OneEvent                    24        538
  cal.EventType                  cal.EventTypes                  21        11
- cal.Guest                      cal.Guests                      9         562
+ cal.Guest                      cal.Guests                      9         582
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15
@@ -825,8 +825,8 @@ Here is the output of :func:`walk_menu_items
 - Ateliers --> Ateliers d'insertion sociale : 6
 - Ateliers --> Ateliers d'Insertion socioprofessionnelle : 3
 - Ateliers --> Séries d'ateliers : 8
-- Ateliers --> Demandes d’inscription en attente : 21
-- Ateliers --> Demandes d’inscription confirmées : 21
+- Ateliers --> Demandes d’inscription en attente : 18
+- Ateliers --> Demandes d’inscription confirmées : 18
 - Nouvelles demandes --> Nouveaux bénéficiaires : 23
 - Nouvelles demandes --> Agents disponibles : 3
 - Médiation de dettes --> Bénéficiaires : 0
@@ -921,15 +921,15 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Bureau --> Text Field Templates : 3
 - Explorateur --> Calendrier --> Entrées calendrier : 290
 - Explorateur --> Calendrier --> Tâches : 35
-- Explorateur --> Calendrier --> Présences : 563
+- Explorateur --> Calendrier --> Présences : 583
 - Explorateur --> Calendrier --> Abonnements : 10
 - Explorateur --> Calendrier --> Event states : 5
 - Explorateur --> Calendrier --> Guest states : 9
 - Explorateur --> Calendrier --> Task states : 4
 - Explorateur --> Ateliers --> Tests de niveau : 1
 - Explorateur --> Ateliers --> Ateliers : 8
-- Explorateur --> Ateliers --> Inscriptions : 81
-- Explorateur --> Ateliers --> États d'inscription : 5
+- Explorateur --> Ateliers --> Inscriptions : 84
+- Explorateur --> Ateliers --> États d'inscription : 6
 - Explorateur --> CPAS --> Interventions : 91
 - Explorateur --> CPAS --> Contacts client : 15
 - Explorateur --> CPAS --> Exclusions : 1

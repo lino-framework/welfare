@@ -86,17 +86,21 @@ Kitchen (12/05/2014)
  1 (12.05.2014 08:00)
 
 >>> rt.show(rt.actors.cal.GuestsByEvent, event)
-==================== ========= =============
- Partner              Role      Actions
--------------------- --------- -------------
- Emonts Erich         Visitor   **Invited**
- Ernst Berta          Visitor   **Invited**
- Groteclaes Gregory   Visitor   **Invited**
- Jansen Jérémy        Visitor   **Invited**
- Jousten Jan          Visitor   **Invited**
- Kaivers Karl         Visitor   **Invited**
- Meier Marie-Louise   Visitor   **Invited**
-==================== ========= =============
+===================== ========= =============
+ Partner               Role      Actions
+--------------------- --------- -------------
+ Bastiaensen Laurent   Visitor   **Invited**
+ Denon Denis           Visitor   **Invited**
+ Dericum Daniel        Visitor   **Invited**
+ Emonts-Gast Erna      Visitor   **Invited**
+ Faymonville Luc       Visitor   **Invited**
+ Gernegroß Germaine    Visitor   **Invited**
+ Jacobs Jacqueline     Visitor   **Invited**
+ Jonas Josef           Visitor   **Invited**
+ Kaivers Karl          Visitor   **Invited**
+ Laschet Laura         Visitor   **Invited**
+ Radermacher Hedi      Visitor   **Invited**
+===================== ========= =============
 <BLANKLINE>
 
 
