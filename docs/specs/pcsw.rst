@@ -138,7 +138,7 @@ Coaching types
 ...    ses.show('coachings.CoachingTypes')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ================= ===================== =================== ====== ====== =====================
- Bezeichnung       Bezeichnung (fr)      Bezeichnung (de)    DSBE   GSS    Role in evaluations
+ Bezeichnung       Bezeichnung (fr)      Bezeichnung (de)    DSBE   ASD    Role in evaluations
 ----------------- --------------------- ------------------- ------ ------ ---------------------
  General           SSG                   ASD                 Nein   Ja     Kollege
  Integ             SI                    DSBE                Ja     Nein   Kollege

@@ -56,7 +56,7 @@ We are talking about the detail layout of a client, defined by
 
 >>> lh = dtl.get_layout_handle(settings.SITE.kernel.default_ui)
 >>> print(lh)
-LayoutHandle for ClientDetail on pcsw.Clients
+LayoutHandle for lino_welfare.modlib.pcsw.models.ClientDetail on lino_welfare.modlib.pcsw.models.Clients
 
 Let's get the `career` panel. It is a
 :class:`lino.modlib.extjs.elems.Panel`:
@@ -64,7 +64,7 @@ Let's get the `career` panel. It is a
 >>> # career_panel = lh.main.find_by_name('career')
 >>> career_panel = with_user_profile(ia_profile, lh.main.find_by_name, 'career')
 >>> career_panel
-<Panel career in ClientDetail on pcsw.Clients>
+<Panel career in lino_welfare.modlib.pcsw.models.ClientDetail on lino_welfare.modlib.pcsw.models.Clients>
 >>> career_panel.__class__
 <class 'lino.modlib.extjs.elems.Panel'>
 

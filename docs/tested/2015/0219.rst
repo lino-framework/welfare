@@ -102,7 +102,7 @@ been "compiled" for a given user interface, in our case
 
 >>> lh = layout.get_layout_handle(dd.plugins.extjs)
 >>> print(lh)
-LayoutHandle for InsertLayout on aids.IncomeConfirmationsByGranting
+LayoutHandle for lino.core.layouts.InsertLayout on lino_welfare.modlib.aids.models.IncomeConfirmationsByGranting
 
 >>> lh.main.__class__
 <class 'lino.modlib.extjs.elems.DetailMainPanel'>
