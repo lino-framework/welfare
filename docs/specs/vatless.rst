@@ -42,11 +42,11 @@ SREG (*Sammelrechnungen*).
 
 >>> REG = ledger.Journal.get_by_ref('REG')
 >>> REG.voucher_type.table_class
-<class 'lino_cosi.lib.vatless.ui.ProjectInvoicesByJournal'>
+lino_cosi.lib.vatless.ui.ProjectInvoicesByJournal
 
 >>> SREG = ledger.Journal.get_by_ref('SREG')
 >>> SREG.voucher_type.table_class
-<class 'lino_cosi.lib.vatless.ui.InvoicesByJournal'>
+lino_cosi.lib.vatless.ui.InvoicesByJournal
 
 The REG journal contains the following invoices:
 

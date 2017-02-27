@@ -106,21 +106,21 @@ For example:
 ...      column_names="personX content urgent address person.coachings")
 Traceback (most recent call last):
   ...
-Exception: ColumnsLayout on xcourses.PendingCourseRequests has no data element 'personX'
+Exception: lino.core.layouts.ColumnsLayout on lino_welfare.modlib.xcourses.models.PendingCourseRequests has no data element 'personX'
 
 
 >>> ses.show(xcourses.PendingCourseRequests,
 ...      column_names="person__foo content urgent address person.coachings")
 Traceback (most recent call last):
   ...
-Exception: ColumnsLayout on xcourses.PendingCourseRequests has no data element 'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))'
+Exception: lino.core.layouts.ColumnsLayout on lino_welfare.modlib.xcourses.models.PendingCourseRequests has no data element 'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))'
 
 
 >>> ses.show(xcourses.PendingCourseRequests,
 ...      column_names="person content urgent address person__foo")
 Traceback (most recent call last):
   ...
-Exception: ColumnsLayout on xcourses.PendingCourseRequests has no data element 'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))'
+Exception: lino.core.layouts.ColumnsLayout on lino_welfare.modlib.xcourses.models.PendingCourseRequests has no data element 'person__foo (Invalid RemoteField pcsw.Client.person__foo (no field foo in pcsw.Client))'
 
 >>> settings.SITE.catch_layout_exceptions = False
 >>> ses.show(xcourses.PendingCourseRequests,
@@ -141,7 +141,7 @@ but mistakenly specifying "person.first_name" instead of
 ...      column_names="person.first_name content urgent address")
 Traceback (most recent call last):
   ...
-Exception: ColumnsLayout on xcourses.PendingCourseRequests has no data element 'person.first_name'
+Exception: lino.core.layouts.ColumnsLayout on lino_welfare.modlib.xcourses.models.PendingCourseRequests has no data element 'person.first_name'
 
 And then the following example failed because Lino simply wasn't yet 
 able to render RemoteFields as rst.

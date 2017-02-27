@@ -125,7 +125,7 @@ The window itself is visible to everybody:
 >>> ui = dd.plugins.extjs
 >>> lh = rt.models.pcsw.Clients.detail_layout.get_layout_handle(ui)
 >>> lh.main
-<TabPanel main in ClientDetail on pcsw.Clients>
+<TabPanel main in lino_welfare.projects.chatelet.modlib.pcsw.models.ClientDetail on lino_welfare.modlib.pcsw.models.Clients>
 >>> lh.main.required_roles
 set([])
 
@@ -140,7 +140,8 @@ the :class:`SocialStaff
 
 >>> misc = lh['misc']
 >>> misc
-<Panel misc in ClientDetail on pcsw.Clients>
+<Panel misc in lino_welfare.projects.chatelet.modlib.pcsw.models.ClientDetail on lino_welfare.modlib.pcsw.models.Clients>
+
 >>> misc.required_roles
 set([<class 'lino_welfare.modlib.pcsw.roles.SocialStaff'>])
 
