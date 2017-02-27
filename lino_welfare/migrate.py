@@ -36,7 +36,7 @@ from django.conf import settings
 from lino.utils.dpy import Migrator, override
 from lino.core.utils import resolve_model
 from lino.api import dd, rt
-from lino_cosi.lib.sepa.utils import belgian_nban_to_iban_bic
+from lino_xl.lib.sepa.utils import belgian_nban_to_iban_bic
 from lino_xl.lib.cal.choicelists import WORKDAYS
 
 

@@ -42,11 +42,11 @@ SREG (*Sammelrechnungen*).
 
 >>> REG = ledger.Journal.get_by_ref('REG')
 >>> REG.voucher_type.table_class
-lino_cosi.lib.vatless.ui.ProjectInvoicesByJournal
+lino_xl.lib.vatless.ui.ProjectInvoicesByJournal
 
 >>> SREG = ledger.Journal.get_by_ref('SREG')
 >>> SREG.voucher_type.table_class
-lino_cosi.lib.vatless.ui.InvoicesByJournal
+lino_xl.lib.vatless.ui.InvoicesByJournal
 
 The REG journal contains the following invoices:
 
@@ -158,7 +158,7 @@ This invoice is registered, and ledger movements have been created:
 
 
 The first five movements are *cleared* because their account is not
-:attr:`clearable <lino_cosi.lib.accounts.Account.clearable>`.
+:attr:`clearable <lino_xl.lib.accounts.Account.clearable>`.
 
 >>> cost_account = rt.modules.accounts.Account.objects.get(ref="832/330/01")
 >>> cost_account.clearable

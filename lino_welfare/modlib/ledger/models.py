@@ -22,10 +22,10 @@ Database models for :mod:`lino_welfare.modlib.ledger`.
 
 from __future__ import unicode_literals
 
-from lino_cosi.lib.ledger.models import *
+from lino_xl.lib.ledger.models import *
 from lino.api import _
-from lino_cosi.lib.accounts.utils import DEBIT
-from lino_cosi.lib.ledger.choicelists import TradeTypes
+from lino_xl.lib.accounts.utils import DEBIT
+from lino_xl.lib.ledger.choicelists import TradeTypes
 
 JournalGroups.clear()
 add = JournalGroups.add_item
@@ -51,7 +51,7 @@ TradeTypes.aids.update(
     partner_account_field_label=_("Aids account"))
 
 
-from lino_cosi.lib.accounts.models import Account
+from lino_xl.lib.accounts.models import Account
 Account._meta.verbose_name = _("Budgetary article")
 Account._meta.verbose_name_plural = _("Budgetary articles")
 
@@ -60,9 +60,9 @@ def set_partner_verbose_name(m):
     fld = m._meta.get_field('partner')
     fld.verbose_name = _("Payment recipient")
 
-from lino_cosi.lib.ledger.models import Movement
+from lino_xl.lib.ledger.models import Movement
 set_partner_verbose_name(Movement)
-from lino_cosi.lib.finan.mixins import FinancialVoucherItem
+from lino_xl.lib.finan.mixins import FinancialVoucherItem
 set_partner_verbose_name(FinancialVoucherItem)
-from lino_cosi.lib.vatless.models import AccountInvoice
+from lino_xl.lib.vatless.models import AccountInvoice
 set_partner_verbose_name(AccountInvoice)

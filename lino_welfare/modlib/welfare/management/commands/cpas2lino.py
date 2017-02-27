@@ -31,8 +31,8 @@ from lino.api import rt
 
 from lino.api import dd
 
-from lino_cosi.lib.tim2lino.utils import TimLoader
-from lino_cosi.lib.sepa.utils import be2iban
+from lino_xl.lib.tim2lino.utils import TimLoader
+from lino_xl.lib.sepa.utils import be2iban
 
 User = rt.modules.users.User
 accounts = rt.modules.accounts
@@ -428,7 +428,7 @@ class TimLoader(TimLoader):
 
         # yield self.load_dbf('JNL')
 
-        # from lino_cosi.lib.vat.fixtures import euvatrates
+        # from lino_xl.lib.vat.fixtures import euvatrates
         # yield euvatrates.objects()
 
         settings.SITE.loading_from_dump = True
@@ -489,16 +489,16 @@ class Command(BaseCommand):
             raise CommandError(self.help)
 
         models = []
-        from lino_cosi.lib.ledger.choicelists import VoucherTypes
+        from lino_xl.lib.ledger.choicelists import VoucherTypes
         for vt in VoucherTypes.items():
             models.append(vt.get_items_model())
             models.append(vt.model)
 
-        # from lino_cosi.lib.ledger.mixins import VoucherItem
+        # from lino_xl.lib.ledger.mixins import VoucherItem
         # models = list(rt.models_by_base(rt.modules.ledger.Voucher))
         # models += list(rt.models_by_base(VoucherItem))
 
-        # from lino_cosi.lib.finan.mixins import (FinancialVoucher,
+        # from lino_xl.lib.finan.mixins import (FinancialVoucher,
         #                                         FinancialVoucherItem)
         # models = list(rt.models_by_base(FinancialVoucher))
         # models += list(rt.models_by_base(FinancialVoucherItem))

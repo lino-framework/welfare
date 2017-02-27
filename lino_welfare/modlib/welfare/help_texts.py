@@ -151,7 +151,7 @@ as a table."""),
     'lino_welfare.modlib.client_vouchers.models.VoucherItem' : _("""An item of an ClientVoucher."""),
     'lino_welfare.modlib.client_vouchers.ui.ClientVouchersByJournal' : _("""Shows all simple invoices of a given journal (whose
 Journal.voucher_type must be
-lino_cosi.lib.sales.models.ClientVoucher)."""),
+lino_xl.lib.sales.models.ClientVoucher)."""),
     'lino_welfare.modlib.debts.fields.PeriodsField' : _("""Used for Entry.periods and Account.periods
 (the latter holds simply the default value for the former).
 It means: for how many months the entered amount counts.
@@ -171,7 +171,7 @@ point to an instance of Group."""),
 account."""),
     'lino_welfare.modlib.debts.models.Account.type' : _("""The account type of this account.  This must
 point to an item of
-lino_cosi.lib.accounts.choicelists.AccountTypes."""),
+lino_xl.lib.accounts.choicelists.AccountTypes."""),
     'lino_welfare.modlib.debts.models.Budget' : _("""A document which expresses the financial situation of a partner at
 a given date."""),
     'lino_welfare.modlib.debts.models.Actor' : _("""An actor of a budget is a partner who is part of the household

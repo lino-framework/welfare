@@ -37,7 +37,7 @@ from lino.api import dd, rt, _, pgettext
 from lino.utils.xmlgen.html import E
 from lino import mixins
 
-from lino_cosi.lib.accounts.choicelists import AccountTypes
+from lino_xl.lib.accounts.choicelists import AccountTypes
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino.modlib.users.mixins import UserAuthored
 
@@ -108,7 +108,7 @@ class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
 
         The *account type* of this account.  This must
         point to an item of
-        :class:`lino_cosi.lib.accounts.choicelists.AccountTypes`.
+        :class:`lino_xl.lib.accounts.choicelists.AccountTypes`.
     
     """
     ref_max_length = settings.SITE.plugins.debts.ref_length
@@ -250,7 +250,7 @@ Vielleicht mit Fußnoten?"""))
 
         :types: an optional string specifying a set of one-letter
                 account type names. See :class:`AccountTypes
-                <lino_cosi.lib.accounts.choicelists.AccountTypes>`.
+                <lino_xl.lib.accounts.choicelists.AccountTypes>`.
 
         Each entry group is encapsulated as a volatile helper object
         :class:`lino_welfare.modlib.debts.ui.EntryGroup`.
@@ -274,7 +274,7 @@ Vielleicht mit Fußnoten?"""))
 
             types: an optional string specifying a set of one-letter
                    account type names. See :class: `AccountTypes
-                   <lino_cosi.lib.accounts.choicelists.AccountTypes>`.
+                   <lino_xl.lib.accounts.choicelists.AccountTypes>`.
 
         """
         if types is not None:

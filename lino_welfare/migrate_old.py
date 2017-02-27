@@ -3554,7 +3554,7 @@ valid_until to end_date.
 
         """
 
-        from lino_cosi.lib.accounts.choicelists import AccountCharts
+        from lino_xl.lib.accounts.choicelists import AccountCharts
         bv2kw = globals_dict['bv2kw']
 
         accounts_Group = rt.modules.accounts.Group

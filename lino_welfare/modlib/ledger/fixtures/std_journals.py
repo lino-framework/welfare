@@ -24,7 +24,7 @@
 from __future__ import unicode_literals
 
 from lino.api import dd, rt, _
-from lino_cosi.lib.accounts.utils import CREDIT
+from lino_xl.lib.accounts.utils import CREDIT
 
 
 def objects():

@@ -18,7 +18,7 @@
 
 """Defines a default accounts chart for social accounting.
 
-Also loads :mod:`lino_cosi.lib.ledger.fixtures.std`
+Also loads :mod:`lino_xl.lib.ledger.fixtures.std`
 and :mod:`lino_welfare.modlib.ledger.fixtures.std_journals`
 
 
@@ -55,7 +55,7 @@ current_group = None
 
 def objects():
 
-    from lino_cosi.lib.ledger.fixtures.std import objects as std_objects
+    from lino_xl.lib.ledger.fixtures.std import objects as std_objects
     yield std_objects()
 
     Group = rt.modules.accounts.Group

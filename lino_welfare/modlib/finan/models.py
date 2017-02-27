@@ -22,7 +22,7 @@ Database models for :mod:`lino_welfare.modlib.cal`.
 
 from __future__ import unicode_literals
 
-from lino_cosi.lib.finan.models import *
+from lino_xl.lib.finan.models import *
 from lino.api import _
 
 

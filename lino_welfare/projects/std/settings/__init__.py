@@ -61,7 +61,7 @@ class Site(Site):
         """
         Change the default value of certain plugin settings.
 
-        - :attr:`lino_cosi.lib.accounts.Plugin.ref_length` = 5
+        - :attr:`lino_xl.lib.accounts.Plugin.ref_length` = 5
         
         - :attr:`excerpts.responsible_user
           <lino_xl.lib.excerpts.Plugin.responsible_user>` is set to
@@ -139,7 +139,7 @@ class Site(Site):
         yield 'lino_xl.lib.extensible'
         yield 'lino_welfare.modlib.cal'
         yield 'lino_welfare.modlib.reception'
-        yield 'lino_cosi.lib.accounts'
+        yield 'lino_xl.lib.accounts'
         yield 'lino_welfare.modlib.badges'
         yield 'lino_xl.lib.boards'
 
@@ -157,11 +157,11 @@ class Site(Site):
         yield 'lino_cosi.lib.b2c'
         yield 'lino_welfare.modlib.finan'
 
-        # yield 'lino_cosi.lib.ledger'
-        yield 'lino_cosi.lib.vatless'
+        # yield 'lino_xl.lib.ledger'
+        yield 'lino_xl.lib.vatless'
         if False:  # not sure whether they make sense
             yield 'lino_welfare.modlib.client_vouchers'
-        # yield 'lino_cosi.lib.finan'
+        # yield 'lino_xl.lib.finan'
 
         yield 'lino_welfare.projects.chatelet.modlib.cv'
         yield 'lino_welfare.modlib.integ'
