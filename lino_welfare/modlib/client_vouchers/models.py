@@ -33,11 +33,11 @@ from django.utils.translation import string_concat
 
 from lino.api import dd
 
-from lino_cosi.lib.ledger.mixins import (
+from lino_xl.lib.ledger.mixins import (
     PartnerRelated, ProjectRelated, AccountVoucherItem, Matching)
-from lino_cosi.lib.ledger.models import Voucher
+from lino_xl.lib.ledger.models import Voucher
 
-from lino_cosi.lib.ledger.roles import LedgerUser
+from lino_xl.lib.ledger.roles import LedgerUser
 
 
 class ClientVoucher(Voucher, ProjectRelated):

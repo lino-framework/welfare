@@ -52,10 +52,10 @@ This project integrates several plugins into Lino Welfare which are
 also used by :ref:`cosi`: 
 
 - :mod:`lino_welfare.modlib.ledger` is a thin extension of
-  :mod:`lino_cosi.lib.ledger`,
-- :mod:`lino_cosi.lib.vatless` is for VAT-less invoices (mostly
+  :mod:`lino_xl.lib.ledger`,
+- :mod:`lino_xl.lib.vatless` is for VAT-less invoices (mostly
   incoming invoices)
-- :mod:`lino_cosi.lib.finan` is for "financial vouchers", i.e. bank
+- :mod:`lino_xl.lib.finan` is for "financial vouchers", i.e. bank
   statements, payment orders, journal entries.
   :mod:`lino_welfare.modlib.finan` extends this and adds a voucher
   type called "Disbursement orders". A disbursement order is similar
@@ -77,28 +77,28 @@ usually has *two* external partners: (1) the "beneficiary" or "client"
 to which this transaction must be assigned and (2) the actual
 recipient (or sender) of the payment.
 
-The :attr:`project_model <lino_cosi.lib.ledger.Plugin.project_model>`
+The :attr:`project_model <lino_xl.lib.ledger.Plugin.project_model>`
 of the ledger plugin is `contacts.Client`, which means that every
 ledger movement can additionally point to a *client* as the "project".
 
 The client of a transaction can be somebody else than the partner.
 
 The following models are called "client related"
-(:class:`lino_cosi.lib.ledger.mixins.ProjectRelated` (don't mix that
+(:class:`lino_xl.lib.ledger.mixins.ProjectRelated` (don't mix that
 up with :class:`lino.mixins.ProjectRelated`), i.e. can point to a
 client:
 
->>> from lino_cosi.lib.ledger.mixins import ProjectRelated
+>>> from lino_xl.lib.ledger.mixins import ProjectRelated
 >>> # from lino.mixins import ProjectRelated
 >>> for m in rt.models_by_base(ProjectRelated):
 ...     print m
-<class 'lino_cosi.lib.finan.models.BankStatementItem'>
-<class 'lino_cosi.lib.finan.models.JournalEntry'>
-<class 'lino_cosi.lib.finan.models.JournalEntryItem'>
-<class 'lino_cosi.lib.finan.models.PaymentOrderItem'>
-<class 'lino_cosi.lib.ledger.models.Movement'>
-<class 'lino_cosi.lib.vatless.models.AccountInvoice'>
-<class 'lino_cosi.lib.vatless.models.InvoiceItem'>
+<class 'lino_xl.lib.finan.models.BankStatementItem'>
+<class 'lino_xl.lib.finan.models.JournalEntry'>
+<class 'lino_xl.lib.finan.models.JournalEntryItem'>
+<class 'lino_xl.lib.finan.models.PaymentOrderItem'>
+<class 'lino_xl.lib.ledger.models.Movement'>
+<class 'lino_xl.lib.vatless.models.AccountInvoice'>
+<class 'lino_xl.lib.vatless.models.InvoiceItem'>
 
 
 .. _wilfried:
@@ -160,8 +160,8 @@ Anyway, these budgetary articles are in social sector accounting
 exactly what general accounts are in private sector accounting.
 
 The account chart is made of two models: :class:`Account
-<lino_cosi.lib.accounts.models.Account>` and :class:`Group
-<lino_cosi.lib.accounts.models.Group>`.
+<lino_xl.lib.accounts.models.Account>` and :class:`Group
+<lino_xl.lib.accounts.models.Group>`.
 
 >>> rt.show(accounts.Groups)
 ===== ======================== ===========
@@ -242,12 +242,12 @@ There are two types of invoice: those with only one project (client)
 and those with more than one projects.
 
 More about voucher types in
-:class:`lino_cosi.lib.ledger.choicelists.VoucherTypes`.
+:class:`lino_xl.lib.ledger.choicelists.VoucherTypes`.
 
 Journals
 ========
 
-A :class:`Journal <lino_cosi.lib.edger.models.Journal>` is a sequence
+A :class:`Journal <lino_xl.lib.edger.models.Journal>` is a sequence
 of numbered vouchers. All vouchers of a given journal are of same
 type, but there may be more than one journal per voucher type.  The
 demo database currently has the following journals defined:
@@ -340,7 +340,7 @@ Users can consult the movements of a given general account.
 Situation
 =========
 
-The :class:`lino_cosi.lib.ledger.ui.Situation` report is one of the
+The :class:`lino_xl.lib.ledger.ui.Situation` report is one of the
 well-known accounting documents. Since accounting in Lino Welfare is
 not complete (it is just a *Nebenbuchhaltung*), there are no debtors
 (Schuldner) and the situation is not expected to be balanced.

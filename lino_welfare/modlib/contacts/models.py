@@ -20,7 +20,7 @@
 Database models for :mod:`lino_welfare.modlib.contacts`.
 
 Lino Welfare defines a `vat_id` field on :class:`Company` but
-doesn't need :mod:`lino_cosi.lib.vat`
+doesn't need :mod:`lino_xl.lib.vat`
 
 """
 
@@ -29,10 +29,10 @@ from __future__ import unicode_literals
 from lino.api import dd, rt, _
 
 from lino_xl.lib.contacts.models import *
-# from lino_cosi.lib.contacts.models import *
+# from lino_xl.lib.contacts.models import *
 
 from lino_xl.lib.addresses.mixins import AddressOwner
-from lino_cosi.lib.vatless.mixins import PartnerDetailMixin
+from lino_xl.lib.vatless.mixins import PartnerDetailMixin
 
 
 @dd.python_2_unicode_compatible

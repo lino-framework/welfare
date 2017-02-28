@@ -16,7 +16,7 @@
 # <http://www.gnu.org/licenses/>.
 
 """
-Lino Welfare extension of :mod:`lino_cosi.lib.finan`
+Lino Welfare extension of :mod:`lino_xl.lib.finan`
 
 .. autosummary::
    :toctree:
@@ -27,7 +27,7 @@ Lino Welfare extension of :mod:`lino_cosi.lib.finan`
 
 """
 
-from lino_cosi.lib.finan import Plugin
+from lino_xl.lib.finan import Plugin
 
 
 # class Plugin(Plugin):

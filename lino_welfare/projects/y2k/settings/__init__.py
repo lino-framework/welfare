@@ -40,7 +40,7 @@ class Site(Site):
 
     def get_installed_apps(self):
         yield super(Site, self).get_installed_apps()
-        yield 'lino_cosi.lib.tim2lino'
+        yield 'lino_xl.lib.tim2lino'
 
 
 # the following line should not be active in a checked-in version

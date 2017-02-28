@@ -23,7 +23,7 @@
 # import os
 # HERE = os.path.dirname(__file__)
 
-from lino_cosi.lib.sepa.fixtures.demo import objects as lib_objects
+from lino_xl.lib.sepa.fixtures.demo import objects as lib_objects
 
 from lino.utils import Cycler
 from lino.api import dd, rt

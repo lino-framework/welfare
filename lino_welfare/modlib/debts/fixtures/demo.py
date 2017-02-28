@@ -26,7 +26,7 @@ from django.utils.translation import ugettext as _
 from lino.utils import Cycler
 from lino.api import rt
 
-from lino_cosi.lib.accounts.choicelists import AccountTypes
+from lino_xl.lib.accounts.choicelists import AccountTypes
 
 from lino_welfare.modlib.debts.roles import DebtsUser
 

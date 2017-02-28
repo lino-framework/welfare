@@ -12,7 +12,7 @@
 # along with Lino Welfare; if not, see <http://www.gnu.org/licenses/>.
 
 """
-Lino-Welfare extension of :mod:`lino_cosi.lib.sepa`
+Lino-Welfare extension of :mod:`lino_xl.lib.sepa`
 
 .. autosummary::
    :toctree:
@@ -23,7 +23,7 @@ Lino-Welfare extension of :mod:`lino_cosi.lib.sepa`
 
 """
 
-from lino_cosi.lib.sepa import Plugin
+from lino_xl.lib.sepa import Plugin
 
 
 class Plugin(Plugin):

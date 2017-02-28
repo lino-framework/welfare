@@ -40,7 +40,7 @@ Disbursment orders
 >>> AAW = ledger.Journal.get_by_ref('AAW')
 
 >>> print(AAW.voucher_type.model)
-<class 'lino_cosi.lib.finan.models.PaymentOrder'>
+<class 'lino_xl.lib.finan.models.PaymentOrder'>
 
 The AAW journal contains the following statements:
 
