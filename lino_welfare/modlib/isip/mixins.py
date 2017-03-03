@@ -33,6 +33,7 @@ from atelier.utils import AttrDict
 from lino.api import dd, rt
 from lino import mixins
 
+from lino.modlib.users.mixins import UserAuthored
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino_xl.lib.cal.mixins import EventGenerator
 from lino_xl.lib.contacts.mixins import ContactRelated
@@ -208,7 +209,7 @@ OverlappingContractsChecker.activate()
 
 
 @dd.python_2_unicode_compatible
-class ContractBase(Signers, Certifiable, EventGenerator):
+class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
     """Abstract base class for all *integration contracts* (an unofficial
     term), i.e.  :class:`isip.Contract
     <lino_welfare.modlib.isip.models.Contract>` :class:`jobs.Contract
@@ -414,27 +415,9 @@ class ContractBase(Signers, Certifiable, EventGenerator):
         super(ContractBase, self).update_owned_instance(other)
 
     def setup_auto_event(self, evt):
-        """This implements the rule that suggested evaluation events should be
-        for the *currently responsible* coach if the contract's author
-        no longer coaches that client.  This is relevant if coach
-        changes while contract is active (see :doc:`/specs/integ`).
-
-        The **currently responsible coach** is the user for which
-        there is a coaching which has :attr:`does_integ
-        <lino_welfare.modlib.pcsw.coaching.CoachingType.does_integ>`
-        set to `True`..
-
-        """
         super(ContractBase, self).setup_auto_event(evt)
-        d = evt.start_date
-        coachings = evt.owner.client.get_coachings(
-            (d, d), type__does_integ=True, user=evt.user)
-        if not coachings.exists():
-            coachings = evt.owner.client.get_coachings(
-                (d, d), type__does_integ=True)
-            if coachings.count() == 1:
-                evt.user = coachings[0].user
-
+        self.client.setup_auto_event(evt)
+    
     def update_cal_rset(self):
         return self.exam_policy
 
