@@ -53,7 +53,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 59 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, boards, welfare, sales, coachings, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, plausibility, tinymce.
-133 models:
+134 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -75,6 +75,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         12
  cal.Event                      cal.OneEvent                    24        538
+ cal.EventPolicy                cal.EventPolicies               20        6
  cal.EventType                  cal.EventTypes                  21        11
  cal.Guest                      cal.Guests                      9         582
  cal.GuestRole                  cal.GuestRoles                  5         4
@@ -101,7 +102,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  contacts.Person                contacts.Persons                31        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               3         134
+ contenttypes.ContentType       gfks.ContentTypes               3         135
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Activities              30        7
@@ -323,6 +324,7 @@ Each window layout defines a given set of fields.
 - courses.Lines.insert : name, name_nl, name_de, name_en, ref, topic, every_unit, every, event_type, description, description_nl, description_de, description_en
 - courses.Slots.detail : name, start_time, end_time
 - courses.Slots.insert : start_time, end_time, name
+- courses.StatusReport.show : body
 - courses.Topics.detail : id, name, name_nl, name_de, name_en
 - courses.Topics.insert : name, name_nl, name_de, name_en, id
 - cv.Durations.insert : id, name, name_nl, name_de, name_en
@@ -509,6 +511,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - courses.Lines.insert : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.Slots.detail : visible for admin 910
 - courses.Slots.insert : visible for admin 910
+- courses.StatusReport.show : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.Topics.detail : visible for admin 910
 - courses.Topics.insert : visible for admin 910
 - cv.Durations.insert : visible for 110 admin 910
@@ -644,7 +647,7 @@ Romain
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
   - Bureau : Types de fichiers téléchargés, Types d'extrait, Types d'observation, Types d'événements, Mes Text Field Templates
-  - Calendrier : Calendriers, Locaux, Priorités, Règles d'évènements récurrents, Rôles de participants, Types d'entrée calendrier, Remote Calendars
+  - Calendrier : Calendriers, Locaux, Priorités, Règles d'évènements récurrents, Rôles de participants, Types d'entrée calendrier, Event Policies, Remote Calendars
   - Comptabilité : Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
   - CPAS : Services, Raisons d’arrêt d'intervention, Types de contact client, Phases d'intégration, Activités, Types d'exclusion, Motifs de dispense, Types d'aide sociale, Catégories
@@ -796,7 +799,7 @@ Here is the output of :func:`walk_menu_items
 - Bureau --> Mes Observations : 10
 - Bureau --> Mes problèmes de données : 0
 - Calendrier --> Mes rendez-vous : 5
-- Calendrier --> Rendez-vous dépassés : 35
+- Calendrier --> Rendez-vous dépassés : 219
 - Calendrier --> Rendez-vous à confirmer : 2
 - Calendrier --> Mes tâches : 1
 - Calendrier --> Mes visiteurs : 1
@@ -854,6 +857,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Calendrier --> Règles d'évènements récurrents : 16
 - Configuration --> Calendrier --> Rôles de participants : 5
 - Configuration --> Calendrier --> Types d'entrée calendrier : 12
+- Configuration --> Calendrier --> Event Policies : 7
 - Configuration --> Calendrier --> Remote Calendars : 1
 - Configuration --> Comptabilité --> Groupes de comptes : 1
 - Configuration --> Comptabilité --> Comptes : 1
@@ -906,7 +910,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Contacts --> Types de parenté : 13
 - Explorateur --> Système --> Procurations : 4
 - Explorateur --> Système --> Types d'utilisateur : 15
-- Explorateur --> Système --> types de contenu : 135
+- Explorateur --> Système --> types de contenu : 136
 - Explorateur --> Système --> Notifications : 13
 - Explorateur --> Système --> Changes : 0
 - Explorateur --> Système --> All dashboard widgets : 1
@@ -919,7 +923,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Bureau --> Extraits : 70
 - Explorateur --> Bureau --> Observations : 112
 - Explorateur --> Bureau --> Text Field Templates : 3
-- Explorateur --> Calendrier --> Entrées calendrier : 290
+- Explorateur --> Calendrier --> Entrées calendrier : 487
 - Explorateur --> Calendrier --> Tâches : 35
 - Explorateur --> Calendrier --> Présences : 583
 - Explorateur --> Calendrier --> Abonnements : 10

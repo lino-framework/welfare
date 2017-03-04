@@ -435,6 +435,12 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
     def update_cal_until(self):
         return self.date_ended or self.applies_until
 
+    def update_cal_summary(self, event_type, i):
+        if event_type is not None:
+            if event_type.event_label:
+                return event_type.event_label + " " + str(i)
+        return _("Evaluation %d") % i
+
     def update_reminders(self, ar):
         rv = super(ContractBase, self).update_reminders(ar)
         au = self.update_cal_until()

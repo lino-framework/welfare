@@ -48,7 +48,7 @@ Lino Welfare:
 - cal.Event :
   - CASCADE : cal.Guest.event
 - cal.EventType :
-  - PROTECT : cal.Event.event_type, cal.RecurrentEvent.event_type, isip.ExamPolicy.event_type, system.SiteConfig.client_calendar, system.SiteConfig.default_event_type, system.SiteConfig.prompt_calendar, users.User.event_type
+  - PROTECT : cal.Event.event_type, cal.EventPolicy.event_type, cal.RecurrentEvent.event_type, isip.ExamPolicy.event_type, system.SiteConfig.client_calendar, system.SiteConfig.default_event_type, system.SiteConfig.prompt_calendar, users.User.event_type
 - cal.GuestRole :
   - PROTECT : cal.Guest.role, coachings.CoachingType.eval_guestrole, system.SiteConfig.client_guestrole, system.SiteConfig.team_guestrole, xcourses.CourseOffer.guest_role
 - cal.Priority :
