@@ -172,7 +172,7 @@ It has 4 keys:
 >>> d.record_id
 127
 >>> d.base_params
-{u'mt': 54, u'mk': 127}
+{u'mt': 55, u'mk': 127}
 
 >>> d.field_values
 {u'userHidden': 5, u'user': u'Hubert Huppertz', u'summary': u''}
@@ -195,8 +195,9 @@ javascript:Lino.extensible.CalendarPanel.grid.run(null,{ "base_params": { "prj":
 
 
 This one is shorter, so we don't need to parse it for inspecting it.
-Note that `su` (subst_user) is the id of the user whose calendar is to be displayed.
-And `prj` will become the value of the `project` field if a new event would be created.
+Note that `su` (subst_user) is the id of the user whose calendar is to
+be displayed.  And `prj` will become the value of the `project` field
+if a new event would be created.
 
 
 

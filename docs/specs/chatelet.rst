@@ -799,7 +799,7 @@ Here is the output of :func:`walk_menu_items
 - Bureau --> Mes Observations : 10
 - Bureau --> Mes problèmes de données : 0
 - Calendrier --> Mes rendez-vous : 5
-- Calendrier --> Rendez-vous dépassés : 219
+- Calendrier --> Rendez-vous dépassés : 35
 - Calendrier --> Rendez-vous à confirmer : 2
 - Calendrier --> Mes tâches : 1
 - Calendrier --> Mes visiteurs : 1
@@ -923,7 +923,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Bureau --> Extraits : 70
 - Explorateur --> Bureau --> Observations : 112
 - Explorateur --> Bureau --> Text Field Templates : 3
-- Explorateur --> Calendrier --> Entrées calendrier : 487
+- Explorateur --> Calendrier --> Entrées calendrier : 290
 - Explorateur --> Calendrier --> Tâches : 35
 - Explorateur --> Calendrier --> Présences : 583
 - Explorateur --> Calendrier --> Abonnements : 10
