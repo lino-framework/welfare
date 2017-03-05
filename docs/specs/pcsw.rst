@@ -240,12 +240,10 @@ runtime errors.
 
 >>> vfields = ('primary_coach', 'coaches', 'active_contract', 'contract_company',
 ...     'find_appointment', 'cbss_relations', 'applies_from', 'applies_until')
->>> counters = dict()
->>> for k in vfields:
-...     counters[k] = set()
+>>> counters = { k: set() for k in vfields }
 >>> for cli in pcsw.Client.objects.all():
 ...     for k in vfields:
 ...         counters[k].add(getattr(cli, k))
-
 >>> [len(counters[k]) for k in vfields]
-[5, 21, 18, 4, 1, 1, 18, 18]
+[1, 21, 18, 4, 1, 1, 18, 18]
+

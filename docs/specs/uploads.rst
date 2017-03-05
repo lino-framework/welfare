@@ -39,7 +39,7 @@ datetime.date(2014, 5, 22)
    changes, subsequent snippets need to get adapted:
 
     >>> contenttypes.ContentType.objects.get_for_model(pcsw.Client).id
-    54
+    55
 
 Configuring upload types
 ========================
@@ -223,7 +223,7 @@ It has 3 keys:
 >>> d.record_id
 8
 >>> d.base_params
-{u'mt': 54, u'type': 4, u'mk': 121}
+{u'mt': 55, u'type': 4, u'mk': 121}
 >>> print(json.dumps(d.param_values))  #doctest: +NORMALIZE_WHITESPACE
 {"userHidden": null, "upload_typeHidden": null, "end_date": null,
 "observed_eventHidden": "20", "observed_event": "Est active",
@@ -304,7 +304,7 @@ It has 3 keys:
 10
 
 >>> d.base_params
-{u'mt': 54, u'mk': 177, u'type_id': 1}
+{u'mt': 55, u'mk': 177, u'type_id': 1}
 
 >>> d.data_record.keys()
 [u'phantom', u'data', u'title']

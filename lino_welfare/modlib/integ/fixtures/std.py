@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2015 Luc Saffre
+# Copyright 2008-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -64,20 +64,12 @@ def objects():
     yield exam_policy(
         1, event_type=client_calendar, start_time="9:00",
         **dd.str2kw('name', _("Every month")))
-        # **dd.babelkw(
-        #     'name', en='every month', de=u'monatlich', fr=u"mensuel"))
     yield exam_policy(
         2, event_type=client_calendar, start_time="9:00",
         **dd.str2kw('name', _("Every 2 months")))
-        # **dd.babelkw(
-        #     'name', en='every 2 months', de=u'zweimonatlich', fr=u"bimensuel"))
     yield exam_policy(
         3, event_type=client_calendar,
         **dd.str2kw('name', _("Every 3 months")))
-        # start_time="9:00", **dd.babelkw(
-        #     'name', en='every 3 months', de=u'alle 3 Monate',
-        #     fr=u"tous les 3 mois"))
-
     exam_policy = Instantiator(
         'isip.ExamPolicy', 'every',
         every_unit=DurationUnits.weeks, **kw).build
@@ -85,9 +77,6 @@ def objects():
         2,
         event_type=client_calendar, start_time="9:00",
         **dd.str2kw('name', _("Every 2 weeks")))
-        # **dd.babelkw('name', en='every 2 weeks', de=u'zweiwöchentlich',
-        #              fr=u"hebdomadaire"))
-
     exam_policy = Instantiator(
         'isip.ExamPolicy', 'every',
         every_unit=DurationUnits.days, **kw).build

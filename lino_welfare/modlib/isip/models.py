@@ -104,7 +104,7 @@ class ExamPolicy(mixins.BabelNamed, RecurrenceSet):
     "evaluation meetings".  That is, Lino automatically suggests dates
     where the agent invites the client.
 
-    TODO: move this to :mod:`lino_welfare.modlib.integ.modules`.
+    TODO: replace this by :class:`lino_xl.lib.cal.models.EventPolicy`.
 
     """
     class Meta:
