@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2015 Luc Saffre
+# Copyright 2008-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -284,7 +284,6 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
         "users.User",
         verbose_name=_("responsible (ASD)"),
         related_name="%(app_label)s_%(class)s_set_by_user_asd",
-        #~ related_name='contracts_asd',
         blank=True, null=True)
 
     exam_policy = models.ForeignKey(
@@ -375,6 +374,11 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
         """If `user` is empty, then `user_asd` can edit this contract."""
         return self.user or self.user_asd
     
+    def set_author(self, user):
+        self.user = user
+        if self.user_asd == user:
+            self.user_asd = None
+        
     def after_ui_save(self, ar, cw):
         super(ContractBase, self).after_ui_save(ar, cw)
         self.update_reminders(ar)
