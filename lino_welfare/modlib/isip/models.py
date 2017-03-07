@@ -173,11 +173,17 @@ class ContractEndings(dd.Table):
 
 
 class ContractPartner(ContractPartnerBase):
+    """Represents a third-party external partner who participates in this
+    contract. For every partner there is a rich text field describing
+    their duties.
 
+    """
     class Meta:
         app_label = 'isip'
         verbose_name = _("Contract partner")
         verbose_name_plural = _("Contract partners")
+
+    allow_cascaded_delete = ['contract']
 
     contract = dd.ForeignKey('isip.Contract')
 
