@@ -124,7 +124,7 @@ Lino Welfare:
 - households.Type :
   - PROTECT : households.Household.type
 - isip.Contract :
-  - PROTECT : isip.ContractPartner.contract
+  - CASCADE : isip.ContractPartner.contract
 - isip.ContractEnding :
   - PROTECT : art61.Contract.ending, isip.Contract.ending, jobs.Contract.ending
 - isip.ContractType :

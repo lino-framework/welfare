@@ -208,7 +208,7 @@ We test whether Theresia is allowed to create an income confirmation.
 The page header includes a lot of scripts:
 
 >>> len(scripts)
-24
+21
 
 Here are the default values for their source URLs:
 
@@ -219,8 +219,6 @@ Here are the default values for their source URLs:
 /static/ext-3.3.1/src/locale/ext-lang-de.js
 /static/ext-3.3.1/examples/ux/statusbar/StatusBar.js
 /static/extjs/Ext.ux.form.DateTime.js
-/static/js/robust-websocket/robust-websocket.js
-/static/js/push.js/push.min.js
 /static/extensible-1.0.1/extensible-all-debug.js
 /static/extensible-1.0.1/src/locale/extensible-lang-de.js
 /static/tinymce-3.5.11/tiny_mce.js
@@ -235,7 +233,6 @@ Here are the default values for their source URLs:
 /static/ext-3.3.1/examples/ux/gridfilters/filter/NumericFilter.js
 /static/ext-3.3.1/examples/ux/gridfilters/filter/BooleanFilter.js
 /static/ext-3.3.1/examples/ux/fileuploadfield/FileUploadField.js
-(inline)
 /media/cache/js/lino_210_de.js
 (inline)
 

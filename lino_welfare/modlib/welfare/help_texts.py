@@ -288,6 +288,9 @@ field filled in."""),
 "evaluation meetings".  That is, Lino automatically suggests dates
 where the agent invites the client."""),
     'lino_welfare.modlib.isip.models.ContractEnding' : _("""A possible reason for premature termination of a contract."""),
+    'lino_welfare.modlib.isip.models.ContractPartner' : _("""Represents a third-party external partner who participates in this
+contract. For every partner there is a rich text field describing
+their duties."""),
     'lino_welfare.modlib.isip.models.Contract' : _("""An ISIP (called "PIIS" in French and "VSE" in German) is a
 convention or contract between the PCSW and a young client that
 leads to an individual coaching of the person, mostly concerning
