@@ -75,7 +75,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Büro : Upload-Arten, Auszugsarten, Notizarten, Ereignisarten, Meine Einfügetexte
-  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Terminregeln, Gastrollen, Kalendereintragsarten, Event Policies, Externe Kalender
+  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Terminregeln, Gastrollen, Kalendereintragsarten, Terminregeln, Externe Kalender
   - Buchhaltung : Kontengruppen, Haushaltsartikel, Journale, Buchungsperioden, Zahlungsbedingungen
   - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
@@ -179,7 +179,7 @@ to explicitly override the language of :meth:`show_menu
   - Orte : Länder, Orte
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
   - Büro : Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
-  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Terminregeln, Kalendereintragsarten, Event Policies, Externe Kalender
+  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Terminregeln, Kalendereintragsarten, Terminregeln, Externe Kalender
   - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
@@ -847,7 +847,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Kalender --> Periodische Terminregeln : 16
 - Konfigurierung --> Kalender --> Gastrollen : 5
 - Konfigurierung --> Kalender --> Kalendereintragsarten : 11
-- Konfigurierung --> Kalender --> Event Policies : 7
+- Konfigurierung --> Kalender --> Terminregeln : 7
 - Konfigurierung --> Kalender --> Externe Kalender : 1
 - Konfigurierung --> Buchhaltung --> Kontengruppen : 7
 - Konfigurierung --> Buchhaltung --> Haushaltsartikel : 27
