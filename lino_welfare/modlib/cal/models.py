@@ -377,8 +377,13 @@ if False:
 EventsByDay.column_names = 'start_time project summary user \
 assigned_to event_type room workflow_buttons *'
 
-EventsByController.column_names = 'when_html summary user \
-assigned_to workflow_buttons *'
+class EventsByController(EventsByController):
+    column_names = 'when_html summary user \
+    assigned_to workflow_buttons *'
+    slave_grid_format = 'grid'
+
+# EventsByController.column_names = 'when_html summary user \
+# assigned_to workflow_buttons *'
 
 
 class Task(Task):
