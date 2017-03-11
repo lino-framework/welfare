@@ -36,9 +36,9 @@ None
 Evaluation events
 =================
 
-The :class:`cal.EventsByController
-<lino.modlib.cal.models.EventsByController>` table shows the
-evaluation events which have been generated.
+The :class:`EventsByController
+<lino_xl.lib.cal.ui.EventsByController>` table shows the evaluation
+events which have been generated.
 
 >>> settings.SITE.site_config.hide_events_before = None
 
