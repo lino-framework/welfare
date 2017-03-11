@@ -68,6 +68,14 @@ class Plugin(ad.Plugin):
 
     """
 
+    def get_used_libs(self, html=None):
+        try:
+            import suds
+            version = suds.__version__
+        except ImportError:
+            version = self.site.not_found_msg
+        yield ("suds", version, "https://fedorahosted.org/suds/")
+
     def setup_main_menu(self, site, profile, m):
         mg = site.plugins.integ
         m = m.add_menu(mg.app_label, mg.verbose_name)
