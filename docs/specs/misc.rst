@@ -270,6 +270,7 @@ see it.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - accounts.Accounts.duplicate : visible for 510 admin 910
 - accounts.AccountsByGroup.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- cal.AllEvents.duplicate : visible for admin 910
 - cal.ConflictingEvents.duplicate : visible for 110 410 admin 910
 - cal.EventTypes.duplicate : visible for 110 410 admin 910
 - cal.Events.duplicate : visible for 110 410 admin 910
@@ -305,7 +306,7 @@ see it.
 - countries.PlacesByPlace.duplicate : visible for 110 210 410 800 admin 910
 - courses.ActiveCourses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.Activities.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
-- courses.AllActivities.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.AllActivities.duplicate : visible for admin 910
 - courses.BasicCourses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.ClosedCourses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.Courses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910

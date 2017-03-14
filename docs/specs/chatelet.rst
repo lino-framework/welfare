@@ -314,8 +314,10 @@ Each window layout defines a given set of fields.
 - countries.Countries.insert : isocode, inscode, name, name_nl, name_de, name_en
 - countries.Places.insert : name, name_nl, name_de, name_en, country, type, parent, zip_code, id
 - countries.Places.merge_row : merge_to, reason
-- courses.Activities.detail : line, teacher, start_date, end_date, start_time, end_time, enrolments_until, room, workflow_buttons, id, user, name, description, description_nl, description_de, description_en, max_places, max_events, max_date, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, EnrolmentsByCourse
+- courses.Activities.detail : line, teacher, start_date, end_date, start_time, end_time, room, workflow_buttons, id, user, name, description, description_nl, description_de, description_en, max_events, max_date, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, enrolments_until, max_places, confirmed, free_places, print_actions, EnrolmentsByCourse
 - courses.Activities.insert : start_date, line, teacher
+- courses.Activities.print_presence_sheet : start_date, end_date, show_remarks, show_states
+- courses.Activities.print_presence_sheet_html : start_date, end_date, show_remarks, show_states
 - courses.Enrolments.detail : request_date, user, course, pupil, remark, workflow_buttons, printed, motivation, problems
 - courses.Enrolments.insert : request_date, user, course, pupil, remark
 - courses.EnrolmentsByCourse.insert : pupil, places, option, remark, request_date, user
@@ -503,6 +505,8 @@ Each window layout is **viewable** by a given set of user profiles.
 - countries.Places.merge_row : visible for 110 210 410 800 admin 910
 - courses.Activities.detail : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.Activities.insert : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.Activities.print_presence_sheet : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.Activities.print_presence_sheet_html : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.Enrolments.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - courses.Enrolments.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - courses.EnrolmentsByCourse.insert : visible for 100 110 120 200 210 300 400 410 800 admin 910
@@ -694,7 +698,6 @@ sociales, freins. Elle peut faire des requètes CBSS.
   - CPAS : Types d'aide sociale, Catégories
 - Explorateur :
   - Contacts : Personnes de contact, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
-  - Ateliers : Ateliers
   - CPAS : Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
 - Site : à propos
 
@@ -731,6 +734,10 @@ options.
   (main) [visible for all]: **Partenaire** (partner), **Type de ménage** (type), **Chef de ménage** (head)
 - countries.Places.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
+- courses.Activities.print_presence_sheet : Presence sheet
+  (main) [visible for all]: **Période du** (start_date), **au ** (end_date), **Show remarks** (show_remarks), **Show states** (show_states)
+- courses.Activities.print_presence_sheet_html : Presence sheet (HTML)
+  (main) [visible for all]: **Période du** (start_date), **au ** (end_date), **Show remarks** (show_remarks), **Show states** (show_states)
 - newcomers.AvailableCoachesByClient.assign_coach : Attribuer
   (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Ne pas avertir les autres** (notify_silent)
 - pcsw.Clients.create_visit : Enregistrer consultation

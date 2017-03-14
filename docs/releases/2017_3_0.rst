@@ -5,7 +5,6 @@ Lino Welfare (Eupen) 2017.3.0
 Neue Features
 =============
 
-- :ticket:`1183` Deleting a user deletes all reported tickets.
 - :ticket:`874` Nouveau profile "Conseiller en sécurité".
 - :ticket:`856` Multiple profiles per user (sh. http://luc.lino-framework.org/blog/2016/0527.html#user-teams)
 - :ticket:`1214` (Verträge sichtbar für ASD)
@@ -23,12 +22,11 @@ Optimierungen
 Bugfixes
 ========
 
+- :ticket:`1183` Deleting a user deletes all reported tickets.
 - Fehlermeldungen, die beim Ausdruck Tx25 auftreten: :ticket:`739` /
   :ticket:`1161` Type not found: 'r:CourtName' (Tx25 Nr 1220 und 1221),
   :ticket:`1159` DeliveryType206 instance has no attribute 'Place'.
-
 - Manchmal funktionierte Ausdruck nach pdf nicht. Behoben.
-  
 - :ticket:`1440` (action_param_values() called without selected_rows)
 - :ticket:`1353` (TypeError: 'fse_field' is an invalid keyword argument for this function)
 - :ticket:`1303` (permission error with appy)
@@ -37,6 +35,9 @@ Bugfixes
   
 Sonstige Änderungen
 ===================
+
+- Das Feld "Verantwortlicher (DSBE)" eines Vertrags (VSE, Art 60§7)
+  heißt jetzt "Autor", denn der Autor kann auch im ASD sein.
 
 - Fundamentale Optimierungen im Handhaben von Benachrichtigungen
   ("notification framework")
