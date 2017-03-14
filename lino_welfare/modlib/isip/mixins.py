@@ -350,7 +350,9 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
 
         """If the contract's author is the client's primary coach, then set
         user_asd to None, otherwise set user_asd to the primary coach.
-        We suppose that only integration agents write contracts.
+        We no longer suppose that only integration agents write
+        contracts.
+
         """
 
         if self.client_id is not None:

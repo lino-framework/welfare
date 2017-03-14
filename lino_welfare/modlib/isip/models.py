@@ -266,9 +266,9 @@ class Contract(ContractBase):
         date_decided date_issued"""
 
 
-dd.update_field(
-    Contract, 'user',
-    verbose_name=_("Integration agent"))
+# dd.update_field(
+#     Contract, 'user',
+#     verbose_name=_("Integration agent"))
 
 
 class ContractDetail(dd.DetailLayout):
