@@ -1,17 +1,21 @@
-Releases
-========
+=============
+Release notes
+=============
 
-Release notes are now in :doc:`/changes`.
+See also :doc:`/changes`.
+
+.. toctree::
+   :maxdepth: 1
+
+   2017_3_0
 
 Older releases
 --------------
 
+
 .. toctree::
    :maxdepth: 1
    :glob:
+   :hidden:
 
-   1.0.?
-   1.0.1?
-   1.1.?
-   1.1.1?
-
+   1.*   

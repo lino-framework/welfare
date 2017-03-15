@@ -299,7 +299,7 @@ class Contract(JobSupplyment):
             'date_decided date_issued ')
 
 
-dd.update_field(Contract, 'user', verbose_name=_("responsible (IS)"))
+# dd.update_field(Contract, 'user', verbose_name=_("responsible (IS)"))
 
 
 class ContractDetail(dd.DetailLayout):

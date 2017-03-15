@@ -52,9 +52,9 @@ Kalender
 >>> for h in soup.find_all('h2'):
 ...     print(h.text.strip())
 Benutzer und ihre Klienten ⍐
+Wartende Besucher ⍐
 Meine Termine ⍐
 Meine überfälligen Termine ⍐
-Wartende Besucher ⍐
 Meine Benachrichtigungen ⍐
 
 
@@ -66,7 +66,7 @@ Meine Benachrichtigungen ⍐
 >>> for h in soup.find_all('h2'):
 ...     print(h.text.strip())
 Users with their Clients ⍐
+Waiting visitors ⍐
 My appointments ⍐
 My overdue appointments ⍐
-Waiting visitors ⍐
 My Notification messages ⍐

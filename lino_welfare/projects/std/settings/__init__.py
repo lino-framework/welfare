@@ -207,9 +207,9 @@ class Site(Site):
         if user.authenticated:
             yield self.modules.integ.UsersWithClients
             yield self.modules.reception.MyWaitingVisitors
+            yield self.modules.reception.WaitingVisitors
             yield self.modules.cal.MyEvents
             yield self.modules.cal.MyTasks
             yield self.actors.cal.MyOverdueAppointments
-            yield self.modules.reception.WaitingVisitors
             #~ yield self.modules.reception.ReceivedVisitors
             yield self.actors.notify.MyMessages

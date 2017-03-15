@@ -148,7 +148,7 @@ class Contract(JobSupplyment):
         del kw['contact_role']
         return kw
 
-dd.update_field(Contract, 'user', verbose_name=_("responsible (IS)"))
+# dd.update_field(Contract, 'user', verbose_name=_("responsible (IS)"))
 dd.update_field(Contract, 'company', blank=False, null=False)
 
 
