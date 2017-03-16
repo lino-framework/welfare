@@ -344,8 +344,6 @@ Each window layout defines a given set of fields.
 - cal.Guests.insert : event, partner, role
 - cal.RecurrentEvents.detail : name, name_fr, name_en, id, user, event_type, start_date, start_time, end_date, end_time, every_unit, every, max_events, monday, tuesday, wednesday, thursday, friday, saturday, sunday, description
 - cal.RecurrentEvents.insert : name, name_fr, name_en, start_date, end_date, every_unit, event_type
-- cal.Rooms.detail : id, name, name_fr, name_en
-- cal.Rooms.insert : id, name, name_fr, name_en
 - cal.Tasks.detail : start_date, due_date, id, workflow_buttons, summary, project, user, delegated, owner, created, modified, description
 - cal.Tasks.insert : summary, user, project
 - cal.TasksByController.insert : summary, start_date, due_date, user, delegated
@@ -533,8 +531,6 @@ Each window layout is **viewable** by a given set of user profiles.
 - cal.Guests.insert : visible for admin 910
 - cal.RecurrentEvents.detail : visible for 110 410 admin 910
 - cal.RecurrentEvents.insert : visible for 110 410 admin 910
-- cal.Rooms.detail : visible for 110 410 admin 910
-- cal.Rooms.insert : visible for 110 410 admin 910
 - cal.Tasks.detail : visible for 110 410 admin 910
 - cal.Tasks.insert : visible for 110 410 admin 910
 - cal.TasksByController.insert : visible for 100 110 120 200 300 400 410 500 510 admin 910
