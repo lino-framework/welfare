@@ -396,6 +396,7 @@ Each window layout defines a given set of fields.
 - pcsw.Clients.refuse_client : reason, remark
 - plausibility.Checkers.detail : value, text
 - plausibility.Problems.detail : user, owner, checker, id, message
+- polls.AnswerRemarks.detail : remark, response, question
 - polls.AnswerRemarks.insert : remark, response, question
 - polls.ChoiceSets.insert : name, name_nl, name_de, name_en
 - polls.Polls.detail : ref, title, workflow_buttons, details, default_choiceset, default_multiple_choices, id, user, created, modified, state
@@ -583,6 +584,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - pcsw.Clients.refuse_client : visible for 120 200 220 300 admin 910
 - plausibility.Checkers.detail : visible for admin 910
 - plausibility.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- polls.AnswerRemarks.detail : visible for 100 110 120 200 300 400 410 admin 910
 - polls.AnswerRemarks.insert : visible for 100 110 120 200 300 400 410 admin 910
 - polls.ChoiceSets.insert : visible for 110 410 admin 910
 - polls.Polls.detail : visible for 100 110 120 200 300 400 410 admin 910
