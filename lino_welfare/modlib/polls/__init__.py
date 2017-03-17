@@ -1,4 +1,4 @@
-# Copyright 2014-2016 Luc Saffre
+# Copyright 2014-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -15,8 +15,9 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""The Lino Welfare extension of :mod:`lino_xl.lib.polls`.
-This just adds one fixture.
+"""The Lino Welfare extension of :mod:`lino_xl.lib.polls`.  This just
+adds one fixture.
+
 Technical specs see :doc:`/specs/polls`.
 
 
@@ -24,7 +25,6 @@ Technical specs see :doc:`/specs/polls`.
    :toctree:
 
     fixtures.demo
-
 
 """
 
