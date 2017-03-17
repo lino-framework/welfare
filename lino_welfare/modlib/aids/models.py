@@ -128,7 +128,7 @@ class AidType(ContactRelated, ExcerptTitle):
     .. attribute:: pharmacy_type
 
         A pointer to the :class:`ClientContactType
-        <lino_welfare.modlib.pcsw.models.ClientContactType>` to be used when
+        <lino_xl.lib.coachings.models.ClientContactType>` to be used when
         selecting the pharmacy of a refund confirmation
         (:attr:`RefundConfirmation.pharmacy`).
 
@@ -842,7 +842,7 @@ class RefundConfirmation(Confirmation):
             # suggest a default pharmacy only if the client has define
             # exactly one pharmacy contact.
             qs = self.granting.get_pharmacies(
-                pcsw_clientcontact_set_by_company__client=self.client)
+                coachings_clientcontact_set_by_company__client=self.client)
             if len(qs) == 1:
                 self.pharmacy = qs[0]
             
