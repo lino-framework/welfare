@@ -292,14 +292,15 @@ class Confirmation(
         super(Confirmation, self).full_clean()
         if self.granting is None:
             return
-        gp = self.granting.get_period()
-        if self.start_date or self.end_date:
-            cp = self.get_period()
-            if not encompass(gp, cp):
-                msg = _(
-                    "Date range %(p1)s lies outside of granted "
-                    "period %(p2)s.") % dict(p2=rangefmt(gp), p1=rangefmt(cp))
-                raise ValidationError(msg)
+        if False:  # deactivated 20170318 after #1354
+            gp = self.granting.get_period()
+            if self.start_date or self.end_date:
+                cp = self.get_period()
+                if not encompass(gp, cp):
+                    msg = _(
+                        "Date range %(p1)s lies outside of granted "
+                        "period %(p2)s.") % dict(p2=rangefmt(gp), p1=rangefmt(cp))
+                    raise ValidationError(msg)
         if not self.language:
             obj = self.recipient
             if obj is None:
