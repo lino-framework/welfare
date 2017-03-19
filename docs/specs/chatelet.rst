@@ -485,9 +485,9 @@ Each window layout is **viewable** by a given set of user profiles.
 - cbss.RetrieveTIGroupsRequests.detail : visible for 100 110 120 200 210 300 400 410 admin 910
 - cbss.RetrieveTIGroupsRequests.insert : visible for 100 110 120 200 210 300 400 410 admin 910
 - changes.Changes.detail : visible for admin 910
-- coachings.ClientContactTypes.insert : visible for 110 410 admin 910
-- coachings.CoachingEndings.insert : visible for 110 410 admin 910
-- coachings.Coachings.create_visit : visible for 110 410 admin 910
+- coachings.ClientContactTypes.insert : visible for 110 210 410 admin 910
+- coachings.CoachingEndings.insert : visible for 110 210 410 admin 910
+- coachings.Coachings.create_visit : visible for 110 210 410 admin 910
 - contacts.Companies.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Companies.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Companies.merge_row : visible for 110 210 410 800 admin 910
@@ -679,7 +679,8 @@ Theresia
 
 Theresia est un agent d'accueil. Elle ne voit pas les questionnaires,
 les données de parcours, compétences professionnelles, compétences
-sociales, freins. Elle peut faire des requètes CBSS.
+sociales, freins. Elle peut faire des requètes CBSS. Elle peut
+modifier les intervention d'autres utilisateurs.
 
 
 >>> rt.login('theresia').show_menu()
@@ -687,16 +688,17 @@ sociales, freins. Elle peut faire des requètes CBSS.
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
 - Bureau : Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Extraits, Mes Observations
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis
+- CPAS : Mes Interventions
 - Intégration :
   - BCSS : Mes Requêtes IdentifyPerson, Mes Requêtes ManageAccess, Mes Requêtes Tx25
 - Ateliers : Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers
 - Configuration :
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Types de ménage
-  - CPAS : Types d'aide sociale, Catégories
+  - CPAS : Services, Raisons d’arrêt d'intervention, Types de contact client, Types d'aide sociale, Catégories
 - Explorateur :
   - Contacts : Personnes de contact, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
-  - CPAS : Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
+  - CPAS : Interventions, Contacts client, Etats bénéficiaires, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
 - Site : à propos
 
 
