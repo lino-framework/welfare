@@ -274,15 +274,16 @@ Empfangsschalter
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Ablaufende Uploads, Meine Uploads, Meine Auszüge, Meine Ereignisse/Notizen
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
+- ÖSHZ : Meine Begleitungen
 - DSBE :
   - ZDSS : Meine IdentifyPerson-Anfragen, Meine ManageAccess-Anfragen, Meine Tx25-Anfragen
 - Konfigurierung :
   - Orte : Länder, Orte
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
-  - ÖSHZ : Hilfearten, Kategorien
+  - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Hilfearten, Kategorien
 - Explorer :
   - Kontakte : Kontaktpersonen, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
-  - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - ÖSHZ : Begleitungen, Klientenkontakte, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
 
@@ -541,9 +542,9 @@ Each window layout is **viewable** by a given set of user profiles.
 - cbss.RetrieveTIGroupsRequests.detail : visible for 100 110 120 200 210 300 400 410 admin 910
 - cbss.RetrieveTIGroupsRequests.insert : visible for 100 110 120 200 210 300 400 410 admin 910
 - changes.Changes.detail : visible for admin 910
-- coachings.ClientContactTypes.insert : visible for 110 410 admin 910
-- coachings.CoachingEndings.insert : visible for 110 410 admin 910
-- coachings.Coachings.create_visit : visible for 110 410 admin 910
+- coachings.ClientContactTypes.insert : visible for 110 210 410 admin 910
+- coachings.CoachingEndings.insert : visible for 110 210 410 admin 910
+- coachings.Coachings.create_visit : visible for 110 210 410 admin 910
 - contacts.Companies.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Companies.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Companies.merge_row : visible for 110 210 410 800 admin 910

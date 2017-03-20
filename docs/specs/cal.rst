@@ -73,16 +73,16 @@ Events today
 Here is what the :class:`lino.modlib.cal.ui.EventsByDay` table gives:
 
 >>> rt.login('theresia').show(cal.EventsByDay, language='en', header_level=1)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ===========================
 Thu 22/05/2014 (22.05.2014)
 ===========================
-============ ======== =========== ================ ============= ===================== ====== ===============
+============ ======== =========== ================ ============= ===================== ====== =============================
  Start time   Client   Summary     Managed by       Assigned to   Calendar Event Type   Room   Actions
------------- -------- ----------- ---------------- ------------- --------------------- ------ ---------------
- 08:30:00              Rencontre   Mélanie Mélard                 External meeting             **Suggested**
- 13:30:00              Frühstück   Judith Jousten                 Internal meeting             **Published**
-============ ======== =========== ================ ============= ===================== ====== ===============
+------------ -------- ----------- ---------------- ------------- --------------------- ------ -----------------------------
+ 08:30:00              Rencontre   Mélanie Mélard                 External meeting             **Suggested** → [☼] [☑] [☒]
+ 13:30:00              Frühstück   Judith Jousten                 Internal meeting             **Published** → [☑] [☒] [☐]
+============ ======== =========== ================ ============= ===================== ====== =============================
 <BLANKLINE>
 
 

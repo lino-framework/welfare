@@ -300,7 +300,7 @@ see it.
 - cbss.MyRetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
 - cbss.RetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
 - cbss.RetrieveTIGroupsRequestsByPerson.duplicate : visible for 100 110 120 200 210 300 400 410 admin 910
-- coachings.CoachingEndings.duplicate : visible for 110 410 admin 910
+- coachings.CoachingEndings.duplicate : visible for 110 210 410 admin 910
 - countries.Places.duplicate : visible for 110 210 410 800 admin 910
 - countries.PlacesByCountry.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - countries.PlacesByPlace.duplicate : visible for 110 210 410 800 admin 910
@@ -351,8 +351,8 @@ see it.
 - excerpts.ExcerptsByType.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - excerpts.MyExcerpts.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - extensible.PanelEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
-- integ.CoachingEndingsByType.duplicate : visible for 110 410 admin 910
-- integ.CoachingEndingsByUser.duplicate : visible for 110 410 admin 910
+- integ.CoachingEndingsByType.duplicate : visible for 110 210 410 admin 910
+- integ.CoachingEndingsByUser.duplicate : visible for 110 210 410 admin 910
 - isip.EventsByContract.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - jobs.JobTypes.duplicate : visible for 110 410 admin 910
 - newcomers.Competences.duplicate : visible for 110 410 admin 910

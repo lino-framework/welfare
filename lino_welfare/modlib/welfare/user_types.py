@@ -34,6 +34,7 @@ from lino_xl.lib.sepa.roles import SepaUser
 from lino_xl.lib.courses.roles import CoursesUser
 from lino_xl.lib.beid.roles import BeIdUser
 from lino_welfare.modlib.cbss.roles import CBSSUser, SecurityAdvisor
+from lino_xl.lib.coachings.roles import CoachingsStaff
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 from lino_welfare.modlib.pcsw.roles import SocialStaff
 from lino_welfare.modlib.aids.roles import AidsStaff
@@ -68,7 +69,7 @@ class SiteAdmin(
 
 class ReceptionClerk(AuthorshipTaker, OfficeOperator, ContactsStaff,
                      AidsStaff, CBSSUser, BeIdUser, SepaUser,
-                     CoursesUser, ExcerptsUser):
+                     CoursesUser, ExcerptsUser, CoachingsStaff):
     """A **reception clerk** is a user who is not a *social agent* but
     receives clients and does certain administrative tasks (in Eupen
     they call them `back office
