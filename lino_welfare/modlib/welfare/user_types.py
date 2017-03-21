@@ -159,3 +159,10 @@ add('910', _("Security advisor"),              SecurityAdvisor)
 from lino_xl.lib.excerpts.models import ExcerptsByProject
 ExcerptsByProject.required_roles = login_required(
     ContactsUser, (OfficeUser, OfficeOperator))
+
+from lino.api import dd, rt
+lib = rt.models
+for m in (lib.pcsw.Client, lib.contacts.Company, lib.countries.Place):
+    #~ print repr(m)
+    m.define_action(merge_row=dd.MergeAction(
+        m, required_roles=set([ContactsStaff])))

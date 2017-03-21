@@ -175,20 +175,17 @@ def customize_sqlite(sender, **kw):
     connection_created.connect(my_callback)
 
 
-@dd.receiver(dd.pre_analyze)
-def set_merge_actions(sender, **kw):
-    #~ logger.info("20130409 %s.set_merge_actions()",__name__)
-    lib = sender.modules
-    for m in (lib.pcsw.Client, lib.contacts.Company, lib.countries.Place):
-        #~ print repr(m)
-        m.define_action(merge_row=dd.MergeAction(
-            m, required_roles=set([(SiteStaff, ContactsStaff)])))
-        #~ m.merge_row = dd.MergeAction(m)
+# moved to user_types_module    
+# @dd.receiver(dd.pre_analyze)
+# def set_merge_actions(sender, **kw):
+#     #~ logger.info("20130409 %s.set_merge_actions()",__name__)
+#     lib = sender.modules
+#     for m in (lib.pcsw.Client, lib.contacts.Company, lib.countries.Place):
+#         #~ print repr(m)
+#         m.define_action(merge_row=dd.MergeAction(
+#             m, required_roles=set([(SiteStaff, ContactsStaff)])))
+#         #~ m.merge_row = dd.MergeAction(m)
 
-    # if sender.is_installed('ledger'):
-        # for x in (lib.vatless.InvoiceItem, lib.finan.JournalEntryItem,
-        #           lib.finan.BankStatementItem, lib.finan.PaymentOrderItem):
-        #     dd.update_field(x, 'account', verbose_name=_("Budgetary article"))
 
 
 @dd.receiver(dd.post_analyze)

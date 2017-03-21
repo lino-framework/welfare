@@ -59,6 +59,9 @@ class AdminTests(BaseTestCase):
 
 class SpecsTests(TestCase):
 
+    def test_memo(self):
+        return self.run_simple_doctests('docs/specs/memo.rst')
+
     def test_coachings(self):
         return self.run_simple_doctests('docs/specs/coachings.rst')
 
