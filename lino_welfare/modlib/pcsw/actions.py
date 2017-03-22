@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2016 Luc Saffre
+# Copyright 2008-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -22,6 +22,7 @@
 
 from __future__ import unicode_literals
 from __future__ import print_function
+from builtins import str
 
 import logging
 logger = logging.getLogger(__name__)
@@ -77,7 +78,7 @@ class RefuseClient(ChangeStateAction):
 
         subject = self.done_msg.format(
             client=obj, user=ar.get_user(), state=self.target_state)
-        body = unicode(ar.action_param_values.reason)
+        body = str(ar.action_param_values.reason)
         if ar.action_param_values.remark:
             body += '\n' + ar.action_param_values.remark
         kw = dict()
@@ -152,6 +153,6 @@ class MarkClientFormer(ChangeStateAction):
             return ar.confirm(
                 ok,
                 _("This will end %(count)d coachings of %(client)s.")
-                % dict(count=qs.count(), client=unicode(obj)))
+                % dict(count=qs.count(), client=str(obj)))
 
 
