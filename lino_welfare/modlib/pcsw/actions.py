@@ -84,6 +84,7 @@ class RefuseClient(ChangeStateAction):
         kw = dict()
         kw.update(message=subject)
         kw.update(alert=_("Success"))
+        dd.logger.info("20170323 %r", kw)
         obj.emit_system_note(
             ar, subject=subject, body=body)
         mt = rt.models.notify.MessageTypes.action
