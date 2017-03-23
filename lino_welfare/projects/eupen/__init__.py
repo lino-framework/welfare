@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2016 Luc Saffre
+# Copyright 2014-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -24,8 +24,7 @@ The Lino Welfare variant used in Eupen.
 
    settings
    modlib
-   tests.test_watchtim
-   tests.test_broken_gfks
+   tests
    print_tx25
 
 """

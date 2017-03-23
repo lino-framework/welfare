@@ -18,7 +18,7 @@
 
 """
 
-  $ cd lino_welfare/projects/std
+  $ cd lino_welfare/projects/eupen
   $ python manage.py test tests.test_clients
 
 """
@@ -91,7 +91,7 @@ class QuickTest(RemoteAuthTestCase):
 
         url = "/api/pcsw/Clients/{0}?sr={0}".format(obj.pk)
         reason = "Wohnt%20noch%20in%20L%C3%BCttich.%20Wollte%20nach%20Eupen%20ziehen.%20Noch%20nicht%20zust%C3%A4ndig"
-        url += "&fv=10&fv={}g&an=refuse_client".format(reason)
+        url += "&fv=20&fv={}g&an=refuse_client".format(reason)
 
         response = self.client.get(url, REMOTE_USER='robin')
         result = self.check_json_result(
@@ -105,4 +105,8 @@ robin a class\xe9 MUSTERMANN Max (100) comme <b>Refus\xe9</b>."""
         self.assertEqual(expected, result['message'])
         self.assertEqual(Note.objects.count(), 1)
         self.assertEqual(Message.objects.count(), 1)
-
+        msg = Message.objects.all()[0]
+        expected = """\
+CPAS n'est pas compétent
+Wohnt noch in Lüttich. Wollte nach Eupen ziehen. Noch nicht zuständigg"""
+        self.assertEqual(expected, msg.body)
