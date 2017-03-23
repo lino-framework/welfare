@@ -78,13 +78,13 @@ class RefuseClient(ChangeStateAction):
 
         subject = self.done_msg.format(
             client=obj, user=ar.get_user(), state=self.target_state)
-        body = unicode(ar.action_param_values.reason)
+        body = str(ar.action_param_values.reason)
         if ar.action_param_values.remark:
             body += '\n' + ar.action_param_values.remark
         kw = dict()
         kw.update(message=subject)
         kw.update(alert=_("Success"))
-        dd.logger.info("20170323 %r", body)
+        # dd.logger.info("20170323 %r", body)
         obj.emit_system_note(
             ar, subject=subject, body=body)
         mt = rt.models.notify.MessageTypes.action
