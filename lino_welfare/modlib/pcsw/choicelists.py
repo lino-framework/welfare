@@ -23,16 +23,8 @@
 from __future__ import unicode_literals
 from __future__ import print_function
 
-import logging
-logger = logging.getLogger(__name__)
-
 from lino.modlib.system.choicelists import ObservedEvent
 from lino.api import dd, _
-
-# from .roles import SocialStaff
-
-# from lino_xl.lib.beid.choicelists import ResidenceTypes
-# from lino_xl.lib.beid.choicelists import CivilStates
 
 from lino_xl.lib.coachings.choicelists import ClientEvents
 

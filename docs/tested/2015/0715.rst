@@ -112,7 +112,6 @@ declare_vars:
 ... #doctest: +NORMALIZE_WHITESPACE
 [ general_panel934, contact_panel961, coaching_panel1189, aids_tab_panel1284, work_tab_1_panel1313, history_panel2023 ]
 
-
 I can even render the :file:`lino*.js` files (at least once):
 
 >>> class W:

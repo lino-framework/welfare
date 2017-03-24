@@ -66,7 +66,6 @@ Rolf is the local system administrator, he has a complete menu:
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
 - Berichte :
-  - System : Broken GFKs
   - Buchhaltung : Situation, Tätigkeitsbericht, Schuldner, Gläubiger
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
@@ -816,7 +815,6 @@ Here is the output of :func:`walk_menu_items
 - Erstempfang --> Verfügbare Begleiter : 3
 - Schuldnerberatung --> Klienten : 0
 - Schuldnerberatung --> Meine Budgets : 4
-- Berichte --> System --> Broken GFKs : 0
 - Berichte --> Buchhaltung --> Schuldner : 5
 - Berichte --> Buchhaltung --> Gläubiger : 10
 - Berichte --> DSBE --> Benutzer und ihre Klienten : 3

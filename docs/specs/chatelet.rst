@@ -642,7 +642,6 @@ Romain
 - Médiation de dettes : Bénéficiaires, Mes Budgets
 - Questionnaires : Mes Questionnaires, Mes Interviews
 - Rapports :
-  - Système : Broken GFKs
   - Intégration : Agents et leurs clients, Situation contrats Art 60-7, Rapport d'activité
 - Configuration :
   - Système : Paramètres du Site, Utilisateurs, Textes d'aide, Update all summary data
@@ -843,7 +842,6 @@ Here is the output of :func:`walk_menu_items
 - Médiation de dettes --> Mes Budgets : 4
 - Questionnaires --> Mes Questionnaires : 1
 - Questionnaires --> Mes Interviews : 1
-- Rapports --> Système --> Broken GFKs : 0
 - Rapports --> Intégration --> Agents et leurs clients : 3
 - Configuration --> Système --> Utilisateurs : 13
 - Configuration --> Système --> Textes d'aide : 6
