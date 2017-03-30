@@ -82,7 +82,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15
  cal.RemoteCalendar             cal.RemoteCalendars             7         0
- cal.Room                       cal.Rooms                       5         0
+ cal.Room                       cal.Rooms                       9         0
  cal.Subscription               cal.Subscriptions               4         9
  cal.Task                       cal.Tasks                       19        34
  cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     21        5
@@ -107,7 +107,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  countries.Place                countries.Places                10        78
  courses.Course                 courses.Activities              30        7
  courses.Enrolment              courses.Enrolments              15        100
- courses.Line                   courses.Lines                   21        7
+ courses.Line                   courses.Lines                   24        7
  courses.Slot                   courses.Slots                   5         0
  courses.Topic                  courses.Topics                  5         0
  cv.Duration                    cv.Durations                    5         5
@@ -287,6 +287,8 @@ Each window layout defines a given set of fields.
 - cal.Guests.insert : event, partner, role
 - cal.RecurrentEvents.detail : name, name_nl, name_de, name_en, id, user, event_type, start_date, start_time, end_date, end_time, every_unit, every, max_events, monday, tuesday, wednesday, thursday, friday, saturday, sunday, description
 - cal.RecurrentEvents.insert : name, name_nl, name_de, name_en, start_date, end_date, every_unit, event_type
+- cal.Rooms.detail : id, name, name_nl, name_de, name_en, company, contact_person, description
+- cal.Rooms.insert : id, name, name_nl, name_de, name_en, company, contact_person
 - cal.Tasks.detail : start_date, due_date, id, workflow_buttons, summary, project, user, delegated, owner, created, modified, description
 - cal.Tasks.insert : summary, user, project
 - cal.TasksByController.insert : summary, start_date, due_date, user, delegated
@@ -320,7 +322,7 @@ Each window layout defines a given set of fields.
 - courses.Enrolments.insert : request_date, user, course, pupil, remark
 - courses.EnrolmentsByCourse.insert : pupil, remark, request_date, user
 - courses.EnrolmentsByPupil.insert : course_area, course, places, option, remark, request_date, user
-- courses.Lines.detail : id, name, name_nl, name_de, name_en, ref, course_area, topic, fees_cat, fee, options_cat, body_template, event_type, guest_role, every_unit, every, description, description_nl, description_de, description_en, excerpt_title, excerpt_title_nl, excerpt_title_de, excerpt_title_en
+- courses.Lines.detail : id, name, name_nl, name_de, name_en, ref, company, contact_person, course_area, topic, fees_cat, fee, options_cat, body_template, event_type, guest_role, every_unit, every, excerpt_title, excerpt_title_nl, excerpt_title_de, excerpt_title_en, description, description_nl, description_de, description_en
 - courses.Lines.insert : name, name_nl, name_de, name_en, ref, topic, every_unit, every, event_type, description, description_nl, description_de, description_en
 - courses.Slots.detail : name, start_time, end_time
 - courses.Slots.insert : start_time, end_time, name
@@ -354,7 +356,7 @@ Each window layout defines a given set of fields.
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
 - gfks.ContentTypes.insert : id, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
-- households.HouseholdsByType.detail : type, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url
+- households.HouseholdsByType.detail : type, prefix, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url
 - households.Types.insert : name, name_nl, name_de, name_en
 - humanlinks.Links.insert : parent, type, child
 - immersion.ContractTypes.detail : id, name, name_nl, name_de, name_en, exam_policy, template, overlap_group, full_name
@@ -475,6 +477,8 @@ Each window layout is **viewable** by a given set of user profiles.
 - cal.Guests.insert : visible for admin 910
 - cal.RecurrentEvents.detail : visible for 110 410 admin 910
 - cal.RecurrentEvents.insert : visible for 110 410 admin 910
+- cal.Rooms.detail : visible for 110 410 admin 910
+- cal.Rooms.insert : visible for 110 410 admin 910
 - cal.Tasks.detail : visible for 110 410 admin 910
 - cal.Tasks.insert : visible for 110 410 admin 910
 - cal.TasksByController.insert : visible for 100 110 120 200 300 400 410 500 510 admin 910
@@ -934,7 +938,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Calendrier --> Abonnements : 10
 - Explorateur --> Calendrier --> Event states : 5
 - Explorateur --> Calendrier --> Guest states : 9
-- Explorateur --> Calendrier --> Task states : 4
+- Explorateur --> Calendrier --> Task states : 5
 - Explorateur --> Ateliers --> Tests de niveau : 1
 - Explorateur --> Ateliers --> Ateliers : 8
 - Explorateur --> Ateliers --> Inscriptions : 84

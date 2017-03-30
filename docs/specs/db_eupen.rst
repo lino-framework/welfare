@@ -47,7 +47,7 @@ Database structure
 - cal.Priority : id, name, ref, name_fr, name_en
 - cal.RecurrentEvent : id, start_date, start_time, end_date, end_time, name, user, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_events, event_type, description, name_fr, name_en
 - cal.RemoteCalendar : id, seqno, type, url_template, username, password, readonly
-- cal.Room : id, name, name_fr, name_en
+- cal.Room : id, name, company, contact_person, contact_role, description, name_fr, name_en
 - cal.Subscription : id, user, calendar, is_hidden
 - cal.Task : id, modified, created, project, start_date, start_time, user, owner_type, owner_id, summary, description, access_class, sequence, auto_type, due_date, due_time, percent, state, delegated
 - cbss.IdentifyPersonRequest : id, user, printed_by, person, sent, status, environment, ticket, request_xml, response_xml, debug_messages, info_messages, national_id, birth_date, sis_card_no, id_card_no, first_name, last_name, middle_name, gender, tolerance

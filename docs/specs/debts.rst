@@ -62,13 +62,13 @@ used in templates. For example, every actor has four attributes
 
 >>> u = attrtable(obj.get_actors(), 'header person client household')
 >>> print(u)
-=========== ======================= ======================== ====================================
+=========== ======================= ======================== ==========================================================
  header      person                  client                   household
------------ ----------------------- ------------------------ ------------------------------------
- Gemeinsam   None                    None                     Jérôme & Theresia Jeanémart-Thelen
+----------- ----------------------- ------------------------ ----------------------------------------------------------
+ Gemeinsam   None                    None                     Jérôme & Theresia Jeanémart-Thelen (Faktischer Haushalt)
  Mr.         Herr Jérôme JEANÉMART   JEANÉMART Jérôme (181)   None
  Mrs.        Frau Theresia THELEN    None                     None
-=========== ======================= ======================== ====================================
+=========== ======================= ======================== ==========================================================
 <BLANKLINE>
 
 

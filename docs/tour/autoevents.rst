@@ -107,16 +107,16 @@ command.
 
 >>> ses.show(isip.ExamPolicies)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-==================== ========================= ========================
+==================== ========================= ======================
  Designation          Designation (fr)          Designation (de)
--------------------- ------------------------- ------------------------
- Every month          Mensuel                   Every month
+-------------------- ------------------------- ----------------------
+ Every month          Mensuel                   Monatlich
  Every 2 months       Bimensuel                 Alle 2 Monate
  Every 3 months       Tous les 3 mois           Alle 3 Monate
  Every 2 weeks        Tous les 14 jours         Alle 2 Wochen
- Once after 10 days   Une fois après 10 jours   Einmalig nach 10 Tagen
+ Once after 10 days   Une fois après 10 jours   Einmal nach 10 Tagen
  Other                Autre                     Sonstige
-==================== ========================= ========================
+==================== ========================= ======================
 <BLANKLINE>
 
 
