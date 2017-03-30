@@ -77,6 +77,7 @@ from lino_xl.lib.coachings.utils import (
 
 from lino_xl.lib.coachings.choicelists import ClientEvents, ClientStates
 from lino_xl.lib.coachings.mixins import Coachable
+from lino_xl.lib.cv.mixins import BiographyOwner
 
 from .roles import SocialAgent, SocialStaff
 from .choicelists import RefusalReasons
@@ -86,8 +87,8 @@ from .actions import RefuseClient, MarkClientFormer
 
 
 @dd.python_2_unicode_compatible
-class Client(contacts.Person, BeIdCardHolder, DupableClient,
-             Coachable, Notable):
+class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
+             DupableClient, Coachable, Notable):
 
     """Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
     :class:`lino_xl.lib.beid.models.BeIdCardHolder`.
