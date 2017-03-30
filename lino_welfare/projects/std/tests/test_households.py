@@ -153,6 +153,6 @@ class BeIdTests(RemoteAuthTestCase):
         url += "&sr=116"
         response = self.client.get(url, REMOTE_USER='root')
         result = self.check_json_result(
-            response, 'message eval_js success refresh_all close_window')
+            response, 'message success refresh_all close_window')
 
 
