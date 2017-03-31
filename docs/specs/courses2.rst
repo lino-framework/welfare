@@ -51,7 +51,8 @@ Ateliers
 <BLANKLINE>
 
 >>> print(rt.actors.courses.Courses.params_layout.main)
-topic line user teacher state can_enroll:10     start_date end_date
+topic line user teacher state 
+    can_enroll:10 start_date end_date show_active
 
 >>> demo_get('robin', 'choices/courses/Courses/topic', 'count rows', 0)
 >>> demo_get('robin', 'choices/courses/Courses/teacher', 'count rows', 102)
