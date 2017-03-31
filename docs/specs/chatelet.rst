@@ -641,7 +641,7 @@ Romain
   - Mises à l'emploi art61
   - Stages d'immersion
   - BCSS : Mes Requêtes IdentifyPerson, Mes Requêtes ManageAccess, Mes Requêtes Tx25
-- Ateliers : Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers, Demandes d’inscription en attente, Demandes d’inscription confirmées
+- Ateliers :  Mes Ateliers, Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers, Demandes d’inscription en attente, Demandes d’inscription confirmées
 - Nouvelles demandes : Nouveaux bénéficiaires, Agents disponibles
 - Médiation de dettes : Bénéficiaires, Mes Budgets
 - Questionnaires : Mes Questionnaires, Mes Interviews
@@ -694,7 +694,7 @@ modifier les intervention d'autres utilisateurs.
 - CPAS : Mes Interventions
 - Intégration :
   - BCSS : Mes Requêtes IdentifyPerson, Mes Requêtes ManageAccess, Mes Requêtes Tx25
-- Ateliers : Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers
+- Ateliers :  Mes Ateliers, Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers
 - Configuration :
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Types de ménage
@@ -835,6 +835,7 @@ Here is the output of :func:`walk_menu_items
 - Intégration --> BCSS --> Mes Requêtes IdentifyPerson : 1
 - Intégration --> BCSS --> Mes Requêtes ManageAccess : 1
 - Intégration --> BCSS --> Mes Requêtes Tx25 : 1
+- Ateliers -->  Mes Ateliers : 1
 - Ateliers --> Ateliers d'insertion sociale : 6
 - Ateliers --> Ateliers d'Insertion socioprofessionnelle : 3
 - Ateliers --> Séries d'ateliers : 8

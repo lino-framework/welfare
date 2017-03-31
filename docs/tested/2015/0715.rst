@@ -98,19 +98,17 @@ Note that the Panel objects which are not visible continue to be in
 general contact coaching aids_tab work_tab_1 career languages 
 competences contracts history calendar MovementsByProject misc debts
 
-Lino filters them away only when generating the js files, py2js and
-declare_vars:
+Lino filters removes them only when generating the js files, IOW
+during :func:`lino.utils.jsgen.py2js`:
 
 >>> from lino.utils.jsgen import with_user_profile
 >>> from lino.utils.jsgen import py2js, declare_vars
 >>> def f():
 ...     print(py2js(lh.main.elements))
-...     for ln in declare_vars(lh.main):
-...         if ln.startswith("var career"):
-...             print(ln)
 >>> with_user_profile(theresia.profile, f)
 ... #doctest: +NORMALIZE_WHITESPACE
-[ general_panel934, contact_panel961, coaching_panel1189, aids_tab_panel1284, work_tab_1_panel1313, history_panel2023 ]
+[ general_panel940, contact_panel967, coaching_panel1195, aids_tab_panel1290, work_tab_1_panel1319, history_panel2029 ]
+
 
 I can even render the :file:`lino*.js` files (at least once):
 
