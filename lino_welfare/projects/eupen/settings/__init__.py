@@ -67,7 +67,7 @@ class Site(Site):
     # def get_dashboard_items(self, user):
     #     yield self.modules.integ.UsersWithClients
     #     yield self.modules.reception.MyWaitingVisitors
-    #     yield self.modules.cal.MyEvents
+    #     yield self.modules.cal.MyEntries
     #     yield self.modules.cal.MyTasks
     #     yield self.modules.reception.WaitingVisitors
     #     #~ yield self.modules.reception.ReceivedVisitors

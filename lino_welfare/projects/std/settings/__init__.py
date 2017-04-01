@@ -89,7 +89,7 @@ class Site(Site):
         tb.add_action(self.modules.integ.Clients)
         tb.add_action(self.modules.isip.MyContracts)
         tb.add_action(self.modules.jobs.MyContracts)
-        tb.add_action(self.modules.cal.EventsByDay)
+        tb.add_action(self.modules.cal.EntriesByDay)
 
     def get_installed_apps(self):
         yield super(Site, self).get_installed_apps()
@@ -174,7 +174,7 @@ class Site(Site):
 
         - :class:`lino_welfare.modlib.integ.models.UsersWithClients`
         - :class:`lino_welfare.modlib.reception.models.MyWaitingVisitors`
-        - :class:`lino_xl.lib.cal.models.MyEvents`
+        - :class:`lino_xl.lib.cal.models.MyEntries`
         - :class:`lino_xl.lib.cal.models.MyTasks`
         - ...
 
@@ -184,7 +184,7 @@ class Site(Site):
             yield self.modules.integ.UsersWithClients
             yield self.modules.reception.MyWaitingVisitors
             yield self.modules.reception.WaitingVisitors
-            yield self.modules.cal.MyEvents
+            yield self.modules.cal.MyEntries
             yield self.modules.cal.MyTasks
             yield self.actors.cal.MyOverdueAppointments
             #~ yield self.modules.reception.ReceivedVisitors

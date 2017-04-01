@@ -26,7 +26,7 @@ See also :ref:`book.specs.cal`.
 Lifecycle of a calendar event
 =============================
 
->>> rt.show(cal.EventStates)
+>>> rt.show(cal.EntryStates)
 ====== ============ ================ ======== ======================= ======== =================== =========
  Wert   name         Text             Symbol   Teilnehmer bearbeiten   Stabil   nicht blockierend   No auto
 ------ ------------ ---------------- -------- ----------------------- -------- ------------------- ---------

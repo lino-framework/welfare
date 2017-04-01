@@ -133,7 +133,7 @@ Update Guests for Evaluation 3 (01.01.2015)...
         # print(expected)
         self.assertEqual(res['info_message'], expected)
 
-        ar = ses.spawn(cal.EventsByController, master_instance=obj)
+        ar = ses.spawn(cal.EntriesByController, master_instance=obj)
         s = ar.to_rst(column_names="start_date state")
         # print(s)
         self.assertEqual(s, """\

@@ -55,7 +55,7 @@ name to read the documentation):
     cal.AccessClasses : AccessClasses
     cal.DurationUnits : DurationUnits
     cal.EventEvents : Beobachtungskriterium
-    cal.EventStates : Termin-Zustände
+    cal.EntryStates : Termin-Zustände
     cal.GuestStates : Gast-Zustände
     cal.Recurrencies : Recurrencies
     cal.TaskStates : Aufgaben-Zustände

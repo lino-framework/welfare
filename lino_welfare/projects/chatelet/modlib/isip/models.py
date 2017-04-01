@@ -42,7 +42,7 @@ class ContractDetail(dd.DetailLayout):
     # """, label=_("Contract partners"))
 
     evaluations = dd.Panel("""
-    cal.EventsByController
+    cal.EntriesByController
     """, label=_("Evaluations"))
 
     duties = dd.Panel("""

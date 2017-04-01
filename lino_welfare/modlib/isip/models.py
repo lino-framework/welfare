@@ -277,7 +277,7 @@ class ContractDetail(dd.DetailLayout):
     study_type applies_from applies_until exam_policy language:8
     date_decided date_issued printed date_ended ending:20
     PartnersByContract
-    cal.TasksByController cal.EventsByController
+    cal.TasksByController cal.EntriesByController
     """, label=_("General"))
 
     isip = dd.Panel("""
@@ -380,7 +380,7 @@ class DelegatedTasksByContract(dd.Table):
         return kwargs
 
 
-class EventsByContract(dd.Table):
+class EntriesByContract(dd.Table):
     model = "cal.Event"
     master_key = "owner"
     column_names = "summary start_date"

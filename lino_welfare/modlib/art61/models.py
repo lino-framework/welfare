@@ -166,7 +166,7 @@ class ContractDetail(dd.DetailLayout):
     """
 
     right = """
-    cal.EventsByController
+    cal.EntriesByController
     cal.TasksByController
     """
 
