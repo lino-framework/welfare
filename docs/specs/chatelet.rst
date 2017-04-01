@@ -274,11 +274,11 @@ Each window layout defines a given set of fields.
 - boards.Boards.insert : name, name_nl, name_de, name_en
 - cal.Calendars.detail : name, name_nl, name_de, name_en, color, id, description
 - cal.Calendars.insert : name, name_nl, name_de, name_en, color
+- cal.EntriesByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
 - cal.EventTypes.detail : name, name_nl, name_de, name_en, event_label, event_label_nl, event_label_de, event_label_en, max_conflicting, max_days, esf_field, email_template, id, all_rooms, locks_user, invite_client, is_appointment, attach_to_email
 - cal.EventTypes.insert : name, name_nl, name_de, name_en, invite_client
 - cal.Events.detail : event_type, summary, project, start_date, start_time, end_date, end_time, user, assigned_to, room, priority, access_class, transparent, owner, workflow_buttons, description, id, created, modified, state
 - cal.Events.insert : summary, start_date, start_time, end_date, end_time, event_type, project
-- cal.EventsByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
 - cal.GuestRoles.insert : id, name, name_nl, name_de, name_en
 - cal.GuestStates.wf1 : notify_subject, notify_body, notify_silent
 - cal.GuestStates.wf2 : notify_subject, notify_body, notify_silent
@@ -464,11 +464,11 @@ Each window layout is **viewable** by a given set of user profiles.
 - boards.Boards.insert : visible for admin 910
 - cal.Calendars.detail : visible for 110 410 admin 910
 - cal.Calendars.insert : visible for 110 410 admin 910
+- cal.EntriesByClient.insert : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.EventTypes.detail : visible for 110 410 admin 910
 - cal.EventTypes.insert : visible for 110 410 admin 910
 - cal.Events.detail : visible for 110 410 admin 910
 - cal.Events.insert : visible for 110 410 admin 910
-- cal.EventsByClient.insert : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.GuestRoles.insert : visible for admin 910
 - cal.GuestStates.wf1 : visible for admin 910
 - cal.GuestStates.wf2 : visible for admin 910
@@ -641,7 +641,7 @@ Romain
   - Mises à l'emploi art61
   - Stages d'immersion
   - BCSS : Mes Requêtes IdentifyPerson, Mes Requêtes ManageAccess, Mes Requêtes Tx25
-- Ateliers :  Mes Ateliers, Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers, Demandes d’inscription en attente, Demandes d’inscription confirmées
+- Ateliers : Mes Ateliers, Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers, Demandes d’inscription en attente, Demandes d’inscription confirmées
 - Nouvelles demandes : Nouveaux bénéficiaires, Agents disponibles
 - Médiation de dettes : Bénéficiaires, Mes Budgets
 - Questionnaires : Mes Questionnaires, Mes Interviews
@@ -652,7 +652,7 @@ Romain
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
   - Bureau : Types de fichiers téléchargés, Types d'extrait, Types d'observation, Types d'événements, Mes Text Field Templates
-  - Calendrier : Calendriers, Locaux, Priorités, Règles d'évènements récurrents, Rôles de participants, Types d'entrée calendrier, Event Policies, Remote Calendars
+  - Calendrier : Calendriers, Locaux, Priorités, Évènements periodiques, Rôles de participants, Types d'entrée calendrier, Règles de récurrence, Calendriers externes
   - Comptabilité : Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
   - CPAS : Services, Raisons d’arrêt d'intervention, Types de contact client, Phases d'intégration, Activités, Types d'exclusion, Motifs de dispense, Types d'aide sociale, Catégories
@@ -737,9 +737,9 @@ options.
   (main) [visible for all]: **Partenaire** (partner), **Type de ménage** (type), **Chef de ménage** (head)
 - countries.Places.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
-- courses.Activities.print_presence_sheet : Presence sheet
+- courses.Activities.print_presence_sheet : Fiche de présences
   (main) [visible for all]: **Période du** (start_date), **au ** (end_date), **Show remarks** (show_remarks), **Show states** (show_states)
-- courses.Activities.print_presence_sheet_html : Presence sheet (HTML)
+- courses.Activities.print_presence_sheet_html : Fiche de présences (HTML)
   (main) [visible for all]: **Période du** (start_date), **au ** (end_date), **Show remarks** (show_remarks), **Show states** (show_states)
 - newcomers.AvailableCoachesByClient.assign_coach : Attribuer
   (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Ne pas avertir les autres** (notify_silent)
@@ -835,7 +835,7 @@ Here is the output of :func:`walk_menu_items
 - Intégration --> BCSS --> Mes Requêtes IdentifyPerson : 1
 - Intégration --> BCSS --> Mes Requêtes ManageAccess : 1
 - Intégration --> BCSS --> Mes Requêtes Tx25 : 1
-- Ateliers -->  Mes Ateliers : 1
+- Ateliers --> Mes Ateliers : 1
 - Ateliers --> Ateliers d'insertion sociale : 6
 - Ateliers --> Ateliers d'Insertion socioprofessionnelle : 3
 - Ateliers --> Séries d'ateliers : 8
@@ -864,11 +864,11 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Calendrier --> Calendriers : 13
 - Configuration --> Calendrier --> Locaux : 1
 - Configuration --> Calendrier --> Priorités : 5
-- Configuration --> Calendrier --> Règles d'évènements récurrents : 16
+- Configuration --> Calendrier --> Évènements periodiques : 16
 - Configuration --> Calendrier --> Rôles de participants : 5
 - Configuration --> Calendrier --> Types d'entrée calendrier : 12
-- Configuration --> Calendrier --> Event Policies : 7
-- Configuration --> Calendrier --> Remote Calendars : 1
+- Configuration --> Calendrier --> Règles de récurrence : 7
+- Configuration --> Calendrier --> Calendriers externes : 1
 - Configuration --> Comptabilité --> Groupes de comptes : 1
 - Configuration --> Comptabilité --> Comptes : 1
 - Configuration --> Ateliers --> Savoirs de base : 1

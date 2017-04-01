@@ -54,8 +54,8 @@ name to read the documentation):
     beid.ResidenceTypes : Residence types
     cal.AccessClasses : AccessClasses
     cal.DurationUnits : DurationUnits
-    cal.EventEvents : Beobachtungskriterium
     cal.EntryStates : Termin-Zustände
+    cal.EventEvents : Beobachtungskriterium
     cal.GuestStates : Gast-Zustände
     cal.Recurrencies : Recurrencies
     cal.TaskStates : Aufgaben-Zustände

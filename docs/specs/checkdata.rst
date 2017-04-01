@@ -37,10 +37,10 @@ checkers.
  printing.CachedPrintableChecker         Check for missing target files
  countries.PlaceChecker                  Check plausibility of geographical places.
  addresses.AddressOwnerChecker           Check for missing or non-primary address records
- cal.EventGuestChecker                   Events without participants
- cal.ConflictingEventsChecker            Check for conflicting events
- cal.ObsoleteEventTypeChecker            Obsolete event type of generated events
- cal.LongEventChecker                    Too long-lasting events
+ cal.EventGuestChecker                   Entries without participants
+ cal.ConflictingEventsChecker            Check for conflicting calendar entries
+ cal.ObsoleteEventTypeChecker            Obsolete event type of generated entries
+ cal.LongEntryChecker                    Too long-lasting calendar entries
  mixins.DupableChecker                   Check for missing phonetic words
  beid.BeIdCardHolderChecker              Check for invalid SSINs
  pcsw.SSINChecker                        Check for valid identification
@@ -67,14 +67,14 @@ System --> Plausibility problems` to see them.
 
 >>> rt.show(plausibility.AllProblems)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-================== =========================================== ============================================================== ================================
+================== =========================================== ============================================================== ========================================
  Responsible        Controlled by                               Message                                                        Plausibility checker
------------------- ------------------------------------------- -------------------------------------------------------------- --------------------------------
- Robin Rood         *Ascension of Jesus (29.05.2014)*           Event conflicts with Consultation (29.05.2014 08:30).          Check for conflicting events
- Robin Rood         *Pentecost (09.06.2014)*                    Event conflicts with 2 other events.                           Check for conflicting events
- Patrick Paraneau   *Consultation (29.05.2014 08:30)*           Event conflicts with Ascension of Jesus (29.05.2014).          Check for conflicting events
- Judith Jousten     *Breakfast (09.06.2014 09:40)*              Event conflicts with Pentecost (09.06.2014).                   Check for conflicting events
- Mélanie Mélard     *Rencontre (09.06.2014 10:20)*              Event conflicts with Pentecost (09.06.2014).                   Check for conflicting events
+------------------ ------------------------------------------- -------------------------------------------------------------- ----------------------------------------
+ Robin Rood         *Ascension of Jesus (29.05.2014)*           Event conflicts with Consultation (29.05.2014 08:30).          Check for conflicting calendar entries
+ Robin Rood         *Pentecost (09.06.2014)*                    Event conflicts with 2 other events.                           Check for conflicting calendar entries
+ Patrick Paraneau   *Consultation (29.05.2014 08:30)*           Event conflicts with Ascension of Jesus (29.05.2014).          Check for conflicting calendar entries
+ Judith Jousten     *Breakfast (09.06.2014 09:40)*              Event conflicts with Pentecost (09.06.2014).                   Check for conflicting calendar entries
+ Mélanie Mélard     *Rencontre (09.06.2014 10:20)*              Event conflicts with Pentecost (09.06.2014).                   Check for conflicting calendar entries
  Caroline Carnol    *AUSDEMWALD Alfons (116)*                   Neither valid eId data nor alternative identifying document.   Check for valid identification
                     *BASTIAENSEN Laurent (117)*                 Neither valid eId data nor alternative identifying document.   Check for valid identification
  Hubert Huppertz    *COLLARD Charlotte (118)*                   Neither valid eId data nor alternative identifying document.   Check for valid identification
@@ -135,7 +135,7 @@ System --> Plausibility problems` to see them.
                     *KASENNOVA Tatjana (213)*                   Neither valid eId data nor alternative identifying document.   Check for valid identification
                     *FRISCH Paul (240)*                         Neither valid eId data nor alternative identifying document.   Check for valid identification
                     *BRAUN Bruno (259)*                         Neither valid eId data nor alternative identifying document.   Check for valid identification
-================== =========================================== ============================================================== ================================
+================== =========================================== ============================================================== ========================================
 <BLANKLINE>
 
 
@@ -175,10 +175,10 @@ assigned to you.
 
 >>> rt.login('melanie').show(plausibility.MyProblems)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-================ ====================================================== ============================================================== ================================
+================ ====================================================== ============================================================== ========================================
  Responsible      Controlled by                                          Message                                                        Plausibility checker
----------------- ------------------------------------------------------ -------------------------------------------------------------- --------------------------------
- Mélanie Mélard   `Rencontre (09.06.2014 10:20) <Detail>`__              Event conflicts with Pentecost (09.06.2014).                   Check for conflicting events
+---------------- ------------------------------------------------------ -------------------------------------------------------------- ----------------------------------------
+ Mélanie Mélard   `Rencontre (09.06.2014 10:20) <Detail>`__              Event conflicts with Pentecost (09.06.2014).                   Check for conflicting calendar entries
  Mélanie Mélard   `DOBBELSTEIN-DEMEULENAERE Dorothée (123) <Detail>`__   Similar clients: DEMEULENAERE Dorothée (122)                   Check for similar clients
  Mélanie Mélard   `DOBBELSTEIN Dorothée (124) <Detail>`__                Similar clients: DOBBELSTEIN-DEMEULENAERE Dorothée (123)       Check for similar clients
  Mélanie Mélard   `DOBBELSTEIN Dorothée (124) <Detail>`__                Neither valid eId data nor alternative identifying document.   Check for valid identification
@@ -196,5 +196,5 @@ assigned to you.
  Mélanie Mélard   `RADERMECKER Rik (173) <Detail>`__                     Neither valid eId data nor alternative identifying document.   Check for valid identification
  Mélanie Mélard   `DENON Denis (180*) <Detail>`__                        Both coached and obsolete.                                     Check coachings
  Mélanie Mélard   `DENON Denis (180*) <Detail>`__                        Neither valid eId data nor alternative identifying document.   Check for valid identification
-================ ====================================================== ============================================================== ================================
+================ ====================================================== ============================================================== ========================================
 <BLANKLINE>

@@ -68,8 +68,8 @@ No data to display
 >>> print(course)
 Kitchen (12/05/2014)
 
->>> # rt.show(rt.actors.cal.EventsByController, course)
->>> ar = rt.actors.cal.EventsByController.request(master_instance=course)
+>>> # rt.show(rt.actors.cal.EntriesByController, course)
+>>> ar = rt.actors.cal.EntriesByController.request(master_instance=course)
 >>> rt.show(ar)
 ============================ ========= ================= ============= ===============
  When                         Summary   Managed by        Assigned to   Actions
