@@ -26,7 +26,7 @@ See also :ref:`book.specs.cal`.
 Lifecycle of a calendar event
 =============================
 
->>> rt.show(cal.EventStates)
+>>> rt.show(cal.EntryStates)
 ====== ============ ================ ======== ======================= ======== =================== =========
  Wert   name         Text             Symbol   Teilnehmer bearbeiten   Stabil   nicht blockierend   No auto
 ------ ------------ ---------------- -------- ----------------------- -------- ------------------- ---------
@@ -70,15 +70,15 @@ users.UserTypes:910 Security advisor
 Events today
 ============
 
-Here is what the :class:`lino.modlib.cal.ui.EventsByDay` table gives:
+Here is what the :class:`lino.modlib.cal.ui.EntriesByDay` table gives:
 
->>> rt.login('theresia').show(cal.EventsByDay, language='en', header_level=1)
+>>> rt.login('theresia').show(cal.EntriesByDay, language='en', header_level=1)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ===========================
 Thu 22/05/2014 (22.05.2014)
 ===========================
 ============ ======== =========== ================ ============= ===================== ====== =============================
- Start time   Client   Summary     Managed by       Assigned to   Calendar Event Type   Room   Actions
+ Start time   Client   Summary     Managed by       Assigned to   Calendar entry type   Room   Actions
 ------------ -------- ----------- ---------------- ------------- --------------------- ------ -----------------------------
  08:30:00              Rencontre   Mélanie Mélard                 External meeting             **Suggested** → [☼] [☑] [☒]
  13:30:00              Frühstück   Judith Jousten                 Internal meeting             **Published** → [☑] [☒] [☐]
@@ -96,10 +96,10 @@ appointments of the user who requests it.
 
 Here is what it says for Alicia.
 
->>> rt.login('alicia').show(cal.MyEvents, language='en')
+>>> rt.login('alicia').show(cal.MyEntries, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ====================================== ========================= ======================= ============== =============================
- When                                   Client                    Calendar Event Type     Summary        Actions
+ When                                   Client                    Calendar entry type     Summary        Actions
 -------------------------------------- ------------------------- ----------------------- -------------- -----------------------------
  `Mon 26/05/2014 at 09:40 <Detail>`__   JANSEN Jérémy (136)       Informational meeting   Diner          **Draft** → [☼] [☒]
  `Sun 01/06/2014 at 08:30 <Detail>`__                             Internal meeting        Diner          **Suggested** → [☼] [☒]
@@ -123,10 +123,10 @@ Here is what it says for Alicia.
 
 These are for Hubert:
 
->>> rt.login('hubert').show(cal.MyEvents, language='en')
+>>> rt.login('hubert').show(cal.MyEntries, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ====================================== ======================== ===================== =============== =============================
- When                                   Client                   Calendar Event Type   Summary         Actions
+ When                                   Client                   Calendar entry type   Summary         Actions
 -------------------------------------- ------------------------ --------------------- --------------- -----------------------------
  `Tue 27/05/2014 at 10:20 <Detail>`__                            Internal meeting      Abendessen      **Took place** → [☐]
  `Wed 28/05/2014 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Évaluation 15   [▽] **Suggested** → [☼] [☒]
@@ -169,10 +169,10 @@ These are for Hubert:
 
 And these for Mélanie:
 
->>> rt.login('melanie').show(cal.MyEvents, language='en')
+>>> rt.login('melanie').show(cal.MyEntries, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ====================================== ============================= ===================== =============== =============================
- When                                   Client                        Calendar Event Type   Summary         Actions
+ When                                   Client                        Calendar entry type   Summary         Actions
 -------------------------------------- ----------------------------- --------------------- --------------- -----------------------------
  `Thu 22/05/2014 at 08:30 <Detail>`__                                 External meeting      Rencontre       **Suggested** → [☼] [☑] [☒]
  `Mon 26/05/2014 at 09:00 <Detail>`__   ENGELS Edgar (129)            Evaluation            Évaluation 3    [▽] **Suggested** → [☼] [☒]
@@ -246,10 +246,10 @@ And these for Mélanie:
 These are Alicia's calendar appointments of the last two months:
 
 >>> pv = dict(start_date=dd.today(-15), end_date=dd.today(-1))
->>> rt.login('alicia').show(cal.MyEvents, language='en',
+>>> rt.login('alicia').show(cal.MyEntries, language='en',
 ...     param_values=pv)
 ====================================== ========================== ===================== =============== =============================
- When                                   Client                     Calendar Event Type   Summary         Actions
+ When                                   Client                     Calendar entry type   Summary         Actions
 -------------------------------------- -------------------------- --------------------- --------------- -----------------------------
  `Wed 07/05/2014 at 09:00 <Detail>`__   DA VINCI David (165)       Evaluation            Évaluation 15   [▽] **Suggested** → [☑] [☒]
  `Thu 08/05/2014 at 13:30 <Detail>`__   DERICUM Daniel (121)       Appointment           Diner           **Published** → [☑] [☒] [☐]
@@ -267,7 +267,7 @@ Overdue appointments
 >>> rt.login('alicia').show(cal.MyOverdueAppointments, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 =============================================== ========================== ============================================================ ===================== =============================
- overview                                        Client                     Controlled by                                                Calendar Event Type   Actions
+ overview                                        Client                     Controlled by                                                Calendar entry type   Actions
 ----------------------------------------------- -------------------------- ------------------------------------------------------------ --------------------- -----------------------------
  `Évaluation 15 (07.04.2014 09:00) <Detail>`__   RADERMACHER Alfons (153)   `ISIP#17 (Alfons RADERMACHER) <Detail>`__                    Evaluation            [▽] **Suggested** → [☑] [☒]
  `Évaluation 14 (07.04.2014 09:00) <Detail>`__   DA VINCI David (165)       `ISIP#22 (David DA VINCI) <Detail>`__                        Evaluation            [▽] **Suggested** → [☑] [☒]
@@ -342,7 +342,7 @@ also those where this client is among the guests.
 
 
 >>> obj = pcsw.Client.objects.get(id=130)
->>> rt.show(cal.EventsByClient, obj, header_level=1,
+>>> rt.show(cal.EntriesByClient, obj, header_level=1,
 ...     language="en", column_names="when_text user summary project")
 ...     #doctest: +SKIP
 ====================================================================
@@ -366,7 +366,7 @@ Events generated by a contract
 
 >>> settings.SITE.site_config.hide_events_before = None
 >>> obj = isip.Contract.objects.get(id=18)
->>> rt.show(cal.EventsByController, obj, header_level=1, language="en")
+>>> rt.show(cal.EntriesByController, obj, header_level=1, language="en")
 ================================================
 Calendar entries of ISIP#18 (Edgard RADERMACHER)
 ================================================

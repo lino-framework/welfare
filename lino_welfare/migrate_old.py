@@ -1187,17 +1187,17 @@ def migrate_from_1_4_3(globals_dict):
     globals_dict.update(create_mails_recipient=create_mails_recipient)
 
     cal_Event = resolve_model("cal.Event")
-    from lino_xl.lib.cal.utils import EventStates, TaskState, GuestState
+    from lino_xl.lib.cal.utils import EntryStates, TaskState, GuestState
     new_content_type_id = globals_dict['new_content_type_id']
 
     def create_cal_event(id, user_id, created, modified, owner_type_id, owner_id, project_id, build_time, calendar_id, uid, start_date, start_time, summary, description, access_class_id, sequence, auto_type, user_modified, rset_id, end_date, end_time, transparent, type_id, place_id, priority_id, status_id):
         owner_type_id = new_content_type_id(owner_type_id)
-        state = EventStates.migrate(status_id)
+        state = EntryStates.migrate(status_id)
         if state is None:
             if start_date < datetime.date.today():
-                state = EventStates.obsolete
+                state = EntryStates.obsolete
             elif user_modified:
-                state = EventStates.draft
+                state = EntryStates.draft
         calendar_id = type_id or 2
         return cal_Event(
             id=id, user_id=user_id, created=created, modified=modified, owner_type_id=owner_type_id, owner_id=owner_id, project_id=project_id, build_time=build_time, calendar_id=calendar_id, uid=uid, start_date=start_date, start_time=start_time, summary=summary, description=description,
@@ -1791,7 +1791,7 @@ class Migrator(Migrator):
         def create_cal_event(id, owner_type_id, owner_id, user_id, created, modified, project_id, build_time, start_date, start_time, end_date, end_time, uid, summary, description, calendar_id, access_class, sequence, auto_type, transparent, place_id, priority_id, state):
             owner_type_id = new_content_type_id(owner_type_id)
             if not state:
-                state = cal.EventStates.new
+                state = cal.EntryStates.new
             return cal_Event(id=id, owner_type_id=owner_type_id, owner_id=owner_id, user_id=user_id, created=created, modified=modified, project_id=project_id, build_time=build_time, start_date=start_date, start_time=start_time, end_date=end_date, end_time=end_time, uid=uid, summary=summary, description=description, calendar_id=calendar_id, access_class=access_class, sequence=sequence, auto_type=auto_type, transparent=transparent, place_id=place_id, priority_id=priority_id, state=state)
         globals_dict.update(create_cal_event=create_cal_event)
 
@@ -2293,7 +2293,7 @@ class Migrator(Migrator):
     def migrate_from_1_1_7(self, globals_dict):
         """
         - in isip.ExamPolicy, renamed field `max_occurences` to `max_events`
-        - cal.EventStates : "notified" becomes "draft", "absent" becomes "cancelled"
+        - cal.EntryStates : "notified" becomes "draft", "absent" becomes "cancelled"
         - renamed app "ui" to "system"
         - in `cal.Room` removed fields `company` and `company_contact`
         """
@@ -2325,10 +2325,10 @@ class Migrator(Migrator):
             return isip_ExamPolicy(**kw)
         globals_dict.update(create_isip_exampolicy=create_isip_exampolicy)
 
-        from lino_xl.lib.cal.models import EventStates
+        from lino_xl.lib.cal.models import EntryStates
         old2new = {
-            '30': EventStates.draft.value,
-            '80': EventStates.cancelled.value,
+            '30': EntryStates.draft.value,
+            '80': EntryStates.cancelled.value,
         }
         cal_Event = resolve_model("cal.Event")
 
@@ -2426,10 +2426,10 @@ class Migrator(Migrator):
             return None
         globals_dict.update(create_postings_posting=create_postings_posting)
 
-        from lino_xl.lib.cal.models import EventStates
+        from lino_xl.lib.cal.models import EntryStates
         old2new = {
-            '60': EventStates.cancelled.value,
-            '30': EventStates.took_place.value,
+            '60': EntryStates.cancelled.value,
+            '30': EntryStates.took_place.value,
         }
         cal_Event = resolve_model("cal.Event")
         new_content_type_id = globals_dict.get('new_content_type_id')

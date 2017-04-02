@@ -64,11 +64,11 @@ Contracts
 
 
 This contract has a slave table 
-:class:`EventsByContract<lino_welfare.modlib.isip.models.EventsByContract>`
+:class:`EntriesByContract<lino_welfare.modlib.isip.models.EntriesByContract>`
 which contains non-ascii characters:
 
 >>> obj = isip.Contract.objects.get(id=1)
->>> rt.show(isip.EventsByContract, obj)
+>>> rt.show(isip.EntriesByContract, obj)
 =============== ============
  Summary         Date
 --------------- ------------

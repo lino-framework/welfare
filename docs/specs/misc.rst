@@ -180,7 +180,7 @@ Yet another series of GET requests
 >>> demo_get('rolf', 'api/contacts/Persons', json_fields, 103, **kw)
 >>> demo_get('rolf', 'api/pcsw/CoachedClients', json_fields, 30, **kw)
 >>> demo_get('rolf', 'api/debts/Clients', json_fields, 0, **kw)
->>> demo_get('rolf', 'api/cal/MyEvents', json_fields, 4, **kw)
+>>> demo_get('rolf', 'api/cal/MyEntries', json_fields, 4, **kw)
 >>> demo_get('rolf', 'api/newcomers/NewClients', json_fields, 23, **kw)
 >>> demo_get(
 ...    'rolf', 'api/newcomers/AvailableCoachesByClient', json_fields,
@@ -270,24 +270,24 @@ see it.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - accounts.Accounts.duplicate : visible for 510 admin 910
 - accounts.AccountsByGroup.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- cal.AllEvents.duplicate : visible for admin 910
+- cal.AllEntries.duplicate : visible for admin 910
 - cal.ConflictingEvents.duplicate : visible for 110 410 admin 910
+- cal.EntriesByClient.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- cal.EntriesByController.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- cal.EntriesByDay.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- cal.EntriesByProject.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- cal.EntriesByRoom.duplicate : visible for 110 410 admin 910
+- cal.EntriesByType.duplicate : visible for 110 410 admin 910
 - cal.EventTypes.duplicate : visible for 110 410 admin 910
 - cal.Events.duplicate : visible for 110 410 admin 910
-- cal.EventsByClient.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
-- cal.EventsByController.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
-- cal.EventsByDay.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- cal.EventsByProject.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
-- cal.EventsByRoom.duplicate : visible for 110 410 admin 910
-- cal.EventsByType.duplicate : visible for 110 410 admin 910
 - cal.MyAssignedEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
-- cal.MyEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
-- cal.MyEventsToday.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- cal.MyEntries.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- cal.MyEntriesToday.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.MyOverdueAppointments.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.MyUnconfirmedAppointments.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.OneEvent.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - cal.OverdueAppointments.duplicate : visible for 110 410 admin 910
-- cal.PublicEvents.duplicate : visible for nobody
+- cal.PublicEntries.duplicate : visible for nobody
 - cal.RemoteCalendars.duplicate : visible for 110 410 admin 910
 - cbss.AllIdentifyPersonRequests.duplicate : visible for admin 910
 - cbss.AllManageAccessRequests.duplicate : visible for admin 910
@@ -316,7 +316,7 @@ see it.
 - courses.CoursesByTeacher.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.CoursesByTopic.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.DraftCourses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
-- courses.EventsByTeacher.duplicate : visible for 110 410 admin 910
+- courses.EntriesByTeacher.duplicate : visible for 110 410 admin 910
 - courses.InactiveCourses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.JobCourses.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.Lines.duplicate : visible for 100 110 120 200 210 300 400 410 800 admin 910
@@ -355,7 +355,7 @@ see it.
 - extensible.PanelEvents.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - integ.CoachingEndingsByType.duplicate : visible for 110 210 410 admin 910
 - integ.CoachingEndingsByUser.duplicate : visible for 110 210 410 admin 910
-- isip.EventsByContract.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- isip.EntriesByContract.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - jobs.JobTypes.duplicate : visible for 110 410 admin 910
 - newcomers.Competences.duplicate : visible for 110 410 admin 910
 - newcomers.CompetencesByFaculty.duplicate : visible for 110 410 admin 910

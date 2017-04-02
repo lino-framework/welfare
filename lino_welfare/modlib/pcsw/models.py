@@ -621,8 +621,8 @@ class ClientDetail(dd.DetailLayout):
 
     calendar = dd.Panel("""
     # find_appointment
-    # cal.EventsByProject
-    cal.EventsByClient
+    # cal.EntriesByProject
+    cal.EntriesByClient
     cal.TasksByProject
     """, label=_("Calendar"))
 

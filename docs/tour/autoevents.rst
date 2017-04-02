@@ -36,8 +36,8 @@ None
 Evaluation events
 =================
 
-The :class:`EventsByController
-<lino_xl.lib.cal.ui.EventsByController>` table shows the evaluation
+The :class:`EntriesByController
+<lino_xl.lib.cal.ui.EntriesByController>` table shows the evaluation
 events which have been generated.
 
 >>> settings.SITE.site_config.hide_events_before = None
@@ -47,7 +47,7 @@ For example let's look at ISIP contract #26 of the demo database.
 >>> obj = isip.Contract.objects.get(pk=26)
 >>> obj.exam_policy
 ExamPolicy #1 ('Every month')
->>> rt.show(cal.EventsByController, obj)
+>>> rt.show(cal.EntriesByController, obj)
 ============================ =============== ================= ============= ===============
  When                         Summary         Managed by        Assigned to   Actions
 ---------------------------- --------------- ----------------- ------------- ---------------
@@ -78,7 +78,7 @@ Monday.
     >>> mt = contenttypes.ContentType.objects.get_for_model(obj.__class__)
     >>> print(mt)
     ISIP
-    >>> uri = '/api/cal/EventsByController?mt={0}&mk={1}&fmt=json'
+    >>> uri = '/api/cal/EntriesByController?mt={0}&mk={1}&fmt=json'
     >>> uri = uri.format(mt.id, obj.id)
     >>> res = test_client.get(uri, REMOTE_USER='robin')
     >>> res.status_code
@@ -131,7 +131,7 @@ responsible coach* at the event's date.
 For example, let's pick up ISIP contract #1.
 
 >>> obj = isip.Contract.objects.get(pk=1)
->>> rt.show(cal.EventsByController, obj)
+>>> rt.show(cal.EntriesByController, obj)
 ============================ =============== ================= ============= ===============
  When                         Summary         Managed by        Assigned to   Actions
 ---------------------------- --------------- ----------------- ------------- ---------------
@@ -230,7 +230,7 @@ The above is coded in
     >>> qs1 = isip.Contract.objects.all()
     >>> qs2 = jobs.Contract.objects.all()
     >>> for obj in list(qs1) + list(qs2):
-    ...     ar = cal.EventsByController.request(master_instance=obj)
+    ...     ar = cal.EntriesByController.request(master_instance=obj)
     ...     names = set([e.user.username for e in ar])
     ...     if len(names) > 1:
     ...         l.append(unicode(obj))
@@ -256,7 +256,7 @@ The above is coded in
     Lino attributes the automatic evaluation events to the coach in
     charge, depending on their date.
 
-    >>> ar = cal.EventsByController.request(master_instance=obj)
+    >>> ar = cal.EntriesByController.request(master_instance=obj)
     >>> events = ["%s (%s)" % (e.start_date, e.user.first_name) for e in ar]
     >>> print(", ".join(events))
     ... #doctest: +NORMALIZE_WHITESPACE

@@ -190,7 +190,7 @@ class Event(Event):
 dd.update_field(Event, 'user', verbose_name=_("Managed by"))
 
 
-class EventsByClient(Events):
+class EntriesByClient(Events):
     """Events where :attr:`Event.project` **or** one guest is this client.
 
     """
@@ -263,14 +263,14 @@ class Guest(Guest):
             return None
 
 EventTypes.column_names = 'name invite_client esf_field *'
-MyEvents.column_names = 'when_text project event_type summary workflow_buttons *'
+MyEntries.column_names = 'when_text project event_type summary workflow_buttons *'
 
 EventTypes.detail_layout = """
 name
 event_label
 max_conflicting:10 max_days:10 esf_field:20 email_template:20 id
 all_rooms locks_user invite_client is_appointment attach_to_email
-EventsByType
+EntriesByType
 """
 
 EventTypes.insert_layout = """
@@ -290,7 +290,7 @@ def customize_cal(sender, **kw):
     # event_label
     # max_conflicting all_rooms locks_user esf_field
     # id invite_client is_appointment email_template attach_to_email
-    # EventsByType
+    # EntriesByType
     # """)
 
     # site.modules.cal.EventTypes.set_insert_layout("""
@@ -359,8 +359,8 @@ if False:
         def run_from_ui(self, ar, **kw):
             obj = ar.selected_rows[0]
             ekw = dict(project=obj, user=ar.get_user())
-            ekw.update(state=EventStates.draft)
-            #~ ekw.update(state=EventStates.published)
+            ekw.update(state=EntryStates.draft)
+            #~ ekw.update(state=EntryStates.published)
             ekw.update(start_date=ar.action_param_values.date)
             ekw.update(end_date=ar.action_param_values.date)
             ekw.update(event_type=settings.SITE.site_config.client_calendar)
@@ -374,15 +374,15 @@ if False:
             ar.goto_instance(event)
             ar.success(**kw)
 
-EventsByDay.column_names = 'start_time project summary user \
+EntriesByDay.column_names = 'start_time project summary user \
 assigned_to event_type room workflow_buttons *'
 
-class EventsByController(EventsByController):
+class EntriesByController(EntriesByController):
     column_names = 'when_html summary user \
     assigned_to workflow_buttons *'
     slave_grid_format = 'grid'
 
-# EventsByController.column_names = 'when_html summary user \
+# EntriesByController.column_names = 'when_html summary user \
 # assigned_to workflow_buttons *'
 
 

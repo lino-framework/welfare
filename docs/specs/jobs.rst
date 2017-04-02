@@ -250,7 +250,7 @@ Reached upper date limit 2014-12-02
 
 >>> settings.SITE.site_config.hide_events_before = None
 
->>> ses.show(cal.EventsByController.request(obj),
+>>> ses.show(cal.EntriesByController.request(obj),
 ... column_names="when_html summary")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ================== ==================
@@ -272,7 +272,7 @@ similar case in the demo data. See :ticket:`13`):
 
 >>> d = i2d(20140915)
 >>> pv = dict(start_date=d, end_date=d)
->>> ses.show(cal.EventsByDay.request(param_values=pv),
+>>> ses.show(cal.EntriesByDay.request(param_values=pv),
 ...     column_names="user summary project")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +SKIP
 ================ =============== =========================
@@ -287,7 +287,7 @@ This is because the EventType of these automatically generated
 evaluation appointments is configured to allow for up to 4
 conflicting events:
 
->>> e = cal.EventsByDay.request(param_values=pv).data_iterator[0]
+>>> e = cal.EntriesByDay.request(param_values=pv).data_iterator[0]
 >>> e.event_type
 EventType #4 ('Auswertung')
 >>> e.event_type.max_conflicting

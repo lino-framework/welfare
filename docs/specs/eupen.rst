@@ -74,7 +74,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Büro : Upload-Arten, Auszugsarten, Notizarten, Ereignisarten, Meine Einfügetexte
-  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Terminregeln, Gastrollen, Kalendereintragsarten, Terminregeln, Externe Kalender
+  - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
   - Buchhaltung : Kontengruppen, Haushaltsartikel, Journale, Buchungsperioden, Zahlungsbedingungen
   - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
@@ -178,7 +178,7 @@ to explicitly override the language of :meth:`show_menu
   - Orte : Länder, Orte
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
   - Büro : Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
-  - Kalender : Kalenderliste, Räume, Prioritäten, Periodische Terminregeln, Kalendereintragsarten, Terminregeln, Externe Kalender
+  - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
   - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
@@ -331,11 +331,11 @@ Each window layout defines a given set of fields.
 - boards.Boards.insert : name, name_fr, name_en
 - cal.Calendars.detail : name, name_fr, name_en, color, id, description
 - cal.Calendars.insert : name, name_fr, name_en, color
+- cal.EntriesByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
 - cal.EventTypes.detail : name, name_fr, name_en, event_label, event_label_fr, event_label_en, max_conflicting, max_days, esf_field, email_template, id, all_rooms, locks_user, invite_client, is_appointment, attach_to_email
 - cal.EventTypes.insert : name, name_fr, name_en, invite_client
 - cal.Events.detail : event_type, summary, project, start_date, start_time, end_date, end_time, user, assigned_to, room, priority, access_class, transparent, owner, workflow_buttons, description, id, created, modified, state
 - cal.Events.insert : summary, start_date, start_time, end_date, end_time, event_type, project
-- cal.EventsByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
 - cal.GuestRoles.insert : id, name, name_fr, name_en
 - cal.GuestStates.wf1 : notify_subject, notify_body, notify_silent
 - cal.GuestStates.wf2 : notify_subject, notify_body, notify_silent
@@ -520,11 +520,11 @@ Each window layout is **viewable** by a given set of user profiles.
 - boards.Boards.insert : visible for admin 910
 - cal.Calendars.detail : visible for 110 410 admin 910
 - cal.Calendars.insert : visible for 110 410 admin 910
+- cal.EntriesByClient.insert : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.EventTypes.detail : visible for 110 410 admin 910
 - cal.EventTypes.insert : visible for 110 410 admin 910
 - cal.Events.detail : visible for 110 410 admin 910
 - cal.Events.insert : visible for 110 410 admin 910
-- cal.EventsByClient.insert : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - cal.GuestRoles.insert : visible for admin 910
 - cal.GuestStates.wf1 : visible for admin 910
 - cal.GuestStates.wf2 : visible for admin 910
@@ -843,10 +843,10 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Kalender --> Kalenderliste : 13
 - Konfigurierung --> Kalender --> Räume : 1
 - Konfigurierung --> Kalender --> Prioritäten : 5
-- Konfigurierung --> Kalender --> Periodische Terminregeln : 16
+- Konfigurierung --> Kalender --> Regelmäßige Ereignisse : 16
 - Konfigurierung --> Kalender --> Gastrollen : 5
 - Konfigurierung --> Kalender --> Kalendereintragsarten : 11
-- Konfigurierung --> Kalender --> Terminregeln : 7
+- Konfigurierung --> Kalender --> Wiederholungsregeln : 7
 - Konfigurierung --> Kalender --> Externe Kalender : 1
 - Konfigurierung --> Buchhaltung --> Kontengruppen : 7
 - Konfigurierung --> Buchhaltung --> Haushaltsartikel : 27

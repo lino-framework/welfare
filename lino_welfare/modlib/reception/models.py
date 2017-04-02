@@ -47,11 +47,11 @@ extensible = dd.resolve_app('extensible')
 from lino_xl.lib.coachings.choicelists import ClientStates
 from lino_xl.lib.coachings.desktop import CoachingsByClient
 
-# Make EventsByDay available also for reception agents who are not in
+# Make EntriesByDay available also for reception agents who are not in
 # office group.
 # cal = dd.resolve_app('cal')
-# cal.EventsByDay.required_roles.add(OfficeUser)
-# cal.EventsByDay.required_roles = dd.login_required(OfficeUser)
+# cal.EntriesByDay.required_roles.add(OfficeUser)
+# cal.EntriesByDay.required_roles = dd.login_required(OfficeUser)
 
 # Visitors.required.update(user_groups='coaching reception')
 # WaitingVisitors.required.update(user_groups='coaching reception')

@@ -23,7 +23,7 @@ from lino.api import dd, _
 from lino_xl.lib.reception.workflows import *
 from lino_xl.lib.excerpts.choicelists import Shortcuts
 
-# self.actors.cal.EventStates.published.text = _("Notified")
+# self.actors.cal.EntryStates.published.text = _("Notified")
 
 Shortcuts.add_item('pcsw.Client', 'cvs_emitted', _("CVs emitted"))
 
