@@ -22,7 +22,7 @@ It is based on the following other specifications:
 
 - :ref:`cosi.specs.accounting`
 - :ref:`cosi.specs.ledger`
-- :ref:`cosi.specs.finan`
+- :ref:`specs.cosi.finan`
 - :ref:`welfare.specs.ledger`
 
 
