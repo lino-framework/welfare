@@ -48,25 +48,25 @@ For example let's look at ISIP contract #26 of the demo database.
 >>> obj.exam_policy
 ExamPolicy #1 ('Every month')
 >>> rt.show(cal.EntriesByController, obj)
-============================ =============== ================= ============= ===============
- When                         Summary         Managed by        Assigned to   Actions
----------------------------- --------------- ----------------- ------------- ---------------
- **Tue 26/03/2013 (09:00)**   Évaluation 1    Alicia Allmanns                 **Suggested**
- **Fri 26/04/2013 (09:00)**   Évaluation 2    Alicia Allmanns                 **Suggested**
- **Mon 27/05/2013 (09:00)**   Évaluation 3    Alicia Allmanns                 **Suggested**
- **Thu 27/06/2013 (09:00)**   Évaluation 4    Alicia Allmanns                 **Suggested**
- **Mon 29/07/2013 (09:00)**   Évaluation 5    Alicia Allmanns                 **Suggested**
- **Thu 29/08/2013 (09:00)**   Évaluation 6    Alicia Allmanns                 **Suggested**
- **Mon 30/09/2013 (09:00)**   Évaluation 7    Alicia Allmanns                 **Suggested**
- **Wed 30/10/2013 (09:00)**   Évaluation 8    Alicia Allmanns                 **Suggested**
- **Mon 02/12/2013 (09:00)**   Évaluation 9    Alicia Allmanns                 **Suggested**
- **Thu 02/01/2014 (09:00)**   Évaluation 10   Alicia Allmanns                 **Suggested**
- **Mon 03/02/2014 (09:00)**   Évaluation 11   Alicia Allmanns                 **Suggested**
- **Tue 04/03/2014 (09:00)**   Évaluation 12   Alicia Allmanns                 **Suggested**
- **Fri 04/04/2014 (09:00)**   Évaluation 13   Alicia Allmanns                 **Suggested**
- **Mon 05/05/2014 (09:00)**   Évaluation 14   Alicia Allmanns                 **Suggested**
- **Thu 05/06/2014 (09:00)**   Évaluation 15   Alicia Allmanns                 **Suggested**
-============================ =============== ================= ============= ===============
+============================ =================== ================= ============= ===============
+ When                         Short description   Managed by        Assigned to   Actions
+---------------------------- ------------------- ----------------- ------------- ---------------
+ **Tue 26/03/2013 (09:00)**   Évaluation 1        Alicia Allmanns                 **Suggested**
+ **Fri 26/04/2013 (09:00)**   Évaluation 2        Alicia Allmanns                 **Suggested**
+ **Mon 27/05/2013 (09:00)**   Évaluation 3        Alicia Allmanns                 **Suggested**
+ **Thu 27/06/2013 (09:00)**   Évaluation 4        Alicia Allmanns                 **Suggested**
+ **Mon 29/07/2013 (09:00)**   Évaluation 5        Alicia Allmanns                 **Suggested**
+ **Thu 29/08/2013 (09:00)**   Évaluation 6        Alicia Allmanns                 **Suggested**
+ **Mon 30/09/2013 (09:00)**   Évaluation 7        Alicia Allmanns                 **Suggested**
+ **Wed 30/10/2013 (09:00)**   Évaluation 8        Alicia Allmanns                 **Suggested**
+ **Mon 02/12/2013 (09:00)**   Évaluation 9        Alicia Allmanns                 **Suggested**
+ **Thu 02/01/2014 (09:00)**   Évaluation 10       Alicia Allmanns                 **Suggested**
+ **Mon 03/02/2014 (09:00)**   Évaluation 11       Alicia Allmanns                 **Suggested**
+ **Tue 04/03/2014 (09:00)**   Évaluation 12       Alicia Allmanns                 **Suggested**
+ **Fri 04/04/2014 (09:00)**   Évaluation 13       Alicia Allmanns                 **Suggested**
+ **Mon 05/05/2014 (09:00)**   Évaluation 14       Alicia Allmanns                 **Suggested**
+ **Thu 05/06/2014 (09:00)**   Évaluation 15       Alicia Allmanns                 **Suggested**
+============================ =================== ================= ============= ===============
 <BLANKLINE>
 
 Note how Lino avoids Sundays and Saturdays by moving to the following
@@ -132,20 +132,20 @@ For example, let's pick up ISIP contract #1.
 
 >>> obj = isip.Contract.objects.get(pk=1)
 >>> rt.show(cal.EntriesByController, obj)
-============================ =============== ================= ============= ===============
- When                         Summary         Managed by        Assigned to   Actions
----------------------------- --------------- ----------------- ------------- ---------------
- **Mon 29/10/2012 (09:00)**   Evaluation 1    Hubert Huppertz                 **Suggested**
- **Thu 29/11/2012 (09:00)**   Evaluation 2    Hubert Huppertz                 **Suggested**
- **Mon 31/12/2012 (09:00)**   Evaluation 3    Hubert Huppertz                 **Suggested**
- **Thu 31/01/2013 (09:00)**   Evaluation 4    Hubert Huppertz                 **Suggested**
- **Thu 28/02/2013 (09:00)**   Evaluation 5    Hubert Huppertz                 **Suggested**
- **Thu 28/03/2013 (09:00)**   Evaluation 6    Mélanie Mélard                  **Suggested**
- **Mon 29/04/2013 (09:00)**   Evaluation 7    Mélanie Mélard                  **Suggested**
- **Wed 29/05/2013 (09:00)**   Evaluation 8    Mélanie Mélard                  **Suggested**
- **Mon 01/07/2013 (09:00)**   Evaluation 9    Mélanie Mélard                  **Suggested**
- **Thu 01/08/2013 (09:00)**   Evaluation 10   Mélanie Mélard                  **Suggested**
-============================ =============== ================= ============= ===============
+============================ =================== ================= ============= ===============
+ When                         Short description   Managed by        Assigned to   Actions
+---------------------------- ------------------- ----------------- ------------- ---------------
+ **Mon 29/10/2012 (09:00)**   Evaluation 1        Hubert Huppertz                 **Suggested**
+ **Thu 29/11/2012 (09:00)**   Evaluation 2        Hubert Huppertz                 **Suggested**
+ **Mon 31/12/2012 (09:00)**   Evaluation 3        Hubert Huppertz                 **Suggested**
+ **Thu 31/01/2013 (09:00)**   Evaluation 4        Hubert Huppertz                 **Suggested**
+ **Thu 28/02/2013 (09:00)**   Evaluation 5        Hubert Huppertz                 **Suggested**
+ **Thu 28/03/2013 (09:00)**   Evaluation 6        Mélanie Mélard                  **Suggested**
+ **Mon 29/04/2013 (09:00)**   Evaluation 7        Mélanie Mélard                  **Suggested**
+ **Wed 29/05/2013 (09:00)**   Evaluation 8        Mélanie Mélard                  **Suggested**
+ **Mon 01/07/2013 (09:00)**   Evaluation 9        Mélanie Mélard                  **Suggested**
+ **Thu 01/08/2013 (09:00)**   Evaluation 10       Mélanie Mélard                  **Suggested**
+============================ =================== ================= ============= ===============
 <BLANKLINE>
 
 The above shows that appointments before 2013-11-10 are with Hubert,
