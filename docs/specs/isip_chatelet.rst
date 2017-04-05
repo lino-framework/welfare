@@ -69,20 +69,20 @@ which contains non-ascii characters:
 
 >>> obj = isip.Contract.objects.get(id=1)
 >>> rt.show(isip.EntriesByContract, obj)
-=============== ============
- Summary         Date
---------------- ------------
- Évaluation 1    29/10/2012
- Évaluation 2    29/11/2012
- Évaluation 3    31/12/2012
- Évaluation 4    31/01/2013
- Évaluation 5    28/02/2013
- Évaluation 6    28/03/2013
- Évaluation 7    29/04/2013
- Évaluation 8    29/05/2013
- Évaluation 9    01/07/2013
- Évaluation 10   01/08/2013
-=============== ============
+=================== ============
+ Short description   Date
+------------------- ------------
+ Évaluation 1        29/10/2012
+ Évaluation 2        29/11/2012
+ Évaluation 3        31/12/2012
+ Évaluation 4        31/01/2013
+ Évaluation 5        28/02/2013
+ Évaluation 6        28/03/2013
+ Évaluation 7        29/04/2013
+ Évaluation 8        29/05/2013
+ Évaluation 9        01/07/2013
+ Évaluation 10       01/08/2013
+=================== ============
 <BLANKLINE>
 
 
