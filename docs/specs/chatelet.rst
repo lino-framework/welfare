@@ -668,7 +668,7 @@ Romain
   - Bureau : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations, Text Field Templates
   - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
-  - CPAS : Interventions, Contacts client, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Type de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
+  - CPAS : Interventions, Contacts client, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
   - Parcours : Connaissances de langue, Formations, Études, Expériences professionnelles, Connaissances de langue, Compétences professionnelles, Compétences sociales, Freins
   - Intégration : PIISs, Mises à l'emploi art60§7, Candidatures, Services utilisateurs, Mises à l'emploi art61, Stages d'immersion, Preuves de recherche, Fiches FSE
   - Nouvelles demandes : Compétences
@@ -951,7 +951,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> CPAS --> Bénéficiaires : 58
 - Explorateur --> CPAS --> Etats civils : 7
 - Explorateur --> CPAS --> Etats bénéficiaires : 4
-- Explorateur --> CPAS --> Type de carte eID : 10
+- Explorateur --> CPAS --> Types de carte eID : 11
 - Explorateur --> CPAS --> Octrois d'aide : 56
 - Explorateur --> CPAS --> Certificats de revenu : 55
 - Explorateur --> CPAS --> Refund confirmations : 13
