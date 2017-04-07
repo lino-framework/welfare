@@ -711,7 +711,9 @@ Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
         only_primary=models.BooleanField(
             _("Only primary clients"), default=False, help_text=u"""\
 Nur Klienten, die eine effektive <b>primäre</b> Begleitung haben."""),
-        client_state=ClientStates.field(blank=True, help_text=u"""\
+        client_state=ClientStates.field(
+            blank=True, default='',
+            help_text=u"""\
 Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ new_since = models.DateField(_("Newly coached since"),blank=True),
         **contacts.Persons.parameters)

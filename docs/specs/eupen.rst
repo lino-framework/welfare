@@ -922,7 +922,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> ÖSHZ --> Klienten : 58
 - Explorer --> ÖSHZ --> Zivilstände : 7
 - Explorer --> ÖSHZ --> Bearbeitungszustände Klienten : 4
-- Explorer --> ÖSHZ --> eID-Kartenarten : 10
+- Explorer --> ÖSHZ --> eID-Kartenarten : 11
 - Explorer --> ÖSHZ --> Hilfebeschlüsse : 59
 - Explorer --> ÖSHZ --> Einkommensbescheinigungen : 59
 - Explorer --> ÖSHZ --> Kostenübernahmescheine : 13
