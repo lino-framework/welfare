@@ -112,7 +112,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  courses.Topic                  courses.Topics                  5         0
  cv.Duration                    cv.Durations                    5         5
  cv.EducationLevel              cv.EducationLevels              8         5
- cv.Experience                  cv.Experiences                  17        30
+ cv.Experience                  cv.Experiences                  18        30
  cv.Function                    cv.Functions                    7         4
  cv.LanguageKnowledge           cv.LanguageKnowledges           9         114
  cv.Obstacle                    cv.Obstacles                    6         20
@@ -124,9 +124,9 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cv.SoftSkill                   cv.SoftSkills                   5         0
  cv.SoftSkillType               cv.SoftSkillTypes               5         0
  cv.Status                      cv.Statuses                     5         7
- cv.Study                       cv.Studies                      14        22
+ cv.Study                       cv.Studies                      15        22
  cv.StudyType                   cv.StudyTypes                   8         11
- cv.Training                    cv.Trainings                    16        20
+ cv.Training                    cv.Trainings                    17        20
  dashboard.Widget               dashboard.Widgets               5         0
  debts.Account                  debts.Accounts                  13        51
  debts.Actor                    debts.Actors                    6         63
@@ -315,7 +315,7 @@ Each window layout defines a given set of fields.
 - countries.Places.insert : name, name_nl, name_de, name_en, country, type, parent, zip_code, id
 - countries.Places.merge_row : merge_to, reason
 - courses.Activities.detail : line, teacher, start_date, end_date, start_time, end_time, room, workflow_buttons, id, user, name, description, description_nl, description_de, description_en, max_events, max_date, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, enrolments_until, max_places, confirmed, free_places, print_actions, EnrolmentsByCourse
-- courses.Activities.insert : start_date, line, teacher
+- courses.Activities.insert : line, teacher, name, start_date
 - courses.Activities.print_presence_sheet : start_date, end_date, show_remarks, show_states
 - courses.Activities.print_presence_sheet_html : start_date, end_date, show_remarks, show_states
 - courses.Enrolments.detail : request_date, user, course, pupil, remark, workflow_buttons, printed, motivation, problems
@@ -400,7 +400,6 @@ Each window layout defines a given set of fields.
 - plausibility.Problems.detail : user, owner, checker, id, message
 - polls.AnswerRemarks.detail : remark, response, question
 - polls.AnswerRemarks.insert : remark, response, question
-- polls.ChoiceSets.insert : name, name_nl, name_de, name_en
 - polls.Polls.detail : ref, title, workflow_buttons, details, default_choiceset, default_multiple_choices, id, user, created, modified, state
 - polls.Polls.insert : ref, title, default_choiceset, default_multiple_choices, questions_to_add
 - polls.Questions.insert : poll, number, is_heading, choiceset, multiple_choices, title, details
@@ -590,7 +589,6 @@ Each window layout is **viewable** by a given set of user profiles.
 - plausibility.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - polls.AnswerRemarks.detail : visible for 100 110 120 200 300 400 410 admin 910
 - polls.AnswerRemarks.insert : visible for 100 110 120 200 300 400 410 admin 910
-- polls.ChoiceSets.insert : visible for 110 410 admin 910
 - polls.Polls.detail : visible for 100 110 120 200 300 400 410 admin 910
 - polls.Polls.insert : visible for 100 110 120 200 300 400 410 admin 910
 - polls.Questions.insert : visible for 110 410 admin 910

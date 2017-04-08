@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -128,9 +128,11 @@ class DebtsTests(RemoteAuthTestCase):
         url = "/api/debts/Budgets/1?&an=duplicate&sr=1"
         res = test_client.get(url, REMOTE_USER='other')
         rv = json.loads(res.content)
-        self.assertEqual(
+        self.assertEquivalent(
             rv['message'],
-            u'Duplicated Budget 1 for A-B to Budget 3 for A-B.')
+            'This will create a copy of Budget 1 for A-B Are you sure?')
+        
+        # remaining tests fail because I must now confirm above message
         new = rt.modules.debts.Budget.objects.get(pk=3)
 
         self.assertEqual(new.user.username, 'other')
