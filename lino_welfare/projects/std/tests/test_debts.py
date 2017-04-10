@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -54,6 +54,21 @@ class DebtsTests(RemoteAuthTestCase):
 
     def test01(self):
 
+        # Member = rt.modules.households.Member
+        Household = rt.modules.households.Household
+        Person = rt.modules.contacts.Person
+        Genders = rt.modules.system.Genders
+        Budget = rt.models.debts.Budget
+        Actor = rt.models.debts.Actor
+        Entry = rt.models.debts.Entry
+        
+        def check_count(b, a, e):
+            self.assertEqual(Budget.objects.count(), b)
+            self.assertEqual(Actor.objects.count(), a)
+            self.assertEqual(Entry.objects.count(), e)
+        
+        
+
         u = users.User(username='root',
                        profile=UserTypes.admin,
                        language="en")
@@ -80,11 +95,6 @@ class DebtsTests(RemoteAuthTestCase):
 
         # Reproduce ticket #521
         ar = rt.login('root')
-        # Member = rt.modules.households.Member
-        Household = rt.modules.households.Household
-        Person = rt.modules.contacts.Person
-        Genders = rt.modules.system.Genders
-        Budget = rt.modules.debts.Budget
         
         p1 = Person(first_name="A", last_name="A", gender=Genders.male)
         p1.save()
@@ -96,6 +106,8 @@ class DebtsTests(RemoteAuthTestCase):
         # entry. Lino should ignore this entry.
         h.add_member(None)
 
+        check_count(0, 0, 0)
+        
         b = Budget(partner=h, user=u)
         b.save()
         b.fill_defaults()
@@ -118,19 +130,28 @@ class DebtsTests(RemoteAuthTestCase):
                         language="en")
         ou.save()
         ar = rt.login('other')
+
+        check_count(1, 2, 44)
+        
         new = b.duplicate.run_from_code(ar)
         self.assertEqual(new.user.username, 'other')
         self.assertEqual(new.id, 2)
-        # new.save()  # must save after on_duplicate
-        new = rt.modules.debts.Budget.objects.get(pk=2)
+        
+        check_count(2, 4, 88)
+        new = Budget.objects.get(pk=2)
         self.assertEqual(new.user.username, 'other')
-
+       
         url = "/api/debts/Budgets/1?&an=duplicate&sr=1"
-        res = test_client.get(url, REMOTE_USER='other')
-        rv = json.loads(res.content)
-        self.assertEqual(
-            rv['message'],
-            u'Duplicated Budget 1 for A-B to Budget 3 for A-B.')
-        new = rt.modules.debts.Budget.objects.get(pk=3)
+        dlg = []
+        dlg.append((
+            "This will create a copy of Budget 1 for A-B Are you sure?",
+            'yes'))
+        dlg.append((
+            'Duplicated Budget 1 for A-B to Budget 3 for A-B.',
+            None))
+        self.check_callback_dialog(self.client.get, 'other', url, dlg)
 
+        check_count(3, 6, 132)
+
+        new = Budget.objects.get(pk=3)
         self.assertEqual(new.user.username, 'other')

@@ -92,6 +92,7 @@ class TestCase(TestCase):
         Event = rt.models.cal.Event
         EventType = rt.models.cal.EventType
         Client = rt.models.pcsw.Client
+        ClientStates = rt.models.pcsw.ClientStates
         Coaching = rt.models.coachings.Coaching
         ContentType = rt.models.contenttypes.ContentType
 
@@ -100,17 +101,19 @@ class TestCase(TestCase):
         caroline = self.create_obj(
             User, username='caroline', profile='200')
         alicia = self.create_obj(
-            User, username='alicia', first_name="Alicia", profile='100')
+            User, username='alicia', first_name="Alicia", profile='900')
         roger = self.create_obj(
             User, username='roger', profile='400')
 
         ses = rt.login('robin')
 
         first = self.create_obj(
-            Client, first_name="First", last_name="Client")
+            Client, first_name="First", last_name="Client",
+            client_state=ClientStates.coached)
 
         second = self.create_obj(
-            Client, first_name="Second", last_name="Client")
+            Client, first_name="Second", last_name="Client",
+            client_state=ClientStates.coached)
         self.create_obj(
             Coaching, client=second,
             start_date=i2d(20130501),
@@ -333,6 +336,9 @@ class TestCase(TestCase):
 
         Message.objects.all().delete()
         Note.objects.all().delete()
+
+        first.client_state = ClientStates.newcomer
+        first.save()
 
         data = dict(fv=["20", ""], an="refuse_client")
         kwargs = dict(data=data)

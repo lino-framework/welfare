@@ -72,15 +72,15 @@ Database structure
 - countries.Place : id, parent, name, country, zip_code, type, inscode, name_fr, name_en
 - cv.Duration : id, name, name_fr, name_en
 - cv.EducationLevel : id, seqno, name, is_study, is_training, name_fr, name_en
-- cv.Experience : id, start_date, end_date, country, city, zip_code, sector, function, person, company, title, status, duration, regime, is_training, remarks, termination_reason
+- cv.Experience : id, start_date, end_date, country, city, zip_code, sector, function, person, duration_text, company, title, status, duration, regime, is_training, remarks, termination_reason
 - cv.Function : id, name, remark, sector, name_fr, name_en
 - cv.LanguageKnowledge : id, person, language, spoken, written, spoken_passively, written_passively, native, cef_level
 - cv.Regime : id, name, name_fr, name_en
 - cv.Sector : id, name, remark, name_fr, name_en
 - cv.Status : id, name, name_fr, name_en
-- cv.Study : id, start_date, end_date, country, city, zip_code, person, language, school, state, remarks, type, education_level, content
+- cv.Study : id, start_date, end_date, country, city, zip_code, person, duration_text, language, school, state, remarks, type, education_level, content
 - cv.StudyType : id, name, is_study, is_training, education_level, name_fr, name_en
-- cv.Training : id, start_date, end_date, country, city, zip_code, sector, function, person, language, school, state, remarks, type, content, certificates
+- cv.Training : id, start_date, end_date, country, city, zip_code, sector, function, person, duration_text, language, school, state, remarks, type, content, certificates
 - dashboard.Widget : id, seqno, user, item_name, visible
 - debts.Account : id, ref, seqno, name, group, type, required_for_household, required_for_person, periods, default_amount, name_fr, name_en
 - debts.Actor : id, seqno, budget, partner, header, remark
