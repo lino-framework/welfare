@@ -180,8 +180,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  plausibility.Problem           plausibility.Problems           6         0
  polls.AnswerChoice             polls.AnswerChoices             4         88
  polls.AnswerRemark             polls.AnswerRemarks             4         0
- polls.Choice                   polls.Choices                   7         35
- polls.ChoiceSet                polls.ChoiceSets                5         8
+ polls.Choice                   polls.Choices                   7         39
+ polls.ChoiceSet                polls.ChoiceSets                5         9
  polls.Poll                     polls.Polls                     11        2
  polls.Question                 polls.Questions                 9         38
  polls.Response                 polls.Responses                 7         6
@@ -907,7 +907,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> BCSS --> Codes fonction : 107
 - Configuration --> Médiation de dettes --> Groupes de comptes : 9
 - Configuration --> Médiation de dettes --> Comptes : 52
-- Configuration --> Questionnaires --> Listes de choix : 9
+- Configuration --> Questionnaires --> Listes de choix : 10
 - Explorateur --> Contacts --> Personnes de contact : 11
 - Explorateur --> Contacts --> Types d'adresses : 6
 - Explorateur --> Contacts --> Adresses : 91
@@ -978,7 +978,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Médiation de dettes --> Entrées : 717
 - Explorateur --> Questionnaires --> Questionnaires : 3
 - Explorateur --> Questionnaires --> Questions : 39
-- Explorateur --> Questionnaires --> Choix : 36
+- Explorateur --> Questionnaires --> Choix : 40
 - Explorateur --> Questionnaires --> Interviews : 7
 - Explorateur --> Questionnaires --> Choix de réponse : 89
 - Explorateur --> Questionnaires --> Answer Remarks : 1
