@@ -122,15 +122,9 @@ class BeIdTests(RemoteAuthTestCase):
         # obj.first_name = "Jean-Claude"
         obj.full_clean()
         obj.save()
-        response = self.client.post(
-            url, post_data,
-            REMOTE_USER='robin',
-            HTTP_ACCEPT_LANGUAGE='en')
-        # self.assertEqual(response.content, '')
-        result = self.check_json_result(
-            response,
-            'xcallback success message')
-        self.assertEqual(result['success'], True)
+
+
+        dlg = []
         expected = """\
 Click OK to apply the following changes for JEFFIN Jean (100) :\
 <br/>City : None -> Place #1 ('Tallinn')
@@ -145,26 +139,14 @@ Click OK to apply the following changes for JEFFIN Jean (100) :\
 <br/>Birth date : '' -> 1968-06-01
 <br/>eID card number : '' -> '592345678901'
 <br/>Zip code : '' -> '1418'"""
-        # print(result['message'])
-        self.assertEqual(result['message'], expected)
-
-        # ... and we answer yes:
-
-        cb = result['xcallback']
-        self.assertEqual(cb['title'], "Confirmation")
-        self.assertEqual(cb['buttons'], {'yes': 'Yes', 'no': 'No'})
-        url = '/callbacks/%d/yes' % cb['id']
-        response = self.client.get(
-            url,
-            REMOTE_USER='robin',
-            HTTP_ACCEPT_LANGUAGE='en')
-        result = self.check_json_result(
-            response,
-            'detail_handler_name data_record alert success message')
-        self.assertEqual(result['success'], True)
-        self.assertEqual(
-            result['message'],
-            'Client "JEFFIN Jean (100)" has been saved.')
+        
+        dlg.append((expected, 'yes'))
+        dlg.append((
+            'Client "JEFFIN Jean (100)" has been saved.',
+            None))
+        self.check_callback_dialog(
+            self.client.post, 'robin', url, dlg, post_data)
+        
         obj = pcsw.Client.objects.get(id=100)
         addr = addresses.Address.objects.get(partner=obj)
         self.assertEqual(addr.city.name, "Tallinn")

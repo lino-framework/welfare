@@ -70,7 +70,8 @@ This is the list of choice sets:
  5    Acquis                Acquis                Acquired
  6    1...5                 1...5                 1...5
  7    1...10                1...10                1...10
- 8    Temps de travail
+ 8    Agree-Disagree        Agree-Disagree        Agree-Disagree
+ 9    Temps de travail
 ==== ===================== ===================== =====================
 <BLANKLINE>
 
