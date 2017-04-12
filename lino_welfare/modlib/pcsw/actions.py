@@ -23,6 +23,7 @@
 from __future__ import unicode_literals
 from __future__ import print_function
 from builtins import str
+import six
 
 import logging
 logger = logging.getLogger(__name__)
@@ -80,13 +81,10 @@ class RefuseClient(ChangeStateAction):
             client=obj, user=ar.get_user(), state=self.target_state)
         body = str(ar.action_param_values.reason)
         if ar.action_param_values.remark:
-            body += '\n' + ar.action_param_values.remark
-        kw = dict()
-        kw.update(message=subject)
-        kw.update(alert=_("Success"))
-        # dd.logger.info("20170323 %r", body)
-        obj.emit_system_note(
-            ar, subject=subject, body=body)
+            body += '\n' + str(ar.action_param_values.remark)
+        # dd.logger.info("20170412 %r", ar.action_param_values)
+        body = six.text_type(body)  # 20170412 mysql does not support newstr
+        obj.emit_system_note(ar, subject=subject, body=body)
         mt = rt.models.notify.MessageTypes.action
         
         if subject:
@@ -95,6 +93,9 @@ class RefuseClient(ChangeStateAction):
             rt.models.notify.Message.emit_message(
                 ar, obj, mt, msg, recipients)
             
+        kw = dict()
+        kw.update(message=subject)
+        kw.update(alert=_("Success"))
         ar.success(**kw)
 
 
