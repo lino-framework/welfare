@@ -82,7 +82,7 @@ class RefuseClient(ChangeStateAction):
         body = str(ar.action_param_values.reason)
         if ar.action_param_values.remark:
             body += '\n' + str(ar.action_param_values.remark)
-        dd.logger.info("20170412 %r", ar.action_param_values)
+        # dd.logger.info("20170412 %r", ar.action_param_values)
         body = six.text_type(body)  # 20170412 mysql does not support newstr
         obj.emit_system_note(ar, subject=subject, body=body)
         mt = rt.models.notify.MessageTypes.action
