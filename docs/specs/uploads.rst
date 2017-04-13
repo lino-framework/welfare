@@ -249,7 +249,7 @@ BRECHT Bernd (177)
 Here we use :func:`lino.api.doctest.get_json_soup` to inspect what the
 summary view of `UploadsByClient` returns for this client.
 
->>> soup = get_json_soup('rolf', 'pcsw/Clients/177', 'UploadsByClient')
+>>> soup = get_json_soup('rolf', 'pcsw/Clients/177', 'uploads_UploadsByClient')
 >>> print(soup.get_text())
 ... #doctest: +NORMALIZE_WHITESPACE
 Aufenthaltserlaubnis: Arbeitserlaubnis: Führerschein: 3Identifizierendes Dokument: 4Diplom:

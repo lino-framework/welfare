@@ -308,7 +308,7 @@ Each window layout defines a given set of fields.
 - contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, is_obsolete, created, modified
 - contacts.Partners.insert : name, language, email
 - contacts.Persons.create_household : partner, type, head
-- contacts.Persons.detail : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, activity, url, client_contact_type, is_obsolete, created, modified
+- contacts.Persons.detail : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, households_MembersByPerson, humanlinks_LinksByHuman, remarks, activity, url, client_contact_type, is_obsolete, created, modified
 - contacts.Persons.insert : first_name, last_name, gender, language
 - countries.Countries.detail : isocode, name, name_nl, name_de, name_en, short_code, inscode, actual_country
 - countries.Countries.insert : isocode, inscode, name, name_nl, name_de, name_en
@@ -387,12 +387,12 @@ Each window layout defines a given set of fields.
 - notes.EventTypes.insert : id, name, name_nl, name_de, name_en, remark
 - notes.NoteTypes.detail : id, name, name_nl, name_de, name_en, build_method, template, special_type, email_template, attach_to_email, remark
 - notes.NoteTypes.insert : name, name_nl, name_de, name_en, build_method
-- notes.Notes.detail : date, time, event_type, type, project, subject, important, company, contact_person, user, language, build_time, id, body, UploadsByController
+- notes.Notes.detail : date, time, event_type, type, project, subject, important, company, contact_person, user, language, build_time, id, body, uploads_UploadsByController
 - notes.Notes.insert : event_type, type, subject, project
-- outbox.Mails.detail : subject, project, date, user, sent, id, owner, AttachmentsByMail, UploadsByController, body
+- outbox.Mails.detail : subject, project, date, user, sent, id, owner, outbox_AttachmentsByMail, uploads_UploadsByController, body
 - outbox.Mails.insert : project, subject, body
 - pcsw.Clients.create_visit : user, summary
-- pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, MembersByPerson, child_custody, LinksByHuman, LanguageKnowledgesByPerson, skills, obstacles, is_seeking, unemployed_since, seeking_since, work_permit_suspended_until, ResponsesByPartner, ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, has_esf, created, modified, remarks
+- pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, households_MembersByPerson, child_custody, humanlinks_LinksByHuman, cv_LanguageKnowledgesByPerson, skills, obstacles, is_seeking, unemployed_since, seeking_since, work_permit_suspended_until, polls_ResponsesByPartner, excerpts_ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, has_esf, created, modified, remarks
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, pcsw_Dispense, cv_LanguageKnowledge, cv_Obstacle, cv_Skill, cv_SoftSkill, addresses_Address, reason
 - pcsw.Clients.refuse_client : reason, remark
@@ -403,7 +403,7 @@ Each window layout defines a given set of fields.
 - polls.Polls.detail : ref, title, workflow_buttons, details, default_choiceset, default_multiple_choices, id, user, created, modified, state
 - polls.Polls.insert : ref, title, default_choiceset, default_multiple_choices, questions_to_add
 - polls.Questions.insert : poll, number, is_heading, choiceset, multiple_choices, title, details
-- polls.Responses.detail : poll, partner, date, workflow_buttons, AnswersByResponse, user, state, remark
+- polls.Responses.detail : poll, partner, date, workflow_buttons, polls_AnswersByResponse, user, state, remark
 - polls.Responses.insert : user, date, poll
 - reception.BusyVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.GoneVisitors.detail : event, client, role, state, remark, workflow_buttons

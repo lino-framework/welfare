@@ -359,13 +359,13 @@ Each window layout defines a given set of fields.
 - coachings.ClientContactTypes.insert : id, name, name_fr, name_en, can_refund, is_bailiff
 - coachings.CoachingEndings.insert : id, name, name_fr, name_en, seqno
 - coachings.Coachings.create_visit : user, summary
-- contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, payment_term, VouchersByPartner, MovementsByPartner, id, language, activity, is_obsolete, created, modified
+- contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, payment_term, vatless_VouchersByPartner, ledger_MovementsByPartner, id, language, activity, is_obsolete, created, modified
 - contacts.Companies.insert : name, language, email, type, id
 - contacts.Companies.merge_row : merge_to, addresses_Address, sepa_Account, reason
-- contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, payment_term, VouchersByPartner, MovementsByPartner, is_obsolete, created, modified
+- contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, payment_term, vatless_VouchersByPartner, ledger_MovementsByPartner, is_obsolete, created, modified
 - contacts.Partners.insert : name, language, email
 - contacts.Persons.create_household : partner, type, head
-- contacts.Persons.detail : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, MembersByPerson, LinksByHuman, remarks, payment_term, VouchersByPartner, MovementsByPartner, activity, url, client_contact_type, is_obsolete, created, modified
+- contacts.Persons.detail : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, households_MembersByPerson, humanlinks_LinksByHuman, remarks, payment_term, vatless_VouchersByPartner, ledger_MovementsByPartner, activity, url, client_contact_type, is_obsolete, created, modified
 - contacts.Persons.insert : first_name, last_name, gender, language
 - countries.Countries.detail : isocode, name, name_fr, name_en, short_code, inscode, actual_country
 - countries.Countries.insert : isocode, inscode, name, name_fr, name_en
@@ -436,12 +436,12 @@ Each window layout defines a given set of fields.
 - notes.EventTypes.insert : id, name, name_fr, name_en, remark
 - notes.NoteTypes.detail : id, name, name_fr, name_en, build_method, template, special_type, email_template, attach_to_email, remark
 - notes.NoteTypes.insert : name, name_fr, name_en, build_method
-- notes.Notes.detail : date, time, event_type, type, project, subject, important, company, contact_person, user, language, build_time, id, body, UploadsByController
+- notes.Notes.detail : date, time, event_type, type, project, subject, important, company, contact_person, user, language, build_time, id, body, uploads_UploadsByController
 - notes.Notes.insert : event_type, type, subject, project
-- outbox.Mails.detail : subject, project, date, user, sent, id, owner, AttachmentsByMail, UploadsByController, body
+- outbox.Mails.detail : subject, project, date, user, sent, id, owner, outbox_AttachmentsByMail, uploads_UploadsByController, body
 - outbox.Mails.insert : project, subject, body
 - pcsw.Clients.create_visit : user, summary
-- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, SimilarClients, LinksByHuman, cbss_relations, MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, aid_type, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, UploadsByClient, cvs_emitted, LanguageKnowledgesByPerson, skills, obstacles, ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
+- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, dupable_clients_SimilarClients, humanlinks_LinksByHuman, cbss_relations, households_MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, aid_type, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, uploads_UploadsByClient, cvs_emitted, cv_LanguageKnowledgesByPerson, skills, obstacles, excerpts_ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, cv_LanguageKnowledge, dupable_clients_Word, pcsw_Dispense, properties_PersonProperty, addresses_Address, sepa_Account, reason
 - pcsw.Clients.refuse_client : reason, remark
@@ -478,10 +478,11 @@ Each window layout defines a given set of fields.
 - xcourses.CourseOffers.detail : id, title, content, provider, guest_role, description
 - xcourses.CourseOffers.insert : provider, content, title
 - xcourses.CourseProviders.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax
-- xcourses.CourseRequests.insert : date_submitted, person, content, offer, urgent, course, state, date_ended, id, remark, UploadsByController
+- xcourses.CourseRequests.insert : date_submitted, person, content, offer, urgent, course, state, date_ended, id, remark, uploads_UploadsByController
 - xcourses.Courses.detail : id, start_date, offer, title, remark
 - xcourses.Courses.insert : start_date, offer, title
 <BLANKLINE>
+
 
 Windows and permissions
 =======================
