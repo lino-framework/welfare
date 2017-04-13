@@ -54,9 +54,9 @@ Lino Welfare à la Eupen.
         - **Termine** (reception.AppointmentsByPartner)
         - **Termin machen mit** (AgentsByClient)
     - **Beziehungen** (contact):
-      - (contact_1): **Ähnliche Klienten** (SimilarClients) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910], **Beziehungen** (LinksByHuman) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910], **ZDSS** (cbss_relations)
+      - (contact_1): **Ähnliche Klienten** (dupable_clients_SimilarClients) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910], **Beziehungen** (humanlinks_LinksByHuman) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910], **ZDSS** (cbss_relations)
       - (contact_2) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]:
-        - **Mitgliedschaft in Haushalten** (MembersByPerson)
+        - **Mitgliedschaft in Haushalten** (households_MembersByPerson)
         - **Haushaltszusammensetzung** (households.SiblingsByPerson)
     - **Begleiter** (coaching) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
       - (coaching_1) [visible for 110 120 200 220 300 800 admin 910]:
@@ -87,14 +87,14 @@ Lino Welfare à la Eupen.
       - (papers):
         - (papers_1): **Sucht Arbeit seit** (seeking_since), **Arbeitslos seit** (unemployed_since), **Wartezeit bis** (work_permit_suspended_until)
         - (papers_2): **Braucht Aufenthaltserlaubnis** (needs_residence_permit), **Braucht Arb.Erl.** (needs_work_permit)
-        - **Uploads** (UploadsByClient) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]
+        - **Uploads** (uploads_UploadsByClient) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]
     - **Lebenslauf** (career) [visible for 100 110 120 admin 910]:
       - **Erstellte Lebensläufe** (cvs_emitted) [visible for all]
       - **Studien** (cv.StudiesByPerson)
       - **Ausbildungen** (cv.TrainingsByPerson)
       - **Berufserfahrungen** (cv.ExperiencesByPerson)
     - **Sprachen** (languages) [visible for 100 110 120 200 300 400 410 admin 910]:
-      - **Sprachkenntnisse** (LanguageKnowledgesByPerson) [visible for 100 110 120 admin 910]
+      - **Sprachkenntnisse** (cv_LanguageKnowledgesByPerson) [visible for 100 110 120 admin 910]
       - **Kursanfragen** (xcourses.CourseRequestsByPerson)
     - **Kompetenzen** (competences) [visible for 100 110 120 admin 910]:
       - (competences_1) [visible for all]:
@@ -110,7 +110,7 @@ Lino Welfare à la Eupen.
       - **Art.60§7-Konventionen** (jobs.ContractsByClient)
     - **Historie** (history) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]:
       - **Ereignisse/Notizen** (notes.NotesByProject)
-      - **Bestehende Auszüge** (ExcerptsByProject)
+      - **Bestehende Auszüge** (excerpts_ExcerptsByProject)
     - **Kalender** (calendar) [visible for 100 110 120 200 300 400 410 500 510 admin 910]:
       - **Kalendereinträge** (cal.EntriesByClient)
       - **Aufgaben** (cal.TasksByProject)

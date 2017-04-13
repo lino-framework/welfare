@@ -50,7 +50,7 @@ Mr Paul FRISCH
 ...     d = json.loads(res.content)
 ...     return d['data'][fieldname]
 
->>> soup = BeautifulSoup(check('contacts/Persons/240', 'LinksByHuman'), 'lxml')
+>>> soup = BeautifulSoup(check('contacts/Persons/240', 'humanlinks_LinksByHuman'), 'lxml')
 >>> links = soup.find_all('a')
 >>> len(links)
 23
@@ -200,14 +200,14 @@ The response to this AJAX request is in JSON:
 
 We test the MembersByPerson panel. It contains a summary:
 
->>> print(d['data']['MembersByPerson'])
+>>> print(d['data']['households_MembersByPerson'])
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 <div>DUBOIS Robin (179) ist<ul><li><a href="javascript:Lino.households.Members.set_primary(...)...</div>
 
 Since this is not very human-readable, we are going to analyze it with
 `BeautifulSoup <http://beautiful-soup-4.readthedocs.org/en/latest>`_.
 
->>> soup = BeautifulSoup(d['data']['MembersByPerson'], 'lxml')
+>>> soup = BeautifulSoup(d['data']['households_MembersByPerson'], 'lxml')
 
 >>> print(soup.get_text(' ', strip=True))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF
@@ -256,7 +256,7 @@ false, "gender": null, "genderHidden": null } })
 
 The :func:`lino.api.doctest.get_json_soup` automates this trick:
 
->>> soup = get_json_soup('rolf', 'integ/Clients/179', 'MembersByPerson')
+>>> soup = get_json_soup('rolf', 'integ/Clients/179', 'households_MembersByPerson')
 >>> links = soup.find_all('a')
 >>> len(links)
 8
