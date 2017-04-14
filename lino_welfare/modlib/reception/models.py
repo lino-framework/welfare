@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2015 Luc Saffre
+# Copyright 2013-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -32,7 +32,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.utils.xmlgen.html import E
 
-from lino.api import dd
+from lino.api import dd, rt
 
 from lino.core.tables import ButtonsTable
 
@@ -157,14 +157,29 @@ class CreateClientVisit(dd.Action):
     def user_choices(self):
         return appointable_users(newcomer_consultations=True)
 
-    def run_from_ui(self, ar, **kw):
-        obj = ar.selected_rows[0]
+    def create_visit(self, ar, client):
         pv = ar.action_param_values
         if not pv.user:
             raise Warning(_("Please select a user!"))
-        create_prompt_event(obj, obj, pv.user, pv.summary,
-                            settings.SITE.site_config.client_guestrole)
+        e = create_prompt_event(
+            client, client, pv.user, pv.summary,
+            settings.SITE.site_config.client_guestrole)
+        # e.after_ui_save(ar, None)
+
+        def msg(user, mm):
+            subject = _("{client} now waiting for {user}")
+            subject = subject.format(
+                client=client, user=pv.user)
+            return (subject, '')
+        recipients = [ (pv.user, pv.user.mail_mode) ]
+        mt = rt.actors.notify.MessageTypes.change
+        rt.models.notify.Message.emit_message(
+            ar, client, mt, msg, recipients)
         ar.success(refresh=True)
+        
+    def run_from_ui(self, ar, **kw):
+        self.create_visit(ar, ar.selected_rows[0])
+        
 
 
 class CreateCoachingVisit(CreateClientVisit):
@@ -182,14 +197,8 @@ class CreateCoachingVisit(CreateClientVisit):
         return kw
 
     def run_from_ui(self, ar, **kw):
-        obj = ar.selected_rows[0]
-        create_prompt_event(
-            obj.client, obj.client,
-            ar.action_param_values.user,
-            ar.action_param_values.summary,
-            settings.SITE.site_config.client_guestrole)
-        ar.success(refresh=True)
-
+        self.create_visit(ar, ar.selected_rows[0].client)
+        
 
 class CreateNote(dd.Action):
     label = _("Attestation")
