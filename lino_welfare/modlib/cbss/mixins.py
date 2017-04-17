@@ -520,7 +520,7 @@ class NewStyleRequest(CBSSRequest):
     def create_client(self):
         url = self.get_wsdl_uri()
 
-        logger.info("Instantiate CBSS client at %s", url)
+        logger.debug("Instantiate CBSS client at %s", url)
         sc = settings.SITE.site_config
         #~ t = HttpAuthenticated(
             #~ username=settings.SITE.cbss_username,
