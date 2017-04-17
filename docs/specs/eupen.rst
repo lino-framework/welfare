@@ -373,14 +373,14 @@ Each window layout defines a given set of fields.
 - countries.Places.merge_row : merge_to, reason
 - cv.Durations.insert : id, name, name_fr, name_en
 - cv.EducationLevels.insert : name, name_fr, name_en, is_study, is_training
-- cv.Experiences.insert : person, start_date, end_date, termination_reason, company, country, city, sector, function, title, status, duration, regime, is_training, remarks
+- cv.Experiences.insert : person, company, country, city, sector, function, title, status, duration, regime, is_training, start_date, end_date, duration_text, termination_reason, remarks
 - cv.ExperiencesByPerson.insert : start_date, end_date, company, function
 - cv.Functions.insert : id, name, name_fr, name_en, sector, remark
 - cv.LanguageKnowledgesByPerson.insert : language, native, cef_level, spoken_passively, spoken, written
 - cv.Regimes.insert : id, name, name_fr, name_en
 - cv.Sectors.insert : id, name, name_fr, name_en, remark
 - cv.Statuses.insert : id, name, name_fr, name_en
-- cv.Studies.insert : person, start_date, end_date, type, content, education_level, state, school, country, city, remarks
+- cv.Studies.insert : person, start_date, end_date, duration_text, type, content, education_level, state, school, country, city, remarks
 - cv.StudiesByPerson.insert : start_date, end_date, type, content
 - cv.StudyTypes.detail : name, name_fr, name_en, id, education_level, is_study, is_training
 - cv.StudyTypes.insert : name, name_fr, name_en, is_study, is_training, education_level

@@ -331,14 +331,14 @@ Each window layout defines a given set of fields.
 - courses.Topics.insert : name, name_nl, name_de, name_en, id
 - cv.Durations.insert : id, name, name_nl, name_de, name_en
 - cv.EducationLevels.insert : name, name_nl, name_de, name_en, is_study, is_training
-- cv.Experiences.insert : person, start_date, end_date, termination_reason, company, country, city, sector, function, title, status, duration, regime, is_training, remarks
+- cv.Experiences.insert : person, company, country, city, sector, function, title, status, duration, regime, is_training, start_date, end_date, duration_text, termination_reason, remarks
 - cv.ExperiencesByPerson.insert : start_date, end_date, company, function
 - cv.Functions.insert : id, name, name_nl, name_de, name_en, sector, remark
 - cv.LanguageKnowledgesByPerson.insert : language, native, cef_level, spoken_passively, spoken, written
 - cv.Regimes.insert : id, name, name_nl, name_de, name_en
 - cv.Sectors.insert : id, name, name_nl, name_de, name_en, remark
 - cv.Statuses.insert : id, name, name_nl, name_de, name_en
-- cv.Studies.insert : person, start_date, end_date, type, content, education_level, state, school, country, city, remarks
+- cv.Studies.insert : person, start_date, end_date, duration_text, type, content, education_level, state, school, country, city, remarks
 - cv.StudiesByPerson.insert : start_date, end_date, type, content
 - cv.StudyTypes.detail : name, name_nl, name_de, name_en, id, education_level, is_study, is_training
 - cv.StudyTypes.insert : name, name_nl, name_de, name_en, is_study, is_training, education_level
@@ -400,6 +400,7 @@ Each window layout defines a given set of fields.
 - plausibility.Problems.detail : user, owner, checker, id, message
 - polls.AnswerRemarks.detail : remark, response, question
 - polls.AnswerRemarks.insert : remark, response, question
+- polls.ChoiceSets.insert : name, name_nl, name_de, name_en
 - polls.Polls.detail : ref, title, workflow_buttons, details, default_choiceset, default_multiple_choices, id, user, created, modified, state
 - polls.Polls.insert : ref, title, default_choiceset, default_multiple_choices, questions_to_add
 - polls.Questions.insert : poll, number, is_heading, choiceset, multiple_choices, title, details
@@ -589,6 +590,7 @@ Each window layout is **viewable** by a given set of user profiles.
 - plausibility.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - polls.AnswerRemarks.detail : visible for 100 110 120 200 300 400 410 admin 910
 - polls.AnswerRemarks.insert : visible for 100 110 120 200 300 400 410 admin 910
+- polls.ChoiceSets.insert : visible for 110 410 admin 910
 - polls.Polls.detail : visible for 100 110 120 200 300 400 410 admin 910
 - polls.Polls.insert : visible for 100 110 120 200 300 400 410 admin 910
 - polls.Questions.insert : visible for 110 410 admin 910

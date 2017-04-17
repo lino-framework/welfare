@@ -49,12 +49,12 @@ Configuration
 =============
 
 >>> rt.show(polls.Polls)
-=========== =========================== ============ ========
+=========== =========================== ============ =======
  Référence   Titre                       Auteur       État
------------ --------------------------- ------------ --------
- INI         Interview initial           Robin Rood   Publié
- RAE         Recherche active d'emploi   Robin Rood   Publié
-=========== =========================== ============ ========
+----------- --------------------------- ------------ -------
+ INI         Interview initial           Robin Rood   Actif
+ RAE         Recherche active d'emploi   Robin Rood   Actif
+=========== =========================== ============ =======
 <BLANKLINE>
 
 This is the list of choice sets:
@@ -273,12 +273,12 @@ The results of a poll is the set of all responses.
 
 >>> ses = rt.login('robin')
 >>> ses.show(polls.MyPolls)
-=========== =========================== ========
+=========== =========================== =======
  Référence   Titre                       État
------------ --------------------------- --------
- INI         Interview initial           Publié
- RAE         Recherche active d'emploi   Publié
-=========== =========================== ========
+----------- --------------------------- -------
+ INI         Interview initial           Actif
+ RAE         Recherche active d'emploi   Actif
+=========== =========================== =======
 <BLANKLINE>
 
 >>> obj = polls.Poll.get_by_ref('INI')
