@@ -49,7 +49,7 @@ def demo_polls():
             ref=ref,
             title=title.strip(),
             details=details.strip(),
-            state=polls.PollStates.published,
+            state=polls.PollStates.active,
             questions_to_add=questions,
             default_choiceset=choiceset)
         obj.full_clean()
