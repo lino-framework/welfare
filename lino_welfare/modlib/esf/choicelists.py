@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016 Luc Saffre
+# Copyright 2016-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -127,14 +127,14 @@ class GuestHours(HoursField):
 
 class GuestHoursEvent(HoursField):
     """Count the event's duration for each presence."""
-    
+
     def collect_from_guest(self, obj, summary):
         if obj.event.event_type is None:
             return
         sf = obj.event.event_type.esf_field
         if sf is None or sf.value != self.value:
             return
-        if obj.state != GuestStates.present:
+        if obj.state not in GuestStates.present_states:
             return
         return obj.event.get_duration()
 

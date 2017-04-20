@@ -123,11 +123,28 @@ dd.inject_field(
         blank=True, null=True))
 
 
+@dd.python_2_unicode_compatible
 class Event(Event):
 
     # course = models.ForeignKey(
     #     "courses.Course", blank=True, null=True,
     #     help_text=_("Fill in only if this event is a session of a course."))
+
+    def __str__(self):
+        if self.summary:
+            s = self.summary
+        elif self.event_type:
+            s = str(self.event_type)
+        elif self.pk:
+            s = self._meta.verbose_name + " #" + str(self.pk)
+        else:
+            s = _("Unsaved %s") % self._meta.verbose_name
+        when = self.strftime()
+        if when:
+            s = "{} ({})".format(s, when)
+        if self.project:
+            s = _("{} with {}").format(s, self.project)
+        return s
 
     def get_calendar(self):
         if self.assigned_to is not None:
