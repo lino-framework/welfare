@@ -216,7 +216,7 @@ class EntriesByClient(Events):
     # master = 'cal.Event'
     master = 'pcsw.Client'
     auto_fit_column_widths = True
-    column_names = 'when_html user summary workflow_buttons *'
+    column_names = 'when_text user summary workflow_buttons *'
     # column_names = 'when_text user summary workflow_buttons'
     insert_layout = """
     event_type
