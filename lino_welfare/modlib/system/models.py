@@ -121,7 +121,7 @@ class SiteConfigDetail(dd.DetailLayout):
         work_permit_upload_type \
         driving_licence_upload_type
         # client_calendar
-        default_event_type prompt_calendar
+        default_event_type prompt_calendar hide_events_before
         client_guestrole team_guestrole
         """, label=_("Constants"))
 

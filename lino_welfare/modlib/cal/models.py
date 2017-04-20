@@ -123,11 +123,28 @@ dd.inject_field(
         blank=True, null=True))
 
 
+@dd.python_2_unicode_compatible
 class Event(Event):
 
     # course = models.ForeignKey(
     #     "courses.Course", blank=True, null=True,
     #     help_text=_("Fill in only if this event is a session of a course."))
+
+    def __str__(self):
+        if self.summary:
+            s = self.summary
+        elif self.event_type:
+            s = str(self.event_type)
+        elif self.pk:
+            s = self._meta.verbose_name + " #" + str(self.pk)
+        else:
+            s = _("Unsaved %s") % self._meta.verbose_name
+        when = self.strftime()
+        if when:
+            s = "{} ({})".format(s, when)
+        if self.project:
+            s = _("{} with {}").format(s, self.project)
+        return s
 
     def get_calendar(self):
         if self.assigned_to is not None:
@@ -199,7 +216,7 @@ class EntriesByClient(Events):
     # master = 'cal.Event'
     master = 'pcsw.Client'
     auto_fit_column_widths = True
-    column_names = 'when_html user summary workflow_buttons *'
+    column_names = 'when_text user summary workflow_buttons *'
     # column_names = 'when_text user summary workflow_buttons'
     insert_layout = """
     event_type
@@ -218,7 +235,16 @@ class EntriesByClient(Events):
         return qs
 
     @classmethod
-    def get_filter_kw(self, ar, **kw):
+    def create_instance(cls, ar, **kw):
+        mi = ar.master_instance
+        if mi is not None:
+            kw.update(project=mi)
+        return super(EntriesByClient, cls).create_instance(ar, **kw)
+    
+    @classmethod
+    def unused_get_filter_kw(self, ar, **kw):
+        # disabled 20170420 because it also adds a filter condition
+        # (only entries whose project is mi)
         # cannot call super() since we don't have a master_key
         mi = ar.master_instance
         if mi is None:
