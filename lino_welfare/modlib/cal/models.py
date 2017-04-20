@@ -235,7 +235,16 @@ class EntriesByClient(Events):
         return qs
 
     @classmethod
-    def get_filter_kw(self, ar, **kw):
+    def create_instance(cls, ar, **kw):
+        mi = ar.master_instance
+        if mi is not None:
+            kw.update(project=mi)
+        return super(EntriesByClient, cls).create_instance(ar, **kw)
+    
+    @classmethod
+    def unused_get_filter_kw(self, ar, **kw):
+        # disabled 20170420 because it also adds a filter condition
+        # (only entries whose project is mi)
         # cannot call super() since we don't have a master_key
         mi = ar.master_instance
         if mi is None:
