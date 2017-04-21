@@ -141,6 +141,7 @@ Here is the main menu for accountants:
   - Büro : Meine Einfügetexte
   - ÖSHZ : Hilfearten, Kategorien
 - Explorer :
+  - Kontakte : Partner
   - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - Buchhaltung : Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen

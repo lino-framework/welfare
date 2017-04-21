@@ -342,7 +342,7 @@ Each window layout defines a given set of fields.
 - cv.StudiesByPerson.insert : start_date, end_date, type, content
 - cv.StudyTypes.detail : name, name_nl, name_de, name_en, id, education_level, is_study, is_training
 - cv.StudyTypes.insert : name, name_nl, name_de, name_en, is_study, is_training, education_level
-- cv.Trainings.detail : person, start_date, end_date, type, state, certificates, sector, function, school, country, city, remarks
+- cv.Trainings.detail : person, start_date, end_date, duration_text, type, state, certificates, sector, function, school, country, city, remarks
 - cv.Trainings.insert : person, start_date, end_date, type, state, certificates, sector, function, school, country, city
 - debts.Accounts.detail : ref, name, name_nl, name_de, name_en, group, type, required_for_household, required_for_person, periods, default_amount
 - debts.Accounts.insert : ref, group, type, name, name_nl, name_de, name_en
@@ -410,7 +410,7 @@ Each window layout defines a given set of fields.
 - reception.GoneVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.MyWaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.WaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
-- system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
+- system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, hide_events_before, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail : id, name, user, description, text
 - tinymce.TextFieldTemplates.insert : name, user
 - uploads.AllUploads.detail : file, user, upload_area, type, description, owner
@@ -663,14 +663,14 @@ Romain
   - Médiation de dettes : Groupes de comptes, Comptes, Budget modèle
   - Questionnaires : Listes de choix
 - Explorateur :
-  - Contacts : Personnes de contact, Types d'adresses, Adresses, Membres du conseil, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
+  - Contacts : Personnes de contact, Partenaires, Types d'adresses, Adresses, Membres du conseil, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
   - Système : Procurations, Types d'utilisateur, types de contenu, Notifications, Changes, All dashboard widgets, Tests de données, Problèmes de données
   - Bureau : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations, Text Field Templates
   - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
   - CPAS : Interventions, Contacts client, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
   - Parcours : Connaissances de langue, Formations, Études, Expériences professionnelles, Connaissances de langue, Compétences professionnelles, Compétences sociales, Freins
-  - Intégration : PIISs, Mises à l'emploi art60§7, Candidatures, Services utilisateurs, Mises à l'emploi art61, Stages d'immersion, Preuves de recherche, Fiches FSE
+  - Intégration : PIISs, Mises à l'emploi art60§7, Candidatures, Services utilisateurs, Mises à l'emploi art61, Stages d'immersion, Preuves de recherche, Fiches FSE, Champs FSE
   - Nouvelles demandes : Compétences
   - BCSS : Requêtes IdentifyPerson, Requêtes ManageAccess, Requêtes Tx25
   - Médiation de dettes : Budgets, Entrées
@@ -694,13 +694,13 @@ modifier les intervention d'autres utilisateurs.
 - CPAS : Mes Interventions
 - Intégration :
   - BCSS : Mes Requêtes IdentifyPerson, Mes Requêtes ManageAccess, Mes Requêtes Tx25
-- Ateliers :  Mes Ateliers, Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers
+- Ateliers : Mes Ateliers, Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers
 - Configuration :
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Types de ménage
   - CPAS : Services, Raisons d’arrêt d'intervention, Types de contact client, Types d'aide sociale, Catégories
 - Explorateur :
-  - Contacts : Personnes de contact, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
+  - Contacts : Personnes de contact, Partenaires, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
   - CPAS : Interventions, Contacts client, Etats bénéficiaires, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
 - Site : à propos
 
@@ -911,6 +911,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Médiation de dettes --> Comptes : 52
 - Configuration --> Questionnaires --> Listes de choix : 10
 - Explorateur --> Contacts --> Personnes de contact : 11
+- Explorateur --> Contacts --> Partenaires : 163
 - Explorateur --> Contacts --> Types d'adresses : 6
 - Explorateur --> Contacts --> Adresses : 91
 - Explorateur --> Contacts --> Membres du conseil : 1
@@ -972,6 +973,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Intégration --> Stages d'immersion : 7
 - Explorateur --> Intégration --> Preuves de recherche : 11
 - Explorateur --> Intégration --> Fiches FSE : 189
+- Explorateur --> Intégration --> Champs FSE : 12
 - Explorateur --> Nouvelles demandes --> Compétences : 8
 - Explorateur --> BCSS --> Requêtes IdentifyPerson : 6
 - Explorateur --> BCSS --> Requêtes ManageAccess : 2

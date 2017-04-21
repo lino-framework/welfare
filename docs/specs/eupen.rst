@@ -84,7 +84,7 @@ Rolf is the local system administrator, he has a complete menu:
   - ZDSS : Sektoren, Eigenschafts-Codes
   - Schuldnerberatung : Kontengruppen, Konten, Budget-Kopiervorlage
 - Explorer :
-  - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
+  - Kontakte : Kontaktpersonen, Partner, Adressenarten, Adressen, Gremienmitglieder, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - System : Vollmachten, Benutzerarten, Datenbankmodelle, Benachrichtigungen, Änderungen, All dashboard widgets, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
@@ -94,7 +94,7 @@ Rolf is the local system administrator, he has a complete menu:
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
-  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, ESF Summaries
+  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, ESF Summaries, ESF fields
   - Kurse : Kurse, Kursanfragen
   - Erstempfang : Kompetenzen
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
@@ -131,6 +131,7 @@ Hubert is an Integration agent.
 - Konfigurierung :
   - Büro : Meine Einfügetexte
 - Explorer :
+  - Kontakte : Partner
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - DSBE : VSEs, Art.60§7-Konventionen, Art.61-Konventionen
 - Site : Info
@@ -185,7 +186,7 @@ to explicitly override the language of :meth:`show_menu
   - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche
 - Explorer :
-  - Kontakte : Kontaktpersonen, Adressenarten, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
+  - Kontakte : Kontaktpersonen, Partner, Adressenarten, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - Kalender : Aufgaben, Abonnements
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
@@ -222,6 +223,7 @@ Schuldenberater
   - Büro : Meine Einfügetexte
   - Schuldnerberatung : Budget-Kopiervorlage
 - Explorer :
+  - Kontakte : Partner
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - DSBE : VSEs, Art.60§7-Konventionen
 - Site : Info
@@ -251,6 +253,7 @@ Berater Erstempfang
 - Konfigurierung :
   - Büro : Meine Einfügetexte
 - Explorer :
+  - Kontakte : Partner
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - DSBE : VSEs, Art.60§7-Konventionen
 - Site : Info
@@ -281,7 +284,7 @@ Empfangsschalter
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
   - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Hilfearten, Kategorien
 - Explorer :
-  - Kontakte : Kontaktpersonen, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
+  - Kontakte : Kontaktpersonen, Partner, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - ÖSHZ : Begleitungen, Klientenkontakte, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
@@ -384,7 +387,7 @@ Each window layout defines a given set of fields.
 - cv.StudiesByPerson.insert : start_date, end_date, type, content
 - cv.StudyTypes.detail : name, name_fr, name_en, id, education_level, is_study, is_training
 - cv.StudyTypes.insert : name, name_fr, name_en, is_study, is_training, education_level
-- cv.Trainings.detail : person, start_date, end_date, type, state, certificates, sector, function, school, country, city, remarks
+- cv.Trainings.detail : person, start_date, end_date, duration_text, type, state, certificates, sector, function, school, country, city, remarks
 - cv.Trainings.insert : person, start_date, end_date, type, state, certificates, sector, function, school, country, city
 - debts.Accounts.detail : ref, name, name_fr, name_en, group, type, required_for_household, required_for_person, periods, default_amount
 - debts.Accounts.insert : ref, group, type, name, name_fr, name_en
@@ -454,7 +457,7 @@ Each window layout defines a given set of fields.
 - reception.GoneVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.MyWaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.WaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
-- system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
+- system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, hide_events_before, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail : id, name, user, description, text
 - tinymce.TextFieldTemplates.insert : name, user
 - uploads.AllUploads.detail : file, user, upload_area, type, description, owner
@@ -886,6 +889,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Schuldnerberatung --> Kontengruppen : 9
 - Konfigurierung --> Schuldnerberatung --> Konten : 52
 - Explorer --> Kontakte --> Kontaktpersonen : 11
+- Explorer --> Kontakte --> Partner : 175
 - Explorer --> Kontakte --> Adressenarten : 6
 - Explorer --> Kontakte --> Adressen : 180
 - Explorer --> Kontakte --> Gremienmitglieder : 1
@@ -954,6 +958,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> DSBE --> Vertragspartner : 39
 - Explorer --> DSBE --> Art.61-Konventionen : 8
 - Explorer --> DSBE --> ESF Summaries : 0
+- Explorer --> DSBE --> ESF fields : 12
 - Explorer --> Kurse --> Kurse : 4
 - Explorer --> Kurse --> Kursanfragen : 20
 - Explorer --> Erstempfang --> Kompetenzen : 8
