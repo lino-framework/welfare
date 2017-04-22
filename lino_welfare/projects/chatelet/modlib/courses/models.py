@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2016 Luc Saffre
+# Copyright 2014-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -43,23 +43,28 @@ add('J', _("Job search workshops"), 'job', 'courses.JobCourses')
 # sociale" et "Module de détermination d'un projet socioprofessionnel"
 # par "Ateliers d'Insertion socioprofessionnelle".
 
-# We add two enrolment states:
+# We add three enrolment states:
 add = EnrolmentStates.add_item
 add('40', _("Started"), 'started', invoiceable=False, uses_a_place=True)
 add('50', _("Finished"), 'finished', invoiceable=False, uses_a_place=False)
+add('60', _("Never came"), 'never', invoiceable=False, uses_a_place=False)
 
 
 @dd.receiver(dd.pre_analyze)
 def my_enrolment_workflows(sender=None, **kw):
 
     EnrolmentStates.requested.add_transition(
-        required_states="confirmed")
+        required_states="trying confirmed")
     EnrolmentStates.confirmed.add_transition(
         required_states="requested")
     EnrolmentStates.started.add_transition(
         required_states="confirmed requested")
     EnrolmentStates.finished.add_transition(
         required_states="started")
+    EnrolmentStates.never.add_transition(
+        required_states="requested confirmed")
+    EnrolmentStates.trying.add_transition(
+        required_states="requested confirmed")
 
     CourseStates.active.add_transition(required_states="draft inactive")
     CourseStates.inactive.add_transition(required_states="draft active")
