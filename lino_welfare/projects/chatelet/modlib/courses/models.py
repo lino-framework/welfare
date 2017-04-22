@@ -45,6 +45,7 @@ add('J', _("Job search workshops"), 'job', 'courses.JobCourses')
 
 # We add three enrolment states:
 add = EnrolmentStates.add_item
+EnrolmentStates.trying.remove()
 add('40', _("Started"), 'started', invoiceable=False, uses_a_place=True)
 add('50', _("Finished"), 'finished', invoiceable=False, uses_a_place=False)
 add('60', _("Never came"), 'never', invoiceable=False, uses_a_place=False)
@@ -54,7 +55,7 @@ add('60', _("Never came"), 'never', invoiceable=False, uses_a_place=False)
 def my_enrolment_workflows(sender=None, **kw):
 
     EnrolmentStates.requested.add_transition(
-        required_states="trying confirmed")
+        required_states="confirmed")
     EnrolmentStates.confirmed.add_transition(
         required_states="requested")
     EnrolmentStates.started.add_transition(
@@ -63,8 +64,8 @@ def my_enrolment_workflows(sender=None, **kw):
         required_states="started")
     EnrolmentStates.never.add_transition(
         required_states="requested confirmed")
-    EnrolmentStates.trying.add_transition(
-        required_states="requested confirmed")
+    # EnrolmentStates.trying.add_transition(
+    #     required_states="requested confirmed")
 
     CourseStates.active.add_transition(required_states="draft inactive")
     CourseStates.inactive.add_transition(required_states="draft active")
