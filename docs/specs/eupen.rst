@@ -45,7 +45,7 @@ Rolf is the local system administrator, he has a complete menu:
 >>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Überfällige Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -73,7 +73,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Orte : Länder, Orte
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
-  - Büro : Upload-Arten, Auszugsarten, Notizarten, Ereignisarten, Meine Einfügetexte
+  - Büro : Auszugsarten, Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
   - Buchhaltung : Kontengruppen, Haushaltsartikel, Journale, Buchungsperioden, Zahlungsbedingungen
   - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
@@ -87,7 +87,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kontakte : Kontaktpersonen, Partner, Adressenarten, Adressen, Gremienmitglieder, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - System : Vollmachten, Benutzerarten, Datenbankmodelle, Benachrichtigungen, Änderungen, All dashboard widgets, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
-  - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
+  - Büro : Auszüge, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Kalendereinträge, Aufgaben, Anwesenheiten, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
   - Buchhaltung : Ausgleichungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Journalgruppen, Rechnungen
@@ -112,7 +112,7 @@ Hubert is an Integration agent.
 ...     rt.login('hubert').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -159,7 +159,7 @@ to explicitly override the language of :meth:`show_menu
 >>> rt.login('melanie').show_menu(language="de")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Überfällige Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -211,7 +211,7 @@ Schuldenberater
 ...     rt.login('kerstin').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -243,7 +243,7 @@ Berater Erstempfang
 ...     rt.login('caroline').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -274,7 +274,7 @@ Empfangsschalter
 >>> rt.login('theresia').show_menu(language="de")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Ablaufende Uploads, Meine Uploads, Meine Auszüge, Meine Ereignisse/Notizen
+- Büro : Meine Auszüge, Ablaufende Uploads, Meine Uploads, Meine Ereignisse/Notizen
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
 - ÖSHZ : Meine Begleitungen
 - DSBE :
@@ -780,10 +780,10 @@ Here is the output of :func:`walk_menu_items
 - Kontakte --> Partner (alle) : 175
 - Kontakte --> Haushalte : 15
 - Büro --> Meine Benachrichtigungen : 2
+- Büro --> Meine Auszüge : 0
 - Büro --> Ablaufende Uploads : 1
 - Büro --> Meine Uploads : 1
 - Büro --> Mein E-Mail-Ausgang : 1
-- Büro --> Meine Auszüge : 0
 - Büro --> Meine Ereignisse/Notizen : 9
 - Büro --> Meine Datenkontrollliste : 0
 - Kalender --> Meine Termine : 4
@@ -839,8 +839,8 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Eigenschaften --> Fachkompetenzen : 0
 - Konfigurierung --> Eigenschaften --> Sozialkompetenzen : 0
 - Konfigurierung --> Eigenschaften --> Hindernisse : 0
-- Konfigurierung --> Büro --> Upload-Arten : 10
 - Konfigurierung --> Büro --> Auszugsarten : 21
+- Konfigurierung --> Büro --> Upload-Arten : 10
 - Konfigurierung --> Büro --> Notizarten : 14
 - Konfigurierung --> Büro --> Ereignisarten : 11
 - Konfigurierung --> Büro --> Meine Einfügetexte : 1
@@ -860,10 +860,10 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> ÖSHZ --> Dienste : 4
 - Konfigurierung --> ÖSHZ --> Begleitungsbeendigungsgründe : 5
 - Konfigurierung --> ÖSHZ --> Klientenkontaktarten : 11
-- Konfigurierung --> ÖSHZ --> Integrationsphasen : 1
+- Konfigurierung --> ÖSHZ --> Integrationsphasen : 6
 - Konfigurierung --> ÖSHZ --> Berufe : 1
 - Konfigurierung --> ÖSHZ --> AG-Sperrgründe : 3
-- Konfigurierung --> ÖSHZ --> Dispenzgründe : 1
+- Konfigurierung --> ÖSHZ --> Dispenzgründe : 5
 - Konfigurierung --> ÖSHZ --> Hilfearten : 12
 - Konfigurierung --> ÖSHZ --> Kategorien : 4
 - Konfigurierung --> Lebenslauf --> Sprachen : 6
@@ -906,11 +906,11 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Datentests : 15
 - Explorer --> System --> Datenprobleme : 64
 - Explorer --> Eigenschaften --> Eigenschaften : 24
+- Explorer --> Büro --> Auszüge : 68
 - Explorer --> Büro --> Uploads : 12
 - Explorer --> Büro --> Upload-Bereiche : 1
 - Explorer --> Büro --> E-Mail-Ausgänge : 1
 - Explorer --> Büro --> Anhänge : 1
-- Explorer --> Büro --> Auszüge : 68
 - Explorer --> Büro --> Ereignisse/Notizen : 112
 - Explorer --> Büro --> Einfügetexte : 3
 - Explorer --> Kalender --> Kalendereinträge : 301

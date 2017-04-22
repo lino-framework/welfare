@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2002-2016 Luc Saffre
+# Copyright 2002-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -174,6 +174,7 @@ SETUP_INFO.update(packages=[
     'lino_welfare.projects.eupen',
     'lino_welfare.projects.eupen.modlib',
     'lino_welfare.projects.eupen.modlib.pcsw',
+    'lino_welfare.projects.eupen.modlib.pcsw.fixtures',
     'lino_welfare.projects.eupen.settings',
     'lino_welfare.projects.eupen.tests',
     'lino_welfare.projects.y2k',

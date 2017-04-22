@@ -37,15 +37,15 @@ checkers.
  printing.CachedPrintableChecker         Check for missing target files
  countries.PlaceChecker                  Check plausibility of geographical places.
  addresses.AddressOwnerChecker           Check for missing or non-primary address records
+ mixins.DupableChecker                   Check for missing phonetic words
  cal.EventGuestChecker                   Entries without participants
  cal.ConflictingEventsChecker            Check for conflicting calendar entries
  cal.ObsoleteEventTypeChecker            Obsolete event type of generated entries
  cal.LongEntryChecker                    Too long-lasting calendar entries
- mixins.DupableChecker                   Check for missing phonetic words
  beid.BeIdCardHolderChecker              Check for invalid SSINs
  pcsw.SSINChecker                        Check for valid identification
- coachings.ClientCoachingsChecker        Check coachings
  isip.OverlappingContractsChecker        Check for overlapping contracts
+ coachings.ClientCoachingsChecker        Check coachings
  ledger.VoucherChecker                   Check integrity of ledger movements
  sepa.BankAccountChecker                 Check for partner mismatches in bank accounts
  dupable_clients.SimilarClientsChecker   Check for similar clients

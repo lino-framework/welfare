@@ -52,7 +52,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-59 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, uploads, outbox, excerpts, extensible, cal, reception, accounts, badges, boards, welfare, sales, coachings, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, plausibility, tinymce.
+59 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, excerpts, welfare, uploads, outbox, extensible, cal, reception, accounts, badges, boards, sales, coachings, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, plausibility, tinymce.
 134 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -627,7 +627,7 @@ Romain
 >>> rt.login('romain').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Bureau : Mes Notifications, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Extraits, Mes Observations, Mes problèmes de données
+- Bureau : Mes Notifications, Mes Extraits, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Observations, Mes problèmes de données
 - Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Rendez-vous à confirmer, Mes tâches, Mes visiteurs, Mes présences, Mes rendez-vous dépassés
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis, Visiteurs qui m'attendent
 - CPAS : Bénéficiaires, Mes Interventions, Octrois à confirmer
@@ -651,7 +651,7 @@ Romain
   - Système : Paramètres du Site, Utilisateurs, Textes d'aide, Update all summary data
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
-  - Bureau : Types de fichiers téléchargés, Types d'extrait, Types d'observation, Types d'événements, Mes Text Field Templates
+  - Bureau : Types d'extrait, Types de fichiers téléchargés, Types d'observation, Types d'événements, Mes Text Field Templates
   - Calendrier : Calendriers, Locaux, Priorités, Évènements periodiques, Rôles de participants, Types d'entrée calendrier, Règles de récurrence, Calendriers externes
   - Comptabilité : Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
@@ -665,7 +665,7 @@ Romain
 - Explorateur :
   - Contacts : Personnes de contact, Partenaires, Types d'adresses, Adresses, Membres du conseil, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
   - Système : Procurations, Types d'utilisateur, types de contenu, Notifications, Changes, All dashboard widgets, Tests de données, Problèmes de données
-  - Bureau : Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Extraits, Observations, Text Field Templates
+  - Bureau : Extraits, Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Observations, Text Field Templates
   - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
   - CPAS : Interventions, Contacts client, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
@@ -689,7 +689,7 @@ modifier les intervention d'autres utilisateurs.
 >>> rt.login('theresia').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Bureau : Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Extraits, Mes Observations
+- Bureau : Mes Extraits, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Observations
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis
 - CPAS : Mes Interventions
 - Intégration :
@@ -802,10 +802,10 @@ Here is the output of :func:`walk_menu_items
 - Contacts --> Partenaires (tous) : 163
 - Contacts --> Ménages : 15
 - Bureau --> Mes Notifications : 2
+- Bureau --> Mes Extraits : 0
 - Bureau --> Mes téléchargements à renouveler : 1
 - Bureau --> Mes Fichiers téléchargés : 1
 - Bureau --> Mon courrier sortant : 1
-- Bureau --> Mes Extraits : 0
 - Bureau --> Mes Observations : 10
 - Bureau --> Mes problèmes de données : 0
 - Calendrier --> Mes rendez-vous : 5
@@ -856,8 +856,8 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Contacts --> Fonctions : 6
 - Configuration --> Contacts --> Conseils : 4
 - Configuration --> Contacts --> Types de ménage : 7
-- Configuration --> Bureau --> Types de fichiers téléchargés : 10
 - Configuration --> Bureau --> Types d'extrait : 19
+- Configuration --> Bureau --> Types de fichiers téléchargés : 10
 - Configuration --> Bureau --> Types d'observation : 14
 - Configuration --> Bureau --> Types d'événements : 11
 - Configuration --> Bureau --> Mes Text Field Templates : 1
@@ -927,11 +927,11 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> All dashboard widgets : 1
 - Explorateur --> Système --> Tests de données : 12
 - Explorateur --> Système --> Problèmes de données : 0
+- Explorateur --> Bureau --> Extraits : 70
 - Explorateur --> Bureau --> Fichiers téléchargés : 12
 - Explorateur --> Bureau --> Upload Areas : 1
 - Explorateur --> Bureau --> Mails envoyés : 1
 - Explorateur --> Bureau --> Pièces jointes : 1
-- Explorateur --> Bureau --> Extraits : 70
 - Explorateur --> Bureau --> Observations : 112
 - Explorateur --> Bureau --> Text Field Templates : 3
 - Explorateur --> Calendrier --> Entrées calendrier : 290
