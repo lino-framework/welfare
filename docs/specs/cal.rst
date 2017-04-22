@@ -211,18 +211,17 @@ Overdue appointments
 
 >>> rt.login('alicia').show(cal.MyOverdueAppointments, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-=============================================== ========================== ============================================================ ===================== =============================
- overview                                        Client                     Controlled by                                                Calendar entry type   Actions
------------------------------------------------ -------------------------- ------------------------------------------------------------ --------------------- -----------------------------
- `Évaluation 15 (07.04.2014 09:00) <Detail>`__   RADERMACHER Alfons (153)   `ISIP#17 (Alfons RADERMACHER) <Detail>`__                    Evaluation            [▽] **Suggested** → [☑] [☒]
- `Évaluation 14 (07.04.2014 09:00) <Detail>`__   DA VINCI David (165)       `ISIP#22 (David DA VINCI) <Detail>`__                        Evaluation            [▽] **Suggested** → [☑] [☒]
- `Évaluation 5 (14.04.2014) <Detail>`__          RADERMACHER Fritz (158)    `Art60§7 job supplyment#11 (Fritz RADERMACHER) <Detail>`__   Evaluation            [▽] **Suggested** → [☑] [☒]
- `Diner (02.05.2014 08:30) <Detail>`__                                                                                                   Meeting               **Suggested** → [☑] [☒]
- `Évaluation 15 (07.05.2014 09:00) <Detail>`__   DA VINCI David (165)       `ISIP#22 (David DA VINCI) <Detail>`__                        Evaluation            [▽] **Suggested** → [☑] [☒]
- `Évaluation 6 (14.05.2014) <Detail>`__          HILGERS Hildegard (133)    `Art60§7 job supplyment#5 (Hildegard HILGERS) <Detail>`__    Evaluation            [▽] **Suggested** → [☑] [☒]
-=============================================== ========================== ============================================================ ===================== =============================
+============================================================================= ============================================================ ===================== =============================
+ overview                                                                      Controlled by                                                Calendar entry type   Actions
+----------------------------------------------------------------------------- ------------------------------------------------------------ --------------------- -----------------------------
+ `Évaluation 15 (07.04.2014 09:00) with RADERMACHER Alfons (153) <Detail>`__   `ISIP#17 (Alfons RADERMACHER) <Detail>`__                    Evaluation            [▽] **Suggested** → [☑] [☒]
+ `Évaluation 14 (07.04.2014 09:00) with DA VINCI David (165) <Detail>`__       `ISIP#22 (David DA VINCI) <Detail>`__                        Evaluation            [▽] **Suggested** → [☑] [☒]
+ `Évaluation 5 (14.04.2014) with RADERMACHER Fritz (158) <Detail>`__           `Art60§7 job supplyment#11 (Fritz RADERMACHER) <Detail>`__   Evaluation            [▽] **Suggested** → [☑] [☒]
+ `Diner (02.05.2014 08:30) <Detail>`__                                                                                                      Meeting               **Suggested** → [☑] [☒]
+ `Évaluation 15 (07.05.2014 09:00) with DA VINCI David (165) <Detail>`__       `ISIP#22 (David DA VINCI) <Detail>`__                        Evaluation            [▽] **Suggested** → [☑] [☒]
+ `Évaluation 6 (14.05.2014) with HILGERS Hildegard (133) <Detail>`__           `Art60§7 job supplyment#5 (Hildegard HILGERS) <Detail>`__    Evaluation            [▽] **Suggested** → [☑] [☒]
+============================================================================= ============================================================ ===================== =============================
 <BLANKLINE>
-
 
 
 Calendars and Subscriptions

@@ -45,7 +45,7 @@ Rolf is the local system administrator, he has a complete menu:
 >>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Überfällige Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -73,7 +73,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Orte : Länder, Orte
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
-  - Büro : Upload-Arten, Auszugsarten, Notizarten, Ereignisarten, Meine Einfügetexte
+  - Büro : Auszugsarten, Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
   - Buchhaltung : Kontengruppen, Haushaltsartikel, Journale, Buchungsperioden, Zahlungsbedingungen
   - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
@@ -84,17 +84,17 @@ Rolf is the local system administrator, he has a complete menu:
   - ZDSS : Sektoren, Eigenschafts-Codes
   - Schuldnerberatung : Kontengruppen, Konten, Budget-Kopiervorlage
 - Explorer :
-  - Kontakte : Kontaktpersonen, Adressenarten, Adressen, Gremienmitglieder, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
+  - Kontakte : Kontaktpersonen, Partner, Adressenarten, Adressen, Gremienmitglieder, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - System : Vollmachten, Benutzerarten, Datenbankmodelle, Benachrichtigungen, Änderungen, All dashboard widgets, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
-  - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Auszüge, Ereignisse/Notizen, Einfügetexte
+  - Büro : Auszüge, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Kalendereinträge, Aufgaben, Anwesenheiten, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
   - Buchhaltung : Ausgleichungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Journalgruppen, Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
-  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, ESF Summaries
+  - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen, ESF Summaries, ESF fields
   - Kurse : Kurse, Kursanfragen
   - Erstempfang : Kompetenzen
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
@@ -112,7 +112,7 @@ Hubert is an Integration agent.
 ...     rt.login('hubert').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -131,6 +131,7 @@ Hubert is an Integration agent.
 - Konfigurierung :
   - Büro : Meine Einfügetexte
 - Explorer :
+  - Kontakte : Partner
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - DSBE : VSEs, Art.60§7-Konventionen, Art.61-Konventionen
 - Site : Info
@@ -158,7 +159,7 @@ to explicitly override the language of :meth:`show_menu
 >>> rt.login('melanie').show_menu(language="de")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Überfällige Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -185,7 +186,7 @@ to explicitly override the language of :meth:`show_menu
   - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche
 - Explorer :
-  - Kontakte : Kontaktpersonen, Adressenarten, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
+  - Kontakte : Kontaktpersonen, Partner, Adressenarten, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - Kalender : Aufgaben, Abonnements
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
@@ -210,7 +211,7 @@ Schuldenberater
 ...     rt.login('kerstin').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -222,6 +223,7 @@ Schuldenberater
   - Büro : Meine Einfügetexte
   - Schuldnerberatung : Budget-Kopiervorlage
 - Explorer :
+  - Kontakte : Partner
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - DSBE : VSEs, Art.60§7-Konventionen
 - Site : Info
@@ -241,7 +243,7 @@ Berater Erstempfang
 ...     rt.login('caroline').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Auszüge, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
 - Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
@@ -251,6 +253,7 @@ Berater Erstempfang
 - Konfigurierung :
   - Büro : Meine Einfügetexte
 - Explorer :
+  - Kontakte : Partner
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - DSBE : VSEs, Art.60§7-Konventionen
 - Site : Info
@@ -271,7 +274,7 @@ Empfangsschalter
 >>> rt.login('theresia').show_menu(language="de")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Ablaufende Uploads, Meine Uploads, Meine Auszüge, Meine Ereignisse/Notizen
+- Büro : Meine Auszüge, Ablaufende Uploads, Meine Uploads, Meine Ereignisse/Notizen
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
 - ÖSHZ : Meine Begleitungen
 - DSBE :
@@ -281,7 +284,7 @@ Empfangsschalter
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
   - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Hilfearten, Kategorien
 - Explorer :
-  - Kontakte : Kontaktpersonen, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
+  - Kontakte : Kontaktpersonen, Partner, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - ÖSHZ : Begleitungen, Klientenkontakte, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
@@ -384,7 +387,7 @@ Each window layout defines a given set of fields.
 - cv.StudiesByPerson.insert : start_date, end_date, type, content
 - cv.StudyTypes.detail : name, name_fr, name_en, id, education_level, is_study, is_training
 - cv.StudyTypes.insert : name, name_fr, name_en, is_study, is_training, education_level
-- cv.Trainings.detail : person, start_date, end_date, type, state, certificates, sector, function, school, country, city, remarks
+- cv.Trainings.detail : person, start_date, end_date, duration_text, type, state, certificates, sector, function, school, country, city, remarks
 - cv.Trainings.insert : person, start_date, end_date, type, state, certificates, sector, function, school, country, city
 - debts.Accounts.detail : ref, name, name_fr, name_en, group, type, required_for_household, required_for_person, periods, default_amount
 - debts.Accounts.insert : ref, group, type, name, name_fr, name_en
@@ -454,7 +457,7 @@ Each window layout defines a given set of fields.
 - reception.GoneVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.MyWaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.WaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
-- system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
+- system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, hide_events_before, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail : id, name, user, description, text
 - tinymce.TextFieldTemplates.insert : name, user
 - uploads.AllUploads.detail : file, user, upload_area, type, description, owner
@@ -777,10 +780,10 @@ Here is the output of :func:`walk_menu_items
 - Kontakte --> Partner (alle) : 175
 - Kontakte --> Haushalte : 15
 - Büro --> Meine Benachrichtigungen : 2
+- Büro --> Meine Auszüge : 0
 - Büro --> Ablaufende Uploads : 1
 - Büro --> Meine Uploads : 1
 - Büro --> Mein E-Mail-Ausgang : 1
-- Büro --> Meine Auszüge : 0
 - Büro --> Meine Ereignisse/Notizen : 9
 - Büro --> Meine Datenkontrollliste : 0
 - Kalender --> Meine Termine : 4
@@ -836,8 +839,8 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Eigenschaften --> Fachkompetenzen : 0
 - Konfigurierung --> Eigenschaften --> Sozialkompetenzen : 0
 - Konfigurierung --> Eigenschaften --> Hindernisse : 0
-- Konfigurierung --> Büro --> Upload-Arten : 10
 - Konfigurierung --> Büro --> Auszugsarten : 21
+- Konfigurierung --> Büro --> Upload-Arten : 10
 - Konfigurierung --> Büro --> Notizarten : 14
 - Konfigurierung --> Büro --> Ereignisarten : 11
 - Konfigurierung --> Büro --> Meine Einfügetexte : 1
@@ -857,10 +860,10 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> ÖSHZ --> Dienste : 4
 - Konfigurierung --> ÖSHZ --> Begleitungsbeendigungsgründe : 5
 - Konfigurierung --> ÖSHZ --> Klientenkontaktarten : 11
-- Konfigurierung --> ÖSHZ --> Integrationsphasen : 1
+- Konfigurierung --> ÖSHZ --> Integrationsphasen : 6
 - Konfigurierung --> ÖSHZ --> Berufe : 1
 - Konfigurierung --> ÖSHZ --> AG-Sperrgründe : 3
-- Konfigurierung --> ÖSHZ --> Dispenzgründe : 1
+- Konfigurierung --> ÖSHZ --> Dispenzgründe : 5
 - Konfigurierung --> ÖSHZ --> Hilfearten : 12
 - Konfigurierung --> ÖSHZ --> Kategorien : 4
 - Konfigurierung --> Lebenslauf --> Sprachen : 6
@@ -886,6 +889,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Schuldnerberatung --> Kontengruppen : 9
 - Konfigurierung --> Schuldnerberatung --> Konten : 52
 - Explorer --> Kontakte --> Kontaktpersonen : 11
+- Explorer --> Kontakte --> Partner : 175
 - Explorer --> Kontakte --> Adressenarten : 6
 - Explorer --> Kontakte --> Adressen : 180
 - Explorer --> Kontakte --> Gremienmitglieder : 1
@@ -902,11 +906,11 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Datentests : 15
 - Explorer --> System --> Datenprobleme : 64
 - Explorer --> Eigenschaften --> Eigenschaften : 24
+- Explorer --> Büro --> Auszüge : 68
 - Explorer --> Büro --> Uploads : 12
 - Explorer --> Büro --> Upload-Bereiche : 1
 - Explorer --> Büro --> E-Mail-Ausgänge : 1
 - Explorer --> Büro --> Anhänge : 1
-- Explorer --> Büro --> Auszüge : 68
 - Explorer --> Büro --> Ereignisse/Notizen : 112
 - Explorer --> Büro --> Einfügetexte : 3
 - Explorer --> Kalender --> Kalendereinträge : 301
@@ -954,6 +958,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> DSBE --> Vertragspartner : 39
 - Explorer --> DSBE --> Art.61-Konventionen : 8
 - Explorer --> DSBE --> ESF Summaries : 0
+- Explorer --> DSBE --> ESF fields : 12
 - Explorer --> Kurse --> Kurse : 4
 - Explorer --> Kurse --> Kursanfragen : 20
 - Explorer --> Erstempfang --> Kompetenzen : 8

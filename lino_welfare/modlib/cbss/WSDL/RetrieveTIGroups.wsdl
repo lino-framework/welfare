@@ -61,7 +61,7 @@
 			<!--dvlp : bcssksz-services-test.smals.be -->
 			<!--acpt:bcssksz-services-acc.smals.be -->
 			<!-- prod:bcssksz-servicesprod.smals.be-->
-			<soap:address location="https://b2b-%(cbss_environment)s.ksz-bcss.fgov.be:4520/RetrieveTIGroupsService/retrieveTI"/>
+			<soap:address location="https://bcssksz-services-%(cbss_environment)s.smals.be:443/SOA4520/RetrieveTIGroupsService/retrieveTI"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

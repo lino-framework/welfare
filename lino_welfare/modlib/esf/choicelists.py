@@ -174,6 +174,7 @@ class StatisticalFields(dd.ChoiceList):
     verbose_name_plural = _("ESF fields")
     column_names = 'value name text type'
     item_class = StatisticalField
+    required_roles = dd.login_required(dd.SiteStaff)
 
 add = StatisticalFields.add_item_instance
 
