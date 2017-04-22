@@ -108,7 +108,7 @@ class Site(Site):
         yield 'lino_xl.lib.properties'
         yield 'lino_xl.lib.addresses'
 
-        yield 'lino_welfare.modlib.uploads'
+        yield 'lino_xl.lib.uploads'
         yield 'lino_xl.lib.outbox'
         yield 'lino_xl.lib.excerpts'
 

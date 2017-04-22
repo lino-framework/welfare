@@ -150,8 +150,6 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.system',
     'lino_welfare.modlib.immersion',
     'lino_welfare.modlib.immersion.fixtures',
-    'lino_welfare.modlib.uploads',
-    'lino_welfare.modlib.uploads.fixtures',
     'lino_welfare.modlib.users',
     'lino_welfare.modlib.users.fixtures',
     'lino_welfare.modlib.welfare',

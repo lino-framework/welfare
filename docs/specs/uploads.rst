@@ -64,6 +64,8 @@ This is the list of upload types:
 <BLANKLINE>
 
 
+
+
 Two clients and their uploads
 =============================
 
@@ -169,6 +171,20 @@ Keine Daten anzuzeigen
 Shortcut fields
 ===============
 
+
+>>> id_document = uploads.UploadType.objects.get(shortcut=uploads.Shortcuts.id_document)
+>>> rt.show(uploads.UploadsByType, id_document)
+=================== ====================== ============================ ======= ============ ============ ============================
+ Hochgeladen durch   Klient                 Upload-Art                   Datei   Gültig von   Gültig bis   Beschreibung
+------------------- ---------------------- ---------------------------- ------- ------------ ------------ ----------------------------
+ Theresia Thelen     DERICUM Daniel (121)   Identifizierendes Dokument                        25.05.14     Identifizierendes Dokument
+ Theresia Thelen     DERICUM Daniel (121)   Identifizierendes Dokument                        22.04.14     Identifizierendes Dokument
+ Hubert Huppertz     BRECHT Bernd (177)     Identifizierendes Dokument                        27.05.15     Identifizierendes Dokument
+=================== ====================== ============================ ======= ============ ============ ============================
+<BLANKLINE>
+
+
+
 Let's have a closer look at the `id_document` shortcut field for
 some customers. 
 
@@ -233,7 +249,7 @@ It has 3 keys:
 
 
 Uploads by client
------------------
+=================
 
 :class:`UploadsByClient
 <lino_welfare.modlib.uploads.models.UploadsByClient>` shows all the

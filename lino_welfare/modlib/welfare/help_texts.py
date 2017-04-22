@@ -438,19 +438,6 @@ account_type and
 statements."""),
     'lino_welfare.modlib.sepa.models.AccountsByClient.master' : _("""alias of Partner"""),
     'lino_welfare.modlib.sepa.models.AccountsByClient.model' : _("""alias of Account"""),
-    'lino_welfare.modlib.uploads.models.UploadType' : _("""Extends the library model by adding warn_expiry info."""),
-    'lino_welfare.modlib.uploads.models.Upload' : _("""Extends the library model by adding the ContactRelated,
-ProjectRelated and DatePeriod mixins and two fields."""),
-    'lino_welfare.modlib.uploads.models.Upload.remark' : _("""A remark about this document."""),
-    'lino_welfare.modlib.uploads.models.Upload.needed' : _("""Whether this particular upload is a needed document. Default value
-is True if the new Upload has an UploadType with a nonempty
-warn_expiry_unit."""),
-    'lino_welfare.modlib.uploads.models.UploadDetail' : _("""The Detail layout for Upload"""),
-    'lino_welfare.modlib.uploads.models.MyExpiringUploads' : _("""Expiring uploads for client coached by me"""),
-    'lino_welfare.modlib.uploads.models.MyExpiringUploads.model' : _("""alias of Upload"""),
-    'lino_welfare.modlib.uploads.models.UploadsByClient' : _("""Uploads by Client"""),
-    'lino_welfare.modlib.uploads.models.UploadsByClient.master' : _("""alias of Client"""),
-    'lino_welfare.modlib.uploads.models.UploadsByClient.model' : _("""alias of Upload"""),
     'lino_welfare.modlib.users.desktop.UserDetail' : _("""Layout of User Detail in Lino Welfare."""),
     'lino_welfare.modlib.users.models.User' : _("""The users.User model used in Lino Welfare.  We add a few fields
 to the standard models (lino.modlib.users.models.User)."""),
