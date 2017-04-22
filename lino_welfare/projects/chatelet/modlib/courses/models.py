@@ -43,12 +43,17 @@ add('J', _("Job search workshops"), 'job', 'courses.JobCourses')
 # sociale" et "Module de détermination d'un projet socioprofessionnel"
 # par "Ateliers d'Insertion socioprofessionnelle".
 
-# We add three enrolment states:
+# What follows is still the old approach for redefining a
+# workflow. One day we should convert this to the new approach using
+# the workflows_module.
+
+# We add three enrolment states and remove "trying":
 add = EnrolmentStates.add_item
-EnrolmentStates.trying.remove()
+EnrolmentStates.trying.text = _("Never came")
+# EnrolmentStates.trying.remove()
 add('40', _("Started"), 'started', invoiceable=False, uses_a_place=True)
 add('50', _("Finished"), 'finished', invoiceable=False, uses_a_place=False)
-add('60', _("Never came"), 'never', invoiceable=False, uses_a_place=False)
+# add('60', _("Never came"), 'never', invoiceable=False, uses_a_place=False)
 
 
 @dd.receiver(dd.pre_analyze)
@@ -62,7 +67,7 @@ def my_enrolment_workflows(sender=None, **kw):
         required_states="confirmed requested")
     EnrolmentStates.finished.add_transition(
         required_states="started")
-    EnrolmentStates.never.add_transition(
+    EnrolmentStates.trying.add_transition(
         required_states="requested confirmed")
     # EnrolmentStates.trying.add_transition(
     #     required_states="requested confirmed")
