@@ -41,7 +41,6 @@ The following plugins are extensions of their respective version in
     sales
     sepa
     system
-    uploads
     users
 
 The following plugins are not being used:

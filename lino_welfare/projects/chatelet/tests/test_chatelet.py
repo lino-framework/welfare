@@ -80,7 +80,10 @@ class TestCase(TestCase):
         self.assertEqual(
             colnames,
             ['type', 'user', 'detected_date', 'remark', 'id',
-             'workflow_buttons', 'overview', 'description_column',
+             'mobile_item',
+             'description_column',
+             'overview',
+             'workflow_buttons',
              'person'])
 
         url = "/api/cv/ObstaclesByPerson"
@@ -103,8 +106,10 @@ class TestCase(TestCase):
             """Obstacle "Obstacle object" has been created.""")
         self.assertEqual(result['rows'], [
             ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
-             '<span />', '<div><em>Obstacle object</em></div>',
+             '<div><em>Obstacle object</em></div>',
              '<em>Obstacle object</em>',
+             u'<div><em>Obstacle object</em></div>',
+             '<span />',
              'First LAST', 100,
              {'id': True}, {}, False]])
 

@@ -30,7 +30,7 @@
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from lino_welfare.projects.std.settings import *
+from lino_welfare.modlib.welfare.settings import *
 
 # configure_plugin('beid', read_only_simulate=True)
 

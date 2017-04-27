@@ -1,4 +1,4 @@
-# Copyright 2016 Luc Saffre
+# Copyright 2016-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -40,5 +40,6 @@ class Plugin(ad.Plugin):
         mg = site.plugins.integ
         m = m.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('esf.AllSummaries')
+        m.add_action('esf.StatisticalFields')
 
 

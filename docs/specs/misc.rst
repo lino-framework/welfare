@@ -373,7 +373,7 @@ see it.
 - notes.NotesByX.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.DispenseReasons.duplicate : visible for 110 410 admin 910
 - polls.Choices.duplicate : visible for 110 410 admin 910
-- polls.ChoicesBySet.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- polls.ChoicesBySet.duplicate : visible for 110 410 admin 910
 - polls.PollResult.duplicate : visible for 110 410 admin 910
 - polls.Questions.duplicate : visible for 110 410 admin 910
 - polls.QuestionsByPoll.duplicate : visible for 100 110 120 200 300 400 410 admin 910

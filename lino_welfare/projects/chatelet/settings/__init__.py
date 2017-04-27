@@ -20,7 +20,7 @@
 The settings.py used for building both `/docs` and `/userdocs`
 """
 
-from lino_welfare.projects.std.settings import *
+from lino_welfare.modlib.welfare.settings import *
 from lino.api import _
 
 

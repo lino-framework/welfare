@@ -103,7 +103,7 @@ class BeIdTests(RemoteAuthTestCase):
         result = self.check_json_result(
             response, 'navinfo data disable_delete id title')
 
-        fieldname = 'MembersByPerson'
+        fieldname = 'households_MembersByPerson'
         html = result['data'][fieldname]
         soup = BeautifulSoup(html)
     

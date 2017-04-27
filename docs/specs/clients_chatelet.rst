@@ -58,9 +58,9 @@ Lino Welfare à la Chatelet.
   - **Interventions** (coachings.CoachingsByClient)
 - **Situation familiale** (family) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]:
   - (family_1) [visible for all]:
-    - (family_left): **Appartenance aux ménages** (MembersByPerson) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910], **Garde d'enfant** (child_custody)
+    - (family_left): **Appartenance aux ménages** (households_MembersByPerson) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910], **Garde d'enfant** (child_custody)
     - **Composition de ménage** (households.SiblingsByPerson) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]
-  - **Liens de parenté** (LinksByHuman)
+  - **Liens de parenté** (humanlinks_LinksByHuman)
 - **Parcours** (career) [visible for 100 110 120 admin 910]:
   - **Études** (cv.StudiesByPerson)
   - **Formations** (cv.TrainingsByPerson)
@@ -70,7 +70,7 @@ Lino Welfare à la Chatelet.
     - **Compétences professionnelles** (cv.SkillsByPerson) [visible for 100 110 120 admin 910]
     - **Tests de niveau** (badges.AwardsByHolder)
     - **Compétences sociales** (cv.SoftSkillsByPerson) [visible for 100 110 120 admin 910]
-  - (competences_2) [visible for all]: **Connaissances de langue** (LanguageKnowledgesByPerson) [visible for 100 110 120 admin 910], **Autres atouts** (skills)
+  - (competences_2) [visible for all]: **Connaissances de langue** (cv_LanguageKnowledgesByPerson) [visible for 100 110 120 admin 910], **Autres atouts** (skills)
 - **Freins** (obstacles_tab) [visible for 100 110 120 admin 910]:
   - (obstacles_tab_1) [visible for 100 110 120 200 300 400 410 admin 910]:
     - **Freins** (cv.ObstaclesByPerson) [visible for 100 110 120 admin 910]
@@ -90,7 +90,7 @@ Lino Welfare à la Chatelet.
     - **Exclusions** (pcsw.ExclusionsByClient) [visible for 100 110 120 200 300 400 410 admin 910]
   - (papers) [visible for 100 110 120 200 300 400 410 admin 910]:
     - **Preuves de recherche** (active_job_search.ProofsByClient) [visible for 100 110 120 admin 910]
-    - **Interviews** (ResponsesByPartner)
+    - **Interviews** (polls_ResponsesByPartner)
 - **Mise à l'emploi** (contracts) [visible for 100 110 120 200 300 400 410 admin 910]:
   - **Candidatures** (jobs.CandidaturesByPerson)
   - **Mises à l'emploi art60§7** (jobs.ContractsByClient)
@@ -99,7 +99,7 @@ Lino Welfare à la Chatelet.
   - **Observations** (notes.NotesByProject)
   - (history_right):
     - **Fichiers téléchargés** (uploads.UploadsByClient)
-    - **Existing excerpts** (ExcerptsByProject)
+    - **Existing excerpts** (excerpts_ExcerptsByProject)
     - **Fiches FSE** (esf.SummariesByClient) [visible for 100 110 120 admin 910]
 - **Calendrier** (calendar) [visible for 100 110 120 200 300 400 410 500 510 admin 910]:
   - **Entrées calendrier** (cal.EntriesByClient)

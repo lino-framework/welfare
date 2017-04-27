@@ -192,13 +192,13 @@ class TestCase(TestCase):
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)
 
-        # self.check_notifications()
+        #self.check_notifications()
         self.check_notifications("""
-================================== ======================== ===========
- Subject                            Controlled by            Recipient
----------------------------------- ------------------------ -----------
- Alicia modified roger / Client S   *CLIENT Seconda (101)*   roger
-================================== ======================== ===========
+================================== ==================== ===========
+ Subject                            Controlled by        Recipient
+---------------------------------- -------------------- -----------
+ Alicia modified roger / Client S   *roger / Client S*   roger
+================================== ==================== ===========
 """)
 
         # AssignCoach. we are going to Assign caroline as coach for
