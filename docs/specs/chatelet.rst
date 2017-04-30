@@ -470,11 +470,11 @@ Each window layout is **viewable** by a given set of user profiles.
 - cal.Events.detail : visible for 110 410 admin 910
 - cal.Events.insert : visible for 110 410 admin 910
 - cal.GuestRoles.insert : visible for admin 910
-- cal.GuestStates.wf1 : visible for admin 910
-- cal.GuestStates.wf2 : visible for admin 910
-- cal.Guests.checkin : visible for admin 910
-- cal.Guests.detail : visible for admin 910
-- cal.Guests.insert : visible for admin 910
+- cal.GuestStates.wf1 : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- cal.GuestStates.wf2 : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- cal.Guests.checkin : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- cal.Guests.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- cal.Guests.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - cal.RecurrentEvents.detail : visible for 110 410 admin 910
 - cal.RecurrentEvents.insert : visible for 110 410 admin 910
 - cal.Rooms.detail : visible for 110 410 admin 910
