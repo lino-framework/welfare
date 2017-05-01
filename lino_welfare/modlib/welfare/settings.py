@@ -72,6 +72,7 @@ class Site(Site):
         super(Site, self).setup_plugins()
         self.plugins.accounts.configure(ref_length=16)
         self.plugins.coachings.configure(client_model='pcsw.Client')
+        self.plugins.addresses.configure(partner_model='contacts.Partner')
         self.plugins.excerpts.configure(responsible_user='melanie')
         # self.plugins.extjs.configure(enter_submits_form=True)
 
