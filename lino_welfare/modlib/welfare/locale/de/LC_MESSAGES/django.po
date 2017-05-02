@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-22 07:09+0300\n"
+"POT-Creation-Date: 2017-04-22 20:38+0300\n"
 "PO-Revision-Date: 2017-03-13 14:02+0200\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: de\n"
@@ -3718,7 +3718,7 @@ msgid "Accepts appointments for newcomers."
 msgstr ""
 
 #: lino_welfare/modlib/welfare/__init__.py:39
-#: lino_welfare/projects/std/settings/__init__.py:33
+#: lino_welfare/modlib/welfare/settings.py:33
 msgid "Lino Welfare"
 msgstr "Lino für ÖSHZ"
 
@@ -3953,8 +3953,7 @@ msgstr "Art.61-Konventionsart"
 #: lino_welfare/modlib/welfare/help_texts.py:419
 #: lino_welfare/modlib/welfare/help_texts.py:426
 #: lino_welfare/modlib/welfare/help_texts.py:431
-#: lino_welfare/modlib/welfare/help_texts.py:452
-#: lino_welfare/modlib/welfare/help_texts.py:490
+#: lino_welfare/modlib/welfare/help_texts.py:477
 #, fuzzy
 msgid "alias of Client"
 msgstr "Ähnliche Klienten"
@@ -4972,127 +4971,88 @@ msgid "alias of Account"
 msgstr "Sozi"
 
 #: lino_welfare/modlib/welfare/help_texts.py:441
-msgid "Extends the library model by adding warn_expiry info."
-msgstr ""
-
-#: lino_welfare/modlib/welfare/help_texts.py:442
-msgid ""
-"Extends the library model by adding the ContactRelated,\n"
-"ProjectRelated and DatePeriod mixins and two fields."
-msgstr ""
-
-#: lino_welfare/modlib/welfare/help_texts.py:444
-msgid "A remark about this document."
-msgstr ""
-
-#: lino_welfare/modlib/welfare/help_texts.py:445
-msgid ""
-"Whether this particular upload is a needed document. Default value\n"
-"is True if the new Upload has an UploadType with a nonempty\n"
-"warn_expiry_unit."
-msgstr ""
-
-#: lino_welfare/modlib/welfare/help_texts.py:448
-msgid "The Detail layout for Upload"
-msgstr ""
-
-#: lino_welfare/modlib/welfare/help_texts.py:449
-msgid "Expiring uploads for client coached by me"
-msgstr ""
-
-#: lino_welfare/modlib/welfare/help_texts.py:450
-#: lino_welfare/modlib/welfare/help_texts.py:453
-msgid "alias of Upload"
-msgstr ""
-
-#: lino_welfare/modlib/welfare/help_texts.py:451
-#, fuzzy
-msgid "Uploads by Client"
-msgstr "Dublettenkontrolle Klienten"
-
-#: lino_welfare/modlib/welfare/help_texts.py:454
 msgid "Layout of User Detail in Lino Welfare."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:455
+#: lino_welfare/modlib/welfare/help_texts.py:442
 msgid ""
 "The users.User model used in Lino Welfare.  We add a few fields\n"
 "to the standard models (lino.modlib.users.models.User)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:457
+#: lino_welfare/modlib/welfare/help_texts.py:444
 msgid "Like an accountant, but also has access to configuration."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:458
+#: lino_welfare/modlib/welfare/help_texts.py:445
 msgid "The site adminstrator has permission for everything."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:459
+#: lino_welfare/modlib/welfare/help_texts.py:446
 msgid ""
 "A reception clerk is a user who is not a social agent but\n"
 "receives clients and does certain administrative tasks (in Eupen\n"
 "they call them back office)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:462
+#: lino_welfare/modlib/welfare/help_texts.py:449
 msgid ""
 "A newcomers reception clerk is a reception clerk who also\n"
 "can assign coaches to clients."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:464
+#: lino_welfare/modlib/welfare/help_texts.py:451
 msgid ""
 "A newcomers integration agent is an integration agent who\n"
 "also can assign coaches to clients and create budgets for debts\n"
 "mediation."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:467
+#: lino_welfare/modlib/welfare/help_texts.py:454
 msgid ""
 "An accountant is a user who enters invoices, bank statements,\n"
 "payment orders and other ledger operations."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:469
+#: lino_welfare/modlib/welfare/help_texts.py:456
 msgid "A backoffice user who can act as others."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:470
+#: lino_welfare/modlib/welfare/help_texts.py:457
 msgid "A CourseProvider is a Company that offers Courses."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:471
+#: lino_welfare/modlib/welfare/help_texts.py:458
 msgid ""
 "Same as CompanyDetail, except that we add a tab\n"
 "Courses."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:473
+#: lino_welfare/modlib/welfare/help_texts.py:460
 #, fuzzy
 msgid "Table of all course providers"
 msgstr "Kursanbieter"
 
-#: lino_welfare/modlib/welfare/help_texts.py:474
+#: lino_welfare/modlib/welfare/help_texts.py:461
 #, fuzzy
 msgid "alias of CourseProvider"
 msgstr "Kursanbieter"
 
-#: lino_welfare/modlib/welfare/help_texts.py:475
+#: lino_welfare/modlib/welfare/help_texts.py:462
 msgid ""
 "Ein Kursinhalt (z.B. \"Französisch\", \"Deutsch\", "
 "\"Alphabétisation\",...)"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:476
+#: lino_welfare/modlib/welfare/help_texts.py:463
 msgid "Bezeichnung des Kursinhalts (nach Konvention des DSBE)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:477
+#: lino_welfare/modlib/welfare/help_texts.py:464
 msgid "Der Titel des Kurses. Maximal 200 Zeichen."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:478
+#: lino_welfare/modlib/welfare/help_texts.py:465
 msgid ""
 "Ein konkreter Kurs, der an einem bestimmten Datum beginnt.\n"
 "Für jeden Kurs muss ein entsprechendes Angebot existieren, \n"
@@ -5102,68 +5062,68 @@ msgid ""
 "Kurs muss ein Angebot erstellt werden."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:484
+#: lino_welfare/modlib/welfare/help_texts.py:471
 msgid "Bemerkung über diesen konkreten Kurs. Maximal 200 Zeichen."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:485
+#: lino_welfare/modlib/welfare/help_texts.py:472
 msgid ""
 "A Course Request is created when a certain Person expresses her\n"
 "wish to participate in a Course with a certain CourseContent."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:487
+#: lino_welfare/modlib/welfare/help_texts.py:474
 msgid "Bemerkung zu dieser konkreten Kursanfrage oder -teilnahme."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:488
+#: lino_welfare/modlib/welfare/help_texts.py:475
 msgid "Datum der effektives Beendigung dieser Kursteilname."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:489
+#: lino_welfare/modlib/welfare/help_texts.py:476
 msgid "Shows the course requests of a client."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:491
-#: lino_welfare/modlib/welfare/help_texts.py:494
-#: lino_welfare/modlib/welfare/help_texts.py:497
-#: lino_welfare/modlib/welfare/help_texts.py:501
-#: lino_welfare/modlib/welfare/help_texts.py:503
+#: lino_welfare/modlib/welfare/help_texts.py:478
+#: lino_welfare/modlib/welfare/help_texts.py:481
+#: lino_welfare/modlib/welfare/help_texts.py:484
+#: lino_welfare/modlib/welfare/help_texts.py:488
+#: lino_welfare/modlib/welfare/help_texts.py:490
 #, fuzzy
 msgid "alias of CourseRequest"
 msgstr "Flüchtlingsstatus"
 
-#: lino_welfare/modlib/welfare/help_texts.py:492
+#: lino_welfare/modlib/welfare/help_texts.py:479
 msgid "Table of CourseRequest instances of a Course."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:493
-#: lino_welfare/modlib/welfare/help_texts.py:496
-#: lino_welfare/modlib/welfare/help_texts.py:500
+#: lino_welfare/modlib/welfare/help_texts.py:480
+#: lino_welfare/modlib/welfare/help_texts.py:483
+#: lino_welfare/modlib/welfare/help_texts.py:487
 msgid "alias of Course"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:495
+#: lino_welfare/modlib/welfare/help_texts.py:482
 #, fuzzy
 msgid "List of participating candidates for the given Course."
 msgstr "Diesen Kandidaten für diesen Kurs eintragen."
 
-#: lino_welfare/modlib/welfare/help_texts.py:498
+#: lino_welfare/modlib/welfare/help_texts.py:485
 msgid ""
 "List of Candidates for the given Course\n"
 "which are not registiered."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:502
+#: lino_welfare/modlib/welfare/help_texts.py:489
 #, fuzzy
 msgid "List of pending course requests."
 msgstr "Offene Kursanfragen"
 
-#: lino_welfare/modlib/welfare/help_texts.py:504
+#: lino_welfare/modlib/welfare/help_texts.py:491
 msgid "Adds two text fields motivation and problems."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:505
+#: lino_welfare/modlib/welfare/help_texts.py:492
 msgid ""
 "Select only clients who are \"learning\" during the given date.\n"
 "That is, who have an active Study, Training or\n"
@@ -5172,42 +5132,38 @@ msgid ""
 "this criteria."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:510
+#: lino_welfare/modlib/welfare/help_texts.py:497
 msgid ""
 "A proof is some document which certifies that a given person\n"
 "has a given skill."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:512
+#: lino_welfare/modlib/welfare/help_texts.py:499
 msgid ""
 "Abstract base for Skill, SoftSkill and\n"
 "Obstacle."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:514
+#: lino_welfare/modlib/welfare/help_texts.py:501
 msgid ""
 "An obstacle is an observed fact or characteristic of a client\n"
 "which might be reason to not get a given job."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:516
+#: lino_welfare/modlib/welfare/help_texts.py:503
 msgid "A pointer to ObstacleType."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:517
+#: lino_welfare/modlib/welfare/help_texts.py:504
 msgid "The agent who observed this obstacle."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:518
+#: lino_welfare/modlib/welfare/help_texts.py:505
 msgid "The date when the agent observed this obstacle."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:519
+#: lino_welfare/modlib/welfare/help_texts.py:506
 msgid "Miscellaneous tests on an empty database."
-msgstr ""
-
-#: lino_welfare/modlib/welfare/help_texts.py:520
-msgid "The base class for all Lino Welfare applications."
 msgstr ""
 
 #: lino_welfare/modlib/welfare/models.py:67
@@ -5609,7 +5565,7 @@ msgid "unknown age"
 msgstr "unbek. Alter"
 
 #: lino_welfare/projects/chatelet/modlib/courses/__init__.py:36
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:72
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:77
 msgid "Workshops"
 msgstr ""
 
@@ -5651,25 +5607,29 @@ msgstr "Uploads Arbeitssuche"
 msgid "Finished"
 msgstr ""
 
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:50
+msgid "Never came"
+msgstr ""
+
 #: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:41
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:71
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:76
 msgid "Workshop"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:86
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:91
 msgid "Motif de l'orientation"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:89
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:94
 msgid "Difficultés à l'origine de la demande / Problématiques repérées"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:104
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:109
 #, fuzzy
 msgid "Workshop series"
 msgstr "Eigenschaften"
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:105
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:110
 msgid "Workshop lines"
 msgstr ""
 
@@ -5942,5 +5902,37 @@ msgstr "Interim-Agenturen"
 #~ msgstr "Ablaufende Uploads"
 
 #~ msgid "Show needed uploads whose validity expires soon"
+#~ msgstr ""
+
+#~ msgid "Extends the library model by adding warn_expiry info."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Extends the library model by adding the ContactRelated,\n"
+#~ "ProjectRelated and DatePeriod mixins and two fields."
+#~ msgstr ""
+
+#~ msgid "A remark about this document."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Whether this particular upload is a needed document. Default value\n"
+#~ "is True if the new Upload has an UploadType with a nonempty\n"
+#~ "warn_expiry_unit."
+#~ msgstr ""
+
+#~ msgid "The Detail layout for Upload"
+#~ msgstr ""
+
+#~ msgid "Expiring uploads for client coached by me"
+#~ msgstr ""
+
+#~ msgid "alias of Upload"
+#~ msgstr ""
+
+#~ msgid "Uploads by Client"
+#~ msgstr "Dublettenkontrolle Klienten"
+
+#~ msgid "The base class for all Lino Welfare applications."
 #~ msgstr ""
 

@@ -504,5 +504,4 @@ which might be reason to not get a given job."""),
     'lino_welfare.projects.chatelet.modlib.cv.models.Obstacle.user' : _("""The agent who observed this obstacle."""),
     'lino_welfare.projects.chatelet.modlib.cv.models.Obstacle.detected_date' : _("""The date when the agent observed this obstacle."""),
     'lino_welfare.projects.chatelet.tests.test_chatelet.TestCase' : _("""Miscellaneous tests on an empty database."""),
-    'lino_welfare.projects.std.settings.Site' : _("""The base class for all Lino Welfare applications."""),
 }
