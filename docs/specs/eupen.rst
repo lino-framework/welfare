@@ -363,13 +363,13 @@ Each window layout defines a given set of fields.
 - coachings.CoachingEndings.insert : id, name, name_fr, name_en, seqno
 - coachings.Coachings.create_visit : user, summary
 - contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, payment_term, vatless_VouchersByPartner, ledger_MovementsByPartner, id, language, activity, is_obsolete, created, modified
-- contacts.Companies.insert : name, language, email, type, id
+- contacts.Companies.insert : name, email, type, id
 - contacts.Companies.merge_row : merge_to, addresses_Address, sepa_Account, reason
 - contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, payment_term, vatless_VouchersByPartner, ledger_MovementsByPartner, is_obsolete, created, modified
-- contacts.Partners.insert : name, language, email
+- contacts.Partners.insert : name, email
 - contacts.Persons.create_household : partner, type, head
 - contacts.Persons.detail : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, households_MembersByPerson, humanlinks_LinksByHuman, remarks, payment_term, vatless_VouchersByPartner, ledger_MovementsByPartner, activity, url, client_contact_type, is_obsolete, created, modified
-- contacts.Persons.insert : first_name, last_name, gender, language
+- contacts.Persons.insert : first_name, last_name, gender, email
 - countries.Countries.detail : isocode, name, name_fr, name_en, short_code, inscode, actual_country
 - countries.Countries.insert : isocode, inscode, name, name_fr, name_en
 - countries.Places.insert : name, name_fr, name_en, country, type, parent, zip_code, id
