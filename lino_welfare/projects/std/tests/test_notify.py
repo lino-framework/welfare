@@ -157,17 +157,17 @@ class TestCase(TestCase):
         res = ses.run(guest.checkin)
         # 'GÉRARD First (100) has started waiting for caroline'
         self.assertEqual(res, {
-            'message': "GÉRARD First (100) a commencé d'attendre caroline",
+            'message': "GÉRARD First (100) a commencé d'attendre caróline",
             'success': True, 'refresh': True})
 
         # it has caused a notification message:
         self.assertEqual(Message.objects.count(), 1)
         msg = Message.objects.all()[0]
-        self.assertEqual(msg.user.username, 'caroline')
+        self.assertEqual(msg.user.username, 'caróline')
 
         self.assertEqual(
             msg.subject,
-            "GÉRARD First (100) a commencé d'attendre caroline")
+            "GÉRARD First (100) a commencé d'attendre caróline")
 
         # id does *not* cause a system note:
         self.assertEqual(Note.objects.count(), 0)
@@ -182,7 +182,7 @@ class TestCase(TestCase):
 
         data = dict(first_name="Seconda", an="submit_detail")
         kwargs = dict(data=urlencode(data))
-        kwargs['REMOTE_USER'] = 'alicia'
+        kwargs['REMOTE_USER'] = 'alícia'
         url = '/api/pcsw/Clients/{}'.format(second.pk)
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)
@@ -194,8 +194,8 @@ class TestCase(TestCase):
 =================================================== ======================== ==============
  Sujet                                               Lié à                    Destinataire
 --------------------------------------------------- ------------------------ --------------
- GÉRARD First (100) a commencé d'attendre caroline                            caroline
- Alicia modified GÉRARD Seconda (101)                *GÉRARD Seconda (101)*   roger
+ GÉRARD First (100) a commencé d'attendre caróline                            caróline
+ Alicia modified GÉRARD Seconda (101)                *GÉRARD Seconda (101)*   róger
 =================================================== ======================== ==============
 """)
 
@@ -207,7 +207,7 @@ class TestCase(TestCase):
         data.update(mt=51)
         data.update(mk=second.pk)
         kwargs = dict(data=urlencode(data))
-        kwargs['REMOTE_USER'] = 'alicia'
+        kwargs['REMOTE_USER'] = 'alícia'
         url = '/api/coachings/CoachingsByClient/{}'.format(second_roger.pk)
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)
@@ -217,7 +217,7 @@ class TestCase(TestCase):
 ================================== ==================== ==============
  Sujet                              Lié à                Destinataire
 ---------------------------------- -------------------- --------------
- Alicia modified roger / Gérard S   *roger / Gérard S*   roger
+ Alicia modified róger / Gérard S   *róger / Gérard S*   róger
 ================================== ==================== ==============
 """)
 
@@ -242,8 +242,8 @@ class TestCase(TestCase):
 ==== ====================== ======================== ============ ============= ==========
  ID   Bénéficiaire           En intervention depuis   au           Intervenant   Primaire
 ---- ---------------------- ------------------------ ------------ ------------- ----------
- 1    GÉRARD Seconda (101)   01/05/2013               01/05/2014   caroline      Non
- 2    GÉRARD Seconda (101)   02/05/2014                            roger         Non
+ 1    GÉRARD Seconda (101)   01/05/2013               01/05/2014   caróline      Non
+ 2    GÉRARD Seconda (101)   02/05/2014                            róger         Non
  3    GÉRARD Seconda (101)   20/05/2014                            Alicia        Non
 ==== ====================== ======================== ============ ============= ==========
 """)
@@ -251,13 +251,13 @@ class TestCase(TestCase):
         self.assertEqual(Note.objects.count(), 0)
 
         data = dict(
-            fv=["First GÉRARD assigned to caroline", "Body", 'false'],
+            fv=["First GÉRARD assigned to caróline", "Body", 'false'],
             an="assign_coach")
         data.update(mt=ContentType.objects.get_for_model(Client).pk)
         data.update(mk=first.pk)
         kwargs = dict(data=data)
         # kwargs = dict(data=urlencode(data))
-        kwargs['REMOTE_USER'] = 'alicia'
+        kwargs['REMOTE_USER'] = 'alícia'
         url = '/api/newcomers/AvailableCoachesByClient/{}'.format(
             caroline.pk)
         res = self.client.get(url, **kwargs)
@@ -267,7 +267,7 @@ class TestCase(TestCase):
 =================================== ======= ==============
  Sujet                               Lié à   Destinataire
 ----------------------------------- ------- --------------
- First GÉRARD assigned to caroline           caroline
+ First GÉRARD assigned to caróline           caróline
 =================================== ======= ==============
 """)
 
@@ -275,10 +275,10 @@ class TestCase(TestCase):
 ==== ====================== ======================== ============ ============= ==========
  ID   Bénéficiaire           En intervention depuis   au           Intervenant   Primaire
 ---- ---------------------- ------------------------ ------------ ------------- ----------
- 1    GÉRARD Seconda (101)   01/05/2013               01/05/2014   caroline      Non
- 2    GÉRARD Seconda (101)   02/05/2014                            roger         Non
+ 1    GÉRARD Seconda (101)   01/05/2013               01/05/2014   caróline      Non
+ 2    GÉRARD Seconda (101)   02/05/2014                            róger         Non
  3    GÉRARD Seconda (101)   20/05/2014                            Alicia        Non
- 4    GÉRARD First (100)     22/05/2014                            caroline      Non
+ 4    GÉRARD First (100)     22/05/2014                            caróline      Non
 ==== ====================== ======================== ============ ============= ==========
 """)
 
@@ -286,7 +286,7 @@ class TestCase(TestCase):
 ==== ======== ==================== ===================================
  ID   Auteur   Bénéficiaire         Sujet
 ---- -------- -------------------- -----------------------------------
- 1    Alicia   GÉRARD First (100)   First GÉRARD assigned to caroline
+ 1    Alicia   GÉRARD First (100)   First GÉRARD assigned to caróline
 ==== ======== ==================== ===================================
 """)
 
@@ -302,7 +302,7 @@ class TestCase(TestCase):
         data = dict(an="mark_former")
         kwargs = dict(data=data)
         # kwargs = dict(data=urlencode(data))
-        kwargs['REMOTE_USER'] = 'alicia'
+        kwargs['REMOTE_USER'] = 'alícia'
         url = '/api/pcsw/Clients/{}'.format(second.pk)
         res = self.client.get(url, **kwargs)
         self.assertEqual(res.status_code, 200)
@@ -312,7 +312,7 @@ class TestCase(TestCase):
 
         self.assertEqual(res.xcallback['title'], "Confirmation")
         kwargs = dict()
-        kwargs['REMOTE_USER'] = 'alicia'
+        kwargs['REMOTE_USER'] = 'alícia'
         url = '/callbacks/{}/yes'.format(res.xcallback['id'])
         res = self.client.get(url, **kwargs)
         self.assertEqual(res.status_code, 200)
@@ -326,7 +326,7 @@ class TestCase(TestCase):
 =========================================================== ======================== ==============
  Sujet                                                       Lié à                    Destinataire
 ----------------------------------------------------------- ------------------------ --------------
- Alicia a classé GÉRARD Seconda (101) comme <b>Ancien</b>.   *GÉRARD Seconda (101)*   roger
+ Alicia a classé GÉRARD Seconda (101) comme <b>Ancien</b>.   *GÉRARD Seconda (101)*   róger
 =========================================================== ======================== ==============
 """)
 
@@ -336,10 +336,10 @@ class TestCase(TestCase):
 ==== ====================== ======================== ============ ============= ==========
  ID   Bénéficiaire           En intervention depuis   au           Intervenant   Primaire
 ---- ---------------------- ------------------------ ------------ ------------- ----------
- 1    GÉRARD Seconda (101)   01/05/2013               01/05/2014   caroline      Non
- 2    GÉRARD Seconda (101)   02/05/2014               22/05/2014   roger         Non
+ 1    GÉRARD Seconda (101)   01/05/2013               01/05/2014   caróline      Non
+ 2    GÉRARD Seconda (101)   02/05/2014               22/05/2014   róger         Non
  3    GÉRARD Seconda (101)   20/05/2014               22/05/2014   Alicia        Non
- 4    GÉRARD First (100)     22/05/2014                            caroline      Non
+ 4    GÉRARD First (100)     22/05/2014                            caróline      Non
 ==== ====================== ======================== ============ ============= ==========
 """)
         # self.check_notes()
@@ -364,7 +364,7 @@ class TestCase(TestCase):
         data = dict(fv=["20", ""], an="refuse_client")
         kwargs = dict(data=data)
         # kwargs = dict(data=urlencode(data))
-        kwargs['REMOTE_USER'] = 'alicia'
+        kwargs['REMOTE_USER'] = 'alícia'
         url = '/api/pcsw/Clients/{}'.format(first.pk)
         res = self.client.get(url, **kwargs)
         self.assertEqual(res.status_code, 200)
@@ -372,7 +372,7 @@ class TestCase(TestCase):
 ========================================================= ====================== ==============
  Sujet                                                     Lié à                  Destinataire
 --------------------------------------------------------- ---------------------- --------------
- Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   caroline
+ Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   caróline
 ========================================================= ====================== ==============
 """)
         # self.check_notes()
@@ -397,7 +397,7 @@ class TestCase(TestCase):
             projectHidden=second.pk)
         
         kwargs = dict(data=data)
-        kwargs['REMOTE_USER'] = 'alicia'
+        kwargs['REMOTE_USER'] = 'alícia'
         url = '/api/notes/NotesByProject/{}'.format(second.pk)
         res = self.client.post(url, **kwargs)
         self.assertEqual(res.status_code, 200)
@@ -411,7 +411,7 @@ class TestCase(TestCase):
 ============================== ================== ==============
  Sujet                          Lié à              Destinataire
 ------------------------------ ------------------ --------------
- Alicia created Event/Note #4   *Observation #4*   roger
+ Alicia created Event/Note #4   *Observation #4*   róger
 ============================== ================== ==============
 """)
 
@@ -428,7 +428,7 @@ class TestCase(TestCase):
         
         kwargs = dict(data=urlencode(data))
         # kwargs = dict(data=data)
-        kwargs['REMOTE_USER'] = 'alicia'
+        kwargs['REMOTE_USER'] = 'alícia'
         url = '/api/notes/NotesByProject/{}'.format(new_note_pk)
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)
@@ -437,7 +437,7 @@ class TestCase(TestCase):
 =============================== ================== ==============
  Sujet                           Lié à              Destinataire
 ------------------------------- ------------------ --------------
- Alicia modified Event/Note #4   *Observation #4*   roger
+ Alicia modified Event/Note #4   *Observation #4*   róger
 =============================== ================== ==============
 """)
 
