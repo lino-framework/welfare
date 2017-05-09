@@ -36,6 +36,7 @@ from __future__ import unicode_literals
 import json
 from urllib import urlencode
 from django.conf import settings
+from django.utils import translation
 
 from lino.utils.djangotest import TestCase
 from lino.utils import i2d, AttrDict
@@ -55,25 +56,28 @@ class TestCase(TestCase):
         """
         ar = rt.actors.notify.Messages.request()
         rst = ar.to_rst(column_names="subject owner user")
-        if not expected:
+        if expected:
+            self.assertEquivalent(expected, rst)
+        else:
             print rst
         # print rst  # handy when something fails
-        self.assertEquivalent(expected, rst)
 
-    def check_notes(self, expected):
+    def check_notes(self, expected=''):
         ar = rt.actors.notes.Notes.request()
         rst = ar.to_rst(column_names="id user project subject")
-        if not expected:
+        if expected:
+            self.assertEquivalent(expected, rst)
+        else:
             print rst
-        self.assertEquivalent(expected, rst)
 
-    def check_coachings(self, expected):
+    def check_coachings(self, expected=''):
         ar = rt.actors.coachings.Coachings.request()
         rst = ar.to_rst(
             column_names="id client start_date end_date user primary")
-        if not expected:
+        if expected:
+            self.assertEquivalent(expected, rst)
+        else:
             print rst
-        self.assertEquivalent(expected, rst)
 
     def test_checkin_guest(self):
         """Test whether notifications are being emitted.
@@ -96,23 +100,30 @@ class TestCase(TestCase):
         Coaching = rt.models.coachings.Coaching
         ContentType = rt.models.contenttypes.ContentType
 
+        self.assertEqual(settings.SITE.use_websockets, True)
+
         self.create_obj(
-            User, username='robin', profile=UserTypes.admin)
+            User, username='robin',
+            profile=UserTypes.admin, language="en")
         caroline = self.create_obj(
-            User, username='caroline', profile='200')
+            User, username='caróline',
+            profile='200', language="fr")
         alicia = self.create_obj(
-            User, username='alicia', first_name="Alicia", profile='900')
+            User, username='alícia', first_name="Alicia",
+            profile='900', language="fr")
         roger = self.create_obj(
-            User, username='roger', profile='400')
+            User, username='róger', profile='400',
+            language="en")
 
         ses = rt.login('robin')
+        translation.activate('fr')
 
         first = self.create_obj(
-            Client, first_name="First", last_name="Client",
+            Client, first_name="First", last_name="Gérard",
             client_state=ClientStates.coached)
 
         second = self.create_obj(
-            Client, first_name="Second", last_name="Client",
+            Client, first_name="Second", last_name="Gérard",
             client_state=ClientStates.coached)
         self.create_obj(
             Coaching, client=second,
@@ -144,15 +155,24 @@ class TestCase(TestCase):
         # Checkin a guest
 
         res = ses.run(guest.checkin)
+        # 'GÉRARD First (100) has started waiting for caroline'
         self.assertEqual(res, {
-            'message': 'CLIENT First (100) has started waiting for caroline',
+            'message': "GÉRARD First (100) a commencé d'attendre caroline",
             'success': True, 'refresh': True})
 
         # it has caused a notification message:
         self.assertEqual(Message.objects.count(), 1)
+        msg = Message.objects.all()[0]
+        self.assertEqual(msg.user.username, 'caroline')
+
+        self.assertEqual(
+            msg.subject,
+            "GÉRARD First (100) a commencé d'attendre caroline")
 
         # id does *not* cause a system note:
         self.assertEqual(Note.objects.count(), 0)
+
+        
 
         # When a client is modified, all active coaches get a
         # notification.
@@ -171,12 +191,12 @@ class TestCase(TestCase):
 
         # self.check_notifications()
         self.check_notifications("""
-===================================================== ======================== ===========
- Subject                                               Controlled by            Recipient
------------------------------------------------------ ------------------------ -----------
- CLIENT First (100) has started waiting for caroline                            caroline
- Alicia modified CLIENT Seconda (101)                  *CLIENT Seconda (101)*   roger
-===================================================== ======================== ===========
+=================================================== ======================== ==============
+ Sujet                                               Lié à                    Destinataire
+--------------------------------------------------- ------------------------ --------------
+ GÉRARD First (100) a commencé d'attendre caroline                            caroline
+ Alicia modified GÉRARD Seconda (101)                *GÉRARD Seconda (101)*   roger
+=================================================== ======================== ==============
 """)
 
         # When a coaching is modified, all active coaches of that
@@ -194,11 +214,11 @@ class TestCase(TestCase):
 
         #self.check_notifications()
         self.check_notifications("""
-================================== ==================== ===========
- Subject                            Controlled by        Recipient
----------------------------------- -------------------- -----------
- Alicia modified roger / Client S   *roger / Client S*   roger
-================================== ==================== ===========
+================================== ==================== ==============
+ Sujet                              Lié à                Destinataire
+---------------------------------- -------------------- --------------
+ Alicia modified roger / Gérard S   *roger / Gérard S*   roger
+================================== ==================== ==============
 """)
 
         # AssignCoach. we are going to Assign caroline as coach for
@@ -217,20 +237,21 @@ class TestCase(TestCase):
 
         Message.objects.all().delete()
         # self.assertEqual(Coaching.objects.count(), 1)
+        # self.check_coachings()
         self.check_coachings("""
-==== ====================== ============== ============ ========== =========
- ID   Client                 Coached from   until        Coach      Primary
----- ---------------------- -------------- ------------ ---------- ---------
- 1    CLIENT Seconda (101)   01/05/2013     01/05/2014   caroline   No
- 2    CLIENT Seconda (101)   02/05/2014                  roger      No
- 3    CLIENT Seconda (101)   20/05/2014                  Alicia     No
-==== ====================== ============== ============ ========== =========
+==== ====================== ======================== ============ ============= ==========
+ ID   Bénéficiaire           En intervention depuis   au           Intervenant   Primaire
+---- ---------------------- ------------------------ ------------ ------------- ----------
+ 1    GÉRARD Seconda (101)   01/05/2013               01/05/2014   caroline      Non
+ 2    GÉRARD Seconda (101)   02/05/2014                            roger         Non
+ 3    GÉRARD Seconda (101)   20/05/2014                            Alicia        Non
+==== ====================== ======================== ============ ============= ==========
 """)
 
         self.assertEqual(Note.objects.count(), 0)
 
         data = dict(
-            fv=["First CLIENT assigned to caroline", "Body", 'false'],
+            fv=["First GÉRARD assigned to caroline", "Body", 'false'],
             an="assign_coach")
         data.update(mt=ContentType.objects.get_for_model(Client).pk)
         data.update(mk=first.pk)
@@ -242,31 +263,30 @@ class TestCase(TestCase):
         res = self.client.get(url, **kwargs)
         self.assertEqual(res.status_code, 200)
 
-        # self.check_notifications()
         self.check_notifications("""
-=================================== =============== ===========
- Subject                             Controlled by   Recipient
------------------------------------ --------------- -----------
- First CLIENT assigned to caroline                   caroline
-=================================== =============== ===========
+=================================== ======= ==============
+ Sujet                               Lié à   Destinataire
+----------------------------------- ------- --------------
+ First GÉRARD assigned to caroline           caroline
+=================================== ======= ==============
 """)
 
         self.check_coachings("""
-==== ====================== ============== ============ ========== =========
- ID   Client                 Coached from   until        Coach      Primary
----- ---------------------- -------------- ------------ ---------- ---------
- 1    CLIENT Seconda (101)   01/05/2013     01/05/2014   caroline   No
- 2    CLIENT Seconda (101)   02/05/2014                  roger      No
- 3    CLIENT Seconda (101)   20/05/2014                  Alicia     No
- 4    CLIENT First (100)     22/05/2014                  caroline   No
-==== ====================== ============== ============ ========== =========
+==== ====================== ======================== ============ ============= ==========
+ ID   Bénéficiaire           En intervention depuis   au           Intervenant   Primaire
+---- ---------------------- ------------------------ ------------ ------------- ----------
+ 1    GÉRARD Seconda (101)   01/05/2013               01/05/2014   caroline      Non
+ 2    GÉRARD Seconda (101)   02/05/2014                            roger         Non
+ 3    GÉRARD Seconda (101)   20/05/2014                            Alicia        Non
+ 4    GÉRARD First (100)     22/05/2014                            caroline      Non
+==== ====================== ======================== ============ ============= ==========
 """)
 
         self.check_notes("""
 ==== ======== ==================== ===================================
- ID   Author   Client               Subject
+ ID   Auteur   Bénéficiaire         Sujet
 ---- -------- -------------------- -----------------------------------
- 1    Alicia   CLIENT First (100)   First CLIENT assigned to caroline
+ 1    Alicia   GÉRARD First (100)   First GÉRARD assigned to caroline
 ==== ======== ==================== ===================================
 """)
 
@@ -288,7 +308,7 @@ class TestCase(TestCase):
         self.assertEqual(res.status_code, 200)
         res = AttrDict(json.loads(res.content))
         self.assertEqual(
-            res.message, 'This will end 2 coachings of CLIENT Seconda (101).')
+            res.message, 'This will end 2 coachings of GÉRARD Seconda (101).')
 
         self.assertEqual(res.xcallback['title'], "Confirmation")
         kwargs = dict()
@@ -299,35 +319,36 @@ class TestCase(TestCase):
         res = AttrDict(json.loads(res.content))
         self.assertEqual(
             res.message,
-            'Alicia marked CLIENT Seconda (101) as <b>Former</b>.')
+            'Alicia a classé GÉRARD Seconda (101) comme <b>Ancien</b>.')
         self.assertTrue(res.success)
 
-        # self.check_notifications()
         self.check_notifications("""
-====================================================== ======================== ===========
- Subject                                                Controlled by            Recipient
------------------------------------------------------- ------------------------ -----------
- Alicia marked CLIENT Seconda (101) as <b>Former</b>.   *CLIENT Seconda (101)*   roger
-====================================================== ======================== ===========
+=========================================================== ======================== ==============
+ Sujet                                                       Lié à                    Destinataire
+----------------------------------------------------------- ------------------------ --------------
+ Alicia a classé GÉRARD Seconda (101) comme <b>Ancien</b>.   *GÉRARD Seconda (101)*   roger
+=========================================================== ======================== ==============
 """)
 
         # check two coachings have now an end_date set:
+        # self.check_coachings()
         self.check_coachings("""
-==== ====================== ============== ============ ========== =========
- ID   Client                 Coached from   until        Coach      Primary
----- ---------------------- -------------- ------------ ---------- ---------
- 1    CLIENT Seconda (101)   01/05/2013     01/05/2014   caroline   No
- 2    CLIENT Seconda (101)   02/05/2014     22/05/2014   roger      No
- 3    CLIENT Seconda (101)   20/05/2014     22/05/2014   Alicia     No
- 4    CLIENT First (100)     22/05/2014                  caroline   No
-==== ====================== ============== ============ ========== =========
+==== ====================== ======================== ============ ============= ==========
+ ID   Bénéficiaire           En intervention depuis   au           Intervenant   Primaire
+---- ---------------------- ------------------------ ------------ ------------- ----------
+ 1    GÉRARD Seconda (101)   01/05/2013               01/05/2014   caroline      Non
+ 2    GÉRARD Seconda (101)   02/05/2014               22/05/2014   roger         Non
+ 3    GÉRARD Seconda (101)   20/05/2014               22/05/2014   Alicia        Non
+ 4    GÉRARD First (100)     22/05/2014                            caroline      Non
+==== ====================== ======================== ============ ============= ==========
 """)
+        # self.check_notes()
         self.check_notes("""
-==== ======== ====================== ======================================================
- ID   Author   Client                 Subject
----- -------- ---------------------- ------------------------------------------------------
- 2    Alicia   CLIENT Seconda (101)   Alicia marked CLIENT Seconda (101) as <b>Former</b>.
-==== ======== ====================== ======================================================
+==== ======== ====================== ===========================================================
+ ID   Auteur   Bénéficiaire           Sujet
+---- -------- ---------------------- -----------------------------------------------------------
+ 2    Alicia   GÉRARD Seconda (101)   Alicia a classé GÉRARD Seconda (101) comme <b>Ancien</b>.
+==== ======== ====================== ===========================================================
 """)
 
         #
@@ -347,20 +368,20 @@ class TestCase(TestCase):
         url = '/api/pcsw/Clients/{}'.format(first.pk)
         res = self.client.get(url, **kwargs)
         self.assertEqual(res.status_code, 200)
-        # self.check_notifications()
         self.check_notifications("""
-===================================================== ====================== ===========
- Subject                                               Controlled by          Recipient
------------------------------------------------------ ---------------------- -----------
- Alicia marked CLIENT First (100) as <b>Refused</b>.   *CLIENT First (100)*   caroline
-===================================================== ====================== ===========
+========================================================= ====================== ==============
+ Sujet                                                     Lié à                  Destinataire
+--------------------------------------------------------- ---------------------- --------------
+ Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   caroline
+========================================================= ====================== ==============
 """)
+        # self.check_notes()
         self.check_notes("""
-==== ======== ==================== =====================================================
- ID   Author   Client               Subject
----- -------- -------------------- -----------------------------------------------------
- 3    Alicia   CLIENT First (100)   Alicia marked CLIENT First (100) as <b>Refused</b>.
-==== ======== ==================== =====================================================
+==== ======== ==================== =========================================================
+ ID   Auteur   Bénéficiaire         Sujet
+---- -------- -------------------- ---------------------------------------------------------
+ 3    Alicia   GÉRARD First (100)   Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.
+==== ======== ==================== =========================================================
 """)
 
         # When a note is created, all active coaches of that
@@ -387,11 +408,11 @@ class TestCase(TestCase):
 
         # self.check_notifications()
         self.check_notifications("""
-============================== ================= ===========
- Subject                        Controlled by     Recipient
------------------------------- ----------------- -----------
- Alicia created Event/Note #4   *Event/Note #4*   roger
-============================== ================= ===========
+============================== ================== ==============
+ Sujet                          Lié à              Destinataire
+------------------------------ ------------------ --------------
+ Alicia created Event/Note #4   *Observation #4*   roger
+============================== ================== ==============
 """)
 
 
@@ -413,17 +434,17 @@ class TestCase(TestCase):
         self.assertEqual(res.status_code, 200)
         # self.check_notifications()
         self.check_notifications("""
-=============================== ================= ===========
- Subject                         Controlled by     Recipient
-------------------------------- ----------------- -----------
- Alicia modified Event/Note #4   *Event/Note #4*   roger
-=============================== ================= ===========
+=============================== ================== ==============
+ Sujet                           Lié à              Destinataire
+------------------------------- ------------------ --------------
+ Alicia modified Event/Note #4   *Observation #4*   roger
+=============================== ================== ==============
 """)
 
         
         msg = Message.objects.all()[0]
         # print msg.body
         self.assertEquivalent(msg.body, """
-<div><p>Subject: test 2<br />Client: [client 101] (Seconda CLIENT)</p><p>Alicia modified [note 4] (test 2):</p><ul><li><b>Body</b> : 1 lines added</li><li><b>Subject</b> : test --&gt; test 2</li></ul></div>
+<div><p>Subject: test 2<br />Client: [client 101] (Seconda G&#201;RARD)</p><p>Alicia modified [note 4] (test 2):</p><ul><li><b>Body</b> : 1 lines added</li><li><b>Subject</b> : test --&gt; test 2</li></ul></div>
 """)
 

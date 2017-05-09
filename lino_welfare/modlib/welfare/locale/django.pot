@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 2017.1.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-04-22 20:38+0300\n"
+"POT-Creation-Date: 2017-05-09 08:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2293,7 +2293,7 @@ msgid "Observed events"
 msgstr ""
 
 #: lino_welfare/modlib/isip/choicelists.py:30
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:48
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:54
 msgid "Started"
 msgstr ""
 
@@ -5439,7 +5439,7 @@ msgid "unknown age"
 msgstr ""
 
 #: lino_welfare/projects/chatelet/modlib/courses/__init__.py:36
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:77
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:83
 msgid "Workshops"
 msgstr ""
 
@@ -5471,32 +5471,32 @@ msgstr ""
 msgid "Job search workshops"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:49
-msgid "Finished"
-msgstr ""
-
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:50
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:52
 msgid "Never came"
 msgstr ""
 
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:55
+msgid "Finished"
+msgstr ""
+
 #: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:41
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:76
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:82
 msgid "Workshop"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:91
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:97
 msgid "Motif de l'orientation"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:94
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:100
 msgid "Difficultés à l'origine de la demande / Problématiques repérées"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:109
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:115
 msgid "Workshop series"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:110
+#: lino_welfare/projects/chatelet/modlib/courses/models.py:116
 msgid "Workshop lines"
 msgstr ""
 
