@@ -89,8 +89,8 @@ Here is the textual representation of the "Expenses" panel:
  (3012) Strom                           Electricity
  (3020) Festnetz-Telefon und Internet   Telephone & Internet   5,00
  (3021) Handy                           Cell phone             10,00
- (3030) Fahrtkosten                     Transport costs        15,00        Shopping
  (3030) Fahrtkosten                     Transport costs        15,00        Cinema
+ (3030) Fahrtkosten                     Transport costs        15,00        Shopping
  (3031) TEC Busabonnement               Public transport       20,00
  (3032) Benzin                          Fuel                   26,00
  (3033) Unterhalt Auto                  Car maintenance        31,00
@@ -216,7 +216,7 @@ printable row (e.g. "Fahrtkosten"), they are separated by commas.
  Electricity
  Telephone & Internet                      60,00           5,00                      5,00
  Cell phone                                120,00          10,00                     10,00
- Transport costs        Shopping, Cinema   360,00          30,00                     30,00
+ Transport costs        Cinema, Shopping   360,00          30,00                     30,00
  Public transport                          240,00          20,00                     20,00
  Fuel                                      312,00          26,00                     26,00
  Car maintenance                           372,00          31,00                     31,00
@@ -392,7 +392,7 @@ Monthly expenses
  Electricity                               240,00          20,00                     20,00
  Telephone & Internet                      312,00          26,00                     26,00
  Cell phone                                372,00          31,00                     31,00
- Transport costs        Cinema, Shopping   864,00          72,00                     72,00
+ Transport costs        Shopping, Cinema   864,00          72,00                     72,00
  Public transport                          492,00          41,00                     41,00
  Fuel                                      564,00          47,00                     47,00
  Car maintenance

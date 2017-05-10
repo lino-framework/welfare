@@ -12,6 +12,8 @@ class Site(Site):
     the_demo_date = datetime.date(2014, 05, 22)
     # many test cases which rely on these dates
 
+    use_websockets = True
+
     def is_imported_partner(self, obj):
         if obj.id is not None and (obj.id > 110 and obj.id < 121):
             return True
