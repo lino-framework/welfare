@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2016 Luc Saffre
+# Copyright 2013-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -22,13 +22,13 @@
 
 from __future__ import unicode_literals
 
-from django.utils.translation import ugettext_lazy as _
+# from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
 # from django.contrib.humanize.templatetags.humanize import naturalday
 
 from django.db.models import Q
 
-from lino.api import dd, rt
+from lino.api import dd, rt, _
 
 from lino.utils.xmlgen.html import E
 
@@ -51,18 +51,19 @@ page."""
         for evt in events:
             if sep:
                 chunks.append(sep)
-            ctx = dict(id=evt.id)
-            if evt.event_type is None:
-                ctx.update(label=unicode(evt))
-            else:
-                ctx.update(label=evt.event_type.event_label)
+            # ctx = dict(id=evt.id)
+            # if evt.event_type is None:
+            #     ctx.update(label=unicode(evt))
+            # else:
+            #     ctx.update(label=evt.event_type.event_label)
 
-            if evt.project is None:
-                txt = _("{label} #{id}").format(**ctx)
-            else:
-                ctx.update(project=unicode(evt.project))
-                txt = _("{label} with {project}").format(**ctx)
-            chunks.append(ar.obj2html(evt, txt))
+            # if evt.project is None:
+            #     txt = _("{label} #{id}").format(**ctx)
+            # else:
+            #     ctx.update(project=unicode(evt.project))
+            #     txt = _("{label} with {project}").format(**ctx)
+            # chunks.append(ar.obj2html(evt, txt))
+            chunks.append(evt.obj2href(ar))
             chunks += [
                 ' (',
                 ar.instance_action_button(evt.close_meeting),
@@ -143,7 +144,8 @@ class Event(Event):
         if when:
             s = "{} ({})".format(s, when)
         if self.project:
-            s = _("{} with {}").format(s, self.project)
+            s = _("{label} with {client}").format(
+                label=s, client=self.project)
         return s
 
     def get_calendar(self):

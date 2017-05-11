@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
+from lino.modlib.users.roles import AuthorshipTaker
 from lino.modlib.office.roles import OfficeUser, OfficeStaff
 from lino_xl.lib.polls.roles import PollsUser, PollsStaff
 from lino_xl.lib.beid.roles import BeIdUser
@@ -31,7 +32,8 @@ from lino_xl.lib.contacts.roles import ContactsStaff, ContactsUser
 
 class SocialAgent(OfficeUser, ContactsUser, CBSSUser, BeIdUser,
                   PlausibilityUser, AidsUser, PollsUser, SepaUser,
-                  CoursesUser, ExcerptsUser, CoachingsUser):
+                  CoursesUser, ExcerptsUser, CoachingsUser,
+                  AuthorshipTaker):
     """A **social agent** is a user who does individual coaching of
     clients.  Certain privacy-relevant client data is visible only
     to social agents.
