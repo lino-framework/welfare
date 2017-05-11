@@ -24,10 +24,9 @@ See :ref:`welfare.specs.users`
 
 from lino.core.roles import UserRole, SiteAdmin, Supervisor, login_required
 from lino.modlib.users.roles import AuthorshipTaker
-from lino.modlib.office.roles import OfficeOperator, OfficeStaff
+from lino.modlib.office.roles import OfficeOperator, OfficeStaff, OfficeUser
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsStaff, ContactsUser, SimpleContactsUser
-from lino.modlib.office.roles import OfficeUser
 from lino_xl.lib.ledger.roles import LedgerStaff, LedgerUser
 from lino_xl.lib.sepa.roles import SepaStaff
 from lino_xl.lib.sepa.roles import SepaUser
@@ -54,7 +53,6 @@ class AccountantManager(LedgerStaff, ContactsUser, OfficeUser,
 
 class SiteAdmin(
         SiteAdmin,
-        AuthorshipTaker,
         IntegrationStaff,
         DebtsStaff,
         LedgerStaff,
@@ -67,9 +65,10 @@ class SiteAdmin(
     """The site adminstrator has permission for everything."""
 
 
-class ReceptionClerk(AuthorshipTaker, OfficeOperator, ContactsStaff,
-                     AidsStaff, CBSSUser, BeIdUser, SepaUser,
-                     CoursesUser, ExcerptsUser, CoachingsStaff):
+class ReceptionClerk(AuthorshipTaker, OfficeOperator,
+                     ContactsStaff, AidsStaff, CBSSUser, BeIdUser,
+                     SepaUser, CoursesUser, ExcerptsUser,
+                     CoachingsStaff):
     """A **reception clerk** is a user who is not a *social agent* but
     receives clients and does certain administrative tasks (in Eupen
     they call them `back office
