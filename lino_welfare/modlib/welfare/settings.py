@@ -98,7 +98,6 @@ class Site(Site):
         yield 'lino_welfare.modlib.system'
         yield 'lino_xl.lib.statbel.countries'
         yield 'lino_welfare.modlib.contacts'
-        yield 'lino_welfare.modlib.welfare'
 
         # yield 'lino.modlib.gfks'
         yield 'lino_xl.lib.appypod'
@@ -111,6 +110,8 @@ class Site(Site):
         yield 'lino_xl.lib.addresses'
 
         yield 'lino_xl.lib.excerpts'
+        
+        yield 'lino_welfare.modlib.welfare'
         
         # yield 'lino_welfare.modlib.welfare'
         yield 'lino_xl.lib.uploads'
