@@ -527,7 +527,25 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
         else:
             self.check_environment(si)
             try:
-                reply = client.service.retrieveTI(infoCustomer, None, si)
+                # The arguments to be used here are defined for the
+                # RetrieveTIGroupsRequestType sequence which in
+                # RetrieveTIGroupsV5.xsd has the following children:
+                # (1) informationCustomer
+                # (2) informationCBSS (minOccurs=0)
+                # (3) legalContext (minOccurs=0)
+                # (4) searchInfdormation
+                
+                # This sequence is important because suds uses it when
+                # adding positional arguments as children to the XML
+                # request.
+                
+                # The optional "legalContext" argument had been added
+                # by CBSS in V5.
+                
+                # reply = client.service.retrieveTI(infoCustomer, None, si)
+                reply = client.service.retrieveTI(
+                    informationCustomer=infoCustomer,
+                    searchInfdormation=si)
             except WebFault as e:
                 """
                 Example of a SOAP fault:
