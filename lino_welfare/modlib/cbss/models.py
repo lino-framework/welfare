@@ -543,9 +543,10 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
                 # by CBSS in V5.
                 
                 # reply = client.service.retrieveTI(infoCustomer, None, si)
-                reply = client.service.retrieveTI(
-                    informationCustomer=infoCustomer,
-                    searchInfdormation=si)
+                reply = client.service.retrieveTI(infoCustomer, None, None, si)
+                # reply = client.service.retrieveTI(
+                #     informationCustomer=infoCustomer,
+                #     searchInfdormation=si)
             except WebFault as e:
                 """
                 Example of a SOAP fault:
