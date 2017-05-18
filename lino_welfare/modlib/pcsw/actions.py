@@ -77,13 +77,18 @@ class RefuseClient(ChangeStateAction):
         obj.full_clean()
         obj.save()
 
-        subject = self.done_msg.format(
+        ctx = dict(
             client=obj, user=ar.get_user(), state=self.target_state)
-        body = str(ar.action_param_values.reason)
+        subject = self.done_msg.format(**ctx)
+        ctx.update(client=ar.obj2memo(obj))
+        body = self.done_msg.format(**ctx)
+        body += '\n{}: {}'.format(
+            RefusalReasons.verbose_name, ar.action_param_values.reason)
         if ar.action_param_values.remark:
             body += '\n' + str(ar.action_param_values.remark)
         # dd.logger.info("20170412 %r", ar.action_param_values)
-        body = six.text_type(body)  # 20170412 mysql does not support newstr
+        # 20170412 seems that mysql does not support newstr:
+        body = six.text_type(body)
         obj.emit_system_note(ar, subject=subject, body=body)
         mt = rt.models.notify.MessageTypes.action
         
