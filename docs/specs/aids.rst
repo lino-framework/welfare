@@ -514,3 +514,13 @@ been issued for this granting.
 
 The above was written to reproduce :ticket:`685`.
 
+
+
+The board field of a Granting has a chooser which takes an argument of
+type date.
+
+>>> show_choices('rolf', '/choices/aids/GrantingsByClient/board?decision_date=')
+<br/>
+Sozialhilferat (SHR)
+Sozialhilfeausschuss (SAS)
+Ständiges Präsidium (SP)
