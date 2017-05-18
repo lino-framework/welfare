@@ -95,7 +95,6 @@ class Site(Site):
     def get_installed_apps(self):
         yield super(Site, self).get_installed_apps()
 
-        yield 'lino_welfare.modlib.welfare'
         yield 'lino_welfare.modlib.system'
         yield 'lino_xl.lib.statbel.countries'
         yield 'lino_welfare.modlib.contacts'
@@ -111,6 +110,8 @@ class Site(Site):
         yield 'lino_xl.lib.addresses'
 
         yield 'lino_xl.lib.excerpts'
+        
+        yield 'lino_welfare.modlib.welfare'
         
         # yield 'lino_welfare.modlib.welfare'
         yield 'lino_xl.lib.uploads'

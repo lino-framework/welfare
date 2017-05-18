@@ -55,7 +55,7 @@ name to read the documentation):
     cal.AccessClasses : AccessClasses
     cal.DurationUnits : DurationUnits
     cal.EntryStates : Termin-Zustände
-    cal.EventEvents : Beobachtungskriterium
+    cal.EventEvents : Beobachtungskriterien
     cal.GuestStates : Gast-Zustände
     cal.Recurrencies : Recurrencies
     cal.TaskStates : Aufgaben-Zustände
@@ -65,9 +65,9 @@ name to read the documentation):
     cbss.RequestLanguages : RequestLanguages
     cbss.RequestStates : Zustände
     changes.ChangeTypes : Änderungsarten
-    coachings.ClientEvents : Beobachtungskriterium
+    coachings.ClientEvents : Beobachtungskriterien
     coachings.ClientStates : Bearbeitungszustände Klienten
-    contacts.PartnerEvents : Beobachtungskriterium
+    contacts.PartnerEvents : Beobachtungskriterien
     countries.PlaceTypes : PlaceTypes
     cv.CefLevel : CEF-Kategorien
     cv.EducationEntryStates : EducationEntryStates
@@ -79,7 +79,7 @@ name to read the documentation):
     households.MemberDependencies : Haushaltsmitgliedsabhängigkeiten
     households.MemberRoles : Haushaltsmitgliedsrollen
     humanlinks.LinkTypes : Verwandschaftsarten
-    isip.ContractEvents : Beobachtungskriterium
+    isip.ContractEvents : Beobachtungskriterien
     isip.OverlapGroups : Überlappungsgruppen
     jobs.CandidatureStates : Kandidatur-Zustände
     ledger.FiscalYears : Geschäftsjahre
@@ -99,7 +99,7 @@ name to read the documentation):
     properties.HowWell : HowWell
     sepa.AccountTypes : Kontoarten
     system.Genders : Genders
-    system.PeriodEvents : Beobachtungskriterium
+    system.PeriodEvents : Beobachtungskriterien
     system.YesNo : Ja oder Nein
     uploads.Shortcuts : Upload shortcuts
     uploads.UploadAreas : Upload-Bereiche

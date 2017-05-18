@@ -107,6 +107,7 @@ robin a class\xe9 MUSTERMANN Max (100) comme <b>Refus\xe9</b>."""
         self.assertEqual(Message.objects.count(), 1)
         msg = Message.objects.all()[0]
         expected = """\
-CPAS n'est pas compétent
+robin a classé [client 100] (M. Max MUSTERMANN) comme <b>Refusé</b>.
+Raison de refus: CPAS n'est pas compétent
 Wohnt noch in Lüttich. Wollte nach Eupen ziehen. Noch nicht zuständigg"""
         self.assertEqual(expected, msg.body)

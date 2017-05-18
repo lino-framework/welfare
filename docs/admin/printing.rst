@@ -43,6 +43,7 @@ primitive direct printing method (see :ref:`lino.admin.printing`):
     <class 'lino_welfare.modlib.cal.models.Event'>
     <class 'lino_xl.lib.courses.models.Topic'>
     <class 'lino_xl.lib.excerpts.models.Excerpt'>
+    <class 'lino_xl.lib.finan.models.PaymentOrder'>
     <class 'lino_welfare.modlib.notes.models.Note'>
     <class 'lino_xl.lib.outbox.models.Mail'>
 

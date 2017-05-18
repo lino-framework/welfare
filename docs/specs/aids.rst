@@ -90,7 +90,7 @@ Willkommensmeldung unter die Nase gerieben:
 >>> translation.activate('de')
 >>> for msg in settings.SITE.get_welcome_messages(ses):
 ...     print(E.tostring(msg))
-<span>Du bist besch&#228;ftigt in <a href="Detail">Beratung mit COLLARD Charlotte (118)</a> (<b>&#9745;</b>). </span>
+<span>Du bist besch&#228;ftigt in <a href="Detail">Beschwerde (22.05.2014) mit COLLARD Charlotte (118)</a> (<b>&#9745;</b>). </span>
 <span>Du hast <b>6 Eintr&#228;ge in Zu best&#228;tigende Hilfebeschl&#252;sse</b>.</span>
 <b>Du hast 3 offene Datenkontrollen.</b>
 
@@ -514,3 +514,13 @@ been issued for this granting.
 
 The above was written to reproduce :ticket:`685`.
 
+
+
+The board field of a Granting has a chooser which takes an argument of
+type date.
+
+>>> show_choices('rolf', '/choices/aids/GrantingsByClient/board?decision_date=')
+<br/>
+Sozialhilferat (SHR)
+Sozialhilfeausschuss (SAS)
+Ständiges Präsidium (SP)
