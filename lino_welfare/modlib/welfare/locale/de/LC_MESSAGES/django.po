@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-11 11:36+0300\n"
-"PO-Revision-Date: 2017-05-11 11:37+0300\n"
+"POT-Creation-Date: 2017-05-19 15:41+0300\n"
+"PO-Revision-Date: 2017-05-19 15:41+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: de\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
@@ -45,7 +45,7 @@ msgstr "Arbeitssuche"
 #: lino_welfare/modlib/cbss/tx25.py:351 lino_welfare/modlib/cbss/tx25.py:398
 #: lino_welfare/modlib/cbss/tx25.py:407 lino_welfare/modlib/cbss/tx25.py:419
 #: lino_welfare/modlib/cbss/tx25.py:510 lino_welfare/modlib/cbss/tx25.py:522
-#: lino_welfare/modlib/debts/models.py:160 lino_welfare/modlib/isip/models.py:390
+#: lino_welfare/modlib/debts/models.py:160 lino_welfare/modlib/isip/models.py:411
 #: lino_welfare/modlib/jobs/models.py:889 lino_welfare/modlib/jobs/models.py:1010
 #: lino_welfare/modlib/pcsw/models.py:1109
 #: lino_welfare/projects/chatelet/modlib/cv/models.py:250
@@ -630,7 +630,7 @@ msgstr "Notiz"
 #: lino_welfare/modlib/contacts/models.py:130
 #: lino_welfare/modlib/contacts/models.py:200
 #: lino_welfare/modlib/contacts/models.py:289 lino_welfare/modlib/debts/ui.py:141
-#: lino_welfare/modlib/finan/models.py:35 lino_welfare/modlib/isip/models.py:281
+#: lino_welfare/modlib/finan/models.py:35 lino_welfare/modlib/isip/models.py:302
 #: lino_welfare/modlib/system/models.py:114
 #: lino_welfare/modlib/users/desktop.py:37
 #: lino_welfare/projects/chatelet/modlib/isip/models.py:38
@@ -875,27 +875,27 @@ msgstr "Tx25-Anfragen"
 msgid "History"
 msgstr "Historie"
 
-#: lino_welfare/modlib/cbss/models.py:605
+#: lino_welfare/modlib/cbss/models.py:624
 msgid "Requesting organisation"
 msgstr "Anfragende Organisation"
 
-#: lino_welfare/modlib/cbss/models.py:618
+#: lino_welfare/modlib/cbss/models.py:637
 msgid "SSDN User Id"
 msgstr ""
 
-#: lino_welfare/modlib/cbss/models.py:626
+#: lino_welfare/modlib/cbss/models.py:645
 msgid "SSDN email address"
 msgstr ""
 
-#: lino_welfare/modlib/cbss/models.py:634
+#: lino_welfare/modlib/cbss/models.py:653
 msgid "HTTP username"
 msgstr ""
 
-#: lino_welfare/modlib/cbss/models.py:641
+#: lino_welfare/modlib/cbss/models.py:660
 msgid "HTTP password"
 msgstr ""
 
-#: lino_welfare/modlib/cbss/models.py:679
+#: lino_welfare/modlib/cbss/models.py:698
 msgid "CBSS summary"
 msgstr "Zusammenfassung ZDSS"
 
@@ -2118,6 +2118,7 @@ msgid "responsibilities"
 msgstr "Aufgabenbereich"
 
 #: lino_welfare/modlib/immersion/models.py:128
+#: lino_welfare/modlib/isip/models.py:263
 msgid "responsible (IS)"
 msgstr "Verantwortlicher (DSBE)"
 
@@ -2159,9 +2160,8 @@ msgid "Integration"
 msgstr "DSBE"
 
 #: lino_welfare/modlib/integ/models.py:47
-#, fuzzy
 msgid "Available"
-msgstr "Nicht verfügbar bis"
+msgstr "Verfügbar"
 
 #: lino_welfare/modlib/integ/models.py:70
 msgid "Integration Clients"
@@ -2273,7 +2273,7 @@ msgstr "Tätigkeitsbericht"
 
 #: lino_welfare/modlib/integ/models.py:592
 #: lino_welfare/modlib/isip/__init__.py:44 lino_welfare/modlib/isip/models.py:232
-#: lino_welfare/modlib/isip/models.py:286
+#: lino_welfare/modlib/isip/models.py:307
 msgid "ISIP"
 msgstr "VSE"
 
@@ -2476,7 +2476,8 @@ msgid "designation"
 msgstr "Bezeichnung"
 
 #: lino_welfare/modlib/isip/models.py:154 lino_welfare/modlib/jobs/models.py:278
-#: lino_welfare/modlib/pcsw/actions.py:98 lino_welfare/modlib/pcsw/actions.py:128
+#: lino_welfare/modlib/pcsw/actions.py:103
+#: lino_welfare/modlib/pcsw/actions.py:133
 msgid "Success"
 msgstr "Abschluss"
 
@@ -2521,10 +2522,18 @@ msgid "duties DSBE"
 msgstr "Verpflichtungen DSBE"
 
 #: lino_welfare/modlib/isip/models.py:255
+msgid "duties PCSW"
+msgstr "Verpflichtungen ÖSHZ"
+
+#: lino_welfare/modlib/isip/models.py:258
 msgid "duties person"
 msgstr "Verpflichtungen Person"
 
-#: lino_welfare/modlib/isip/models.py:379
+#: lino_welfare/modlib/isip/models.py:287
+msgid "Cannot print{} because there is no active aid confirmation"
+msgstr ""
+
+#: lino_welfare/modlib/isip/models.py:400
 #, fuzzy
 msgid "Proceedings"
 msgstr "prodziert"
@@ -3084,11 +3093,11 @@ msgstr "{user} hat {client} als <b>{state}</b> klassiert."
 msgid "Refuse"
 msgstr "Ablehnen"
 
-#: lino_welfare/modlib/pcsw/actions.py:107
+#: lino_welfare/modlib/pcsw/actions.py:112
 msgid "Former"
 msgstr "Ehemalig"
 
-#: lino_welfare/modlib/pcsw/actions.py:156 lino_welfare/modlib/pcsw/models.py:318
+#: lino_welfare/modlib/pcsw/actions.py:161 lino_welfare/modlib/pcsw/models.py:318
 #, python-format
 msgid "This will end %(count)d coachings of %(client)s."
 msgstr "Hierdurch werden %(count)d Begleitungen von %(client)s beendet."
@@ -5792,3 +5801,12 @@ msgstr "andere Einkommen"
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:69
 msgid "Job agents"
 msgstr "Interim-Agenturen"
+
+#~ msgid "responsible (DSBE)"
+#~ msgstr "Verantwortlicher (DSBE)"
+
+#~ msgid "No active aid confirmation for {}"
+#~ msgstr "Kann Keine aktive Hilfebestätigung für {}"
+
+#~ msgid "Responsible (IS)"
+#~ msgstr "Verantwortlicher (DSBE)"

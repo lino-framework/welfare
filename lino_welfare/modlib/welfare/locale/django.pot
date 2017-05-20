@@ -7,9 +7,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: lino-welfare 2017.1.0\n"
+"Project-Id-Version: lino-welfare 2017.5.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-11 11:36+0300\n"
+"POT-Creation-Date: 2017-05-19 15:41+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,7 +40,7 @@ msgstr ""
 #: lino_welfare/modlib/cbss/tx25.py:398 lino_welfare/modlib/cbss/tx25.py:407
 #: lino_welfare/modlib/cbss/tx25.py:419 lino_welfare/modlib/cbss/tx25.py:510
 #: lino_welfare/modlib/cbss/tx25.py:522 lino_welfare/modlib/debts/models.py:160
-#: lino_welfare/modlib/isip/models.py:390
+#: lino_welfare/modlib/isip/models.py:411
 #: lino_welfare/modlib/jobs/models.py:889
 #: lino_welfare/modlib/jobs/models.py:1010
 #: lino_welfare/modlib/pcsw/models.py:1109
@@ -624,7 +624,7 @@ msgstr ""
 #: lino_welfare/modlib/contacts/models.py:200
 #: lino_welfare/modlib/contacts/models.py:289
 #: lino_welfare/modlib/debts/ui.py:141 lino_welfare/modlib/finan/models.py:35
-#: lino_welfare/modlib/isip/models.py:281
+#: lino_welfare/modlib/isip/models.py:302
 #: lino_welfare/modlib/system/models.py:114
 #: lino_welfare/modlib/users/desktop.py:37
 #: lino_welfare/projects/chatelet/modlib/isip/models.py:38
@@ -870,27 +870,27 @@ msgstr ""
 msgid "History"
 msgstr ""
 
-#: lino_welfare/modlib/cbss/models.py:605
+#: lino_welfare/modlib/cbss/models.py:624
 msgid "Requesting organisation"
 msgstr ""
 
-#: lino_welfare/modlib/cbss/models.py:618
+#: lino_welfare/modlib/cbss/models.py:637
 msgid "SSDN User Id"
 msgstr ""
 
-#: lino_welfare/modlib/cbss/models.py:626
+#: lino_welfare/modlib/cbss/models.py:645
 msgid "SSDN email address"
 msgstr ""
 
-#: lino_welfare/modlib/cbss/models.py:634
+#: lino_welfare/modlib/cbss/models.py:653
 msgid "HTTP username"
 msgstr ""
 
-#: lino_welfare/modlib/cbss/models.py:641
+#: lino_welfare/modlib/cbss/models.py:660
 msgid "HTTP password"
 msgstr ""
 
-#: lino_welfare/modlib/cbss/models.py:679
+#: lino_welfare/modlib/cbss/models.py:698
 msgid "CBSS summary"
 msgstr ""
 
@@ -2086,6 +2086,7 @@ msgid "responsibilities"
 msgstr ""
 
 #: lino_welfare/modlib/immersion/models.py:128
+#: lino_welfare/modlib/isip/models.py:263
 msgid "responsible (IS)"
 msgstr ""
 
@@ -2234,7 +2235,7 @@ msgstr ""
 #: lino_welfare/modlib/integ/models.py:592
 #: lino_welfare/modlib/isip/__init__.py:44
 #: lino_welfare/modlib/isip/models.py:232
-#: lino_welfare/modlib/isip/models.py:286
+#: lino_welfare/modlib/isip/models.py:307
 msgid "ISIP"
 msgstr ""
 
@@ -2435,8 +2436,8 @@ msgstr ""
 
 #: lino_welfare/modlib/isip/models.py:154
 #: lino_welfare/modlib/jobs/models.py:278
-#: lino_welfare/modlib/pcsw/actions.py:98
-#: lino_welfare/modlib/pcsw/actions.py:128
+#: lino_welfare/modlib/pcsw/actions.py:103
+#: lino_welfare/modlib/pcsw/actions.py:133
 msgid "Success"
 msgstr ""
 
@@ -2482,10 +2483,18 @@ msgid "duties DSBE"
 msgstr ""
 
 #: lino_welfare/modlib/isip/models.py:255
+msgid "duties PCSW"
+msgstr ""
+
+#: lino_welfare/modlib/isip/models.py:258
 msgid "duties person"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:379
+#: lino_welfare/modlib/isip/models.py:287
+msgid "Cannot print{} because there is no active aid confirmation"
+msgstr ""
+
+#: lino_welfare/modlib/isip/models.py:400
 msgid "Proceedings"
 msgstr ""
 
@@ -3049,11 +3058,11 @@ msgstr ""
 msgid "Refuse"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/actions.py:107
+#: lino_welfare/modlib/pcsw/actions.py:112
 msgid "Former"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/actions.py:156
+#: lino_welfare/modlib/pcsw/actions.py:161
 #: lino_welfare/modlib/pcsw/models.py:318
 #, python-format
 msgid "This will end %(count)d coachings of %(client)s."

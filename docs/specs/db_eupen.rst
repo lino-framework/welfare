@@ -102,7 +102,7 @@ Database structure
 - households.Member : id, start_date, end_date, title, first_name, middle_name, last_name, gender, birth_date, role, person, household, dependency, primary
 - households.Type : id, name, name_fr, name_en
 - humanlinks.Link : id, type, parent, child
-- isip.Contract : id, signer1, signer2, user, printed_by, client, language, applies_from, applies_until, date_decided, date_issued, user_asd, exam_policy, ending, date_ended, type, study_type, stages, goals, duties_asd, duties_dsbe, duties_person
+- isip.Contract : id, signer1, signer2, user, printed_by, client, language, applies_from, applies_until, date_decided, date_issued, user_asd, exam_policy, ending, date_ended, type, study_type, stages, goals, duties_asd, duties_dsbe, duties_pcsw, duties_person, user_dsbe
 - isip.ContractEnding : id, name, use_in_isip, use_in_jobs, is_success, needs_date_ended
 - isip.ContractPartner : id, company, contact_person, contact_role, contract, duties_company
 - isip.ContractType : id, name, full_name, exam_policy, overlap_group, template, ref, needs_study_type, name_fr, name_en

@@ -137,7 +137,7 @@ class ClientDetail(ClientDetail, PartnerDetailMixin):
 
     status = """
     in_belgium_since:15 residence_type gesdos_id #tim_id
-    job_agents group:16 aid_type
+    job_agents group:16 #aid_type
     """
 
     income = """
