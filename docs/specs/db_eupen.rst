@@ -20,6 +20,14 @@ Database structure
 Database structure
 ==================
 
+>>> print(analyzer.show_complexity_factors())
+- 63 plugins
+- 139 models
+- 535 views
+- 15 user types
+- 13 dialog actions
+<BLANKLINE>
+
 >>> print(analyzer.show_database_structure())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - accounts.Account : id, ref, seqno, name, group, type, needs_partner, clearable, default_amount, name_fr, name_en, sales_allowed, purchases_allowed, wages_allowed, clearings_allowed
