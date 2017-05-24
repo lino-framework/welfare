@@ -410,7 +410,7 @@ class AllGrantings(Grantings):
 
 class MyPendingGrantings(Grantings):
     required_roles = dd.login_required(SocialAgent)
-    column_names = "client aid_type start_date " \
+    column_names = "client aid_type category start_date " \
                    "end_date user workflow_buttons *"
     label = _("Grantings to confirm")
     auto_fit_column_widths = True

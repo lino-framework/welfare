@@ -284,7 +284,7 @@ class Contract(ContractBase):
         super(Contract, self).before_printable_build(bm)
         if not self.get_aid_confirmation():
             raise Warning(
-                _("Cannot print{} because there is no active "
+                _("Cannot print {} because there is no active "
                   "aid confirmation").format(self))
 
 # dd.update_field(
