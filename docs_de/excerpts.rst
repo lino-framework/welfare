@@ -2,6 +2,7 @@
 Bescheinigungen
 ===============
 
+
 **Vorbemerkung für Eupener**
 
   Im Dezember 2015 wird im ÖSHZ Eupen der Empfang von TIM nach Lino
@@ -42,7 +43,7 @@ Anwesenheitsbescheinigung
 Um eine Anwesenheitsbescheinigung auszustellen, muss der Klient
 "anwesend" gewesen sein.  Also es muss ein :term:`Termin` oder eine
 :term:`Visite` existieren, für die dieser Klient als Gast eingetragen
-ist. Diese Einträge sind es, die man sieht im Feld "Termine" des
+ist.  Diese Einträge sind es, die man sieht im Feld "Termine" des
 Reiters "Person" im Detail des Klienten.
 
 
@@ -53,65 +54,13 @@ Siehe :doc:`aids`.
 
 .. _welfare.excerpts.examples.de:
 
-Beispiele
-=========
+Beispiele von von Ausdrucken aus der Demo-Datenbank
+===================================================
 
 Hier einige Beispiele von Ausdrucken aus der Demo-Datenbank.
 
 .. django2rst::
 
-  try:
-
-    import os
-    import shutil
-    from atelier import rstgen
-    from lino.api import rt
-    ses = rt.login()
-    # dd.logger.info("20141029 %s", settings.SITE)
-    coll = {}
-    def collect(obj):
-        l = coll.setdefault(obj.excerpt_type, [])
-        if len(l) > 2:
-            return
-        rv = ses.run(obj.do_print)
-        if rv['success']:
-            pass
-            # print("\n\n%s\n\n" % rv['open_url'])
-        else:
-            raise Exception("Oops: %s" % rv['message'])
-        if not 'open_url' in rv:
-            raise Exception("Oops: %s" % rv['message'])
-        # tmppath = settings.SITE.project_dir + rv['open_url']
-        tmppath = settings.SITE.cache_dir + rv['open_url']
-        head, tail = os.path.split(tmppath)
-        # tail = 'tested/' + tail
-        tail = 'dl/excerpts/' + tail
-        kw = dict(tail=tail)
-        kw.update(type=obj.excerpt_type)
-        kw.update(owner=obj.owner)
-        try:
-            # dd.logger.info("20141029 copy %s to %s", tmppath, tail)
-            shutil.copyfile(tmppath, tail)
-        except IOError as e:
-            kw.update(error=str(e))
-            msg = "%(type)s %(owner)s %(tail)s Oops: %(error)s" % kw
-            # raise Exception(msg)
-            kw.update(owner=msg)
-
-        l.append(kw)
-
-    for o in excerpts.Excerpt.objects.order_by('excerpt_type'):
-        collect(o)
-
-    def asli(et, items):
-        s = unicode(et)
-        s += " : " + ', '.join(
-            "`%(owner)s <../%(tail)s>`__" % kw % kw for kw in items)
-        return s
-    
-    print(rstgen.ul([asli(k, v) for k, v in coll.items()]))
+   from lino_xl.lib.excerpts.doctools import show_excerpts
+   print(show_excerpts())
    
-  except Exception as e:
-
-     print(e)
-
