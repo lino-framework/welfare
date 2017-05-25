@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -29,45 +29,9 @@ Extends :mod:`lino_xl.lib.finan.fixtures.demo_bookings`
 from __future__ import unicode_literals
 
 
-import datetime
-from dateutil.relativedelta import relativedelta as delta
-
-from django.conf import settings
-from lino.utils import Cycler
-from lino.api import dd, rt
-
-finan = dd.resolve_app('finan')
-
-REQUEST = settings.SITE.login()  # BaseRequest()
-
-
 from lino_xl.lib.finan.fixtures.payments import objects as cosi_objects
 
 
 def objects():
-
-    # Journal = rt.modules.ledger.Journal
-    # USERS = Cycler(settings.SITE.user_model.objects.all())
-
-    # START_YEAR = dd.plugins.ledger.start_year
-    # date = datetime.date(START_YEAR, 1, 1)
-    # end_date = settings.SITE.demo_date(-30)
-    # while date < end_date:
-    #     jnl = Journal.objects.get(ref="AAW")
-    #     voucher = jnl.create_voucher(
-    #         user=USERS.pop(),
-    #         date=date + delta(days=10))
-    #     yield voucher
-    #     sug_table = jnl.voucher_type.table_class.suggestions_table
-    #     suggestions = sug_table.request(voucher)
-    #     # finan.SuggestionsByPaymentOrder.request(voucher)
-    #     ba = sug_table.get_action_by_name('do_fill')
-    #     ar = ba.request(master_instance=voucher)
-    #     ar.selected_rows = list(suggestions)
-    #     ar.run()
-    #     voucher.register(REQUEST)
-    #     voucher.save()
-
-    #     date += delta(months=1)
 
     yield cosi_objects('AAW ZKBC')

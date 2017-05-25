@@ -182,7 +182,7 @@ Lino Welfare:
 - properties.Property :
   - PROTECT : properties.PersonProperty.property
 - sepa.Account :
-  - PROTECT : finan.PaymentOrderItem.bank_account, vatless.AccountInvoice.bank_account
+  - PROTECT : finan.PaymentOrderItem.bank_account, ledger.Journal.sepa_account, vatless.AccountInvoice.bank_account
 - uploads.UploadType :
   - PROTECT : uploads.Upload.type
 - users.User :
