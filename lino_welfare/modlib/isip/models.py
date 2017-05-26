@@ -282,10 +282,10 @@ class Contract(ContractBase):
 
     def before_printable_build(self, bm):
         super(Contract, self).before_printable_build(bm)
-        if not self.get_aid_confirmation():
+        if not self.duties_pcsw and not self.get_aid_confirmation():
             raise Warning(
                 _("Cannot print {} because there is no active "
-                  "aid confirmation").format(self))
+                  "aid confirmation and Duties (PCSW) is empty.").format(self))
 
 # dd.update_field(
 #     Contract, 'user',

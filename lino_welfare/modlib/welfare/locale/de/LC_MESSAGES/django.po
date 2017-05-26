@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-24 11:55+0300\n"
-"PO-Revision-Date: 2017-05-24 11:57+0300\n"
+"POT-Creation-Date: 2017-05-26 22:53+0300\n"
+"PO-Revision-Date: 2017-05-26 22:53+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: de\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
@@ -2530,8 +2530,12 @@ msgid "duties person"
 msgstr "Verpflichtungen Person"
 
 #: lino_welfare/modlib/isip/models.py:287
-msgid "Cannot print {} because there is no active aid confirmation"
-msgstr "Kann {} nicht drucken, weil es keine aktive Hilfebestätigung gibt."
+msgid ""
+"Cannot print {} because there is no active aid confirmation and Duties (PCSW) "
+"is empty."
+msgstr ""
+"Kann {} nicht drucken, weil es keine aktive Hilfebestätigung gibt und "
+"Verpflichtungen ÖSHZ leer ist."
 
 #: lino_welfare/modlib/isip/models.py:400
 #, fuzzy

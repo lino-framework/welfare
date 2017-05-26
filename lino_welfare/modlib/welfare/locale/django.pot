@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 2017.5.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-05-24 11:55+0300\n"
+"POT-Creation-Date: 2017-05-26 22:53+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2491,7 +2491,9 @@ msgid "duties person"
 msgstr ""
 
 #: lino_welfare/modlib/isip/models.py:287
-msgid "Cannot print {} because there is no active aid confirmation"
+msgid ""
+"Cannot print {} because there is no active aid confirmation and Duties "
+"(PCSW) is empty."
 msgstr ""
 
 #: lino_welfare/modlib/isip/models.py:400

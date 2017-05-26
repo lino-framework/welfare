@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-24 11:55+0300\n"
+"POT-Creation-Date: 2017-05-26 22:53+0300\n"
 "PO-Revision-Date: 2017-04-22 20:39+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: fr\n"
@@ -2550,7 +2550,9 @@ msgid "duties person"
 msgstr "Obligations du bénéficiaire"
 
 #: lino_welfare/modlib/isip/models.py:287
-msgid "Cannot print {} because there is no active aid confirmation"
+msgid ""
+"Cannot print {} because there is no active aid confirmation and Duties "
+"(PCSW) is empty."
 msgstr ""
 
 #: lino_welfare/modlib/isip/models.py:400
@@ -5939,5 +5941,8 @@ msgstr "Agences de travail"
 #~ "Experience.\n"
 #~ "Only the start_date is used, end_date has no effect when\n"
 #~ "this criteria."
+#~ msgstr ""
+
+#~ msgid "Cannot print {} because there is no active aid confirmation"
 #~ msgstr ""
 
