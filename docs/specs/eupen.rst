@@ -934,9 +934,9 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> ÖSHZ --> Einfache Bescheinigungen : 20
 - Explorer --> ÖSHZ --> Phonetische Wörter : 132
 - Explorer --> Buchhaltung --> Ausgleichungsregeln : 3
-- Explorer --> Buchhaltung --> Belege : 52
+- Explorer --> Buchhaltung --> Belege : 53
 - Explorer --> Buchhaltung --> Belegarten : 6
-- Explorer --> Buchhaltung --> Bewegungen : 420
+- Explorer --> Buchhaltung --> Bewegungen : 451
 - Explorer --> Buchhaltung --> Geschäftsjahre : 8
 - Explorer --> Buchhaltung --> Handelsarten : 3
 - Explorer --> Buchhaltung --> Journalgruppen : 5
@@ -947,7 +947,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> SEPA --> Transaktionen : 57
 - Explorer --> Finanzjournale --> Kontoauszüge : 1
 - Explorer --> Finanzjournale --> Diverse Buchungen : 1
-- Explorer --> Finanzjournale --> Zahlungsaufträge : 23
+- Explorer --> Finanzjournale --> Zahlungsaufträge : 24
 - Explorer --> Lebenslauf --> Sprachkenntnisse : 113
 - Explorer --> Lebenslauf --> Ausbildungen : 21
 - Explorer --> Lebenslauf --> Studien : 23
