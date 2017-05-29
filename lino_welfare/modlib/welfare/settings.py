@@ -51,7 +51,8 @@ class Site(Site):
     # use_java = False  # temporarily
     # verbose_client_info_message = True
 
-    default_build_method = "appyodt"
+    # default_build_method = "appyodt"
+    default_build_method = "appypdf"
     uppercase_last_name = True
 
     user_types_module = 'lino_welfare.modlib.welfare.user_types'

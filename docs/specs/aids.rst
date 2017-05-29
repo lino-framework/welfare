@@ -98,16 +98,16 @@ When she clicks the link "Zu bestätigende Hilfebeschlüsse", then they show up:
 
 >>> ses.show(aids.MyPendingGrantings)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-======================== ========================= ============== ========== ======= ==============================
- Klient                   Hilfeart                  Laufzeit von   bis        Autor   Aktionen
------------------------- ------------------------- -------------- ---------- ------- ------------------------------
- DUBOIS Robin (179)       Eingliederungseinkommen   23.07.14                          [Bestätigen] **Unbestätigt**
- DUBOIS Robin (179)       Ausländerbeihilfe         22.06.14                          [Bestätigen] **Unbestätigt**
- EMONTS-GAST Erna (152)   Heizkosten                30.05.14       31.05.14           [Bestätigen] **Unbestätigt**
- DA VINCI David (165)     Eingliederungseinkommen   23.05.14                          [Bestätigen] **Unbestätigt**
- DUBOIS Robin (179)       Eingliederungseinkommen   26.02.13                          [Bestätigen] **Unbestätigt**
- DA VINCI David (165)     Ausländerbeihilfe         27.01.13                          [Bestätigen] **Unbestätigt**
-======================== ========================= ============== ========== ======= ==============================
+======================== ========================= =========== ============== ========== ======= ==============================
+ Klient                   Hilfeart                  Kategorie   Laufzeit von   bis        Autor   Aktionen
+------------------------ ------------------------- ----------- -------------- ---------- ------- ------------------------------
+ DUBOIS Robin (179)       Eingliederungseinkommen               23.07.14                          [Bestätigen] **Unbestätigt**
+ DUBOIS Robin (179)       Ausländerbeihilfe                     22.06.14                          [Bestätigen] **Unbestätigt**
+ EMONTS-GAST Erna (152)   Heizkosten                            30.05.14       31.05.14           [Bestätigen] **Unbestätigt**
+ DA VINCI David (165)     Eingliederungseinkommen               23.05.14                          [Bestätigen] **Unbestätigt**
+ DUBOIS Robin (179)       Eingliederungseinkommen               26.02.13                          [Bestätigen] **Unbestätigt**
+ DA VINCI David (165)     Ausländerbeihilfe                     27.01.13                          [Bestätigen] **Unbestätigt**
+======================== ========================= =========== ============== ========== ======= ==============================
 <BLANKLINE>
 
 

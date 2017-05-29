@@ -144,7 +144,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  immersion.Contract             immersion.Contracts             25        6
  immersion.ContractType         immersion.ContractTypes         9         3
  immersion.Goal                 immersion.Goals                 5         4
- isip.Contract                  isip.Contracts                  22        30
+ isip.Contract                  isip.Contracts                  24        30
  isip.ContractEnding            isip.ContractEndings            6         4
  isip.ContractPartner           isip.ContractPartners           6         35
  isip.ContractType              isip.ContractTypes              11        5

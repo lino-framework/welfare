@@ -251,9 +251,24 @@ class Contract(ContractBase):
     duties_dsbe = dd.RichTextField(
         _("duties DSBE"),
         blank=True, null=True, format='html')
+    duties_pcsw = dd.RichTextField(
+        _("duties PCSW"),
+        blank=True, null=True, format='html')
     duties_person = dd.RichTextField(
         _("duties person"),
         blank=True, null=True, format='html')
+
+    user_dsbe = models.ForeignKey(
+        "users.User",
+        verbose_name=_("responsible (IS)"),
+        related_name="%(app_label)s_%(class)s_set_by_user_dsbe",
+        blank=True, null=True)
+
+    def before_dumpy_save(self, loader=None):
+        # removes the need of writing a custom database migrator
+        if loader and loader.source_version == '2017.1.0':
+            if self.user_dsbe is None:
+                self.user_dsbe = self.user 
 
     @classmethod
     def get_certifiable_fields(cls):
@@ -261,10 +276,16 @@ class Contract(ContractBase):
         applies_from applies_until
         language
         stages goals duties_dsbe
-        duties_asd duties_person
-        user user_asd exam_policy
+        duties_asd duties_pcsw duties_person 
+        user user_asd user_dsbe exam_policy
         date_decided date_issued"""
 
+    def before_printable_build(self, bm):
+        super(Contract, self).before_printable_build(bm)
+        if not self.duties_pcsw and not self.get_aid_confirmation():
+            raise Warning(
+                _("Cannot print {} because there is no active "
+                  "aid confirmation and Duties (PCSW) is empty.").format(self))
 
 # dd.update_field(
 #     Contract, 'user',
@@ -273,7 +294,7 @@ class Contract(ContractBase):
 
 class ContractDetail(dd.DetailLayout):
     general = dd.Panel("""
-    id:8 client:25 type user:15 user_asd:15
+    id:8 client:25 type user:15 user_dsbe:15 user_asd:15
     study_type applies_from applies_until exam_policy language:8
     date_decided date_issued printed date_ended ending:20
     PartnersByContract
@@ -281,8 +302,8 @@ class ContractDetail(dd.DetailLayout):
     """, label=_("General"))
 
     isip = dd.Panel("""
-    stages  goals
-    duties_asd  duties_dsbe  duties_person
+    stages  goals duties_person
+    duties_asd duties_dsbe duties_pcsw
     """, label=_("ISIP"))
 
     main = "general isip"

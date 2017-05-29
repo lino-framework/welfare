@@ -182,11 +182,11 @@ Lino Welfare:
 - properties.Property :
   - PROTECT : properties.PersonProperty.property
 - sepa.Account :
-  - PROTECT : finan.PaymentOrderItem.bank_account, vatless.AccountInvoice.bank_account
+  - PROTECT : finan.PaymentOrderItem.bank_account, ledger.Journal.sepa_account, vatless.AccountInvoice.bank_account
 - uploads.UploadType :
   - PROTECT : uploads.Upload.type
 - users.User :
-  - PROTECT : aids.Granting.signer, aids.Granting.user, aids.IncomeConfirmation.signer, aids.IncomeConfirmation.user, aids.RefundConfirmation.signer, aids.RefundConfirmation.user, aids.SimpleConfirmation.signer, aids.SimpleConfirmation.user, art61.Contract.user, art61.Contract.user_asd, cal.Event.assigned_to, cal.Event.user, cal.RecurrentEvent.user, cal.Subscription.user, cal.Task.user, cbss.IdentifyPersonRequest.user, cbss.ManageAccessRequest.user, cbss.RetrieveTIGroupsRequest.user, changes.Change.user, coachings.Coaching.user, dashboard.Widget.user, debts.Budget.user, excerpts.Excerpt.user, isip.Contract.user, isip.Contract.user_asd, jobs.Contract.user, jobs.Contract.user_asd, ledger.Voucher.user, newcomers.Competence.user, notes.Note.user, notify.Message.user, outbox.Mail.user, plausibility.Problem.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user
+  - PROTECT : aids.Granting.signer, aids.Granting.user, aids.IncomeConfirmation.signer, aids.IncomeConfirmation.user, aids.RefundConfirmation.signer, aids.RefundConfirmation.user, aids.SimpleConfirmation.signer, aids.SimpleConfirmation.user, art61.Contract.user, art61.Contract.user_asd, cal.Event.assigned_to, cal.Event.user, cal.RecurrentEvent.user, cal.Subscription.user, cal.Task.user, cbss.IdentifyPersonRequest.user, cbss.ManageAccessRequest.user, cbss.RetrieveTIGroupsRequest.user, changes.Change.user, coachings.Coaching.user, dashboard.Widget.user, debts.Budget.user, excerpts.Excerpt.user, isip.Contract.user, isip.Contract.user_asd, isip.Contract.user_dsbe, jobs.Contract.user, jobs.Contract.user_asd, ledger.Voucher.user, newcomers.Competence.user, notes.Note.user, notify.Message.user, outbox.Mail.user, plausibility.Problem.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user
 - vatless.AccountInvoice :
   - CASCADE : vatless.InvoiceItem.voucher
 - xcourses.Course :

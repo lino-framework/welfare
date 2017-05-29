@@ -73,7 +73,7 @@ Lino Welfare à la Eupen.
       - (aids_tab_1):
         - (status):
           - (status_1): **Lebt in Belgien seit** (in_belgium_since), **Register** (residence_type), **Gesdos-Nr** (gesdos_id)
-          - (status_2): **Interim-Agenturen** (job_agents), **Integrationsphase** (group), **Sozialhilfeart** (aid_type)
+          - (status_2): **Interim-Agenturen** (job_agents), **Integrationsphase** (group)
         - (income):
           - (income_1): **Arbeitslosengeld** (income_ag), **Wartegeld** (income_wg)
           - (income_2): **Krankengeld** (income_kg), **Rente** (income_rente)

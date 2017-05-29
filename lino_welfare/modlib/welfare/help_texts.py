@@ -24,7 +24,7 @@ selecting an aid type."""),
 See also
 lino_xl.lib.excerpts.mixins.ExcerptTitle.excerpt_title."""),
     'lino_welfare.modlib.aids.models.AidType.body_template' : _("""The body template to use when printing a confirmation of this type.
-If this field is empty, Lino uses the excerpt type's
+If this field is empty, Lino uses the excerpt type’s
 body_template.
 See also /admin/printing."""),
     'lino_welfare.modlib.aids.models.AidType.is_urgent' : _("""Whether aid grantings of this type are considered as urgent.
@@ -32,7 +32,7 @@ This is used by Confirmation.get_urgent_granting()"""),
     'lino_welfare.modlib.aids.models.AidType.board' : _("""Pointer to the default lino_xl.lib.boards.models.Board
 for aid projects of this type."""),
     'lino_welfare.modlib.aids.models.AidType.confirmed_by_primary_coach' : _("""Whether grantings for this aid type are to be signed by the
-client's primary coach (see Client.get_primary_coach)."""),
+client’s primary coach (see Client.get_primary_coach)."""),
     'lino_welfare.modlib.aids.models.AidType.pharmacy_type' : _("""A pointer to the ClientContactType to be used when
 selecting the pharmacy of a refund confirmation
 (RefundConfirmation.pharmacy)."""),
@@ -41,7 +41,7 @@ gets a given aid during a given period."""),
     'lino_welfare.modlib.aids.models.Granting.client' : _("""Pointer to the lino_welfare.modlib.pcsw.models.Client."""),
     'lino_welfare.modlib.aids.models.Granting.aid_type' : _("""The type of aid being granted. Mandatory.
 Pointer to the AidType."""),
-    'lino_welfare.modlib.aids.models.Granting.signer' : _("""Pointer to the user who is expected to "sign" this granting
+    'lino_welfare.modlib.aids.models.Granting.signer' : _("""Pointer to the user who is expected to “sign” this granting
 (i.e. to confirm that it is real)."""),
     'lino_welfare.modlib.aids.models.Granting.board' : _("""Pointer to the Board
 which decided to allocate this aid project."""),
@@ -67,8 +67,8 @@ successful creation (if AidType.print_directly is checked)."""),
     'lino_welfare.modlib.art61.models.ContractType' : _("""This is the homologue of isip.ContractType (see there for
 general documentation)."""),
     'lino_welfare.modlib.art61.models.ContractTypes.model' : _("""alias of ContractType"""),
-    'lino_welfare.modlib.art61.models.Contract' : _("""An "Art61 job supplyment" is an agreement between the PCSW and a
-private company..."""),
+    'lino_welfare.modlib.art61.models.Contract' : _("""An “Art61 job supplyment” is an agreement between the PCSW and a
+private company…"""),
     'lino_welfare.modlib.art61.models.ContractsByClient' : _("""Shows the Art61 job supplyments for this client."""),
     'lino_welfare.modlib.art61.models.ContractsByClient.master' : _("""alias of Client"""),
     'lino_welfare.modlib.art61.models.ContractsByClient.model' : _("""alias of Contract"""),
@@ -85,7 +85,7 @@ lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.cbss.Plugin.cbss_live_requests' : _("""Whether executing requests should try to really connect to the
 CBSS.  Real requests would fail with a timeout if run from behind
 an IP address that is not registered at the CBSS."""),
-    'lino_welfare.modlib.cbss.Plugin.cbss_environment' : _("""Either None or one of 'test', 'acpt' or 'prod'."""),
+    'lino_welfare.modlib.cbss.Plugin.cbss_environment' : _("""Either None or one of ‘test’, ‘acpt’ or ‘prod’."""),
     'lino_welfare.modlib.cbss.choicelists.RequestStates' : _("""The status of a CBSSRequest."""),
     'lino_welfare.modlib.cbss.choicelists.ManageActions' : _("""Possible values for the action field of a
 lino_welfare.modlib.cbss.models.ManageAccessRequest."""),
@@ -111,10 +111,10 @@ lino_welfare.modlib.cbss.models.ManageAccessRequest."""),
     'lino_welfare.modlib.cbss.mixins.CBSSRequest' : _("""Common Abstract Base Class for SSDNRequest
 and NewStyleRequest"""),
     'lino_welfare.modlib.cbss.mixins.CBSSRequest.wsdl_parts' : _("""alias of NotImplementedError"""),
-    'lino_welfare.modlib.cbss.mixins.SSDNRequest' : _("""Abstract Base Class for Models that represent SSDN ("classic")
+    'lino_welfare.modlib.cbss.mixins.SSDNRequest' : _("""Abstract Base Class for Models that represent SSDN (“classic”)
 requests."""),
     'lino_welfare.modlib.cbss.mixins.NewStyleRequest' : _("""Abstract Base Class for Models that represent
-"new style" requests to the CBSS (and responses)."""),
+“new style” requests to the CBSS (and responses)."""),
     'lino_welfare.modlib.cbss.mixins.SSIN' : _("""Abstract base for Requests that have a field national_id and a method 
 get_ssin()."""),
     'lino_welfare.modlib.cbss.mixins.WithPerson' : _("""Mixin for models that have certain fields"""),
@@ -183,7 +183,7 @@ not."""),
     'lino_welfare.modlib.debts.models.Entry.account' : _("""The related Account."""),
     'lino_welfare.modlib.debts.ui.Groups' : _("""The global table of all account groups."""),
     'lino_welfare.modlib.debts.ui.Groups.model' : _("""alias of Group"""),
-    'lino_welfare.modlib.debts.ui.ActorsByBudget' : _("""The table used to edit Actors in a Budget's detail."""),
+    'lino_welfare.modlib.debts.ui.ActorsByBudget' : _("""The table used to edit Actors in a Budget’s detail."""),
     'lino_welfare.modlib.debts.ui.ActorsByBudget.master' : _("""alias of Budget"""),
     'lino_welfare.modlib.debts.ui.ActorsByBudget.model' : _("""alias of Actor"""),
     'lino_welfare.modlib.debts.ui.BudgetDetail' : _("""Defines the Detail form of a Budget."""),
@@ -206,7 +206,7 @@ PrintLiabilitiesByBudget and PrintAssetsByBudget)."""),
 same as total, otherwise it is total * 12 / periods."""),
     'lino_welfare.modlib.debts.ui.PrintEntriesByBudget.master' : _("""alias of EntryGroup"""),
     'lino_welfare.modlib.dupable_clients.Plugin' : _("""See lino.core.plugin.Plugin."""),
-    'lino_welfare.modlib.dupable_clients.mixins.DupableClient' : _("""Model mixin to add to the base classes of your application's
+    'lino_welfare.modlib.dupable_clients.mixins.DupableClient' : _("""Model mixin to add to the base classes of your application’s
 pcsw.Client model."""),
     'lino_welfare.modlib.dupable_clients.models.Word' : _("""Phonetic word for pcsw.Client.
 See lino.mixins.dupable.PhoneticWordBase."""),
@@ -239,7 +239,7 @@ columns (coachings per PersonGroup table."""),
     'lino_welfare.modlib.integ.models.ActivityReport' : _("""Gives an overview about the work of the Integration Service during
 a given period."""),
     'lino_welfare.modlib.integ.roles.IntegrationAgent' : _("""A social agent who can see database content specific to
-integration work: CV, language courses, workshops, ..."""),
+integration work: CV, language courses, workshops, …"""),
     'lino_welfare.modlib.isip.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.isip.choicelists.OverlapGroups' : _("""The list of all known overlap groups to be selected for the
 overlap_group
@@ -270,14 +270,14 @@ This field is set to the same value as applies_until."""),
 ContractEnding"""),
     'lino_welfare.modlib.isip.mixins.ContractBase.date_issued' : _("""When the contract was issued to the client and signed by them."""),
     'lino_welfare.modlib.isip.mixins.ContractBase.date_decided' : _("""When the contract was ratified by the responsible board."""),
-    'lino_welfare.modlib.isip.mixins.ContractBase.language' : _("""The language of this contract. Default value is the client's
+    'lino_welfare.modlib.isip.mixins.ContractBase.language' : _("""The language of this contract. Default value is the client’s
 language."""),
     'lino_welfare.modlib.isip.mixins.ContractBase.type' : _("""The type of this contract. Pointer to a subclass of
 ContractTypeBase."""),
     'lino_welfare.modlib.isip.mixins.ContractBaseTable' : _("""Base for contract tables. Defines the following parameter fields:"""),
     'lino_welfare.modlib.isip.mixins.ContractBaseTable.ending' : _("""Show only contracts with the specified
 ContractEnding."""),
-    'lino_welfare.modlib.isip.mixins.ContractBaseTable.ending_success' : _("""Select "Yes" to show only contracts whose ending
+    'lino_welfare.modlib.isip.mixins.ContractBaseTable.ending_success' : _("""Select “Yes” to show only contracts whose ending
 ContractEnding has
 is_success
 checked."""),
@@ -285,16 +285,16 @@ checked."""),
     'lino_welfare.modlib.isip.models.ContractType.needs_study_type' : _("""Whether contracts of this type need their study_type
 field filled in."""),
     'lino_welfare.modlib.isip.models.ExamPolicy' : _("""An examination policy is mostly a RecurrenceSet used for generating
-"evaluation meetings".  That is, Lino automatically suggests dates
+“evaluation meetings”.  That is, Lino automatically suggests dates
 where the agent invites the client."""),
     'lino_welfare.modlib.isip.models.ContractEnding' : _("""A possible reason for premature termination of a contract."""),
     'lino_welfare.modlib.isip.models.ContractPartner' : _("""Represents a third-party external partner who participates in this
 contract. For every partner there is a rich text field describing
 their duties."""),
-    'lino_welfare.modlib.isip.models.Contract' : _("""An ISIP (called "PIIS" in French and "VSE" in German) is a
+    'lino_welfare.modlib.isip.models.Contract' : _("""An ISIP (called “PIIS” in French and “VSE” in German) is a
 convention or contract between the PCSW and a young client that
 leads to an individual coaching of the person, mostly concerning
-the client's scholar education."""),
+the client’s scholar education."""),
     'lino_welfare.modlib.isip.models.Contract.type' : _("""The type of this contract.
 Pointer to ContractType."""),
     'lino_welfare.modlib.isip.models.Contract.study_type' : _("""The type of study that is going to be followed during this
@@ -313,7 +313,7 @@ service or a private company."""),
     'lino_welfare.modlib.jobs.models.ContractType' : _("""This is the homologue of isip.ContractType (see there for
 general documentation)."""),
     'lino_welfare.modlib.jobs.models.ContractTypes.model' : _("""alias of ContractType"""),
-    'lino_welfare.modlib.jobs.models.Contract' : _("""An Art60§7 job supplyment is a contract bla bla..."""),
+    'lino_welfare.modlib.jobs.models.Contract' : _("""An Art60§7 job supplyment is a contract bla bla…"""),
     'lino_welfare.modlib.jobs.models.Contract.duration' : _("""If applies_from and duration are set, then the
 default value for applies_until is computed assuming 26
 workdays per month:"""),
@@ -330,13 +330,13 @@ workdays per month:"""),
 candidature. Check at least one of them."""),
     'lino_welfare.modlib.jobs.models.Candidatures' : _("""List of Candidatures."""),
     'lino_welfare.modlib.jobs.models.Candidatures.model' : _("""alias of Candidature"""),
-    'lino_welfare.modlib.jobs.models.CandidaturesByPerson' : _("""..."""),
+    'lino_welfare.modlib.jobs.models.CandidaturesByPerson' : _("""…"""),
     'lino_welfare.modlib.jobs.models.CandidaturesByPerson.master' : _("""alias of Client"""),
     'lino_welfare.modlib.jobs.models.CandidaturesByPerson.model' : _("""alias of Candidature"""),
     'lino_welfare.modlib.jobs.models.SectorFunctionByOffer' : _("""Shows the Candidatures or Experiences for this Offer."""),
     'lino_welfare.modlib.jobs.models.SectorFunctionByOffer.master' : _("""alias of Offer"""),
     'lino_welfare.modlib.jobs.models.JobType' : _("""The list of Job Types is used for statistical analysis,
-e.g. in :class:``"""),
+e.g. in :class:“"""),
     'lino_welfare.modlib.jobs.models.ContractsSearch' : _("""Shows the Job contracts owned by this user."""),
     'lino_welfare.modlib.jobs.models.ContractsSearch.model' : _("""alias of Contract"""),
     'lino_welfare.modlib.jobs.models.JobsOverviewByType.master' : _("""alias of JobType"""),
@@ -359,7 +359,7 @@ consultants."""),
     'lino_welfare.modlib.newcomers.models.AvailableCoaches' : _("""List of users available for new coachings."""),
     'lino_welfare.modlib.newcomers.models.AvailableCoaches.model' : _("""alias of User"""),
     'lino_welfare.modlib.newcomers.models.AssignCoach' : _("""Assign this agent as coach for this client.  This will set the
-client's state to Coached and send a notification to the new
+client’s state to Coached and send a notification to the new
 coach."""),
     'lino_welfare.modlib.newcomers.models.AvailableCoachesByClient' : _("""List of users available for coaching this client.  Visible only to
 Newcomers consultants."""),
@@ -378,7 +378,7 @@ the person linked to this note."""),
     'lino_welfare.modlib.notes.models.Note.person' : _("""An alias to lino_xl.lib.notes.models.Note.project."""),
     'lino_welfare.modlib.pcsw.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.pcsw.actions.RefuseClient' : _("""Refuse this newcomer request."""),
-    'lino_welfare.modlib.pcsw.actions.MarkClientFormer' : _("""Change client's state to 'former'. This will also end any active
+    'lino_welfare.modlib.pcsw.actions.MarkClientFormer' : _("""Change client’s state to ‘former’. This will also end any active
 coachings."""),
     'lino_welfare.modlib.pcsw.models.Client' : _("""Inherits from lino_welfare.modlib.contacts.models.Person and
 lino_xl.lib.beid.models.BeIdCardHolder."""),
@@ -387,7 +387,7 @@ lino_xl.lib.beid.models.BeIdCardHolder."""),
     'lino_welfare.modlib.pcsw.models.Client.cvs_emitted' : _("""A virtual field displaying a group of shortcut links for managing CVs
 (Curriculum Vitaes)."""),
     'lino_welfare.modlib.pcsw.models.Client.id_document' : _("""A virtual field displaying a group of buttons for managing the
-"identifying document", i.e. an uploaded document which has been
+“identifying document”, i.e. an uploaded document which has been
 used as alternative to the eID card."""),
     'lino_welfare.modlib.pcsw.models.Client.group' : _("""Pointer to PersonGroup.
 The intergration phase of this client."""),
@@ -427,7 +427,7 @@ lino_xl.lib.reception.models.create_prompt_event()."""),
     'lino_welfare.modlib.reception.models.AgentsByClient' : _("""Shows the users for whom an appointment can be made with this
 client. Per user you have two possible buttons: (1) a prompt
 consultation (client will wait in the lounge until the user receives
-them) or (2) a scheduled appointment in the user's calendar."""),
+them) or (2) a scheduled appointment in the user’s calendar."""),
     'lino_welfare.modlib.reception.models.AgentsByClient.master' : _("""alias of Client"""),
     'lino_welfare.modlib.reception.models.AgentsByClient.model' : _("""alias of Coaching"""),
     'lino_welfare.modlib.sepa.models.Account' : _("""A bank account of a partner."""),
@@ -459,7 +459,7 @@ payment orders and other ledger operations."""),
 Courses."""),
     'lino_welfare.modlib.xcourses.models.CourseProviders' : _("""Table of all course providers"""),
     'lino_welfare.modlib.xcourses.models.CourseProviders.model' : _("""alias of CourseProvider"""),
-    'lino_welfare.modlib.xcourses.models.CourseContent' : _("""Ein Kursinhalt (z.B. "Französisch", "Deutsch", "Alphabétisation",...)"""),
+    'lino_welfare.modlib.xcourses.models.CourseContent' : _("""Ein Kursinhalt (z.B. “Französisch”, “Deutsch”, “Alphabétisation”,…)"""),
     'lino_welfare.modlib.xcourses.models.CourseContent.name' : _("""Bezeichnung des Kursinhalts (nach Konvention des DSBE)."""),
     'lino_welfare.modlib.xcourses.models.CourseOffer.title' : _("""Der Titel des Kurses. Maximal 200 Zeichen."""),
     'lino_welfare.modlib.xcourses.models.Course' : _("""Ein konkreter Kurs, der an einem bestimmten Datum beginnt.
@@ -489,7 +489,7 @@ which are not registiered."""),
     'lino_welfare.modlib.xcourses.models.PendingCourseRequests' : _("""List of pending course requests."""),
     'lino_welfare.modlib.xcourses.models.PendingCourseRequests.model' : _("""alias of CourseRequest"""),
     'lino_welfare.projects.chatelet.modlib.courses.models.Enrolment' : _("""Adds two text fields motivation and problems."""),
-    'lino_welfare.projects.chatelet.modlib.cv.models.ClientIsLearning' : _("""Select only clients who are "learning" during the given date.
+    'lino_welfare.projects.chatelet.modlib.cv.models.ClientIsLearning' : _("""Select only clients who are “learning” during the given date.
 That is, who have an active Study, Training or
 Experience.
 Only the start_date is used, end_date has no effect when
