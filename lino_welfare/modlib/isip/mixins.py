@@ -466,6 +466,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
     def get_granting(self, **aidtype_filter):
         ap = self.active_period()
         ap = AttrDict(start_date=ap[0], end_date=ap[1])
+        # print(20170529, ap)
         return rt.modules.aids.Granting.objects.get_by_aidtype(
             self.client, ap, **aidtype_filter)
 
@@ -479,16 +480,17 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
         """Returns the last aid confirmation that has been issued for this
         contract. May be used in `.odt` template.
 
+        Update 20170530: not the last *confirmation* but the last
+        *granting*.
+
         """
         g = self.get_granting(is_integ_duty=True)
         if g and g.aid_type and g.aid_type.confirmation_type:
-            ct = g.aid_type.confirmation_type
-            qs = ct.model.objects.filter(granting=g)
-            # ap = self.active_period()
-            # ap = AttrDict(start_date=ap[0], end_date=ap[1])
-            # qs = PeriodEvents.active.add_filter(qs, ap)
-            if qs.count() > 0:
-                return qs[qs.count()-1]
+            return g
+            # ct = g.aid_type.confirmation_type
+            # qs = ct.model.objects.filter(granting=g)
+            # if qs.count() > 0:
+            #     return qs[qs.count()-1]
 
     def suggest_cal_guests(self, event):
         """Automatic evaluation events have the client as mandatory
