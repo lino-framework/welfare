@@ -43,7 +43,7 @@ from lino.utils import i2d, AttrDict
 
 from lino.api import rt
 
-from lino.modlib.users.choicelists import UserTypes
+from lino.modlib.auth.choicelists import UserTypes
 
 
 class TestCase(TestCase):
@@ -104,15 +104,15 @@ class TestCase(TestCase):
 
         self.create_obj(
             User, username='robin',
-            profile=UserTypes.admin, language="en")
+            user_type=UserTypes.admin, language="en")
         caroline = self.create_obj(
             User, username='caróline',
-            profile='200', language="fr")
+            user_type='200', language="fr")
         alicia = self.create_obj(
             User, username='alícia', first_name="Alicia",
-            profile='900', language="fr")
+            user_type='900', language="fr")
         roger = self.create_obj(
-            User, username='róger', profile='400',
+            User, username='róger', user_type='400',
             language="en")
 
         ses = rt.login('robin')

@@ -55,7 +55,6 @@ cal = dd.resolve_app('cal')
 contacts = dd.resolve_app('contacts')
 cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
-users = dd.resolve_app('users')
 from lino_xl.lib.beid.mixins import BeIdCardHolder
 from lino.modlib.plausibility.choicelists import Checker
 # from lino.modlib.vatless.mixins import PartnerDetailMixin
@@ -240,7 +239,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
 
     def disabled_fields(self, ar):
         rv = super(Client, self).disabled_fields(ar)
-        if not ar.get_user().profile.has_required_roles([(NewcomersOperator, NewcomersAgent)]):
+        if not ar.get_user().user_type.has_required_roles([(NewcomersOperator, NewcomersAgent)]):
             rv = rv | set(['broker', 'faculty', 'refusal_reason'])
         #~ logger.info("20130808 pcsw %s", rv)
         return rv
@@ -693,11 +692,11 @@ class Clients(contacts.Persons):
 
     parameters = mixins.ObservedPeriod(
         coached_by=models.ForeignKey(
-            'users.User', blank=True, null=True,
+            'auth.User', blank=True, null=True,
             verbose_name=_("Coached by"), help_text=u"""\
 Nur Klienten, die eine Begleitung mit diesem Benutzer haben."""),
         and_coached_by=models.ForeignKey(
-            'users.User', blank=True, null=True,
+            'auth.User', blank=True, null=True,
             verbose_name=_("and by"), help_text=u"""\
 Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
         nationality=dd.ForeignKey(

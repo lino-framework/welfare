@@ -40,7 +40,7 @@ from lino import mixins
 from lino.utils.xmlgen.html import E
 from lino.utils.ranges import encompass
 
-from lino.modlib.users.mixins import UserAuthored
+from lino.modlib.auth.mixins import UserAuthored
 from lino_xl.lib.contacts.mixins import ContactRelated
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino.mixins.periods import rangefmt
@@ -79,7 +79,7 @@ class SignConfirmation(dd.Action):
     def get_action_permission(self, ar, obj, state):
         user = ar.get_user()
         if obj.signer_id and obj.signer != user \
-           and not user.profile.has_required_roles([AidsStaff]):
+           and not user.user_type.has_required_roles([AidsStaff]):
             return False
         return super(SignConfirmation,
                      self).get_action_permission(ar, obj, state)
@@ -110,7 +110,7 @@ class RevokeConfirmation(dd.Action):
 
     def get_action_permission(self, ar, obj, state):
         user = ar.get_user()
-        if obj.signer != user and not user.profile.has_required_roles([AidsStaff]):
+        if obj.signer != user and not user.user_type.has_required_roles([AidsStaff]):
             return False
         return super(RevokeConfirmation,
                      self).get_action_permission(ar, obj, state)

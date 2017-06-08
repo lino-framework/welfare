@@ -31,7 +31,7 @@ from lino_xl.lib.reception import Plugin
 
 class Plugin(Plugin):
 
-    def setup_main_menu(self, site, profile, main):
+    def setup_main_menu(self, site, user_type, main):
         m = main.add_menu(self.app_name, self.verbose_name)
         m.add_action('reception.Clients')
-        super(Plugin, self).setup_main_menu(site, profile, main)
+        super(Plugin, self).setup_main_menu(site, user_type, main)

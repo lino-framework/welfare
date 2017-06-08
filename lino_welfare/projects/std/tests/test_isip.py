@@ -36,7 +36,7 @@ from lino.utils.djangotest import RemoteAuthTestCase
 from lino.utils import i2d
 from lino_xl.lib.cal.choicelists import WORKDAYS
 from lino_xl.lib.coachings.choicelists import ClientStates
-from lino.modlib.users.choicelists import UserTypes
+from lino.modlib.auth.choicelists import UserTypes
 from lino.modlib.system.choicelists import Genders
 
 
@@ -53,8 +53,8 @@ class QuickTest(RemoteAuthTestCase):
     def test01(self):
         from lino.api.shell import cal, pcsw, isip, users, contacts
 
-        users.User(username="robin",
-                   profile=UserTypes.admin,
+        auth.User(username="robin",
+                   user_type=UserTypes.admin,
                    language="en").save()
         ses = settings.SITE.login('robin')
 

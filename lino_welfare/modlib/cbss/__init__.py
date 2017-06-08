@@ -76,7 +76,7 @@ class Plugin(ad.Plugin):
             version = self.site.not_found_msg
         yield ("suds", version, "https://fedorahosted.org/suds/")
 
-    def setup_main_menu(self, site, profile, m):
+    def setup_main_menu(self, site, user_type, m):
         mg = site.plugins.integ
         m = m.add_menu(mg.app_label, mg.verbose_name)
         m = m.add_menu(self.app_label, self.verbose_name)
@@ -84,12 +84,12 @@ class Plugin(ad.Plugin):
         m.add_action('cbss.MyManageAccessRequests')
         m.add_action('cbss.MyRetrieveTIGroupsRequests')
 
-    def setup_config_menu(self, site, profile, m):
+    def setup_config_menu(self, site, user_type, m):
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('cbss.Sectors')
         m.add_action('cbss.Purposes')
 
-    def setup_explorer_menu(self, site, profile, m):
+    def setup_explorer_menu(self, site, user_type, m):
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('cbss.AllIdentifyPersonRequests')
         m.add_action('cbss.AllManageAccessRequests')

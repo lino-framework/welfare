@@ -286,7 +286,7 @@ def load_dbf(dbpath, tableName, load):
 def load_tim_data(dbpath):
 
     #~ from django.contrib.auth import models as auth
-    from lino.modlib.users import models as auth
+    from lino.modlib.auth import models as auth
 
     def load(row):
         #~ auth.User.objects.create_user(row['USERID'],row['EMAIL'] or '','')

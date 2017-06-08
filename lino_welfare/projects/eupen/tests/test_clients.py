@@ -35,7 +35,7 @@ from lino.utils.djangotest import RemoteAuthTestCase
 from lino.utils import i2d
 from lino_xl.lib.cal.choicelists import WORKDAYS
 from lino_xl.lib.coachings.choicelists import ClientStates
-from lino.modlib.users.choicelists import UserTypes
+from lino.modlib.auth.choicelists import UserTypes
 from lino.modlib.system.choicelists import Genders
 from lino.utils.instantiator import create_row as create
 from lino.api import rt
@@ -60,14 +60,14 @@ class QuickTest(RemoteAuthTestCase):
         Message = rt.models.notify.Message
 
         create(
-            users.User, username="robin",
-            profile=UserTypes.admin,
+            auth.User, username="robin",
+            user_type=UserTypes.admin,
             language="fr")
         
         aline = create(
-            users.User,
+            auth.User,
             username="aline",
-            profile=UserTypes.admin,
+            user_type=UserTypes.admin,
             language="fr")
         
 

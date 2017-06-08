@@ -37,7 +37,7 @@ def n2dec(v):
 
 def objects():
 
-    User = rt.modules.users.User
+    User = rt.modules.auth.User
     Household = rt.modules.households.Household
     Budget = rt.modules.debts.Budget
     Entry = rt.modules.debts.Entry
@@ -46,12 +46,12 @@ def objects():
 
     kerstin = User(username="kerstin",
                    first_name="Kerstin", last_name=u"Kerres",
-                   profile='300')
+                   user_type='300')
     yield kerstin
-    profiles = [
-        p for p in rt.modules.users.UserTypes.get_list_items()
+    user_types = [
+        p for p in rt.modules.auth.UserTypes.get_list_items()
         if p.has_required_roles([DebtsUser])]
-    USERS = Cycler(User.objects.filter(profile__in=profiles))
+    USERS = Cycler(User.objects.filter(user_type__in=user_types))
 
     for hh in Household.objects.all():
         b = Budget(partner_id=hh.id, user=USERS.pop())

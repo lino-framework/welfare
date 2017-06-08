@@ -40,7 +40,7 @@ from lino.utils.djangotest import RemoteAuthTestCase
 from lino.utils import AttrDict
 
 from django.conf import settings
-from lino.modlib.users.choicelists import UserTypes
+from lino.modlib.auth.choicelists import UserTypes
 from lino.api.shell import countries, pcsw, users
 
 
@@ -65,8 +65,8 @@ class BeIdTests(RemoteAuthTestCase):
             'lino.core.auth.RemoteUserMiddleware',
             'lino.utils.ajax.AjaxExceptionResponse'))
 
-        u = users.User(username='root',
-                       profile=UserTypes.admin,
+        u = auth.User(username='root',
+                       user_type=UserTypes.admin,
                        language="en")
         u.save()
         be = countries.Country(name="Belgium", isocode="BE")

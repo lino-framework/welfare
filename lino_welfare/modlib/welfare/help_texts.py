@@ -439,7 +439,7 @@ statements."""),
     'lino_welfare.modlib.sepa.models.AccountsByClient.master' : _("""alias of Partner"""),
     'lino_welfare.modlib.sepa.models.AccountsByClient.model' : _("""alias of Account"""),
     'lino_welfare.modlib.users.desktop.UserDetail' : _("""Layout of User Detail in Lino Welfare."""),
-    'lino_welfare.modlib.users.models.User' : _("""The users.User model used in Lino Welfare.  We add a few fields
+    'lino_welfare.modlib.users.models.User' : _("""The auth.User model used in Lino Welfare.  We add a few fields
 to the standard models (lino.modlib.users.models.User)."""),
     'lino_welfare.modlib.welfare.user_types.AccountantManager' : _("""Like an accountant, but also has access to configuration."""),
     'lino_welfare.modlib.welfare.user_types.SiteAdmin' : _("""The site adminstrator has permission for everything."""),

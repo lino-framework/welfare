@@ -56,7 +56,7 @@ from lino.core.utils import is_valid_url, is_valid_email
 
 from lino_xl.lib.countries.models import Place, Country
 from lino_xl.lib.notes.models import Note
-from lino.modlib.users.models import User
+from lino.modlib.auth.models import User
 from lino_xl.lib.cal import models as cal
 #~ from lino_xl.lib.cal.utils import EventStatus
 from lino_xl.lib.properties import models as properties
@@ -856,7 +856,7 @@ def objects():
     yield phin('3')
     yield phin('4')
     yield phin('4b')
-    #~ User = resolve_model('users.User')
+    #~ User = resolve_model('auth.User')
     #~ for o in PersonLoader().load(): yield o
     #~ for k,v in CboTypeMiseEmplois.items():
         #~ yield ContractType(id=k,name=v)

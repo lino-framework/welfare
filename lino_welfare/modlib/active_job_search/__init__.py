@@ -34,7 +34,7 @@ class Plugin(ad.Plugin):
     verbose_name = _("Active Job Search")
     short_name = _("AJS")
 
-    def setup_explorer_menu(self, site, profile, m):
+    def setup_explorer_menu(self, site, user_type, m):
         menugroup = site.plugins.integ
         m = m.add_menu(menugroup.app_label, menugroup.verbose_name)
         m.add_action('active_job_search.Proofs')

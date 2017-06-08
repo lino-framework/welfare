@@ -26,9 +26,9 @@ current_group = None
 
 
 def objects():
-    User = rt.modules.users.User
+    User = rt.modules.auth.User
     wilfried = User(username="wilfried",
                     first_name="Wilfried", last_name="Willems",
-                    profile='500')
+                    user_type='500')
     yield wilfried
     # See sepa/fixtures/demo.py for the rest of legder fixtures (Since sepa depend on ledger)

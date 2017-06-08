@@ -42,14 +42,14 @@ class Plugin(ad.Plugin):
     verbose_name = _("PCSW")
     needs_plugins = ['lino_xl.lib.coachings']
 
-    def setup_main_menu(self, site, profile, m):
+    def setup_main_menu(self, site, user_type, m):
         # mg = self.get_menu_group()
         mg = self
         m = m.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('pcsw.CoachedClients')
         m.add_action('coachings.MyCoachings')
 
-    def setup_config_menu(self, site, profile, m):
+    def setup_config_menu(self, site, user_type, m):
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('pcsw.PersonGroups')
         m.add_action('pcsw.Activities')
@@ -58,7 +58,7 @@ class Plugin(ad.Plugin):
         if not site.is_installed('aids'):
             m.add_action('pcsw.AidTypes')
 
-    def setup_explorer_menu(config, site, profile, m):
+    def setup_explorer_menu(config, site, user_type, m):
         m = m.add_menu(config.app_label, config.verbose_name)
         m.add_action('pcsw.Exclusions')
         m.add_action('pcsw.Convictions')

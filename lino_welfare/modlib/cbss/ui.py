@@ -21,7 +21,7 @@
 
 from lino.api import dd, _
 from lino.utils import AttrDict
-from lino.modlib.users.mixins import My
+from lino.modlib.auth.mixins import My
 from .roles import CBSSUser, SecurityAdvisor
 from .mixins import RequestStates
 from .utils import (nodetext, cbss2gender, cbss2date, cbss2address,
@@ -138,7 +138,7 @@ class ConfidentialResultsTable(dd.VirtualTable):
     def check_permission(cls, obj, ar):
         u = ar.user  # the real user, not the subst_user
         if obj.user != u:
-            if not u.profile.has_required_roles([SecurityAdvisor]):
+            if not u.user_type.has_required_roles([SecurityAdvisor]):
                 raise Warning(
                     _("Confidential data"))
         

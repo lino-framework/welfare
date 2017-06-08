@@ -20,7 +20,7 @@ from django.conf import settings
 from lino.utils.xmlgen.html import E
 from lino.utils.report import Report
 from lino.mixins import ObservedPeriod
-from lino.modlib.users.choicelists import UserTypes
+from lino.modlib.auth.choicelists import UserTypes
 from lino.modlib.system.choicelists import PeriodEvents
 
 from lino.api import dd, rt
@@ -33,7 +33,6 @@ pcsw = dd.resolve_app('pcsw')
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 courses = dd.resolve_app('courses')
-users = dd.resolve_app('users')
 cv = dd.resolve_app('cv')
 # properties = dd.resolve_app('properties')
 
@@ -160,16 +159,16 @@ class UsersWithClients(dd.VirtualTable):
 
         """
         u = ar.get_user()
-        if u is None or not u.profile.has_required_roles([dd.SiteAdmin]):
-            profiles = [p for p in UserTypes.items()
+        if u is None or not u.user_type.has_required_roles([dd.SiteAdmin]):
+            user_types = [p for p in UserTypes.items()
                         if p.has_required_roles([IntegrationAgent])
                         and not p.has_required_roles([dd.SiteAdmin])]
         else:
-            profiles = [
+            user_types = [
                 p for p in UserTypes.items()
                 if p.has_required_roles([IntegrationAgent])]
 
-        qs = users.User.objects.filter(profile__in=profiles)
+        qs = auth.User.objects.filter(user_type__in=user_types)
         for user in qs.order_by('username'):
             r = Clients.request(param_values=dict(coached_by=user))
             if r.get_total_count():
@@ -393,9 +392,9 @@ class CoachingEndingsByUser(dd.VentilatingTable, CoachingEndings):
                 return rt.actors.coachings.Coachings.request(param_values=pv)
             return func
 
-        profiles = [p for p in UserTypes.items()
+        user_types = [p for p in UserTypes.items()
                     if p.has_required_roles([IntegrationAgent])]
-        for u in settings.SITE.user_model.objects.filter(profile__in=profiles):
+        for u in settings.SITE.user_model.objects.filter(user_type__in=user_types):
             yield dd.RequestField(w(u), verbose_name=unicode(u.username))
         yield dd.RequestField(w(None), verbose_name=_("Total"))
 
@@ -464,7 +463,7 @@ class JobsContractEndingsByType(ContractEndingsByType):
     contracts_table = jobs.Contracts
     contract_type_model = jobs.ContractType
 
-from lino_welfare.modlib.users.desktop import Users
+from lino_welfare.modlib.auth.desktop import Users
 
 class ContractsPerUserAndContractType(ContractsByType, Users):
     label = _("PIIS par agent et type")

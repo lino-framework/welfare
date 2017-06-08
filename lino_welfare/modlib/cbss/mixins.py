@@ -35,7 +35,7 @@ from lino.api import dd
 
 from lino.utils.ssin import ssin_validator
 
-from lino.modlib.users.mixins import UserAuthored
+from lino.modlib.auth.mixins import UserAuthored
 
 from .utils import nodetext, xsdpath, CBSS_ENVS
 from .choicelists import *

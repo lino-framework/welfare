@@ -88,7 +88,7 @@ def objects():
     IncomeConfirmation = rt.modules.aids.IncomeConfirmation
     ClientContact = rt.modules.coachings.ClientContact
 
-    COACHES = Cycler(rt.modules.users.User.objects.filter(
+    COACHES = Cycler(rt.modules.auth.User.objects.filter(
         coaching_type__isnull=False))
 
     AMOUNTS = Cycler(123, 234, 345, 456, 678)

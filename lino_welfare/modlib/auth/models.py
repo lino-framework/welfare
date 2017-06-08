@@ -16,7 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Database models for :mod:`lino_welfare.modlib.users`.
+"""Database models for :mod:`lino_welfare.modlib.auth`.
 
 """
 
@@ -31,15 +31,15 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd, rt
 
-from lino.modlib.users.models import *
+from lino.modlib.auth.models import *
 
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 from lino.modlib.office.roles import OfficeUser
 
 
 class User(User):
-    """The `users.User` model used in Lino Welfare.  We add a few fields
-    to the standard models (:class:`lino.modlib.users.models.User`).
+    """The `auth.User` model used in Lino Welfare.  We add a few fields
+    to the standard models (:class:`lino.modlib.auth.models.User`).
 
     """
 
@@ -75,10 +75,10 @@ class User(User):
         """
         super(User, self). save(*args, **kwargs)
 
-        if not self.profile:
+        if not self.user_type:
             return
 
-        if not self.profile.has_required_roles([OfficeUser]):
+        if not self.user_type.has_required_roles([OfficeUser]):
             return
 
         if not self.calendar:
@@ -89,7 +89,7 @@ class User(User):
 
     def check_all_subscriptions(self):
 
-        if not self.profile.has_required_roles([SocialAgent]):
+        if not self.user_type.has_required_roles([SocialAgent]):
             return
 
         coaching_profiles = set()
@@ -97,7 +97,7 @@ class User(User):
             if p.has_required_roles([SocialAgent]):
                 coaching_profiles.add(p)
         for u in User.objects.filter(
-                profile__in=coaching_profiles).exclude(id=self.id):
+                user_type__in=coaching_profiles).exclude(id=self.id):
             rt.models.cal.check_subscription(self, u.calendar)
             rt.models.cal.check_subscription(u, self.calendar)
         # logger.info("20140403 wrote subscriptions for %s", self)

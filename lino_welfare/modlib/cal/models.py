@@ -90,7 +90,7 @@ class EventType(EventType):
     esf_field = dd.DummyField()
 
 dd.inject_field(
-    'users.User', 'calendar',
+    'auth.User', 'calendar',
     dd.ForeignKey(
         'cal.Calendar',
         verbose_name=_("User Calendar"),

@@ -44,7 +44,6 @@ jobs = dd.resolve_app('jobs')
 pcsw = dd.resolve_app('pcsw')
 uploads = dd.resolve_app('uploads')
 contacts = dd.resolve_app('contacts')
-users = dd.resolve_app('users')
 countries = dd.resolve_app('countries')
 reception = dd.resolve_app('reception')
 cal = dd.resolve_app('cal')
@@ -161,7 +160,8 @@ def objects():
     #~ Contact = resolve_model('contacts.Contact')
     Role = resolve_model('contacts.Role')
     RoleType = resolve_model('contacts.RoleType')
-    Authority = resolve_model('users.Authority')
+    Authority = resolve_model('auth.Authority')
+    User = settings.SITE.user_model
     #~ Country = resolve_model('countries.Country')
     Client = resolve_model('pcsw.Client')
 
@@ -250,8 +250,8 @@ def objects():
     ## Alicia does only appointments but no life
     ## consultations. Caroline and Judith do both.
     yield melanie
-    melanie = users.User(
-        username="melanie", partner=melanie, profile='110',
+    melanie = User(
+        username="melanie", partner=melanie, user_type='110',
         coaching_type=DSBE,
         newcomer_consultations=False, newcomer_appointments=False)
     yield melanie
@@ -260,8 +260,8 @@ def objects():
                     email=settings.SITE.demo_email,
                     city=kettenis, country='BE', gender=dd.Genders.male)
     yield hubert
-    hubert = users.User(
-        username="hubert", partner=hubert, profile='100',
+    hubert = User(
+        username="hubert", partner=hubert, user_type='100',
         coaching_type=DSBE,
         newcomer_consultations=True, newcomer_appointments=False)
     yield hubert
@@ -273,8 +273,8 @@ def objects():
         # gender=dd.Genders.female,  # don't set gender
         language='fr')
     yield alicia
-    alicia = users.User(
-        username="alicia", partner=alicia, profile='100',
+    alicia = User(
+        username="alicia", partner=alicia, user_type='100',
         coaching_type=DSBE,
         newcomer_consultations=True, newcomer_appointments=True)
     yield alicia
@@ -283,10 +283,10 @@ def objects():
                       email=settings.SITE.demo_email,
                       city=eupen, country='BE', gender=dd.Genders.female)
     yield theresia
-    theresia = users.User(username="theresia", partner=theresia, profile='210')
+    theresia = User(username="theresia", partner=theresia, user_type='210')
     yield theresia
 
-    nicolas = users.User(username="nicolas", profile='')
+    nicolas = User(username="nicolas", user_type='')
     yield nicolas
 
     # yield Authority(user=alicia, authorized=hubert)
@@ -296,9 +296,9 @@ def objects():
     yield Authority(user=alicia, authorized=theresia)
     yield Authority(user=melanie, authorized=theresia)
 
-    caroline = users.User(
+    caroline = User(
         username="caroline", first_name="Caroline", last_name="Carnol",
-        profile='200',
+        user_type='200',
         coaching_type=ASD,
         newcomer_consultations=True, newcomer_appointments=True)
     yield caroline
@@ -308,19 +308,19 @@ def objects():
                  city=eupen, country='BE', gender=dd.Genders.female)
     yield obj
 
-    judith = users.User(
-        username="judith", partner=obj, profile='400',
+    judith = User(
+        username="judith", partner=obj, user_type='400',
         coaching_type=ASD,
         newcomer_consultations=True, newcomer_appointments=True)
     yield judith
 
-    yield users.User(
+    yield User(
         username="patrick", first_name="Patrick",
-        last_name="Paraneau", profile='910',
+        last_name="Paraneau", user_type='910',
         email=settings.SITE.demo_email)
 
     # for obj in rt.models.coachings.CoachingType.objects.all():
-    #     yield users.Team(**dd.babelkw('name', **field2kw(obj, 'name')))
+    #     yield auth.Team(**dd.babelkw('name', **field2kw(obj, 'name')))
 
     obj = cal.GuestRole(
         # email_template="Visitor.eml.html",
@@ -732,7 +732,7 @@ def objects():
     #~ for person in Person.objects.filter(gender__isnull=False):
     for person in Person.objects.exclude(gender=''):
         if not person.birth_date:  # not those from humanlinks
-            if users.User.objects.filter(partner=person).count() == 0:
+            if User.objects.filter(partner=person).count() == 0:
                 if contacts.Role.objects.filter(person=person).count() == 0:
                     birth_date = settings.SITE.demo_date(-170 * count - 16 * 365)
                     national_id = generate_ssin(birth_date, person.gender)
@@ -793,7 +793,7 @@ def objects():
     #~ yield note(user=user,project=prj,date=i2d(20091007),subject="Anschauen",company=oshz)
 
     Note = resolve_model('notes.Note')
-    USERS = Cycler(users.User.objects.all())
+    USERS = Cycler(User.objects.all())
     SUBJECTS = Cycler(u"""
     Erstgespräch
     Versammlung beim AG
@@ -1126,7 +1126,7 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
     Calendar = dd.resolve_model('cal.Calendar')
     COLORS = Cycler(Calendar.COLOR_CHOICES)
 
-    for u in settings.SITE.user_model.objects.exclude(profile=None):
+    for u in settings.SITE.user_model.objects.exclude(user_type=None):
         obj = Calendar(name=u.username, color=COLORS.pop())
         yield obj
         u.calendar = obj

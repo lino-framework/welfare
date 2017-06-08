@@ -43,12 +43,12 @@ class Plugin(ad.Plugin):
     """The `max_length` of the `Reference` field of an account.
     """
 
-    def setup_main_menu(self, site, profile, m):
+    def setup_main_menu(self, site, user_type, m):
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('debts.Clients')
         m.add_action('debts.MyBudgets')
 
-    def setup_config_menu(self, site, profile, m):
+    def setup_config_menu(self, site, user_type, m):
         m = m.add_menu(self.app_label, self.verbose_name)
 
         m.add_action('debts.Groups')
@@ -71,7 +71,7 @@ class Plugin(ad.Plugin):
                 mb, label=unicode(fld.verbose_name),
                 action=MyBudgets.detail_action)
 
-    def setup_explorer_menu(self, site, profile, m):
+    def setup_explorer_menu(self, site, user_type, m):
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('debts.Budgets')
         m.add_action('debts.Entries')

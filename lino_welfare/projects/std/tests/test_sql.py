@@ -54,11 +54,11 @@ from lino.utils import i2d
 from lino.core.utils import resolve_model
 
 from lino.utils.instantiator import Instantiator
-from lino.modlib.users.choicelists import UserTypes
+from lino.modlib.auth.choicelists import UserTypes
 
 
 #~ def create_user(*args):
-    #~ user = Instantiator('users.User',
+    #~ user = Instantiator('auth.User',
       #~ 'username email first_name last_name is_staff is_superuser',
       #~ is_active=True,last_login=NOW,date_joined=NOW).build
     #~ return user(*args)
@@ -99,20 +99,20 @@ class SqlTest(TestCase):
         #~ 'SELECT "lino_siteconfig"."id", [...] WHERE "lino_siteconfig"."id" = 1',
         #~ 'SELECT "pcsw_persongroup"."id", [...] WHERE "pcsw_persongroup"."ref_name" IS NOT NULL ORDER BY "pcsw_persongroup"."ref_name" ASC',
 
-        from lino.modlib.users.models import User
+        from lino.modlib.auth.models import User
 
         #~ user = create_user('user','user@example.com','John','Jones',False,False)
         #~ user.save()
         #~ root = create_user('root','root@example.com','Dick','Dickens',True,True)
         user = Instantiator(settings.SITE.user_model,
-                            'username email first_name last_name profile').build
+                            'username email first_name last_name user_type').build
         root = user('root', 'root@example.com', 'Dick', 'Dickens', '900')
 
         root.save()
 
         self.check_sql_queries(
             'INSERT INTO "users_user" [...]'
-            #~ 'SELECT "users_user"."id", [...] FROM "users_user" WHERE "users_user"."profile" = 900'
+            #~ 'SELECT "users_user"."id", [...] FROM "users_user" WHERE "users_user"."user_type" = 900'
         )
         #~ self.check_sql_queries(
           #~ 'SELECT (1) AS "a" FROM "lino_siteconfig" [...]',
