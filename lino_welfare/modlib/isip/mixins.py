@@ -33,7 +33,7 @@ from atelier.utils import AttrDict
 from lino.api import dd, rt
 from lino import mixins
 
-from lino.modlib.users.mixins import UserAuthored
+from lino.modlib.auth.mixins import UserAuthored
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino_xl.lib.cal.mixins import EventGenerator
 from lino_xl.lib.contacts.mixins import ContactRelated
@@ -281,7 +281,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
         blank=True, null=True, verbose_name=_("date issued"))
 
     user_asd = models.ForeignKey(
-        "users.User",
+        "auth.User",
         verbose_name=_("responsible (ASD)"),
         related_name="%(app_label)s_%(class)s_set_by_user_asd",
         blank=True, null=True)

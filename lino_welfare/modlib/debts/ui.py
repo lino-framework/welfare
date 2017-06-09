@@ -37,7 +37,7 @@ from lino.api import dd
 from lino.core.constants import _handle_attr_name
 
 from lino_xl.lib.accounts.choicelists import AccountTypes
-from lino.modlib.users.mixins import My
+from lino.modlib.auth.mixins import My
 
 from lino_welfare.modlib.pcsw import models as pcsw
 

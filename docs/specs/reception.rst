@@ -106,7 +106,7 @@ EVERS Eberhart (127)
 Client 257 is a `ClientStates.newcomer` and *not* coached. In that
 case Lino shows all social agents who care for newcomers (i.e. who
 have a non-zero :attr:`newcomer_quota
-<lino_welfare.modlib.users.User.newcomer_quota>`).
+<lino_welfare.modlib.auth.User.newcomer_quota>`).
 
 
 >>> obj = pcsw.Client.objects.get(first_name="Bruno", last_name="Braun")

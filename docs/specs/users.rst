@@ -17,7 +17,7 @@ Users
     >>> from lino.api.doctest import *
 
 This document describes how Lino Welfare uses the
-:mod:`lino.modlib.users` plugin.
+:mod:`lino.modlib.auth` plugin.
 
 .. contents::
    :depth: 2

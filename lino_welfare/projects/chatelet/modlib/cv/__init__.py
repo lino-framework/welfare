@@ -33,15 +33,15 @@ from lino_xl.lib.cv import Plugin
 
 class Plugin(Plugin):
 
-    def setup_config_menu(self, site, profile, m):
-        super(Plugin, self).setup_config_menu(site, profile, m)
+    def setup_config_menu(self, site, user_type, m):
+        super(Plugin, self).setup_config_menu(site, user_type, m)
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('cv.SoftSkillTypes')
         m.add_action('cv.ObstacleTypes')
         m.add_action('cv.Proofs')
 
-    def setup_explorer_menu(self, site, profile, m):
-        super(Plugin, self).setup_explorer_menu(site, profile, m)
+    def setup_explorer_menu(self, site, user_type, m):
+        super(Plugin, self).setup_explorer_menu(site, user_type, m)
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('cv.AllLanguageKnowledges')
         m.add_action('cv.Skills')

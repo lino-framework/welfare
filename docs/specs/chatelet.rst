@@ -195,10 +195,10 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 <BLANKLINE>
 
 
-User profiles
+user types
 =============
 
-We use the user profiles defined in
+We use the user types defined in
 :mod:`lino_welfare.modlib.welfare.user_types`:
 
 >>> settings.SITE.user_types_module
@@ -423,8 +423,8 @@ Each window layout defines a given set of fields.
 - uploads.UploadsByController.insert : file, type, end_date, description
 - users.AllUsers.send_welcome_email : email, subject
 - users.Users.change_password : current, new1, new2
-- users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
-- users.Users.insert : username, email, first_name, last_name, partner, language, profile
+- users.Users.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
+- users.Users.insert : username, email, first_name, last_name, partner, language, user_type
 <BLANKLINE>
 
 
@@ -432,7 +432,7 @@ Each window layout defines a given set of fields.
 Windows and permissions
 =======================
 
-Each window layout is **viewable** by a given set of user profiles.
+Each window layout is **viewable** by a given set of user types.
 
 >>> print(analyzer.show_window_permissions())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF

@@ -16,7 +16,7 @@
 # <http://www.gnu.org/licenses/>.
 
 """
-Lino-Welfare extension of :mod:`lino.modlib.users`.
+Lino-Welfare extension of :mod:`lino.modlib.auth`.
 
 .. autosummary::
    :toctree:
@@ -28,7 +28,7 @@ Lino-Welfare extension of :mod:`lino.modlib.users`.
 
 """
 
-from lino.modlib.users import Plugin
+from lino.modlib.auth import Plugin
 
 
 class Plugin(Plugin):

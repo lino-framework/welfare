@@ -36,16 +36,16 @@ from lino import ad
 class Plugin(ad.Plugin):
     verbose_name = _("Newcomers")
 
-    def setup_main_menu(self, site, profile, m):
+    def setup_main_menu(self, site, user_type, m):
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('newcomers.NewClients')
         m.add_action('newcomers.AvailableCoaches')
 
-    def setup_config_menu(self, site, profile, m):
+    def setup_config_menu(self, site, user_type, m):
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('newcomers.Brokers')
         m.add_action('newcomers.Faculties')
 
-    def setup_explorer_menu(self, site, profile, m):
+    def setup_explorer_menu(self, site, user_type, m):
         m = m.add_menu(self.app_label, self.verbose_name)
         m.add_action('newcomers.Competences')

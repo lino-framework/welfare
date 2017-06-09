@@ -45,12 +45,12 @@ class Plugin(ad.Plugin):
 
     holder_model = 'contacts.Person'
 
-    def setup_config_menu(self, site, profile, m):
+    def setup_config_menu(self, site, user_type, m):
         mg = site.plugins.courses
         m = m.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('badges.Badges')
 
-    def setup_explorer_menu(self, site, profile, m):
+    def setup_explorer_menu(self, site, user_type, m):
         mg = site.plugins.courses
         m = m.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('badges.Awards')

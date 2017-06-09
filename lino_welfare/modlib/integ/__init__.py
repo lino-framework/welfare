@@ -48,7 +48,7 @@ class Plugin(ad.Plugin):
 
     """
 
-    def setup_reports_menu(config, site, profile, m):
+    def setup_reports_menu(config, site, user_type, m):
         m = m.add_menu(config.app_label, config.verbose_name)
         #~ m.add_action(site.modules.jobs.OldJobsOverview)
         m.add_action(site.modules.integ.UsersWithClients)
@@ -56,7 +56,7 @@ class Plugin(ad.Plugin):
         m.add_action('jobs.JobsOverview')
         m.add_action('integ.ActivityReport')
 
-    def setup_main_menu(config, site, profile, m):
+    def setup_main_menu(config, site, user_type, m):
         m = m.add_menu(config.app_label, config.verbose_name)
         m.add_action('integ.Clients')
         m.add_action('isip.MyContracts')
@@ -66,7 +66,7 @@ class Plugin(ad.Plugin):
         m.add_action('jobs.Jobs')
         m.add_action('jobs.Offers')
 
-    def setup_config_menu(config, site, profile, m):
+    def setup_config_menu(config, site, user_type, m):
         m = m.add_menu(config.app_label, config.verbose_name)
         m.add_action('isip.ContractTypes')
         m.add_action('isip.ContractEndings')
@@ -76,7 +76,7 @@ class Plugin(ad.Plugin):
         m.add_action('jobs.JobTypes')
         m.add_action('jobs.Schedules')
 
-    def setup_explorer_menu(config, site, profile, m):
+    def setup_explorer_menu(config, site, user_type, m):
         m = m.add_menu(config.app_label, config.verbose_name)
         m.add_action('isip.Contracts')
         m.add_action('jobs.Contracts')

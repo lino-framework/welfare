@@ -29,7 +29,7 @@ class Plugin(Plugin):
 
     extends_models = ['Partner', 'Person', 'Company']
 
-    def setup_main_menu(self, site, profile, main):
+    def setup_main_menu(self, site, user_type, main):
         m = main.add_menu(self.app_label, self.verbose_name)
         m.add_action('contacts.Persons')
         m.add_action(

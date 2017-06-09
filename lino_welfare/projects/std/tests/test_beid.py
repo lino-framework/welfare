@@ -66,7 +66,7 @@ class BeIdTests(RemoteAuthTestCase):
     def test01(self):
         from lino.core import constants
         from django.conf import settings
-        from lino.modlib.users.choicelists import UserTypes
+        from lino.modlib.auth.choicelists import UserTypes
         from lino.api.shell import countries, addresses, pcsw, users
         
         Holder = dd.plugins.beid.holder_model
@@ -81,10 +81,11 @@ class BeIdTests(RemoteAuthTestCase):
             'lino.core.auth.RemoteUserMiddleware',
             'lino.utils.ajax.AjaxExceptionResponse'))
 
-        u = users.User(username='robin',
-                       profile=UserTypes.admin,
+        u = auth.User(username='robin',
+                       user_type=UserTypes.admin,
                        language="en")
         u.save()
+        self.client.force_login(u)
         be = countries.Country(name="Belgium", isocode="BE")
         be.save()
         kw = dict()

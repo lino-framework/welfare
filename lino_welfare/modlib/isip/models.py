@@ -259,7 +259,7 @@ class Contract(ContractBase):
         blank=True, null=True, format='html')
 
     user_dsbe = models.ForeignKey(
-        "users.User",
+        "auth.User",
         verbose_name=_("responsible (IS)"),
         related_name="%(app_label)s_%(class)s_set_by_user_dsbe",
         blank=True, null=True)

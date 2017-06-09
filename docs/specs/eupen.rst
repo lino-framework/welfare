@@ -144,7 +144,7 @@ Mélanie
 
 Mélanie is a manager of the Integration service.
 
->>> p = rt.login('melanie').get_user().profile
+>>> p = rt.login('melanie').get_user().user_type
 >>> print(p)
 Begleiter im DSBE (Manager)
 >>> p.role  #doctest: +ELLIPSIS
@@ -152,7 +152,7 @@ Begleiter im DSBE (Manager)
 
 
 Because Mélanie has her :attr:`language
-<lino.modlib.users.models.User.language>` field set to French, we need
+<lino.modlib.auth.models.User.language>` field set to French, we need
 to explicitly override the language of :meth:`show_menu
 <lino.core.requests.BaseRequest.show_menu>` to get her menu in German:
 
@@ -203,7 +203,7 @@ Kerstin
 
 Kerstin is a debts consultant.
 
->>> p = rt.login('kerstin').get_user().profile
+>>> p = rt.login('kerstin').get_user().user_type
 >>> print(p)
 Schuldenberater
 
@@ -235,7 +235,7 @@ Caroline
 
 Caroline is a newcomers consultant.
 
->>> p = rt.login('caroline').get_user().profile
+>>> p = rt.login('caroline').get_user().user_type
 >>> print(p)
 Berater Erstempfang
 
@@ -266,7 +266,7 @@ Theresia
 
 Theresia is a reception clerk.
 
->>> p = rt.login('theresia').get_user().profile
+>>> p = rt.login('theresia').get_user().user_type
 >>> print(p)
 Empfangsschalter
 
@@ -470,8 +470,8 @@ Each window layout defines a given set of fields.
 - uploads.UploadsByController.insert : file, type, end_date, description
 - users.AllUsers.send_welcome_email : email, subject
 - users.Users.change_password : current, new1, new2
-- users.Users.detail : username, profile, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
-- users.Users.insert : username, email, first_name, last_name, partner, language, profile
+- users.Users.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
+- users.Users.insert : username, email, first_name, last_name, partner, language, user_type
 - vatless.Invoices.detail : journal, number, voucher_date, entry_date, accounting_period, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, match, state, user, id, MovementsByVoucher
 - vatless.Invoices.insert : journal, partner, voucher_date
 - vatless.InvoicesByJournal.insert : partner, voucher_date
@@ -490,7 +490,7 @@ Each window layout defines a given set of fields.
 Windows and permissions
 =======================
 
-Each window layout is **viewable** by a given set of user profiles.
+Each window layout is **viewable** by a given set of user user_types.
 
 >>> print(analyzer.show_window_permissions())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
@@ -681,7 +681,7 @@ Visibility of eID reader actions
 ================================
 
 Here is a list of the eid card reader actions and their availability
-per user profile.
+per user user_type.
 
 >>> from lino_xl.lib.beid.actions import BaseBeIdReadCardAction
 >>> print(analyzer.show_action_permissions(BaseBeIdReadCardAction))

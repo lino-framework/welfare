@@ -62,13 +62,13 @@ from lino_xl.lib.coachings.desktop import CoachingsByClient
 
 def appointable_users(*args, **kw):
     """Return a queryset of the users for whom reception clerks can create
-    appointments. Candidates must have a :attr:`profile
-    <lino.modlib.users.models.User.profile>` and a :attr:`calendar
-    <lino_welfare.modlib.users.models.User.calendar>`.
+    appointments. Candidates must have a :attr:`user_type
+    <lino.modlib.auth.models.User.user_type>` and a :attr:`calendar
+    <lino_welfare.modlib.auth.models.User.calendar>`.
     Additional arguments are forwarded to the query filter.
 
     """
-    qs = settings.SITE.user_model.objects.exclude(profile='')
+    qs = settings.SITE.user_model.objects.exclude(user_type='')
     kw.update(calendar__isnull=False)
     qs = qs.filter(*args, **kw)
     return qs
@@ -247,7 +247,7 @@ class CreateNote(dd.Action):
 class Clients(pcsw.CoachedClients):  # see blog 2013/0817
     """The list that opens by :menuselection:`Reception --> Clients`.
 
-    Visible to user profiles in group "reception".
+    Visible to user user_types in group "reception".
     It differs from :class:`CoachedClients
     <lino_xl.lib.coachings.desktop.CoachedClients>` by the visible columns.
 
@@ -397,7 +397,7 @@ class CoachingsByClient(CoachingsByClient):
             obj.create_visit,
             _("Visit"), icon_name=CreateClientVisit.icon_name), ' ']
 
-        if obj.user.profile is not None:
+        if obj.user.user_type is not None:
             sar = extensible.CalendarPanel.request(
                 subst_user=obj.user,
                 current_project=client.pk)

@@ -107,7 +107,7 @@ PUT_PAR_6283 = """
 """
 
 
-User = dd.resolve_model('users.User')
+User = dd.resolve_model('auth.User')
 Partner = dd.resolve_model('contacts.Partner')
 Company = dd.resolve_model('contacts.Company')
 Person = dd.resolve_model('contacts.Person')

@@ -44,7 +44,7 @@ class Plugin(ad.Plugin):
 
     needs_plugins = ['lino_welfare.modlib.pcsw']
 
-    def setup_explorer_menu(self, site, profile, main):
+    def setup_explorer_menu(self, site, user_type, main):
         mg = site.plugins.pcsw
         m = main.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('dupable_clients.Words')

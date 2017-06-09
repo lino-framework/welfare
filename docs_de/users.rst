@@ -6,7 +6,7 @@ Benutzerprofile
 ===============
 
 Damit ein Benutzer sich anmelden kann, muss sein
-:ddref:`users.User.profile` einen der folgenden Werte enthalten:
+:ddref:`users.User.user_type` einen der folgenden Werte enthalten:
 
 .. py2rst::
 

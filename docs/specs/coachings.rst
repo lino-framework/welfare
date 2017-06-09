@@ -83,7 +83,7 @@ should mark the client as **former**.
 
 >>> from lino_xl.lib.coachings.roles import CoachingsStaff
 >>> username = 'rolf'
->>> rt.login(username).user.profile.has_required_roles([CoachingsStaff])
+>>> rt.login(username).user.user_type.has_required_roles([CoachingsStaff])
 True
 
 >>> from lino_xl.lib.coachings.choicelists import ClientStates

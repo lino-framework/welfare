@@ -40,17 +40,17 @@ class Plugin(ad.Plugin):
     verbose_name = _("Art61 job supplying")  # Mises à l'emploi art.61
     needs_plugins = ['lino_welfare.modlib.jobs', 'lino_xl.lib.cv']
 
-    def setup_main_menu(self, site, profile, m):
+    def setup_main_menu(self, site, user_type, m):
         mg = site.plugins.integ
         m = m.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('art61.MyContracts')
 
-    def setup_config_menu(self, site, profile, m):
+    def setup_config_menu(self, site, user_type, m):
         mg = site.plugins.integ
         m = m.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('art61.ContractTypes')
 
-    def setup_explorer_menu(self, site, profile, m):
+    def setup_explorer_menu(self, site, user_type, m):
         mg = site.plugins.integ
         m = m.add_menu(mg.app_label, mg.verbose_name)
         m.add_action('art61.Contracts')

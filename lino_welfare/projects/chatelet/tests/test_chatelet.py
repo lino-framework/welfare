@@ -41,7 +41,7 @@ from lino.utils import i2d
 from lino.utils.instantiator import create_row
 from lino.core import constants
 
-from lino.modlib.users.choicelists import UserTypes
+from lino.modlib.auth.choicelists import UserTypes
 
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 
@@ -61,9 +61,11 @@ class TestCase(TestCase):
         User = settings.SITE.user_model
 
         robin = create_row(
-            User, username='robin', profile=UserTypes.admin,
+            User, username='robin', user_type=UserTypes.admin,
             language='en')
-        robin.profile.has_required_roles([IntegrationAgent])
+        robin.user_type.has_required_roles([IntegrationAgent])
+        self.client.force_login(robin)
+        
         ObstacleType(name='Alcohol').save()
 
         obj = Client(first_name="First", last_name="Last")
@@ -123,7 +125,7 @@ class TestCase(TestCase):
         Client = rt.modules.pcsw.Client
         User = settings.SITE.user_model
 
-        User(username='robin', profile=UserTypes.admin).save()
+        User(username='robin', user_type=UserTypes.admin).save()
 
         Client(first_name="First", last_name="Last").save()
 
@@ -161,7 +163,7 @@ class TestCase(TestCase):
         EnrolmentStates = rt.models.courses.EnrolmentStates
         Pupil = rt.modules.pcsw.Client
 
-        robin = User(username='robin', profile=UserTypes.admin)
+        robin = User(username='robin', user_type=UserTypes.admin)
         robin.save()
         ar = rt.login('robin')
         settings.SITE.verbose_client_info_message = False
