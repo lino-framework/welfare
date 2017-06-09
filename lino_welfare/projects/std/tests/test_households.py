@@ -69,6 +69,7 @@ class BeIdTests(RemoteAuthTestCase):
                        user_type=UserTypes.admin,
                        language="en")
         u.save()
+        self.client.force_login(u)
         be = countries.Country(name="Belgium", isocode="BE")
         be.save()
         kw = dict()

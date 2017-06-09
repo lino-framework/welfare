@@ -52,18 +52,19 @@ class QuickTest(RemoteAuthTestCase):
     maxDiff = None
 
     def test01(self):
-        from lino.api.shell import cal, pcsw, isip, users, contacts
+        from lino.api.shell import cal, pcsw, isip, auth, contacts
         # NoteType = rt.models.notes.NoteType
         EventType = rt.models.notes.EventType
         Note = rt.models.notes.Note
         Coaching = rt.models.coachings.Coaching
         Message = rt.models.notify.Message
 
-        create(
+        robin = create(
             auth.User, username="robin",
             user_type=UserTypes.admin,
             language="fr")
         
+        self.client.force_login(robin)
         aline = create(
             auth.User,
             username="aline",

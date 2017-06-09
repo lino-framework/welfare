@@ -64,6 +64,8 @@ class TestCase(TestCase):
             User, username='robin', user_type=UserTypes.admin,
             language='en')
         robin.user_type.has_required_roles([IntegrationAgent])
+        self.client.force_login(robin)
+        
         ObstacleType(name='Alcohol').save()
 
         obj = Client(first_name="First", last_name="Last")

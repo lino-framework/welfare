@@ -184,6 +184,7 @@ class TestCase(TestCase):
         kwargs = dict(data=urlencode(data))
         kwargs['REMOTE_USER'] = 'alícia'
         url = '/api/pcsw/Clients/{}'.format(second.pk)
+        self.client.force_login(alicia)
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)
 
@@ -208,6 +209,7 @@ class TestCase(TestCase):
         data.update(mk=second.pk)
         kwargs = dict(data=urlencode(data))
         kwargs['REMOTE_USER'] = 'alícia'
+        self.client.force_login(alicia)
         url = '/api/coachings/CoachingsByClient/{}'.format(second_roger.pk)
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)
@@ -258,6 +260,7 @@ class TestCase(TestCase):
         kwargs = dict(data=data)
         # kwargs = dict(data=urlencode(data))
         kwargs['REMOTE_USER'] = 'alícia'
+        self.client.force_login(alicia)
         url = '/api/newcomers/AvailableCoachesByClient/{}'.format(
             caroline.pk)
         res = self.client.get(url, **kwargs)
@@ -303,6 +306,7 @@ class TestCase(TestCase):
         kwargs = dict(data=data)
         # kwargs = dict(data=urlencode(data))
         kwargs['REMOTE_USER'] = 'alícia'
+        self.client.force_login(alicia)
         url = '/api/pcsw/Clients/{}'.format(second.pk)
         res = self.client.get(url, **kwargs)
         self.assertEqual(res.status_code, 200)
@@ -313,6 +317,7 @@ class TestCase(TestCase):
         self.assertEqual(res.xcallback['title'], "Confirmation")
         kwargs = dict()
         kwargs['REMOTE_USER'] = 'alícia'
+        self.client.force_login(alicia)
         url = '/callbacks/{}/yes'.format(res.xcallback['id'])
         res = self.client.get(url, **kwargs)
         self.assertEqual(res.status_code, 200)
@@ -365,6 +370,7 @@ class TestCase(TestCase):
         kwargs = dict(data=data)
         # kwargs = dict(data=urlencode(data))
         kwargs['REMOTE_USER'] = 'alícia'
+        self.client.force_login(alicia)
         url = '/api/pcsw/Clients/{}'.format(first.pk)
         res = self.client.get(url, **kwargs)
         self.assertEqual(res.status_code, 200)
@@ -398,6 +404,7 @@ class TestCase(TestCase):
         
         kwargs = dict(data=data)
         kwargs['REMOTE_USER'] = 'alícia'
+        self.client.force_login(alicia)
         url = '/api/notes/NotesByProject/{}'.format(second.pk)
         res = self.client.post(url, **kwargs)
         self.assertEqual(res.status_code, 200)
@@ -429,6 +436,7 @@ class TestCase(TestCase):
         kwargs = dict(data=urlencode(data))
         # kwargs = dict(data=data)
         kwargs['REMOTE_USER'] = 'alícia'
+        self.client.force_login(alicia)
         url = '/api/notes/NotesByProject/{}'.format(new_note_pk)
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)

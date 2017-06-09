@@ -109,6 +109,7 @@ class SqlTest(TestCase):
         root = user('root', 'root@example.com', 'Dick', 'Dickens', '900')
 
         root.save()
+        self.client.force_login(root)
 
         self.check_sql_queries(
             'INSERT INTO "users_user" [...]'
