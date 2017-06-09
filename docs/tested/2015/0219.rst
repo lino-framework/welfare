@@ -135,14 +135,14 @@ Now we can call :func:`declare_vars <lino.utils.jsgen.declare_vars>`
 who will yield us a series of lines of javascript code.  These lines
 declare the variables used to define the main panel.
 
-When rendering any Javascript, Lino must know the user profile for
+When rendering any Javascript, Lino must know the user user_type for
 which we want it:
 
 Here is the Javascript generated *before* the change (the following
 snippet has `+SKIP` specified which means that it is **not** being
 tested:
 
->>> lines = with_user_profile(ses.user.profile, declare_vars, lh.main)
+>>> lines = with_user_profile(ses.user.user_type, declare_vars, lh.main)
 >>> js = '\n'.join(lines)
 >>> print(js)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF +SKIP
@@ -166,7 +166,7 @@ This structure caused the ExtJS layout manager to produce unexpected
 behaviour because the horizontal panel for the two fields `client` and
 `granting` is not hidden.  In that case the panel must also be hidden.
 
->>> lines = with_user_profile(ses.user.profile, declare_vars, lh.main)
+>>> lines = with_user_profile(ses.user.user_type, declare_vars, lh.main)
 >>> js = '\n'.join(lines)
 >>> print(js)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP

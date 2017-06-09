@@ -242,7 +242,7 @@ Visibility of merge action
 ==========================
 
 Here is a list of the tables that have the
-:class:`lino.core.merge.MergeAction` and the user profiles that can
+:class:`lino.core.merge.MergeAction` and the user types that can
 see it.
 
 
@@ -261,7 +261,7 @@ Visibility of duplicate action
 ==============================
 
 Here is a list of the tables that have the
-:class:`lino.mixins.duplicable.Duplicate` and the user profiles that can
+:class:`lino.mixins.duplicable.Duplicate` and the user types that can
 see it.
 
 

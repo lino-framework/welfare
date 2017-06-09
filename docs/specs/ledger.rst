@@ -103,14 +103,14 @@ client:
 
 .. _wilfried:
 
-The "accountant" user profile
+The "accountant" user type
 =============================
 
 A demo user with the fictive name *Wilfried Willems* has the user
-profile of an accountant
+user_type of an accountant
 (:class:`lino_welfare.modlib.welfare.roles.LedgerUser`).
 
->>> p = rt.login('wilfried').get_user().profile
+>>> p = rt.login('wilfried').get_user().user_type
 >>> print(p)
 Buchhalter
 

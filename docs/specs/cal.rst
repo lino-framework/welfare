@@ -44,7 +44,7 @@ Not for everybody
 
 Only users with the :class:`OfficeUser
 <lino.modlib.office.roles.OfficeUser>` role can see the calendar
-functionality.  All users with one of the following profiles can see
+functionality.  All users with one of the following user_types can see
 each other's calendars:
 
 >>> from lino.modlib.office.roles import OfficeUser
