@@ -12,7 +12,7 @@ valeurs suivantes:
 .. py2rst::
 
     from lino.api import rt
-    rt.show('users.UserTypes', stripped=False)
+    rt.show('auth.UserTypes', stripped=False)
     
 
 Détails techniques

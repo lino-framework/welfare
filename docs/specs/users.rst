@@ -29,7 +29,7 @@ The default set of user types for Lino Welfare is defined in
 :mod:`lino_welfare.modlib.welfare.user_types` and leads to the
 following list of profiles:
 
->>> rt.show(users.UserTypes)
+>>> rt.show(auth.UserTypes)
 ======= =========== =============================== ==================================================================
  value   name        text                            User role
 ------- ----------- ------------------------------- ------------------------------------------------------------------
@@ -68,14 +68,14 @@ An integration agent (manager) has some staff permissions but is not a
 >>> from lino.core.roles import SiteStaff
 >>> from lino_xl.lib.contacts.roles import ContactsStaff
 
->>> p110 = users.UserTypes.get_by_value('110')
+>>> p110 = auth.UserTypes.get_by_value('110')
 >>> p110.has_required_roles([SiteStaff])
 False
 
 A reception clerk is a
 :class:`lino_xl.lib.contacts.roles.ContactsStaff`:
 
->>> p210 = users.UserTypes.get_by_value('210')
+>>> p210 = auth.UserTypes.get_by_value('210')
 >>> p210.has_required_roles([SiteStaff])
 False
 >>> p210.has_required_roles([ContactsStaff])

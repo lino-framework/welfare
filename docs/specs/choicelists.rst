@@ -103,7 +103,7 @@ name to read the documentation):
     system.YesNo : Ja oder Nein
     uploads.Shortcuts : Upload shortcuts
     uploads.UploadAreas : Upload-Bereiche
-    users.UserTypes : Benutzerarten
+    auth.UserTypes : Benutzerarten
     xcourses.CourseRequestStates : Zustände
 
 

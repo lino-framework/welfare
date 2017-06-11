@@ -573,7 +573,7 @@ the budgets authored by the requesting user.
 In order to see the budgets issued by other users, users can manually
 select that other user in the filter parameter "Author".
 
->>> pv = dict(user=users.User.objects.get(username='kerstin'))
+>>> pv = dict(user=auth.User.objects.get(username='kerstin'))
 >>> kwargs.update(param_values=pv)
 >>> ses.show(debts.Budgets, **kwargs)
 ==== ================ ============ =========================== ======================
