@@ -34,6 +34,6 @@ LayoutHandle for ParamsLayout on cal.Subscriptions has no variables
 >>> w = W()
 >>> def f():
 ...     dd.plugins.extjs.renderer.write_lino_js(w)
->>> with_user_profile(users.UserTypes.anonymous, f)
+>>> with_user_profile(auth.UserTypes.anonymous, f)
 ... #doctest: +NORMALIZE_WHITESPACE
 

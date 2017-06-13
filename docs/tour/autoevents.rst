@@ -214,7 +214,7 @@ The above is coded in
 
     >>> integ = coachings.CoachingType.objects.filter(does_integ=True)
     >>> l = []
-    >>> for u in users.User.objects.all():
+    >>> for u in auth.User.objects.all():
     ...     qs = coachings.Coaching.objects.filter(user=u,
     ...             type__in=integ, end_date__isnull=False)
     ...     if qs.count():

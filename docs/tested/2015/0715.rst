@@ -36,11 +36,11 @@ A reception clerk is not an integration agent:
 >>> isinstance(ReceptionClerk, IntegrationAgent)
 False
 
->>> ia_user_type = users.UserTypes.get_by_value('100')
+>>> ia_user_type = auth.UserTypes.get_by_value('100')
 >>> print(ia_user_type)
 Integration agent
 
->>> rc_user_type = users.UserTypes.get_by_value('210')
+>>> rc_user_type = auth.UserTypes.get_by_value('210')
 >>> print(rc_user_type)
 Reception clerk
 
@@ -76,7 +76,7 @@ set([<class 'lino_welfare.modlib.integ.roles.IntegrationAgent'>])
 Theresia is a reception clerk
 (:class:`lino_welfare.modlib.welfare.user_types.ReceptionClerk`):
 
->>> theresia = users.User.objects.get(username="theresia")
+>>> theresia = auth.User.objects.get(username="theresia")
 >>> theresia.user_type.role  #doctest: +ELLIPSIS
 <lino_welfare.modlib.welfare.user_types.ReceptionClerk object at ...>
 

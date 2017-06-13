@@ -112,7 +112,7 @@ class SqlTest(TestCase):
         self.client.force_login(root)
 
         self.check_sql_queries(
-            'INSERT INTO "users_user" [...]'
+            'INSERT INTO "auth_user" [...]'
             #~ 'SELECT "users_user"."id", [...] FROM "users_user" WHERE "users_user"."user_type" = 900'
         )
         #~ self.check_sql_queries(

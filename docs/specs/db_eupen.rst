@@ -161,7 +161,7 @@ Database structure
 - uploads.Upload : id, project, start_date, end_date, file, mimetype, company, contact_person, contact_role, user, owner_type, owner_id, upload_area, type, description, remark, needed
 - uploads.UploadType : id, name, upload_area, max_number, wanted, shortcut, warn_expiry_unit, warn_expiry_value, name_fr, name_en
 - users.Authority : id, user, authorized
-- users.User : id, email, language, modified, created, password, last_login, username, user_type, initials, first_name, last_name, remarks, newcomer_consultations, newcomer_appointments, notify_myself, mail_mode, access_class, event_type, calendar, coaching_type, coaching_supervisor, newcomer_quota, partner
+- auth.User : id, email, language, modified, created, password, last_login, username, user_type, initials, first_name, last_name, remarks, newcomer_consultations, newcomer_appointments, notify_myself, mail_mode, access_class, event_type, calendar, coaching_type, coaching_supervisor, newcomer_quota, partner
 - vatless.AccountInvoice : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, project, partner, payment_term, match, bank_account, your_ref, due_date, amount
 - vatless.InvoiceItem : id, seqno, project, account, voucher, title, amount
 - xcourses.Course : id, offer, title, start_date, remark

@@ -41,7 +41,7 @@ from lino.utils import AttrDict
 
 from django.conf import settings
 from lino.modlib.auth.choicelists import UserTypes
-from lino.api.shell import countries, pcsw, users
+from lino.api.shell import countries, pcsw
 
 
 def readfile(name):

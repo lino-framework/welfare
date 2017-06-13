@@ -6,12 +6,12 @@ Benutzerprofile
 ===============
 
 Damit ein Benutzer sich anmelden kann, muss sein
-:ddref:`users.User.user_type` einen der folgenden Werte enthalten:
+:ddref:`auth.User.user_type` einen der folgenden Werte enthalten:
 
 .. py2rst::
 
     from lino.api import rt
-    rt.show('users.UserTypes', stripped=False)
+    rt.show('auth.UserTypes', stripped=False)
     
 
 Technisches

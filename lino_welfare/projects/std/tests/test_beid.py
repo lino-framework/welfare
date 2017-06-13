@@ -67,7 +67,7 @@ class BeIdTests(RemoteAuthTestCase):
         from lino.core import constants
         from django.conf import settings
         from lino.modlib.auth.choicelists import UserTypes
-        from lino.api.shell import countries, addresses, pcsw, users
+        from lino.api.shell import countries, addresses, pcsw
         
         Holder = dd.plugins.beid.holder_model
 

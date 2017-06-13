@@ -48,21 +48,21 @@ functionality.  All users with one of the following user_types can see
 each other's calendars:
 
 >>> from lino.modlib.office.roles import OfficeUser
->>> for p in users.UserTypes.items():
+>>> for p in auth.UserTypes.items():
 ...     if p.has_required_roles([OfficeUser]):
 ...         print repr(p), unicode(p)
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
-users.UserTypes:100 Begleiter im DSBE
-users.UserTypes:110 Begleiter im DSBE (Manager)
-users.UserTypes:120 Begleiter im DSBE (+Erstempfang)
-users.UserTypes:200 Berater Erstempfang
-users.UserTypes:300 Schuldenberater
-users.UserTypes:400 Sozi
-users.UserTypes:410 Sozi (Manager)
-users.UserTypes:500 Buchhalter
-users.UserTypes:510 Accountant (Manager)
-users.UserTypes.admin:900 Verwalter
-users.UserTypes:910 Security advisor
+auth.UserTypes:100 Begleiter im DSBE
+auth.UserTypes:110 Begleiter im DSBE (Manager)
+auth.UserTypes:120 Begleiter im DSBE (+Erstempfang)
+auth.UserTypes:200 Berater Erstempfang
+auth.UserTypes:300 Schuldenberater
+auth.UserTypes:400 Sozi
+auth.UserTypes:410 Sozi (Manager)
+auth.UserTypes:500 Buchhalter
+auth.UserTypes:510 Accountant (Manager)
+auth.UserTypes.admin:900 Verwalter
+auth.UserTypes:910 Security advisor
 
 
 

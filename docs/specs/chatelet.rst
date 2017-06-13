@@ -190,7 +190,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
- users.User                     users.Users                     24        12
+ auth.User                     auth.Users                     24        12
 ============================== =============================== ========= =======
 <BLANKLINE>
 
@@ -203,7 +203,7 @@ We use the user types defined in
 
 >>> settings.SITE.user_types_module
 'lino_welfare.modlib.welfare.user_types'
->>> rt.show(users.UserTypes)
+>>> rt.show(auth.UserTypes)
 ======= =========== ============================================ ==================================================================
  value   name        text                                         User role
 ------- ----------- -------------------------------------------- ------------------------------------------------------------------
@@ -422,9 +422,9 @@ Each window layout defines a given set of fields.
 - uploads.UploadsByClient.insert : file, type, end_date, description
 - uploads.UploadsByController.insert : file, type, end_date, description
 - users.AllUsers.send_welcome_email : email, subject
-- users.Users.change_password : current, new1, new2
-- users.Users.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
-- users.Users.insert : username, email, first_name, last_name, partner, language, user_type
+- auth.Users.change_password : current, new1, new2
+- auth.Users.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
+- auth.Users.insert : username, email, first_name, last_name, partner, language, user_type
 <BLANKLINE>
 
 
@@ -612,9 +612,9 @@ Each window layout is **viewable** by a given set of user types.
 - uploads.UploadsByClient.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - users.AllUsers.send_welcome_email : visible for admin 910
-- users.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- users.Users.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- users.Users.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- auth.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- auth.Users.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- auth.Users.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 <BLANKLINE>
 
 
@@ -759,7 +759,7 @@ options.
   (main) [visible for all]: **Raison de refus** (reason), **Remarque** (remark)
 - users.AllUsers.send_welcome_email : Welcome mail
   (main) [visible for all]: **adresse e-mail** (email), **Sujet** (subject)
-- users.Users.change_password : Changer mot de passe
+- auth.Users.change_password : Changer mot de passe
   (main) [visible for all]: **Mot de passe actuel** (current), **Nouveau mot de passe** (new1), **Encore une fois** (new2)
 <BLANKLINE>
 
