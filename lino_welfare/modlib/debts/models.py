@@ -566,7 +566,8 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
         E.g. the Up/Down methods should work only within a given account_type.
         """
         # return super(Entry,self).get_siblings().filter(account_type=self.account_type)
-        return self.__class__.objects.filter(budget=self.budget, account_type=self.account_type).order_by('seqno')
+        return self.__class__.objects.filter(
+          budget=self.budget, account_type=self.account_type)
 
     @dd.chooser()
     def account_choices(cls, account_type):
