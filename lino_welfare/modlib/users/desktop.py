@@ -20,7 +20,7 @@
 
 """
 
-from lino.modlib.auth.desktop import *
+from lino.modlib.users.desktop import *
 
 from lino.api import dd, _
 

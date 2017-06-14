@@ -6,13 +6,13 @@ Profils d'utilisateur
 =====================
 
 Pour qu'un utilisateur puisse se connecter, il faut que son
-:attr:`user_type <lino.modlib.auth.models.User.user_type>` aie une des
+:attr:`user_type <lino.modlib.users.models.User.user_type>` aie une des
 valeurs suivantes:
 
 .. py2rst::
 
     from lino.api import rt
-    rt.show('auth.UserTypes', stripped=False)
+    rt.show('users.UserTypes', stripped=False)
     
 
 Détails techniques

@@ -93,6 +93,7 @@ set([<class 'lino_xl.lib.coachings.roles.CoachingsStaff'>])
 
 >>> url = 'api/coachings/ClientStates'
 >>> url = settings.SITE.buildurl(url, fmt='json')
+>>> test_client.force_login(rt.login(username).user)
 >>> response = test_client.get(url, REMOTE_USER=username)
 >>> result = check_json_result(response, None, "GET %s for user %s" % (url, username))
 >>> result['count']

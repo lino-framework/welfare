@@ -37,7 +37,7 @@ def n2dec(v):
 
 def objects():
 
-    User = rt.modules.auth.User
+    User = rt.modules.users.User
     Household = rt.modules.households.Household
     Budget = rt.modules.debts.Budget
     Entry = rt.modules.debts.Entry
@@ -49,7 +49,7 @@ def objects():
                    user_type='300')
     yield kerstin
     user_types = [
-        p for p in rt.modules.auth.UserTypes.get_list_items()
+        p for p in rt.modules.users.UserTypes.get_list_items()
         if p.has_required_roles([DebtsUser])]
     USERS = Cycler(User.objects.filter(user_type__in=user_types))
 

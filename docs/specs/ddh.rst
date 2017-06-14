@@ -44,11 +44,11 @@ Lino Welfare:
 - boards.Board :
   - PROTECT : aids.AidType.board, aids.Granting.board, boards.Member.board
 - cal.Calendar :
-  - PROTECT : cal.Subscription.calendar, system.SiteConfig.site_calendar, auth.User.calendar
+  - PROTECT : cal.Subscription.calendar, system.SiteConfig.site_calendar, users.User.calendar
 - cal.Event :
   - CASCADE : cal.Guest.event
 - cal.EventType :
-  - PROTECT : cal.Event.event_type, cal.EventPolicy.event_type, cal.RecurrentEvent.event_type, isip.ExamPolicy.event_type, system.SiteConfig.client_calendar, system.SiteConfig.default_event_type, system.SiteConfig.prompt_calendar, auth.User.event_type
+  - PROTECT : cal.Event.event_type, cal.EventPolicy.event_type, cal.RecurrentEvent.event_type, isip.ExamPolicy.event_type, system.SiteConfig.client_calendar, system.SiteConfig.default_event_type, system.SiteConfig.prompt_calendar, users.User.event_type
 - cal.GuestRole :
   - PROTECT : cal.Guest.role, coachings.CoachingType.eval_guestrole, system.SiteConfig.client_guestrole, system.SiteConfig.team_guestrole, xcourses.CourseOffer.guest_role
 - cal.Priority :
@@ -64,7 +64,7 @@ Lino Welfare:
 - coachings.CoachingEnding :
   - PROTECT : coachings.Coaching.ending
 - coachings.CoachingType :
-  - PROTECT : coachings.Coaching.type, coachings.CoachingEnding.type, auth.User.coaching_type
+  - PROTECT : coachings.Coaching.type, coachings.CoachingEnding.type, users.User.coaching_type
 - contacts.Company :
   - CASCADE : jobs.JobProvider.company_ptr, xcourses.CourseProvider.company_ptr
   - PROTECT : aids.AidType.company, aids.IncomeConfirmation.company, aids.RefundConfirmation.company, aids.RefundConfirmation.pharmacy, aids.SimpleConfirmation.company, art61.Contract.company, cal.Room.company, coachings.ClientContact.company, contacts.Role.company, debts.Entry.bailiff, excerpts.Excerpt.company, isip.ContractPartner.company, jobs.Contract.company, notes.Note.company, pcsw.Client.health_insurance, pcsw.Client.pharmacy, system.SiteConfig.site_company, uploads.Upload.company
@@ -72,7 +72,7 @@ Lino Welfare:
   - PROTECT : contacts.Company.type
 - contacts.Partner :
   - CASCADE : addresses.Address.partner, contacts.Company.partner_ptr, contacts.Person.partner_ptr, households.Household.partner_ptr, sepa.Account.partner
-  - PROTECT : cal.Guest.partner, debts.Actor.partner, debts.Budget.partner, debts.Entry.partner, finan.BankStatementItem.partner, finan.JournalEntryItem.partner, finan.PaymentOrderItem.partner, ledger.Movement.partner, outbox.Recipient.partner, auth.User.partner, vatless.AccountInvoice.partner
+  - PROTECT : cal.Guest.partner, debts.Actor.partner, debts.Budget.partner, debts.Entry.partner, finan.BankStatementItem.partner, finan.JournalEntryItem.partner, finan.PaymentOrderItem.partner, ledger.Movement.partner, outbox.Recipient.partner, users.User.partner, vatless.AccountInvoice.partner
 - contacts.Person :
   - CASCADE : pcsw.Client.person_ptr
   - PROTECT : aids.AidType.contact_person, aids.IncomeConfirmation.contact_person, aids.RefundConfirmation.contact_person, aids.RefundConfirmation.doctor, aids.SimpleConfirmation.contact_person, art61.Contract.contact_person, art61.Contract.signer1, art61.Contract.signer2, boards.Member.person, cal.Room.contact_person, coachings.ClientContact.contact_person, contacts.Role.person, excerpts.Excerpt.contact_person, households.Member.person, humanlinks.Link.child, humanlinks.Link.parent, isip.Contract.signer1, isip.Contract.signer2, isip.ContractPartner.contact_person, jobs.Contract.contact_person, jobs.Contract.signer1, jobs.Contract.signer2, notes.Note.contact_person, system.SiteConfig.signer1, system.SiteConfig.signer2, uploads.Upload.contact_person
@@ -185,7 +185,7 @@ Lino Welfare:
   - PROTECT : finan.PaymentOrderItem.bank_account, ledger.Journal.sepa_account, vatless.AccountInvoice.bank_account
 - uploads.UploadType :
   - PROTECT : uploads.Upload.type
-- auth.User :
+- users.User :
   - PROTECT : aids.Granting.signer, aids.Granting.user, aids.IncomeConfirmation.signer, aids.IncomeConfirmation.user, aids.RefundConfirmation.signer, aids.RefundConfirmation.user, aids.SimpleConfirmation.signer, aids.SimpleConfirmation.user, art61.Contract.user, art61.Contract.user_asd, cal.Event.assigned_to, cal.Event.user, cal.RecurrentEvent.user, cal.Subscription.user, cal.Task.user, cbss.IdentifyPersonRequest.user, cbss.ManageAccessRequest.user, cbss.RetrieveTIGroupsRequest.user, changes.Change.user, coachings.Coaching.user, dashboard.Widget.user, debts.Budget.user, excerpts.Excerpt.user, isip.Contract.user, isip.Contract.user_asd, isip.Contract.user_dsbe, jobs.Contract.user, jobs.Contract.user_asd, ledger.Voucher.user, newcomers.Competence.user, notes.Note.user, notify.Message.user, outbox.Mail.user, plausibility.Problem.user, tinymce.TextFieldTemplate.user, uploads.Upload.user, users.Authority.authorized, users.Authority.user
 - vatless.AccountInvoice :
   - CASCADE : vatless.InvoiceItem.voucher
@@ -204,10 +204,10 @@ Users and partners
 ==================
 
 It is not allowed to delete a person who is being used as the
-:attr:`partner <lino.modlib.auth.models.User.partner>` of a user
+:attr:`partner <lino.modlib.users.models.User.partner>` of a user
 (although that field is nullable).
 
->>> rt.show('auth.Users', column_names="id username partner partner__id",
+>>> rt.show('users.Users', column_names="id username partner partner__id",
 ...     language="en")
 ==== ========== ================= =====
  ID   Username   Partner           ID

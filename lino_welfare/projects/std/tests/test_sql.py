@@ -54,11 +54,11 @@ from lino.utils import i2d
 from lino.core.utils import resolve_model
 
 from lino.utils.instantiator import Instantiator
-from lino.modlib.auth.choicelists import UserTypes
+from lino.modlib.users.choicelists import UserTypes
 
 
 #~ def create_user(*args):
-    #~ user = Instantiator('auth.User',
+    #~ user = Instantiator('users.User',
       #~ 'username email first_name last_name is_staff is_superuser',
       #~ is_active=True,last_login=NOW,date_joined=NOW).build
     #~ return user(*args)
@@ -99,7 +99,7 @@ class SqlTest(TestCase):
         #~ 'SELECT "lino_siteconfig"."id", [...] WHERE "lino_siteconfig"."id" = 1',
         #~ 'SELECT "pcsw_persongroup"."id", [...] WHERE "pcsw_persongroup"."ref_name" IS NOT NULL ORDER BY "pcsw_persongroup"."ref_name" ASC',
 
-        from lino.modlib.auth.models import User
+        from lino.modlib.users.models import User
 
         #~ user = create_user('user','user@example.com','John','Jones',False,False)
         #~ user.save()

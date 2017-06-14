@@ -21,9 +21,9 @@ Database structure
 ==================
 
 >>> print(analyzer.show_complexity_factors())
-- 63 plugins
-- 139 models
-- 535 views
+- 64 plugins
+- 140 models
+- 536 views
 - 15 user types
 - 13 dialog actions
 <BLANKLINE>
@@ -156,12 +156,13 @@ Database structure
 - properties.PropType : id, name, choicelist, default_value, limit_to_choices, multiple_choices, name_fr, name_en
 - properties.Property : id, name, group, type, name_fr, name_en
 - sepa.Account : id, partner, iban, bic, remark, primary, account_type, managed
+- sessions.Session : session_key, session_data, expire_date
 - system.SiteConfig : id, default_build_method, simulate_today, site_company, signer1, signer2, signer1_function, signer2_function, next_partner_id, propgroup_skills, propgroup_softskills, propgroup_obstacles, default_event_type, site_calendar, max_auto_events, hide_events_before, client_calendar, client_guestrole, team_guestrole, prompt_calendar, master_budget, system_note_type, job_office, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, suppliers_account, aids_account, sector, cbss_org_unit, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplate : id, user, name, description, text
 - uploads.Upload : id, project, start_date, end_date, file, mimetype, company, contact_person, contact_role, user, owner_type, owner_id, upload_area, type, description, remark, needed
 - uploads.UploadType : id, name, upload_area, max_number, wanted, shortcut, warn_expiry_unit, warn_expiry_value, name_fr, name_en
 - users.Authority : id, user, authorized
-- auth.User : id, email, language, modified, created, password, last_login, username, user_type, initials, first_name, last_name, remarks, newcomer_consultations, newcomer_appointments, notify_myself, mail_mode, access_class, event_type, calendar, coaching_type, coaching_supervisor, newcomer_quota, partner
+- users.User : id, email, language, modified, created, password, last_login, username, user_type, initials, first_name, last_name, remarks, newcomer_consultations, newcomer_appointments, notify_myself, mail_mode, access_class, event_type, calendar, coaching_type, coaching_supervisor, newcomer_quota, partner
 - vatless.AccountInvoice : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, project, partner, payment_term, match, bank_account, your_ref, due_date, amount
 - vatless.InvoiceItem : id, seqno, project, account, voucher, title, amount
 - xcourses.Course : id, offer, title, start_date, remark

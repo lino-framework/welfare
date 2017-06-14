@@ -111,6 +111,7 @@ will ask a confirmation first:
 >>> data.update(last_name="Dobbelstein")
 >>> data.update(genderHidden="F")
 >>> data.update(gender="Weiblich")
+>>> test_client.force_login(rt.login('robin').user)
 >>> res = test_client.post('/api/pcsw/Clients', data=data, REMOTE_USER="robin")
 >>> res.status_code
 200

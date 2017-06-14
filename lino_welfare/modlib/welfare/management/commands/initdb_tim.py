@@ -286,10 +286,10 @@ def load_dbf(dbpath, tableName, load):
 def load_tim_data(dbpath):
 
     #~ from django.contrib.auth import models as auth
-    from lino.modlib.auth import models as auth
+    from lino.modlib.users import models as auth
 
     def load(row):
-        #~ auth.User.objects.create_user(row['USERID'],row['EMAIL'] or '','')
+        #~ users.User.objects.create_user(row['USERID'],row['EMAIL'] or '','')
         if not row['EMAIL']:
             return
         username = settings.TIM2LINO_USERNAME(row['USERID'])
@@ -297,7 +297,7 @@ def load_tim_data(dbpath):
             return
         d = name2kw(row['NAME'], False)
         now = datetime.datetime.now()
-        user = auth.User(
+        user = users.User(
             username=username,
             #~ username=row['USERID'].lower(),
             email=row['EMAIL'],
@@ -390,9 +390,9 @@ def load_tim_data(dbpath):
                 if username is not None:
                     try:
                         kw.update(
-                            coach1=auth.User.objects.get(username=username))
-                        #~ kw.update(user=auth.User.objects.get(username=username))
-                    except auth.User.DoesNotExist, e:
+                            coach1=users.User.objects.get(username=username))
+                        #~ kw.update(user=users.User.objects.get(username=username))
+                    except users.User.DoesNotExist, e:
                         dblogger.warning(
                             "PAR:%s PAR->IdUsr %r (converted to %r) doesn't exist!", row['IDPAR'], row['IDUSR'], username)
         language = isolang(row['LANGUE'])

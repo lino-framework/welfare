@@ -20,9 +20,9 @@ A technical tour into the :mod:`lino_welfare.modlib.main` module.
 .. contents::
    :depth: 2
 
-
 Test the content of the admin main page.
 
+>>> test_client.force_login(rt.login('rolf').user)
 >>> res = test_client.get('/api/main_html', REMOTE_USER='rolf')
 >>> print(res.status_code)
 200
@@ -58,6 +58,7 @@ Meine überfälligen Termine ⍐
 Meine Benachrichtigungen ⍐
 
 
+>>> test_client.force_login(rt.login('robin').user)
 >>> res = test_client.get('/api/main_html', REMOTE_USER='robin')
 >>> print(res.status_code)
 200

@@ -42,7 +42,7 @@ from lino.utils import AttrDict
 from django.utils.datastructures import MultiValueDict
 
 from django.conf import settings
-from lino.modlib.auth.choicelists import UserTypes
+from lino.modlib.users.choicelists import UserTypes
 from lino.api.shell import countries, pcsw
 from lino.api import rt
 from lino.api.doctest import test_client
@@ -69,7 +69,7 @@ class DebtsTests(RemoteAuthTestCase):
         
         
 
-        u = auth.User(username='root',
+        u = users.User(username='root',
                        user_type=UserTypes.admin,
                        language="en")
         u.save()
@@ -125,7 +125,7 @@ class DebtsTests(RemoteAuthTestCase):
         self.assertEqual(b.user.username, 'root')
         self.assertEqual(b.id, 1)
 
-        ou = auth.User(username='other',
+        ou = users.User(username='other',
                         user_type=UserTypes.admin,
                         language="en")
         ou.save()

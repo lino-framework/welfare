@@ -23,7 +23,7 @@ See :ref:`welfare.specs.users`
 """
 
 from lino.core.roles import UserRole, SiteAdmin, Supervisor, login_required
-from lino.modlib.auth.roles import AuthorshipTaker
+from lino.modlib.users.roles import AuthorshipTaker
 from lino.modlib.office.roles import OfficeOperator, OfficeStaff, OfficeUser
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsStaff, ContactsUser, SimpleContactsUser
@@ -129,7 +129,7 @@ class Supervisor(Supervisor, AuthorshipTaker, OfficeOperator,
     pass
 
 
-from lino.modlib.auth.choicelists import UserTypes
+from lino.modlib.users.choicelists import UserTypes
 from lino.api import _
 
 UserTypes.clear()

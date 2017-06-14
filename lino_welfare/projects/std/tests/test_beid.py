@@ -66,8 +66,8 @@ class BeIdTests(RemoteAuthTestCase):
     def test01(self):
         from lino.core import constants
         from django.conf import settings
-        from lino.modlib.auth.choicelists import UserTypes
-        from lino.api.shell import countries, addresses, pcsw
+        from lino.modlib.users.choicelists import UserTypes
+        from lino.api.shell import countries, addresses, pcsw, users
         
         Holder = dd.plugins.beid.holder_model
 
@@ -78,10 +78,13 @@ class BeIdTests(RemoteAuthTestCase):
         self.assertEqual(settings.MIDDLEWARE_CLASSES, (
             'django.middleware.common.CommonMiddleware',
             'django.middleware.locale.LocaleMiddleware',
-            'lino.core.auth.RemoteUserMiddleware',
+            'django.contrib.sessions.middleware.SessionMiddleware',
+            'lino.modlib.users.middleware.AuthenticationMiddleware',
+            'lino.modlib.users.middleware.WithUserMiddleware',
+            'lino.modlib.users.middleware.RemoteUserMiddleware',
             'lino.utils.ajax.AjaxExceptionResponse'))
 
-        u = auth.User(username='robin',
+        u = users.User(username='robin',
                        user_type=UserTypes.admin,
                        language="en")
         u.save()

@@ -52,8 +52,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-59 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, excerpts, welfare, uploads, outbox, extensible, cal, reception, accounts, badges, boards, sales, coachings, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, plausibility, tinymce.
-134 models:
+60 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, excerpts, welfare, uploads, outbox, extensible, cal, reception, accounts, badges, boards, sales, coachings, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, plausibility, tinymce, sessions.
+135 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -185,12 +185,13 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  polls.Poll                     polls.Polls                     11        2
  polls.Question                 polls.Questions                 9         38
  polls.Response                 polls.Responses                 7         6
+ sessions.Session               sessions.SessionTable           3         ...
  system.SiteConfig              system.SiteConfigs              29        1
  tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
- auth.User                     auth.Users                     24        12
+ users.User                     users.Users                     24        12
 ============================== =============================== ========= =======
 <BLANKLINE>
 
@@ -203,7 +204,7 @@ We use the user types defined in
 
 >>> settings.SITE.user_types_module
 'lino_welfare.modlib.welfare.user_types'
->>> rt.show(auth.UserTypes)
+>>> rt.show(users.UserTypes)
 ======= =========== ============================================ ==================================================================
  value   name        text                                         User role
 ------- ----------- -------------------------------------------- ------------------------------------------------------------------
@@ -422,9 +423,9 @@ Each window layout defines a given set of fields.
 - uploads.UploadsByClient.insert : file, type, end_date, description
 - uploads.UploadsByController.insert : file, type, end_date, description
 - users.AllUsers.send_welcome_email : email, subject
-- auth.Users.change_password : current, new1, new2
-- auth.Users.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
-- auth.Users.insert : username, email, first_name, last_name, partner, language, user_type
+- users.Users.change_password : current, new1, new2
+- users.Users.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
+- users.Users.insert : username, email, first_name, last_name, partner, language, user_type
 <BLANKLINE>
 
 
@@ -612,9 +613,9 @@ Each window layout is **viewable** by a given set of user types.
 - uploads.UploadsByClient.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - users.AllUsers.send_welcome_email : visible for admin 910
-- auth.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- auth.Users.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- auth.Users.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.Users.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.Users.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 <BLANKLINE>
 
 
@@ -759,7 +760,7 @@ options.
   (main) [visible for all]: **Raison de refus** (reason), **Remarque** (remark)
 - users.AllUsers.send_welcome_email : Welcome mail
   (main) [visible for all]: **adresse e-mail** (email), **Sujet** (subject)
-- auth.Users.change_password : Changer mot de passe
+- users.Users.change_password : Changer mot de passe
   (main) [visible for all]: **Mot de passe actuel** (current), **Nouveau mot de passe** (new1), **Encore une fois** (new2)
 <BLANKLINE>
 

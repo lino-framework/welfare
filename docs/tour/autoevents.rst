@@ -80,6 +80,7 @@ Monday.
     ISIP
     >>> uri = '/api/cal/EntriesByController?mt={0}&mk={1}&fmt=json'
     >>> uri = uri.format(mt.id, obj.id)
+    >>> test_client.force_login(rt.login('robin').user)
     >>> res = test_client.get(uri, REMOTE_USER='robin')
     >>> res.status_code
     200
@@ -214,7 +215,7 @@ The above is coded in
 
     >>> integ = coachings.CoachingType.objects.filter(does_integ=True)
     >>> l = []
-    >>> for u in auth.User.objects.all():
+    >>> for u in users.User.objects.all():
     ...     qs = coachings.Coaching.objects.filter(user=u,
     ...             type__in=integ, end_date__isnull=False)
     ...     if qs.count():

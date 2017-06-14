@@ -294,6 +294,7 @@ The following snippet reproduces a one-day bug
 discovered :blogref:`20130527`:
 
 >>> url = '/api/debts/Budgets/3?fmt=json&an=detail'
+>>> test_client.force_login(rt.login('rolf').user)
 >>> res = test_client.get(url,REMOTE_USER='rolf')
 >>> print(res.status_code)
 200
@@ -573,7 +574,7 @@ the budgets authored by the requesting user.
 In order to see the budgets issued by other users, users can manually
 select that other user in the filter parameter "Author".
 
->>> pv = dict(user=auth.User.objects.get(username='kerstin'))
+>>> pv = dict(user=users.User.objects.get(username='kerstin'))
 >>> kwargs.update(param_values=pv)
 >>> ses.show(debts.Budgets, **kwargs)
 ==== ================ ============ =========================== ======================

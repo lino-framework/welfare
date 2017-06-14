@@ -72,9 +72,6 @@ private company…"""),
     'lino_welfare.modlib.art61.models.ContractsByClient' : _("""Shows the Art61 job supplyments for this client."""),
     'lino_welfare.modlib.art61.models.ContractsByClient.master' : _("""alias of Client"""),
     'lino_welfare.modlib.art61.models.ContractsByClient.model' : _("""alias of Contract"""),
-    'lino_welfare.modlib.auth.desktop.UserDetail' : _("""Layout of User Detail in Lino Welfare."""),
-    'lino_welfare.modlib.auth.models.User' : _("""The auth.User model used in Lino Welfare.  We add a few fields
-to the standard models (lino.modlib.auth.models.User)."""),
     'lino_welfare.modlib.badges.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.badges.Plugin.holder_model' : _("""A string referring to the model which represents the badge holder in
 your application.  Default value is 'contacts.Person'."""),
@@ -439,6 +436,9 @@ account_type and
 statements."""),
     'lino_welfare.modlib.sepa.models.AccountsByClient.master' : _("""alias of Partner"""),
     'lino_welfare.modlib.sepa.models.AccountsByClient.model' : _("""alias of Account"""),
+    'lino_welfare.modlib.users.desktop.UserDetail' : _("""Layout of User Detail in Lino Welfare."""),
+    'lino_welfare.modlib.users.models.User' : _("""The users.User model used in Lino Welfare.  We add a few fields
+to the standard models (lino.modlib.users.models.User)."""),
     'lino_welfare.modlib.welfare.user_types.AccountantManager' : _("""Like an accountant, but also has access to configuration."""),
     'lino_welfare.modlib.welfare.user_types.SiteAdmin' : _("""The site adminstrator has permission for everything."""),
     'lino_welfare.modlib.welfare.user_types.ReceptionClerk' : _("""A reception clerk is a user who is not a social agent but

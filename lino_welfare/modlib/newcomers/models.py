@@ -46,12 +46,12 @@ from lino import mixins
 from django.conf import settings
 from lino_xl.lib.cal.choicelists import amonthago
 from lino_xl.lib.notes.actions import NotableAction
-from lino.modlib.auth.choicelists import UserTypes
-from lino.modlib.auth.mixins import My, UserAuthored
+from lino.modlib.users.choicelists import UserTypes
+from lino.modlib.users.mixins import My, UserAuthored
 
 from lino.core.diff import ChangeWatcher
 
-from lino_welfare.modlib.auth.desktop import Users
+from lino_welfare.modlib.users.desktop import Users
 from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
 # from lino_welfare.modlib.integ.roles import IntegrationAgent
 from .roles import NewcomersAgent, NewcomersOperator

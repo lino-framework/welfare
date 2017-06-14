@@ -134,6 +134,7 @@ BASTIAENSEN Laurent (117)
 <BLANKLINE>
 
 >>> url = '/api/newcomers/AvailableCoachesByClient?fmt=json&mt=58&mk=117'
+>>> test_client.force_login(rt.login('rolf').user)
 >>> res = test_client.get(url, REMOTE_USER='rolf')
 >>> res.status_code
 200

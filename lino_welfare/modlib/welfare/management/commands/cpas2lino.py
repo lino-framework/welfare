@@ -34,7 +34,7 @@ from lino.api import dd
 from lino_xl.lib.tim2lino.utils import TimLoader
 from lino_xl.lib.sepa.utils import be2iban
 
-User = rt.modules.auth.User
+User = rt.modules.users.User
 accounts = rt.modules.accounts
 ledger = rt.modules.ledger
 vatless = rt.modules.vatless

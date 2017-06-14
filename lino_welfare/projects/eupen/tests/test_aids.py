@@ -37,7 +37,7 @@ from django.conf import settings
 from lino.api import rt
 from lino.utils.djangotest import TestCase
 
-from lino.modlib.auth.choicelists import UserTypes
+from lino.modlib.users.choicelists import UserTypes
 
 from lino_welfare.modlib.aids.choicelists import ConfirmationTypes
 

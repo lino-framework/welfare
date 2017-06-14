@@ -41,7 +41,7 @@ from lino.utils import i2d
 from lino.utils.instantiator import create_row
 from lino.core import constants
 
-from lino.modlib.auth.choicelists import UserTypes
+from lino.modlib.users.choicelists import UserTypes
 
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 
@@ -134,6 +134,7 @@ class TestCase(TestCase):
         data.update(last_name="Last")
         data.update(genderHidden="M")
         data.update(gender="Male")
+        self.client.force_login(rt.login("robin").user)
         response = self.client.post(
             '/api/pcsw/Clients', data=data, REMOTE_USER="robin")
         result = self.check_json_result(

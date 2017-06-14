@@ -63,8 +63,8 @@ from lino_xl.lib.coachings.desktop import CoachingsByClient
 def appointable_users(*args, **kw):
     """Return a queryset of the users for whom reception clerks can create
     appointments. Candidates must have a :attr:`user_type
-    <lino.modlib.auth.models.User.user_type>` and a :attr:`calendar
-    <lino_welfare.modlib.auth.models.User.calendar>`.
+    <lino.modlib.users.models.User.user_type>` and a :attr:`calendar
+    <lino_welfare.modlib.users.models.User.calendar>`.
     Additional arguments are forwarded to the query filter.
 
     """

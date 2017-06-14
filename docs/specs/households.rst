@@ -41,11 +41,11 @@ Mr Paul FRISCH
 >>> print(rt.modules.households.get_household_summary(paul))
 2 adults and 3 children
 
+>>> test_client.force_login(rt.login('rolf').user)
 
->>> client = Client()
 >>> def check(uri, fieldname):
 ...     url = '/api/%s?fmt=json&an=detail' % uri
-...     res = client.get(url, REMOTE_USER='rolf')
+...     res = test_client.get(url, REMOTE_USER='rolf')
 ...     assert res.status_code == 200
 ...     d = json.loads(res.content)
 ...     return d['data'][fieldname]
@@ -188,7 +188,6 @@ for ParamsLayout on pcsw.Clients expects a list of 12 values but got
 >>> print(pcsw.Client.objects.get(pk=179))
 DUBOIS Robin (179)
 
->>> client = Client()
 >>> url = '/api/integ/Clients/179?pv=30&pv=5&pv=&pv=29.04.2014&pv=29.04.2014&pv=&pv=&pv=&pv=&pv=&pv=false&pv=&pv=&pv=1&pv=false&pv=false&an=detail&rp=ext-comp-1351&fmt=json'
 >>> res = test_client.get(url, REMOTE_USER='rolf')
 >>> print(res.status_code)
