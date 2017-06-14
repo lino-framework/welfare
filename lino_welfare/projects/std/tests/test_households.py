@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -41,7 +41,7 @@ from lino.utils import AttrDict
 
 from django.conf import settings
 from lino.modlib.users.choicelists import UserTypes
-from lino.api.shell import countries, pcsw
+from lino.api.shell import countries, pcsw, users
 
 
 def readfile(name):
@@ -62,7 +62,10 @@ class BeIdTests(RemoteAuthTestCase):
         self.assertEqual(settings.MIDDLEWARE_CLASSES, (
             'django.middleware.common.CommonMiddleware',
             'django.middleware.locale.LocaleMiddleware',
-            'lino.core.auth.RemoteUserMiddleware',
+            'django.contrib.sessions.middleware.SessionMiddleware',
+            'lino.modlib.users.middleware.AuthenticationMiddleware',
+            'lino.modlib.users.middleware.WithUserMiddleware',
+            'lino.modlib.users.middleware.RemoteUserMiddleware',
             'lino.utils.ajax.AjaxExceptionResponse'))
 
         u = users.User(username='root',
