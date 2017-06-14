@@ -692,11 +692,11 @@ class Clients(contacts.Persons):
 
     parameters = mixins.ObservedPeriod(
         coached_by=models.ForeignKey(
-            'auth.User', blank=True, null=True,
+            'users.User', blank=True, null=True,
             verbose_name=_("Coached by"), help_text=u"""\
 Nur Klienten, die eine Begleitung mit diesem Benutzer haben."""),
         and_coached_by=models.ForeignKey(
-            'auth.User', blank=True, null=True,
+            'users.User', blank=True, null=True,
             verbose_name=_("and by"), help_text=u"""\
 Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
         nationality=dd.ForeignKey(

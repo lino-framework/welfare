@@ -197,6 +197,7 @@ We test whether Theresia is allowed to create an income confirmation.
 >>> headers.update(REMOTE_USER='rolf')
 >>> url = "/api/aids/IncomeConfirmationsByGranting"
 >>> url += "?su={2}&mt={0}&mk={1}&an=insert".format(mt, mk, theresia.pk)
+>>> test_client.force_login(rt.login('rolf').user)
 >>> res = test_client.get(url, **headers)
 >>> print(res.status_code)
 200

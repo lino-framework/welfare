@@ -43,7 +43,7 @@ from lino.utils import i2d, AttrDict
 
 from lino.api import rt
 
-from lino.modlib.auth.choicelists import UserTypes
+from lino.modlib.users.choicelists import UserTypes
 
 
 class TestCase(TestCase):

@@ -30,7 +30,7 @@ from lino.api import dd, rt, _
 def objects():
     Note = rt.modules.notes.Note
     NTYPES = Cycler(rt.modules.notes.NoteType.objects.all())
-    USERS = Cycler(rt.modules.auth.User.objects.all())
+    USERS = Cycler(rt.modules.users.User.objects.all())
     CLIENTS = Cycler(rt.modules.pcsw.Client.objects.all())
 
     yield lib_objects()

@@ -27,7 +27,7 @@ Coaching
 
     .. attribute:: user
 
-    The social agent. Pointer to :class:`ml.auth.User`.
+    The social agent. Pointer to :class:`ml.users.User`.
 
     .. attribute:: primary
 

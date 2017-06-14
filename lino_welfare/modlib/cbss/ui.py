@@ -21,7 +21,7 @@
 
 from lino.api import dd, _
 from lino.utils import AttrDict
-from lino.modlib.auth.mixins import My
+from lino.modlib.users.mixins import My
 from .roles import CBSSUser, SecurityAdvisor
 from .mixins import RequestStates
 from .utils import (nodetext, cbss2gender, cbss2date, cbss2address,

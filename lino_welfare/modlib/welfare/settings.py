@@ -103,7 +103,7 @@ class Site(Site):
         # yield 'lino.modlib.gfks'
         yield 'lino_xl.lib.appypod'
         yield 'django.contrib.humanize'  # translations for
-        yield 'lino_welfare.modlib.auth'
+        yield 'lino_welfare.modlib.users'
         yield 'lino.modlib.notify'
         yield 'lino.modlib.changes'
 

@@ -326,7 +326,7 @@ def migrate_from_1_2_1(globals_dict):
     TextFieldTemplate = resolve_model("lino.TextFieldTemplate")
     Note = resolve_model("notes.Note")
     Upload = resolve_model("uploads.Upload")
-    User = resolve_model("auth.User")
+    User = resolve_model("users.User")
     PersonSearch = resolve_model("dsbe.PersonSearch")
     WantedLanguageKnowledge = resolve_model("dsbe.WantedLanguageKnowledge")
     LanguageKnowledge = resolve_model("dsbe.LanguageKnowledge")
@@ -699,14 +699,14 @@ def migrate_from_1_2_5(globals_dict):
 def migrate_from_1_2_6(globals_dict):
     """
     - Rename fields `sex` to `gender` 
-      in `contacts.Person`, `auth.User`, `dsbe.PersonSearch`.
+      in `contacts.Person`, `users.User`, `dsbe.PersonSearch`.
     - add previously hard-coded objects from 
       :mod:`lino_xl.lib.cal.fixtures.std`
     """
     from lino.utils.mti import insert_child
     contacts_Contact = resolve_model("contacts.Contact")
     contacts_Person = resolve_model("contacts.Person")
-    auth.User = resolve_model("auth.User")
+    users.User = resolve_model("users.User")
     dsbe_PersonSearch = resolve_model("dsbe.PersonSearch")
     cal_Event = resolve_model("cal.Event")
     cal_Task = resolve_model("cal.Task")
@@ -724,7 +724,7 @@ def migrate_from_1_2_6(globals_dict):
 
     def create_users_user(contact_ptr_id, first_name, last_name, title, sex, username, is_staff, is_expert, is_active, is_superuser, last_login, date_joined, is_spis):
         return insert_child(
-            contacts_Contact.objects.get(pk=contact_ptr_id), auth.User,
+            contacts_Contact.objects.get(pk=contact_ptr_id), users.User,
             first_name=first_name, last_name=last_name, title=title,
             gender=sex,
             username=username, is_staff=is_staff, is_expert=is_expert, is_active=is_active, is_superuser=is_superuser, last_login=last_login, date_joined=date_joined, is_spis=is_spis)
@@ -1149,12 +1149,12 @@ def migrate_from_1_4_3(globals_dict):
     """
     from lino.core.utils import resolve_model
     from lino.utils.mti import create_child
-    from lino.modlib.auth.models import UserTypes
+    from lino.modlib.users.models import UserTypes
     #~ from lino.utils import mti
     #~ from lino.utils import dblogger
 
     contacts_Contact = resolve_model("contacts.Partner")
-    auth.User = resolve_model("auth.User")
+    users.User = resolve_model("users.User")
     globals_dict.update(contacts_Contact=contacts_Contact)
     globals_dict.update(
         bcss_IdentifyPersonRequest=resolve_model("cbss.IdentifyPersonRequest"))
@@ -1270,10 +1270,10 @@ def migrate_from_1_4_3(globals_dict):
             kw.update(profile='200')  # UserTypes.caroline)
             #~ kw.update(debts_level=UserLevel.user)
             #~ kw.update(level=UserLevel.user)
-        #~ return create_child(contacts_Contact,contact_ptr_id,auth.User,
+        #~ return create_child(contacts_Contact,contact_ptr_id,users.User,
         if not date_joined:
             date_joined = datetime.datetime.now()
-        return auth.User(partner_id=contact_ptr_id,
+        return users.User(partner_id=contact_ptr_id,
                           id=contact_ptr_id,
                           first_name=first_name, last_name=last_name,
                           email=contacts_Contact.objects.get(
@@ -1526,7 +1526,7 @@ class Migrator(Migrator):
         pcsw_CoachingType = resolve_model("pcsw.CoachingType")
         pcsw_ClientContactType = resolve_model("pcsw.ClientContactType")
         accounts_Chart = resolve_model("accounts.Chart")
-        auth.User = resolve_model("auth.User")
+        users.User = resolve_model("users.User")
         isip_Contract = resolve_model("isip.Contract")
         jobs_Contract = resolve_model("jobs.Contract")
         contacts_Role = resolve_model("contacts.Role")
@@ -2526,7 +2526,7 @@ class Migrator(Migrator):
             return cal_EventType(**kw)
         globals_dict.update(create_cal_calendar=create_cal_calendar)
 
-        users_User = resolve_model("auth.User")
+        users_User = resolve_model("users.User")
 
         def create_users_user(id, created, modified, username, password, profile, initials, first_name, last_name, email, remarks, language, partner_id, access_class, calendar_id, coaching_type_id, coaching_supervisor, newcomer_quota):
             kw = dict()
@@ -2703,7 +2703,7 @@ class Migrator(Migrator):
         globals_dict.update(system_SiteConfig=f)
 
         cal_Calendar = resolve_model('cal.Calendar')
-        users_User = resolve_model("auth.User")
+        users_User = resolve_model("users.User")
         Note = resolve_model("notes.Note")
         NoteType = resolve_model("notes.NoteType")
         Excerpt = resolve_model("excerpts.Excerpt")

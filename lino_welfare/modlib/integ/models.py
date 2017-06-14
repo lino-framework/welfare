@@ -20,7 +20,7 @@ from django.conf import settings
 from lino.utils.xmlgen.html import E
 from lino.utils.report import Report
 from lino.mixins import ObservedPeriod
-from lino.modlib.auth.choicelists import UserTypes
+from lino.modlib.users.choicelists import UserTypes
 from lino.modlib.system.choicelists import PeriodEvents
 
 from lino.api import dd, rt
@@ -168,7 +168,7 @@ class UsersWithClients(dd.VirtualTable):
                 p for p in UserTypes.items()
                 if p.has_required_roles([IntegrationAgent])]
 
-        qs = auth.User.objects.filter(user_type__in=user_types)
+        qs = rt.models.users.User.objects.filter(user_type__in=user_types)
         for user in qs.order_by('username'):
             r = Clients.request(param_values=dict(coached_by=user))
             if r.get_total_count():
@@ -463,7 +463,7 @@ class JobsContractEndingsByType(ContractEndingsByType):
     contracts_table = jobs.Contracts
     contract_type_model = jobs.ContractType
 
-from lino_welfare.modlib.auth.desktop import Users
+from lino_welfare.modlib.users.desktop import Users
 
 class ContractsPerUserAndContractType(ContractsByType, Users):
     label = _("PIIS par agent et type")

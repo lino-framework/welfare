@@ -109,7 +109,7 @@ Example:
 >>> ses.show(jobs.ExperiencesByOffer, obj)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 ============ ========== ==================== =================================== ==========================
- Beginnt am   Enddatum   Klient               Firma                               Land
+ Beginnt am   Enddatum   Klient               Organisation                        Land
 ------------ ---------- -------------------- ----------------------------------- --------------------------
  07.02.11     07.03.11   LAZARUS Line (144)   Belgisches Rotes Kreuz              Afghanistan
  04.04.11     04.04.13   JONAS Josef (139)    Pharmacies Populaires de Verviers   Britische Jungferninseln

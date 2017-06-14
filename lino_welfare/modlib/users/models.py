@@ -16,7 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Database models for :mod:`lino_welfare.modlib.auth`.
+"""Database models for :mod:`lino_welfare.modlib.users`.
 
 """
 
@@ -31,15 +31,15 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd, rt
 
-from lino.modlib.auth.models import *
+from lino.modlib.users.models import *
 
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 from lino.modlib.office.roles import OfficeUser
 
 
 class User(User):
-    """The `auth.User` model used in Lino Welfare.  We add a few fields
-    to the standard models (:class:`lino.modlib.auth.models.User`).
+    """The `users.User` model used in Lino Welfare.  We add a few fields
+    to the standard models (:class:`lino.modlib.users.models.User`).
 
     """
 

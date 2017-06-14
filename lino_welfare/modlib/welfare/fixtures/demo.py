@@ -160,7 +160,7 @@ def objects():
     #~ Contact = resolve_model('contacts.Contact')
     Role = resolve_model('contacts.Role')
     RoleType = resolve_model('contacts.RoleType')
-    Authority = resolve_model('auth.Authority')
+    Authority = resolve_model('users.Authority')
     User = settings.SITE.user_model
     #~ Country = resolve_model('countries.Country')
     Client = resolve_model('pcsw.Client')

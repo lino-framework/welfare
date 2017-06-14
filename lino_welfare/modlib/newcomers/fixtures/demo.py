@@ -27,7 +27,7 @@ from lino.utils import Cycler
 from lino.api.dd import babel_values
 
 from lino.api import dd, rt
-from lino.modlib.auth.choicelists import UserTypes
+from lino.modlib.users.choicelists import UserTypes
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 from lino_xl.lib.coachings.choicelists import ClientStates
 
@@ -37,7 +37,7 @@ def objects():
     from lino_welfare.modlib.newcomers.models import Broker, Faculty, Competence
     pcsw = dd.resolve_app('pcsw')
     Person = dd.resolve_model('contacts.Person')
-    User = rt.models.auth.User
+    User = rt.models.users.User
 
     I = Instantiator(Broker).build
     #~ yield I(**babel_values('name',
@@ -54,7 +54,7 @@ def objects():
     yield I(weight=6, **babel_values('name', de=u"Finanzielle Begleitung",  fr=u"Accompagnement budgétaire",     en=u"Finanzielle Begleitung"))
     yield I(weight=2, **babel_values('name', de=u"Laufende Beihilfe",       fr=u"Aide complémenataire",       en=u"Laufende Beihilfe"))
 
-    #~ User = resolve_model('auth.User')
+    #~ User = resolve_model('users.User')
     #~ yield User(username="caroline",
         #~ first_name="Caroline",last_name="Carnol",
         # ~ user_type='200') # UserTypes.caroline)

@@ -16,7 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-from lino.modlib.auth.roles import AuthorshipTaker
+from lino.modlib.users.roles import AuthorshipTaker
 from lino.modlib.office.roles import OfficeUser, OfficeStaff
 from lino_xl.lib.polls.roles import PollsUser, PollsStaff
 from lino_xl.lib.beid.roles import BeIdUser

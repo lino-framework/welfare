@@ -23,6 +23,7 @@ Permalink to the detail of a note type
 ======================================
 
 >>> url = '/api/notes/NoteTypes/1?fmt=detail'
+>>> test_client.force_login(rt.login('rolf').user)
 >>> res = test_client.get(url, REMOTE_USER='rolf')
 >>> print(res.status_code)
 200

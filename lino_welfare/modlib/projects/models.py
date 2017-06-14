@@ -31,7 +31,7 @@ from lino.api import dd
 from lino import mixins
 
 from lino_xl.lib.excerpts.mixins import Certifiable
-from lino.modlib.auth.choicelists import SiteStaff
+from lino.modlib.users.choicelists import SiteStaff
 
 
 class ProjectType(mixins.BabelNamed):

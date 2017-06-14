@@ -39,7 +39,7 @@ from lino import mixins
 
 from lino_xl.lib.accounts.choicelists import AccountTypes
 from lino_xl.lib.excerpts.mixins import Certifiable
-from lino.modlib.auth.mixins import UserAuthored
+from lino.modlib.users.mixins import UserAuthored
 
 
 from .fields import PeriodsField

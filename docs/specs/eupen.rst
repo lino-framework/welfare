@@ -152,7 +152,7 @@ Begleiter im DSBE (Manager)
 
 
 Because Mélanie has her :attr:`language
-<lino.modlib.auth.models.User.language>` field set to French, we need
+<lino.modlib.users.models.User.language>` field set to French, we need
 to explicitly override the language of :meth:`show_menu
 <lino.core.requests.BaseRequest.show_menu>` to get her menu in German:
 
@@ -469,9 +469,9 @@ Each window layout defines a given set of fields.
 - uploads.UploadsByClient.insert : file, type, end_date, description
 - uploads.UploadsByController.insert : file, type, end_date, description
 - users.AllUsers.send_welcome_email : email, subject
-- auth.Users.change_password : current, new1, new2
-- auth.Users.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
-- auth.Users.insert : username, email, first_name, last_name, partner, language, user_type
+- users.Users.change_password : current, new1, new2
+- users.Users.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
+- users.Users.insert : username, email, first_name, last_name, partner, language, user_type
 - vatless.Invoices.detail : journal, number, voucher_date, entry_date, accounting_period, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, match, state, user, id, MovementsByVoucher
 - vatless.Invoices.insert : journal, partner, voucher_date
 - vatless.InvoicesByJournal.insert : partner, voucher_date
@@ -659,9 +659,9 @@ Each window layout is **viewable** by a given set of user user_types.
 - uploads.UploadsByClient.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - users.AllUsers.send_welcome_email : visible for admin 910
-- auth.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- auth.Users.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- auth.Users.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.Users.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.Users.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - vatless.Invoices.detail : visible for 500 510 admin 910
 - vatless.Invoices.insert : visible for 500 510 admin 910
 - vatless.InvoicesByJournal.insert : visible for 500 510 admin 910
@@ -749,7 +749,7 @@ Global list of all actions that have a parameter dialog.
   (main) [visible for all]: **Ablehnungsgrund** (reason), **Bemerkung** (remark)
 - users.AllUsers.send_welcome_email : Welcome mail
   (main) [visible for all]: **E-Mail-Adresse** (email), **Betreff** (subject)
-- auth.Users.change_password : Passwort ändern
+- users.Users.change_password : Passwort ändern
   (main) [visible for all]: **Aktuelles Passwort** (current), **Neues Passwort** (new1), **Neues Passwort nochmal** (new2)
 <BLANKLINE>
 

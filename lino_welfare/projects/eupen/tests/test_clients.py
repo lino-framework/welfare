@@ -35,7 +35,7 @@ from lino.utils.djangotest import RemoteAuthTestCase
 from lino.utils import i2d
 from lino_xl.lib.cal.choicelists import WORKDAYS
 from lino_xl.lib.coachings.choicelists import ClientStates
-from lino.modlib.auth.choicelists import UserTypes
+from lino.modlib.users.choicelists import UserTypes
 from lino.modlib.system.choicelists import Genders
 from lino.utils.instantiator import create_row as create
 from lino.api import rt
@@ -52,7 +52,7 @@ class QuickTest(RemoteAuthTestCase):
     maxDiff = None
 
     def test01(self):
-        from lino.api.shell import cal, pcsw, isip, auth, contacts
+        from lino.api.shell import cal, pcsw, isip, users, contacts
         # NoteType = rt.models.notes.NoteType
         EventType = rt.models.notes.EventType
         Note = rt.models.notes.Note
@@ -60,13 +60,13 @@ class QuickTest(RemoteAuthTestCase):
         Message = rt.models.notify.Message
 
         robin = create(
-            auth.User, username="robin",
+            users.User, username="robin",
             user_type=UserTypes.admin,
             language="fr")
         
         self.client.force_login(robin)
         aline = create(
-            auth.User,
+            users.User,
             username="aline",
             user_type=UserTypes.admin,
             language="fr")

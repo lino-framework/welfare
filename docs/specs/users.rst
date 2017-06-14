@@ -10,14 +10,13 @@ Users
     
     doctest init:
 
-    >>> from __future__ import print_function
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
     ...    'lino_welfare.projects.std.settings.doctests'
     >>> from lino.api.doctest import *
 
 This document describes how Lino Welfare uses the
-:mod:`lino.modlib.auth` plugin.
+:mod:`lino.modlib.users` plugin.
 
 .. contents::
    :depth: 2
@@ -29,7 +28,7 @@ The default set of user types for Lino Welfare is defined in
 :mod:`lino_welfare.modlib.welfare.user_types` and leads to the
 following list of profiles:
 
->>> rt.show(auth.UserTypes)
+>>> rt.show(users.UserTypes)
 ======= =========== =============================== ==================================================================
  value   name        text                            User role
 ------- ----------- ------------------------------- ------------------------------------------------------------------
@@ -68,14 +67,14 @@ An integration agent (manager) has some staff permissions but is not a
 >>> from lino.core.roles import SiteStaff
 >>> from lino_xl.lib.contacts.roles import ContactsStaff
 
->>> p110 = auth.UserTypes.get_by_value('110')
+>>> p110 = users.UserTypes.get_by_value('110')
 >>> p110.has_required_roles([SiteStaff])
 False
 
 A reception clerk is a
 :class:`lino_xl.lib.contacts.roles.ContactsStaff`:
 
->>> p210 = auth.UserTypes.get_by_value('210')
+>>> p210 = users.UserTypes.get_by_value('210')
 >>> p210.has_required_roles([SiteStaff])
 False
 >>> p210.has_required_roles([ContactsStaff])
