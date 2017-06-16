@@ -79,9 +79,9 @@ class BeIdTests(RemoteAuthTestCase):
             'django.middleware.common.CommonMiddleware',
             'django.middleware.locale.LocaleMiddleware',
             'django.contrib.sessions.middleware.SessionMiddleware',
-            'lino.modlib.users.middleware.AuthenticationMiddleware',
-            'lino.modlib.users.middleware.WithUserMiddleware',
-            'lino.modlib.users.middleware.RemoteUserMiddleware',
+            'lino.core.auth.middleware.AuthenticationMiddleware',
+            'lino.core.auth.middleware.WithUserMiddleware',
+            'lino.core.auth.middleware.RemoteUserMiddleware',
             'lino.utils.ajax.AjaxExceptionResponse'))
 
         u = users.User(username='robin',

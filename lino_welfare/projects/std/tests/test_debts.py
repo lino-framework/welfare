@@ -43,7 +43,7 @@ from django.utils.datastructures import MultiValueDict
 
 from django.conf import settings
 from lino.modlib.users.choicelists import UserTypes
-from lino.api.shell import countries, pcsw
+from lino.api.shell import countries, pcsw, users
 from lino.api import rt
 from lino.api.doctest import test_client
 
