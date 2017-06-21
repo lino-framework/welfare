@@ -44,7 +44,7 @@ For the following examples we will use budget no. 3:
 
 >>> obj = debts.Budget.objects.get(pk=3)
 >>> obj
-Budget #3 ('Budget Nr. 3 f\xfcr Jean\xe9mart-Thelen')
+Budget #3 ('Budget Nr. 3 f\xfcr J\xe9r\xf4me & Theresia Jean\xe9mart-Thelen')
 
 
 Actors
@@ -533,25 +533,25 @@ command shows the table of all budgets.
 
 >>> kwargs = dict(column_names="id user date partner dist_amount")
 >>> ses.show(debts.Budgets, **kwargs)
-==== ================== ============ =========================== ======================
- ID   Author             Date         Partner                     Distributable amount
----- ------------------ ------------ --------------------------- ----------------------
- 1    Kerstin Kerres     22/05/2014   Gerkens-Kasennova           120,00
- 2    Patrick Paraneau   22/05/2014   Huppertz-Jousten            120,00
- 3    Romain Raffault    22/05/2014   Jeanémart-Thelen            120,00
- 4    Rolf Rompen        22/05/2014   Denon-Mélard                120,00
- 5    Robin Rood         22/05/2014   Dubois-Lahm                 120,00
- 6    Kerstin Kerres     22/05/2014   Jeanémart-Vandenmeulenbos   120,00
- 7    Patrick Paraneau   22/05/2014   Frisch-Frogemuth            120,00
- 8    Romain Raffault    22/05/2014   Frisch-Einzig               120,00
- 9    Rolf Rompen        22/05/2014   Frisch-Zweith               120,00
- 10   Robin Rood         22/05/2014   Frisch-Loslever             120,00
- 11   Kerstin Kerres     22/05/2014   Adam-Evrard                 120,00
- 12   Patrick Paraneau   22/05/2014   Adam-Freisen                120,00
- 13   Romain Raffault    22/05/2014   Braun-Evrard                120,00
- 14   Rolf Rompen        22/05/2014   Braun-Freisen               120,00
-                                                                  **1 680,00**
-==== ================== ============ =========================== ======================
+==== ================== ============ ================================================= ======================
+ ID   Author             Date         Partner                                           Distributable amount
+---- ------------------ ------------ ------------------------------------------------- ----------------------
+ 1    Kerstin Kerres     22/05/2014   Gerd & Tatjana Gerkens-Kasennova                  120,00
+ 2    Patrick Paraneau   22/05/2014   Hubert & Judith Huppertz-Jousten                  120,00
+ 3    Romain Raffault    22/05/2014   Jérôme & Theresia Jeanémart-Thelen                120,00
+ 4    Rolf Rompen        22/05/2014   Denis & Mélanie Denon-Mélard                      120,00
+ 5    Robin Rood         22/05/2014   Robin & Lisa Dubois-Lahm                          120,00
+ 6    Kerstin Kerres     22/05/2014   Jérôme & Marie-Louise Jeanémart-Vandenmeulenbos   120,00
+ 7    Patrick Paraneau   22/05/2014   Hubert & Gaby Frisch-Frogemuth                    120,00
+ 8    Romain Raffault    22/05/2014   Paul & Paula Frisch-Einzig                        120,00
+ 9    Rolf Rompen        22/05/2014   Paul & Petra Frisch-Zweith                        120,00
+ 10   Robin Rood         22/05/2014   Ludwig & Laura Frisch-Loslever                    120,00
+ 11   Kerstin Kerres     22/05/2014   Albert & Eveline Adam-Evrard                      120,00
+ 12   Patrick Paraneau   22/05/2014   Albert & Françoise Adam-Freisen                   120,00
+ 13   Romain Raffault    22/05/2014   Bruno & Eveline Braun-Evrard                      120,00
+ 14   Rolf Rompen        22/05/2014   Bruno & Françoise Braun-Freisen                   120,00
+                                                                                        **1 680,00**
+==== ================== ============ ================================================= ======================
 <BLANKLINE>
 
 
@@ -560,14 +560,14 @@ the budgets authored by the requesting user.
 
 
 >>> ses.show(debts.MyBudgets, **kwargs)
-==== ============= ============ =============== ======================
- ID   Author        Date         Partner         Distributable amount
----- ------------- ------------ --------------- ----------------------
- 4    Rolf Rompen   22/05/2014   Denon-Mélard    120,00
- 9    Rolf Rompen   22/05/2014   Frisch-Zweith   120,00
- 14   Rolf Rompen   22/05/2014   Braun-Freisen   120,00
-                                                 **360,00**
-==== ============= ============ =============== ======================
+==== ============= ============ ================================= ======================
+ ID   Author        Date         Partner                           Distributable amount
+---- ------------- ------------ --------------------------------- ----------------------
+ 4    Rolf Rompen   22/05/2014   Denis & Mélanie Denon-Mélard      120,00
+ 9    Rolf Rompen   22/05/2014   Paul & Petra Frisch-Zweith        120,00
+ 14   Rolf Rompen   22/05/2014   Bruno & Françoise Braun-Freisen   120,00
+                                                                   **360,00**
+==== ============= ============ ================================= ======================
 <BLANKLINE>
 
 
@@ -577,12 +577,12 @@ select that other user in the filter parameter "Author".
 >>> pv = dict(user=users.User.objects.get(username='kerstin'))
 >>> kwargs.update(param_values=pv)
 >>> ses.show(debts.Budgets, **kwargs)
-==== ================ ============ =========================== ======================
- ID   Author           Date         Partner                     Distributable amount
----- ---------------- ------------ --------------------------- ----------------------
- 1    Kerstin Kerres   22/05/2014   Gerkens-Kasennova           120,00
- 6    Kerstin Kerres   22/05/2014   Jeanémart-Vandenmeulenbos   120,00
- 11   Kerstin Kerres   22/05/2014   Adam-Evrard                 120,00
-                                                                **360,00**
-==== ================ ============ =========================== ======================
+==== ================ ============ ================================================= ======================
+ ID   Author           Date         Partner                                           Distributable amount
+---- ---------------- ------------ ------------------------------------------------- ----------------------
+ 1    Kerstin Kerres   22/05/2014   Gerd & Tatjana Gerkens-Kasennova                  120,00
+ 6    Kerstin Kerres   22/05/2014   Jérôme & Marie-Louise Jeanémart-Vandenmeulenbos   120,00
+ 11   Kerstin Kerres   22/05/2014   Albert & Eveline Adam-Evrard                      120,00
+                                                                                      **360,00**
+==== ================ ============ ================================================= ======================
 <BLANKLINE>

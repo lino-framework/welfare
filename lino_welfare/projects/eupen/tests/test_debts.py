@@ -21,7 +21,7 @@
 How to run only this test::
 
   $ go welfare
-  $ cd lino_welfare/projects/std
+  $ cd lino_welfare/projects/eupen
   $ python manage.py test tests.test_debts
 
 """
@@ -144,10 +144,10 @@ class DebtsTests(RemoteAuthTestCase):
         url = "/api/debts/Budgets/1?&an=duplicate&sr=1"
         dlg = []
         dlg.append((
-            "This will create a copy of Budget 1 for A-B Are you sure?",
+            "This will create a copy of Budget 1 for A & B A-B Are you sure?",
             'yes'))
         dlg.append((
-            'Duplicated Budget 1 for A-B to Budget 3 for A-B.',
+            'Duplicated Budget 1 for A & B A-B to Budget 3 for A & B A-B.',
             None))
         self.check_callback_dialog(self.client.get, 'other', url, dlg)
 
