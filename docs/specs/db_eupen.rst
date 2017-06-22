@@ -69,10 +69,10 @@ Database structure
 - coachings.Coaching : id, start_date, end_date, user, client, type, primary, ending
 - coachings.CoachingEnding : id, seqno, name, type, name_fr, name_en
 - coachings.CoachingType : id, name, does_integ, does_gss, eval_guestrole, name_fr, name_en
-- contacts.Company : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, prefix, type, vat_id
+- contacts.Company : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, type, vat_id
 - contacts.CompanyType : id, name, abbr, abbr_fr, abbr_en, name_fr, name_en
-- contacts.Partner : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, remarks, is_obsolete, activity, client_contact_type, payment_term
-- contacts.Person : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, title, first_name, middle_name, last_name, gender, birth_date
+- contacts.Partner : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term
+- contacts.Person : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, title, first_name, middle_name, last_name, gender, birth_date
 - contacts.Role : id, type, person, company
 - contacts.RoleType : id, name, name_fr, name_en, use_in_contracts
 - contenttypes.ContentType : id, app_label, model
@@ -106,7 +106,7 @@ Database structure
 - finan.PaymentOrder : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, total, execution_date
 - finan.PaymentOrderItem : id, seqno, project, match, amount, dc, remark, account, partner, bank_account, voucher
 - gfks.HelpText : id, content_type, field, help_text
-- households.Household : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, prefix, type
+- households.Household : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, type
 - households.Member : id, start_date, end_date, title, first_name, middle_name, last_name, gender, birth_date, role, person, household, dependency, primary
 - households.Type : id, name, name_fr, name_en
 - humanlinks.Link : id, type, parent, child
@@ -119,7 +119,7 @@ Database structure
 - jobs.Contract : id, signer1, signer2, company, contact_person, contact_role, user, printed_by, client, language, applies_from, applies_until, date_decided, date_issued, user_asd, exam_policy, ending, date_ended, duration, reference_person, responsibilities, remark, type, job, regime, schedule, hourly_rate, refund_rate
 - jobs.ContractType : id, ref, name, full_name, exam_policy, overlap_group, template, name_fr, name_en
 - jobs.Job : id, sector, function, name, type, provider, contract_type, hourly_rate, capacity, remark
-- jobs.JobProvider : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, prefix, type, vat_id, company_ptr
+- jobs.JobProvider : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, type, vat_id, company_ptr
 - jobs.JobType : id, seqno, name, remark, is_social
 - jobs.Offer : id, sector, function, name, provider, selection_from, selection_until, start_date, remark
 - jobs.Schedule : id, name, name_fr, name_en
@@ -142,7 +142,7 @@ Database structure
 - outbox.Recipient : id, mail, partner, type, address, name
 - pcsw.Activity : id, name, lst104
 - pcsw.AidType : id, name, name_fr, name_en
-- pcsw.Client : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, title, first_name, middle_name, last_name, gender, birth_date, person_ptr, national_id, birth_country, birth_place, nationality, card_number, card_valid_from, card_valid_until, card_type, card_issuer, noble_condition, client_state, group, civil_state, residence_type, in_belgium_since, residence_until, unemployed_since, seeking_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type, declared_name, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_office_contact, refusal_reason, remarks2, gesdos_id, tim_id, is_cpas, is_senior, health_insurance, pharmacy, income_ag, income_wg, income_kg, income_rente, income_misc, job_agents, broker, faculty, has_esf
+- pcsw.Client : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, title, first_name, middle_name, last_name, gender, birth_date, person_ptr, national_id, birth_country, birth_place, nationality, card_number, card_valid_from, card_valid_until, card_type, card_issuer, noble_condition, client_state, group, civil_state, residence_type, in_belgium_since, residence_until, unemployed_since, seeking_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type, declared_name, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_office_contact, refusal_reason, remarks2, gesdos_id, tim_id, is_cpas, is_senior, health_insurance, pharmacy, income_ag, income_wg, income_kg, income_rente, income_misc, job_agents, broker, faculty, has_esf
 - pcsw.Conviction : id, client, date, prejudicial, designation
 - pcsw.Dispense : id, client, reason, remarks, start_date, end_date
 - pcsw.DispenseReason : id, seqno, name, name_fr, name_en
@@ -168,6 +168,6 @@ Database structure
 - xcourses.Course : id, offer, title, start_date, remark
 - xcourses.CourseContent : id, name
 - xcourses.CourseOffer : id, title, guest_role, content, provider, description
-- xcourses.CourseProvider : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, prefix, type, vat_id, company_ptr
+- xcourses.CourseProvider : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, type, vat_id, company_ptr
 - xcourses.CourseRequest : id, person, offer, content, date_submitted, urgent, state, course, remark, date_ended
 <BLANKLINE>

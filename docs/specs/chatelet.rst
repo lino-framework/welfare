@@ -98,8 +98,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  coachings.CoachingType         coachings.CoachingTypes         8         3
  contacts.Company               contacts.Companies              28        39
  contacts.CompanyType           contacts.CompanyTypes           9         16
- contacts.Partner               contacts.Partners               24        162
- contacts.Person                contacts.Persons                31        109
+ contacts.Partner               contacts.Partners               25        162
+ contacts.Person                contacts.Persons                32        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
  contenttypes.ContentType       gfks.ContentTypes               3         135
@@ -170,7 +170,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  outbox.Recipient               outbox.Recipients               6         0
  pcsw.Activity                  pcsw.Activities                 3         0
  pcsw.AidType                   pcsw.AidTypes                   5         0
- pcsw.Client                    pcsw.Clients                    67        63
+ pcsw.Client                    pcsw.Clients                    68        63
  pcsw.Conviction                pcsw.Convictions                5         0
  pcsw.Dispense                  pcsw.Dispenses                  6         0
  pcsw.DispenseReason            pcsw.DispenseReasons            6         4

@@ -123,7 +123,7 @@ Here is a list of all demo excerpts.
  15   ISIP                     *ISIP#2 (Alfons AUSDEMWALD)*                          AUSDEMWALD Alfons (116)
  14   ISIP                     *ISIP#1 (Alfons AUSDEMWALD)*                          AUSDEMWALD Alfons (116)
  13   Payment Order            *AAW 1*                                                                                                              de
- 12   Financial situation      *Budget 1 for Gerkens-Kasennova*
+ 12   Financial situation      *Budget 1 for Gerd & Tatjana Gerkens-Kasennova*
  11   Art61 job supplyment     *Art61 job supplyment#7 (Karl KELLER)*                KELLER Karl (178)
  10   Art61 job supplyment     *Art61 job supplyment#6 (Hedi RADERMACHER)*           RADERMACHER Hedi (161)
  9    Art61 job supplyment     *Art61 job supplyment#5 (Hedi RADERMACHER)*           RADERMACHER Hedi (161)
