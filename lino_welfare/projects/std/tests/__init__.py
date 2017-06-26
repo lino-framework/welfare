@@ -5,7 +5,6 @@
 
    test_beid
    test_ddh
-   test_debts
    test_dupe_clients
    test_households
    test_isip

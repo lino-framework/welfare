@@ -25,5 +25,6 @@ The test suite for this project.
    test_watchtim
    test_broken_gfks
    test_clients
+   test_debts
 
 """
