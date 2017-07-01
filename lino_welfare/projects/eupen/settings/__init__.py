@@ -73,10 +73,10 @@ class Site(Site):
     #     #~ yield self.modules.reception.ReceivedVisitors
         
     #     if user.authenticated:
-    #         yield self.actors.notify.MyMessages
+    #         yield self.models.notify.MyMessages
 
     def do_site_startup(self):
-        ctt = self.actors.coachings.ClientContactTypes
+        ctt = self.models.coachings.ClientContactTypes
         ctt.set_detail_layout("""
         id name can_refund is_bailiff
         coachings.PartnersByClientContactType

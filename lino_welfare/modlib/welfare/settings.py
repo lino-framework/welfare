@@ -190,6 +190,6 @@ class Site(Site):
             yield self.modules.reception.WaitingVisitors
             yield self.modules.cal.MyEntries
             yield self.modules.cal.MyTasks
-            yield self.actors.cal.MyOverdueAppointments
+            yield self.models.cal.MyOverdueAppointments
             #~ yield self.modules.reception.ReceivedVisitors
-            yield self.actors.notify.MyMessages
+            yield self.models.notify.MyMessages
