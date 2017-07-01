@@ -90,17 +90,17 @@ class Site(Site):
         yield self.modules.reception.WaitingVisitors
         # yield self.modules.integ.UsersWithClients
         #~ yield self.modules.reception.ReceivedVisitors
-        yield self.actors.cal.MyOverdueAppointments
+        yield self.models.cal.MyOverdueAppointments
         
         if user.authenticated:
-            yield self.actors.notify.MyMessages
+            yield self.models.notify.MyMessages
             
 
     def do_site_startup(self):
         super(Site, self).do_site_startup()
 
         from lino.core.inject import update_field
-        # ctt = self.actors.coachings.ClientContactTypes
+        # ctt = self.models.coachings.ClientContactTypes
         ct = self.models.coachings.ClientContact
         ct.column_names = "company contact_person remark"
         update_field(ct, 'remark', verbose_name=_("Contact details"))
