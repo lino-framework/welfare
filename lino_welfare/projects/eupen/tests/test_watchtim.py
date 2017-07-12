@@ -640,5 +640,5 @@ def changes_to_rst(master):
 
 
 def coachings_to_rst(master):
-    A = settings.SITE.actors.coachings.CoachingsByClient
+    A = settings.SITE.models.coachings.CoachingsByClient
     return A.request(master).to_rst()

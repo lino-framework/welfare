@@ -90,7 +90,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Büro : Auszüge, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Kalendereinträge, Aufgaben, Anwesenheiten, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
-  - Buchhaltung : Ausgleichungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Journalgruppen, Rechnungen
+  - Buchhaltung : Begleichungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Journalgruppen, Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
@@ -429,7 +429,7 @@ Each window layout defines a given set of fields.
 - jobs.Schedules.insert : id, name, name_fr, name_en
 - languages.Languages.insert : id, iso2, name, name_fr, name_en
 - ledger.ActivityReport.show : body
-- ledger.Journals.detail : name, name_fr, name_en, ref, trade_type, seqno, id, voucher_type, journal_group, account, build_method, template, dc, force_sequence, yearly_numbering, auto_check_clearings, printed_name, printed_name_fr, printed_name_en
+- ledger.Journals.detail : name, name_fr, name_en, ref, trade_type, seqno, id, voucher_type, journal_group, account, build_method, template, dc, force_sequence, yearly_numbering, auto_check_clearings, must_declare, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, journal_group, voucher_type
 - ledger.PaymentTerms.insert : ref, months, days, end_of_month, name, name_fr, name_en, printed_text, printed_text_fr, printed_text_en
 - ledger.Situation.show : body
@@ -933,7 +933,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> ÖSHZ --> Kostenübernahmescheine : 13
 - Explorer --> ÖSHZ --> Einfache Bescheinigungen : 20
 - Explorer --> ÖSHZ --> Phonetische Wörter : 132
-- Explorer --> Buchhaltung --> Ausgleichungsregeln : 3
+- Explorer --> Buchhaltung --> Begleichungsregeln : 3
 - Explorer --> Buchhaltung --> Belege : 53
 - Explorer --> Buchhaltung --> Belegarten : 6
 - Explorer --> Buchhaltung --> Bewegungen : 451
