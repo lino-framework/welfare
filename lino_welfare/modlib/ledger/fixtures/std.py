@@ -97,7 +97,7 @@ def objects():
         '4450', 'liabilities', _("Disbursement orders to execute"),
         clearable=True, needs_partner=True)
     yield a4450
-
+    
     # a4460 = account('4460', 'liabilities',
     #                 _("Instructions to execute"), clearable=True)
     # yield a4460
