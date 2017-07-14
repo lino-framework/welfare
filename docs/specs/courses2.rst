@@ -20,11 +20,11 @@ Workshops
     :depth: 1
 
 This is about *internal* courses
-(:mod:`lino_welfare.projects.chatelet.modlib.courses.models`), not
+(:mod:`lino_welfare.projects.chatelet.modlib.courses`), not
 :doc:`courses`.
 
->>> rt.modules.courses.__name__
-'lino_welfare.projects.chatelet.modlib.courses.models'
+>>> dd.plugins.courses
+lino_welfare.projects.chatelet.modlib.courses (extends_models=['Course', 'Line', 'Enrolment'])
 
 We call them "workshops":
 
