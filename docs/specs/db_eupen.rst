@@ -23,14 +23,14 @@ Database structure
 >>> print(analyzer.show_complexity_factors())
 - 64 plugins
 - 140 models
-- 536 views
+- 537 views
 - 15 user types
 - 13 dialog actions
 <BLANKLINE>
 
 >>> print(analyzer.show_database_structure())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- accounts.Account : id, ref, seqno, name, group, type, needs_partner, clearable, default_amount, name_fr, name_en, sales_allowed, purchases_allowed, wages_allowed, clearings_allowed
+- accounts.Account : id, ref, seqno, name, group, type, needs_partner, clearable, default_amount, name_fr, name_en, sales_allowed, purchases_allowed, wages_allowed, taxes_allowed, clearings_allowed
 - accounts.Group : id, name, ref, account_type, name_fr, name_en
 - addresses.Address : id, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, data_source, address_type, partner, remark, primary
 - aids.AidType : id, name, company, contact_person, contact_role, excerpt_title, aid_regime, confirmation_type, short_name, board, print_directly, is_integ_duty, is_urgent, confirmed_by_primary_coach, pharmacy_type, address_type, body_template, name_fr, name_en, excerpt_title_fr, excerpt_title_en
