@@ -50,31 +50,31 @@ lino_xl.lib.vatless.ui.InvoicesByJournal
 The REG journal contains the following invoices:
 
 >>> rt.show(REG.voucher_type.table_class, REG)
-========= ============ ============================ =============================== ============ ============== ================== =================
- Nr.       Belegdatum   Klient                       Zahlungsempfänger               Betrag       Zahlungsziel   Autor              Aktionen
---------- ------------ ---------------------------- ------------------------------- ------------ -------------- ------------------ -----------------
- 20        27.12.13     EVERS Eberhart (127)         Leffin Electronics              12,50        27.01.14       Wilfried Willems   **Registriert**
- 19        06.01.14     EVERS Eberhart (127)         Ethias s.a.                     5,33         06.02.14       Wilfried Willems   **Registriert**
- 18        11.01.14     COLLARD Charlotte (118)      Electrabel Customer Solutions   120,00       11.02.14       Wilfried Willems   **Registriert**
- 17        21.01.14     EVERS Eberhart (127)         Maksu- ja tolliamet             120,00       21.02.14       Wilfried Willems   **Registriert**
- 16        26.01.14     COLLARD Charlotte (118)      IIZI kindlustusmaakler AS       29,95        26.02.14       Wilfried Willems   **Registriert**
- 15        05.02.14     COLLARD Charlotte (118)      AS Matsalu Veevärk              12,50        08.03.14       Wilfried Willems   **Registriert**
- 14        10.02.14     EMONTS Daniel (128)          AS Express Post                 10,00        13.03.14       Wilfried Willems   **Registriert**
- 13        20.02.14     COLLARD Charlotte (118)      Niederau Eupen AG               10,00        23.03.14       Wilfried Willems   **Registriert**
- 12        25.02.14     EMONTS Daniel (128)          Ethias s.a.                     5,33         28.03.14       Wilfried Willems   **Registriert**
- 11        07.03.14     EMONTS Daniel (128)          Ragn-Sells AS                   29,95        07.04.14       Wilfried Willems   **Registriert**
- 10        12.03.14     DOBBELSTEIN Dorothée (124)   Maksu- ja tolliamet             25,00        12.04.14       Wilfried Willems   **Registriert**
- 9         22.03.14     EMONTS Daniel (128)          Eesti Energia AS                25,00        22.04.14       Wilfried Willems   **Registriert**
- 8         27.03.14     DOBBELSTEIN Dorothée (124)   AS Matsalu Veevärk              12,50        27.04.14       Wilfried Willems   **Registriert**
- 7         06.04.14     DOBBELSTEIN Dorothée (124)   Leffin Electronics              5,33         07.05.14       Wilfried Willems   **Registriert**
- 6         11.04.14     AUSDEMWALD Alfons (116)      Niederau Eupen AG               120,00       12.05.14       Wilfried Willems   **Registriert**
- 5         21.04.14     DOBBELSTEIN Dorothée (124)   Electrabel Customer Solutions   120,00       22.05.14       Wilfried Willems   **Registriert**
- 4         26.04.14     AUSDEMWALD Alfons (116)      Ragn-Sells AS                   29,95        27.05.14       Wilfried Willems   **Registriert**
- 3         06.05.14     AUSDEMWALD Alfons (116)      IIZI kindlustusmaakler AS       12,50        06.06.14       Wilfried Willems   **Registriert**
- 2         11.05.14     EVERS Eberhart (127)         Eesti Energia AS                10,00        11.06.14       Wilfried Willems   **Registriert**
- 1         21.05.14     AUSDEMWALD Alfons (116)      AS Express Post                 10,00        21.06.14       Wilfried Willems   **Registriert**
- **210**                                                                             **725,84**
-========= ============ ============================ =============================== ============ ============== ================== =================
+========= =============== ============================ =============================== ============ ============== ================== =================
+ Nr.       Buchungsdatum   Klient                       Zahlungsempfänger               Betrag       Zahlungsziel   Autor              Aktionen
+--------- --------------- ---------------------------- ------------------------------- ------------ -------------- ------------------ -----------------
+ 20        28.12.13        EVERS Eberhart (127)         Leffin Electronics              12,50        27.01.14       Wilfried Willems   **Registriert**
+ 19        07.01.14        EVERS Eberhart (127)         Ethias s.a.                     5,33         06.02.14       Wilfried Willems   **Registriert**
+ 18        12.01.14        COLLARD Charlotte (118)      Electrabel Customer Solutions   120,00       11.02.14       Wilfried Willems   **Registriert**
+ 17        22.01.14        EVERS Eberhart (127)         Maksu- ja tolliamet             120,00       21.02.14       Wilfried Willems   **Registriert**
+ 16        27.01.14        COLLARD Charlotte (118)      IIZI kindlustusmaakler AS       29,95        26.02.14       Wilfried Willems   **Registriert**
+ 15        06.02.14        COLLARD Charlotte (118)      AS Matsalu Veevärk              12,50        08.03.14       Wilfried Willems   **Registriert**
+ 14        11.02.14        EMONTS Daniel (128)          AS Express Post                 10,00        13.03.14       Wilfried Willems   **Registriert**
+ 13        21.02.14        COLLARD Charlotte (118)      Niederau Eupen AG               10,00        23.03.14       Wilfried Willems   **Registriert**
+ 12        26.02.14        EMONTS Daniel (128)          Ethias s.a.                     5,33         28.03.14       Wilfried Willems   **Registriert**
+ 11        08.03.14        EMONTS Daniel (128)          Ragn-Sells AS                   29,95        07.04.14       Wilfried Willems   **Registriert**
+ 10        13.03.14        DOBBELSTEIN Dorothée (124)   Maksu- ja tolliamet             25,00        12.04.14       Wilfried Willems   **Registriert**
+ 9         23.03.14        EMONTS Daniel (128)          Eesti Energia AS                25,00        22.04.14       Wilfried Willems   **Registriert**
+ 8         28.03.14        DOBBELSTEIN Dorothée (124)   AS Matsalu Veevärk              12,50        27.04.14       Wilfried Willems   **Registriert**
+ 7         07.04.14        DOBBELSTEIN Dorothée (124)   Leffin Electronics              5,33         07.05.14       Wilfried Willems   **Registriert**
+ 6         12.04.14        AUSDEMWALD Alfons (116)      Niederau Eupen AG               120,00       12.05.14       Wilfried Willems   **Registriert**
+ 5         22.04.14        DOBBELSTEIN Dorothée (124)   Electrabel Customer Solutions   120,00       22.05.14       Wilfried Willems   **Registriert**
+ 4         27.04.14        AUSDEMWALD Alfons (116)      Ragn-Sells AS                   29,95        27.05.14       Wilfried Willems   **Registriert**
+ 3         07.05.14        AUSDEMWALD Alfons (116)      IIZI kindlustusmaakler AS       12,50        06.06.14       Wilfried Willems   **Registriert**
+ 2         12.05.14        EVERS Eberhart (127)         Eesti Energia AS                10,00        11.06.14       Wilfried Willems   **Registriert**
+ 1         22.05.14        AUSDEMWALD Alfons (116)      AS Express Post                 10,00        21.06.14       Wilfried Willems   **Registriert**
+ **210**                                                                                **725,84**
+========= =============== ============================ =============================== ============ ============== ================== =================
 <BLANKLINE>
 
 
@@ -85,21 +85,21 @@ Collective invoices
 The SREG journal contains the following invoices:
 
 >>> rt.show(SREG.voucher_type.table_class, SREG)
-======== ============ =============================== ============== ============== ================== =================
- Nr.      Belegdatum   Zahlungsempfänger               Betrag         Zahlungsziel   Autor              Aktionen
--------- ------------ ------------------------------- -------------- -------------- ------------------ -----------------
- 10       01.01.14     Niederau Eupen AG               212,78         01.02.14       Wilfried Willems   **Registriert**
- 9        16.01.14     Ragn-Sells AS                   82,78          16.02.14       Wilfried Willems   **Registriert**
- 8        31.01.14     Eesti Energia AS                227,78         03.03.14       Wilfried Willems   **Registriert**
- 7        15.02.14     Leffin Electronics              192,78         18.03.14       Wilfried Willems   **Registriert**
- 6        02.03.14     Electrabel Customer Solutions   322,78         02.04.14       Wilfried Willems   **Registriert**
- 5        17.03.14     IIZI kindlustusmaakler AS       177,78         17.04.14       Wilfried Willems   **Registriert**
- 4        01.04.14     AS Express Post                 212,78         02.05.14       Wilfried Willems   **Registriert**
- 3        16.04.14     Ethias s.a.                     82,78          17.05.14       Wilfried Willems   **Registriert**
- 2        01.05.14     Maksu- ja tolliamet             227,78         01.06.14       Wilfried Willems   **Registriert**
- 1        16.05.14     AS Matsalu Veevärk              192,78         16.06.14       Wilfried Willems   **Registriert**
- **55**                                                **1 932,80**
-======== ============ =============================== ============== ============== ================== =================
+======== =============== =============================== ============== ============== ================== =================
+ Nr.      Buchungsdatum   Zahlungsempfänger               Betrag         Zahlungsziel   Autor              Aktionen
+-------- --------------- ------------------------------- -------------- -------------- ------------------ -----------------
+ 10       02.01.14        Niederau Eupen AG               212,78         01.02.14       Wilfried Willems   **Registriert**
+ 9        17.01.14        Ragn-Sells AS                   82,78          16.02.14       Wilfried Willems   **Registriert**
+ 8        01.02.14        Eesti Energia AS                227,78         03.03.14       Wilfried Willems   **Registriert**
+ 7        16.02.14        Leffin Electronics              192,78         18.03.14       Wilfried Willems   **Registriert**
+ 6        03.03.14        Electrabel Customer Solutions   322,78         02.04.14       Wilfried Willems   **Registriert**
+ 5        18.03.14        IIZI kindlustusmaakler AS       177,78         17.04.14       Wilfried Willems   **Registriert**
+ 4        02.04.14        AS Express Post                 212,78         02.05.14       Wilfried Willems   **Registriert**
+ 3        17.04.14        Ethias s.a.                     82,78          17.05.14       Wilfried Willems   **Registriert**
+ 2        02.05.14        Maksu- ja tolliamet             227,78         01.06.14       Wilfried Willems   **Registriert**
+ 1        17.05.14        AS Matsalu Veevärk              192,78         16.06.14       Wilfried Willems   **Registriert**
+ **55**                                                   **1 932,80**
+======== =============== =============================== ============== ============== ================== =================
 <BLANKLINE>
 
 
@@ -208,24 +208,28 @@ admitted for payment (i.e. a disbursement instruction (AAW) has been
 registered), but the payment has not yet been executed.
 
 >>> rt.show(rt.modules.ledger.MovementsByPartner, obj.partner)
-**7 offene Bewegungen (-93.44 €)**
+**11 offene Bewegungen (-72.12 €)**
 
 >>> rt.show(rt.modules.ledger.MovementsByPartner, obj.partner, nosummary=True)
 ========== ========== ==================================================================== =========== ============ ============ ===========
  Valuta     Beleg      Beschreibung                                                         Debit       Kredit       Match        Beglichen
 ---------- ---------- -------------------------------------------------------------------- ----------- ------------ ------------ -----------
- 22.05.14   *AAW 19*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                        5,33                     **REG 19**   Ja
- 22.05.14   *AAW 19*   *(4450) Auszuführende Ausgabeanweisungen* / *EVERS Eberhart (127)*               5,33         **REG 19**   Nein
- 22.05.14   *AAW 21*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                         5,33                     **REG 12**   Ja
- 22.05.14   *AAW 21*   *(4450) Auszuführende Ausgabeanweisungen* / *EMONTS Daniel (128)*                5,33         **REG 12**   Nein
+ 21.04.14   *ZKBC 4*   *(4450) Auszuführende Ausgabeanweisungen* / *EMONTS Daniel (128)*    5,33                     **REG 12**   Ja
  17.04.14   *SREG 3*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                                     5,33         **SREG 3**   Nein
  17.04.14   *SREG 3*   *(4400) Lieferanten* / *DOBBELSTEIN Dorothée (124)*                              25,00        **SREG 3**   Nein
  17.04.14   *SREG 3*   *(4400) Lieferanten* / *AUSDEMWALD Alfons (116)*                                 10,00        **SREG 3**   Nein
  17.04.14   *SREG 3*   *(4400) Lieferanten* / *COLLARD Charlotte (118)*                                 12,50        **SREG 3**   Nein
  17.04.14   *SREG 3*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                                    29,95        **SREG 3**   Nein
- 26.02.14   *REG 12*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                                     5,33         **REG 12**   Ja
- 07.01.14   *REG 19*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                                    5,33         **REG 19**   Ja
-                       **Saldo -93.44 (11 Bewegungen)**                                     **10,66**   **104,10**
+ 21.03.14   *ZKBC 3*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                         5,33                     **REG 12**   Nein
+ 13.03.14   *AAW 21*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                         5,33                     **REG 12**   Nein
+ 13.03.14   *AAW 21*   *(4450) Auszuführende Ausgabeanweisungen* / *EMONTS Daniel (128)*                5,33         **REG 12**   Ja
+ 26.02.14   *REG 12*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                                     5,33         **REG 12**   Nein
+ 21.02.14   *ZKBC 2*   *(4450) Auszuführende Ausgabeanweisungen* / *EVERS Eberhart (127)*   5,33                     **REG 19**   Ja
+ 21.01.14   *ZKBC 1*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                        5,33                     **REG 19**   Nein
+ 13.01.14   *AAW 19*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                        5,33                     **REG 19**   Nein
+ 13.01.14   *AAW 19*   *(4450) Auszuführende Ausgabeanweisungen* / *EVERS Eberhart (127)*               5,33         **REG 19**   Ja
+ 07.01.14   *REG 19*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                                    5,33         **REG 19**   Nein
+                       **Saldo -72.12 (15 Bewegungen)**                                     **31,98**   **104,10**
 ========== ========== ==================================================================== =========== ============ ============ ===========
 <BLANKLINE>
 
@@ -248,19 +252,41 @@ Our client has invoices from different partners:
  22.05.14   *AAW 4*    *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*          800,08                         **AAW 4:5**    Nein
  22.05.14   *AAW 5*    *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                      648,91                         **AAW 5:5**    Nein
  22.05.14   *AAW 6*    *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*           817,36                         **AAW 6:5**    Nein
- 22.05.14   *AAW 19*   *(4450) Auszuführende Ausgabeanweisungen* / *Niederau Eupen AG*                                                120,00         **SREG 10**    Nein
- 22.05.14   *AAW 20*   *(4450) Auszuführende Ausgabeanweisungen* / *Ragn-Sells AS*                                                    29,95          **SREG 9**     Nein
- ...
+ 17.05.14   *SREG 1*   *(4400) Lieferanten* / *AS Matsalu Veevärk*                                                                    29,95          **SREG 1**     Nein
+ 02.05.14   *SREG 2*   *(4400) Lieferanten* / *Maksu- ja tolliamet*                                                                   120,00         **SREG 2**     Nein
+ 22.04.14   *AAW 7*    *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*             544,91                         **AAW 7:5**    Nein
+ 22.04.14   *AAW 8*    *(4450) Auszuführende Ausgabeanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*   800,08                         **AAW 8:5**    Nein
+ 22.04.14   *AAW 9*    *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*       648,91                         **AAW 9:5**    Nein
+ 22.04.14   *AAW 10*   *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*          817,36                         **AAW 10:5**   Nein
  22.04.14   *AAW 11*   *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                      544,91                         **AAW 11:5**   Nein
  22.04.14   *AAW 12*   *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*           800,08                         **AAW 12:5**   Nein
+ 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                         648,91         **AAW 13:5**   Nein
+ 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                         817,36         **AAW 14:5**   Nein
+ 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                         544,91         **AAW 15:5**   Nein
+ 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                         800,08         **AAW 16:5**   Nein
+ 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                         648,91         **AAW 17:5**   Nein
+ 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                         817,36         **AAW 18:5**   Nein
+ 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Eesti Energia AS*                                                      25,00                          **REG 9**      Nein
  17.04.14   *SREG 3*   *(4400) Lieferanten* / *Ethias s.a.*                                                                           5,33           **SREG 3**     Nein
+ 13.04.14   *AAW 22*   *(4400) Lieferanten* / *Eesti Energia AS*                                                      25,00                          **REG 9**      Nein
+ 13.04.14   *AAW 22*   *(4450) Auszuführende Ausgabeanweisungen* / *Eesti Energia AS*                                                 25,00          **REG 9**      Nein
+ 23.03.14   *REG 9*    *(4400) Lieferanten* / *Eesti Energia AS*                                                                      25,00          **REG 9**      Nein
  23.03.14   *AAW 13*   *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*             648,91                         **AAW 13:5**   Nein
  23.03.14   *AAW 14*   *(4450) Auszuführende Ausgabeanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*   817,36                         **AAW 14:5**   Nein
  23.03.14   *AAW 15*   *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*       544,91                         **AAW 15:5**   Nein
  23.03.14   *AAW 16*   *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*          800,08                         **AAW 16:5**   Nein
  23.03.14   *AAW 17*   *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                      648,91                         **AAW 17:5**   Nein
  23.03.14   *AAW 18*   *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*           817,36                         **AAW 18:5**   Nein
-                       **Saldo 7940.49 (38 Bewegungen)**                                                              **12 711,31**   **4 770,82**
+ 21.03.14   *ZKBC 3*   *(4400) Lieferanten* / *Ethias s.a.*                                                           5,33                           **REG 12**     Nein
+ 21.03.14   *ZKBC 3*   *(4400) Lieferanten* / *Ragn-Sells AS*                                                         29,95                          **REG 11**     Nein
+ 13.03.14   *AAW 21*   *(4400) Lieferanten* / *Ethias s.a.*                                                           5,33                           **REG 12**     Nein
+ 13.03.14   *AAW 21*   *(4400) Lieferanten* / *Ragn-Sells AS*                                                         29,95                          **REG 11**     Nein
+ 08.03.14   *REG 11*   *(4400) Lieferanten* / *Ragn-Sells AS*                                                                         29,95          **REG 11**     Nein
+ 26.02.14   *REG 12*   *(4400) Lieferanten* / *Ethias s.a.*                                                                           5,33           **REG 12**     Nein
+ 21.02.14   *ZKBC 2*   *(4400) Lieferanten* / *AS Express Post*                                                       10,00                          **REG 14**     Nein
+ 13.02.14   *AAW 20*   *(4400) Lieferanten* / *AS Express Post*                                                       10,00                          **REG 14**     Nein
+ 11.02.14   *REG 14*   *(4400) Lieferanten* / *AS Express Post*                                                                       10,00          **REG 14**     Nein
+                       **Saldo 8323.78 (40 Bewegungen)**                                                              **12 851,87**   **4 528,09**
 ========== ========== ============================================================================================== =============== ============== ============== ===========
 <BLANKLINE>
 
