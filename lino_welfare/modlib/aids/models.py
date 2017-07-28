@@ -48,7 +48,7 @@ from .roles import AidsUser, AidsStaff
 
 from .mixins import Confirmable, Confirmation
 from .choicelists import ConfirmationTypes, AidRegimes, ConfirmationStates
-from lino.mixins import ObservedPeriod
+from lino.mixins import ObservedDateRange
 
 
 class Category(mixins.BabelNamed):

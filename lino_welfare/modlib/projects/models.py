@@ -45,7 +45,7 @@ class ProjectTypes(dd.Table):
     required_roles = dd.login_required(SiteStaff)
 
 
-class Project(mixins.DatePeriod, Certifiable):
+class Project(mixins.DateRange, Certifiable):
 
     class Meta:
         verbose_name = _("Client Project")

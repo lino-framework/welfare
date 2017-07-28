@@ -141,14 +141,14 @@ This invoice is registered, and ledger movements have been created:
 ========== ============================ =================== =================================== =========== =========== ============ ===========
  Seq.-Nr.   Klient                       Zahlungsempfänger   Haushaltsartikel                    Debit       Kredit      Match        Beglichen
 ---------- ---------------------------- ------------------- ----------------------------------- ----------- ----------- ------------ -----------
- 1          COLLARD Charlotte (118)                          (832/330/01) Allgemeine Beihilfen   12,50                                Ja
- 2          AUSDEMWALD Alfons (116)                          (832/330/01) Allgemeine Beihilfen   10,00                                Ja
- 3          EVERS Eberhart (127)                             (832/330/01) Allgemeine Beihilfen   29,95                                Ja
+ 1          EVERS Eberhart (127)                             (832/330/01) Allgemeine Beihilfen   29,95                                Ja
+ 2          EMONTS Daniel (128)                              (832/330/01) Allgemeine Beihilfen   5,33                                 Ja
+ 3          COLLARD Charlotte (118)                          (832/330/01) Allgemeine Beihilfen   12,50                                Ja
  4          DOBBELSTEIN Dorothée (124)                       (832/330/01) Allgemeine Beihilfen   25,00                                Ja
- 5          EMONTS Daniel (128)                              (832/330/01) Allgemeine Beihilfen   5,33                                 Ja
+ 5          AUSDEMWALD Alfons (116)                          (832/330/01) Allgemeine Beihilfen   10,00                                Ja
  6          EMONTS Daniel (128)          Ethias s.a.         (4400) Lieferanten                              5,33        **SREG 3**   Nein
- 7          DOBBELSTEIN Dorothée (124)   Ethias s.a.         (4400) Lieferanten                              25,00       **SREG 3**   Nein
- 8          AUSDEMWALD Alfons (116)      Ethias s.a.         (4400) Lieferanten                              10,00       **SREG 3**   Nein
+ 7          AUSDEMWALD Alfons (116)      Ethias s.a.         (4400) Lieferanten                              10,00       **SREG 3**   Nein
+ 8          DOBBELSTEIN Dorothée (124)   Ethias s.a.         (4400) Lieferanten                              25,00       **SREG 3**   Nein
  9          COLLARD Charlotte (118)      Ethias s.a.         (4400) Lieferanten                              12,50       **SREG 3**   Nein
  10         EVERS Eberhart (127)         Ethias s.a.         (4400) Lieferanten                              29,95       **SREG 3**   Nein
  **55**                                                      **Saldo 0.00 (10 Bewegungen)**      **82,78**   **82,78**
@@ -216,8 +216,8 @@ registered), but the payment has not yet been executed.
 ---------- ---------- -------------------------------------------------------------------- ----------- ------------ ------------ -----------
  21.04.14   *ZKBC 4*   *(4450) Auszuführende Ausgabeanweisungen* / *EMONTS Daniel (128)*    5,33                     **REG 12**   Ja
  17.04.14   *SREG 3*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                                     5,33         **SREG 3**   Nein
- 17.04.14   *SREG 3*   *(4400) Lieferanten* / *DOBBELSTEIN Dorothée (124)*                              25,00        **SREG 3**   Nein
  17.04.14   *SREG 3*   *(4400) Lieferanten* / *AUSDEMWALD Alfons (116)*                                 10,00        **SREG 3**   Nein
+ 17.04.14   *SREG 3*   *(4400) Lieferanten* / *DOBBELSTEIN Dorothée (124)*                              25,00        **SREG 3**   Nein
  17.04.14   *SREG 3*   *(4400) Lieferanten* / *COLLARD Charlotte (118)*                                 12,50        **SREG 3**   Nein
  17.04.14   *SREG 3*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                                    29,95        **SREG 3**   Nein
  21.03.14   *ZKBC 3*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                         5,33                     **REG 12**   Nein

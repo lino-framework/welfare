@@ -439,7 +439,6 @@ The period of a confirmation
 ============================
 
 >>> from lino.utils.format_date import fdl
->>> from lino.mixins.periods import DatePeriod
 >>> print(dd.fdl(dd.today()))
 22. Mai 2014
 

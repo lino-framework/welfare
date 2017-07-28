@@ -739,9 +739,9 @@ options.
 - countries.Places.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - courses.Activities.print_presence_sheet : Fiche de présences
-  (main) [visible for all]: **Période du** (start_date), **au ** (end_date), **Show remarks** (show_remarks), **Show states** (show_states)
+  (main) [visible for all]: **Date du** (start_date), **au ** (end_date), **Show remarks** (show_remarks), **Show states** (show_states)
 - courses.Activities.print_presence_sheet_html : Fiche de présences (HTML)
-  (main) [visible for all]: **Période du** (start_date), **au ** (end_date), **Show remarks** (show_remarks), **Show states** (show_states)
+  (main) [visible for all]: **Date du** (start_date), **au ** (end_date), **Show remarks** (show_remarks), **Show states** (show_states)
 - newcomers.AvailableCoachesByClient.assign_coach : Attribuer
   (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Ne pas avertir les autres** (notify_silent)
 - pcsw.Clients.create_visit : Enregistrer consultation

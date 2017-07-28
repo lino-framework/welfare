@@ -298,10 +298,10 @@ The state of a voucher
 .. technical:
 
     The `VoucherStates` choicelist is used by two fields: one database
-    field and one parameter field.
+    field and 19 parameter fields.
 
     >>> len(ledger.VoucherStates._fields)
-    2
+    20
     >>> for f in ledger.VoucherStates._fields:
     ...     model = getattr(f, 'model', None)
     ...     if model:
@@ -328,11 +328,11 @@ Users can consult the movements of a given general account.
  Valuta     Beleg      Beschreibung                                          Debit        Kredit   Match   Beglichen
 ---------- ---------- ----------------------------------------------------- ------------ -------- ------- -----------
  22.05.14   *REG 1*    *AS Express Post* / *AUSDEMWALD Alfons (116)*         10,00                         Ja
+ 16.02.14   *SREG 7*   *Leffin Electronics* / *EVERS Eberhart (127)*         12,50                         Ja
+ 16.02.14   *SREG 7*   *Leffin Electronics* / *EMONTS Daniel (128)*          25,00                         Ja
  16.02.14   *SREG 7*   *Leffin Electronics* / *COLLARD Charlotte (118)*      120,00                        Ja
  16.02.14   *SREG 7*   *Leffin Electronics* / *DOBBELSTEIN Dorothée (124)*   5,33                          Ja
  16.02.14   *SREG 7*   *Leffin Electronics* / *AUSDEMWALD Alfons (116)*      29,95                         Ja
- 16.02.14   *SREG 7*   *Leffin Electronics* / *EVERS Eberhart (127)*         12,50                         Ja
- 16.02.14   *SREG 7*   *Leffin Electronics* / *EMONTS Daniel (128)*          25,00                         Ja
                        **Saldo 202.78 (6 Bewegungen)**                       **202,78**
 ========== ========== ===================================================== ============ ======== ======= ===========
 <BLANKLINE>

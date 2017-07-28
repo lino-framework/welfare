@@ -552,7 +552,7 @@ class ContractBaseTable(dd.Table):
         checked.
 
     """
-    parameters = mixins.ObservedPeriod(
+    parameters = mixins.ObservedDateRange(
         user=dd.ForeignKey(settings.SITE.user_model, blank=True),
 
         observed_event=ContractEvents.field(
