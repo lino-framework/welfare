@@ -51,7 +51,7 @@ name to read the documentation):
     art61.Subsidizations : Subsidizations
     beid.BeIdCardTypes : eID-Kartenarten
     beid.CivilStates : Zivilstände
-    beid.ResidenceTypes : Residence types
+    beid.ResidenceTypes : Einwohnerregister
     cal.AccessClasses : AccessClasses
     cal.DurationUnits : DurationUnits
     cal.EntryStates : Termin-Zustände

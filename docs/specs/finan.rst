@@ -45,33 +45,33 @@ Disbursment orders
 The AAW journal contains the following statements:
 
 >>> rt.show(AAW.voucher_type.table_class, AAW)
-========= ============ ================================ =============== ================== ================= =================
- Nr.       Belegdatum   Interne Referenz                 Total           Ausführungsdatum   Buchungsperiode   Aktionen
---------- ------------ -------------------------------- --------------- ------------------ ----------------- -----------------
- 22        13.04.14                                      -553,39                            2014-05           **Registriert**
- 21        13.03.14                                      -585,84                            2014-05           **Registriert**
- 20        13.02.14                                      -483,01                            2014-05           **Registriert**
- 19        13.01.14                                      -350,61                            2014-05           **Registriert**
- 18        23.03.14     Beihilfe für Ausländer           3 628,62                           2014-03           **Registriert**
- 17        23.03.14     Sozialhilfe                      3 460,17                           2014-03           **Registriert**
- 16        23.03.14     Eingliederungseinkommen          3 611,34                           2014-03           **Registriert**
- 15        23.03.14     Fonds Gas und Elektrizität       3 356,17                           2014-03           **Registriert**
- 14        23.03.14     Heizkosten- u. Energiebeihilfe   3 628,62                           2014-03           **Registriert**
- 13        23.03.14     Allgemeine Beihilfen             3 460,17                           2014-03           **Registriert**
- 12        22.04.14     Beihilfe für Ausländer           3 611,34                           2014-04           **Registriert**
- 11        22.04.14     Sozialhilfe                      3 356,17                           2014-04           **Registriert**
- 10        22.04.14     Eingliederungseinkommen          3 628,62                           2014-04           **Registriert**
- 9         22.04.14     Fonds Gas und Elektrizität       3 460,17                           2014-04           **Registriert**
- 8         22.04.14     Heizkosten- u. Energiebeihilfe   3 611,34                           2014-04           **Registriert**
- 7         22.04.14     Allgemeine Beihilfen             3 356,17                           2014-04           **Registriert**
- 6         22.05.14     Beihilfe für Ausländer           3 628,62                           2014-05           **Registriert**
- 5         22.05.14     Sozialhilfe                      3 460,17                           2014-05           **Registriert**
- 4         22.05.14     Eingliederungseinkommen          3 611,34                           2014-05           **Registriert**
- 3         22.05.14     Fonds Gas und Elektrizität       3 356,17                           2014-05           **Registriert**
- 2         22.05.14     Heizkosten- u. Energiebeihilfe   3 628,62                           2014-05           **Registriert**
- 1         22.05.14     Allgemeine Beihilfen             3 460,17                           2014-05           **Registriert**
- **253**                                                 **61 341,14**
-========= ============ ================================ =============== ================== ================= =================
+========= =============== ================================ =============== ================== ================= =================
+ Nr.       Buchungsdatum   Interne Referenz                 Total           Ausführungsdatum   Buchungsperiode   Aktionen
+--------- --------------- -------------------------------- --------------- ------------------ ----------------- -----------------
+ 22        13.04.14                                         -553,39                            2014-04           **Registriert**
+ 21        13.03.14                                         -585,84                            2014-03           **Registriert**
+ 20        13.02.14                                         -483,01                            2014-02           **Registriert**
+ 19        13.01.14                                         -350,61                            2014-01           **Registriert**
+ 18        23.03.14        Beihilfe für Ausländer           3 628,62                           2014-03           **Registriert**
+ 17        23.03.14        Sozialhilfe                      3 460,17                           2014-03           **Registriert**
+ 16        23.03.14        Eingliederungseinkommen          3 611,34                           2014-03           **Registriert**
+ 15        23.03.14        Fonds Gas und Elektrizität       3 356,17                           2014-03           **Registriert**
+ 14        23.03.14        Heizkosten- u. Energiebeihilfe   3 628,62                           2014-03           **Registriert**
+ 13        23.03.14        Allgemeine Beihilfen             3 460,17                           2014-03           **Registriert**
+ 12        22.04.14        Beihilfe für Ausländer           3 611,34                           2014-04           **Registriert**
+ 11        22.04.14        Sozialhilfe                      3 356,17                           2014-04           **Registriert**
+ 10        22.04.14        Eingliederungseinkommen          3 628,62                           2014-04           **Registriert**
+ 9         22.04.14        Fonds Gas und Elektrizität       3 460,17                           2014-04           **Registriert**
+ 8         22.04.14        Heizkosten- u. Energiebeihilfe   3 611,34                           2014-04           **Registriert**
+ 7         22.04.14        Allgemeine Beihilfen             3 356,17                           2014-04           **Registriert**
+ 6         22.05.14        Beihilfe für Ausländer           3 628,62                           2014-05           **Registriert**
+ 5         22.05.14        Sozialhilfe                      3 460,17                           2014-05           **Registriert**
+ 4         22.05.14        Eingliederungseinkommen          3 611,34                           2014-05           **Registriert**
+ 3         22.05.14        Fonds Gas und Elektrizität       3 356,17                           2014-05           **Registriert**
+ 2         22.05.14        Heizkosten- u. Energiebeihilfe   3 628,62                           2014-05           **Registriert**
+ 1         22.05.14        Allgemeine Beihilfen             3 460,17                           2014-05           **Registriert**
+ **253**                                                    **61 341,14**
+========= =============== ================================ =============== ================== ================= =================
 <BLANKLINE>
 
 
@@ -88,55 +88,38 @@ generated)
 The ZKBC journal contains the following payment orders:
 
 >>> rt.show(ZKBC.voucher_type.table_class, ZKBC)  #doctest: -SKIP
-======= ============ ================== =============== ================== ================= =================
- Nr.     Belegdatum   Interne Referenz   Total           Ausführungsdatum   Buchungsperiode   Aktionen
-------- ------------ ------------------ --------------- ------------------ ----------------- -----------------
- 1       21.04.14                        21 145,09                          2014-05           **Registriert**
- **1**                                   **21 145,09**
-======= ============ ================== =============== ================== ================= =================
+======== =============== ================== =============== ================== ================= =================
+ Nr.      Buchungsdatum   Interne Referenz   Total           Ausführungsdatum   Buchungsperiode   Aktionen
+-------- --------------- ------------------ --------------- ------------------ ----------------- -----------------
+ 4        21.04.14                           20 521,42                          2014-04           **Registriert**
+ 3        21.03.14                           -758,29                            2014-03           **Registriert**
+ 2        21.02.14                           -620,84                            2014-02           **Registriert**
+ 1        21.01.14                           -350,61                            2014-01           **Registriert**
+ **10**                                      **18 791,68**
+======== =============== ================== =============== ================== ================= =================
 <BLANKLINE>
+
+TODO: Note that it is not normal to have negative totals in above
+list.  See :ticket:`1985`.
 
 
 >>> obj = ZKBC.voucher_type.model.objects.get(number=1, journal=ZKBC)  #doctest: -SKIP
 >>> rt.login('wilfried').show(finan.ItemsByPaymentOrder, obj)  #doctest: -SKIP
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-========= ============================ ====================== ========== ==================================== ========== =============== ==================
- Nr.       Klient                       Zahlungsempfänger      Aktionen   Bankkonto                            Match      Betrag          Externe Referenz
---------- ---------------------------- ---------------------- ---------- ------------------------------------ ---------- --------------- ------------------
- 1         AUSDEMWALD Alfons (116)      Ausdemwald Alfons                 BG45 LMDF 6875 2666 8474 93          AAW 13:1   648,91
- 2         COLLARD Charlotte (118)      Collard Charlotte                 CY94 5951 8993 3551 8874 2318 3914   AAW 13:2   817,36
- 3         DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée              DK09 0573 4385 9143 85               AAW 13:3   544,91
- 4         EVERS Eberhart (127)         Evers Eberhart                    DO34 8944 3429 6388 1766 4829 8583   AAW 13:4   800,08
- 5         EMONTS Daniel (128)          Emonts Daniel                     DO87 9470 5313 8589 9175 5390 3987   AAW 13:5   648,91
- 6         AUSDEMWALD Alfons (116)      Ausdemwald Alfons                 BG45 LMDF 6875 2666 8474 93          AAW 14:1   817,36
- 7         COLLARD Charlotte (118)      Collard Charlotte                 CY94 5951 8993 3551 8874 2318 3914   AAW 14:2   544,91
- 8         DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée              DK09 0573 4385 9143 85               AAW 14:3   800,08
- 9         EVERS Eberhart (127)         Evers Eberhart                    DO34 8944 3429 6388 1766 4829 8583   AAW 14:4   648,91
- 10        EMONTS Daniel (128)          Emonts Daniel                     DO87 9470 5313 8589 9175 5390 3987   AAW 14:5   817,36
- 11        AUSDEMWALD Alfons (116)      Ausdemwald Alfons                 BG45 LMDF 6875 2666 8474 93          AAW 15:1   544,91
- 12        COLLARD Charlotte (118)      Collard Charlotte                 CY94 5951 8993 3551 8874 2318 3914   AAW 15:2   800,08
- 13        DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée              DK09 0573 4385 9143 85               AAW 15:3   648,91
- 14        EVERS Eberhart (127)         Evers Eberhart                    DO34 8944 3429 6388 1766 4829 8583   AAW 15:4   817,36
- 15        EMONTS Daniel (128)          Emonts Daniel                     DO87 9470 5313 8589 9175 5390 3987   AAW 15:5   544,91
- 16        AUSDEMWALD Alfons (116)      Ausdemwald Alfons                 BG45 LMDF 6875 2666 8474 93          AAW 16:1   800,08
- 17        COLLARD Charlotte (118)      Collard Charlotte                 CY94 5951 8993 3551 8874 2318 3914   AAW 16:2   648,91
- 18        DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée              DK09 0573 4385 9143 85               AAW 16:3   817,36
- 19        EVERS Eberhart (127)         Evers Eberhart                    DO34 8944 3429 6388 1766 4829 8583   AAW 16:4   544,91
- 20        EMONTS Daniel (128)          Emonts Daniel                     DO87 9470 5313 8589 9175 5390 3987   AAW 16:5   800,08
- 21        AUSDEMWALD Alfons (116)      Ausdemwald Alfons                 BG45 LMDF 6875 2666 8474 93          AAW 17:1   648,91
- 22        COLLARD Charlotte (118)      Collard Charlotte                 CY94 5951 8993 3551 8874 2318 3914   AAW 17:2   817,36
- 23        DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée              DK09 0573 4385 9143 85               AAW 17:3   544,91
- 24        EVERS Eberhart (127)         Evers Eberhart                    DO34 8944 3429 6388 1766 4829 8583   AAW 17:4   800,08
- 25        EMONTS Daniel (128)          Emonts Daniel                     DO87 9470 5313 8589 9175 5390 3987   AAW 17:5   648,91
- 26        AUSDEMWALD Alfons (116)      Ausdemwald Alfons                 BG45 LMDF 6875 2666 8474 93          AAW 18:1   817,36
- 27        COLLARD Charlotte (118)      Collard Charlotte                 CY94 5951 8993 3551 8874 2318 3914   AAW 18:2   544,91
- 28        DOBBELSTEIN Dorothée (124)   Dobbelstein Dorothée              DK09 0573 4385 9143 85               AAW 18:3   800,08
- 29        EVERS Eberhart (127)         Evers Eberhart                    DO34 8944 3429 6388 1766 4829 8583   AAW 18:4   648,91
- 30        EMONTS Daniel (128)          Emonts Daniel                     DO87 9470 5313 8589 9175 5390 3987   AAW 18:5   817,36
- **465**                                                                                                                  **21 145,09**
-========= ============================ ====================== ========== ==================================== ========== =============== ==================
+======== ============================ =============================== ========== ===================== ========= ============ ==================
+ Nr.      Klient                       Zahlungsempfänger               Aktionen   Bankkonto             Match     Betrag       Externe Referenz
+-------- ---------------------------- ------------------------------- ---------- --------------------- --------- ------------ ------------------
+ 1        EVERS Eberhart (127)         Leffin Electronics                         BE38 2480 1735 7572   REG 20    12,50
+ 2        EMONTS Daniel (128)          Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   120,00
+ 3        AUSDEMWALD Alfons (116)      Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   15,33
+ 4        DOBBELSTEIN Dorothée (124)   Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   25,00
+ 5        COLLARD Charlotte (118)      Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   22,50
+ 6        EVERS Eberhart (127)         Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   29,95
+ 7        EVERS Eberhart (127)         Ethias s.a.                                BE79 8270 8180 3833   REG 19    5,33
+ 8        COLLARD Charlotte (118)      Electrabel Customer Solutions              BE46 0003 2544 8336   REG 18    120,00
+ **36**                                                                                                           **350,61**
+======== ============================ =============================== ========== ===================== ========= ============ ==================
 <BLANKLINE>
-
 
 
 >>> kw = dict()
@@ -144,5 +127,5 @@ The ZKBC journal contains the following payment orders:
 >>> obj = ZKBC.voucher_type.model.objects.get(number=1, journal=ZKBC)  #doctest: -SKIP
 >>> demo_get(
 ...    'wilfried', 'choices/finan/ItemsByPaymentOrder/match',
-...    fields, 140, mk=obj.pk, **kw)  #doctest: -SKIP
+...    fields, 94, mk=obj.pk, **kw)  #doctest: -SKIP
 

@@ -104,7 +104,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  contacts.RoleType              contacts.RoleTypes              6         5
  contenttypes.ContentType       gfks.ContentTypes               3         135
  countries.Country              countries.Countries             9         270
- countries.Place                countries.Places                10        78
+ countries.Place                countries.Places                11        78
  courses.Course                 courses.Activities              30        7
  courses.Enrolment              courses.Enrolments              15        100
  courses.Line                   courses.Lines                   24        7
@@ -313,7 +313,7 @@ Each window layout defines a given set of fields.
 - contacts.Persons.insert : first_name, last_name, gender, email
 - countries.Countries.detail : isocode, name, name_nl, name_de, name_en, short_code, inscode, actual_country
 - countries.Countries.insert : isocode, inscode, name, name_nl, name_de, name_en
-- countries.Places.insert : name, name_nl, name_de, name_en, country, type, parent, zip_code, id
+- countries.Places.insert : name, name_nl, name_de, name_en, country, inscode, zip_code, parent, type, id
 - countries.Places.merge_row : merge_to, reason
 - courses.Activities.detail : line, teacher, start_date, end_date, start_time, end_time, room, workflow_buttons, id, user, name, description, description_nl, description_de, description_en, max_events, max_date, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, enrolments_until, max_places, confirmed, free_places, print_actions, EnrolmentsByCourse
 - courses.Activities.insert : line, teacher, name, start_date
@@ -739,9 +739,9 @@ options.
 - countries.Places.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - courses.Activities.print_presence_sheet : Fiche de présences
-  (main) [visible for all]: **Période du** (start_date), **au ** (end_date), **Show remarks** (show_remarks), **Show states** (show_states)
+  (main) [visible for all]: **Date du** (start_date), **au ** (end_date), **Show remarks** (show_remarks), **Show states** (show_states)
 - courses.Activities.print_presence_sheet_html : Fiche de présences (HTML)
-  (main) [visible for all]: **Période du** (start_date), **au ** (end_date), **Show remarks** (show_remarks), **Show states** (show_states)
+  (main) [visible for all]: **Date du** (start_date), **au ** (end_date), **Show remarks** (show_remarks), **Show states** (show_states)
 - newcomers.AvailableCoachesByClient.assign_coach : Attribuer
   (main) [visible for all]: **Résumé** (notify_subject), **Description** (notify_body), **Ne pas avertir les autres** (notify_silent)
 - pcsw.Clients.create_visit : Enregistrer consultation

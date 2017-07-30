@@ -23,7 +23,7 @@ Database structure
 >>> print(analyzer.show_complexity_factors())
 - 64 plugins
 - 140 models
-- 537 views
+- 538 views
 - 15 user types
 - 13 dialog actions
 <BLANKLINE>
@@ -77,7 +77,7 @@ Database structure
 - contacts.RoleType : id, name, name_fr, name_en, use_in_contracts
 - contenttypes.ContentType : id, app_label, model
 - countries.Country : name, isocode, short_code, iso3, inscode, actual_country, name_fr, name_en
-- countries.Place : id, parent, name, country, zip_code, type, inscode, name_fr, name_en
+- countries.Place : id, parent, name, country, zip_code, type, show_type, inscode, name_fr, name_en
 - cv.Duration : id, name, name_fr, name_en
 - cv.EducationLevel : id, seqno, name, is_study, is_training, name_fr, name_en
 - cv.Experience : id, start_date, end_date, country, city, zip_code, sector, function, person, duration_text, company, title, status, duration, regime, is_training, remarks, termination_reason
@@ -99,11 +99,11 @@ Database structure
 - esf.ClientSummary : id, printed_by, year, month, esf10, esf20, esf21, esf30, esf40, esf41, esf42, esf43, esf44, esf50, esf60, esf70, master, education_level, children_at_charge, certified_handicap, other_difficulty, result, remark
 - excerpts.Excerpt : id, project, build_time, build_method, company, contact_person, contact_role, user, owner_type, owner_id, excerpt_type, language
 - excerpts.ExcerptType : id, name, build_method, template, attach_to_email, email_template, certifying, remark, body_template, content_type, primary, backward_compat, print_recipient, print_directly, shortcut, name_fr, name_en
-- finan.BankStatement : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, last_item_date, balance1, balance2
+- finan.BankStatement : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, last_item_date, balance1, balance2
 - finan.BankStatementItem : id, seqno, project, match, amount, dc, remark, account, partner, date, voucher
-- finan.JournalEntry : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, printed_by, project, item_account, item_remark, last_item_date
+- finan.JournalEntry : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, state, voucher_ptr, printed_by, project, item_account, item_remark, last_item_date
 - finan.JournalEntryItem : id, seqno, project, match, amount, dc, remark, account, partner, date, voucher
-- finan.PaymentOrder : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, total, execution_date
+- finan.PaymentOrder : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, total, execution_date
 - finan.PaymentOrderItem : id, seqno, project, match, amount, dc, remark, account, partner, bank_account, voucher
 - gfks.HelpText : id, content_type, field, help_text
 - households.Household : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, type
@@ -129,7 +129,7 @@ Database structure
 - ledger.MatchRule : id, account, journal
 - ledger.Movement : id, project, voucher, partner, seqno, account, amount, dc, match, cleared, value_date
 - ledger.PaymentTerm : id, ref, name, days, months, end_of_month, printed_text, printed_text_fr, printed_text_en, name_fr, name_en
-- ledger.Voucher : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state
+- ledger.Voucher : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, state
 - newcomers.Broker : id, name
 - newcomers.Competence : id, seqno, user, faculty, weight
 - newcomers.Faculty : id, name, weight, name_fr, name_en
@@ -163,7 +163,7 @@ Database structure
 - uploads.UploadType : id, name, upload_area, max_number, wanted, shortcut, warn_expiry_unit, warn_expiry_value, name_fr, name_en
 - users.Authority : id, user, authorized
 - users.User : id, email, language, modified, created, password, last_login, username, user_type, initials, first_name, last_name, remarks, newcomer_consultations, newcomer_appointments, notify_myself, mail_mode, access_class, event_type, calendar, coaching_type, coaching_supervisor, newcomer_quota, partner
-- vatless.AccountInvoice : id, user, journal, voucher_date, entry_date, accounting_period, number, narration, state, voucher_ptr, project, partner, payment_term, match, bank_account, your_ref, due_date, amount
+- vatless.AccountInvoice : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, state, voucher_ptr, project, partner, payment_term, match, bank_account, your_ref, due_date, amount
 - vatless.InvoiceItem : id, seqno, project, account, voucher, title, amount
 - xcourses.Course : id, offer, title, start_date, remark
 - xcourses.CourseContent : id, name

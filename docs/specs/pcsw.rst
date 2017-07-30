@@ -52,9 +52,9 @@ ResidenceType
 ======= ====== ========================
  value   name   text
 ------- ------ ------------------------
- 1              Registry of citizens
- 2              Registry of foreigners
- 3              Waiting for registry
+ 1              Register of citizens
+ 2              Register of foreigners
+ 3              Waiting register
 ======= ====== ========================
 <BLANKLINE>
 

@@ -298,10 +298,10 @@ The state of a voucher
 .. technical:
 
     The `VoucherStates` choicelist is used by two fields: one database
-    field and one parameter field.
+    field and 19 parameter fields.
 
     >>> len(ledger.VoucherStates._fields)
-    2
+    20
     >>> for f in ledger.VoucherStates._fields:
     ...     model = getattr(f, 'model', None)
     ...     if model:
@@ -328,11 +328,11 @@ Users can consult the movements of a given general account.
  Valuta     Beleg      Beschreibung                                          Debit        Kredit   Match   Beglichen
 ---------- ---------- ----------------------------------------------------- ------------ -------- ------- -----------
  22.05.14   *REG 1*    *AS Express Post* / *AUSDEMWALD Alfons (116)*         10,00                         Ja
+ 16.02.14   *SREG 7*   *Leffin Electronics* / *EVERS Eberhart (127)*         12,50                         Ja
+ 16.02.14   *SREG 7*   *Leffin Electronics* / *EMONTS Daniel (128)*          25,00                         Ja
  16.02.14   *SREG 7*   *Leffin Electronics* / *COLLARD Charlotte (118)*      120,00                        Ja
  16.02.14   *SREG 7*   *Leffin Electronics* / *DOBBELSTEIN Dorothée (124)*   5,33                          Ja
  16.02.14   *SREG 7*   *Leffin Electronics* / *AUSDEMWALD Alfons (116)*      29,95                         Ja
- 16.02.14   *SREG 7*   *Leffin Electronics* / *EVERS Eberhart (127)*         12,50                         Ja
- 16.02.14   *SREG 7*   *Leffin Electronics* / *EMONTS Daniel (128)*          25,00                         Ja
                        **Saldo 202.78 (6 Bewegungen)**                       **202,78**
 ========== ========== ===================================================== ============ ======== ======= ===========
 <BLANKLINE>
@@ -351,36 +351,33 @@ not complete (it is just a *Nebenbuchhaltung*), there are no debtors
 Schuldner
 ---------
 <BLANKLINE>
-========= ============== ====================== ========= =============== =======================================================================================================================================================================================================================================
- Alter     Zahlungsziel   Partner                ID        Saldo           Belege
---------- -------------- ---------------------- --------- --------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 60        23.03.14       Ausdemwald Alfons      116       8 433,78        AAW 13:1, AAW 14:1, AAW 15:1, AAW 16:1, AAW 17:1, AAW 18:1, AAW 7:1, AAW 8:1, AAW 9:1, AAW 10:1, AAW 11:1, AAW 12:1, AAW 1:1, AAW 2:1, AAW 3:1, AAW 4:1, AAW 5:1, AAW 6:1, AAW 13:1, AAW 14:1, AAW 15:1, AAW 16:1, AAW 17:1, AAW 18:1
- 60        23.03.14       Collard Charlotte      118       8 433,78        AAW 13:2, AAW 14:2, AAW 15:2, AAW 16:2, AAW 17:2, AAW 18:2, AAW 7:2, AAW 8:2, AAW 9:2, AAW 10:2, AAW 11:2, AAW 12:2, AAW 1:2, AAW 2:2, AAW 3:2, AAW 4:2, AAW 5:2, AAW 6:2, AAW 13:2, AAW 14:2, AAW 15:2, AAW 16:2, AAW 17:2, AAW 18:2
- 60        23.03.14       Dobbelstein Dorothée   124       8 433,78        AAW 13:3, AAW 14:3, AAW 15:3, AAW 16:3, AAW 17:3, AAW 18:3, AAW 7:3, AAW 8:3, AAW 9:3, AAW 10:3, AAW 11:3, AAW 12:3, AAW 1:3, AAW 2:3, AAW 3:3, AAW 4:3, AAW 5:3, AAW 6:3, AAW 13:3, AAW 14:3, AAW 15:3, AAW 16:3, AAW 17:3, AAW 18:3
- 60        23.03.14       Emonts Daniel          128       8 433,78        AAW 13:5, AAW 14:5, AAW 15:5, AAW 16:5, AAW 17:5, AAW 18:5, AAW 7:5, AAW 8:5, AAW 9:5, AAW 10:5, AAW 11:5, AAW 12:5, AAW 1:5, AAW 2:5, AAW 3:5, AAW 4:5, AAW 5:5, AAW 6:5, AAW 13:5, AAW 14:5, AAW 15:5, AAW 16:5, AAW 17:5, AAW 18:5
- 60        23.03.14       Evers Eberhart         127       8 433,78        AAW 13:4, AAW 14:4, AAW 15:4, AAW 16:4, AAW 17:4, AAW 18:4, AAW 7:4, AAW 8:4, AAW 9:4, AAW 10:4, AAW 11:4, AAW 12:4, AAW 1:4, AAW 2:4, AAW 3:4, AAW 4:4, AAW 5:4, AAW 6:4, AAW 13:4, AAW 14:4, AAW 15:4, AAW 16:4, AAW 17:4, AAW 18:4
- **300**                                         **613**   **42 168,90**
-========= ============== ====================== ========= =============== =======================================================================================================================================================================================================================================
+========= ============== =========================== ========== =============== =======================================================================================================================================================================================================================================
+ Alter     Zahlungsziel   Partner                     ID         Saldo           Belege
+--------- -------------- --------------------------- ---------- --------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 129       13.01.14       Leffin Electronics          229        12,50           REG 20, REG 20, SREG 7, SREG 7, SREG 7, SREG 7, SREG 7, SREG 7, SREG 7, SREG 7, SREG 7, SREG 7, REG 7, REG 7
+ 129       13.01.14       Niederau Eupen AG           228        10,00           SREG 10, SREG 10, SREG 10, SREG 10, SREG 10, SREG 10, SREG 10, SREG 10, SREG 10, SREG 10, REG 13, REG 13, REG 6, REG 6
+ 98        13.02.14       IIZI kindlustusmaakler AS   223        17,45           REG 16, REG 16, SREG 5, SREG 5, SREG 5, SREG 5, SREG 5, SREG 5, SREG 5, SREG 5, SREG 5, SREG 5, REG 3
+ 60        23.03.14       Ausdemwald Alfons           116        8 433,78        AAW 13:1, AAW 14:1, AAW 15:1, AAW 16:1, AAW 17:1, AAW 18:1, AAW 13:1, AAW 14:1, AAW 15:1, AAW 16:1, AAW 17:1, AAW 18:1, AAW 7:1, AAW 8:1, AAW 9:1, AAW 10:1, AAW 11:1, AAW 12:1, AAW 1:1, AAW 2:1, AAW 3:1, AAW 4:1, AAW 5:1, AAW 6:1
+ 60        23.03.14       Collard Charlotte           118        8 433,78        AAW 13:2, AAW 14:2, AAW 15:2, AAW 16:2, AAW 17:2, AAW 18:2, AAW 13:2, AAW 14:2, AAW 15:2, AAW 16:2, AAW 17:2, AAW 18:2, AAW 7:2, AAW 8:2, AAW 9:2, AAW 10:2, AAW 11:2, AAW 12:2, AAW 1:2, AAW 2:2, AAW 3:2, AAW 4:2, AAW 5:2, AAW 6:2
+ 60        23.03.14       Dobbelstein Dorothée        124        8 433,78        AAW 13:3, AAW 14:3, AAW 15:3, AAW 16:3, AAW 17:3, AAW 18:3, AAW 13:3, AAW 14:3, AAW 15:3, AAW 16:3, AAW 17:3, AAW 18:3, AAW 7:3, AAW 8:3, AAW 9:3, AAW 10:3, AAW 11:3, AAW 12:3, AAW 1:3, AAW 2:3, AAW 3:3, AAW 4:3, AAW 5:3, AAW 6:3
+ 60        23.03.14       Emonts Daniel               128        8 433,78        AAW 13:5, AAW 14:5, AAW 15:5, AAW 16:5, AAW 17:5, AAW 18:5, AAW 13:5, AAW 14:5, AAW 15:5, AAW 16:5, AAW 17:5, AAW 18:5, AAW 7:5, AAW 8:5, AAW 9:5, AAW 10:5, AAW 11:5, AAW 12:5, AAW 1:5, AAW 2:5, AAW 3:5, AAW 4:5, AAW 5:5, AAW 6:5
+ 60        23.03.14       Evers Eberhart              127        8 433,78        AAW 13:4, AAW 14:4, AAW 15:4, AAW 16:4, AAW 17:4, AAW 18:4, AAW 13:4, AAW 14:4, AAW 15:4, AAW 16:4, AAW 17:4, AAW 18:4, AAW 7:4, AAW 8:4, AAW 9:4, AAW 10:4, AAW 11:4, AAW 12:4, AAW 1:4, AAW 2:4, AAW 3:4, AAW 4:4, AAW 5:4, AAW 6:4
+ **656**                                              **1293**   **42 208,85**
+========= ============== =========================== ========== =============== =======================================================================================================================================================================================================================================
 <BLANKLINE>
 ---------
 Gläubiger
 ---------
 <BLANKLINE>
-========== ============== =============================== ========== ============== ========================================================================================================================
- Alter      Zahlungsziel   Partner                         ID         Saldo          Belege
----------- -------------- ------------------------------- ---------- -------------- ------------------------------------------------------------------------------------------------------------------------
- 129        13.01.14       Electrabel Customer Solutions   226        562,78         REG 18, SREG 6, SREG 6, SREG 6, SREG 6, SREG 6, REG 5, REG 18, SREG 6, SREG 6, SREG 6, SREG 6, SREG 6
- 129        13.01.14       Ethias s.a.                     227        93,44          REG 19, REG 12, SREG 3, SREG 3, SREG 3, SREG 3, SREG 3, REG 19, REG 12
- 129        13.01.14       Leffin Electronics              229        210,61         REG 20, SREG 7, SREG 7, SREG 7, SREG 7, SREG 7, REG 7, REG 20, SREG 7, SREG 7, SREG 7, SREG 7, SREG 7, REG 7
- 129        13.01.14       Niederau Eupen AG               228        342,78         SREG 10, SREG 10, SREG 10, SREG 10, SREG 10, REG 13, REG 6, SREG 10, SREG 10, SREG 10, SREG 10, SREG 10, REG 13, REG 6
- 98         13.02.14       AS Express Post                 220        232,78         REG 14, SREG 4, SREG 4, SREG 4, SREG 4, SREG 4, REG 1, REG 14, SREG 4, SREG 4, SREG 4, SREG 4, SREG 4
- 98         13.02.14       AS Matsalu Veevärk              221        217,78         REG 15, REG 8, SREG 1, SREG 1, SREG 1, SREG 1, SREG 1, REG 15, REG 8
- 98         13.02.14       Eesti Energia AS                222        262,78         SREG 8, SREG 8, SREG 8, SREG 8, SREG 8, REG 9, REG 2, SREG 8, SREG 8, SREG 8, SREG 8, SREG 8, REG 9
- 98         13.02.14       IIZI kindlustusmaakler AS       223        220,23         REG 16, SREG 5, SREG 5, SREG 5, SREG 5, SREG 5, REG 3, REG 16, SREG 5, SREG 5, SREG 5, SREG 5, SREG 5
- 98         13.02.14       Maksu- ja tolliamet             224        372,78         REG 17, REG 10, SREG 2, SREG 2, SREG 2, SREG 2, SREG 2, REG 17, REG 10
- 98         13.02.14       Ragn-Sells AS                   225        142,68         SREG 9, SREG 9, SREG 9, SREG 9, SREG 9, REG 11, REG 4, SREG 9, SREG 9, SREG 9, SREG 9, SREG 9, REG 11
- **1104**                                                  **2245**   **2 658,64**
-========== ============== =============================== ========== ============== ========================================================================================================================
+========= ============== ===================== ========= ============ =====================================================================================================
+ Alter     Zahlungsziel   Partner               ID        Saldo        Belege
+--------- -------------- --------------------- --------- ------------ -----------------------------------------------------------------------------------------------------
+ 129       13.01.14       Ethias s.a.           227       72,12        REG 19, REG 19, REG 12, REG 12, SREG 3, SREG 3, SREG 3, SREG 3, SREG 3
+ 98        13.02.14       AS Matsalu Veevärk    221       180,28       REG 15, REG 15, REG 8, REG 8, SREG 1, SREG 1, SREG 1, SREG 1, SREG 1
+ 98        13.02.14       Eesti Energia AS      222       10,00        SREG 8, SREG 8, SREG 8, SREG 8, SREG 8, SREG 8, SREG 8, SREG 8, SREG 8, SREG 8, REG 9, REG 9, REG 2
+ 98        13.02.14       Maksu- ja tolliamet   224       82,78        REG 17, REG 17, REG 10, REG 10, SREG 2, SREG 2, SREG 2, SREG 2, SREG 2
+ **423**                                        **894**   **345,18**
+========= ============== ===================== ========= ============ =====================================================================================================
 <BLANKLINE>
 
 TODO in above report: 

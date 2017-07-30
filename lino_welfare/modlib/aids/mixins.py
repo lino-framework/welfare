@@ -129,7 +129,7 @@ class RevokeConfirmation(dd.Action):
         ar.confirm(ok, msg, _("Are you sure?"))
 
 
-class Confirmable(mixins.DatePeriod):
+class Confirmable(mixins.DateRange):
     """Base class for both :class:`Granting` and :class:`Confirmation`.
 
     .. attribute:: signer

@@ -142,9 +142,14 @@ Here is the Javascript generated *before* the change (the following
 snippet has `+SKIP` specified which means that it is **not** being
 tested:
 
->>> lines = with_user_profile(ses.user.user_type, declare_vars, lh.main)
->>> js = '\n'.join(lines)
->>> print(js)
+>> # lines = with_user_profile(ses.user.user_type, declare_vars, lh.main)
+>> js = '\n'.join(lines)
+>> print(js)
+
+
+>>> with ses.user.user_type.context():
+...     for ln in declare_vars(lh.main):
+...         print(ln)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF +SKIP
 var client91 = new Lino.TwinCombo({ "preferred_width": 20, "autoHeight": true, "fieldLabel": "Client", "allowBlank": false, "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.pcsw.Clients.detail,Lino.pcsw.Clients.insert)}, "emptyText": "Select a Client...", "listeners": { "render": Lino.quicktip_renderer("Client","(aids.IncomeConfirmationsByGranting.client) ") }, "selectOnFocus": true, "hidden": true, "hiddenName": "clientHidden", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/client", "method": "GET" }) }), "name": "client" });
 var granting92 = new Lino.TwinCombo({ "autoHeight": true, "fieldLabel": "Aid granting", "name": "granting", "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.aids.GrantingsByX.detail,Lino.aids.GrantingsByX.insert)}, "emptyText": "Select a Aid granting...", "listeners": { "render": Lino.quicktip_renderer("Aid granting","(aids.IncomeConfirmationsByGranting.granting) ") }, "selectOnFocus": true, "hidden": true, "hiddenName": "grantingHidden", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/granting", "method": "GET" }) }) });
@@ -166,9 +171,9 @@ This structure caused the ExtJS layout manager to produce unexpected
 behaviour because the horizontal panel for the two fields `client` and
 `granting` is not hidden.  In that case the panel must also be hidden.
 
->>> lines = with_user_profile(ses.user.user_type, declare_vars, lh.main)
->>> js = '\n'.join(lines)
->>> print(js)
+>>> with ses.user.user_type.context():
+...     for ln in declare_vars(lh.main):
+...         print(ln)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
 var client228 = new Lino.TwinCombo({ "preferred_width": 20, "autoHeight": true, "fieldLabel": "Client", "allowBlank": false, "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.pcsw.Clients.detail,Lino.pcsw.Clients.insert)}, "emptyText": "Select a Client...", "listeners": { "render": Lino.quicktip_renderer("Client","(aids.IncomeConfirmationsByGranting.client) ") }, "selectOnFocus": true, "hidden": true, "hiddenName": "clientHidden", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/client", "method": "GET" }) }), "name": "client" });
 var granting229 = new Lino.TwinCombo({ "autoHeight": true, "fieldLabel": "Aid granting", "name": "granting", "pageSize": 20, "onTrigger2Click": function(e){ Lino.show_fk_detail(this,Lino.aids.GrantingsByX.detail,Lino.aids.GrantingsByX.insert)}, "emptyText": "Select a Aid granting...", "listeners": { "render": Lino.quicktip_renderer("Aid granting","(aids.IncomeConfirmationsByGranting.granting) ") }, "selectOnFocus": true, "hidden": true, "hiddenName": "grantingHidden", "anchor": "-20", "store": new Lino.ComplexRemoteComboStore({ "proxy": new Ext.data.HttpProxy({ "url": "/choices/aids/IncomeConfirmationsByGranting/granting", "method": "GET" }) }) });
@@ -189,7 +194,9 @@ var main_panel251 = new Ext.Panel({ "autoScroll": false, "border": false, "layou
 That's a long string, but we can test whether it declares three
 components with an attribute "hidden":
 
->>> js.count('"hidden"')
+>>> with ses.user.user_type.context():
+...     js = '\n'.join(declare_vars(lh.main))
+...     js.count('"hidden"')
 3
 
 Which corresponds to what we want.

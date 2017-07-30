@@ -372,7 +372,7 @@ Each window layout defines a given set of fields.
 - contacts.Persons.insert : first_name, last_name, gender, email
 - countries.Countries.detail : isocode, name, name_fr, name_en, short_code, inscode, actual_country
 - countries.Countries.insert : isocode, inscode, name, name_fr, name_en
-- countries.Places.insert : name, name_fr, name_en, country, type, parent, zip_code, id
+- countries.Places.insert : name, name_fr, name_en, country, inscode, zip_code, parent, type, id
 - countries.Places.merge_row : merge_to, reason
 - cv.Durations.insert : id, name, name_fr, name_en
 - cv.EducationLevels.insert : name, name_fr, name_en, is_study, is_training
@@ -399,13 +399,13 @@ Each window layout defines a given set of fields.
 - excerpts.ExcerptTypes.detail : id, name, name_fr, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_fr, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
-- finan.BankStatements.detail : voucher_date, balance1, balance2, user, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
-- finan.BankStatements.insert : voucher_date, balance1
+- finan.BankStatements.detail : entry_date, balance1, balance2, user, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
+- finan.BankStatements.insert : entry_date, balance1
 - finan.DisbursementOrders.detail : journal, number, voucher_date, entry_date, accounting_period, item_account, total, workflow_buttons, narration, item_remark, state, user, id, MovementsByVoucher
 - finan.DisbursementOrdersByJournal.insert : item_account, voucher_date
-- finan.FinancialVouchers.detail : voucher_date, user, narration, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
-- finan.FinancialVouchers.insert : voucher_date, narration
-- finan.PaymentOrders.detail : voucher_date, user, narration, total, execution_date, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
+- finan.FinancialVouchers.detail : entry_date, user, narration, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
+- finan.FinancialVouchers.insert : entry_date, narration
+- finan.PaymentOrders.detail : entry_date, user, narration, total, execution_date, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
 - gfks.ContentTypes.insert : id, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
 - households.HouseholdsByType.detail : type, prefix, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url
@@ -472,11 +472,11 @@ Each window layout defines a given set of fields.
 - users.Users.change_password : current, new1, new2
 - users.Users.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert : username, email, first_name, last_name, partner, language, user_type
-- vatless.Invoices.detail : journal, number, voucher_date, entry_date, accounting_period, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, match, state, user, id, MovementsByVoucher
-- vatless.Invoices.insert : journal, partner, voucher_date
-- vatless.InvoicesByJournal.insert : partner, voucher_date
-- vatless.ProjectInvoicesByJournal.detail : journal, number, voucher_date, entry_date, accounting_period, workflow_buttons, project, narration, partner, your_ref, payment_term, due_date, bank_account, amount, match, state, user, id, MovementsByVoucher
-- vatless.ProjectInvoicesByJournal.insert : project, partner, voucher_date
+- vatless.Invoices.detail : journal, number, entry_date, voucher_date, accounting_period, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, match, state, user, id, MovementsByVoucher
+- vatless.Invoices.insert : journal, partner, entry_date
+- vatless.InvoicesByJournal.insert : partner, entry_date
+- vatless.ProjectInvoicesByJournal.detail : journal, number, entry_date, voucher_date, accounting_period, workflow_buttons, project, narration, partner, your_ref, payment_term, due_date, bank_account, amount, match, state, user, id, MovementsByVoucher
+- vatless.ProjectInvoicesByJournal.insert : project, partner, entry_date
 - xcourses.CourseContents.insert : id, name
 - xcourses.CourseOffers.detail : id, title, content, provider, guest_role, description
 - xcourses.CourseOffers.insert : provider, content, title
@@ -826,8 +826,8 @@ Here is the output of :func:`walk_menu_items
 - Berichte --> Buchhaltung --> Saldenliste Generalkonten : 22
 - Berichte --> Buchhaltung --> Saldenlisten Lieferanten : 0
 - Berichte --> Buchhaltung --> Saldenliste Lieferanten : 0
-- Berichte --> Buchhaltung --> Schuldner : 5
-- Berichte --> Buchhaltung --> Gläubiger : 10
+- Berichte --> Buchhaltung --> Schuldner : 8
+- Berichte --> Buchhaltung --> Gläubiger : 4
 - Berichte --> DSBE --> Benutzer und ihre Klienten : 3
 - Konfigurierung --> System --> Benutzer : 14
 - Konfigurierung --> System --> Hilfetexte : 6
@@ -858,7 +858,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Buchhaltung --> Kontengruppen : 7
 - Konfigurierung --> Buchhaltung --> Haushaltsartikel : 27
 - Konfigurierung --> Buchhaltung --> Journale : 5
-- Konfigurierung --> Buchhaltung --> Buchungsperioden : 7
+- Konfigurierung --> Buchhaltung --> Buchungsperioden : 30
 - Konfigurierung --> Buchhaltung --> Zahlungsbedingungen : 9
 - Konfigurierung --> ÖSHZ --> Dienste : 4
 - Konfigurierung --> ÖSHZ --> Begleitungsbeendigungsgründe : 5
@@ -937,9 +937,9 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> ÖSHZ --> Einfache Bescheinigungen : 20
 - Explorer --> ÖSHZ --> Phonetische Wörter : 132
 - Explorer --> Buchhaltung --> Begleichungsregeln : 3
-- Explorer --> Buchhaltung --> Belege : 53
+- Explorer --> Buchhaltung --> Belege : 56
 - Explorer --> Buchhaltung --> Belegarten : 6
-- Explorer --> Buchhaltung --> Bewegungen : 451
+- Explorer --> Buchhaltung --> Bewegungen : 515
 - Explorer --> Buchhaltung --> Geschäftsjahre : 8
 - Explorer --> Buchhaltung --> Handelsarten : 3
 - Explorer --> Buchhaltung --> Journalgruppen : 5
@@ -950,7 +950,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> SEPA --> Transaktionen : 57
 - Explorer --> Finanzjournale --> Kontoauszüge : 1
 - Explorer --> Finanzjournale --> Diverse Buchungen : 1
-- Explorer --> Finanzjournale --> Zahlungsaufträge : 24
+- Explorer --> Finanzjournale --> Zahlungsaufträge : 27
 - Explorer --> Lebenslauf --> Sprachkenntnisse : 113
 - Explorer --> Lebenslauf --> Ausbildungen : 21
 - Explorer --> Lebenslauf --> Studien : 23

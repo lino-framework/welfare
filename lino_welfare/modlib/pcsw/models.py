@@ -690,7 +690,7 @@ class Clients(contacts.Persons):
 
     detail_layout = ClientDetail()
 
-    parameters = mixins.ObservedPeriod(
+    parameters = mixins.ObservedDateRange(
         coached_by=models.ForeignKey(
             'users.User', blank=True, null=True,
             verbose_name=_("Coached by"), help_text=u"""\

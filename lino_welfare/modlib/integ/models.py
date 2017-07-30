@@ -19,7 +19,7 @@ from django.conf import settings
 
 from lino.utils.xmlgen.html import E
 from lino.utils.report import Report
-from lino.mixins import ObservedPeriod
+from lino.mixins import ObservedDateRange
 from lino.modlib.users.choicelists import UserTypes
 from lino.modlib.system.choicelists import PeriodEvents
 
@@ -583,7 +583,7 @@ class ActivityReport(Report):
     required_roles = dd.login_required(IntegrationAgent)
     label = _("Activity Report")
 
-    parameters = ObservedPeriod(
+    parameters = ObservedDateRange(
         # start_date=models.DateField(verbose_name=_("Period from")),
         # end_date=models.DateField(verbose_name=_("until")),
         include_jobs=models.BooleanField(
