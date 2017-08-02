@@ -64,8 +64,8 @@ class DisbursementOrdersByJournal(ledger.ByJournal, DisbursementOrders):
     """
 
 
-VoucherTypes.add_item(
-    PaymentOrder, DisbursementOrdersByJournal, _("Disbursement orders"))
+VoucherTypes.add_item_lazy(
+    DisbursementOrdersByJournal, _("Disbursement orders"))
 
 
 @dd.receiver(dd.pre_analyze)
