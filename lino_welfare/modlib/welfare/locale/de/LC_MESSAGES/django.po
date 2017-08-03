@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-26 22:53+0300\n"
-"PO-Revision-Date: 2017-05-26 22:53+0300\n"
+"PO-Revision-Date: 2017-08-03 11:09+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: de\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
@@ -217,7 +217,7 @@ msgstr "Kategorie"
 
 #: lino_welfare/modlib/aids/models.py:58
 msgid "Categories"
-msgstr "Kategorien "
+msgstr "Kategorien"
 
 #: lino_welfare/modlib/aids/models.py:140
 msgid "Aid Type"

@@ -66,7 +66,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
 - Berichte :
-  - Buchhaltung : Situation, Saldenliste Generalkonten, Saldenlisten Lieferanten, Saldenliste Lieferanten, Schuldner, Gläubiger
+  - Buchhaltung : Situation, Saldenliste Generalkonten, Saldenliste Kunden, Saldenliste Lieferanten, Schuldner, Gläubiger
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - System : Site-Parameter, Benutzer, Hilfetexte, Update all summary data
@@ -824,7 +824,7 @@ Here is the output of :func:`walk_menu_items
 - Schuldnerberatung --> Klienten : 0
 - Schuldnerberatung --> Meine Budgets : 4
 - Berichte --> Buchhaltung --> Saldenliste Generalkonten : 22
-- Berichte --> Buchhaltung --> Saldenlisten Lieferanten : 0
+- Berichte --> Buchhaltung --> Saldenliste Kunden : 0
 - Berichte --> Buchhaltung --> Saldenliste Lieferanten : 0
 - Berichte --> Buchhaltung --> Schuldner : 8
 - Berichte --> Buchhaltung --> Gläubiger : 4

@@ -136,7 +136,7 @@ Here is the main menu for accountants:
   - Ausgabeanweisungen : Ausgabeanweisungen (AAW)
   - Zahlungsaufträge : KBC Zahlungsaufträge (ZKBC)
 - Berichte :
-  - Buchhaltung : Situation, Saldenliste Generalkonten, Saldenlisten Lieferanten, Saldenliste Lieferanten, Schuldner, Gläubiger
+  - Buchhaltung : Situation, Saldenliste Generalkonten, Saldenliste Kunden, Saldenliste Lieferanten, Schuldner, Gläubiger
 - Konfigurierung :
   - Büro : Meine Einfügetexte
   - ÖSHZ : Hilfearten, Kategorien
