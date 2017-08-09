@@ -229,7 +229,7 @@ The first link is the disabled checkbox for the :attr:`primary
 Clicking on this would run the following JavaScript:
 
 >>> print(links[0].get('href'))
-javascript:Lino.households.Members.set_primary("ext-comp-1351",9,{  })
+javascript:Lino.households.Members.set_primary("ext-comp-1351",true,9,{  })
 
 The next link is the name of the household, and clicking on it would
 equally execute some Javascript code:

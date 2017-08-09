@@ -90,7 +90,7 @@ Editing the print template of an excerpt
 ========================================
 
 Here we want to see what the :class:`EditTemplate
-<lino.modlib.printing.mixins.EditTemplate>` action says, especially
+<lino.modlib.printing.actions.EditTemplate>` action says, especially
 when called on an excerpt where Lino has two possible locations.
 
 Note that we need a local config directory for the following test to
@@ -100,29 +100,29 @@ work:
 >>> lcd = settings.SITE.cache_dir.child('config')
 >>> rt.makedirs_if_missing(lcd)
 
-(And these tests are the reason why `is_local_project_dir` is `True`
-in `lino_welfare.projects.std.settings.doctests`.)
+(These tests are the reason why `is_local_project_dir` is `True` in
+:mod:`lino_welfare.projects.std.settings.doctests`.)
 
 
 Excerpts are printables with *two* template groups.  The first
 template group is given by the owner (e.g. `"immersion/Contract"`) and
 the second is just `"excerpts"`.
 
-For example the owner of Excerpt #1 is an immersion training, while
+For example the owner of Excerpt #2 is an immersion training, while
 the owner of Excerpt #4 is an aids confirmation:
 
->>> excerpts.Excerpt.objects.get(pk=1).get_template_groups()
+>>> excerpts.Excerpt.objects.get(pk=2).get_template_groups()
 [u'immersion/Contract', u'excerpts']
 >>> excerpts.Excerpt.objects.get(pk=4).get_template_groups()
 [u'aids/Confirmation', u'excerpts']
 
-When creating a local copy of the factory template, Lino copies the
-factory file to the directory given by the *first* group. Before doing
-so, it will ask for user confirmation.
-
 >>> obj = excerpts.Excerpt.objects.get(pk=2)
 >>> obj.owner
 Contract #2 ("Stage d'immersion#2 (Daniel EMONTS)")
+
+When creating a local copy of the factory template, Lino copies the
+factory file to the directory given by the *first* group. Before doing
+so, it will ask for user confirmation.
 
 >>> ses.set_confirm_answer(False)
 >>> rv = ses.run(obj.edit_template)

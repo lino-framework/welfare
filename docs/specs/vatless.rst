@@ -138,21 +138,21 @@ This invoice is registered, and ledger movements have been created:
 >>> obj.state
 <VoucherStates.registered:20>
 >>> rt.show(rt.modules.ledger.MovementsByVoucher, obj)
-========== ============================ =================== =================================== =========== =========== ============ ===========
- Seq.-Nr.   Klient                       Zahlungsempfänger   Haushaltsartikel                    Debit       Kredit      Match        Beglichen
----------- ---------------------------- ------------------- ----------------------------------- ----------- ----------- ------------ -----------
- 1          EVERS Eberhart (127)                             (832/330/01) Allgemeine Beihilfen   29,95                                Ja
- 2          EMONTS Daniel (128)                              (832/330/01) Allgemeine Beihilfen   5,33                                 Ja
- 3          COLLARD Charlotte (118)                          (832/330/01) Allgemeine Beihilfen   12,50                                Ja
- 4          DOBBELSTEIN Dorothée (124)                       (832/330/01) Allgemeine Beihilfen   25,00                                Ja
- 5          AUSDEMWALD Alfons (116)                          (832/330/01) Allgemeine Beihilfen   10,00                                Ja
- 6          EMONTS Daniel (128)          Ethias s.a.         (4400) Lieferanten                              5,33        **SREG 3**   Nein
- 7          AUSDEMWALD Alfons (116)      Ethias s.a.         (4400) Lieferanten                              10,00       **SREG 3**   Nein
- 8          DOBBELSTEIN Dorothée (124)   Ethias s.a.         (4400) Lieferanten                              25,00       **SREG 3**   Nein
- 9          COLLARD Charlotte (118)      Ethias s.a.         (4400) Lieferanten                              12,50       **SREG 3**   Nein
- 10         EVERS Eberhart (127)         Ethias s.a.         (4400) Lieferanten                              29,95       **SREG 3**   Nein
- **55**                                                      **Saldo 0.00 (10 Bewegungen)**      **82,78**   **82,78**
-========== ============================ =================== =================================== =========== =========== ============ ===========
+=================================== ============================ =================== =========== =========== ============ ===========
+ Haushaltsartikel                    Klient                       Zahlungsempfänger   Debit       Kredit      Match        Beglichen
+----------------------------------- ---------------------------- ------------------- ----------- ----------- ------------ -----------
+ (4400) Lieferanten                  EMONTS Daniel (128)          Ethias s.a.                     5,33        **SREG 3**   Nein
+ (4400) Lieferanten                  AUSDEMWALD Alfons (116)      Ethias s.a.                     10,00       **SREG 3**   Nein
+ (4400) Lieferanten                  DOBBELSTEIN Dorothée (124)   Ethias s.a.                     25,00       **SREG 3**   Nein
+ (4400) Lieferanten                  COLLARD Charlotte (118)      Ethias s.a.                     12,50       **SREG 3**   Nein
+ (4400) Lieferanten                  EVERS Eberhart (127)         Ethias s.a.                     29,95       **SREG 3**   Nein
+ (832/330/01) Allgemeine Beihilfen   EVERS Eberhart (127)                             29,95                                Ja
+ (832/330/01) Allgemeine Beihilfen   EMONTS Daniel (128)                              5,33                                 Ja
+ (832/330/01) Allgemeine Beihilfen   COLLARD Charlotte (118)                          12,50                                Ja
+ (832/330/01) Allgemeine Beihilfen   DOBBELSTEIN Dorothée (124)                       25,00                                Ja
+ (832/330/01) Allgemeine Beihilfen   AUSDEMWALD Alfons (116)                          10,00                                Ja
+                                                                                      **82,78**   **82,78**
+=================================== ============================ =================== =========== =========== ============ ===========
 <BLANKLINE>
 
 
@@ -239,55 +239,73 @@ Let's look at one of these movements via its client.
 >>> print(client)
 EMONTS Daniel (128)
 
-Our client has invoices from different partners:
+Our client has lots of other open transactions:
 
 >>> rt.show(ledger.MovementsByProject, client)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-========== ========== ============================================================================================== =============== ============== ============== ===========
- Valuta     Beleg      Beschreibung                                                                                   Debit           Kredit         Match          Beglichen
----------- ---------- ---------------------------------------------------------------------------------------------- --------------- -------------- -------------- -----------
- 22.05.14   *AAW 1*    *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*             648,91                         **AAW 1:5**    Nein
- 22.05.14   *AAW 2*    *(4450) Auszuführende Ausgabeanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*   817,36                         **AAW 2:5**    Nein
- 22.05.14   *AAW 3*    *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*       544,91                         **AAW 3:5**    Nein
- 22.05.14   *AAW 4*    *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*          800,08                         **AAW 4:5**    Nein
- 22.05.14   *AAW 5*    *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                      648,91                         **AAW 5:5**    Nein
- 22.05.14   *AAW 6*    *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*           817,36                         **AAW 6:5**    Nein
- 17.05.14   *SREG 1*   *(4400) Lieferanten* / *AS Matsalu Veevärk*                                                                    29,95          **SREG 1**     Nein
- 02.05.14   *SREG 2*   *(4400) Lieferanten* / *Maksu- ja tolliamet*                                                                   120,00         **SREG 2**     Nein
- 22.04.14   *AAW 7*    *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*             544,91                         **AAW 7:5**    Nein
- 22.04.14   *AAW 8*    *(4450) Auszuführende Ausgabeanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*   800,08                         **AAW 8:5**    Nein
- 22.04.14   *AAW 9*    *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*       648,91                         **AAW 9:5**    Nein
- 22.04.14   *AAW 10*   *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*          817,36                         **AAW 10:5**   Nein
- 22.04.14   *AAW 11*   *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                      544,91                         **AAW 11:5**   Nein
- 22.04.14   *AAW 12*   *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*           800,08                         **AAW 12:5**   Nein
- 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                         648,91         **AAW 13:5**   Nein
- 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                         817,36         **AAW 14:5**   Nein
- 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                         544,91         **AAW 15:5**   Nein
- 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                         800,08         **AAW 16:5**   Nein
- 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                         648,91         **AAW 17:5**   Nein
- 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                         817,36         **AAW 18:5**   Nein
- 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Eesti Energia AS*                                                      25,00                          **REG 9**      Nein
- 17.04.14   *SREG 3*   *(4400) Lieferanten* / *Ethias s.a.*                                                                           5,33           **SREG 3**     Nein
- 13.04.14   *AAW 22*   *(4400) Lieferanten* / *Eesti Energia AS*                                                      25,00                          **REG 9**      Nein
- 13.04.14   *AAW 22*   *(4450) Auszuführende Ausgabeanweisungen* / *Eesti Energia AS*                                                 25,00          **REG 9**      Nein
- 23.03.14   *REG 9*    *(4400) Lieferanten* / *Eesti Energia AS*                                                                      25,00          **REG 9**      Nein
- 23.03.14   *AAW 13*   *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*             648,91                         **AAW 13:5**   Nein
- 23.03.14   *AAW 14*   *(4450) Auszuführende Ausgabeanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*   817,36                         **AAW 14:5**   Nein
- 23.03.14   *AAW 15*   *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*       544,91                         **AAW 15:5**   Nein
- 23.03.14   *AAW 16*   *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*          800,08                         **AAW 16:5**   Nein
- 23.03.14   *AAW 17*   *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                      648,91                         **AAW 17:5**   Nein
- 23.03.14   *AAW 18*   *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*           817,36                         **AAW 18:5**   Nein
- 21.03.14   *ZKBC 3*   *(4400) Lieferanten* / *Ethias s.a.*                                                           5,33                           **REG 12**     Nein
- 21.03.14   *ZKBC 3*   *(4400) Lieferanten* / *Ragn-Sells AS*                                                         29,95                          **REG 11**     Nein
- 13.03.14   *AAW 21*   *(4400) Lieferanten* / *Ethias s.a.*                                                           5,33                           **REG 12**     Nein
- 13.03.14   *AAW 21*   *(4400) Lieferanten* / *Ragn-Sells AS*                                                         29,95                          **REG 11**     Nein
- 08.03.14   *REG 11*   *(4400) Lieferanten* / *Ragn-Sells AS*                                                                         29,95          **REG 11**     Nein
- 26.02.14   *REG 12*   *(4400) Lieferanten* / *Ethias s.a.*                                                                           5,33           **REG 12**     Nein
- 21.02.14   *ZKBC 2*   *(4400) Lieferanten* / *AS Express Post*                                                       10,00                          **REG 14**     Nein
- 13.02.14   *AAW 20*   *(4400) Lieferanten* / *AS Express Post*                                                       10,00                          **REG 14**     Nein
- 11.02.14   *REG 14*   *(4400) Lieferanten* / *AS Express Post*                                                                       10,00          **REG 14**     Nein
-                       **Saldo 8323.78 (40 Bewegungen)**                                                              **12 851,87**   **4 528,09**
-========== ========== ============================================================================================== =============== ============== ============== ===========
+========== ========== ================================================================================================== =============== =============== ============== ===========
+ Valuta     Beleg      Beschreibung                                                                                       Debit           Kredit          Match          Beglichen
+---------- ---------- -------------------------------------------------------------------------------------------------- --------------- --------------- -------------- -----------
+ 22.05.14   *AAW 1*    *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*                 648,91                          **AAW 1:5**    Nein
+ 22.05.14   *AAW 1*    *(832/330/01) Allgemeine Beihilfen* / Allgemeine Beihilfen / *Emonts Daniel*                                       648,91          **AAW 1:5**    Nein
+ 22.05.14   *AAW 2*    *(4450) Auszuführende Ausgabeanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*       817,36                          **AAW 2:5**    Nein
+ 22.05.14   *AAW 2*    *(832/330/03) Heizkosten- u. Energiebeihilfe* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*                   817,36          **AAW 2:5**    Nein
+ 22.05.14   *AAW 3*    *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*           544,91                          **AAW 3:5**    Nein
+ 22.05.14   *AAW 3*    *(832/330/03F) Fonds Gas und Elektrizität* / Fonds Gas und Elektrizität / *Emonts Daniel*                          544,91          **AAW 3:5**    Nein
+ 22.05.14   *AAW 4*    *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*              800,08                          **AAW 4:5**    Nein
+ 22.05.14   *AAW 4*    *(832/3331/01) Eingliederungseinkommen* / Eingliederungseinkommen / *Emonts Daniel*                                800,08          **AAW 4:5**    Nein
+ 22.05.14   *AAW 5*    *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                          648,91                          **AAW 5:5**    Nein
+ 22.05.14   *AAW 5*    *(832/334/27) Sozialhilfe* / Sozialhilfe / *Emonts Daniel*                                                         648,91          **AAW 5:5**    Nein
+ 22.05.14   *AAW 6*    *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*               817,36                          **AAW 6:5**    Nein
+ 22.05.14   *AAW 6*    *(832/3343/21) Beihilfe für Ausländer* / Beihilfe für Ausländer / *Emonts Daniel*                                  817,36          **AAW 6:5**    Nein
+ 17.05.14   *SREG 1*   *(4400) Lieferanten* / *AS Matsalu Veevärk*                                                                        29,95           **SREG 1**     Nein
+ 02.05.14   *SREG 2*   *(4400) Lieferanten* / *Maksu- ja tolliamet*                                                                       120,00          **SREG 2**     Nein
+ 22.04.14   *AAW 7*    *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*                 544,91                          **AAW 7:5**    Nein
+ 22.04.14   *AAW 7*    *(832/330/01) Allgemeine Beihilfen* / Allgemeine Beihilfen / *Emonts Daniel*                                       544,91          **AAW 7:5**    Nein
+ 22.04.14   *AAW 8*    *(4450) Auszuführende Ausgabeanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*       800,08                          **AAW 8:5**    Nein
+ 22.04.14   *AAW 8*    *(832/330/03) Heizkosten- u. Energiebeihilfe* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*                   800,08          **AAW 8:5**    Nein
+ 22.04.14   *AAW 9*    *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*           648,91                          **AAW 9:5**    Nein
+ 22.04.14   *AAW 9*    *(832/330/03F) Fonds Gas und Elektrizität* / Fonds Gas und Elektrizität / *Emonts Daniel*                          648,91          **AAW 9:5**    Nein
+ 22.04.14   *AAW 10*   *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*              817,36                          **AAW 10:5**   Nein
+ 22.04.14   *AAW 10*   *(832/3331/01) Eingliederungseinkommen* / Eingliederungseinkommen / *Emonts Daniel*                                817,36          **AAW 10:5**   Nein
+ 22.04.14   *AAW 11*   *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                          544,91                          **AAW 11:5**   Nein
+ 22.04.14   *AAW 11*   *(832/334/27) Sozialhilfe* / Sozialhilfe / *Emonts Daniel*                                                         544,91          **AAW 11:5**   Nein
+ 22.04.14   *AAW 12*   *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*               800,08                          **AAW 12:5**   Nein
+ 22.04.14   *AAW 12*   *(832/3343/21) Beihilfe für Ausländer* / Beihilfe für Ausländer / *Emonts Daniel*                                  800,08          **AAW 12:5**   Nein
+ 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                             648,91          **AAW 13:5**   Nein
+ 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                             817,36          **AAW 14:5**   Nein
+ 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                             544,91          **AAW 15:5**   Nein
+ 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                             800,08          **AAW 16:5**   Nein
+ 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                             648,91          **AAW 17:5**   Nein
+ 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Emonts Daniel*                                                                             817,36          **AAW 18:5**   Nein
+ 21.04.14   *ZKBC 4*   *(4400) Lieferanten* / *Eesti Energia AS*                                                          25,00                           **REG 9**      Nein
+ 17.04.14   *SREG 3*   *(4400) Lieferanten* / *Ethias s.a.*                                                                               5,33            **SREG 3**     Nein
+ 13.04.14   *AAW 22*   *(4400) Lieferanten* / *Eesti Energia AS*                                                          25,00                           **REG 9**      Nein
+ 13.04.14   *AAW 22*   *(4450) Auszuführende Ausgabeanweisungen* / *Eesti Energia AS*                                                     25,00           **REG 9**      Nein
+ 23.03.14   *REG 9*    *(4400) Lieferanten* / *Eesti Energia AS*                                                                          25,00           **REG 9**      Nein
+ 23.03.14   *AAW 13*   *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*                 648,91                          **AAW 13:5**   Nein
+ 23.03.14   *AAW 13*   *(832/330/01) Allgemeine Beihilfen* / Allgemeine Beihilfen / *Emonts Daniel*                                       648,91          **AAW 13:5**   Nein
+ 23.03.14   *AAW 14*   *(4450) Auszuführende Ausgabeanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*       817,36                          **AAW 14:5**   Nein
+ 23.03.14   *AAW 14*   *(832/330/03) Heizkosten- u. Energiebeihilfe* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*                   817,36          **AAW 14:5**   Nein
+ 23.03.14   *AAW 15*   *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*           544,91                          **AAW 15:5**   Nein
+ 23.03.14   *AAW 15*   *(832/330/03F) Fonds Gas und Elektrizität* / Fonds Gas und Elektrizität / *Emonts Daniel*                          544,91          **AAW 15:5**   Nein
+ 23.03.14   *AAW 16*   *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*              800,08                          **AAW 16:5**   Nein
+ 23.03.14   *AAW 16*   *(832/3331/01) Eingliederungseinkommen* / Eingliederungseinkommen / *Emonts Daniel*                                800,08          **AAW 16:5**   Nein
+ 23.03.14   *AAW 17*   *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                          648,91                          **AAW 17:5**   Nein
+ 23.03.14   *AAW 17*   *(832/334/27) Sozialhilfe* / Sozialhilfe / *Emonts Daniel*                                                         648,91          **AAW 17:5**   Nein
+ 23.03.14   *AAW 18*   *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*               817,36                          **AAW 18:5**   Nein
+ 23.03.14   *AAW 18*   *(832/3343/21) Beihilfe für Ausländer* / Beihilfe für Ausländer / *Emonts Daniel*                                  817,36          **AAW 18:5**   Nein
+ 21.03.14   *ZKBC 3*   *(4400) Lieferanten* / *Ethias s.a.*                                                               5,33                            **REG 12**     Nein
+ 21.03.14   *ZKBC 3*   *(4400) Lieferanten* / *Ragn-Sells AS*                                                             29,95                           **REG 11**     Nein
+ 13.03.14   *AAW 21*   *(4400) Lieferanten* / *Ethias s.a.*                                                               5,33                            **REG 12**     Nein
+ 13.03.14   *AAW 21*   *(4400) Lieferanten* / *Ragn-Sells AS*                                                             29,95                           **REG 11**     Nein
+ 08.03.14   *REG 11*   *(4400) Lieferanten* / *Ragn-Sells AS*                                                                             29,95           **REG 11**     Nein
+ 26.02.14   *REG 12*   *(4400) Lieferanten* / *Ethias s.a.*                                                                               5,33            **REG 12**     Nein
+ 21.02.14   *ZKBC 2*   *(4400) Lieferanten* / *AS Express Post*                                                           10,00                           **REG 14**     Nein
+ 13.02.14   *AAW 20*   *(4400) Lieferanten* / *AS Express Post*                                                           10,00                           **REG 14**     Nein
+ 11.02.14   *REG 14*   *(4400) Lieferanten* / *AS Express Post*                                                                           10,00           **REG 14**     Nein
+                       **Saldo -4387.53 (58 Bewegungen)**                                                                 **12 851,87**   **17 239,40**
+========== ========== ================================================================================================== =============== =============== ============== ===========
 <BLANKLINE>
 
 

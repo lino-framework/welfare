@@ -83,6 +83,5 @@ class ClientVouchersByJournal(ClientVouchers, ByJournal):
     order_by = ["-number"]
 
 
-from .models import ClientVoucher
-VoucherTypes.add_item(ClientVoucher, ClientVouchersByJournal)
+VoucherTypes.add_item_lazy(ClientVouchersByJournal)
 
