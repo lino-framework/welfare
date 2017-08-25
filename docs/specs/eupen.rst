@@ -399,13 +399,13 @@ Each window layout defines a given set of fields.
 - excerpts.ExcerptTypes.detail : id, name, name_fr, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_fr, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
-- finan.BankStatements.detail : entry_date, balance1, balance2, user, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
+- finan.BankStatements.detail : entry_date, balance1, balance2, user, id, workflow_buttons, ItemsByBankStatement, journal, accounting_period, item_account, item_remark, MovementsByVoucher
 - finan.BankStatements.insert : entry_date, balance1
-- finan.DisbursementOrders.detail : journal, number, voucher_date, entry_date, accounting_period, item_account, total, workflow_buttons, narration, item_remark, state, user, id, MovementsByVoucher
+- finan.DisbursementOrders.detail : journal, number, voucher_date, entry_date, accounting_period, item_account, total, workflow_buttons, narration, item_remark, ItemsByDisbursementOrder, state, user, id, MovementsByVoucher
 - finan.DisbursementOrdersByJournal.insert : item_account, voucher_date
-- finan.FinancialVouchers.detail : entry_date, user, narration, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
+- finan.FinancialVouchers.detail : entry_date, number, user, workflow_buttons, narration, id, ItemsByJournalEntry, journal, accounting_period, item_account, item_remark, MovementsByVoucher
 - finan.FinancialVouchers.insert : entry_date, narration
-- finan.PaymentOrders.detail : entry_date, user, narration, total, execution_date, workflow_buttons, journal, accounting_period, number, id, MovementsByVoucher
+- finan.PaymentOrders.detail : entry_date, number, user, total, execution_date, workflow_buttons, narration, id, ItemsByPaymentOrder, journal, accounting_period, item_account, item_remark, MovementsByVoucher
 - gfks.ContentTypes.insert : id, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
 - households.HouseholdsByType.detail : type, prefix, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url
@@ -429,7 +429,7 @@ Each window layout defines a given set of fields.
 - jobs.Schedules.insert : id, name, name_fr, name_en
 - languages.Languages.insert : id, iso2, name, name_fr, name_en
 - ledger.ActivityReport.show : body
-- ledger.Journals.detail : name, name_fr, name_en, ref, trade_type, seqno, id, voucher_type, journal_group, account, build_method, template, dc, force_sequence, yearly_numbering, auto_check_clearings, must_declare, printed_name, printed_name_fr, printed_name_en
+- ledger.Journals.detail : name, name_fr, name_en, ref, trade_type, seqno, id, voucher_type, journal_group, account, build_method, template, dc, force_sequence, yearly_numbering, auto_fill_suggestions, auto_check_clearings, must_declare, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, journal_group, voucher_type
 - ledger.PaymentTerms.insert : ref, months, days, end_of_month, name, name_fr, name_en, printed_text, printed_text_fr, printed_text_en
 - ledger.Situation.show : body

@@ -5,92 +5,92 @@ from django.utils.translation import ugettext_lazy as _
 
 help_texts = {
     'lino_welfare.migrate.Migrator' : _("""The standard migrator for welfare."""),
-    'lino_welfare.modlib.aids.choicelists.ConfirmationTypes' : _("""A list of the models that may be used as confirmation."""),
-    'lino_welfare.modlib.aids.choicelists.ConfirmationTypes.et_template' : _("""The template defined for the ExcerptType defined for this
+    'lino_welfare.modlib.aids.ConfirmationTypes' : _("""A list of the models that may be used as confirmation."""),
+    'lino_welfare.modlib.aids.ConfirmationTypes.et_template' : _("""The template defined for the ExcerptType defined for this
 confirmation type."""),
     'lino_welfare.modlib.aids.mixins.SignConfirmation' : _("""Sign this database object."""),
     'lino_welfare.modlib.aids.mixins.Confirmable' : _("""Base class for both Granting and Confirmation."""),
     'lino_welfare.modlib.aids.mixins.Confirmation' : _("""Base class for all aid confirmations."""),
-    'lino_welfare.modlib.aids.models.AidType' : _("""The type of aid being granted to a client.  Every granting has a
+    'lino_welfare.modlib.aids.AidType' : _("""The type of aid being granted to a client.  Every granting has a
 mandatory field Granting.aid_type which points to an
 AidType instance."""),
-    'lino_welfare.modlib.aids.models.AidType.short_name' : _("""The short name for internal use, e.g. when a user must select
+    'lino_welfare.modlib.aids.AidType.short_name' : _("""The short name for internal use, e.g. when a user must select
 an aid type from a combobox."""),
-    'lino_welfare.modlib.aids.models.AidType.confirmation_type' : _("""The database model to use for issuing an aid confirmation of
+    'lino_welfare.modlib.aids.AidType.confirmation_type' : _("""The database model to use for issuing an aid confirmation of
 this type. This is a mandatory pointer to
 ConfirmationTypes."""),
-    'lino_welfare.modlib.aids.models.AidType.name' : _("""The designation of this aid type as seen by the user e.g. when
+    'lino_welfare.modlib.aids.AidType.name' : _("""The designation of this aid type as seen by the user e.g. when
 selecting an aid type."""),
-    'lino_welfare.modlib.aids.models.AidType.excerpt_title' : _("""The text to print as title in confirmations.
+    'lino_welfare.modlib.aids.AidType.excerpt_title' : _("""The text to print as title in confirmations.
 See also
 lino_xl.lib.excerpts.mixins.ExcerptTitle.excerpt_title."""),
-    'lino_welfare.modlib.aids.models.AidType.body_template' : _("""The body template to use when printing a confirmation of this type.
+    'lino_welfare.modlib.aids.AidType.body_template' : _("""The body template to use when printing a confirmation of this type.
 If this field is empty, Lino uses the excerpt type’s
 body_template.
 See also /admin/printing."""),
-    'lino_welfare.modlib.aids.models.AidType.is_urgent' : _("""Whether aid grantings of this type are considered as urgent.
+    'lino_welfare.modlib.aids.AidType.is_urgent' : _("""Whether aid grantings of this type are considered as urgent.
 This is used by Confirmation.get_urgent_granting()"""),
-    'lino_welfare.modlib.aids.models.AidType.board' : _("""Pointer to the default lino_xl.lib.boards.models.Board
+    'lino_welfare.modlib.aids.AidType.board' : _("""Pointer to the default lino_xl.lib.boards.models.Board
 for aid projects of this type."""),
-    'lino_welfare.modlib.aids.models.AidType.confirmed_by_primary_coach' : _("""Whether grantings for this aid type are to be signed by the
+    'lino_welfare.modlib.aids.AidType.confirmed_by_primary_coach' : _("""Whether grantings for this aid type are to be signed by the
 client’s primary coach (see Client.get_primary_coach)."""),
-    'lino_welfare.modlib.aids.models.AidType.pharmacy_type' : _("""A pointer to the ClientContactType to be used when
+    'lino_welfare.modlib.aids.AidType.pharmacy_type' : _("""A pointer to the ClientContactType to be used when
 selecting the pharmacy of a refund confirmation
 (RefundConfirmation.pharmacy)."""),
-    'lino_welfare.modlib.aids.models.Granting' : _("""An aid granting is the principal promise that a given client
+    'lino_welfare.modlib.aids.Granting' : _("""An aid granting is the principal promise that a given client
 gets a given aid during a given period."""),
-    'lino_welfare.modlib.aids.models.Granting.client' : _("""Pointer to the lino_welfare.modlib.pcsw.models.Client."""),
-    'lino_welfare.modlib.aids.models.Granting.aid_type' : _("""The type of aid being granted. Mandatory.
+    'lino_welfare.modlib.aids.Granting.client' : _("""Pointer to the lino_welfare.modlib.pcsw.models.Client."""),
+    'lino_welfare.modlib.aids.Granting.aid_type' : _("""The type of aid being granted. Mandatory.
 Pointer to the AidType."""),
-    'lino_welfare.modlib.aids.models.Granting.signer' : _("""Pointer to the user who is expected to “sign” this granting
+    'lino_welfare.modlib.aids.Granting.signer' : _("""Pointer to the user who is expected to “sign” this granting
 (i.e. to confirm that it is real)."""),
-    'lino_welfare.modlib.aids.models.Granting.board' : _("""Pointer to the Board
+    'lino_welfare.modlib.aids.Granting.board' : _("""Pointer to the Board
 which decided to allocate this aid project."""),
-    'lino_welfare.modlib.aids.models.Granting.category' : _("""Currently only used for printing an isip.Contract."""),
-    'lino_welfare.modlib.aids.models.Grantings' : _("""The default table for Granting."""),
-    'lino_welfare.modlib.aids.models.Grantings.model' : _("""alias of Granting"""),
-    'lino_welfare.modlib.aids.models.Confirmations' : _("""Abstract base class for all confirmation tables."""),
-    'lino_welfare.modlib.aids.models.ConfirmationsByGranting' : _("""Shows the confirmations issued for a given granting."""),
-    'lino_welfare.modlib.aids.models.ConfirmationsByGranting.master' : _("""alias of Granting"""),
-    'lino_welfare.modlib.aids.models.SimpleConfirmation' : _("""This is when a social agent confirms that a client benefits of some
+    'lino_welfare.modlib.aids.Granting.category' : _("""Currently only used for printing an isip.Contract."""),
+    'lino_welfare.modlib.aids.Grantings' : _("""The default table for Granting."""),
+    'lino_welfare.modlib.aids.Grantings.model' : _("""alias of Granting"""),
+    'lino_welfare.modlib.aids.Confirmations' : _("""Abstract base class for all confirmation tables."""),
+    'lino_welfare.modlib.aids.ConfirmationsByGranting' : _("""Shows the confirmations issued for a given granting."""),
+    'lino_welfare.modlib.aids.ConfirmationsByGranting.master' : _("""alias of Granting"""),
+    'lino_welfare.modlib.aids.SimpleConfirmation' : _("""This is when a social agent confirms that a client benefits of some
 simple aid during a given period."""),
-    'lino_welfare.modlib.aids.models.IncomeConfirmation' : _("""This is when a social agent confirms that a client benefits of a
+    'lino_welfare.modlib.aids.IncomeConfirmation' : _("""This is when a social agent confirms that a client benefits of a
 given income during a given period."""),
-    'lino_welfare.modlib.aids.models.IncomeConfirmationsByGranting' : _("""Show the confirmations of a Granting whose aid_type has
+    'lino_welfare.modlib.aids.IncomeConfirmationsByGranting' : _("""Show the confirmations of a Granting whose aid_type has
 IncomeConfirmation as confirmation_type."""),
-    'lino_welfare.modlib.aids.models.IncomeConfirmationsByGranting.master' : _("""alias of Granting"""),
-    'lino_welfare.modlib.aids.models.IncomeConfirmationsByGranting.model' : _("""alias of IncomeConfirmation"""),
-    'lino_welfare.modlib.aids.models.RefundConfirmation' : _("""This is when a social agent confirms that a client benefits of a
+    'lino_welfare.modlib.aids.IncomeConfirmationsByGranting.master' : _("""alias of Granting"""),
+    'lino_welfare.modlib.aids.IncomeConfirmationsByGranting.model' : _("""alias of IncomeConfirmation"""),
+    'lino_welfare.modlib.aids.RefundConfirmation' : _("""This is when a social agent confirms that a client benefits of a
 refund aid (Kostenrückerstattung) during a given period."""),
-    'lino_welfare.modlib.aids.models.SubmitInsertAndPrint' : _("""A customized variant of the standard SubmitInsert which prints the Confirmation after
+    'lino_welfare.modlib.aids.SubmitInsertAndPrint' : _("""A customized variant of the standard SubmitInsert which prints the Confirmation after
 successful creation (if AidType.print_directly is checked)."""),
     'lino_welfare.modlib.art61.Plugin' : _("""See lino.core.plugin.Plugin."""),
-    'lino_welfare.modlib.art61.models.ContractType' : _("""This is the homologue of isip.ContractType (see there for
+    'lino_welfare.modlib.art61.ContractType' : _("""This is the homologue of isip.ContractType (see there for
 general documentation)."""),
-    'lino_welfare.modlib.art61.models.ContractTypes.model' : _("""alias of ContractType"""),
-    'lino_welfare.modlib.art61.models.Contract' : _("""An “Art61 job supplyment” is an agreement between the PCSW and a
+    'lino_welfare.modlib.art61.ContractTypes.model' : _("""alias of ContractType"""),
+    'lino_welfare.modlib.art61.Contract' : _("""An “Art61 job supplyment” is an agreement between the PCSW and a
 private company…"""),
-    'lino_welfare.modlib.art61.models.ContractsByClient' : _("""Shows the Art61 job supplyments for this client."""),
-    'lino_welfare.modlib.art61.models.ContractsByClient.master' : _("""alias of Client"""),
-    'lino_welfare.modlib.art61.models.ContractsByClient.model' : _("""alias of Contract"""),
+    'lino_welfare.modlib.art61.ContractsByClient' : _("""Shows the Art61 job supplyments for this client."""),
+    'lino_welfare.modlib.art61.ContractsByClient.master' : _("""alias of Client"""),
+    'lino_welfare.modlib.art61.ContractsByClient.model' : _("""alias of Contract"""),
     'lino_welfare.modlib.badges.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.badges.Plugin.holder_model' : _("""A string referring to the model which represents the badge holder in
 your application.  Default value is 'contacts.Person'."""),
     'lino_welfare.modlib.cal.Plugin' : _("""See lino.core.plugin.Plugin."""),
-    'lino_welfare.modlib.cal.models.EntriesByClient' : _("""Events where Event.project or one guest is this client."""),
-    'lino_welfare.modlib.cal.models.EntriesByClient.master' : _("""alias of Client"""),
-    'lino_welfare.modlib.cal.models.EntriesByClient.model' : _("""alias of Event"""),
-    'lino_welfare.modlib.cal.models.Guest.client' : _("""Virtual field which returns the partner if it is a client."""),
+    'lino_welfare.modlib.cal.EntriesByClient' : _("""Events where Event.project or one guest is this client."""),
+    'lino_welfare.modlib.cal.EntriesByClient.master' : _("""alias of Client"""),
+    'lino_welfare.modlib.cal.EntriesByClient.model' : _("""alias of Event"""),
+    'lino_welfare.modlib.cal.Guest.client' : _("""Virtual field which returns the partner if it is a client."""),
     'lino_welfare.modlib.cbss.Plugin' : _("""The descriptor for this plugin. See
 lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.cbss.Plugin.cbss_live_requests' : _("""Whether executing requests should try to really connect to the
 CBSS.  Real requests would fail with a timeout if run from behind
 an IP address that is not registered at the CBSS."""),
     'lino_welfare.modlib.cbss.Plugin.cbss_environment' : _("""Either None or one of ‘test’, ‘acpt’ or ‘prod’."""),
-    'lino_welfare.modlib.cbss.choicelists.RequestStates' : _("""The status of a CBSSRequest."""),
-    'lino_welfare.modlib.cbss.choicelists.ManageActions' : _("""Possible values for the action field of a
+    'lino_welfare.modlib.cbss.RequestStates' : _("""The status of a CBSSRequest."""),
+    'lino_welfare.modlib.cbss.ManageActions' : _("""Possible values for the action field of a
 lino_welfare.modlib.cbss.models.ManageAccessRequest."""),
-    'lino_welfare.modlib.cbss.choicelists.ManageActions.REGISTER' : _("""Ce service est sollicité au moment du démarrage de l’enquête
+    'lino_welfare.modlib.cbss.ManageActions.REGISTER' : _("""Ce service est sollicité au moment du démarrage de l’enquête
 sociale.  Le CPAS déclare au réseau de la sécurité sociale qu’il
 possède un dossier pour lequel il a l’autorisation (dispositions
 légales et réglementaires) d’obtenir des informations des autres
@@ -100,15 +100,15 @@ répertoire sectoriel des CPAS à la SmalS-MvM et peut concerner
 plusieurs catégories de personnes : le demandeur, les
 cohabitants et les tiers concernés et ce, pour des finalités
 différentes."""),
-    'lino_welfare.modlib.cbss.choicelists.ManageActions.UNREGISTER' : _("""L’opération contraire est aussi mise à disposition."""),
-    'lino_welfare.modlib.cbss.choicelists.ManageActions.LIST' : _("""Il est en plus possible d’obtenir une liste des enregistrements
+    'lino_welfare.modlib.cbss.ManageActions.UNREGISTER' : _("""L’opération contraire est aussi mise à disposition."""),
+    'lino_welfare.modlib.cbss.ManageActions.LIST' : _("""Il est en plus possible d’obtenir une liste des enregistrements
 dans le répertoire sectoriel des CPAS à la SmalS-MvM ainsi qu’au
 sein du réseau BCSS."""),
-    'lino_welfare.modlib.cbss.choicelists.QueryRegisters' : _("""Possible values for the query_register field of a
+    'lino_welfare.modlib.cbss.QueryRegisters' : _("""Possible values for the query_register field of a
 lino_welfare.modlib.cbss.models.ManageAccessRequest."""),
-    'lino_welfare.modlib.cbss.choicelists.QueryRegisters.PRIMARY' : _("""Query only the primary register."""),
-    'lino_welfare.modlib.cbss.choicelists.QueryRegisters.SECONDARY' : _("""Query only the secondary register."""),
-    'lino_welfare.modlib.cbss.choicelists.QueryRegisters.ALL' : _("""Query both registers."""),
+    'lino_welfare.modlib.cbss.QueryRegisters.PRIMARY' : _("""Query only the primary register."""),
+    'lino_welfare.modlib.cbss.QueryRegisters.SECONDARY' : _("""Query only the secondary register."""),
+    'lino_welfare.modlib.cbss.QueryRegisters.ALL' : _("""Query both registers."""),
     'lino_welfare.modlib.cbss.mixins.CBSSRequest' : _("""Common Abstract Base Class for SSDNRequest
 and NewStyleRequest"""),
     'lino_welfare.modlib.cbss.mixins.CBSSRequest.wsdl_parts' : _("""alias of NotImplementedError"""),
@@ -119,36 +119,36 @@ requests."""),
     'lino_welfare.modlib.cbss.mixins.SSIN' : _("""Abstract base for Requests that have a field national_id and a method 
 get_ssin()."""),
     'lino_welfare.modlib.cbss.mixins.WithPerson' : _("""Mixin for models that have certain fields"""),
-    'lino_welfare.modlib.cbss.models.Sector' : _("""Default values filled from
+    'lino_welfare.modlib.cbss.Sector' : _("""Default values filled from
 lino_welfare.modlib.cbss.fixtures.sectors."""),
-    'lino_welfare.modlib.cbss.models.Purpose' : _("""Codes qualité (Hoedanigheidscodes).
+    'lino_welfare.modlib.cbss.Purpose' : _("""Codes qualité (Hoedanigheidscodes).
 This table is usually filled with the official codes
 by lino_welfare.modlib.cbss.fixtures.purposes."""),
-    'lino_welfare.modlib.cbss.models.IdentifyPersonRequest' : _("""A request to the IdentifyPerson service."""),
-    'lino_welfare.modlib.cbss.models.ManageAccessRequest' : _("""A request to the ManageAccess service."""),
-    'lino_welfare.modlib.cbss.models.ManageAccessRequest.sector' : _("""Pointer to Sector."""),
-    'lino_welfare.modlib.cbss.models.ManageAccessRequest.purpose' : _("""Pointer to Purpose."""),
-    'lino_welfare.modlib.cbss.models.ManageAccessRequest.action' : _("""The action to perform.  This must be one of the values in
+    'lino_welfare.modlib.cbss.IdentifyPersonRequest' : _("""A request to the IdentifyPerson service."""),
+    'lino_welfare.modlib.cbss.ManageAccessRequest' : _("""A request to the ManageAccess service."""),
+    'lino_welfare.modlib.cbss.ManageAccessRequest.sector' : _("""Pointer to Sector."""),
+    'lino_welfare.modlib.cbss.ManageAccessRequest.purpose' : _("""Pointer to Purpose."""),
+    'lino_welfare.modlib.cbss.ManageAccessRequest.action' : _("""The action to perform.  This must be one of the values in
 lino_welfare.modlib.cbss.choicelists.ManageActions"""),
-    'lino_welfare.modlib.cbss.models.ManageAccessRequest.query_register' : _("""The register to be query.
+    'lino_welfare.modlib.cbss.ManageAccessRequest.query_register' : _("""The register to be query.
 This must be one of the values in
 lino_welfare.modlib.cbss.choicelists.QueryRegisters"""),
-    'lino_welfare.modlib.cbss.models.RetrieveTIGroupsRequest' : _("""A request to the RetrieveTIGroups service (aka Tx25)"""),
+    'lino_welfare.modlib.cbss.RetrieveTIGroupsRequest' : _("""A request to the RetrieveTIGroups service (aka Tx25)"""),
     'lino_welfare.modlib.cbss.tx25.RowFactory' : _("""The result of a Tx25 consist of data rows, each of which has a
 given type.  Consult the source code of this class to see how it
 works."""),
     'lino_welfare.modlib.cbss.tx25.RetrieveTIGroupsResult' : _("""Displays the response of an RetrieveTIGroupsRequest
 as a table."""),
     'lino_welfare.modlib.cbss.tx25.RetrieveTIGroupsResult.master' : _("""alias of RetrieveTIGroupsRequest"""),
-    'lino_welfare.modlib.cbss.ui.ConfidentialResultsTable' : _("""Base class for virtual tables which show highly confidential data
+    'lino_welfare.modlib.cbss.ConfidentialResultsTable' : _("""Base class for virtual tables which show highly confidential data
 which must be visible only to the user who made the request (and
 to security advisors)."""),
-    'lino_welfare.modlib.cbss.ui.IdentifyPersonResult' : _("""Displays the response of an IdentifyPersonRequest
+    'lino_welfare.modlib.cbss.IdentifyPersonResult' : _("""Displays the response of an IdentifyPersonRequest
 as a table."""),
-    'lino_welfare.modlib.cbss.ui.IdentifyPersonResult.master' : _("""alias of IdentifyPersonRequest"""),
+    'lino_welfare.modlib.cbss.IdentifyPersonResult.master' : _("""alias of IdentifyPersonRequest"""),
     'lino_welfare.modlib.client_vouchers.Plugin' : _("""See lino.core.plugin.Plugin."""),
-    'lino_welfare.modlib.client_vouchers.models.VoucherItem' : _("""An item of an ClientVoucher."""),
-    'lino_welfare.modlib.client_vouchers.ui.ClientVouchersByJournal' : _("""Shows all simple invoices of a given journal (whose
+    'lino_welfare.modlib.client_vouchers.VoucherItem' : _("""An item of an ClientVoucher."""),
+    'lino_welfare.modlib.client_vouchers.ClientVouchersByJournal' : _("""Shows all simple invoices of a given journal (whose
 Journal.voucher_type must be
 lino_xl.lib.sales.models.ClientVoucher)."""),
     'lino_welfare.modlib.debts.fields.PeriodsField' : _("""Used for Entry.periods and Account.periods
@@ -158,89 +158,89 @@ Default value is 1. For yearly amounts set it to 12."""),
     'lino_welfare.modlib.debts.mixins.ActorBase' : _("""Base class for both the volatile MainActor and the
 Actor model."""),
     'lino_welfare.modlib.debts.mixins.MainActor' : _("""A volatile object that represents the budget partner as actor"""),
-    'lino_welfare.modlib.debts.models.Group' : _("""A group of accounts."""),
-    'lino_welfare.modlib.debts.models.Account' : _("""An account is an item of an account chart used to collect
+    'lino_welfare.modlib.debts.Group' : _("""A group of accounts."""),
+    'lino_welfare.modlib.debts.Account' : _("""An account is an item of an account chart used to collect
 ledger transactions or other accountable items."""),
-    'lino_welfare.modlib.debts.models.Account.name' : _("""The multilingual designation of this account, as the users see
+    'lino_welfare.modlib.debts.Account.name' : _("""The multilingual designation of this account, as the users see
 it."""),
-    'lino_welfare.modlib.debts.models.Account.group' : _("""The account group to which this account belongs.  This must
+    'lino_welfare.modlib.debts.Account.group' : _("""The account group to which this account belongs.  This must
 point to an instance of Group."""),
-    'lino_welfare.modlib.debts.models.Account.seqno' : _("""The sequence number of this account within its group."""),
-    'lino_welfare.modlib.debts.models.Account.ref' : _("""An optional unique name which can be used to reference a given
+    'lino_welfare.modlib.debts.Account.seqno' : _("""The sequence number of this account within its group."""),
+    'lino_welfare.modlib.debts.Account.ref' : _("""An optional unique name which can be used to reference a given
 account."""),
-    'lino_welfare.modlib.debts.models.Account.type' : _("""The account type of this account.  This must
+    'lino_welfare.modlib.debts.Account.type' : _("""The account type of this account.  This must
 point to an item of
 lino_xl.lib.accounts.choicelists.AccountTypes."""),
-    'lino_welfare.modlib.debts.models.Budget' : _("""A document which expresses the financial situation of a partner at
+    'lino_welfare.modlib.debts.Budget' : _("""A document which expresses the financial situation of a partner at
 a given date."""),
-    'lino_welfare.modlib.debts.models.Actor' : _("""An actor of a budget is a partner who is part of the household
+    'lino_welfare.modlib.debts.Actor' : _("""An actor of a budget is a partner who is part of the household
 for which the budget has been established."""),
-    'lino_welfare.modlib.debts.models.Entry' : _("""A detail row of a Budget."""),
-    'lino_welfare.modlib.debts.models.Entry.amount' : _("""The amount of money. An empty amount is different from a zero
+    'lino_welfare.modlib.debts.Entry' : _("""A detail row of a Budget."""),
+    'lino_welfare.modlib.debts.Entry.amount' : _("""The amount of money. An empty amount is different from a zero
 amount in that the latter will be printed while the former
 not."""),
-    'lino_welfare.modlib.debts.models.Entry.account' : _("""The related Account."""),
-    'lino_welfare.modlib.debts.ui.Groups' : _("""The global table of all account groups."""),
-    'lino_welfare.modlib.debts.ui.Groups.model' : _("""alias of Group"""),
-    'lino_welfare.modlib.debts.ui.ActorsByBudget' : _("""The table used to edit Actors in a Budget’s detail."""),
-    'lino_welfare.modlib.debts.ui.ActorsByBudget.master' : _("""alias of Budget"""),
-    'lino_welfare.modlib.debts.ui.ActorsByBudget.model' : _("""alias of Actor"""),
-    'lino_welfare.modlib.debts.ui.BudgetDetail' : _("""Defines the Detail form of a Budget."""),
-    'lino_welfare.modlib.debts.ui.Budgets' : _("""Base class for lists of Budgets.
+    'lino_welfare.modlib.debts.Entry.account' : _("""The related Account."""),
+    'lino_welfare.modlib.debts.Groups' : _("""The global table of all account groups."""),
+    'lino_welfare.modlib.debts.Groups.model' : _("""alias of Group"""),
+    'lino_welfare.modlib.debts.ActorsByBudget' : _("""The table used to edit Actors in a Budget’s detail."""),
+    'lino_welfare.modlib.debts.ActorsByBudget.master' : _("""alias of Budget"""),
+    'lino_welfare.modlib.debts.ActorsByBudget.model' : _("""alias of Actor"""),
+    'lino_welfare.modlib.debts.BudgetDetail' : _("""Defines the Detail form of a Budget."""),
+    'lino_welfare.modlib.debts.Budgets' : _("""Base class for lists of Budgets.
 Serves as base for MyBudgets and BudgetsByPartner,
 but is directly used by Explorer ‣ Debts ‣Budgets."""),
-    'lino_welfare.modlib.debts.ui.Budgets.model' : _("""alias of Budget"""),
-    'lino_welfare.modlib.debts.ui.EntriesByBudget' : _("""Base class for the tables used to edit Entries by budget."""),
-    'lino_welfare.modlib.debts.ui.EntriesByBudget.master' : _("""alias of Budget"""),
-    'lino_welfare.modlib.debts.ui.EntriesByBudget.model' : _("""alias of Entry"""),
-    'lino_welfare.modlib.debts.ui.EntryGroup' : _("""Volatile object used to encapsulate the account groups which have
+    'lino_welfare.modlib.debts.Budgets.model' : _("""alias of Budget"""),
+    'lino_welfare.modlib.debts.EntriesByBudget' : _("""Base class for the tables used to edit Entries by budget."""),
+    'lino_welfare.modlib.debts.EntriesByBudget.master' : _("""alias of Budget"""),
+    'lino_welfare.modlib.debts.EntriesByBudget.model' : _("""alias of Entry"""),
+    'lino_welfare.modlib.debts.EntryGroup' : _("""Volatile object used to encapsulate the account groups which have
 some data in a given budget.  Entry groups are instantiated and
 yeld by Budget.entry_groups, and they
 are used as the master instance for all
 PrintEntriesByBudget tables."""),
-    'lino_welfare.modlib.debts.ui.PrintEntriesByBudget' : _("""Base class for the printable tables of entries by budget
+    'lino_welfare.modlib.debts.PrintEntriesByBudget' : _("""Base class for the printable tables of entries by budget
 (PrintExpensesByBudget, PrintIncomesByBudget,
 PrintLiabilitiesByBudget and PrintAssetsByBudget)."""),
-    'lino_welfare.modlib.debts.ui.PrintEntriesByBudget.yearly_amount' : _("""Shows the yearly amount. For entries with periodicity 12 this is the
+    'lino_welfare.modlib.debts.PrintEntriesByBudget.yearly_amount' : _("""Shows the yearly amount. For entries with periodicity 12 this is the
 same as total, otherwise it is total * 12 / periods."""),
-    'lino_welfare.modlib.debts.ui.PrintEntriesByBudget.master' : _("""alias of EntryGroup"""),
+    'lino_welfare.modlib.debts.PrintEntriesByBudget.master' : _("""alias of EntryGroup"""),
     'lino_welfare.modlib.dupable_clients.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.dupable_clients.mixins.DupableClient' : _("""Model mixin to add to the base classes of your application’s
 pcsw.Client model."""),
-    'lino_welfare.modlib.dupable_clients.models.Word' : _("""Phonetic word for pcsw.Client.
+    'lino_welfare.modlib.dupable_clients.Word' : _("""Phonetic word for pcsw.Client.
 See lino.mixins.dupable.PhoneticWordBase."""),
-    'lino_welfare.modlib.dupable_clients.models.SimilarClients' : _("""Shows the other clients who are similar to this one."""),
-    'lino_welfare.modlib.dupable_clients.models.SimilarClientsChecker' : _("""If several clients have similar names, their coach should fill at
+    'lino_welfare.modlib.dupable_clients.SimilarClients' : _("""Shows the other clients who are similar to this one."""),
+    'lino_welfare.modlib.dupable_clients.SimilarClientsChecker' : _("""If several clients have similar names, their coach should fill at
 least their birth_date and national_id to assert their
 identity."""),
     'lino_welfare.modlib.esf.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.immersion.Plugin' : _("""See lino.core.plugin.Plugin."""),
-    'lino_welfare.modlib.immersion.models.ContractType' : _("""Every immersion training has a mandatory field
+    'lino_welfare.modlib.immersion.ContractType' : _("""Every immersion training has a mandatory field
 Contract.type which points to this.  The immersion
 training type defines certain properties of the immersion
 trainings that use it."""),
-    'lino_welfare.modlib.immersion.models.ContractType.name' : _("""Translatable description."""),
-    'lino_welfare.modlib.immersion.models.ContractType.template' : _("""See lino_welfare.modlib.isip.mixins.ContractTypeBase.template"""),
-    'lino_welfare.modlib.immersion.models.Contract' : _("""An immersion training."""),
-    'lino_welfare.modlib.immersion.ui.Goals.model' : _("""alias of Goal"""),
-    'lino_welfare.modlib.immersion.ui.ContractTypes' : _("""The default table for ContractType instances."""),
-    'lino_welfare.modlib.immersion.ui.ContractTypes.model' : _("""alias of ContractType"""),
-    'lino_welfare.modlib.immersion.ui.ContractsByClient.master' : _("""alias of Client"""),
-    'lino_welfare.modlib.immersion.ui.ContractsByClient.model' : _("""alias of Contract"""),
+    'lino_welfare.modlib.immersion.ContractType.name' : _("""Translatable description."""),
+    'lino_welfare.modlib.immersion.ContractType.template' : _("""See lino_welfare.modlib.isip.mixins.ContractTypeBase.template"""),
+    'lino_welfare.modlib.immersion.Contract' : _("""An immersion training."""),
+    'lino_welfare.modlib.immersion.Goals.model' : _("""alias of Goal"""),
+    'lino_welfare.modlib.immersion.ContractTypes' : _("""The default table for ContractType instances."""),
+    'lino_welfare.modlib.immersion.ContractTypes.model' : _("""alias of ContractType"""),
+    'lino_welfare.modlib.immersion.ContractsByClient.master' : _("""alias of Client"""),
+    'lino_welfare.modlib.immersion.ContractsByClient.model' : _("""alias of Contract"""),
     'lino_welfare.modlib.integ.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.integ.Plugin.only_primary' : _("""Whether to show only primary coachings in the dynamic ventilation
 columns (coachings per PersonGroup table."""),
-    'lino_welfare.modlib.integ.models.UsersWithClients' : _("""An overview table for agents of the integration service."""),
-    'lino_welfare.modlib.integ.models.CompareRequestsTable' : _("""This is one of the tables of the ActivityReport."""),
-    'lino_welfare.modlib.integ.models.JobProvidersAndContracts' : _("""Ventilates number of job supplyments by provider and type."""),
-    'lino_welfare.modlib.integ.models.JobProvidersAndContracts.contract_types' : _("""alias of ContractType"""),
-    'lino_welfare.modlib.integ.models.JobProvidersAndContracts.model' : _("""alias of Company"""),
-    'lino_welfare.modlib.integ.models.ActivityReport' : _("""Gives an overview about the work of the Integration Service during
+    'lino_welfare.modlib.integ.UsersWithClients' : _("""An overview table for agents of the integration service."""),
+    'lino_welfare.modlib.integ.CompareRequestsTable' : _("""This is one of the tables of the ActivityReport."""),
+    'lino_welfare.modlib.integ.JobProvidersAndContracts' : _("""Ventilates number of job supplyments by provider and type."""),
+    'lino_welfare.modlib.integ.JobProvidersAndContracts.contract_types' : _("""alias of ContractType"""),
+    'lino_welfare.modlib.integ.JobProvidersAndContracts.model' : _("""alias of Company"""),
+    'lino_welfare.modlib.integ.ActivityReport' : _("""Gives an overview about the work of the Integration Service during
 a given period."""),
     'lino_welfare.modlib.integ.roles.IntegrationAgent' : _("""A social agent who can see database content specific to
 integration work: CV, language courses, workshops, …"""),
     'lino_welfare.modlib.isip.Plugin' : _("""See lino.core.plugin.Plugin."""),
-    'lino_welfare.modlib.isip.choicelists.OverlapGroups' : _("""The list of all known overlap groups to be selected for the
+    'lino_welfare.modlib.isip.OverlapGroups' : _("""The list of all known overlap groups to be selected for the
 overlap_group
 of a contract type."""),
     'lino_welfare.modlib.isip.mixins.ContractTypeBase' : _("""Base class for all ContractType models."""),
@@ -280,129 +280,129 @@ ContractEnding."""),
 ContractEnding has
 is_success
 checked."""),
-    'lino_welfare.modlib.isip.models.ContractType' : _("""The type of an isip.Contract."""),
-    'lino_welfare.modlib.isip.models.ContractType.needs_study_type' : _("""Whether contracts of this type need their study_type
+    'lino_welfare.modlib.isip.ContractType' : _("""The type of an isip.Contract."""),
+    'lino_welfare.modlib.isip.ContractType.needs_study_type' : _("""Whether contracts of this type need their study_type
 field filled in."""),
-    'lino_welfare.modlib.isip.models.ExamPolicy' : _("""An examination policy is mostly a RecurrenceSet used for generating
+    'lino_welfare.modlib.isip.ExamPolicy' : _("""An examination policy is mostly a RecurrenceSet used for generating
 “evaluation meetings”.  That is, Lino automatically suggests dates
 where the agent invites the client."""),
-    'lino_welfare.modlib.isip.models.ContractEnding' : _("""A possible reason for premature termination of a contract."""),
-    'lino_welfare.modlib.isip.models.ContractPartner' : _("""Represents a third-party external partner who participates in this
+    'lino_welfare.modlib.isip.ContractEnding' : _("""A possible reason for premature termination of a contract."""),
+    'lino_welfare.modlib.isip.ContractPartner' : _("""Represents a third-party external partner who participates in this
 contract. For every partner there is a rich text field describing
 their duties."""),
-    'lino_welfare.modlib.isip.models.Contract' : _("""An ISIP (called “PIIS” in French and “VSE” in German) is a
+    'lino_welfare.modlib.isip.Contract' : _("""An ISIP (called “PIIS” in French and “VSE” in German) is a
 convention or contract between the PCSW and a young client that
 leads to an individual coaching of the person, mostly concerning
 the client’s scholar education."""),
-    'lino_welfare.modlib.isip.models.Contract.type' : _("""The type of this contract.
+    'lino_welfare.modlib.isip.Contract.type' : _("""The type of this contract.
 Pointer to ContractType."""),
-    'lino_welfare.modlib.isip.models.Contract.study_type' : _("""The type of study that is going to be followed during this
+    'lino_welfare.modlib.isip.Contract.study_type' : _("""The type of study that is going to be followed during this
 contract."""),
     'lino_welfare.modlib.jobs.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.jobs.mixins.JobSupplyment' : _("""Base class for Contract and
 lino_welfare.modlib.art61.models.Contract."""),
-    'lino_welfare.modlib.jobs.models.Schedule' : _("""List of choices for jobs.Contract.schedule field."""),
-    'lino_welfare.modlib.jobs.models.JobProvider' : _("""A job provider (Stellenanbieter, Services utilisateurs) is an
+    'lino_welfare.modlib.jobs.Schedule' : _("""List of choices for jobs.Contract.schedule field."""),
+    'lino_welfare.modlib.jobs.JobProvider' : _("""A job provider (Stellenanbieter, Services utilisateurs) is an
 organisation where the work will be executed. They are not
 necessarily also the employer. It may be either some public
 service or a private company."""),
-    'lino_welfare.modlib.jobs.models.JobProviderDetail' : _("""This is the same as CompanyDetail, except that we"""),
-    'lino_welfare.modlib.jobs.models.JobProviders' : _("""The table of all job providers."""),
-    'lino_welfare.modlib.jobs.models.JobProviders.model' : _("""alias of JobProvider"""),
-    'lino_welfare.modlib.jobs.models.ContractType' : _("""This is the homologue of isip.ContractType (see there for
+    'lino_welfare.modlib.jobs.JobProviderDetail' : _("""This is the same as CompanyDetail, except that we"""),
+    'lino_welfare.modlib.jobs.JobProviders' : _("""The table of all job providers."""),
+    'lino_welfare.modlib.jobs.JobProviders.model' : _("""alias of JobProvider"""),
+    'lino_welfare.modlib.jobs.ContractType' : _("""This is the homologue of isip.ContractType (see there for
 general documentation)."""),
-    'lino_welfare.modlib.jobs.models.ContractTypes.model' : _("""alias of ContractType"""),
-    'lino_welfare.modlib.jobs.models.Contract' : _("""An Art60§7 job supplyment is a contract bla bla…"""),
-    'lino_welfare.modlib.jobs.models.Contract.duration' : _("""If applies_from and duration are set, then the
+    'lino_welfare.modlib.jobs.ContractTypes.model' : _("""alias of ContractType"""),
+    'lino_welfare.modlib.jobs.Contract' : _("""An Art60§7 job supplyment is a contract bla bla…"""),
+    'lino_welfare.modlib.jobs.Contract.duration' : _("""If applies_from and duration are set, then the
 default value for applies_until is computed assuming 26
 workdays per month:"""),
-    'lino_welfare.modlib.jobs.models.ContractsByClient' : _("""Shows the Art60§7 job supplyments for this client."""),
-    'lino_welfare.modlib.jobs.models.ContractsByClient.master' : _("""alias of Client"""),
-    'lino_welfare.modlib.jobs.models.ContractsByClient.model' : _("""alias of Contract"""),
-    'lino_welfare.modlib.jobs.models.ContractsByRegime' : _("""Shows Job Contracts for a given Regime."""),
-    'lino_welfare.modlib.jobs.models.ContractsByRegime.master' : _("""alias of Regime"""),
-    'lino_welfare.modlib.jobs.models.ContractsByRegime.model' : _("""alias of Contract"""),
-    'lino_welfare.modlib.jobs.models.Offer' : _("""A Job Offer"""),
-    'lino_welfare.modlib.jobs.models.Job' : _("""A job is a place where a Client can work. The Job Provider"""),
-    'lino_welfare.modlib.jobs.models.Candidature' : _("""A candidature is when a client applies for a known Job."""),
-    'lino_welfare.modlib.jobs.models.Candidature.art61' : _("""Whether an art.61 (art.60) contract can satisfy this
+    'lino_welfare.modlib.jobs.ContractsByClient' : _("""Shows the Art60§7 job supplyments for this client."""),
+    'lino_welfare.modlib.jobs.ContractsByClient.master' : _("""alias of Client"""),
+    'lino_welfare.modlib.jobs.ContractsByClient.model' : _("""alias of Contract"""),
+    'lino_welfare.modlib.jobs.ContractsByRegime' : _("""Shows Job Contracts for a given Regime."""),
+    'lino_welfare.modlib.jobs.ContractsByRegime.master' : _("""alias of Regime"""),
+    'lino_welfare.modlib.jobs.ContractsByRegime.model' : _("""alias of Contract"""),
+    'lino_welfare.modlib.jobs.Offer' : _("""A Job Offer"""),
+    'lino_welfare.modlib.jobs.Job' : _("""A job is a place where a Client can work. The Job Provider"""),
+    'lino_welfare.modlib.jobs.Candidature' : _("""A candidature is when a client applies for a known Job."""),
+    'lino_welfare.modlib.jobs.Candidature.art61' : _("""Whether an art.61 (art.60) contract can satisfy this
 candidature. Check at least one of them."""),
-    'lino_welfare.modlib.jobs.models.Candidatures' : _("""List of Candidatures."""),
-    'lino_welfare.modlib.jobs.models.Candidatures.model' : _("""alias of Candidature"""),
-    'lino_welfare.modlib.jobs.models.CandidaturesByPerson' : _("""…"""),
-    'lino_welfare.modlib.jobs.models.CandidaturesByPerson.master' : _("""alias of Client"""),
-    'lino_welfare.modlib.jobs.models.CandidaturesByPerson.model' : _("""alias of Candidature"""),
-    'lino_welfare.modlib.jobs.models.SectorFunctionByOffer' : _("""Shows the Candidatures or Experiences for this Offer."""),
-    'lino_welfare.modlib.jobs.models.SectorFunctionByOffer.master' : _("""alias of Offer"""),
-    'lino_welfare.modlib.jobs.models.JobType' : _("""The list of Job Types is used for statistical analysis,
+    'lino_welfare.modlib.jobs.Candidatures' : _("""List of Candidatures."""),
+    'lino_welfare.modlib.jobs.Candidatures.model' : _("""alias of Candidature"""),
+    'lino_welfare.modlib.jobs.CandidaturesByPerson' : _("""…"""),
+    'lino_welfare.modlib.jobs.CandidaturesByPerson.master' : _("""alias of Client"""),
+    'lino_welfare.modlib.jobs.CandidaturesByPerson.model' : _("""alias of Candidature"""),
+    'lino_welfare.modlib.jobs.SectorFunctionByOffer' : _("""Shows the Candidatures or Experiences for this Offer."""),
+    'lino_welfare.modlib.jobs.SectorFunctionByOffer.master' : _("""alias of Offer"""),
+    'lino_welfare.modlib.jobs.JobType' : _("""The list of Job Types is used for statistical analysis,
 e.g. in :class:``"""),
-    'lino_welfare.modlib.jobs.models.ContractsSearch' : _("""Shows the Job contracts owned by this user."""),
-    'lino_welfare.modlib.jobs.models.ContractsSearch.model' : _("""alias of Contract"""),
-    'lino_welfare.modlib.jobs.models.JobsOverviewByType.master' : _("""alias of JobType"""),
-    'lino_welfare.modlib.jobs.models.JobsOverviewByType.model' : _("""alias of Job"""),
-    'lino_welfare.modlib.jobs.models.JobsOverview' : _("""An overview of the jobs and the candidates working there or
+    'lino_welfare.modlib.jobs.ContractsSearch' : _("""Shows the Job contracts owned by this user."""),
+    'lino_welfare.modlib.jobs.ContractsSearch.model' : _("""alias of Contract"""),
+    'lino_welfare.modlib.jobs.JobsOverviewByType.master' : _("""alias of JobType"""),
+    'lino_welfare.modlib.jobs.JobsOverviewByType.model' : _("""alias of Job"""),
+    'lino_welfare.modlib.jobs.JobsOverview' : _("""An overview of the jobs and the candidates working there or
 applying for it."""),
     'lino_welfare.modlib.ledger.Plugin' : _("""See lino.core.plugin.Plugin."""),
-    'lino_welfare.modlib.newcomers.models.Broker' : _("""A Broker (Vermittler) is an external institution who suggests
+    'lino_welfare.modlib.newcomers.Broker' : _("""A Broker (Vermittler) is an external institution who suggests
 newcomers."""),
-    'lino_welfare.modlib.newcomers.models.Brokers' : _("""List of Brokers on this site."""),
-    'lino_welfare.modlib.newcomers.models.Brokers.model' : _("""alias of Broker"""),
-    'lino_welfare.modlib.newcomers.models.Faculty' : _("""A Faculty (Fachbereich) is a conceptual (not organizational)
+    'lino_welfare.modlib.newcomers.Brokers' : _("""List of Brokers on this site."""),
+    'lino_welfare.modlib.newcomers.Brokers.model' : _("""alias of Broker"""),
+    'lino_welfare.modlib.newcomers.Faculty' : _("""A Faculty (Fachbereich) is a conceptual (not organizational)
 department of this PCSW.  Each Newcomer will be assigned to one
 and only one Faculty, based on his/her needs."""),
-    'lino_welfare.modlib.newcomers.models.Competence' : _("""A competence is when a given user is declared to be competent
+    'lino_welfare.modlib.newcomers.Competence' : _("""A competence is when a given user is declared to be competent
 in a given faculty."""),
-    'lino_welfare.modlib.newcomers.models.NewClients' : _("""A variant of pcsw.CoachedClients designed for newcomers
+    'lino_welfare.modlib.newcomers.NewClients' : _("""A variant of pcsw.CoachedClients designed for newcomers
 consultants."""),
-    'lino_welfare.modlib.newcomers.models.NewClients.model' : _("""alias of Client"""),
-    'lino_welfare.modlib.newcomers.models.AvailableCoaches' : _("""List of users available for new coachings."""),
-    'lino_welfare.modlib.newcomers.models.AvailableCoaches.model' : _("""alias of User"""),
-    'lino_welfare.modlib.newcomers.models.AssignCoach' : _("""Assign this agent as coach for this client.  This will set the
+    'lino_welfare.modlib.newcomers.NewClients.model' : _("""alias of Client"""),
+    'lino_welfare.modlib.newcomers.AvailableCoaches' : _("""List of users available for new coachings."""),
+    'lino_welfare.modlib.newcomers.AvailableCoaches.model' : _("""alias of User"""),
+    'lino_welfare.modlib.newcomers.AssignCoach' : _("""Assign this agent as coach for this client.  This will set the
 client’s state to Coached and send a notification to the new
 coach."""),
-    'lino_welfare.modlib.newcomers.models.AvailableCoachesByClient' : _("""List of users available for coaching this client.  Visible only to
+    'lino_welfare.modlib.newcomers.AvailableCoachesByClient' : _("""List of users available for coaching this client.  Visible only to
 Newcomers consultants."""),
-    'lino_welfare.modlib.newcomers.models.AvailableCoachesByClient.master' : _("""alias of Client"""),
-    'lino_welfare.modlib.newcomers.models.AvailableCoachesByClient.model' : _("""alias of User"""),
+    'lino_welfare.modlib.newcomers.AvailableCoachesByClient.master' : _("""alias of Client"""),
+    'lino_welfare.modlib.newcomers.AvailableCoachesByClient.model' : _("""alias of User"""),
     'lino_welfare.modlib.newcomers.roles.NewcomersAgent' : _("""A newcomers agent is a social agent who also manages
 newcomers."""),
     'lino_welfare.modlib.newcomers.roles.NewcomersOperator' : _("""A newcomers operator is a user who is not social agent but
 can e.g. register newcomers and assign them a coach."""),
-    'lino_welfare.modlib.notes.models.Note' : _("""Overrides the library model, setting an alternative verbose name,
+    'lino_welfare.modlib.notes.Note' : _("""Overrides the library model, setting an alternative verbose name,
 adding a real database field important and the
 person property."""),
-    'lino_welfare.modlib.notes.models.Note.important' : _("""Checking this will cause this note to appear in the
+    'lino_welfare.modlib.notes.Note.important' : _("""Checking this will cause this note to appear in the
 overview panel of
 the person linked to this note."""),
-    'lino_welfare.modlib.notes.models.Note.person' : _("""An alias to lino_xl.lib.notes.models.Note.project."""),
+    'lino_welfare.modlib.notes.Note.person' : _("""An alias to lino_xl.lib.notes.models.Note.project."""),
     'lino_welfare.modlib.pcsw.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.pcsw.actions.RefuseClient' : _("""Refuse this newcomer request."""),
     'lino_welfare.modlib.pcsw.actions.MarkClientFormer' : _("""Change client’s state to ‘former’. This will also end any active
 coachings."""),
-    'lino_welfare.modlib.pcsw.models.Client' : _("""Inherits from lino_welfare.modlib.contacts.models.Person and
+    'lino_welfare.modlib.pcsw.Client' : _("""Inherits from lino_welfare.modlib.contacts.models.Person and
 lino_xl.lib.beid.models.BeIdCardHolder."""),
-    'lino_welfare.modlib.pcsw.models.Client.has_esf' : _("""Whether Lino should make ESF summaries for this client."""),
-    'lino_welfare.modlib.pcsw.models.Client.overview' : _("""A panel with general information about this client."""),
-    'lino_welfare.modlib.pcsw.models.Client.cvs_emitted' : _("""A virtual field displaying a group of shortcut links for managing CVs
+    'lino_welfare.modlib.pcsw.Client.has_esf' : _("""Whether Lino should make ESF summaries for this client."""),
+    'lino_welfare.modlib.pcsw.Client.overview' : _("""A panel with general information about this client."""),
+    'lino_welfare.modlib.pcsw.Client.cvs_emitted' : _("""A virtual field displaying a group of shortcut links for managing CVs
 (Curriculum Vitaes)."""),
-    'lino_welfare.modlib.pcsw.models.Client.id_document' : _("""A virtual field displaying a group of buttons for managing the
+    'lino_welfare.modlib.pcsw.Client.id_document' : _("""A virtual field displaying a group of buttons for managing the
 “identifying document”, i.e. an uploaded document which has been
 used as alternative to the eID card."""),
-    'lino_welfare.modlib.pcsw.models.Client.group' : _("""Pointer to PersonGroup.
+    'lino_welfare.modlib.pcsw.Client.group' : _("""Pointer to PersonGroup.
 The intergration phase of this client."""),
-    'lino_welfare.modlib.pcsw.models.Client.civil_state' : _("""The civil state of this client. Allowed choices are defined in
+    'lino_welfare.modlib.pcsw.Client.civil_state' : _("""The civil state of this client. Allowed choices are defined in
 CivilState."""),
-    'lino_welfare.modlib.pcsw.models.Client.client_state' : _("""Pointer to ClientStates."""),
-    'lino_welfare.modlib.pcsw.models.Client.unemployed_since' : _("""The date when this client got unemployed and stopped to have a
+    'lino_welfare.modlib.pcsw.Client.client_state' : _("""Pointer to ClientStates."""),
+    'lino_welfare.modlib.pcsw.Client.unemployed_since' : _("""The date when this client got unemployed and stopped to have a
 regular work."""),
-    'lino_welfare.modlib.pcsw.models.Client.seeking_since' : _("""The date when this client registered as unemployed and started
+    'lino_welfare.modlib.pcsw.Client.seeking_since' : _("""The date when this client registered as unemployed and started
 to look for a new job."""),
-    'lino_welfare.modlib.pcsw.models.Client.dupable_word_model' : _("""alias of Word"""),
-    'lino_welfare.modlib.pcsw.models.Clients' : _("""The list that opens by Contacts ‣ Clients."""),
-    'lino_welfare.modlib.pcsw.models.Clients.client_state' : _("""If not empty, show only Clients whose client_state equals
+    'lino_welfare.modlib.pcsw.Client.dupable_word_model' : _("""alias of Word"""),
+    'lino_welfare.modlib.pcsw.Clients' : _("""The list that opens by Contacts ‣ Clients."""),
+    'lino_welfare.modlib.pcsw.Clients.client_state' : _("""If not empty, show only Clients whose client_state equals
 the specified value."""),
-    'lino_welfare.modlib.pcsw.models.Clients.model' : _("""alias of Client"""),
-    'lino_welfare.modlib.pcsw.models.SSINChecker' : _("""Clients must have either valid eId data or an alternative
+    'lino_welfare.modlib.pcsw.Clients.model' : _("""alias of Client"""),
+    'lino_welfare.modlib.pcsw.SSINChecker' : _("""Clients must have either valid eId data or an alternative
 identifying document."""),
     'lino_welfare.modlib.pcsw.roles.SocialAgent' : _("""A social agent is a user who does individual coaching of
 clients.  Certain privacy-relevant client data is visible only
@@ -410,35 +410,35 @@ to social agents."""),
     'lino_welfare.modlib.pcsw.roles.SocialStaff' : _("""A social staff member is a social agent who has access to more
 technical information about welfare clients.  For example the
 Miscellaneous panel."""),
-    'lino_welfare.modlib.reception.models.FindDateByClientTable' : _("""A ButtonsTable which shows
+    'lino_welfare.modlib.reception.FindDateByClientTable' : _("""A ButtonsTable which shows
 all users who are candidates responsible of new client
 appointment. Clicking on one of them will open the
 extensible.CalendarPanel with appropriate parameters
 (subst_user and current_project)."""),
-    'lino_welfare.modlib.reception.models.FindDateByClientTable.master' : _("""alias of Client"""),
-    'lino_welfare.modlib.reception.models.FindDateByClientDlg' : _("""Create an appointment from a client for this client with a user to
+    'lino_welfare.modlib.reception.FindDateByClientTable.master' : _("""alias of Client"""),
+    'lino_welfare.modlib.reception.FindDateByClientDlg' : _("""Create an appointment from a client for this client with a user to
 be selected manually."""),
-    'lino_welfare.modlib.reception.models.CreateClientVisit' : _("""Create a prompt event from a client."""),
-    'lino_welfare.modlib.reception.models.CreateCoachingVisit' : _("""Call a prompt event from a Coaching.  See also
+    'lino_welfare.modlib.reception.CreateClientVisit' : _("""Create a prompt event from a client."""),
+    'lino_welfare.modlib.reception.CreateCoachingVisit' : _("""Call a prompt event from a Coaching.  See also
 lino_xl.lib.reception.models.create_prompt_event()."""),
-    'lino_welfare.modlib.reception.models.Clients' : _("""The list that opens by Reception ‣ Clients."""),
-    'lino_welfare.modlib.reception.models.Clients.model' : _("""alias of Client"""),
-    'lino_welfare.modlib.reception.models.AgentsByClient' : _("""Shows the users for whom an appointment can be made with this
+    'lino_welfare.modlib.reception.Clients' : _("""The list that opens by Reception ‣ Clients."""),
+    'lino_welfare.modlib.reception.Clients.model' : _("""alias of Client"""),
+    'lino_welfare.modlib.reception.AgentsByClient' : _("""Shows the users for whom an appointment can be made with this
 client. Per user you have two possible buttons: (1) a prompt
 consultation (client will wait in the lounge until the user receives
 them) or (2) a scheduled appointment in the user’s calendar."""),
-    'lino_welfare.modlib.reception.models.AgentsByClient.master' : _("""alias of Client"""),
-    'lino_welfare.modlib.reception.models.AgentsByClient.model' : _("""alias of Coaching"""),
-    'lino_welfare.modlib.sepa.models.Account' : _("""A bank account of a partner."""),
-    'lino_welfare.modlib.sepa.models.Account.managed' : _("""Whether this account is being managed by the PCSW."""),
-    'lino_welfare.modlib.sepa.models.AccountsByClient' : _("""Shows the accounts for a given client. This includes additional
+    'lino_welfare.modlib.reception.AgentsByClient.master' : _("""alias of Client"""),
+    'lino_welfare.modlib.reception.AgentsByClient.model' : _("""alias of Coaching"""),
+    'lino_welfare.modlib.sepa.Account' : _("""A bank account of a partner."""),
+    'lino_welfare.modlib.sepa.Account.managed' : _("""Whether this account is being managed by the PCSW."""),
+    'lino_welfare.modlib.sepa.AccountsByClient' : _("""Shows the accounts for a given client. This includes additional
 information managed,
 account_type and
 statements."""),
-    'lino_welfare.modlib.sepa.models.AccountsByClient.master' : _("""alias of Partner"""),
-    'lino_welfare.modlib.sepa.models.AccountsByClient.model' : _("""alias of Account"""),
-    'lino_welfare.modlib.users.desktop.UserDetail' : _("""Layout of User Detail in Lino Welfare."""),
-    'lino_welfare.modlib.users.models.User' : _("""The users.User model used in Lino Welfare.  We add a few fields
+    'lino_welfare.modlib.sepa.AccountsByClient.master' : _("""alias of Partner"""),
+    'lino_welfare.modlib.sepa.AccountsByClient.model' : _("""alias of Account"""),
+    'lino_welfare.modlib.users.UserDetail' : _("""Layout of User Detail in Lino Welfare."""),
+    'lino_welfare.modlib.users.User' : _("""The users.User model used in Lino Welfare.  We add a few fields
 to the standard models (lino.modlib.users.models.User)."""),
     'lino_welfare.modlib.welfare.user_types.AccountantManager' : _("""Like an accountant, but also has access to configuration."""),
     'lino_welfare.modlib.welfare.user_types.SiteAdmin' : _("""The site adminstrator has permission for everything."""),
@@ -453,49 +453,49 @@ mediation."""),
     'lino_welfare.modlib.welfare.user_types.LedgerUser' : _("""An accountant is a user who enters invoices, bank statements,
 payment orders and other ledger operations."""),
     'lino_welfare.modlib.welfare.user_types.Supervisor' : _("""A backoffice user who can act as others."""),
-    'lino_welfare.modlib.xcourses.models.CourseProvider' : _("""A CourseProvider is a Company that offers Courses."""),
-    'lino_welfare.modlib.xcourses.models.CourseProviderDetail' : _("""Same as CompanyDetail, except that we add a tab
+    'lino_welfare.modlib.xcourses.CourseProvider' : _("""A CourseProvider is a Company that offers Courses."""),
+    'lino_welfare.modlib.xcourses.CourseProviderDetail' : _("""Same as CompanyDetail, except that we add a tab
 Courses."""),
-    'lino_welfare.modlib.xcourses.models.CourseProviders' : _("""Table of all course providers"""),
-    'lino_welfare.modlib.xcourses.models.CourseProviders.model' : _("""alias of CourseProvider"""),
-    'lino_welfare.modlib.xcourses.models.CourseContent' : _("""Ein Kursinhalt (z.B. “Französisch”, “Deutsch”, “Alphabétisation”,…)"""),
-    'lino_welfare.modlib.xcourses.models.Course' : _("""Ein konkreter Kurs, der an einem bestimmten Datum beginnt.
+    'lino_welfare.modlib.xcourses.CourseProviders' : _("""Table of all course providers"""),
+    'lino_welfare.modlib.xcourses.CourseProviders.model' : _("""alias of CourseProvider"""),
+    'lino_welfare.modlib.xcourses.CourseContent' : _("""Ein Kursinhalt (z.B. “Französisch”, “Deutsch”, “Alphabétisation”,…)"""),
+    'lino_welfare.modlib.xcourses.Course' : _("""Ein konkreter Kurs, der an einem bestimmten Datum beginnt.
 Für jeden Kurs muss ein entsprechendes Angebot existieren, 
 das u.A. den Kursinhalt 
 und Kursanbieter 
 detailliert. Also selbst für einen einmalig stattfindenden 
 Kurs muss ein Angebot erstellt werden."""),
-    'lino_welfare.modlib.xcourses.models.CourseRequest' : _("""A Course Request is created when a certain Person expresses her
+    'lino_welfare.modlib.xcourses.CourseRequest' : _("""A Course Request is created when a certain Person expresses her
 wish to participate in a Course with a certain CourseContent."""),
-    'lino_welfare.modlib.xcourses.models.CourseRequestsByPerson' : _("""Shows the course requests of a client."""),
-    'lino_welfare.modlib.xcourses.models.CourseRequestsByPerson.master' : _("""alias of Client"""),
-    'lino_welfare.modlib.xcourses.models.CourseRequestsByPerson.model' : _("""alias of CourseRequest"""),
-    'lino_welfare.modlib.xcourses.models.RequestsByCourse' : _("""Table of CourseRequest instances of a Course."""),
-    'lino_welfare.modlib.xcourses.models.RequestsByCourse.master' : _("""alias of Course"""),
-    'lino_welfare.modlib.xcourses.models.RequestsByCourse.model' : _("""alias of CourseRequest"""),
-    'lino_welfare.modlib.xcourses.models.ParticipantsByCourse' : _("""List of participating candidates for the given Course."""),
-    'lino_welfare.modlib.xcourses.models.ParticipantsByCourse.master' : _("""alias of Course"""),
-    'lino_welfare.modlib.xcourses.models.ParticipantsByCourse.model' : _("""alias of CourseRequest"""),
-    'lino_welfare.modlib.xcourses.models.CandidatesByCourse' : _("""List of Candidates for the given Course
+    'lino_welfare.modlib.xcourses.CourseRequestsByPerson' : _("""Shows the course requests of a client."""),
+    'lino_welfare.modlib.xcourses.CourseRequestsByPerson.master' : _("""alias of Client"""),
+    'lino_welfare.modlib.xcourses.CourseRequestsByPerson.model' : _("""alias of CourseRequest"""),
+    'lino_welfare.modlib.xcourses.RequestsByCourse' : _("""Table of CourseRequest instances of a Course."""),
+    'lino_welfare.modlib.xcourses.RequestsByCourse.master' : _("""alias of Course"""),
+    'lino_welfare.modlib.xcourses.RequestsByCourse.model' : _("""alias of CourseRequest"""),
+    'lino_welfare.modlib.xcourses.ParticipantsByCourse' : _("""List of participating candidates for the given Course."""),
+    'lino_welfare.modlib.xcourses.ParticipantsByCourse.master' : _("""alias of Course"""),
+    'lino_welfare.modlib.xcourses.ParticipantsByCourse.model' : _("""alias of CourseRequest"""),
+    'lino_welfare.modlib.xcourses.CandidatesByCourse' : _("""List of Candidates for the given Course
 which are not registiered."""),
-    'lino_welfare.modlib.xcourses.models.CandidatesByCourse.master' : _("""alias of Course"""),
-    'lino_welfare.modlib.xcourses.models.CandidatesByCourse.model' : _("""alias of CourseRequest"""),
-    'lino_welfare.modlib.xcourses.models.PendingCourseRequests' : _("""List of pending course requests."""),
-    'lino_welfare.modlib.xcourses.models.PendingCourseRequests.model' : _("""alias of CourseRequest"""),
-    'lino_welfare.projects.chatelet.modlib.courses.models.Enrolment' : _("""Adds two text fields motivation and problems."""),
-    'lino_welfare.projects.chatelet.modlib.cv.models.ClientIsLearning' : _("""Select only clients who are “learning” during the given date.
+    'lino_welfare.modlib.xcourses.CandidatesByCourse.master' : _("""alias of Course"""),
+    'lino_welfare.modlib.xcourses.CandidatesByCourse.model' : _("""alias of CourseRequest"""),
+    'lino_welfare.modlib.xcourses.PendingCourseRequests' : _("""List of pending course requests."""),
+    'lino_welfare.modlib.xcourses.PendingCourseRequests.model' : _("""alias of CourseRequest"""),
+    'lino_welfare.projects.chatelet.modlib.courses.Enrolment' : _("""Adds two text fields motivation and problems."""),
+    'lino_welfare.projects.chatelet.modlib.cv.ClientIsLearning' : _("""Select only clients who are “learning” during the given date.
 That is, who have an active Study, Training or
 Experience.
 Only the start_date is used, end_date has no effect when
 this criteria."""),
-    'lino_welfare.projects.chatelet.modlib.cv.models.Proof' : _("""A proof is some document which certifies that a given person
+    'lino_welfare.projects.chatelet.modlib.cv.Proof' : _("""A proof is some document which certifies that a given person
 has a given skill."""),
-    'lino_welfare.projects.chatelet.modlib.cv.models.PersonProperty' : _("""Abstract base for Skill, SoftSkill and
+    'lino_welfare.projects.chatelet.modlib.cv.PersonProperty' : _("""Abstract base for Skill, SoftSkill and
 Obstacle."""),
-    'lino_welfare.projects.chatelet.modlib.cv.models.Obstacle' : _("""An obstacle is an observed fact or characteristic of a client
+    'lino_welfare.projects.chatelet.modlib.cv.Obstacle' : _("""An obstacle is an observed fact or characteristic of a client
 which might be reason to not get a given job."""),
-    'lino_welfare.projects.chatelet.modlib.cv.models.Obstacle.type' : _("""A pointer to ObstacleType."""),
-    'lino_welfare.projects.chatelet.modlib.cv.models.Obstacle.user' : _("""The agent who observed this obstacle."""),
-    'lino_welfare.projects.chatelet.modlib.cv.models.Obstacle.detected_date' : _("""The date when the agent observed this obstacle."""),
+    'lino_welfare.projects.chatelet.modlib.cv.Obstacle.type' : _("""A pointer to ObstacleType."""),
+    'lino_welfare.projects.chatelet.modlib.cv.Obstacle.user' : _("""The agent who observed this obstacle."""),
+    'lino_welfare.projects.chatelet.modlib.cv.Obstacle.detected_date' : _("""The date when the agent observed this obstacle."""),
     'lino_welfare.projects.chatelet.tests.test_chatelet.TestCase' : _("""Miscellaneous tests on an empty database."""),
 }
