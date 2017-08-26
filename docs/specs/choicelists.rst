@@ -93,6 +93,7 @@ name to read the documentation):
     notify.MessageTypes : Message Types
     outbox.RecipientTypes : RecipientTypes
     pcsw.RefusalReasons : Ablehnungsgründe
+    phones.ContactDetailTypes : Contact detail types
     plausibility.Checkers : Datentests
     printing.BuildMethods : BuildMethods
     properties.DoYouLike : DoYouLike
