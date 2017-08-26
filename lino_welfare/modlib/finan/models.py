@@ -34,10 +34,10 @@ class DisbursementOrderDetail(JournalEntryDetail):
     finan.ItemsByDisbursementOrder
     """, label=_("General"))
 
-    ledger = dd.Panel("""
+    more = dd.Panel("""
     state user id
     ledger.MovementsByVoucher
-    """, label=_("Ledger"))
+    """, label=_("More"))
 
 
 class DisbursementOrders(PaymentOrders):
