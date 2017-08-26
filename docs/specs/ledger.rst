@@ -298,14 +298,13 @@ The state of a voucher
 .. technical:
 
     The `VoucherStates` choicelist is used by two fields: one database
-    field and 19 parameter fields.
+    field and one parameter field.
 
     >>> len(ledger.VoucherStates._fields)
-    20
+    2
     >>> for f in ledger.VoucherStates._fields:
-    ...     model = getattr(f, 'model', None)
-    ...     if model:
-    ...        print("%s.%s.%s" % (model._meta.app_label, model.__name__, f.name))
+    ...     print(f)
+    <lino.core.choicelists.ChoiceListField: state>
     ledger.Voucher.state
 
     >>> obj = vatless.AccountInvoice.objects.get(id=1)
