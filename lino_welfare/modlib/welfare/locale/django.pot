@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 2017.5.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-25 20:28+0300\n"
+"POT-Creation-Date: 2017-08-30 21:05+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,8 +41,8 @@ msgstr ""
 #: lino_welfare/modlib/cbss/tx25.py:419 lino_welfare/modlib/cbss/tx25.py:510
 #: lino_welfare/modlib/cbss/tx25.py:522 lino_welfare/modlib/debts/models.py:160
 #: lino_welfare/modlib/isip/models.py:411
-#: lino_welfare/modlib/jobs/models.py:889
-#: lino_welfare/modlib/jobs/models.py:1010
+#: lino_welfare/modlib/jobs/models.py:890
+#: lino_welfare/modlib/jobs/models.py:1011
 #: lino_welfare/modlib/pcsw/models.py:1108
 #: lino_welfare/projects/chatelet/modlib/cv/models.py:250
 msgid "Date"
@@ -176,7 +176,7 @@ msgstr ""
 #: lino_welfare/modlib/jobs/mixins.py:58 lino_welfare/modlib/jobs/models.py:457
 #: lino_welfare/modlib/jobs/models.py:514
 #: lino_welfare/modlib/jobs/models.py:650
-#: lino_welfare/modlib/jobs/models.py:829
+#: lino_welfare/modlib/jobs/models.py:830
 #: lino_welfare/modlib/pcsw/actions.py:60
 #: lino_welfare/modlib/pcsw/models.py:1013
 #: lino_welfare/modlib/pcsw/models.py:1074
@@ -2592,12 +2592,12 @@ msgid "start date"
 msgstr ""
 
 #: lino_welfare/modlib/jobs/models.py:489
-#: lino_welfare/modlib/jobs/models.py:896
+#: lino_welfare/modlib/jobs/models.py:897
 msgid "Job"
 msgstr ""
 
 #: lino_welfare/modlib/jobs/models.py:498
-#: lino_welfare/modlib/jobs/models.py:822
+#: lino_welfare/modlib/jobs/models.py:823
 msgid "Job Type"
 msgstr ""
 
@@ -2628,7 +2628,7 @@ msgid "Active"
 msgstr ""
 
 #: lino_welfare/modlib/jobs/models.py:618
-#: lino_welfare/modlib/jobs/models.py:915
+#: lino_welfare/modlib/jobs/models.py:916
 msgid "Probation"
 msgstr ""
 
@@ -2637,7 +2637,7 @@ msgid "Probation failed"
 msgstr ""
 
 #: lino_welfare/modlib/jobs/models.py:620
-#: lino_welfare/modlib/jobs/models.py:907
+#: lino_welfare/modlib/jobs/models.py:908
 msgctxt "jobs"
 msgid "Working"
 msgstr ""
@@ -2680,52 +2680,52 @@ msgstr ""
 msgid "Whether an art.61 contract can satisfy this candidature."
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:683
+#: lino_welfare/modlib/jobs/models.py:684
 #, python-format
 msgid "Candidature by %(person)s"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:779
-#: lino_welfare/modlib/jobs/models.py:911
+#: lino_welfare/modlib/jobs/models.py:780
+#: lino_welfare/modlib/jobs/models.py:912
 #: lino_welfare/modlib/xcourses/models.py:524
 msgid "Candidates"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:785
+#: lino_welfare/modlib/jobs/models.py:786
 msgid "Experiences"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:790
+#: lino_welfare/modlib/jobs/models.py:791
 msgid ""
 "\n"
 "    Eine Stelle ist ein Arbeitsplatz bei einem Stellenabieter.\n"
 "    "
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:823
+#: lino_welfare/modlib/jobs/models.py:824
 msgid "Job Types"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:827
+#: lino_welfare/modlib/jobs/models.py:828
 #: lino_welfare/modlib/pcsw/models.py:932
 #: lino_welfare/modlib/pcsw/models.py:1111
 msgid "Designation"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:830
+#: lino_welfare/modlib/jobs/models.py:831
 msgid "Social economy"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:864
+#: lino_welfare/modlib/jobs/models.py:865
 msgid "Job Contracts Search"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:884
-#: lino_welfare/modlib/jobs/models.py:1006
+#: lino_welfare/modlib/jobs/models.py:885
+#: lino_welfare/modlib/jobs/models.py:1007
 msgid "Contracts Situation"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:899
+#: lino_welfare/modlib/jobs/models.py:900
 msgctxt "(place)"
 msgid " at "
 msgstr ""
