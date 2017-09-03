@@ -131,7 +131,7 @@ class BeIdTests(RemoteAuthTestCase):
         dlg = []
         expected = """\
 Click OK to apply the following changes for JEFFIN Jean (100) :\
-<br/>City : None -> Place #1 ('Tallinn')
+<br/>Locality : None -> Place #1 ('Tallinn')
 <br/>Gender : None -> <Genders.male:M>
 <br/>until : None -> 2016-08-19
 <br/>Street : '' -> 'Estland'

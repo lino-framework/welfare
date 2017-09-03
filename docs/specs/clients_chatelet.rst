@@ -51,7 +51,7 @@ Lino Welfare à la Chatelet.
 - **Intervenants** (coaching) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
   - (coaching_1) [visible for 110 120 200 220 300 800 admin 910]:
     - (newcomers_left):
-      - (newcomers_left_1) [visible for all]: **Actions** (workflow_buttons), **Document identifiant** (id_document)
+      - (newcomers_left_1) [visible for all]: **Workflow** (workflow_buttons), **Document identifiant** (id_document)
       - **Spécificité** (faculty) [visible for all]
       - **Contacts** (coachings.ContactsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]
     - **Agents disponibles** (newcomers.AvailableCoachesByClient)

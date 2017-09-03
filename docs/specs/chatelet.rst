@@ -4,9 +4,9 @@
 Lino Welfare à la Châtelet
 ==========================
 
-.. How to test only this document:
+..  How to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_chatelet
+    $ doctest docs/specs/chatelet.rst
 
     doctest init:
 

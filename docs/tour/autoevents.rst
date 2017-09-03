@@ -49,7 +49,7 @@ For example let's look at ISIP contract #26 of the demo database.
 ExamPolicy #1 ('Every month')
 >>> rt.show(cal.EntriesByController, obj)
 ============================ =================== ================= ============= ===============
- When                         Short description   Managed by        Assigned to   Actions
+ When                         Short description   Managed by        Assigned to   Workflow
 ---------------------------- ------------------- ----------------- ------------- ---------------
  **Tue 26/03/2013 (09:00)**   Évaluation 1        Alicia Allmanns                 **Suggested**
  **Fri 26/04/2013 (09:00)**   Évaluation 2        Alicia Allmanns                 **Suggested**
@@ -134,7 +134,7 @@ For example, let's pick up ISIP contract #1.
 >>> obj = isip.Contract.objects.get(pk=1)
 >>> rt.show(cal.EntriesByController, obj)
 ============================ =================== ================= ============= ===============
- When                         Short description   Managed by        Assigned to   Actions
+ When                         Short description   Managed by        Assigned to   Workflow
 ---------------------------- ------------------- ----------------- ------------- ---------------
  **Mon 29/10/2012 (09:00)**   Evaluation 1        Hubert Huppertz                 **Suggested**
  **Thu 29/11/2012 (09:00)**   Evaluation 2        Hubert Huppertz                 **Suggested**

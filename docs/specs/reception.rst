@@ -5,9 +5,9 @@
 Reception
 ===================
 
-.. How to test only this document:
+..  How to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_reception
+    $ doctest docs/specs/reception.rst
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
@@ -35,7 +35,7 @@ This client has the following appointments.
 ...     column_names="event__start_date event__start_time event__user event__summary event__state workflow_buttons",
 ...     language="en")  #doctest: -REPORT_UDIFF
 ============ ============ ================= =================== =========== =======================================================
- Start date   Start time   Managed by        Short description   State       Actions
+ Start date   Start time   Managed by        Short description   State       Workflow
 ------------ ------------ ----------------- ------------------- ----------- -------------------------------------------------------
  15/05/2014   09:00:00     Caroline Carnol   Auswertung 2        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
  15/05/2014   13:30:00     Hubert Huppertz   Abendessen          Published   [Checkin] **Accepted** → [Reject] [Absent] [Excused]
@@ -56,7 +56,7 @@ functionality can click on the dates to see their detail:
 >>> rt.login('theresia').show(reception.AppointmentsByPartner, obj,
 ...     language="en")  #doctest: +REPORT_UDIFF
 ====================================== ================= =======================================================
- When                                   Managed by        Actions
+ When                                   Managed by        Workflow
 -------------------------------------- ----------------- -------------------------------------------------------
  `Thu 15/05/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
  `Thu 15/05/2014 at 13:30 <Detail>`__   Hubert Huppertz   [Checkin] **Accepted** → [Reject] [Absent] [Excused]
@@ -217,7 +217,7 @@ the lounge:
 >>> rt.login('alicia').show(reception.MyWaitingVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ========================= ========== =======================================================
- Client                    Position   Actions
+ Client                    Position   Workflow
 ------------------------- ---------- -------------------------------------------------------
  HILGERS Hildegard (133)   1          [Receive] [Checkout] **Waiting** → [Absent] [Excused]
  KAIVERS Karl (141)        2          [Receive] [Checkout] **Waiting** → [Absent] [Excused]
@@ -227,7 +227,7 @@ the lounge:
 >>> rt.login('hubert').show(reception.MyWaitingVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ===================== ========== =======================================================
- Client                Position   Actions
+ Client                Position   Workflow
 --------------------- ---------- -------------------------------------------------------
  EMONTS Daniel (128)   1          [Receive] [Checkout] **Waiting** → [Absent] [Excused]
  JONAS Josef (139)     2          [Receive] [Checkout] **Waiting** → [Absent] [Excused]
@@ -249,7 +249,7 @@ Theresia is rather going to use the overview tables:
 >>> rt.login('theresia').show(reception.WaitingVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ========================= ================= =======================================================
- Client                    Managed by        Actions
+ Client                    Managed by        Workflow
 ------------------------- ----------------- -------------------------------------------------------
  EMONTS Daniel (128)       Hubert Huppertz   [Receive] [Checkout] **Waiting** → [Absent] [Excused]
  EVERS Eberhart (127)      Mélanie Mélard    [Receive] [Checkout] **Waiting** → [Absent] [Excused]
@@ -265,7 +265,7 @@ Theresia is rather going to use the overview tables:
 >>> rt.login('theresia').show(reception.BusyVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ========================= ================= ==========================================
- Client                    Managed by        Actions
+ Client                    Managed by        Workflow
 ------------------------- ----------------- ------------------------------------------
  BRECHT Bernd (177)        Hubert Huppertz   [Checkout] **Busy** → [Absent] [Excused]
  COLLARD Charlotte (118)   Alicia Allmanns   [Checkout] **Busy** → [Absent] [Excused]
@@ -278,7 +278,7 @@ Theresia is rather going to use the overview tables:
 >>> rt.login('theresia').show(reception.GoneVisitors, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ============================ ================= ===============================
- Client                       Managed by        Actions
+ Client                       Managed by        Workflow
 ---------------------------- ----------------- -------------------------------
  MALMENDIER Marc (146)        Alicia Allmanns   **Gone** → [Absent] [Excused]
  KELLER Karl (178)            Judith Jousten    **Gone** → [Absent] [Excused]
