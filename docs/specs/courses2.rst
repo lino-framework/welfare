@@ -38,7 +38,7 @@ Ateliers
 
 >>> rt.show(rt.actors.courses.Activities)
 ============ ============= ============================= ============= ======= ===============
- Date début   Désignation   Série d'ateliers              Instructeur   Local   Actions
+ Date début   Désignation   Série d'ateliers              Instructeur   Local   Workflow
 ------------ ------------- ----------------------------- ------------- ------- ---------------
  12/05/2014                 Cuisine                                             **Brouillon**
  12/05/2014                 Créativité                                          **Brouillon**
@@ -72,7 +72,7 @@ Kitchen (12/05/2014)
 >>> ar = rt.actors.cal.EntriesByController.request(master_instance=course)
 >>> rt.show(ar)
 ============================ =================== ================= ============= ===============
- When                         Short description   Managed by        Assigned to   Actions
+ When                         Short description   Managed by        Assigned to   Workflow
 ---------------------------- ------------------- ----------------- ------------- ---------------
  **Mon 12/05/2014 (08:00)**   1                   Hubert Huppertz                 **Suggested**
  **Mon 19/05/2014 (08:00)**   2                   Hubert Huppertz                 **Suggested**
@@ -88,7 +88,7 @@ Kitchen (12/05/2014)
 
 >>> rt.show(rt.actors.cal.GuestsByEvent, event)
 ===================== ========= =============
- Partner               Role      Actions
+ Partner               Role      Workflow
 --------------------- --------- -------------
  Bastiaensen Laurent   Visitor   **Invited**
  Denon Denis           Visitor   **Invited**

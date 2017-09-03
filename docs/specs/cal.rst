@@ -78,7 +78,7 @@ Here is what the :class:`lino.modlib.cal.ui.EntriesByDay` table gives:
 Thu 22/05/2014 (22.05.2014)
 ===========================
 ============ ======== =================== ================ ============= ===================== ====== =================================
- Start time   Client   Short description   Managed by       Assigned to   Calendar entry type   Room   Actions
+ Start time   Client   Short description   Managed by       Assigned to   Calendar entry type   Room   Workflow
 ------------ -------- ------------------- ---------------- ------------- --------------------- ------ ---------------------------------
  08:30:00              Rencontre           Mélanie Mélard                 External meeting             [⚑] **Suggested** → [☼] [☑] [☒]
  13:30:00              Frühstück           Judith Jousten                 Internal meeting             [⚑] **Published** → [☑] [☒] [☐]
@@ -99,7 +99,7 @@ Here is what it says for Alicia.
 >>> rt.login('alicia').show(cal.MyEntries, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ====================================== ========================= ======================= =================== =============================
- When                                   Client                    Calendar entry type     Short description   Actions
+ When                                   Client                    Calendar entry type     Short description   Workflow
 -------------------------------------- ------------------------- ----------------------- ------------------- -----------------------------
  `Mon 26/05/2014 at 09:40 <Detail>`__   JANSEN Jérémy (136)       Informational meeting   Diner               **Draft** → [☼] [☒]
  `Sun 01/06/2014 at 08:30 <Detail>`__                             Internal meeting        Diner               **Suggested** → [☼] [☒]
@@ -126,7 +126,7 @@ These are for Hubert:
 >>> rt.login('hubert').show(cal.MyEntries, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ====================================== ======================== ===================== =================== =============================
- When                                   Client                   Calendar entry type   Short description   Actions
+ When                                   Client                   Calendar entry type   Short description   Workflow
 -------------------------------------- ------------------------ --------------------- ------------------- -----------------------------
  `Tue 27/05/2014 at 10:20 <Detail>`__                            Internal meeting      Abendessen          **Took place** → [☐]
  `Wed 28/05/2014 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Évaluation 15       [▽] **Suggested** → [☼] [☒]
@@ -170,7 +170,7 @@ And these for Mélanie:
 >>> rt.login('melanie').show(cal.MyEntries, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ====================================== ============================= ===================== =================== =============================
- When                                   Client                        Calendar entry type   Short description   Actions
+ When                                   Client                        Calendar entry type   Short description   Workflow
 -------------------------------------- ----------------------------- --------------------- ------------------- -----------------------------
  `Thu 22/05/2014 at 08:30 <Detail>`__                                 External meeting      Rencontre           **Suggested** → [☼] [☑] [☒]
  `Mon 26/05/2014 at 09:00 <Detail>`__   ENGELS Edgar (129)            Evaluation            Évaluation 3        [▽] **Suggested** → [☼] [☒]
@@ -194,7 +194,7 @@ These are Alicia's calendar appointments of the last two months:
 >>> rt.login('alicia').show(cal.MyEntries, language='en',
 ...     param_values=pv)
 ====================================== ========================== ===================== =================== =============================
- When                                   Client                     Calendar entry type   Short description   Actions
+ When                                   Client                     Calendar entry type   Short description   Workflow
 -------------------------------------- -------------------------- --------------------- ------------------- -----------------------------
  `Wed 07/05/2014 at 09:00 <Detail>`__   DA VINCI David (165)       Evaluation            Évaluation 15       [▽] **Suggested** → [☑] [☒]
  `Thu 08/05/2014 at 13:30 <Detail>`__   DERICUM Daniel (121)       Appointment           Diner               **Published** → [☑] [☒] [☐]
@@ -212,7 +212,7 @@ Overdue appointments
 >>> rt.login('alicia').show(cal.MyOverdueAppointments, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ============================================================================= ============================================================ ===================== =============================
- overview                                                                      Controlled by                                                Calendar entry type   Actions
+ overview                                                                      Controlled by                                                Calendar entry type   Workflow
 ----------------------------------------------------------------------------- ------------------------------------------------------------ --------------------- -----------------------------
  `Évaluation 15 (07.04.2014 09:00) with RADERMACHER Alfons (153) <Detail>`__   `ISIP#17 (Alfons RADERMACHER) <Detail>`__                    Evaluation            [▽] **Suggested** → [☑] [☒]
  `Évaluation 14 (07.04.2014 09:00) with DA VINCI David (165) <Detail>`__       `ISIP#22 (David DA VINCI) <Detail>`__                        Evaluation            [▽] **Suggested** → [☑] [☒]
@@ -315,7 +315,7 @@ Events generated by a contract
 Calendar entries of ISIP#18 (Edgard RADERMACHER)
 ================================================
 ============================ =================== ================= ============= ===============
- When                         Short description   Managed by        Assigned to   Actions
+ When                         Short description   Managed by        Assigned to   Workflow
 ---------------------------- ------------------- ----------------- ------------- ---------------
  **Thu 07/02/2013 (09:00)**   Évaluation 1        Alicia Allmanns                 **Suggested**
  **Thu 07/03/2013 (09:00)**   Évaluation 2        Alicia Allmanns                 **Suggested**

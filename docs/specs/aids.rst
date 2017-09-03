@@ -99,7 +99,7 @@ When she clicks the link "Zu bestätigende Hilfebeschlüsse", then they show up:
 >>> ses.show(aids.MyPendingGrantings)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ======================== ========================= =========== ============== ========== ======= ==============================
- Klient                   Hilfeart                  Kategorie   Laufzeit von   bis        Autor   Aktionen
+ Klient                   Hilfeart                  Kategorie   Laufzeit von   bis        Autor   Workflow
 ------------------------ ------------------------- ----------- -------------- ---------- ------- ------------------------------
  DUBOIS Robin (179)       Eingliederungseinkommen               23.07.14                          [Bestätigen] **Unbestätigt**
  DUBOIS Robin (179)       Ausländerbeihilfe                     22.06.14                          [Bestätigen] **Unbestätigt**

@@ -127,7 +127,7 @@ BASTIAENSEN Laurent (117)
 
 >>> rt.show(newcomers.AvailableCoachesByClient, master_instance=obj)
 ================= ========== ================= =============== =================== =========== =============== ===================
- Name              Aktionen   Komplette Akten   Neue Klienten   Quote Erstempfang   Belastung   Mehrbelastung   Mehrbelastung (%)
+ Name              Workflow   Komplette Akten   Neue Klienten   Quote Erstempfang   Belastung   Mehrbelastung   Mehrbelastung (%)
 ----------------- ---------- ----------------- --------------- ------------------- ----------- --------------- -------------------
  Alicia Allmanns              **12**            **1**           100                 6,          6,              100,00
 ================= ========== ================= =============== =================== =========== =============== ===================

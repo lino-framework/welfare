@@ -46,7 +46,7 @@ The AAW journal contains the following statements:
 
 >>> rt.show(AAW.voucher_type.table_class, AAW)
 ========= =============== ================================ =============== ================== ================= =================
- Nr.       Buchungsdatum   Interne Referenz                 Total           Ausführungsdatum   Buchungsperiode   Aktionen
+ Nr.       Buchungsdatum   Interne Referenz                 Total           Ausführungsdatum   Buchungsperiode   Workflow
 --------- --------------- -------------------------------- --------------- ------------------ ----------------- -----------------
  22        13.04.14                                         -553,39                            2014-04           **Registriert**
  21        13.03.14                                         -585,84                            2014-03           **Registriert**
@@ -89,7 +89,7 @@ The ZKBC journal contains the following payment orders:
 
 >>> rt.show(ZKBC.voucher_type.table_class, ZKBC)  #doctest: -SKIP
 ======== =============== ================== =============== ================== ================= =================
- Nr.      Buchungsdatum   Interne Referenz   Total           Ausführungsdatum   Buchungsperiode   Aktionen
+ Nr.      Buchungsdatum   Interne Referenz   Total           Ausführungsdatum   Buchungsperiode   Workflow
 -------- --------------- ------------------ --------------- ------------------ ----------------- -----------------
  4        21.04.14                           20 521,42                          2014-04           **Registriert**
  3        21.03.14                           -758,29                            2014-03           **Registriert**
@@ -107,7 +107,7 @@ list.  See :ticket:`1985`.
 >>> rt.login('wilfried').show(finan.ItemsByPaymentOrder, obj)  #doctest: -SKIP
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ======== ============================ =============================== ========== ===================== ========= ============ ==================
- Nr.      Klient                       Zahlungsempfänger               Aktionen   Bankkonto             Match     Betrag       Externe Referenz
+ Nr.      Klient                       Zahlungsempfänger               Workflow   Bankkonto             Match     Betrag       Externe Referenz
 -------- ---------------------------- ------------------------------- ---------- --------------------- --------- ------------ ------------------
  1        EVERS Eberhart (127)         Leffin Electronics                         BE38 2480 1735 7572   REG 20    12,50
  2        EMONTS Daniel (128)          Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   120,00
