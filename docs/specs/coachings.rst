@@ -6,7 +6,7 @@ Coachings
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_coachings
+    $ doctest docs/specs/coachings.rst
     
     doctest init:
 

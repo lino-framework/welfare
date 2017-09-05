@@ -6,7 +6,7 @@ Financial vouchers in Lino Welfare
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_finan
+    $ doctest docs/specs/finan.rst
     
     doctest init:
 
@@ -45,33 +45,33 @@ Disbursment orders
 The AAW journal contains the following statements:
 
 >>> rt.show(AAW.voucher_type.table_class, AAW)
-========= =============== ================================ =============== ================== ================= =================
- Nr.       Buchungsdatum   Interne Referenz                 Total           Ausführungsdatum   Buchungsperiode   Workflow
---------- --------------- -------------------------------- --------------- ------------------ ----------------- -----------------
- 22        13.04.14                                         -553,39                            2014-04           **Registriert**
- 21        13.03.14                                         -585,84                            2014-03           **Registriert**
- 20        13.02.14                                         -483,01                            2014-02           **Registriert**
- 19        13.01.14                                         -350,61                            2014-01           **Registriert**
- 18        23.03.14        Beihilfe für Ausländer           3 628,62                           2014-03           **Registriert**
- 17        23.03.14        Sozialhilfe                      3 460,17                           2014-03           **Registriert**
- 16        23.03.14        Eingliederungseinkommen          3 611,34                           2014-03           **Registriert**
- 15        23.03.14        Fonds Gas und Elektrizität       3 356,17                           2014-03           **Registriert**
- 14        23.03.14        Heizkosten- u. Energiebeihilfe   3 628,62                           2014-03           **Registriert**
- 13        23.03.14        Allgemeine Beihilfen             3 460,17                           2014-03           **Registriert**
- 12        22.04.14        Beihilfe für Ausländer           3 611,34                           2014-04           **Registriert**
- 11        22.04.14        Sozialhilfe                      3 356,17                           2014-04           **Registriert**
- 10        22.04.14        Eingliederungseinkommen          3 628,62                           2014-04           **Registriert**
- 9         22.04.14        Fonds Gas und Elektrizität       3 460,17                           2014-04           **Registriert**
- 8         22.04.14        Heizkosten- u. Energiebeihilfe   3 611,34                           2014-04           **Registriert**
- 7         22.04.14        Allgemeine Beihilfen             3 356,17                           2014-04           **Registriert**
- 6         22.05.14        Beihilfe für Ausländer           3 628,62                           2014-05           **Registriert**
- 5         22.05.14        Sozialhilfe                      3 460,17                           2014-05           **Registriert**
- 4         22.05.14        Eingliederungseinkommen          3 611,34                           2014-05           **Registriert**
- 3         22.05.14        Fonds Gas und Elektrizität       3 356,17                           2014-05           **Registriert**
- 2         22.05.14        Heizkosten- u. Energiebeihilfe   3 628,62                           2014-05           **Registriert**
- 1         22.05.14        Allgemeine Beihilfen             3 460,17                           2014-05           **Registriert**
- **253**                                                    **61 341,14**
-========= =============== ================================ =============== ================== ================= =================
+======================= =============== ================================ =============== ================== ================= =================
+ Nr.                     Buchungsdatum   Interne Referenz                 Total           Ausführungsdatum   Buchungsperiode   Workflow
+----------------------- --------------- -------------------------------- --------------- ------------------ ----------------- -----------------
+ 22/2014                 13.04.14                                         -553,39                            2014-04           **Registriert**
+ 21/2014                 13.03.14                                         -585,84                            2014-03           **Registriert**
+ 20/2014                 13.02.14                                         -483,01                            2014-02           **Registriert**
+ 19/2014                 13.01.14                                         -350,61                            2014-01           **Registriert**
+ 18/2014                 23.03.14        Beihilfe für Ausländer           3 628,62                           2014-03           **Registriert**
+ 17/2014                 23.03.14        Sozialhilfe                      3 460,17                           2014-03           **Registriert**
+ 16/2014                 23.03.14        Eingliederungseinkommen          3 611,34                           2014-03           **Registriert**
+ 15/2014                 23.03.14        Fonds Gas und Elektrizität       3 356,17                           2014-03           **Registriert**
+ 14/2014                 23.03.14        Heizkosten- u. Energiebeihilfe   3 628,62                           2014-03           **Registriert**
+ 13/2014                 23.03.14        Allgemeine Beihilfen             3 460,17                           2014-03           **Registriert**
+ 12/2014                 22.04.14        Beihilfe für Ausländer           3 611,34                           2014-04           **Registriert**
+ 11/2014                 22.04.14        Sozialhilfe                      3 356,17                           2014-04           **Registriert**
+ 10/2014                 22.04.14        Eingliederungseinkommen          3 628,62                           2014-04           **Registriert**
+ 9/2014                  22.04.14        Fonds Gas und Elektrizität       3 460,17                           2014-04           **Registriert**
+ 8/2014                  22.04.14        Heizkosten- u. Energiebeihilfe   3 611,34                           2014-04           **Registriert**
+ 7/2014                  22.04.14        Allgemeine Beihilfen             3 356,17                           2014-04           **Registriert**
+ 6/2014                  22.05.14        Beihilfe für Ausländer           3 628,62                           2014-05           **Registriert**
+ 5/2014                  22.05.14        Sozialhilfe                      3 460,17                           2014-05           **Registriert**
+ 4/2014                  22.05.14        Eingliederungseinkommen          3 611,34                           2014-05           **Registriert**
+ 3/2014                  22.05.14        Fonds Gas und Elektrizität       3 356,17                           2014-05           **Registriert**
+ 2/2014                  22.05.14        Heizkosten- u. Energiebeihilfe   3 628,62                           2014-05           **Registriert**
+ 1/2014                  22.05.14        Allgemeine Beihilfen             3 460,17                           2014-05           **Registriert**
+ **Total (22 Zeilen)**                                                    **61 341,14**
+======================= =============== ================================ =============== ================== ================= =================
 <BLANKLINE>
 
 
@@ -88,15 +88,15 @@ generated)
 The ZKBC journal contains the following payment orders:
 
 >>> rt.show(ZKBC.voucher_type.table_class, ZKBC)  #doctest: -SKIP
-======== =============== ================== =============== ================== ================= =================
- Nr.      Buchungsdatum   Interne Referenz   Total           Ausführungsdatum   Buchungsperiode   Workflow
--------- --------------- ------------------ --------------- ------------------ ----------------- -----------------
- 4        21.04.14                           20 521,42                          2014-04           **Registriert**
- 3        21.03.14                           -758,29                            2014-03           **Registriert**
- 2        21.02.14                           -620,84                            2014-02           **Registriert**
- 1        21.01.14                           -350,61                            2014-01           **Registriert**
- **10**                                      **18 791,68**
-======== =============== ================== =============== ================== ================= =================
+====================== =============== ================== =============== ================== ================= =================
+ Nr.                    Buchungsdatum   Interne Referenz   Total           Ausführungsdatum   Buchungsperiode   Workflow
+---------------------- --------------- ------------------ --------------- ------------------ ----------------- -----------------
+ 4/2014                 21.04.14                           20 521,42                          2014-04           **Registriert**
+ 3/2014                 21.03.14                           -758,29                            2014-03           **Registriert**
+ 2/2014                 21.02.14                           -620,84                            2014-02           **Registriert**
+ 1/2014                 21.01.14                           -350,61                            2014-01           **Registriert**
+ **Total (4 Zeilen)**                                      **18 791,68**
+====================== =============== ================== =============== ================== ================= =================
 <BLANKLINE>
 
 TODO: Note that it is not normal to have negative totals in above

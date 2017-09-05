@@ -6,7 +6,7 @@ Reception clerk sees "Career" tab
 
 .. How to test just this document:
 
-    $ python setup.py test -s tests.DocsTests.test_20150715
+    $ doctest docs/tested/2015/0715.rst
     
     doctest init:
 
@@ -107,7 +107,7 @@ during :func:`lino.utils.jsgen.py2js`:
 ...     print(py2js(lh.main.elements))
 >>> with_user_profile(theresia.user_type, f)
 ... #doctest: +NORMALIZE_WHITESPACE
-[ general_panel1006, contact_panel1034, coaching_panel1267, aids_tab_panel1363, work_tab_1_panel1392, history_panel2125 ]
+[ general_panel1006, contact_panel1033, coaching_panel1261, aids_tab_panel1357, work_tab_1_panel1386, history_panel2107 ]
 
 I can even render the :file:`lino*.js` files (at least once):
 

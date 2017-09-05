@@ -6,7 +6,7 @@ Automatic calendar events
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_autoevents
+    $ doctest docs/tour/autoevents.rst
     
     doctest init:
 
@@ -88,7 +88,7 @@ Monday.
     >>> print(d.title)
     Calendar entries of ISIP#26 (David DA VINCI)
     >>> print(len(d.rows))
-    16
+    15
 
 
 Configuration
