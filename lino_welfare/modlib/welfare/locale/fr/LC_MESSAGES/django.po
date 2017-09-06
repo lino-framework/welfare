@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-30 21:05+0300\n"
+"POT-Creation-Date: 2017-09-05 22:35+0300\n"
 "PO-Revision-Date: 2017-04-22 20:39+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: fr\n"
@@ -339,34 +339,23 @@ msgstr "Attestations émises"
 msgid "Printed"
 msgstr "Imprimé"
 
-#: lino_welfare/modlib/aids/models.py:642
-#: lino_welfare/modlib/debts/models.py:530
-#: lino_welfare/modlib/debts/models.py:590 lino_welfare/modlib/debts/ui.py:468
-#: lino_welfare/modlib/debts/ui.py:477 lino_welfare/modlib/debts/ui.py:545
-#: lino_welfare/modlib/debts/ui.py:722 lino_welfare/modlib/integ/models.py:248
-#: lino_welfare/modlib/integ/models.py:313
-#: lino_welfare/modlib/integ/models.py:501
-#: lino_welfare/modlib/xcourses/models.py:141
-msgid "Description"
-msgstr ""
-
-#: lino_welfare/modlib/aids/models.py:660
+#: lino_welfare/modlib/aids/models.py:656
 msgid "Simple confirmation"
 msgstr "Confirmation simple"
 
-#: lino_welfare/modlib/aids/models.py:661
+#: lino_welfare/modlib/aids/models.py:657
 msgid "Simple confirmations"
 msgstr "Confirmations simple"
 
-#: lino_welfare/modlib/aids/models.py:711
+#: lino_welfare/modlib/aids/models.py:707
 msgid "Income confirmation"
 msgstr "Certificat de revenu"
 
-#: lino_welfare/modlib/aids/models.py:712
+#: lino_welfare/modlib/aids/models.py:708
 msgid "Income confirmations"
 msgstr "Certificats de revenu"
 
-#: lino_welfare/modlib/aids/models.py:716
+#: lino_welfare/modlib/aids/models.py:712
 #: lino_welfare/modlib/client_vouchers/models.py:50
 #: lino_welfare/modlib/client_vouchers/models.py:120
 #: lino_welfare/modlib/debts/models.py:212
@@ -378,54 +367,54 @@ msgstr "Certificats de revenu"
 msgid "Amount"
 msgstr "Montant"
 
-#: lino_welfare/modlib/aids/models.py:785
+#: lino_welfare/modlib/aids/models.py:781
 #, fuzzy
 msgid "Can refund"
 msgstr "Fin de l'accompagnement"
 
-#: lino_welfare/modlib/aids/models.py:786
+#: lino_welfare/modlib/aids/models.py:782
 msgid ""
 "Whether persons of this type can be used as doctor of a refund "
 "confirmation."
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:822
+#: lino_welfare/modlib/aids/models.py:818
 #, fuzzy
 msgid "Refund confirmation"
 msgstr "Certificat de revenu"
 
-#: lino_welfare/modlib/aids/models.py:823
+#: lino_welfare/modlib/aids/models.py:819
 #, fuzzy
 msgid "Refund confirmations"
 msgstr "Certificats de revenu"
 
-#: lino_welfare/modlib/aids/models.py:826
+#: lino_welfare/modlib/aids/models.py:822
 msgid "Doctor type"
 msgstr "Type de médecin"
 
-#: lino_welfare/modlib/aids/models.py:828
+#: lino_welfare/modlib/aids/models.py:824
 msgid "Doctor"
 msgstr "Médecin"
 
 #: lino_welfare/modlib/aids/fixtures/demo.py:63
 #: lino_welfare/modlib/aids/fixtures/std.py:101
-#: lino_welfare/modlib/aids/models.py:831
+#: lino_welfare/modlib/aids/models.py:827
 #: lino_welfare/modlib/welfare/fixtures/demo.py:540
 #: lino_welfare/modlib/welfare/fixtures/std.py:33
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:53
 msgid "Pharmacy"
 msgstr "Pharmacie"
 
-#: lino_welfare/modlib/aids/models.py:889
+#: lino_welfare/modlib/aids/models.py:885
 msgid "Cannot auto-create without doctor type"
 msgstr ""
 
-#: lino_welfare/modlib/aids/models.py:897
+#: lino_welfare/modlib/aids/models.py:893
 #, fuzzy
 msgid "Dr."
 msgstr "Monsieur"
 
-#: lino_welfare/modlib/aids/models.py:913
+#: lino_welfare/modlib/aids/models.py:909
 msgid "Please specify a doctor type."
 msgstr ""
 
@@ -1743,6 +1732,16 @@ msgstr "distribuer"
 
 #: lino_welfare/modlib/debts/models.py:526
 msgid "To Do"
+msgstr ""
+
+#: lino_welfare/modlib/debts/models.py:530
+#: lino_welfare/modlib/debts/models.py:590 lino_welfare/modlib/debts/ui.py:468
+#: lino_welfare/modlib/debts/ui.py:477 lino_welfare/modlib/debts/ui.py:545
+#: lino_welfare/modlib/debts/ui.py:722 lino_welfare/modlib/integ/models.py:248
+#: lino_welfare/modlib/integ/models.py:313
+#: lino_welfare/modlib/integ/models.py:501
+#: lino_welfare/modlib/xcourses/models.py:141
+msgid "Description"
 msgstr ""
 
 #: lino_welfare/modlib/debts/models.py:544 lino_welfare/modlib/debts/ui.py:508
