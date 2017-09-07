@@ -6,7 +6,7 @@ Miscellaneous
 
 ..  How to test only this document:
 
-     $ doctest docs/specs/misc.rst 
+     $ doctest docs/specs/misc.rst
     
     doctest init:
     
@@ -166,7 +166,7 @@ Yet another series of GET requests
 
 >>> json_fields = 'count rows title success no_data_text'
 >>> demo_get('rolf', 'api/countries/Countries', json_fields, 270, **kw)
->>> demo_get('rolf', 'api/jobs/Jobs', json_fields, 9, **kw)
+>>> demo_get('rolf', 'api/jobs/Jobs', json_fields, 8, **kw)
 
 >>> mt = ContentType.objects.get_for_model(RetrieveTIGroupsRequest).pk
 >>> demo_get('rolf', 'api/cbss/RetrieveTIGroupsResult', 

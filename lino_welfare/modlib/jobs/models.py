@@ -802,6 +802,12 @@ class Jobs(dd.Table):
     remark CandidaturesByJob
     ContractsByJob
     """
+    insert_layout = """
+    name provider 
+    contract_type type
+    sector function
+    # capacity hourly_rate
+    """
 
 
 @dd.python_2_unicode_compatible
