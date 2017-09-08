@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -180,7 +180,7 @@ class Contracts(ContractBaseTable):
     required_roles = dd.login_required(IntegrationAgent)
     model = 'art61.Contract'
     column_names = 'id client client__national_id ' \
-                   'applies_from applies_until user type *'
+                   'applies_from date_ended user type *'
     order_by = ['id']
     detail_layout = ContractDetail()
     insert_layout = """

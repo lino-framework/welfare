@@ -7,7 +7,7 @@ The Jobs plugin
 
 .. to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_jobs
+    $ doctest docs/specs/jobs.rst
     
     doctest initialization:
     
@@ -166,26 +166,26 @@ Explorer --> DSBE --> Art.60§7-Konventionen
 The demo database contains 16 job supplyment contracts:
 
 >>> ses.show(jobs.Contracts)  #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-==== ============================= =============== ============== ============== ================================================== ================= ===========================
- ID   Klient                        NR-Nummer       Laufzeit von   Laufzeit bis   Stelle                                             Autor             Art
----- ----------------------------- --------------- -------------- -------------- -------------------------------------------------- ----------------- ---------------------------
- 1    COLLARD Charlotte (118)       960715 002-61   04.10.12       03.10.13       Kellner bei BISA                                   Alicia Allmanns   Sozialökonomie
- 2    EVERTZ Bernd (126)            890722 001-93   14.10.12       13.04.14       Kellner bei R-Cycle Sperrgutsortierzentrum         Alicia Allmanns   mit Rückerstattung Schule
- 3    FAYMONVILLE Luc (130*)        890202 001-76   03.11.12       02.11.13       Koch bei R-Cycle Sperrgutsortierzentrum            Alicia Allmanns   Sozialökonomie - majoré
- 4    FAYMONVILLE Luc (130*)        890202 001-76   03.11.13       03.11.14       Koch bei Pro Aktiv V.o.G.                          Hubert Huppertz   Sozialökonomie
- 5    HILGERS Hildegard (133)       870325 002-29   13.11.12       12.11.14       Küchenassistent bei Pro Aktiv V.o.G.               Alicia Allmanns   Stadt Eupen
- 6    LAMBERTZ Guido (142)          810823 001-96   03.12.12       02.12.14       Küchenassistent bei BISA                           Alicia Allmanns   Sozialökonomie - majoré
- 7    MALMENDIER Marc (146)         791013 001-77   13.12.12       12.12.13       Tellerwäscher bei BISA                             Alicia Allmanns   mit Rückerstattung
- 8    MALMENDIER Marc (146)         791013 001-77   13.12.13       13.12.14       Tellerwäscher bei R-Cycle Sperrgutsortierzentrum   Mélanie Mélard    Stadt Eupen
- 9    RADERMACHER Christian (155)   761227 001-93   02.01.13       01.01.14       Kellner bei BISA                                   Alicia Allmanns   Sozialökonomie
- 10   RADERMACHER Christian (155)   761227 001-93   02.01.14       02.01.15       Kellner bei R-Cycle Sperrgutsortierzentrum         Mélanie Mélard    mit Rückerstattung Schule
- 11   RADERMACHER Fritz (158)       750805 001-25   12.01.13       11.01.15       Koch bei R-Cycle Sperrgutsortierzentrum            Alicia Allmanns   Sozialökonomie - majoré
- 12   VAN VEEN Vincent (166)        710528 001-06   01.02.13       31.01.15       Koch bei Pro Aktiv V.o.G.                          Alicia Allmanns   Sozialökonomie
- 13   RADERMECKER Rik (173)         730407 001-89   11.02.13       10.02.14       Küchenassistent bei Pro Aktiv V.o.G.               Mélanie Mélard    Stadt Eupen
- 14   RADERMECKER Rik (173)         730407 001-89   11.02.14       11.02.15       Küchenassistent bei BISA                           Hubert Huppertz   Sozialökonomie - majoré
- 15   DENON Denis (180*)            950810 001-04   03.03.13       02.03.14       Tellerwäscher bei BISA                             Alicia Allmanns   mit Rückerstattung
- 16   DENON Denis (180*)            950810 001-04   03.03.14       03.03.15       Tellerwäscher bei R-Cycle Sperrgutsortierzentrum   Hubert Huppertz   Stadt Eupen
-==== ============================= =============== ============== ============== ================================================== ================= ===========================
+==== ============================= =============== ============== ========== ================================================== ================= ===========================
+ ID   Klient                        NR-Nummer       Laufzeit von   Enddatum   Stelle                                             Autor             Art
+---- ----------------------------- --------------- -------------- ---------- -------------------------------------------------- ----------------- ---------------------------
+ 1    COLLARD Charlotte (118)       960715 002-61   04.10.12       03.10.13   Kellner bei BISA                                   Alicia Allmanns   Sozialökonomie
+ 2    EVERTZ Bernd (126)            890722 001-93   14.10.12       13.04.14   Kellner bei R-Cycle Sperrgutsortierzentrum         Alicia Allmanns   mit Rückerstattung Schule
+ 3    FAYMONVILLE Luc (130*)        890202 001-76   03.11.12       02.11.13   Koch bei R-Cycle Sperrgutsortierzentrum            Alicia Allmanns   Sozialökonomie - majoré
+ 4    FAYMONVILLE Luc (130*)        890202 001-76   03.11.13       03.11.14   Koch bei Pro Aktiv V.o.G.                          Hubert Huppertz   Sozialökonomie
+ 5    HILGERS Hildegard (133)       870325 002-29   13.11.12       12.11.14   Küchenassistent bei Pro Aktiv V.o.G.               Alicia Allmanns   Stadt Eupen
+ 6    LAMBERTZ Guido (142)          810823 001-96   03.12.12       02.12.14   Küchenassistent bei BISA                           Alicia Allmanns   Sozialökonomie - majoré
+ 7    MALMENDIER Marc (146)         791013 001-77   13.12.12       12.12.13   Tellerwäscher bei BISA                             Alicia Allmanns   mit Rückerstattung
+ 8    MALMENDIER Marc (146)         791013 001-77   13.12.13       13.12.14   Tellerwäscher bei R-Cycle Sperrgutsortierzentrum   Mélanie Mélard    Stadt Eupen
+ 9    RADERMACHER Christian (155)   761227 001-93   02.01.13       01.01.14   Kellner bei BISA                                   Alicia Allmanns   Sozialökonomie
+ 10   RADERMACHER Christian (155)   761227 001-93   02.01.14       02.01.15   Kellner bei R-Cycle Sperrgutsortierzentrum         Mélanie Mélard    mit Rückerstattung Schule
+ 11   RADERMACHER Fritz (158)       750805 001-25   12.01.13       11.01.15   Koch bei R-Cycle Sperrgutsortierzentrum            Alicia Allmanns   Sozialökonomie - majoré
+ 12   VAN VEEN Vincent (166)        710528 001-06   01.02.13       31.01.15   Koch bei Pro Aktiv V.o.G.                          Alicia Allmanns   Sozialökonomie
+ 13   RADERMECKER Rik (173)         730407 001-89   11.02.13       10.02.14   Küchenassistent bei Pro Aktiv V.o.G.               Mélanie Mélard    Stadt Eupen
+ 14   RADERMECKER Rik (173)         730407 001-89   11.02.14       11.02.15   Küchenassistent bei BISA                           Hubert Huppertz   Sozialökonomie - majoré
+ 15   DENON Denis (180*)            950810 001-04   03.03.13       02.03.14   Tellerwäscher bei BISA                             Alicia Allmanns   mit Rückerstattung
+ 16   DENON Denis (180*)            950810 001-04   03.03.14       03.03.15   Tellerwäscher bei R-Cycle Sperrgutsortierzentrum   Hubert Huppertz   Stadt Eupen
+==== ============================= =============== ============== ========== ================================================== ================= ===========================
 <BLANKLINE>
 
 Use the filter parameters to show e.g. only contracts which were
@@ -197,11 +197,11 @@ active on 05.10.2012:
 >>> kwargs.update(param_values=pv)
 >>> ses.show(jobs.Contracts, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-==== ========================= =============== ============== ============== ================== ================= ================
- ID   Klient                    NR-Nummer       Laufzeit von   Laufzeit bis   Stelle             Autor             Art
----- ------------------------- --------------- -------------- -------------- ------------------ ----------------- ----------------
- 1    COLLARD Charlotte (118)   960715 002-61   04.10.12       03.10.13       Kellner bei BISA   Alicia Allmanns   Sozialökonomie
-==== ========================= =============== ============== ============== ================== ================= ================
+==== ========================= =============== ============== ========== ================== ================= ================
+ ID   Klient                    NR-Nummer       Laufzeit von   Enddatum   Stelle             Autor             Art
+---- ------------------------- --------------- -------------- ---------- ------------------ ----------------- ----------------
+ 1    COLLARD Charlotte (118)   960715 002-61   04.10.12       03.10.13   Kellner bei BISA   Alicia Allmanns   Sozialökonomie
+==== ========================= =============== ============== ========== ================== ================= ================
 <BLANKLINE>
 
 Use the filter parameters to show e.g. only contracts which started in
@@ -211,12 +211,12 @@ October 2012:
 ...     start_date=i2d(20121001), end_date=i2d(20121030))
 >>> ses.show(jobs.Contracts, **kwargs)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-==== ========================= =============== ============== ============== ============================================ ================= ===========================
- ID   Klient                    NR-Nummer       Laufzeit von   Laufzeit bis   Stelle                                       Autor             Art
----- ------------------------- --------------- -------------- -------------- -------------------------------------------- ----------------- ---------------------------
- 1    COLLARD Charlotte (118)   960715 002-61   04.10.12       03.10.13       Kellner bei BISA                             Alicia Allmanns   Sozialökonomie
- 2    EVERTZ Bernd (126)        890722 001-93   14.10.12       13.04.14       Kellner bei R-Cycle Sperrgutsortierzentrum   Alicia Allmanns   mit Rückerstattung Schule
-==== ========================= =============== ============== ============== ============================================ ================= ===========================
+==== ========================= =============== ============== ========== ============================================ ================= ===========================
+ ID   Klient                    NR-Nummer       Laufzeit von   Enddatum   Stelle                                       Autor             Art
+---- ------------------------- --------------- -------------- ---------- -------------------------------------------- ----------------- ---------------------------
+ 1    COLLARD Charlotte (118)   960715 002-61   04.10.12       03.10.13   Kellner bei BISA                             Alicia Allmanns   Sozialökonomie
+ 2    EVERTZ Bernd (126)        890722 001-93   14.10.12       13.04.14   Kellner bei R-Cycle Sperrgutsortierzentrum   Alicia Allmanns   mit Rückerstattung Schule
+==== ========================= =============== ============== ========== ============================================ ================= ===========================
 <BLANKLINE>
 
 

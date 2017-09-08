@@ -37,6 +37,7 @@ from lino_xl.lib.cal.models import *
 from lino_xl.lib.cal.utils import format_date
 from lino.modlib.office.roles import OfficeUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
+from lino_xl.lib.coachings.choicelists import ClientStates
 
 
 def you_are_busy_messages(ar):
@@ -161,6 +162,11 @@ class Event(Event):
     @dd.chooser()
     def user_choices(self):
         return settings.SITE.user_model.objects.filter(calendar__isnull=False)
+
+    @dd.chooser()
+    def project_choices(self):
+        return rt.models.pcsw.Client.objects.filter(
+            client_state=ClientStates.coached).order_by('name', 'id')
 
     def full_clean(self):
         if not self.event_type:
