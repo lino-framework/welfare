@@ -96,6 +96,8 @@ Willkommensmeldung unter die Nase gerieben:
 
 When she clicks the link "Zu bestätigende Hilfebeschlüsse", then they show up:
 
+
+
 >>> ses.show(aids.MyPendingGrantings)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ======================== ========================= =========== ============== ========== ======= ==============================

@@ -208,8 +208,9 @@ class Confirmable(mixins.DateRange):
         return True
 
     def disabled_fields(self, ar):
-        if self.state is ConfirmationStates.requested:
-            return set()
+        df = super(Confirmable, self).disabled_fields(ar)
+        if self.state == ConfirmationStates.requested:
+            return df
         return self.CONFIRMED_FIELDS
 
     def get_printable_context(self, ar=None, **kw):
