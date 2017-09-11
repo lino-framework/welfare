@@ -173,13 +173,13 @@ class Confirmable(mixins.DateRange):
         return ''
 
     @classmethod
-    def get_parameter_fields(cls, **fields):
+    def setup_parameters(cls, fields):
         fields.update(signer=models.ForeignKey(
             settings.SITE.user_model,
             verbose_name=pgettext("aids", "Signer"),
             blank=True, null=True))
         fields.update(state=ConfirmationStates.field(blank=True))
-        return super(Confirmable, cls).get_parameter_fields(**fields)
+        super(Confirmable, cls).setup_parameters(fields)
 
     @classmethod
     def get_simple_parameters(cls):
@@ -270,13 +270,13 @@ class Confirmation(
     language = dd.LanguageField(blank=True)
 
     @classmethod
-    def get_parameter_fields(cls, **fields):
+    def setup_parameters(cls, fields):
         # fields.update(client=dd.ForeignKey(
         #     'pcsw.Client', blank=True, null=True))
         # fields.update(
         #     granting=dd.ForeignKey('aids.Granting', blank=True, null=True))
         fields.update(gender=dd.Genders.field(blank=True, null=True))
-        return super(Confirmation, cls).get_parameter_fields(**fields)
+        super(Confirmation, cls).setup_parameters(fields)
 
     @classmethod
     def get_simple_parameters(cls):

@@ -662,8 +662,8 @@ class Candidature(SectorFunction):
 
     # no longer needed after 20170826
     # @classmethod
-    # def get_parameter_fields(cls, **fields):
-    #     fields = super(Candidature, cls).get_parameter_fields(**fields)
+    # def setup_parameters(cls, **fields):
+    #     fields = super(Candidature, cls).setup_parameters(**fields)
     #     fields.update(state=CandidatureStates.field(blank=True))
     #     fields.update(job=models.ForeignKey(
     #         'jobs.Job', blank=True, null=True))

@@ -6,7 +6,7 @@ Accounting for Lino Welfare
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_ledger
+    $ doctest docs/specs/ledger.rst
     
     doctest init:
 
@@ -136,7 +136,7 @@ Here is the main menu for accountants:
   - Ausgabeanweisungen : Ausgabeanweisungen (AAW)
   - Zahlungsaufträge : KBC Zahlungsaufträge (ZKBC)
 - Berichte :
-  - Buchhaltung : Situation, Saldenliste Generalkonten, Saldenliste Kunden, Saldenliste Lieferanten, Schuldner, Gläubiger
+  - Buchhaltung : Accounting Report, Saldenliste Generalkonten, Saldenliste Kunden, Saldenliste Lieferanten, Schuldner, Gläubiger
 - Konfigurierung :
   - Büro : Meine Einfügetexte
   - ÖSHZ : Hilfearten, Kategorien

@@ -52,7 +52,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
 - Berichte :
-  - Buchhaltung : Situation, Saldenliste Generalkonten, Saldenliste Kunden, Saldenliste Lieferanten, Schuldner, Gläubiger
+  - Buchhaltung : Accounting Report, Saldenliste Generalkonten, Saldenliste Kunden, Saldenliste Lieferanten, Schuldner, Gläubiger
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - System : Site-Parameter, Benutzer, Hilfetexte, Update all summary data
@@ -416,6 +416,7 @@ Each window layout defines a given set of fields.
 - jobs.Offers.detail : name, provider, sector, function, selection_from, selection_until, start_date, remark
 - jobs.Schedules.detail : id, name, name_fr, name_en
 - languages.Languages.detail : id, iso2, name, name_fr, name_en
+- ledger.AccountingReport.show : body
 - ledger.ActivityReport.show : body
 - ledger.Journals.detail : name, name_fr, name_en, ref, trade_type, seqno, id, voucher_type, journal_group, account, build_method, template, dc, force_sequence, yearly_numbering, auto_fill_suggestions, auto_check_clearings, must_declare, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, journal_group, voucher_type
@@ -609,6 +610,7 @@ Each window layout is **viewable** by a given set of user user_types.
 - jobs.Offers.detail : visible for 100 110 120 admin 910
 - jobs.Schedules.detail : visible for 110 410 admin 910
 - languages.Languages.detail : visible for 110 410 admin 910
+- ledger.AccountingReport.show : visible for 500 510 admin 910
 - ledger.ActivityReport.show : visible for 500 510 admin 910
 - ledger.Journals.detail : visible for 510 admin 910
 - ledger.Journals.insert : visible for 510 admin 910
