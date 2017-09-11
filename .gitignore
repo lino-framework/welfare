@@ -26,5 +26,6 @@ userdocs/gen
 .DS_Store
 .idea
 .coverage
+.coverage.*
 .eggs/
 .cache
