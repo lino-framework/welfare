@@ -344,6 +344,8 @@ class Grantings(dd.Table):
     board decision_date
     start_date end_date
     """
+    
+    force_phantom_row = True
 
     parameters = dict(
         observed_event=dd.PeriodEvents.field(
