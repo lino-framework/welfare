@@ -100,8 +100,8 @@ work:
 >>> lcd = settings.SITE.cache_dir.child('config')
 >>> rt.makedirs_if_missing(lcd)
 
-(These tests are the reason why `is_local_project_dir` is `True` in
-:mod:`lino_welfare.projects.std.settings.doctests`.)
+.. (These tests are the reason why `is_local_project_dir` is `True` in
+   :mod:`lino_welfare.projects.std.settings.doctests`.)
 
 
 Excerpts are printables with *two* template groups.  The first
