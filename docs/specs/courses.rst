@@ -32,10 +32,10 @@ Requesting for JSON data
 
 >>> json_fields = 'count rows title success no_data_text param_values'
 >>> kw = dict(fmt='json', limit=10, start=0)
->>> demo_get('rolf', 'api/xcourses/CourseProviders', json_fields, 2, **kw)
+>>> demo_get('rolf', 'api/xcourses/CourseProviders', json_fields, 3, **kw)
 
 >>> json_fields = 'count rows title success no_data_text'
->>> demo_get('rolf', 'api/xcourses/CourseOffers', json_fields, 3, **kw)
+>>> demo_get('rolf', 'api/xcourses/CourseOffers', json_fields, 4, **kw)
 
 >>> ContentType = rt.modules.contenttypes.ContentType
 >>> json_fields = 'count rows title success no_data_text param_values'

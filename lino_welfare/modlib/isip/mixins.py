@@ -577,7 +577,6 @@ class ContractBaseTable(dd.Table):
     company ending_success ending
     """
     params_panel_hidden = True
-    force_phantom_row = True
     
     @classmethod
     def get_request_queryset(cls, ar):

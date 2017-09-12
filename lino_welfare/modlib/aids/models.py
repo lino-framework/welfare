@@ -345,8 +345,6 @@ class Grantings(dd.Table):
     start_date end_date
     """
     
-    force_phantom_row = True
-
     parameters = dict(
         observed_event=dd.PeriodEvents.field(
             blank=True, default=dd.PeriodEvents.active.as_callable),
