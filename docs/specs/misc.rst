@@ -158,15 +158,15 @@ Yet another series of GET requests
 
 >>> json_fields = 'count rows title success no_data_text param_values'
 >>> kw = dict(fmt='json', limit=10, start=0)
->>> demo_get('rolf', 'api/contacts/Companies', json_fields, 39, **kw)
->>> demo_get('rolf', 'api/households/Households', json_fields, 14, **kw)
->>> demo_get('rolf', 'api/contacts/Partners', json_fields, 162, **kw)
+>>> demo_get('rolf', 'api/contacts/Companies', json_fields, 40, **kw)
+>>> demo_get('rolf', 'api/households/Households', json_fields, 15, **kw)
+>>> demo_get('rolf', 'api/contacts/Partners', json_fields, 163, **kw)
 
->>> demo_get('rolf', 'api/jobs/JobProviders', json_fields, 3, **kw)
+>>> demo_get('rolf', 'api/jobs/JobProviders', json_fields, 4, **kw)
 
 >>> json_fields = 'count rows title success no_data_text'
->>> demo_get('rolf', 'api/countries/Countries', json_fields, 270, **kw)
->>> demo_get('rolf', 'api/jobs/Jobs', json_fields, 8, **kw)
+>>> demo_get('rolf', 'api/countries/Countries', json_fields, 271, **kw)
+>>> demo_get('rolf', 'api/jobs/Jobs', json_fields, 9, **kw)
 
 >>> mt = ContentType.objects.get_for_model(RetrieveTIGroupsRequest).pk
 >>> demo_get('rolf', 'api/cbss/RetrieveTIGroupsResult', 
@@ -177,11 +177,11 @@ Yet another series of GET requests
 ...     json_fields, 18, mt=mt, mk=1, **kw)
 
 >>> json_fields = 'count rows title success no_data_text param_values'
->>> demo_get('rolf', 'api/contacts/Persons', json_fields, 102, **kw)
->>> demo_get('rolf', 'api/pcsw/CoachedClients', json_fields, 29, **kw)
+>>> demo_get('rolf', 'api/contacts/Persons', json_fields, 103, **kw)
+>>> demo_get('rolf', 'api/pcsw/CoachedClients', json_fields, 30, **kw)
 >>> demo_get('rolf', 'api/debts/Clients', json_fields, 0, **kw)
->>> demo_get('rolf', 'api/cal/MyEntries', json_fields, 3, **kw)
->>> demo_get('rolf', 'api/newcomers/NewClients', json_fields, 22, **kw)
+>>> demo_get('rolf', 'api/cal/MyEntries', json_fields, 4, **kw)
+>>> demo_get('rolf', 'api/newcomers/NewClients', json_fields, 23, **kw)
 >>> demo_get(
 ...    'rolf', 'api/newcomers/AvailableCoachesByClient', json_fields,
 ...    2, mt=50, mk=120, **kw)
