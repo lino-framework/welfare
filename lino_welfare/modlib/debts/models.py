@@ -77,7 +77,7 @@ class Group(mixins.BabelNamed):
     #     max_length=settings.SITE.plugins.debts.ref_length, unique=True)
     ref = models.CharField(
         max_length=settings.SITE.plugins.debts.ref_length,
-        blanke=True, null=True, unique=True)
+        blank=True, null=True, unique=True)
     account_type = AccountTypes.field(blank=True)
     entries_layout = TableLayouts.field(_("Budget entries layout"), blank=True)
 
