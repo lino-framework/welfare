@@ -52,7 +52,7 @@ Some preliminary tests, just to see whether we are at the right place:
 Client #116 ('AUSDEMWALD Alfons (116)')
 >>> rt.login('robin').show(aids.GrantingsByClient, obj)
 =============================================== ============== ======= ================= ======================== =================== =========================
- Description                                     Applies from   until   Signer            Workflow                 Board               Actions
+ Details                                         Applies from   until   Signer            Workflow                 Board               Actions
 ----------------------------------------------- -------------- ------- ----------------- ------------------------ ------------------- -------------------------
  `EiEi/22/05/2014/116 <Detail>`__                22/05/2014             Caroline Carnol   [Sign] **Unconfirmed**   Social Board (SB)   **Create confirmation**
  `Ausländerbeihilfe/08/08/2013/116 <Detail>`__   08/08/2013             Caroline Carnol   [Sign] **Unconfirmed**                       **Create confirmation**

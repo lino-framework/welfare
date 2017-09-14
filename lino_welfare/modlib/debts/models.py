@@ -73,8 +73,11 @@ class Group(mixins.BabelNamed):
         verbose_name = _("Account Group")
         verbose_name_plural = _("Account Groups")
 
-    ref = dd.NullCharField(
-        max_length=settings.SITE.plugins.debts.ref_length, unique=True)
+    # ref = dd.NullCharField(
+    #     max_length=settings.SITE.plugins.debts.ref_length, unique=True)
+    ref = models.CharField(
+        max_length=settings.SITE.plugins.debts.ref_length,
+        blank=True, null=True, unique=True)
     account_type = AccountTypes.field(blank=True)
     entries_layout = TableLayouts.field(_("Budget entries layout"), blank=True)
 

@@ -6,7 +6,7 @@ Accounting for Lino Welfare
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_ledger
+    $ doctest docs/specs/ledger.rst
     
     doctest init:
 
@@ -136,7 +136,7 @@ Here is the main menu for accountants:
   - Ausgabeanweisungen : Ausgabeanweisungen (AAW)
   - Zahlungsaufträge : KBC Zahlungsaufträge (ZKBC)
 - Berichte :
-  - Buchhaltung : Situation, Saldenliste Generalkonten, Saldenliste Kunden, Saldenliste Lieferanten, Schuldner, Gläubiger
+  - Buchhaltung : Accounting Report, Saldenliste Generalkonten, Saldenliste Kunden, Saldenliste Lieferanten, Schuldner, Gläubiger
 - Konfigurierung :
   - Büro : Meine Einfügetexte
   - ÖSHZ : Hilfearten, Kategorien
@@ -327,11 +327,11 @@ Users can consult the movements of a given general account.
  Valuta     Beleg      Beschreibung                                          Debit        Kredit   Match
 ---------- ---------- ----------------------------------------------------- ------------ -------- -------
  22.05.14   *REG 1*    *AS Express Post* / *AUSDEMWALD Alfons (116)*         10,00
- 16.02.14   *SREG 7*   *Leffin Electronics* / *EVERS Eberhart (127)*         12,50
- 16.02.14   *SREG 7*   *Leffin Electronics* / *EMONTS Daniel (128)*          25,00
+ 16.02.14   *SREG 7*   *Leffin Electronics* / *AUSDEMWALD Alfons (116)*      29,95
  16.02.14   *SREG 7*   *Leffin Electronics* / *COLLARD Charlotte (118)*      120,00
  16.02.14   *SREG 7*   *Leffin Electronics* / *DOBBELSTEIN Dorothée (124)*   5,33
- 16.02.14   *SREG 7*   *Leffin Electronics* / *AUSDEMWALD Alfons (116)*      29,95
+ 16.02.14   *SREG 7*   *Leffin Electronics* / *EVERS Eberhart (127)*         12,50
+ 16.02.14   *SREG 7*   *Leffin Electronics* / *EMONTS Daniel (128)*          25,00
                        **Saldo 202.78 (6 Bewegungen)**                       **202,78**
 ========== ========== ===================================================== ============ ======== =======
 <BLANKLINE>

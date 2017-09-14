@@ -10,7 +10,7 @@ This document describes the functionality implemented by the
 
 ..  To test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_aids
+    $ doctest docs/specs/aids.rst
 
     doctest initialization:
 
@@ -95,6 +95,8 @@ Willkommensmeldung unter die Nase gerieben:
 <b>Du hast 3 offene Datenkontrollen.</b>
 
 When she clicks the link "Zu bestätigende Hilfebeschlüsse", then they show up:
+
+
 
 >>> ses.show(aids.MyPendingGrantings)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
@@ -283,7 +285,7 @@ There are two grantings with this aid type:
 
 >>> rt.show(aids.GrantingsByType, at)
 ==================== ==================== ============== ========== ====
- Beschreibung         Klient               Laufzeit von   bis        ID
+ Details              Klient               Laufzeit von   bis        ID
 -------------------- -------------------- -------------- ---------- ----
  *AMK/27.05.14/139*   JONAS Josef (139)    27.05.14       26.06.14   44
  *AMK/27.05.14/141*   KAIVERS Karl (141)   27.05.14       27.05.14   45
@@ -504,9 +506,9 @@ The detail of a Granting shows a list of the confirmations which have
 been issued for this granting.
 
 >>> obj = aids.Granting.objects.get(pk=mk)
->>> rt.show(aids.ConfirmationsByGranting, obj, column_names=" description_column user signer printed")
+>>> rt.show(aids.ConfirmationsByGranting, obj, column_names="detail_pointer user signer printed")
 ======================= ================ ================ =============
- Beschreibung            Autor            Bestätiger       Ausgedruckt
+ Details                 Autor            Bestätiger       Ausgedruckt
 ----------------------- ---------------- ---------------- -------------
  *EiEi/09.10.12/124/4*   Judith Jousten   Mélanie Mélard
 ======================= ================ ================ =============

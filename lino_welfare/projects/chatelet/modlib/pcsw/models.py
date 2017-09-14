@@ -204,7 +204,7 @@ households.SiblingsByPerson.slave_grid_format = 'grid'
 
 
 aids = dd.resolve_app('aids')
-aids.GrantingsByClient.column_names = "description_column request_date "\
+aids.GrantingsByClient.column_names = "detail_pointer request_date "\
                                       "aid_type category start_date"
 
 notes = dd.resolve_app('notes')

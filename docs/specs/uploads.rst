@@ -6,7 +6,7 @@ Uploads
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_uploads
+    $ doctest docs/specs/uploads.rst
 
     doctest init:
     
@@ -319,18 +319,18 @@ It has 3 keys:
 >>> len(d.param_values)
 10
 
->>> d.base_params
-{u'mt': 55, u'mk': 177, u'type_id': 1}
+>>> rmu(d.base_params)
+{'mt': 55, 'mk': 177, 'type_id': 1}
 
->>> d.data_record.keys()
-[u'phantom', u'data', u'title']
+>>> rmu(d.data_record.keys())
+['phantom', 'data', 'title']
 >>> d.data_record['phantom']
 True
 >>> print(d.data_record['title'])
 Einfügen in Uploads von BRECHT Bernd (177) (Ist aktiv)
 
->>> d.data_record['data'].keys()
-[u'file', u'owner', u'id', u'userHidden', u'projectHidden', u'needed', u'disabled_fields', u'type', u'start_date', u'description', u'end_date', u'company', u'contact_role', u'disable_editing', u'companyHidden', u'contact_personHidden', u'user', u'contact_roleHidden', u'remark', u'disabled_actions', u'typeHidden', u'project', u'contact_person']
+>>> rmu(d.data_record['data'].keys())
+['file', 'owner', 'id', 'userHidden', 'projectHidden', 'needed', 'disabled_fields', 'type', 'start_date', 'description', 'end_date', 'company', 'contact_role', 'disable_editing', 'companyHidden', 'contact_personHidden', 'user', 'contact_roleHidden', 'remark', 'typeHidden', 'project', 'contact_person']
 
->>> d.data_record['data']
-{u'file': u'', u'owner': u'&lt;a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &amp;quot;record_id&amp;quot;: 177 })"&gt;BRECHT Bernd (177)&lt;/a&gt;', u'id': None, u'userHidden': 1, u'projectHidden': 177, u'needed': True, u'disabled_fields': {u'mimetype': True}, u'type': u'Aufenthaltserlaubnis', u'start_date': None, u'description': u'', u'end_date': None, u'company': None, u'contact_role': None, u'disable_editing': False, u'companyHidden': None, u'contact_personHidden': None, u'user': u'Rolf Rompen', u'contact_roleHidden': None, u'remark': u'', u'disabled_actions': {}, u'typeHidden': 1, u'project': u'BRECHT Bernd (177)', u'contact_person': None}
+>>> rmu(d.data_record['data'])
+{'file': '', 'owner': '&lt;a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &amp;quot;record_id&amp;quot;: 177 })"&gt;BRECHT Bernd (177)&lt;/a&gt;', 'id': None, 'userHidden': 1, 'projectHidden': 177, 'needed': True, 'disabled_fields': {'mimetype': True}, 'type': 'Aufenthaltserlaubnis', 'start_date': None, 'description': '', 'end_date': None, 'company': None, 'contact_role': None, 'disable_editing': False, 'companyHidden': None, 'contact_personHidden': None, 'user': 'Rolf Rompen', 'contact_roleHidden': None, 'remark': '', 'typeHidden': 1, 'project': 'BRECHT Bernd (177)', 'contact_person': None}

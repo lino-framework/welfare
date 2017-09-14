@@ -416,7 +416,7 @@ class CourseRequest(dd.Model):
         return True
 
     @classmethod
-    def get_parameter_fields(cls, **fields):
+    def setup_parameters(cls, fields):
         fields.update(
             request_state=CourseRequestStates.field(blank=True),
             course_content=models.ForeignKey(
@@ -425,7 +425,7 @@ class CourseRequest(dd.Model):
             course_provider=models.ForeignKey(
                 'xcourses.CourseProvider', blank=True))
         fields.update(CLIENTS_TABLE.parameters)
-        return super(CourseRequest, cls).get_parameter_fields(**fields)
+        super(CourseRequest, cls).setup_parameters(fields)
 
     @classmethod
     def get_request_queryset(self, ar):

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2015 Luc Saffre
+# Copyright 2013-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -27,8 +27,8 @@ class ContractEvents(dd.ChoiceList):
     verbose_name = _("Observed event")
     verbose_name_plural = _("Observed events")
 add = ContractEvents.add_item
-add('10', _("Started"), 'started')
-add('20', _("Active"), 'active')
+add('10', _("Active"), 'active')
+add('20', _("Started"), 'started')
 add('30', _("Ended"), 'ended')
 add('40', _("Decided"), 'decided')
 add('50', _("Issued"), 'issued')

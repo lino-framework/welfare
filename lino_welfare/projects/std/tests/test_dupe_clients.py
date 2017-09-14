@@ -79,7 +79,7 @@ class TestCase(RemoteAuthTestCase):
         jjcheck()   # no similar clients detected
 
         # one client's national_id is missing
-        jj1.national_id = ""
+        jj1.national_id = None
         jj1.save()
         jjcheck()
 
@@ -90,13 +90,13 @@ class TestCase(RemoteAuthTestCase):
         jjcheck()
 
         # both national_id and birth_date are missing for one client
-        jj1.national_id = ""
+        jj1.national_id = None
         jj1.birth_date = ""
         jj1.save()
         jjcheck(100, 101)
 
         # both national_id and birth_date are missing for both clients
-        jj2.national_id = ""
+        jj2.national_id = None
         jj2.birth_date = ""
         jj2.save()
         jjcheck(100, 101)

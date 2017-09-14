@@ -6,7 +6,7 @@ Automatic calendar events
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.DocsTests.test_autoevents
+    $ doctest docs/tour/autoevents.rst
     
     doctest init:
 

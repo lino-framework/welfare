@@ -8,7 +8,7 @@ General PCSW
 ..
   To test only this document, run::
 
-    $ python setup.py test -s tests.SpecsTests.test_pcsw
+    $ doctest docs/specs/pcsw.rst
 
   doctest init:
 
@@ -167,7 +167,7 @@ Einfügen in Klienten (Begleitet)
 There are a lot of data fields:
 
 >>> len(d.data.keys())
-70
+69
 
 >>> print(' '.join(sorted(d.data.keys())))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
@@ -175,7 +175,7 @@ AgentsByClient MovementsByProject activity activityHidden age
 birth_country birth_countryHidden birth_date birth_place broker
 brokerHidden cbss_relations civil_state civil_stateHidden client_state
 client_stateHidden created cv_LanguageKnowledgesByPerson declared_name
-disable_editing disabled_actions disabled_fields
+disable_editing disabled_fields
 dupable_clients_SimilarClients email excerpts_ExcerptsByProject
 faculty facultyHidden fax first_name gender genderHidden group
 groupHidden gsm households_MembersByPerson humanlinks_LinksByHuman id

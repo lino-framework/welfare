@@ -577,7 +577,7 @@ class ContractBaseTable(dd.Table):
     company ending_success ending
     """
     params_panel_hidden = True
-
+    
     @classmethod
     def get_request_queryset(cls, ar):
         qs = super(ContractBaseTable, cls).get_request_queryset(ar)
@@ -603,12 +603,12 @@ class ContractBaseTable(dd.Table):
             elif ce == ContractEvents.issued:
                 qs = qs.filter(dd.inrange_filter('date_issued', period))
             elif ce == ContractEvents.active:
-                f1 = Q(applies_until__isnull=True) | Q(
-                    applies_until__gte=period[0])
-                flt = f1 & (Q(date_ended__isnull=True) |
-                            Q(date_ended__gte=period[0]))
-                flt &= Q(applies_from__lte=period[1])
-                qs = qs.filter(flt)
+                # f1 = Q(applies_until__isnull=True) | Q(
+                #     applies_until__gte=period[0])
+                # flt = f1 & (Q(date_ended__isnull=True) |
+                #             Q(date_ended__gte=period[0]))
+                qs = qs.filter(
+                    date_ended__gte=period[0], applies_from__lte=period[1])
             else:
                 raise Exception(repr(ce))
 

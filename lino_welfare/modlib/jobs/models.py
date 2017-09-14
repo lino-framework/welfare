@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2016 Luc Saffre
+# Copyright 2008-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -330,7 +330,7 @@ class Contracts(isip.ContractBaseTable):
     required_roles = dd.login_required(SocialAgent)
     model = 'jobs.Contract'
     column_names = 'id client client__national_id ' \
-                   'applies_from applies_until job user type *'
+                   'applies_from date_ended job user type *'
     order_by = ['id']
     active_fields = 'job company contact_person contact_role'
     detail_layout = ContractDetail()
@@ -662,8 +662,8 @@ class Candidature(SectorFunction):
 
     # no longer needed after 20170826
     # @classmethod
-    # def get_parameter_fields(cls, **fields):
-    #     fields = super(Candidature, cls).get_parameter_fields(**fields)
+    # def setup_parameters(cls, **fields):
+    #     fields = super(Candidature, cls).setup_parameters(**fields)
     #     fields.update(state=CandidatureStates.field(blank=True))
     #     fields.update(job=models.ForeignKey(
     #         'jobs.Job', blank=True, null=True))
@@ -801,6 +801,12 @@ class Jobs(dd.Table):
     sector function capacity hourly_rate
     remark CandidaturesByJob
     ContractsByJob
+    """
+    insert_layout = """
+    name provider 
+    contract_type type
+    sector function
+    # capacity hourly_rate
     """
 
 

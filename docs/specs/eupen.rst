@@ -7,7 +7,7 @@ Lino Welfare à la Eupen
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_eupen
+    $ doctest docs/specs/eupen.rst
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
@@ -18,18 +18,18 @@ Lino Welfare à la Eupen
    :depth: 2
 
 
-The murderer bug
-================
+Overview
+--------
 
-Before 20150623 it was possible to inadvertently cause a cascaded
-delete by calling `delete` on an object in a script. For example the
-following line would have deleted client 127 and all related data
-instead of raising an exception:
+Lino Welfare à la Eupen is the oldest Lino application in the world,
+it was the first Lino who went into production. This was in 2010.
 
->>> pcsw.Client.objects.get(id=127).delete()
-Traceback (most recent call last):
-...
-Warning: Kann Partner Evers Eberhart nicht l\xf6schen weil 27 Anwesenheiten darauf verweisen.
+
+Don't read me
+-------------
+
+The remaining part of this document is meant rather for testing than
+for explaining.
 
 
 The main menu
@@ -66,7 +66,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
 - Berichte :
-  - Buchhaltung : Situation, Saldenliste Generalkonten, Saldenliste Kunden, Saldenliste Lieferanten, Schuldner, Gläubiger
+  - Buchhaltung : Accounting Report, Saldenliste Generalkonten, Saldenliste Kunden, Saldenliste Lieferanten, Schuldner, Gläubiger
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - System : Site-Parameter, Benutzer, Hilfetexte, Update all summary data
@@ -314,17 +314,17 @@ Each window layout defines a given set of fields.
 - addresses.Addresses.insert : country, city, street, street_no, street_box, address_type, remark
 - aids.AidTypes.detail : id, short_name, confirmation_type, name, name_fr, name_en, excerpt_title, excerpt_title_fr, excerpt_title_en, body_template, print_directly, is_integ_duty, is_urgent, confirmed_by_primary_coach, board, company, contact_person, contact_role, pharmacy_type
 - aids.AidTypes.insert : name, name_fr, name_en, confirmation_type
-- aids.Categories.insert : id, name, name_fr, name_en
+- aids.Categories.detail : id, name, name_fr, name_en
 - aids.Grantings.detail : id, client, user, signer, workflow_buttons, request_date, board, decision_date, aid_type, category, start_date, end_date, custom_actions
 - aids.Grantings.insert : client, aid_type, signer, board, decision_date, start_date, end_date
 - aids.GrantingsByClient.insert : aid_type, board, decision_date, start_date, end_date
-- aids.IncomeConfirmations.insert : client, user, signer, workflow_buttons, printed, company, contact_person, language, granting, start_date, end_date, category, amount, id, remark
+- aids.IncomeConfirmations.detail : client, user, signer, workflow_buttons, printed, company, contact_person, language, granting, start_date, end_date, category, amount, id, remark
 - aids.IncomeConfirmationsByGranting.insert : client, granting, start_date, end_date, category, amount, company, contact_person, language, remark
-- aids.RefundConfirmations.insert : id, client, user, signer, workflow_buttons, granting, start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
+- aids.RefundConfirmations.detail : id, client, user, signer, workflow_buttons, granting, start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
 - aids.RefundConfirmationsByGranting.insert : start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
-- aids.SimpleConfirmations.insert : id, client, user, signer, workflow_buttons, granting, start_date, end_date, company, contact_person, language, printed, remark
+- aids.SimpleConfirmations.detail : id, client, user, signer, workflow_buttons, granting, start_date, end_date, company, contact_person, language, printed, remark
 - aids.SimpleConfirmationsByGranting.insert : start_date, end_date, company, contact_person, language, remark
-- art61.ContractTypes.insert : id, name, name_fr, name_en, ref
+- art61.ContractTypes.detail : id, name, name_fr, name_en, ref
 - art61.Contracts.detail : id, client, user, language, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, job_title, status, cv_duration, regime, reference_person, remark, printed, date_decided, date_issued, date_ended, ending, subsidize_10, subsidize_20, subsidize_30, subsidize_40, subsidize_50, responsibilities
 - art61.Contracts.insert : client, company, type
 - b2c.Accounts.detail : iban, bic, last_transaction, owner_name, account_name, partners
@@ -339,7 +339,7 @@ Each window layout defines a given set of fields.
 - cal.EventTypes.insert : name, name_fr, name_en, invite_client
 - cal.Events.detail : event_type, summary, project, start_date, start_time, end_date, end_time, user, assigned_to, room, priority, access_class, transparent, owner, workflow_buttons, description, id, created, modified, state
 - cal.Events.insert : summary, start_date, start_time, end_date, end_time, event_type, project
-- cal.GuestRoles.insert : id, name, name_fr, name_en
+- cal.GuestRoles.detail : id, name, name_fr, name_en
 - cal.GuestStates.wf1 : notify_subject, notify_body, notify_silent
 - cal.GuestStates.wf2 : notify_subject, notify_body, notify_silent
 - cal.Guests.checkin : notify_subject, notify_body, notify_silent
@@ -359,8 +359,8 @@ Each window layout defines a given set of fields.
 - cbss.RetrieveTIGroupsRequests.detail : id, person, user, sent, status, printed, national_id, language, history, environment, ticket, info_messages, debug_messages
 - cbss.RetrieveTIGroupsRequests.insert : person, national_id, language, history
 - changes.Changes.detail : time, user, type, master, object, id, diff
-- coachings.ClientContactTypes.insert : id, name, name_fr, name_en, can_refund, is_bailiff
-- coachings.CoachingEndings.insert : id, name, name_fr, name_en, seqno
+- coachings.ClientContactTypes.detail : id, name, name_fr, name_en, can_refund, is_bailiff
+- coachings.CoachingEndings.detail : id, name, name_fr, name_en, seqno
 - coachings.Coachings.create_visit : user, summary
 - contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, payment_term, vatless_VouchersByPartner, ledger_MovementsByPartner, id, language, activity, is_obsolete, created, modified
 - contacts.Companies.insert : name, email, type, id
@@ -372,18 +372,19 @@ Each window layout defines a given set of fields.
 - contacts.Persons.insert : first_name, last_name, gender, email
 - countries.Countries.detail : isocode, name, name_fr, name_en, short_code, inscode, actual_country
 - countries.Countries.insert : isocode, inscode, name, name_fr, name_en
-- countries.Places.insert : name, name_fr, name_en, country, inscode, zip_code, parent, type, id
+- countries.Places.detail : name, name_fr, name_en, country, inscode, zip_code, parent, type, id
 - countries.Places.merge_row : merge_to, reason
-- cv.Durations.insert : id, name, name_fr, name_en
-- cv.EducationLevels.insert : name, name_fr, name_en, is_study, is_training
-- cv.Experiences.insert : person, company, country, city, sector, function, title, status, duration, regime, is_training, start_date, end_date, duration_text, termination_reason, remarks
+- cv.Durations.detail : id, name, name_fr, name_en
+- cv.EducationLevels.detail : name, name_fr, name_en, is_study, is_training
+- cv.Experiences.detail : person, company, country, city, sector, function, title, status, duration, regime, is_training, start_date, end_date, duration_text, termination_reason, remarks
 - cv.ExperiencesByPerson.insert : start_date, end_date, company, function
-- cv.Functions.insert : id, name, name_fr, name_en, sector, remark
+- cv.Functions.detail : id, name, name_fr, name_en, sector, remark
+- cv.LanguageKnowledgesByPerson.detail : language, native, cef_level, spoken_passively, spoken, written
 - cv.LanguageKnowledgesByPerson.insert : language, native, cef_level, spoken_passively, spoken, written
-- cv.Regimes.insert : id, name, name_fr, name_en
-- cv.Sectors.insert : id, name, name_fr, name_en, remark
-- cv.Statuses.insert : id, name, name_fr, name_en
-- cv.Studies.insert : person, start_date, end_date, duration_text, type, content, education_level, state, school, country, city, remarks
+- cv.Regimes.detail : id, name, name_fr, name_en
+- cv.Sectors.detail : id, name, name_fr, name_en, remark
+- cv.Statuses.detail : id, name, name_fr, name_en
+- cv.Studies.detail : person, start_date, end_date, duration_text, type, content, education_level, state, school, country, city, remarks
 - cv.StudiesByPerson.insert : start_date, end_date, type, content
 - cv.StudyTypes.detail : name, name_fr, name_en, id, education_level, is_study, is_training
 - cv.StudyTypes.insert : name, name_fr, name_en, is_study, is_training, education_level
@@ -399,44 +400,47 @@ Each window layout defines a given set of fields.
 - excerpts.ExcerptTypes.detail : id, name, name_fr, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_fr, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
-- finan.BankStatements.detail : entry_date, balance1, balance2, user, id, workflow_buttons, ItemsByBankStatement, journal, accounting_period, item_account, item_remark, MovementsByVoucher
+- finan.BankStatements.detail : entry_date, number, balance1, balance2, workflow_buttons, ItemsByBankStatement, journal, accounting_period, user, id, item_account, item_remark, MovementsByVoucher
 - finan.BankStatements.insert : entry_date, balance1
 - finan.DisbursementOrders.detail : journal, number, voucher_date, entry_date, accounting_period, item_account, total, workflow_buttons, narration, item_remark, ItemsByDisbursementOrder, state, user, id, MovementsByVoucher
 - finan.DisbursementOrdersByJournal.insert : item_account, voucher_date
-- finan.FinancialVouchers.detail : entry_date, number, user, workflow_buttons, narration, id, ItemsByJournalEntry, journal, accounting_period, item_account, item_remark, MovementsByVoucher
+- finan.FinancialVouchers.detail : entry_date, number, workflow_buttons, narration, ItemsByJournalEntry, journal, accounting_period, user, id, item_account, item_remark, MovementsByVoucher
 - finan.FinancialVouchers.insert : entry_date, narration
-- finan.PaymentOrders.detail : entry_date, number, user, total, execution_date, workflow_buttons, narration, id, ItemsByPaymentOrder, journal, accounting_period, item_account, item_remark, MovementsByVoucher
-- gfks.ContentTypes.insert : id, app_label, model, base_classes
+- finan.PaymentOrders.detail : entry_date, number, total, execution_date, workflow_buttons, narration, ItemsByPaymentOrder, journal, accounting_period, user, id, item_account, item_remark, MovementsByVoucher
+- gfks.ContentTypes.detail : id, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
 - households.HouseholdsByType.detail : type, prefix, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url
-- households.Types.insert : name, name_fr, name_en
+- households.Types.detail : name, name_fr, name_en
+- humanlinks.Links.detail : parent, type, child
 - humanlinks.Links.insert : parent, type, child
 - integ.ActivityReport.show : body
-- isip.ContractEndings.insert : name, use_in_isip, use_in_jobs, is_success, needs_date_ended
-- isip.ContractPartners.insert : company, contact_person, contact_role, duties_company
-- isip.ContractTypes.insert : id, ref, exam_policy, needs_study_type, name, name_fr, name_en, full_name
+- isip.ContractEndings.detail : name, use_in_isip, use_in_jobs, is_success, needs_date_ended
+- isip.ContractPartners.detail : company, contact_person, contact_role, duties_company
+- isip.ContractTypes.detail : id, ref, exam_policy, needs_study_type, name, name_fr, name_en, full_name
 - isip.Contracts.detail : id, client, type, user, user_dsbe, user_asd, study_type, applies_from, applies_until, exam_policy, language, date_decided, date_issued, printed, date_ended, ending, stages, goals, duties_person, duties_asd, duties_dsbe, duties_pcsw
 - isip.Contracts.insert : client, type
-- isip.ExamPolicies.insert : id, name, name_fr, name_en, max_events, every, every_unit, event_type, monday, tuesday, wednesday, thursday, friday, saturday, sunday
-- jobs.ContractTypes.insert : id, name, name_fr, name_en, ref
+- isip.ExamPolicies.detail : id, name, name_fr, name_en, max_events, every, every_unit, event_type, monday, tuesday, wednesday, thursday, friday, saturday, sunday
+- jobs.ContractTypes.detail : id, name, name_fr, name_en, ref
 - jobs.Contracts.detail : id, client, user, user_asd, language, job, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, regime, schedule, hourly_rate, refund_rate, reference_person, remark, printed, date_decided, date_issued, date_ended, ending, responsibilities
 - jobs.Contracts.insert : client, job
 - jobs.JobProviders.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax
-- jobs.JobTypes.insert : id, name, is_social
-- jobs.Jobs.insert : name, provider, contract_type, type, id, sector, function, capacity, hourly_rate, remark
+- jobs.JobTypes.detail : id, name, is_social
+- jobs.Jobs.detail : name, provider, contract_type, type, id, sector, function, capacity, hourly_rate, remark
+- jobs.Jobs.insert : name, provider, contract_type, type, sector, function
 - jobs.JobsOverview.show : body
-- jobs.Offers.insert : name, provider, sector, function, selection_from, selection_until, start_date, remark
-- jobs.Schedules.insert : id, name, name_fr, name_en
-- languages.Languages.insert : id, iso2, name, name_fr, name_en
+- jobs.Offers.detail : name, provider, sector, function, selection_from, selection_until, start_date, remark
+- jobs.Schedules.detail : id, name, name_fr, name_en
+- languages.Languages.detail : id, iso2, name, name_fr, name_en
+- ledger.AccountingReport.show : body
 - ledger.ActivityReport.show : body
 - ledger.Journals.detail : name, name_fr, name_en, ref, trade_type, seqno, id, voucher_type, journal_group, account, build_method, template, dc, force_sequence, yearly_numbering, auto_fill_suggestions, auto_check_clearings, must_declare, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, journal_group, voucher_type
-- ledger.PaymentTerms.insert : ref, months, days, end_of_month, name, name_fr, name_en, printed_text, printed_text_fr, printed_text_en
+- ledger.PaymentTerms.detail : ref, months, days, end_of_month, name, name_fr, name_en, printed_text, printed_text_fr, printed_text_en
 - ledger.Situation.show : body
 - newcomers.AvailableCoachesByClient.assign_coach : notify_subject, notify_body, notify_silent
 - newcomers.Faculties.detail : id, name, name_fr, name_en, weight
 - newcomers.Faculties.insert : name, name_fr, name_en, weight
-- notes.EventTypes.insert : id, name, name_fr, name_en, remark
+- notes.EventTypes.detail : id, name, name_fr, name_en, remark
 - notes.NoteTypes.detail : id, name, name_fr, name_en, build_method, template, special_type, email_template, attach_to_email, remark
 - notes.NoteTypes.insert : name, name_fr, name_en, build_method
 - notes.Notes.detail : date, time, event_type, type, project, subject, important, company, contact_person, user, language, build_time, id, body, uploads_UploadsByController
@@ -450,13 +454,14 @@ Each window layout defines a given set of fields.
 - pcsw.Clients.refuse_client : reason, remark
 - plausibility.Checkers.detail : value, text
 - plausibility.Problems.detail : user, owner, checker, id, message
-- properties.PropGroups.insert : id, name, name_fr, name_en
-- properties.PropTypes.insert : id, name, name_fr, name_en, choicelist, default_value
-- properties.Properties.insert : id, group, type, name, name_fr, name_en
+- properties.PropGroups.detail : id, name, name_fr, name_en
+- properties.PropTypes.detail : id, name, name_fr, name_en, choicelist, default_value
+- properties.Properties.detail : id, group, type, name, name_fr, name_en
 - reception.BusyVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.GoneVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.MyWaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
 - reception.WaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
+- sepa.AccountsByPartner.insert : iban, bic, remark
 - system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, hide_events_before, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail : id, name, user, description, text
 - tinymce.TextFieldTemplates.insert : name, user
@@ -472,16 +477,16 @@ Each window layout defines a given set of fields.
 - users.Users.change_password : current, new1, new2
 - users.Users.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert : username, email, first_name, last_name, partner, language, user_type
-- vatless.Invoices.detail : journal, number, entry_date, voucher_date, accounting_period, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, match, state, user, id, MovementsByVoucher
+- vatless.Invoices.detail : journal, number, entry_date, voucher_date, accounting_period, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, ItemsByInvoice, match, state, user, id, MovementsByVoucher
 - vatless.Invoices.insert : journal, partner, entry_date
 - vatless.InvoicesByJournal.insert : partner, entry_date
-- vatless.ProjectInvoicesByJournal.detail : journal, number, entry_date, voucher_date, accounting_period, workflow_buttons, project, narration, partner, your_ref, payment_term, due_date, bank_account, amount, match, state, user, id, MovementsByVoucher
+- vatless.ProjectInvoicesByJournal.detail : journal, number, entry_date, voucher_date, accounting_period, workflow_buttons, project, narration, partner, your_ref, payment_term, due_date, bank_account, amount, ItemsByProjectInvoice, match, state, user, id, MovementsByVoucher
 - vatless.ProjectInvoicesByJournal.insert : project, partner, entry_date
-- xcourses.CourseContents.insert : id, name
+- xcourses.CourseContents.detail : id, name
 - xcourses.CourseOffers.detail : id, title, content, provider, guest_role, description
 - xcourses.CourseOffers.insert : provider, content, title
 - xcourses.CourseProviders.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax
-- xcourses.CourseRequests.insert : date_submitted, person, content, offer, urgent, course, state, date_ended, id, remark, uploads_UploadsByController
+- xcourses.CourseRequests.detail : date_submitted, person, content, offer, urgent, course, state, date_ended, id, remark, uploads_UploadsByController
 - xcourses.Courses.detail : id, start_date, offer, title, remark
 - xcourses.Courses.insert : start_date, offer, title
 <BLANKLINE>
@@ -504,17 +509,17 @@ Each window layout is **viewable** by a given set of user user_types.
 - addresses.Addresses.insert : visible for admin 910
 - aids.AidTypes.detail : visible for 110 210 410 500 510 800 admin 910
 - aids.AidTypes.insert : visible for 110 210 410 500 510 800 admin 910
-- aids.Categories.insert : visible for 110 210 410 500 510 800 admin 910
+- aids.Categories.detail : visible for 110 210 410 500 510 800 admin 910
 - aids.Grantings.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - aids.Grantings.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - aids.GrantingsByClient.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- aids.IncomeConfirmations.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- aids.IncomeConfirmations.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - aids.IncomeConfirmationsByGranting.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- aids.RefundConfirmations.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- aids.RefundConfirmations.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - aids.RefundConfirmationsByGranting.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- aids.SimpleConfirmations.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
+- aids.SimpleConfirmations.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - aids.SimpleConfirmationsByGranting.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- art61.ContractTypes.insert : visible for 110 admin 910
+- art61.ContractTypes.detail : visible for 110 admin 910
 - art61.Contracts.detail : visible for 100 110 120 admin 910
 - art61.Contracts.insert : visible for 100 110 120 admin 910
 - b2c.Accounts.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
@@ -529,7 +534,7 @@ Each window layout is **viewable** by a given set of user user_types.
 - cal.EventTypes.insert : visible for 110 410 admin 910
 - cal.Events.detail : visible for 110 410 admin 910
 - cal.Events.insert : visible for 110 410 admin 910
-- cal.GuestRoles.insert : visible for admin 910
+- cal.GuestRoles.detail : visible for admin 910
 - cal.GuestStates.wf1 : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - cal.GuestStates.wf2 : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - cal.Guests.checkin : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
@@ -549,8 +554,8 @@ Each window layout is **viewable** by a given set of user user_types.
 - cbss.RetrieveTIGroupsRequests.detail : visible for 100 110 120 200 210 300 400 410 admin 910
 - cbss.RetrieveTIGroupsRequests.insert : visible for 100 110 120 200 210 300 400 410 admin 910
 - changes.Changes.detail : visible for admin 910
-- coachings.ClientContactTypes.insert : visible for 110 210 410 admin 910
-- coachings.CoachingEndings.insert : visible for 110 210 410 admin 910
+- coachings.ClientContactTypes.detail : visible for 110 210 410 admin 910
+- coachings.CoachingEndings.detail : visible for 110 210 410 admin 910
 - coachings.Coachings.create_visit : visible for 110 210 410 admin 910
 - contacts.Companies.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - contacts.Companies.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
@@ -562,18 +567,19 @@ Each window layout is **viewable** by a given set of user user_types.
 - contacts.Persons.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - countries.Countries.detail : visible for 110 210 410 800 admin 910
 - countries.Countries.insert : visible for 110 210 410 800 admin 910
-- countries.Places.insert : visible for 110 210 410 800 admin 910
+- countries.Places.detail : visible for 110 210 410 800 admin 910
 - countries.Places.merge_row : visible for 110 210 410 800 admin 910
-- cv.Durations.insert : visible for 110 admin 910
-- cv.EducationLevels.insert : visible for 110 admin 910
-- cv.Experiences.insert : visible for 110 admin 910
+- cv.Durations.detail : visible for 110 admin 910
+- cv.EducationLevels.detail : visible for 110 admin 910
+- cv.Experiences.detail : visible for 110 admin 910
 - cv.ExperiencesByPerson.insert : visible for 100 110 120 admin 910
-- cv.Functions.insert : visible for 110 admin 910
+- cv.Functions.detail : visible for 110 admin 910
+- cv.LanguageKnowledgesByPerson.detail : visible for 100 110 120 admin 910
 - cv.LanguageKnowledgesByPerson.insert : visible for 100 110 120 admin 910
-- cv.Regimes.insert : visible for 110 admin 910
-- cv.Sectors.insert : visible for 110 admin 910
-- cv.Statuses.insert : visible for 110 admin 910
-- cv.Studies.insert : visible for 110 admin 910
+- cv.Regimes.detail : visible for 110 admin 910
+- cv.Sectors.detail : visible for 110 admin 910
+- cv.Statuses.detail : visible for 110 admin 910
+- cv.Studies.detail : visible for 110 admin 910
 - cv.StudiesByPerson.insert : visible for 100 110 120 admin 910
 - cv.StudyTypes.detail : visible for 110 admin 910
 - cv.StudyTypes.insert : visible for 110 admin 910
@@ -596,37 +602,40 @@ Each window layout is **viewable** by a given set of user user_types.
 - finan.FinancialVouchers.detail : visible for 500 510 admin 910
 - finan.FinancialVouchers.insert : visible for 500 510 admin 910
 - finan.PaymentOrders.detail : visible for 500 510 admin 910
-- gfks.ContentTypes.insert : visible for admin 910
+- gfks.ContentTypes.detail : visible for admin 910
 - households.Households.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - households.HouseholdsByType.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
-- households.Types.insert : visible for 110 210 410 800 admin 910
+- households.Types.detail : visible for 110 210 410 800 admin 910
+- humanlinks.Links.detail : visible for 110 210 410 800 admin 910
 - humanlinks.Links.insert : visible for 110 210 410 800 admin 910
 - integ.ActivityReport.show : visible for 100 110 120 admin 910
-- isip.ContractEndings.insert : visible for 110 410 admin 910
-- isip.ContractPartners.insert : visible for 110 410 admin 910
-- isip.ContractTypes.insert : visible for 110 410 admin 910
+- isip.ContractEndings.detail : visible for 110 410 admin 910
+- isip.ContractPartners.detail : visible for 110 410 admin 910
+- isip.ContractTypes.detail : visible for 110 410 admin 910
 - isip.Contracts.detail : visible for 100 110 120 200 300 400 410 admin 910
 - isip.Contracts.insert : visible for 100 110 120 200 300 400 410 admin 910
-- isip.ExamPolicies.insert : visible for 110 410 admin 910
-- jobs.ContractTypes.insert : visible for 110 410 admin 910
+- isip.ExamPolicies.detail : visible for 110 410 admin 910
+- jobs.ContractTypes.detail : visible for 110 410 admin 910
 - jobs.Contracts.detail : visible for 100 110 120 200 300 400 410 admin 910
 - jobs.Contracts.insert : visible for 100 110 120 200 300 400 410 admin 910
 - jobs.JobProviders.detail : visible for 100 110 120 admin 910
-- jobs.JobTypes.insert : visible for 110 410 admin 910
+- jobs.JobTypes.detail : visible for 110 410 admin 910
+- jobs.Jobs.detail : visible for 100 110 120 admin 910
 - jobs.Jobs.insert : visible for 100 110 120 admin 910
 - jobs.JobsOverview.show : visible for 100 110 120 admin 910
-- jobs.Offers.insert : visible for 100 110 120 admin 910
-- jobs.Schedules.insert : visible for 110 410 admin 910
-- languages.Languages.insert : visible for 110 410 admin 910
+- jobs.Offers.detail : visible for 100 110 120 admin 910
+- jobs.Schedules.detail : visible for 110 410 admin 910
+- languages.Languages.detail : visible for 110 410 admin 910
+- ledger.AccountingReport.show : visible for 500 510 admin 910
 - ledger.ActivityReport.show : visible for 500 510 admin 910
 - ledger.Journals.detail : visible for 510 admin 910
 - ledger.Journals.insert : visible for 510 admin 910
-- ledger.PaymentTerms.insert : visible for 510 admin 910
+- ledger.PaymentTerms.detail : visible for 510 admin 910
 - ledger.Situation.show : visible for 500 510 admin 910
 - newcomers.AvailableCoachesByClient.assign_coach : visible for 110 120 200 220 300 800 admin 910
 - newcomers.Faculties.detail : visible for 110 410 admin 910
 - newcomers.Faculties.insert : visible for 110 410 admin 910
-- notes.EventTypes.insert : visible for 110 410 admin 910
+- notes.EventTypes.detail : visible for 110 410 admin 910
 - notes.NoteTypes.detail : visible for 110 410 admin 910
 - notes.NoteTypes.insert : visible for 110 410 admin 910
 - notes.Notes.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
@@ -640,13 +649,14 @@ Each window layout is **viewable** by a given set of user user_types.
 - pcsw.Clients.refuse_client : visible for 120 200 220 300 admin 910
 - plausibility.Checkers.detail : visible for admin 910
 - plausibility.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- properties.PropGroups.insert : visible for admin 910
-- properties.PropTypes.insert : visible for admin 910
-- properties.Properties.insert : visible for admin 910
+- properties.PropGroups.detail : visible for admin 910
+- properties.PropTypes.detail : visible for admin 910
+- properties.Properties.detail : visible for admin 910
 - reception.BusyVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - reception.GoneVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - reception.MyWaitingVisitors.detail : visible for 100 110 120 200 300 400 410 500 510 admin 910
 - reception.WaitingVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- sepa.AccountsByPartner.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - system.SiteConfigs.detail : visible for admin 910
 - tinymce.TextFieldTemplates.detail : visible for admin 910
 - tinymce.TextFieldTemplates.insert : visible for admin 910
@@ -667,14 +677,15 @@ Each window layout is **viewable** by a given set of user user_types.
 - vatless.InvoicesByJournal.insert : visible for 500 510 admin 910
 - vatless.ProjectInvoicesByJournal.detail : visible for 500 510 admin 910
 - vatless.ProjectInvoicesByJournal.insert : visible for 500 510 admin 910
-- xcourses.CourseContents.insert : visible for 110 admin 910
+- xcourses.CourseContents.detail : visible for 110 admin 910
 - xcourses.CourseOffers.detail : visible for 100 110 120 admin 910
 - xcourses.CourseOffers.insert : visible for 100 110 120 admin 910
 - xcourses.CourseProviders.detail : visible for 100 110 120 admin 910
-- xcourses.CourseRequests.insert : visible for 110 admin 910
+- xcourses.CourseRequests.detail : visible for 110 admin 910
 - xcourses.Courses.detail : visible for 110 admin 910
 - xcourses.Courses.insert : visible for 110 admin 910
 <BLANKLINE>
+
 
 
 Visibility of eID reader actions
@@ -753,17 +764,6 @@ Global list of all actions that have a parameter dialog.
   (main) [visible for all]: **Aktuelles Passwort** (current), **Neues Passwort** (new1), **Neues Passwort nochmal** (new2)
 <BLANKLINE>
 
-
-
-Some requests
-=============
-
-Some choices lists:
-
->>> kw = dict()
->>> fields = 'count rows'
->>> demo_get('rolf', 'choices/cv/SkillsByPerson/property', fields, 6, **kw)
->>> demo_get('rolf', 'choices/cv/ObstaclesByPerson/property', fields, 15, **kw)
 
 
 Menu walk
@@ -971,3 +971,30 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Schuldnerberatung --> Budgets : 15
 - Explorer --> Schuldnerberatung --> Einträge : 717
 <BLANKLINE>
+
+
+The murderer bug
+================
+
+Before 20150623 it was possible to inadvertently cause a cascaded
+delete by calling `delete` on an object in a script. For example the
+following line would have deleted client 127 and all related data
+instead of raising an exception:
+
+>>> pcsw.Client.objects.get(id=127).delete()
+Traceback (most recent call last):
+...
+Warning: Kann Partner Evers Eberhart nicht l\xf6schen weil 27 Anwesenheiten darauf verweisen.
+
+
+Some requests
+=============
+
+Some choices lists:
+
+>>> kw = dict()
+>>> fields = 'count rows'
+>>> demo_get('rolf', 'choices/cv/SkillsByPerson/property', fields, 6, **kw)
+>>> demo_get('rolf', 'choices/cv/ObstaclesByPerson/property', fields, 15, **kw)
+
+

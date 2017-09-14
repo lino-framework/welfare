@@ -563,7 +563,7 @@ class PAR(Controller):
                 par2client(data, obj)
                 mapper.update(gesdos_id='NB1')
                 if data.has_key('NB2'):
-                    obj.national_id = data['NB2']
+                    obj.national_id = data['NB2'] or None
                     #~ if obj.national_id:
                         #~ if not is_valid_ssin(obj.national_id):
                             #~ dblogger.info("%s : invalid SSIN %s",dd.obj2str(obj),obj.national_id)

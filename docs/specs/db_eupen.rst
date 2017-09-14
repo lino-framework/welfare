@@ -6,7 +6,7 @@ Database structure
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_db_eupen
+    $ doctest docs/specs/db_eupen.rst
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
@@ -23,7 +23,7 @@ Database structure
 >>> print(analyzer.show_complexity_factors())
 - 64 plugins
 - 140 models
-- 538 views
+- 539 views
 - 15 user types
 - 13 dialog actions
 <BLANKLINE>

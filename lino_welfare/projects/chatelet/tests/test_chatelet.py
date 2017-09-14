@@ -83,7 +83,6 @@ class TestCase(TestCase):
             colnames,
             ['type', 'user', 'detected_date', 'remark', 'id',
              'mobile_item',
-             'description_column',
              'overview',
              'workflow_buttons',
              'person'])
@@ -109,11 +108,10 @@ class TestCase(TestCase):
         self.assertEqual(result['rows'], [
             ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
              '<div><em>Obstacle object</em></div>',
-             '<em>Obstacle object</em>',
              u'<div><em>Obstacle object</em></div>',
              '<span />',
              'First LAST', 100,
-             {'id': True}, {}, False]])
+             {'id': True}, False]])
 
         self.assertEqual(Obstacle.objects.get(pk=1).user.username, 'robin')
 

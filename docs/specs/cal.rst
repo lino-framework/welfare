@@ -7,7 +7,7 @@ Calendar functions in Lino Welfare
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_cal
+    $ doctest docs/specs/cal.rst
     
     doctest init:
 
@@ -329,4 +329,50 @@ Calendar entries of ISIP#18 (Edgard RADERMACHER)
  **Thu 14/11/2013 (09:00)**   Évaluation 10       Alicia Allmanns                 **Suggested**
 ============================ =================== ================= ============= ===============
 <BLANKLINE>
+
+Filter list of clients when creating appointment
+================================================
+
+The "Client" field of a calendar entry in :ref:`welfare` has a
+filtered choice list which shows only coached clients.  "Quand on veut
+ajouter un rendez-vous dans le panneau "Rendez-vous aujourd'hui", la
+liste déroulante pour le choix du bénéficiaire fait référence à la
+liste de l'onglet CONTACTS --> BÉNÉFICIAIRES.  Nous souhaitons que la
+liste de référence soit celle de l'onglet CPAS --> BÉNÉFICIAIRES.  En
+effet, cette dernière ne reprend que les dossiers actifs (attribués
+aux travailleurs sociaux)."
+
+>>> show_choices('romain', '/choices/cal/AllEntries/project')
+<br/>
+AUSDEMWALD Alfons (116)
+BRECHT Bernd (177)
+COLLARD Charlotte (118)
+DENON Denis (180*)
+DOBBELSTEIN Dorothée (124)
+DUBOIS Robin (179)
+EMONTS Daniel (128)
+EMONTS-GAST Erna (152)
+ENGELS Edgar (129)
+EVERS Eberhart (127)
+FAYMONVILLE Luc (130*)
+GROTECLAES Gregory (132)
+HILGERS Hildegard (133)
+JACOBS Jacqueline (137)
+JEANÉMART Jérôme (181)
+JONAS Josef (139)
+KAIVERS Karl (141)
+KELLER Karl (178)
+LAMBERTZ Guido (142)
+LAZARUS Line (144)
+MALMENDIER Marc (146)
+MEESSEN Melissa (147)
+RADERMACHER Alfons (153)
+RADERMACHER Christian (155)
+RADERMACHER Edgard (157)
+RADERMACHER Guido (159)
+RADERMACHER Hedi (161)
+RADERMECKER Rik (173)
+DA VINCI David (165)
+VAN VEEN Vincent (166)
+ÖSTGES Otto (168)
 

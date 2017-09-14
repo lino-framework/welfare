@@ -4,9 +4,9 @@
 Miscellaneous
 =============
 
-.. How to test only this document:
+..  How to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_misc
+     $ doctest docs/specs/misc.rst
     
     doctest init:
     
@@ -100,9 +100,10 @@ work:
 >>> lcd = settings.SITE.cache_dir.child('config')
 >>> rt.makedirs_if_missing(lcd)
 
-(These tests are the reason why `is_local_project_dir` is `True` in
-:mod:`lino_welfare.projects.std.settings.doctests`.)
+After having created the directory, we must tell Lino to scan the file
+system again:
 
+>>> settings.SITE.confdirs.scan_config_dirs()
 
 Excerpts are printables with *two* template groups.  The first
 template group is given by the owner (e.g. `"immersion/Contract"`) and
@@ -128,7 +129,7 @@ so, it will ask for user confirmation.
 >>> rv = ses.run(obj.edit_template)
 >>> print(rv['info_message'])
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-Gonna copy ...welfare/config/excerpts/Default.odt to $(PRJ)/config/immersion/Contract/Default.odt
+Gonna copy ...welfare/config/excerpts/Default.odt to .../config/immersion/Contract/Default.odt
 >>> print(rv['message'])
 ...     #doctest: +NORMALIZE_WHITESPACE
 Before you can edit this template we must create a local copy on the server. This will exclude the template from future updates.
@@ -142,7 +143,7 @@ Another thing is the location of the factory template.
 >>> rv = ses.run(obj.edit_template)
 >>> print(rv['info_message'])
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-Gonna copy .../lino_welfare/modlib/welfare/config/excerpts/Default.odt to $(PRJ)/config/immersion/Contract/Default.odt
+Gonna copy .../lino_welfare/modlib/welfare/config/excerpts/Default.odt to .../config/immersion/Contract/Default.odt
 
 .. until 20170122:
    Gonna copy ...lino_welfare/modlib/immersion/config/immersion/Contract/StageForem.odt to $(PRJ)/config/immersion/Contract/StageForem.odt

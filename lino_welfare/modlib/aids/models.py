@@ -344,7 +344,7 @@ class Grantings(dd.Table):
     board decision_date
     start_date end_date
     """
-
+    
     parameters = dict(
         observed_event=dd.PeriodEvents.field(
             blank=True, default=dd.PeriodEvents.active.as_callable),
@@ -427,7 +427,7 @@ class MyPendingGrantings(Grantings):
 class GrantingsByClient(Grantings):
 
     master_key = 'client'
-    column_names = "description_column start_date end_date " \
+    column_names = "detail_pointer start_date end_date " \
                    "signer workflow_buttons " \
                    "board custom_actions *"
     auto_fit_column_widths = True
@@ -447,7 +447,7 @@ class GrantingsByClient(Grantings):
 class GrantingsByType(Grantings):
     auto_fit_column_widths = True
     master_key = 'aid_type'
-    column_names = "description_column client start_date end_date id *"
+    column_names = "detail_pointer client start_date end_date id *"
 
 
 ##
@@ -464,7 +464,7 @@ class Confirmations(dd.Table):
     # model = 'aids.Confirmation'
     required_roles = dd.login_required(AidsStaff)
     order_by = ["-created"]
-    column_names = "description_column created user printed " \
+    column_names = "detail_pointer created user printed " \
                    "start_date end_date *"
 
     parameters = dict(
@@ -578,7 +578,7 @@ class ConfirmationsByGranting(dd.VirtualTable):
     # add column with `master_key`":
     # master_key = 'granting'
 
-    column_names = "description_column created user signer printed " \
+    column_names = "detail_pointer created user signer printed " \
                    "start_date end_date *"
     do_print = PrintConfirmation()
 
@@ -638,10 +638,6 @@ class ConfirmationsByGranting(dd.VirtualTable):
         # `ar`, but we need the `ar` if we want the displayed
         # timestamp to be clickable.
         return obj._meta.get_field('printed').value_from_object(obj, ar)
-
-    @dd.displayfield(_("Description"))
-    def description_column(self, obj, ar):
-        return ar.obj2html(obj)
 
 
 #
