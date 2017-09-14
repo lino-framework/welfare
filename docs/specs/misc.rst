@@ -129,7 +129,7 @@ so, it will ask for user confirmation.
 >>> rv = ses.run(obj.edit_template)
 >>> print(rv['info_message'])
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-Gonna copy ...welfare/config/excerpts/Default.odt to $(PRJ)/config/immersion/Contract/Default.odt
+Gonna copy ...welfare/config/excerpts/Default.odt to .../config/immersion/Contract/Default.odt
 >>> print(rv['message'])
 ...     #doctest: +NORMALIZE_WHITESPACE
 Before you can edit this template we must create a local copy on the server. This will exclude the template from future updates.
@@ -143,7 +143,7 @@ Another thing is the location of the factory template.
 >>> rv = ses.run(obj.edit_template)
 >>> print(rv['info_message'])
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-Gonna copy .../lino_welfare/modlib/welfare/config/excerpts/Default.odt to $(PRJ)/config/immersion/Contract/Default.odt
+Gonna copy .../lino_welfare/modlib/welfare/config/excerpts/Default.odt to .../config/immersion/Contract/Default.odt
 
 .. until 20170122:
    Gonna copy ...lino_welfare/modlib/immersion/config/immersion/Contract/StageForem.odt to $(PRJ)/config/immersion/Contract/StageForem.odt
