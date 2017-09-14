@@ -100,9 +100,10 @@ work:
 >>> lcd = settings.SITE.cache_dir.child('config')
 >>> rt.makedirs_if_missing(lcd)
 
-.. (These tests are the reason why `is_local_project_dir` is `True` in
-   :mod:`lino_welfare.projects.std.settings.doctests`.)
+After having created the directory, we must tell Lino to scan the file
+system again:
 
+>>> settings.SITE.confdirs.scan_config_dirs()
 
 Excerpts are printables with *two* template groups.  The first
 template group is given by the owner (e.g. `"immersion/Contract"`) and
