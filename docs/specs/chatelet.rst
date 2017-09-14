@@ -348,6 +348,7 @@ Each window layout defines a given set of fields.
 - cv.ExperiencesByPerson.insert : start_date, end_date, company, function
 - cv.Functions.detail : id, name, name_nl, name_de, name_en, sector, remark
 - cv.LanguageKnowledgesByPerson.detail : language, native, cef_level, spoken_passively, spoken, written
+- cv.LanguageKnowledgesByPerson.insert : language, native, cef_level, spoken_passively, spoken, written
 - cv.Regimes.detail : id, name, name_nl, name_de, name_en
 - cv.Sectors.detail : id, name, name_nl, name_de, name_en, remark
 - cv.Statuses.detail : id, name, name_nl, name_de, name_en
@@ -539,6 +540,7 @@ Each window layout is **viewable** by a given set of user types.
 - cv.ExperiencesByPerson.insert : visible for 100 110 120 admin 910
 - cv.Functions.detail : visible for 110 admin 910
 - cv.LanguageKnowledgesByPerson.detail : visible for 100 110 120 admin 910
+- cv.LanguageKnowledgesByPerson.insert : visible for 100 110 120 admin 910
 - cv.Regimes.detail : visible for 110 admin 910
 - cv.Sectors.detail : visible for 110 admin 910
 - cv.Statuses.detail : visible for 110 admin 910
