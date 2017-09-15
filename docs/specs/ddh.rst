@@ -6,7 +6,7 @@ Preventing accidental deletes
 
 .. How to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_ddh
+    $ doctest docs/specs/ddh.rst
     
     doctest init:
 
@@ -67,7 +67,7 @@ Lino Welfare:
   - PROTECT : coachings.Coaching.type, coachings.CoachingEnding.type, users.User.coaching_type
 - contacts.Company :
   - CASCADE : jobs.JobProvider.company_ptr, xcourses.CourseProvider.company_ptr
-  - PROTECT : aids.AidType.company, aids.IncomeConfirmation.company, aids.RefundConfirmation.company, aids.RefundConfirmation.pharmacy, aids.SimpleConfirmation.company, art61.Contract.company, cal.Room.company, coachings.ClientContact.company, contacts.Role.company, debts.Entry.bailiff, excerpts.Excerpt.company, isip.ContractPartner.company, jobs.Contract.company, notes.Note.company, pcsw.Client.health_insurance, pcsw.Client.pharmacy, system.SiteConfig.site_company, uploads.Upload.company
+  - PROTECT : aids.AidType.company, aids.IncomeConfirmation.company, aids.RefundConfirmation.company, aids.RefundConfirmation.pharmacy, aids.SimpleConfirmation.company, art61.Contract.company, cal.Room.company, coachings.ClientContact.company, contacts.Role.company, debts.Entry.bailiff, excerpts.Excerpt.company, isip.ContractPartner.company, jobs.Contract.company, ledger.Journal.partner, notes.Note.company, pcsw.Client.health_insurance, pcsw.Client.pharmacy, system.SiteConfig.site_company, uploads.Upload.company    
 - contacts.CompanyType :
   - PROTECT : contacts.Company.type
 - contacts.Partner :

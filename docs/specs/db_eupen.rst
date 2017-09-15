@@ -23,7 +23,7 @@ Database structure
 >>> print(analyzer.show_complexity_factors())
 - 64 plugins
 - 140 models
-- 539 views
+- 540 views
 - 15 user types
 - 13 dialog actions
 <BLANKLINE>
@@ -125,7 +125,7 @@ Database structure
 - jobs.Schedule : id, name, name_fr, name_en
 - languages.Language : name, id, iso2, name_fr, name_en
 - ledger.AccountingPeriod : id, ref, start_date, end_date, state, year, remark
-- ledger.Journal : id, ref, seqno, name, build_method, template, trade_type, voucher_type, journal_group, auto_check_clearings, auto_fill_suggestions, force_sequence, account, printed_name, dc, yearly_numbering, must_declare, printed_name_fr, printed_name_en, name_fr, name_en, sepa_account
+- ledger.Journal : id, ref, seqno, name, build_method, template, trade_type, voucher_type, journal_group, auto_check_clearings, auto_fill_suggestions, force_sequence, account, partner, printed_name, dc, yearly_numbering, must_declare, printed_name_fr, printed_name_en, name_fr, name_en, sepa_account
 - ledger.MatchRule : id, account, journal
 - ledger.Movement : id, project, voucher, partner, seqno, account, amount, dc, match, cleared, value_date
 - ledger.PaymentTerm : id, ref, name, days, months, end_of_month, printed_text, printed_text_fr, printed_text_en, name_fr, name_en

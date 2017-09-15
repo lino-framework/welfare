@@ -632,21 +632,18 @@ def customize_system(sender, **kw):
     Used in SSDN requests as text of the `AuthorizedUser\OrgUnit` element . 
     Used in new style requests as text of the `CustomerIdentification\cbeNumber` element . 
     """))
-    dd.inject_field('system.SiteConfig',
-                    'ssdn_user_id',
-                    models.CharField(_("SSDN User Id"),
-                                     max_length=50,
-                                     blank=True,
-          help_text=r"""\
-    Used in SSDN requests as text of the `AuthorizedUser\UserID` element.
-    """))
-    dd.inject_field('system.SiteConfig',
-                    'ssdn_email',
-                    models.EmailField(_("SSDN email address"),
-                                      blank=True,
-          help_text=r"""\
-    Used in SSDN requests as text of the `AuthorizedUser\Email` element.
-    """))
+    dd.inject_field(
+        'system.SiteConfig', 'ssdn_user_id', models.CharField(
+            _("SSDN User Id"), max_length=50,
+            blank=True,
+            help_text="Used in SSDN requests as text of "\
+            "the `AuthorizedUser\\UserID` element."))
+    dd.inject_field(
+        'system.SiteConfig', 'ssdn_email', models.EmailField(
+            _("SSDN email address"),
+            blank=True,
+            help_text="Used in SSDN requests as text of "\
+            "the `AuthorizedUser\\Email` element."))
     dd.inject_field(
         'system.SiteConfig', 'cbss_http_username',
         models.CharField(
@@ -658,9 +655,7 @@ def customize_system(sender, **kw):
         'system.SiteConfig', 'cbss_http_password',
         models.CharField(
             _("HTTP password"), max_length=50, blank=True,
-            help_text="""\
-            Used in the http header of new-style requests.
-            """))
+            help_text="Used in the http header of new-style requests."))
 
 
 @dd.receiver(dd.pre_analyze)
