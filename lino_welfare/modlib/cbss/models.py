@@ -637,14 +637,14 @@ def customize_system(sender, **kw):
                     models.CharField(_("SSDN User Id"),
                                      max_length=50,
                                      blank=True,
-          help_text="""\
+          help_text=r"""\
     Used in SSDN requests as text of the `AuthorizedUser\UserID` element.
     """))
     dd.inject_field('system.SiteConfig',
                     'ssdn_email',
                     models.EmailField(_("SSDN email address"),
                                       blank=True,
-          help_text="""\
+          help_text=r"""\
     Used in SSDN requests as text of the `AuthorizedUser\Email` element.
     """))
     dd.inject_field(
@@ -726,7 +726,7 @@ def setup_site_cache(self, force):
                 logger.debug(
                     "NOT generating %s because it is newer than the code.", fn)
                 return
-        s = file(os.path.join(os.path.dirname(__file__), 'WSDL', template)
+        s = open(os.path.join(os.path.dirname(__file__), 'WSDL', template)
                  ).read()
         s = s % context
         settings.SITE.makedirs_if_missing(os.path.dirname(fn))
