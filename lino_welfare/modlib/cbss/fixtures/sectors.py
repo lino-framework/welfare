@@ -39,10 +39,10 @@ def objects():
     reader = ucsv.UnicodeReader(
         open(fn, 'r'), encoding='latin1', delimiter=';')
 
-    headers = reader.next()
+    headers = next(reader)
     if headers != [u'Sector', u'', u'verkorte naam', u'Omschrijving', u'Abréviation', u'Nom']:
         raise Exception("Invalid file format: %r" % headers)
-    reader.next()  # ignore second header line
+    next(reader)  # ignore second header line
     code = None
     for row in reader:
         s0 = row[0].strip()

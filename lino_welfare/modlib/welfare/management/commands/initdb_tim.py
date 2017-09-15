@@ -115,14 +115,14 @@ def ADR_id(cIdAdr):
     #~ assert [cIdAdr:-3] == '000'
     try:
         return 199000 + int(cIdAdr)
-    except ValueError, e:
+    except ValueError as e:
         return None
 
 
 def country2kw(row, kw):
     # for both PAR and ADR
 
-    if row.has_key('PROF'):
+    if 'PROF' in row:
         activity = row['PROF']
         if activity:
             try:
@@ -168,12 +168,12 @@ def country2kw(row, kw):
                 zip_code__exact=zip_code,
             )
             kw.update(city=city)
-        except Place.DoesNotExist, e:
+        except Place.DoesNotExist as e:
             city = Place(zip_code=zip_code, name=zip_code, country=country)
             city.save()
             kw.update(city=city)
             #~ dblogger.warning("%s-%s : %s",row['PAYS'],row['CP'],e)
-        except Place.MultipleObjectsReturned, e:
+        except Place.MultipleObjectsReturned as e:
             dblogger.warning("%s-%s : %s", row['PAYS'], row['CP'], e)
 
 
@@ -201,7 +201,7 @@ def pxs2person(row, person):
 
     par2person(row, person)
 
-    if row.has_key('CARDTYPE'):
+    if 'CARDTYPE' in row:
         #~ row.card_type = BeIdCardTypes.items_dict.get(row['CARDTYPE'].strip(),'')
         from lino_welfare.modlib.pcsw import models as pcsw
         if row['CARDTYPE'] == 0:
@@ -212,10 +212,10 @@ def pxs2person(row, person):
         try:
             person.health_insurance = Company.objects.get(
                 pk=ADR_id(row['IDMUT']))
-        except ValueError, e:
+        except ValueError as e:
             dblogger.warning(u"%s : invalid health_insurance %r",
                              obj2str(person), row['IDMUT'])
-        except Company.DoesNotExist, e:
+        except Company.DoesNotExist as e:
             dblogger.warning(u"%s : health_insurance %s not found",
                              obj2str(person), row['IDMUT'])
 
@@ -247,7 +247,7 @@ def try_full_clean(i):
     while True:
         try:
             i.full_clean()
-        except ValidationError, e:
+        except ValidationError as e:
             if not hasattr(e, 'message_dict'):
                 raise
             for k in e.message_dict.keys():
@@ -275,7 +275,7 @@ def load_dbf(dbpath, tableName, load):
                 try:
                     i.save()
                     #~ dblogger.debug("%s has been saved",i)
-                except Exception, e:
+                except Exception as e:
                 #~ except IntegrityError,e:
                     dblogger.warning(
                         "Failed to save %s from %s : %s", obj2str(i), dbfrow, e)
@@ -323,7 +323,7 @@ def load_tim_data(dbpath):
             return
         try:
             country = Country.objects.get(isocode__exact=row['ISOCODE'])
-        except Country.DoesNotExist, e:
+        except Country.DoesNotExist as e:
             country = Country(isocode=row['ISOCODE'])
             country.name = row['NAME']
         if row['IDNAT']:
@@ -336,7 +336,7 @@ def load_tim_data(dbpath):
     def load(row):
         try:
             country = Country.objects.get(short_code__exact=row['PAYS'])
-        except Country.DoesNotExist, e:
+        except Country.DoesNotExist as e:
             return
         kw = dict(
             zip_code=row['CP'] or '',
@@ -392,7 +392,7 @@ def load_tim_data(dbpath):
                         kw.update(
                             coach1=users.User.objects.get(username=username))
                         #~ kw.update(user=users.User.objects.get(username=username))
-                    except users.User.DoesNotExist, e:
+                    except users.User.DoesNotExist as e:
                         dblogger.warning(
                             "PAR:%s PAR->IdUsr %r (converted to %r) doesn't exist!", row['IDPAR'], row['IDUSR'], username)
         language = isolang(row['LANGUE'])
@@ -413,7 +413,7 @@ def load_tim_data(dbpath):
             #~ return
         try:
             person = Person.objects.get(pk=int(row['IDPAR']))
-        except Person.DoesNotExist, e:
+        except Person.DoesNotExist as e:
             return
         pxs2person(row, person)
 

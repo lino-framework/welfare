@@ -4,7 +4,7 @@ from lino_welfare.projects.eupen.settings import *
 
 
 class Site(Site):
-    the_demo_date = datetime.date(2014, 05, 22)
+    the_demo_date = datetime.date(2014, 5, 22)
     use_java = False
     project_name = 'test_eupen'
 

@@ -1039,13 +1039,13 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         c.save()
 
     i = pcsw.Client.objects.order_by('name').__iter__()
-    p = i.next()
+    p = next(i)
     offset = 0
     for f in cv.Function.objects.all():
         yield jobs.Candidature(person=p, function=f, sector=f.sector,
                                #~ date_submitted=i2d(20111019))
                                date_submitted=settings.SITE.demo_date(offset))
-        p = i.next()
+        p = next(i)
         offset -= 1
 
     PERSONGROUPS = Cycler(pcsw.PersonGroup.objects.all())
