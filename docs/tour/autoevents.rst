@@ -88,7 +88,7 @@ Monday.
     >>> print(d.title)
     Calendar entries of ISIP#26 (David DA VINCI)
     >>> print(len(d.rows))
-    16
+    15
 
 
 Configuration
