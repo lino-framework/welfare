@@ -22,6 +22,7 @@ Adds PCSW-specific demo data.
 
 from __future__ import unicode_literals
 
+from builtins import range
 import datetime
 ONE_DAY = datetime.timedelta(days=1)
 

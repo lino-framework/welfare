@@ -19,6 +19,7 @@
 """
 """
 
+from builtins import range
 from lino.utils import Cycler
 from lino.api import rt
 

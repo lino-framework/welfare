@@ -23,6 +23,7 @@ Database models for :mod:`lino_welfare.modlib.reception`.
 
 """
 
+from builtins import str
 import logging
 logger = logging.getLogger(__name__)
 
@@ -107,7 +108,7 @@ class FindDateByClientTable(ButtonsTable):
             sar = extensible.CalendarPanel.request(
                 subst_user=user,
                 current_project=mi.pk)
-            yield ar.href_to_request(sar, unicode(user), icon_name=None)
+            yield ar.href_to_request(sar, str(user), icon_name=None)
 
 
 class FindDateByClientDlg(dd.Action):
@@ -323,11 +324,11 @@ Tested document about :ref:`welfare.tested.reception.AgentsByClient`
 
     @dd.displayfield(_("Agent"))
     def user(self, obj, ar):
-        return unicode(obj.user)
+        return str(obj.user)
 
     @dd.displayfield(_("Coaching type"))
     def coaching_type(self, obj, ar):
-        return unicode(obj.type)
+        return str(obj.type)
 
     @dd.displayfield(_("Actions"))
     def actions(cls, obj, ar):

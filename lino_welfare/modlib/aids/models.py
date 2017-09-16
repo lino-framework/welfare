@@ -23,6 +23,7 @@ Database models for `lino_welfare.modlib.aids`.
 
 from __future__ import unicode_literals
 
+from builtins import str
 import logging
 logger = logging.getLogger(__name__)
 
@@ -287,7 +288,7 @@ class Granting(Confirmable, BoardDecision):
         
     def __str__(self):
         if self.aid_type_id is not None:
-            t1 = self.aid_type.short_name or unicode(self.aid_type)
+            t1 = self.aid_type.short_name or str(self.aid_type)
             return "%s/%s/%s" % (t1, dd.fds(self.start_date), self.client.id)
         return '%s #%s' % (self._meta.verbose_name, self.pk)
 
@@ -400,8 +401,8 @@ class Grantings(dd.Table):
         for k in ('board', 'aid_type'):
             v = pv[k]
             if v:
-                yield unicode(self.parameters[k].verbose_name) \
-                    + ' ' + unicode(v)
+                yield str(self.parameters[k].verbose_name) \
+                    + ' ' + str(v)
 
 
 class AllGrantings(Grantings):
@@ -524,8 +525,8 @@ class Confirmations(dd.Table):
         for k in ('signer', 'board', 'aid_type', 'state'):
             v = pv[k]
             if v:
-                yield unicode(self.parameters[k].verbose_name) \
-                    + ' ' + unicode(v)
+                yield str(self.parameters[k].verbose_name) \
+                    + ' ' + str(v)
 
     @dd.virtualfield(models.IntegerField(_("Adults")))
     def num_adults(self, obj, ar):

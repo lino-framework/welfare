@@ -17,6 +17,7 @@
 # <http://www.gnu.org/licenses/>.
 
 
+from builtins import range
 from lino.api import dd, rt
 from lino.utils import Cycler
 

@@ -22,6 +22,7 @@
 
 from __future__ import unicode_literals
 
+from builtins import str
 from django.db import models
 from django.db.models import Q
 from django.conf import settings
@@ -302,9 +303,9 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
     # exam_policy user_asd ending date_ended signer1 signer2'
 
     def __str__(self):
-        kw = dict(type=unicode(self._meta.verbose_name))
+        kw = dict(type=str(self._meta.verbose_name))
         if self.pk is None:
-            kw.update(client=unicode(self.client))
+            kw.update(client=str(self.client))
             return '{type} ({client})'.format(**kw)
         kw.update(
             id=self.pk,
@@ -318,7 +319,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
         (not the number and name of client).
 
         """
-        return unicode(self.type)
+        return str(self.type)
         # return unicode(self._meta.verbose_name)
 
     def get_excerpt_templates(self, bm):
@@ -633,11 +634,11 @@ class ContractBaseTable(dd.Table):
         else:
             oe = pv.observed_event
             if oe is not None:
-                yield "%s %s-%s" % (unicode(oe.text),
+                yield "%s %s-%s" % (str(oe.text),
                                     dd.dtos(pv.start_date),
                                     dd.dtos(pv.end_date))
 
         if pv.company:
-            yield unicode(pv.company)
+            yield str(pv.company)
 
 

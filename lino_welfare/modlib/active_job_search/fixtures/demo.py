@@ -20,6 +20,7 @@
 Adds demo data for :mod:`lino_welfare.modlib.active_job_search`.
 """
 
+from builtins import range
 from lino.api import dd
 from lino.utils import Cycler
 from lino.utils.instantiator import Instantiator

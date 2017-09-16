@@ -18,6 +18,7 @@
 
 """Database models for this plugin. """
 
+from builtins import str
 import os
 import shutil
 import logging
@@ -579,7 +580,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
                 """
 
                 msg = CBSS_ERROR_MESSAGE % e.fault.faultstring
-                msg += unicode(e.document)
+                msg += str(e.document)
                 self.status = RequestStates.failed
                 raise Warning(msg)
             self.response_xml = reply.decode('utf-8')  # 20130201
@@ -682,7 +683,7 @@ def cbss_summary(self, ar):
         n = ar.spawn(t, master_instance=self).get_total_count()
         if n > 0:
             html += "<li>%d %s</li>" % (
-                n, unicode(t.model._meta.verbose_name_plural))
+                n, str(t.model._meta.verbose_name_plural))
     html += '</ul></p>'
     # html = '<div class="htmlText">%s</div>' % html
     return ar.html_text(html)

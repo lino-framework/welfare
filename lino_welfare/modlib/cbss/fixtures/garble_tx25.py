@@ -27,6 +27,8 @@ for your xml file.
 
 """
 from __future__ import print_function
+from builtins import range
+from builtins import str
 from lino import startup
 startup('lino_welfare.projects.eupen.settings.demo')
 

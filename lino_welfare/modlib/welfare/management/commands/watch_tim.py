@@ -24,6 +24,7 @@ made in TIM to the Lino database.
 
 """
 
+from builtins import str
 import os
 import codecs
 import time
@@ -257,7 +258,7 @@ def country2kw(row, kw):
                         activity = pcsw.Activity.objects.get(pk=activity)
                     except pcsw.Activity.DoesNotExist:
                         activity = pcsw.Activity(
-                            id=activity, name=unicode(activity))
+                            id=activity, name=str(activity))
                         activity.save(force_insert=True)
                     kw.update(activity=activity)
 

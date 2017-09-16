@@ -23,6 +23,7 @@
 from __future__ import unicode_literals
 
 # from django.utils.translation import ugettext_lazy as _
+from builtins import str
 from django.utils.translation import pgettext_lazy as pgettext
 # from django.contrib.humanize.templatetags.humanize import naturalday
 
@@ -47,7 +48,7 @@ page."""
     events = rt.modules.cal.Event.objects.filter(
         user=ar.get_user(), guest__state=GuestStates.busy).distinct()
     if events.count() > 0:
-        chunks = [unicode(_("You are busy in "))]
+        chunks = [str(_("You are busy in "))]
         sep = None
         for evt in events:
             if sep:

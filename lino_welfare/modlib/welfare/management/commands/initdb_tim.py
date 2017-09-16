@@ -21,6 +21,7 @@ Mandatory argument is the path to your TIM data directory.
 
 """
 
+from builtins import str
 import os
 import sys
 import datetime
@@ -135,7 +136,7 @@ def country2kw(row, kw):
                         activity = Activity.objects.get(pk=activity)
                     except Activity.DoesNotExist:
                         activity = Activity(
-                            id=activity, name=unicode(activity))
+                            id=activity, name=str(activity))
                         activity.save(force_insert=True)
                     kw.update(activity=activity)
 

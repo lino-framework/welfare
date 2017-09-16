@@ -31,6 +31,7 @@ Django to recreate a virgin test database for each of them.
 
 from __future__ import unicode_literals
 
+from builtins import str
 import logging
 logger = logging.getLogger(__name__)
 

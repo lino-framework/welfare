@@ -29,6 +29,7 @@ You can run only these tests by issuing::
 from __future__ import unicode_literals
 from __future__ import print_function
 
+from builtins import map
 from lino.utils.djangotest import RemoteAuthTestCase
 from lino.api import rt
 
@@ -61,7 +62,7 @@ class TestCase(RemoteAuthTestCase):
         self.assertEqual(jj2.dupable_matches_required(), 2)
 
         # Verify that the phonetic words have been updated:
-        s = ' '.join(map(unicode, Word.objects.all()))
+        s = ' '.join(map(str, Word.objects.all()))
         self.assertEqual(s, "JN NMRT JN NMRT")
         self.assertEqual(Word.objects.all().count(), 4)
 

@@ -20,6 +20,7 @@ Load pcsw.Clients from tab-separated plain text file.
 
 """
 
+from builtins import map
 import os
 import datetime
 

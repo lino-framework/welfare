@@ -16,6 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
+from builtins import range
 import decimal
 from dateutil.relativedelta import relativedelta
 ONE_DAY = relativedelta(days=1)

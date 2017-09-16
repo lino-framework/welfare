@@ -21,6 +21,7 @@ Fills the Sectors table using the official data from
 http://www.bcss.fgov.be/binaries/documentation/fr/documentation/general/lijst_van_sectoren_liste_des_secteurs.xls
 
 """
+from builtins import next
 from lino.api import dd
 from django.conf import settings
 from lino.utils import ucsv
