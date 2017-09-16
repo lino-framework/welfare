@@ -25,6 +25,7 @@
 
 from builtins import range
 from lino_xl.lib.sepa.fixtures.demo import objects as lib_objects
+from decimal import Decimal as D
 
 from lino.utils import Cycler
 from lino.api import dd, rt
@@ -58,7 +59,7 @@ def objects():
     ACCOUNTS = Cycler(Account.objects.filter(type=AccountTypes.expenses))
     if len(ACCOUNTS) == 0:
         raise Exception("Oops, no ACCOUNTS in %s" % ACCOUNTS)
-    AMOUNTS = Cycler(10, '12.50', 25, '29.95', 120, '5.33')
+    AMOUNTS = Cycler(10, D('12.50'), 25, D('29.95'), 120, D('5.33'))
     ITEMNUMS = Cycler(1, 5, 1, 1, 7, 1)
 
     ses = rt.login('wilfried')
@@ -94,7 +95,7 @@ def objects():
     refs = ('832/3331/01', '832/330/01', '832/330/03F',
             '832/330/03', '832/3343/21', '832/334/27')
     ACCOUNTS = list(rt.modules.accounts.Account.objects.filter(ref__in=refs))
-    AMOUNTS = Cycler('648.91', '817.36', '544.91', '800.08')
+    AMOUNTS = Cycler(D('648.91'), D('817.36'), D('544.91'), D('800.08'))
     jnl = Journal.get_by_ref('AAW')
     for i in range(3):
         kw = dict()
