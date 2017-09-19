@@ -130,7 +130,7 @@ class ContractPartnerBase(ContactRelated):
 
     @classmethod
     def contact_person_choices_queryset(cls, company):
-        return rt.modules.contacts.Person.objects.filter(
+        return rt.models.contacts.Person.objects.filter(
             rolesbyperson__company=company,
             rolesbyperson__type__use_in_contracts=True)
 
@@ -501,7 +501,8 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
         client = event.project
         if client is None:
             return
-        Guest = rt.modules.cal.Guest
+        Guest = rt.models.cal.Guest
+        Person = rt.models.contacts.Person
         # GuestStates = rt.modules.cal.GuestStates
         # st = GuestStates.accepted
         # yield Guest(event=event,
@@ -516,9 +517,10 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
             if coaching.type and coaching.type.eval_guestrole:
                 u = coaching.user
                 if u != event.user and u.partner is not None:
-                    yield Guest(event=event,
-                                partner=u.partner,
-                                role=coaching.type.eval_guestrole)
+                    p = u.partner.get_mti_child(Person)
+                    if p is not None:
+                        yield Guest(event=event, partner=p,
+                                    role=coaching.type.eval_guestrole)
 
     @classmethod
     def get_printable_demo_objects(cls, excerpt_type):
