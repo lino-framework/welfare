@@ -209,10 +209,9 @@ class Confirmable(mixins.DateRange):
         return True
 
     def disabled_fields(self, ar):
-        df = super(Confirmable, self).disabled_fields(ar)
-        if self.state == ConfirmationStates.requested:
-            return df
-        return self.CONFIRMED_FIELDS
+        if self.state != ConfirmationStates.requested:
+            return self.CONFIRMED_FIELDS
+        return super(Confirmable, self).disabled_fields(ar)
 
     def get_printable_context(self, ar=None, **kw):
         kw.update(when=self.get_period_text())
