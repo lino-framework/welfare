@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2015 Luc Saffre
+# Copyright 2013-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -88,7 +88,7 @@ class JobSupplyment(ContractBase, ContractPartnerBase):
                 if self.duration and not self.applies_until:
                     # [NOTE1]
                     self.applies_until = DurationUnits.months.add_duration(
-                        self.applies_from, self.duration / 26) - ONE_DAY
+                        self.applies_from, int(self.duration/26)) - ONE_DAY
 
         super(JobSupplyment, self).full_clean(*args, **kw)
 
