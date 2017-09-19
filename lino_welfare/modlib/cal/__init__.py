@@ -37,3 +37,5 @@ class Plugin(Plugin):
     """See :class:`lino.core.plugin.Plugin`."""
 
     extends_models = ['Event', 'EventType', 'Guest', 'Task']
+
+    partner_model = 'contacts.Partner'

@@ -33,6 +33,7 @@ from atelier.utils import AttrDict
 
 from lino.api import dd, rt
 from lino import mixins
+from lino.utils import mti
 
 from lino.modlib.users.mixins import UserAuthored
 from lino_xl.lib.excerpts.mixins import Certifiable
@@ -517,7 +518,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
             if coaching.type and coaching.type.eval_guestrole:
                 u = coaching.user
                 if u != event.user and u.partner is not None:
-                    p = u.partner.get_mti_child(Person)
+                    p = mti.get_child(u.partner, Person)
                     if p is not None:
                         yield Guest(event=event, partner=p,
                                     role=coaching.type.eval_guestrole)
