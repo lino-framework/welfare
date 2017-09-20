@@ -1,4 +1,4 @@
-from lino.invlib.ns import ns
+from atelier.invlib.ns import ns
 ns.setup_from_tasks(
     globals(), "lino_welfare",
     languages=['en', 'de', 'fr'],
@@ -8,9 +8,9 @@ ns.setup_from_tasks(
     locale_dir='lino_welfare/modlib/welfare/locale',
     cleanable_files=['docs/api/lino_welfare.*'],
     demo_projects=[
-        'lino_welfare.projects.std.settings.demo',
-        'lino_welfare.projects.eupen.settings.demo',
-        'lino_welfare.projects.chatelet.settings.demo'])
+        'lino_welfare/projects/std',
+        'lino_welfare/projects/eupen',
+        'lino_welfare/projects/chatelet'])
 
     # apidoc_exclude_pathnames:
     # - lino_welfare/projects
