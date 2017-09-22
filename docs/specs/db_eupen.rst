@@ -25,7 +25,7 @@ Database structure
 - 140 models
 - 540 views
 - 15 user types
-- 13 dialog actions
+- 14 dialog actions
 <BLANKLINE>
 
 >>> print(analyzer.show_database_structure())
