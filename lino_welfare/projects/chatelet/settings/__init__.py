@@ -82,14 +82,14 @@ class Site(Site):
         # travailleurs sociaux qui attendent leurs rdv ou qui tiennent
         # des permanences.
 
-        yield self.modules.reception.MyWaitingVisitors
-        yield self.modules.cal.MyUnconfirmedAppointments
-        yield self.modules.cal.MyEntriesToday
-        yield self.modules.cal.MyTasks
+        yield self.models.reception.MyWaitingVisitors
+        yield self.models.cal.MyUnconfirmedAppointments
+        yield self.models.cal.MyEntriesToday
+        yield self.models.cal.MyTasks
         
-        yield self.modules.reception.WaitingVisitors
-        # yield self.modules.integ.UsersWithClients
-        #~ yield self.modules.reception.ReceivedVisitors
+        yield self.models.reception.WaitingVisitors
+        # yield self.models.integ.UsersWithClients
+        #~ yield self.models.reception.ReceivedVisitors
         yield self.models.cal.MyOverdueAppointments
         
         if user.authenticated:
@@ -105,16 +105,15 @@ class Site(Site):
         ct.column_names = "company contact_person remark"
         update_field(ct, 'remark', verbose_name=_("Contact details"))
 
-        from lino.modlib.changes.models import watch_changes as wc
-        
+        from lino.utils.watch import watch_changes as wc
 
-        wc(self.modules.contacts.Partner)
-        wc(self.modules.contacts.Person, master_key='partner_ptr')
-        wc(self.modules.contacts.Company, master_key='partner_ptr')
-        wc(self.modules.pcsw.Client, master_key='partner_ptr')
+        wc(self.models.contacts.Partner)
+        wc(self.models.contacts.Person, master_key='partner_ptr')
+        wc(self.models.contacts.Company, master_key='partner_ptr')
+        wc(self.models.pcsw.Client, master_key='partner_ptr')
 
-        wc(self.modules.coachings.Coaching, master_key='client__partner_ptr')
-        wc(self.modules.coachings.ClientContact, master_key='client__partner_ptr')
+        wc(self.models.coachings.Coaching, master_key='client__partner_ptr')
+        wc(self.models.coachings.ClientContact, master_key='client__partner_ptr')
 
 
 # the following line should not be active in a checked-in version

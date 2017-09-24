@@ -6,7 +6,7 @@ Workshops
 
 .. to test only this document:
 
-    $ python setup.py test -s tests.SpecsTests.test_courses2
+    $ doctest docs/specs/courses2.rst
     
     doctest init:
     
@@ -36,7 +36,7 @@ Workshops
 ...     print(dd.plugins.courses.verbose_name)
 Ateliers
 
->>> rt.show(rt.actors.courses.Activities)
+>>> rt.show(rt.models.courses.Activities)
 ============ ============= ============================= ============= ======= ===============
  Date début   Désignation   Série d'ateliers              Instructeur   Local   Workflow
 ------------ ------------- ----------------------------- ------------- ------- ---------------
@@ -50,7 +50,7 @@ Ateliers
 ============ ============= ============================= ============= ======= ===============
 <BLANKLINE>
 
->>> print(rt.actors.courses.Courses.params_layout.main)
+>>> print(rt.models.courses.Courses.params_layout.main)
 topic line user teacher state 
     room can_enroll:10 start_date end_date show_active
 
@@ -60,7 +60,7 @@ topic line user teacher state
 
 Yes, the demo database has no topics defined:
 
->>> rt.show(rt.actors.courses.Topics)
+>>> rt.show(rt.models.courses.Topics)
 No data to display
 
 
@@ -68,8 +68,8 @@ No data to display
 >>> print(course)
 Kitchen (12/05/2014)
 
->>> # rt.show(rt.actors.cal.EntriesByController, course)
->>> ar = rt.actors.cal.EntriesByController.request(master_instance=course)
+>>> # rt.show(rt.models.cal.EntriesByController, course)
+>>> ar = rt.models.cal.EntriesByController.request(master_instance=course)
 >>> rt.show(ar)
 ============================ =================== ================= ============= ===============
  When                         Short description   Managed by        Assigned to   Workflow
@@ -86,10 +86,10 @@ Kitchen (12/05/2014)
 >>> print(event)
  1 (12.05.2014 08:00)
 
->>> rt.show(rt.actors.cal.GuestsByEvent, event)
-===================== ========= =============
- Partner               Role      Workflow
---------------------- --------- -------------
+>>> rt.show(rt.models.cal.GuestsByEvent, event)
+===================== ========= ============= ========
+ Partner               Role      Workflow      Remark
+--------------------- --------- ------------- --------
  Bastiaensen Laurent   Visitor   **Invited**
  Denon Denis           Visitor   **Invited**
  Dericum Daniel        Visitor   **Invited**
@@ -101,7 +101,7 @@ Kitchen (12/05/2014)
  Kaivers Karl          Visitor   **Invited**
  Laschet Laura         Visitor   **Invited**
  Radermacher Hedi      Visitor   **Invited**
-===================== ========= =============
+===================== ========= ============= ========
 <BLANKLINE>
 
 
