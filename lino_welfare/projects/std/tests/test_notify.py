@@ -32,7 +32,9 @@ Or::
 """
 
 from __future__ import unicode_literals
+from __future__ import print_function
 
+from builtins import str
 import json
 from urllib import urlencode
 from django.conf import settings
@@ -59,7 +61,7 @@ class TestCase(TestCase):
         if expected:
             self.assertEquivalent(expected, rst)
         else:
-            print rst
+            print(rst)
         # print rst  # handy when something fails
 
     def check_notes(self, expected=''):
@@ -68,7 +70,7 @@ class TestCase(TestCase):
         if expected:
             self.assertEquivalent(expected, rst)
         else:
-            print rst
+            print(rst)
 
     def check_coachings(self, expected=''):
         ar = rt.actors.coachings.Coachings.request()
@@ -77,7 +79,7 @@ class TestCase(TestCase):
         if expected:
             self.assertEquivalent(expected, rst)
         else:
-            print rst
+            print(rst)
 
     def test_checkin_guest(self):
         """Test whether notifications are being emitted.

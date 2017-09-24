@@ -25,6 +25,7 @@ See also :ref:`welfare.specs.jobs`.
 """
 from __future__ import unicode_literals
 
+from builtins import str
 import logging
 logger = logging.getLogger(__name__)
 
@@ -273,7 +274,7 @@ class Contract(JobSupplyment):
                     candi.save()
                     n += 1
                 if n:
-                    ar.info(unicode(
+                    ar.info(str(
                         _("(%d candidatures have been marked inactive)")) % n)
                     ar.set_response(alert=_("Success"))
 
@@ -837,7 +838,7 @@ class JobType(mixins.Sequenced):
     is_social = models.BooleanField(_("Social economy"), default=False)
 
     def __str__(self):
-        return unicode(self.name)
+        return str(self.name)
 
 
 class JobTypes(dd.Table):
@@ -902,7 +903,7 @@ class JobsOverviewByType(Jobs):
 
     @dd.displayfield(_("Job"))
     def job_desc(self, obj, ar):
-        chunks = [ar.obj2html(obj, unicode(obj.function))]
+        chunks = [ar.obj2html(obj, str(obj.function))]
         chunks.append(pgettext("(place)", " at "))
         chunks.append(ar.obj2html(obj.provider))
         chunks.append(' (%d)' % obj.capacity)
@@ -1043,7 +1044,7 @@ class JobsOverview(Report):
             jobtypes = JobType.objects.all()
 
         for jobtype in jobtypes:
-            yield E.h2(unicode(jobtype))
+            yield E.h2(str(jobtype))
             sar = ar.spawn(JobsOverviewByType,
                            master_instance=jobtype,
                            param_values=dict(date=ar.param_values.today))

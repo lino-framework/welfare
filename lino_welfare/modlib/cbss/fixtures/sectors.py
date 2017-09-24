@@ -21,6 +21,7 @@ Fills the Sectors table using the official data from
 http://www.bcss.fgov.be/binaries/documentation/fr/documentation/general/lijst_van_sectoren_liste_des_secteurs.xls
 
 """
+from builtins import next
 from lino.api import dd
 from django.conf import settings
 from lino.utils import ucsv
@@ -39,10 +40,10 @@ def objects():
     reader = ucsv.UnicodeReader(
         open(fn, 'r'), encoding='latin1', delimiter=';')
 
-    headers = reader.next()
+    headers = next(reader)
     if headers != [u'Sector', u'', u'verkorte naam', u'Omschrijving', u'Abréviation', u'Nom']:
         raise Exception("Invalid file format: %r" % headers)
-    reader.next()  # ignore second header line
+    next(reader)  # ignore second header line
     code = None
     for row in reader:
         s0 = row[0].strip()

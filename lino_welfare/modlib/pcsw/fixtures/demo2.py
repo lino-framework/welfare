@@ -5,6 +5,7 @@
 Demo data for this plugin.
 """
 
+from builtins import range
 from django.conf import settings
 from lino.utils import Cycler
 from lino.api import dd, rt

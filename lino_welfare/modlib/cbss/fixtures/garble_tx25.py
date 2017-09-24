@@ -26,6 +26,9 @@ Where ID is the primary key of the
 for your xml file.
 
 """
+from __future__ import print_function
+from builtins import range
+from builtins import str
 from lino import startup
 startup('lino_welfare.projects.eupen.settings.demo')
 
@@ -112,7 +115,7 @@ def main():
                     sexes = e.xpath('r:Sex', namespaces=ns)
                     sex = sexes[0]
             if date is None:
-                print nn.text, "(no date in", nn.tostring()
+                print(nn.text, "(no date in", nn.tostring())
             else:
                 if nn.text not in NNREP:
                     NNREP[nn.text] = CLIENTS.pop()
@@ -121,7 +124,7 @@ def main():
                     raise Exception("%s has no national_id", obj)
                 nn.text = obj.national_id
                 century, year, month, day = [n.text for n in date]
-                print nn.text, sex.text, century, year, month, day, repr(obj.birth_date)
+                print(nn.text, sex.text, century, year, month, day, repr(obj.birth_date))
                 bd = obj.birth_date.as_date()
                 date[0].text = str(bd.year)[:2]
                 date[1].text = str(bd.year)[2:]
@@ -155,16 +158,16 @@ def main():
     #         e.text = PARTNERS.pop().name
 
     if changes == 0:
-        print "No changes."
+        print("No changes.")
         sys.exit(-1)
 
     for search in searches:
         rep = u", ".join([
             u"{0} -> {1}".format(*i) for i in search.replacements.items()])
-        print u"{0} : {2} ({1} replacements)".format(
-            search.expr, len(search.replacements), rep)
+        print(u"{0} : {2} ({1} replacements)".format(
+            search.expr, len(search.replacements), rep))
 
-    print "Writing {0} changes to {1} ...".format(changes, outfile)
+    print("Writing {0} changes to {1} ...".format(changes, outfile))
     f = open(outfile, 'wt')
     f.write(etree.tostring(tree, encoding="UTF-8"))
     f.close()

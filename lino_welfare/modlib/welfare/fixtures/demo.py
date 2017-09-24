@@ -22,6 +22,9 @@ Adds PCSW-specific demo data.
 
 from __future__ import unicode_literals
 
+from builtins import range
+from builtins import next
+from builtins import str
 import datetime
 ONE_DAY = datetime.timedelta(days=1)
 
@@ -892,7 +895,7 @@ def objects():
         yield jobs.Job(provider=PROVIDERS.pop(),
                        type=JTYPES.pop(),
                        contract_type=JOBS_CONTRACT_TYPES.pop(),
-                       name=unicode(f),
+                       name=str(f),
                        remark=REMARKS.pop(),
                        sector=SECTORS.pop(), function=f)
 
@@ -1039,13 +1042,13 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         c.save()
 
     i = pcsw.Client.objects.order_by('name').__iter__()
-    p = i.next()
+    p = next(i)
     offset = 0
     for f in cv.Function.objects.all():
         yield jobs.Candidature(person=p, function=f, sector=f.sector,
                                #~ date_submitted=i2d(20111019))
                                date_submitted=settings.SITE.demo_date(offset))
-        p = i.next()
+        p = next(i)
         offset -= 1
 
     PERSONGROUPS = Cycler(pcsw.PersonGroup.objects.all())

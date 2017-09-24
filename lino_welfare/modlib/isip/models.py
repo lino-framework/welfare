@@ -20,6 +20,7 @@
 
 """
 
+from builtins import str
 from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
@@ -156,7 +157,7 @@ class ContractEnding(dd.Model):
         _("Require date ended"), default=False)
 
     def __str__(self):
-        return unicode(self.name)
+        return str(self.name)
 
 
 class ContractEndings(dd.Table):
@@ -351,7 +352,7 @@ class Contracts(ContractBaseTable):
             yield t
 
         if ar.param_values.study_type:
-            yield unicode(ar.param_values.study_type)
+            yield str(ar.param_values.study_type)
 
 
 class MyContracts(Contracts):
@@ -397,7 +398,7 @@ class DelegatedTasksByContract(dd.Table):
 
     @classmethod
     def override_column_headers(self, ar, **kwargs):
-        kwargs.update(summary=unicode(_("Proceedings")))
+        kwargs.update(summary=str(_("Proceedings")))
         return kwargs
 
 

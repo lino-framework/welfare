@@ -20,6 +20,7 @@
 The demo fixture for :mod:`welfare.aids`.
 """
 
+from builtins import range
 import datetime
 
 from django.utils.translation import ugettext_lazy as _

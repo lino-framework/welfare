@@ -24,6 +24,7 @@ made in TIM to the Lino database.
 
 """
 
+from builtins import str
 import os
 import codecs
 import time
@@ -161,7 +162,7 @@ def checkcc(person, pk, nType):
     #~ except ValueError,e:
         #~ dblogger.warning(u"%s : invalid health_insurance or pharmacy %r",dd.obj2str(person),cIdAdr)
         #~ return
-    except Company.DoesNotExist, e:
+    except Company.DoesNotExist as e:
         raise Exception(
             "%s : Pharmacy or Health Insurance %s doesn't exist" %
             (dd.obj2str(person), pk))
@@ -208,7 +209,7 @@ def pxs2client(row, person):
 
     par2client(row, person)
 
-    if row.has_key('CARDTYPE'):
+    if 'CARDTYPE' in row:
         if row['CARDTYPE'] == 0:
             #~ person.card_type = BeIdCardTypes.blank_item
             person.card_type = ''
@@ -244,7 +245,7 @@ def pxs2client(row, person):
 def country2kw(row, kw):
     # for both PAR and ADR
 
-    if row.has_key('PROF'):
+    if 'PROF' in row:
         activity = row['PROF']
         if activity:
             try:
@@ -257,7 +258,7 @@ def country2kw(row, kw):
                         activity = pcsw.Activity.objects.get(pk=activity)
                     except pcsw.Activity.DoesNotExist:
                         activity = pcsw.Activity(
-                            id=activity, name=unicode(activity))
+                            id=activity, name=str(activity))
                         activity.save(force_insert=True)
                     kw.update(activity=activity)
 
@@ -280,12 +281,12 @@ def country2kw(row, kw):
                     zip_code__exact=zip_code,
                 )
                 kw.update(city=city)
-            except Place.DoesNotExist, e:
+            except Place.DoesNotExist as e:
                 city = Place(zip_code=zip_code, name=zip_code, country=country)
                 city.save()
                 kw.update(city=city)
                 #~ dblogger.warning("%s-%s : %s",row['PAYS'],row['CP'],e)
-            except Place.MultipleObjectsReturned, e:
+            except Place.MultipleObjectsReturned as e:
                 dblogger.warning("%s-%s : %s", row['PAYS'], row['CP'], e)
 
     email = row['EMAIL']
@@ -341,7 +342,7 @@ def json2py(dct):
             return None
         try:
             return datetime.date(d['year'], d['month'], d['day'])
-        except ValueError, e:
+        except ValueError as e:
             raise ValueError("%s : %s", dct, e)
     return dct
 
@@ -379,7 +380,7 @@ class Controller:
         Deserves more documentation.
         """
         for lino_name, tim_name in mapper.items():
-            if data.has_key(tim_name):
+            if tim_name in data:
                 setattr(obj, lino_name, data[tim_name])
         settings.TIM2LINO_LOCAL(self.__class__.__name__, obj)
 
@@ -396,7 +397,7 @@ class Controller:
             obj.full_clean()
             #~ 20120921 dblogger.log_changes(REQUEST,obj)
             obj.save()
-        except ValidationError, e:
+        except ValidationError as e:
             # here we only log an dd.obj2str() of the object
             # full traceback will be logged in watch() after process_line()
             dblogger.warning("Validation failed for %s : %s",
@@ -539,11 +540,11 @@ class PAR(Controller):
 
         store_date(data, obj, 'DATCREA', 'created')
 
-        if data.has_key('LANGUE'):
+        if 'LANGUE' in data:
             obj.language = isolang(data['LANGUE'])
 
         #~ dblogger.info("20111223 %r",data)
-        if data.has_key('ATTRIB'):
+        if 'ATTRIB' in data:
             #~ obj.newcomer = ("N" in data['ATTRIB'])
             #~ obj.is_obsolete = ("A" in data['ATTRIB'] or "W" in data['ATTRIB'])
             obj.is_obsolete = ("W" in data['ATTRIB'])
@@ -554,15 +555,15 @@ class PAR(Controller):
             if title in ("Herr", "Herrn", "Frau", u"Fräulein", "Madame", "Monsieur"):
                 title = ''
             obj.title = title
-            if data.has_key('FIRME'):
+            if 'FIRME' in data:
                 for k, v in name2kw(data['FIRME']).items():
                     setattr(obj, k, v)
-            if data.has_key('NAME2'):
+            if 'NAME2' in data:
                 setattr(obj, 'addr1', data['NAME2'])
             if obj.__class__ is Client:
                 par2client(data, obj)
                 mapper.update(gesdos_id='NB1')
-                if data.has_key('NB2'):
+                if 'NB2' in data:
                     obj.national_id = data['NB2'] or None
                     #~ if obj.national_id:
                         #~ if not is_valid_ssin(obj.national_id):
@@ -572,7 +573,7 @@ class PAR(Controller):
                     #~ obj.national_id = str(obj.id)
                     #~ if obj.is_deprecated:
                         #~ obj.national_id += ' (A)'
-                if data.has_key('ATTRIB') and "N" in data['ATTRIB']:
+                if 'ATTRIB' in data and "N" in data['ATTRIB']:
                     obj.client_state = ClientStates.newcomer
                 elif data['IDPRT'] == 'I':
                     obj.client_state = ClientStates.former
@@ -587,7 +588,7 @@ class PAR(Controller):
                     #~ obj.gesdos_id = data['NB1']
                 #~ if not obj.national_id:
                     #~ obj.national_id = str()
-                if data.has_key('IDUSR'):
+                if 'IDUSR' in data:
                     username = settings.TIM2LINO_USERNAME(data['IDUSR'])
                     if username:
                         #~ print 20130222, username
@@ -609,7 +610,7 @@ class PAR(Controller):
                     try:
                         coaching = rt.models.coachings.Coaching.objects.get(
                             client=obj, primary=True)
-                    except rt.models.coachings.Coaching.DoesNotExist, e:
+                    except rt.models.coachings.Coaching.DoesNotExist as e:
                         try:
                             coaching = rt.models.coachings.Coaching.objects.get(
                                 client=obj, user=u, end_date__isnull=True)
@@ -618,7 +619,7 @@ class PAR(Controller):
                             coaching.save()
                             watcher.send_update(REQUEST)
                             #~ watcher.log_diff(REQUEST)
-                        except rt.models.coachings.Coaching.DoesNotExist, e:
+                        except rt.models.coachings.Coaching.DoesNotExist as e:
                             if u is not None:
                                 coaching = rt.models.coachings.Coaching(
                                     client=obj, primary=True, user=u,
@@ -628,11 +629,11 @@ class PAR(Controller):
                                 dd.on_ui_created.send(
                                     sender=coaching, request=REQUEST)
                                 #~ changes.log_create(REQUEST,coaching)
-                        except Exception, e:
+                        except Exception as e:
                             raise Exception(
                                 "More than one active coaching for %r by %r" % (obj, u))
 
-                    except Exception, e:
+                    except Exception as e:
                         raise Exception(
                             "More than one primary coaching for %r : %s" % (obj, e))
 
@@ -973,7 +974,7 @@ def watch(data_dir):
     if not os.path.exists(watching):
         try:
             os.rename(infile, watching)
-        except Exception, e:
+        except Exception as e:
             dblogger.debug("Could not rename %s to %s: %s",
                            infile, watching, e)
             return
@@ -989,7 +990,7 @@ def watch(data_dir):
         dblogger.debug("process_line(%r,%r)", i, ln)
         try:
             process_line(ln)
-        except Exception, e:
+        except Exception as e:
             #~ raise
             fd_failed.write("// %s %r\n%s\n\n" % (
                 time.strftime("%Y-%m-%d %H:%M:%S"), e, ln))
@@ -1032,7 +1033,7 @@ def main(*args, **options):
     while True:
         try:
             watch(data_dir)
-        except Exception, e:
+        except Exception as e:
             dblogger.exception(e)
         connection.close()
         time.sleep(1)

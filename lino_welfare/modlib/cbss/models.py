@@ -18,6 +18,7 @@
 
 """Database models for this plugin. """
 
+from builtins import str
 import os
 import shutil
 import logging
@@ -579,7 +580,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
                 """
 
                 msg = CBSS_ERROR_MESSAGE % e.fault.faultstring
-                msg += unicode(e.document)
+                msg += str(e.document)
                 self.status = RequestStates.failed
                 raise Warning(msg)
             self.response_xml = reply.decode('utf-8')  # 20130201
@@ -632,21 +633,18 @@ def customize_system(sender, **kw):
     Used in SSDN requests as text of the `AuthorizedUser\OrgUnit` element . 
     Used in new style requests as text of the `CustomerIdentification\cbeNumber` element . 
     """))
-    dd.inject_field('system.SiteConfig',
-                    'ssdn_user_id',
-                    models.CharField(_("SSDN User Id"),
-                                     max_length=50,
-                                     blank=True,
-          help_text="""\
-    Used in SSDN requests as text of the `AuthorizedUser\UserID` element.
-    """))
-    dd.inject_field('system.SiteConfig',
-                    'ssdn_email',
-                    models.EmailField(_("SSDN email address"),
-                                      blank=True,
-          help_text="""\
-    Used in SSDN requests as text of the `AuthorizedUser\Email` element.
-    """))
+    dd.inject_field(
+        'system.SiteConfig', 'ssdn_user_id', models.CharField(
+            _("SSDN User Id"), max_length=50,
+            blank=True,
+            help_text="Used in SSDN requests as text of "\
+            "the `AuthorizedUser\\UserID` element."))
+    dd.inject_field(
+        'system.SiteConfig', 'ssdn_email', models.EmailField(
+            _("SSDN email address"),
+            blank=True,
+            help_text="Used in SSDN requests as text of "\
+            "the `AuthorizedUser\\Email` element."))
     dd.inject_field(
         'system.SiteConfig', 'cbss_http_username',
         models.CharField(
@@ -658,9 +656,7 @@ def customize_system(sender, **kw):
         'system.SiteConfig', 'cbss_http_password',
         models.CharField(
             _("HTTP password"), max_length=50, blank=True,
-            help_text="""\
-            Used in the http header of new-style requests.
-            """))
+            help_text="Used in the http header of new-style requests."))
 
 
 @dd.receiver(dd.pre_analyze)
@@ -687,7 +683,7 @@ def cbss_summary(self, ar):
         n = ar.spawn(t, master_instance=self).get_total_count()
         if n > 0:
             html += "<li>%d %s</li>" % (
-                n, unicode(t.model._meta.verbose_name_plural))
+                n, str(t.model._meta.verbose_name_plural))
     html += '</ul></p>'
     # html = '<div class="htmlText">%s</div>' % html
     return ar.html_text(html)
@@ -726,7 +722,7 @@ def setup_site_cache(self, force):
                 logger.debug(
                     "NOT generating %s because it is newer than the code.", fn)
                 return
-        s = file(os.path.join(os.path.dirname(__file__), 'WSDL', template)
+        s = open(os.path.join(os.path.dirname(__file__), 'WSDL', template)
                  ).read()
         s = s % context
         settings.SITE.makedirs_if_missing(os.path.dirname(fn))

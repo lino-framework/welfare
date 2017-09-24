@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -19,7 +19,7 @@
 """
 Database models for `lino_welfare.modlib.dupable_clients`.
 """
-
+from builtins import str
 from lino.api import dd, _
 
 from lino.mixins.dupable import PhoneticWordBase, SimilarObjects
@@ -70,7 +70,7 @@ class SimilarClientsChecker(ClientChecker):
         lst = list(obj.find_similar_instances(1))
         if len(lst):
             msg = _("Similar clients: {clients}").format(
-                clients=', '.join(map(unicode, lst)))
+                clients=', '.join([str(i) for i in lst]))
             yield (False, msg)
 
 SimilarClientsChecker.activate()

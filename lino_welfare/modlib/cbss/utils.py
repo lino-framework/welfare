@@ -19,6 +19,7 @@
 """Utilities for this plugin.
 """
 
+from builtins import str
 import os
 from lino.api import dd, rt
 from lino.utils import join_words
@@ -68,7 +69,7 @@ def cbss2civilstate(node):
     v = rt.models.pcsw.CivilState.get_by_value(value)
     # if v is None:
     #     print "20120601 cbss2civilstate None for ", repr(value)
-    return unicode(v)
+    return str(v)
 
 
 def cbss2country(code):

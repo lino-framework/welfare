@@ -22,6 +22,7 @@
 
 from __future__ import unicode_literals
 
+from builtins import str
 from django.db import models
 from django.db.models import Q
 from django.conf import settings
@@ -32,6 +33,7 @@ from atelier.utils import AttrDict
 
 from lino.api import dd, rt
 from lino import mixins
+from lino.utils import mti
 
 from lino.modlib.users.mixins import UserAuthored
 from lino_xl.lib.excerpts.mixins import Certifiable
@@ -129,7 +131,7 @@ class ContractPartnerBase(ContactRelated):
 
     @classmethod
     def contact_person_choices_queryset(cls, company):
-        return rt.modules.contacts.Person.objects.filter(
+        return rt.models.contacts.Person.objects.filter(
             rolesbyperson__company=company,
             rolesbyperson__type__use_in_contracts=True)
 
@@ -302,9 +304,9 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
     # exam_policy user_asd ending date_ended signer1 signer2'
 
     def __str__(self):
-        kw = dict(type=unicode(self._meta.verbose_name))
+        kw = dict(type=str(self._meta.verbose_name))
         if self.pk is None:
-            kw.update(client=unicode(self.client))
+            kw.update(client=str(self.client))
             return '{type} ({client})'.format(**kw)
         kw.update(
             id=self.pk,
@@ -318,7 +320,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
         (not the number and name of client).
 
         """
-        return unicode(self.type)
+        return str(self.type)
         # return unicode(self._meta.verbose_name)
 
     def get_excerpt_templates(self, bm):
@@ -500,7 +502,8 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
         client = event.project
         if client is None:
             return
-        Guest = rt.modules.cal.Guest
+        Guest = rt.models.cal.Guest
+        Person = rt.models.contacts.Person
         # GuestStates = rt.modules.cal.GuestStates
         # st = GuestStates.accepted
         # yield Guest(event=event,
@@ -515,9 +518,10 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
             if coaching.type and coaching.type.eval_guestrole:
                 u = coaching.user
                 if u != event.user and u.partner is not None:
-                    yield Guest(event=event,
-                                partner=u.partner,
-                                role=coaching.type.eval_guestrole)
+                    p = mti.get_child(u.partner, Person)
+                    if p is not None:
+                        yield Guest(event=event, partner=p,
+                                    role=coaching.type.eval_guestrole)
 
     @classmethod
     def get_printable_demo_objects(cls, excerpt_type):
@@ -633,11 +637,11 @@ class ContractBaseTable(dd.Table):
         else:
             oe = pv.observed_event
             if oe is not None:
-                yield "%s %s-%s" % (unicode(oe.text),
+                yield "%s %s-%s" % (str(oe.text),
                                     dd.dtos(pv.start_date),
                                     dd.dtos(pv.end_date))
 
         if pv.company:
-            yield unicode(pv.company)
+            yield str(pv.company)
 
 

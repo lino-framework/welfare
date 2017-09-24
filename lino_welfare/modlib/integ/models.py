@@ -7,6 +7,7 @@ The :xfile:`models` module for the :mod:`lino_welfare.modlib.integ` app.
 """
 from __future__ import unicode_literals
 
+from builtins import str
 import logging
 logger = logging.getLogger(__name__)
 
@@ -126,13 +127,13 @@ class Clients(pcsw.CoachedClients):
         for t in super(Clients, self).get_title_tags(ar):
             yield t
         if ar.param_values.only_active:
-            yield unicode(ar.actor.parameters['only_active'].verbose_name)
+            yield str(ar.actor.parameters['only_active'].verbose_name)
         if ar.param_values.language:
-            yield unicode(
+            yield str(
                 ar.actor.parameters['language'].verbose_name) + \
-                ' ' + unicode(ar.param_values.language)
+                ' ' + str(ar.param_values.language)
         if ar.param_values.group:
-            yield unicode(ar.param_values.group)
+            yield str(ar.param_values.group)
 
 
 class UsersWithClients(dd.VirtualTable):
@@ -395,7 +396,7 @@ class CoachingEndingsByUser(dd.VentilatingTable, CoachingEndings):
         user_types = [p for p in UserTypes.items()
                     if p.has_required_roles([IntegrationAgent])]
         for u in settings.SITE.user_model.objects.filter(user_type__in=user_types):
-            yield dd.RequestField(w(u), verbose_name=unicode(u.username))
+            yield dd.RequestField(w(u), verbose_name=str(u.username))
         yield dd.RequestField(w(None), verbose_name=_("Total"))
 
 
@@ -420,7 +421,7 @@ class CoachingEndingsByType(dd.VentilatingTable, CoachingEndings):
                     param_values=pv)
             return func
         for ct in rt.models.coachings.CoachingType.objects.all():
-            yield dd.RequestField(w(ct), verbose_name=unicode(ct))
+            yield dd.RequestField(w(ct), verbose_name=str(ct))
         yield dd.RequestField(w(None), verbose_name=_("Total"))
 
 
@@ -450,7 +451,7 @@ class ContractsByType(dd.VentilatingTable):
                 return self.contracts_table.request(param_values=pv)
             return func
         for ct in self.contract_type_model.objects.all():
-            yield dd.RequestField(w(ct), verbose_name=unicode(ct))
+            yield dd.RequestField(w(ct), verbose_name=str(ct))
         yield dd.RequestField(w(None), verbose_name=_("Total"))
 
 
@@ -517,7 +518,7 @@ class StudyTypesAndContracts(cv.StudyTypes, dd.VentilatingTable):
                 return self.contracts_table.request(param_values=pv)
             return func
         for ct in isip.ContractType.objects.filter(needs_study_type=True):
-            yield dd.RequestField(w(ct), verbose_name=unicode(ct))
+            yield dd.RequestField(w(ct), verbose_name=str(ct))
         yield dd.RequestField(w(None), verbose_name=_("Total"))
 
 
@@ -555,7 +556,7 @@ class CompaniesAndContracts(contacts.Companies, dd.VentilatingTable):
                 return self.contracts_table.request(param_values=pv)
             return func
         for ct in self.contract_types.objects.all():
-            label = unicode(ct)
+            label = str(ct)
             yield dd.RequestField(w(ct), verbose_name=label)
         yield dd.RequestField(w(None), verbose_name=_("Total"))
 

@@ -31,6 +31,7 @@
 
 """
 
+from builtins import str
 from lino import ad
 
 from django.utils.translation import ugettext_lazy as _
@@ -68,7 +69,7 @@ class Plugin(ad.Plugin):
     
             MyBudgets = site.modules.debts.MyBudgets
             m.add_instance_action(
-                mb, label=unicode(fld.verbose_name),
+                mb, label=str(fld.verbose_name),
                 action=MyBudgets.detail_action)
 
     def setup_explorer_menu(self, site, user_type, m):

@@ -27,6 +27,7 @@ without any fixture. You can run only these tests by issuing::
 from __future__ import unicode_literals
 from __future__ import print_function
 
+from builtins import str
 import logging
 logger = logging.getLogger(__name__)
 
@@ -106,7 +107,7 @@ class QuickTest(RemoteAuthTestCase):
 
         obj = create(isip.Contract, **kw)
 
-        self.assertEqual(unicode(obj), "ISIP#1 (Max MUSTERMANN)")
+        self.assertEqual(str(obj), "ISIP#1 (Max MUSTERMANN)")
 
         settings.SITE.verbose_client_info_message = True
 

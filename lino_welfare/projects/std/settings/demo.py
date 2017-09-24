@@ -9,7 +9,7 @@ class Site(Site):
     # avoid name clash with `lino/projects/docs`.
 
     # ignore_dates_after = datetime.date(2019, 05, 22)
-    the_demo_date = datetime.date(2014, 05, 22)
+    the_demo_date = datetime.date(2014, 5, 22)
     # many test cases which rely on these dates
 
     use_websockets = True

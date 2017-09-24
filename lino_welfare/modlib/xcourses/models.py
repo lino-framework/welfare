@@ -22,6 +22,7 @@
 
 from __future__ import unicode_literals
 
+from builtins import str
 import logging
 logger = logging.getLogger(__name__)
 
@@ -93,7 +94,7 @@ class CourseContent(dd.Model):
     """
 
     def __str__(self):
-        return unicode(self.name)
+        return str(self.name)
 
 
 class CourseContents(dd.Table):
@@ -205,7 +206,7 @@ class Course(dd.Model):
         if self.title:
             s += " " + self.title
         if self.offer:
-            s += " " + unicode(self.offer)
+            s += " " + str(self.offer)
         return s
 
     print_candidates = DirectPrintAction(
@@ -447,13 +448,13 @@ class CourseRequest(dd.Model):
     @classmethod
     def get_title_tags(self, ar):
         if ar.param_values.request_state:
-            yield unicode(ar.param_values.request_state)
+            yield str(ar.param_values.request_state)
         if ar.param_values.course_content:
-            yield unicode(ar.param_values.course_content)
+            yield str(ar.param_values.course_content)
         if ar.param_values.course_provider:
-            yield unicode(ar.param_values.course_provider)
+            yield str(ar.param_values.course_provider)
         if ar.param_values.course_offer:
-            yield unicode(ar.param_values.course_offer)
+            yield str(ar.param_values.course_offer)
         for t in super(CourseRequest, self).get_title_tags(ar):
             yield t
         for t in CLIENTS_TABLE.get_title_tags(ar):

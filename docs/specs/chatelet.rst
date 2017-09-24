@@ -441,6 +441,7 @@ Each window layout defines a given set of fields.
 - users.Users.change_password : current, new1, new2
 - users.Users.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert : username, email, first_name, last_name, partner, language, user_type
+- users.UsersOverview.sign_in : username, password
 <BLANKLINE>
 
 
@@ -633,6 +634,7 @@ Each window layout is **viewable** by a given set of user types.
 - users.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - users.Users.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - users.Users.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.UsersOverview.sign_in : visible for all
 <BLANKLINE>
 
 
@@ -806,6 +808,8 @@ options.
   (main) [visible for all]: **adresse e-mail** (email), **Sujet** (subject)
 - users.Users.change_password : Changer mot de passe
   (main) [visible for all]: **Mot de passe actuel** (current), **Nouveau mot de passe** (new1), **Encore une fois** (new2)
+- users.UsersOverview.sign_in : Sign in
+  (main) [visible for all]: **Nom d'utilisateur** (username), **Mot de passe** (password)
 <BLANKLINE>
 
 

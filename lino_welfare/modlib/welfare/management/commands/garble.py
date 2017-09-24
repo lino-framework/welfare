@@ -18,6 +18,7 @@ Garbles person names in the database so that it may be used for a demo.
 
 """
 
+from builtins import str
 from optparse import make_option
 
 from django.conf import settings
@@ -112,7 +113,7 @@ class Command(BaseCommand):
                 #~ dblogger.log_changes(REQUEST,p)
                 p.name = join_words(p.last_name, p.first_name)
                 p.save()
-                dblogger.info("%s from %s", unicode(p), unicode(p.nationality))
+                dblogger.info("%s from %s", str(p), str(p.nationality))
 
         MEN = Cycler(Person.objects.filter(gender=dd.Genders.male)
                      .order_by('id'))
@@ -131,6 +132,6 @@ class Command(BaseCommand):
                 h.name = ''
                 h.full_clean()
             h.save()
-            dblogger.info(unicode(h))
+            dblogger.info(str(h))
 
         dblogger.info("GARBLE done on database %s." % dbname)

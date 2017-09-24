@@ -17,6 +17,7 @@
 # <http://www.gnu.org/licenses/>.
 """Model mixins for `lino_welfare.modlib.cbss`. """
 
+from builtins import str
 import os
 import traceback
 import datetime
@@ -318,7 +319,7 @@ class SSDNRequest(CBSSRequest):
     def validate_against_xsd(self, srvreq, xsd_filename):
         #~ logger.info("20120524 Validate against %s", xsd_filename)
         from lxml import etree
-        xml = unicode(srvreq)
+        xml = str(srvreq)
         #~ print xml
         doc = etree.fromstring(xml)
         schema_doc = etree.parse(xsd_filename)
@@ -366,12 +367,12 @@ class SSDNRequest(CBSSRequest):
         srvreq = self.build_request()
 
         wrapped_srvreq = self.wrap_ssdn_request(srvreq, now)
-        xmlString = unicode(wrapped_srvreq)
+        xmlString = str(wrapped_srvreq)
         self.request_xml = xmlString
 
         if simulate_response is not None:
             self.environment = 'demo'
-            self.response_xml = unicode(simulate_response)
+            self.response_xml = str(simulate_response)
             return self.fill_from_string(simulate_response)
 
         # the normal case
@@ -388,7 +389,7 @@ class SSDNRequest(CBSSRequest):
         self.logmsg_debug("client.service.sendXML(\n%s\n)", xmlString)
         res = client.service.sendXML(xmlString)
         #~ print 20120522, res
-        self.response_xml = unicode(res)
+        self.response_xml = str(res)
         return self.fill_from_string(res.encode('utf-8'))
 
     def fill_from_string(self, s, sent_xmlString=None):
@@ -445,7 +446,7 @@ class SSDNRequest(CBSSRequest):
               #~ "Return code is %r, but there's no service reply." % rc)
               #~ "Return code is %r but there's no service reply in:\n%s\n" % (rc,reply))
         #~ reply.childAtPath('/ServiceReply/IdentifyPersonReply')
-        self.response_xml = unicode(service_reply)
+        self.response_xml = str(service_reply)
         return service_reply
 
     def get_service_reply(self, full_reply=None):

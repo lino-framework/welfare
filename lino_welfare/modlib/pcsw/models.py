@@ -23,6 +23,7 @@
 from __future__ import unicode_literals
 from __future__ import print_function
 
+from builtins import str
 import logging
 logger = logging.getLogger(__name__)
 
@@ -315,7 +316,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
                 return ar.confirm(
                     ok,
                     _("This will end %(count)d coachings of %(client)s.")
-                    % dict(count=qs.count(), client=unicode(obj)))
+                    % dict(count=qs.count(), client=str(obj)))
 
     def update_owned_instance(self, owned):
         owned.project = self
@@ -375,7 +376,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
                 ba = obj.get_detail_action()
                 url = ui.get_detail_url(ba.actor, obj.pk, **linkkw)
                 html = '<a href="%s">%s</a>&nbsp;: %s' % (
-                    url, unicode(obj), cgi.escape(msg))
+                    url, str(obj), cgi.escape(msg))
                 yield ReminderEntry(getattr(obj, fieldname), html)
 
         for o in find_them(
@@ -456,7 +457,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
     def active_contract(obj, ar):
         c = obj.get_active_contract()
         if c is not None:
-            txt = unicode(daterange_text(c.applies_from, c.applies_until))
+            txt = str(daterange_text(c.applies_from, c.applies_until))
             if isinstance(c, rt.modules.jobs.Contract):
                 if c.company is not None:
                     # txt += unicode(pgettext("(place)", " at "))
@@ -494,7 +495,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
             if old != new:
                 diffs.append(
                     "%s : %s -> %s" % (
-                        unicode(fld.verbose_name), dd.obj2str(old),
+                        str(fld.verbose_name), dd.obj2str(old),
                         dd.obj2str(new)))
                 setattr(obj, fld.name, new)
         return objects, diffs
@@ -826,10 +827,10 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         pv = ar.param_values
 
         if pv.observed_event:
-            yield unicode(pv.observed_event)
+            yield str(pv.observed_event)
 
         if pv.client_state:
-            yield unicode(pv.client_state)
+            yield str(pv.client_state)
 
         if pv.start_date is None or pv.end_date is None:
             period = None
@@ -838,10 +839,10 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
                 pv.start_date, pv.end_date)
 
         if pv.coached_by:
-            s = unicode(self.parameters['coached_by'].verbose_name) + \
-                ' ' + unicode(pv.coached_by)
+            s = str(self.parameters['coached_by'].verbose_name) + \
+                ' ' + str(pv.coached_by)
             if pv.and_coached_by:
-                s += " %s %s" % (unicode(_('and')),
+                s += " %s %s" % (str(_('and')),
                                  pv.and_coached_by)
 
             if period:
@@ -854,7 +855,7 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
 
         if pv.only_primary:
             #~ yield unicode(_("primary"))
-            yield unicode(self.parameters['only_primary'].verbose_name)
+            yield str(self.parameters['only_primary'].verbose_name)
 
     @classmethod
     def apply_cell_format(self, ar, row, col, recno, td):
@@ -965,7 +966,7 @@ class Activity(dd.Model):
     lst104 = models.BooleanField(_("Appears in Listing 104"), default=False)
 
     def __str__(self):
-        return unicode(self.name)
+        return str(self.name)
 
 
 class Activities(dd.Table):
@@ -1045,7 +1046,7 @@ class ExclusionType(dd.Model):
     name = models.CharField(max_length=200)
 
     def __str__(self):
-        return unicode(self.name)
+        return str(self.name)
 
 
 class ExclusionTypes(dd.Table):
@@ -1074,11 +1075,11 @@ class Exclusion(dd.Model):
     remark = models.CharField(_("Remark"), max_length=200, blank=True)
 
     def __str__(self):
-        s = unicode(self.type)
+        s = str(self.type)
         if self.excluded_from:
-            s += ' ' + unicode(self.excluded_from)
+            s += ' ' + str(self.excluded_from)
         if self.excluded_until:
-            s += '-' + unicode(self.excluded_until)
+            s += '-' + str(self.excluded_until)
         return s
 
 
@@ -1116,7 +1117,7 @@ class Conviction(dd.Model):
         super(Conviction, self).full_clean(*args, **kw)
 
     def __str__(self):
-        s = unicode(self.designation)
+        s = str(self.designation)
         if self.date:
             s += ' (%s)' % dd.fds(self.date)
         return s

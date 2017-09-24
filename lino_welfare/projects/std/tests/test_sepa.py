@@ -29,6 +29,7 @@ You can run only these tests by issuing::
 from __future__ import unicode_literals
 from __future__ import print_function
 
+from builtins import str
 from django.core.exceptions import ValidationError
 from lino.utils.djangotest import RemoteAuthTestCase
 from lino.api import rt

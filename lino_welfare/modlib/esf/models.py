@@ -22,6 +22,7 @@
 from __future__ import unicode_literals
 from __future__ import print_function
 
+from builtins import str
 from django.db import models
 from django.conf import settings
 
@@ -117,7 +118,7 @@ class ClientSummary(Certifiable, Summary):
         for sf in StatisticalFields.objects():
             v = getattr(self, sf.field_name)
             cells.append(E.td(
-                unicode(sf.text), E.br(), unicode(v),
+                str(sf.text), E.br(), str(v),
                 **ar.renderer.cellattrs))
         return E.table(E.tr(*cells), **ar.renderer.tableattrs)
 

@@ -23,6 +23,7 @@ Database models for `lino_welfare.modlib.debts`.
 
 from __future__ import unicode_literals
 
+from builtins import str
 import logging
 logger = logging.getLogger(__name__)
 
@@ -192,7 +193,7 @@ Vielleicht mit Fußnoten?"""))
 
     def __str__(self):
         if self.pk is None:
-            return unicode(_("New")) + ' ' + unicode(self._meta.verbose_name)
+            return str(_("New")) + ' ' + str(self._meta.verbose_name)
         return force_text(
             _("Budget %(pk)d for %(partner)s")
             % dict(pk=self.pk, partner=self.partner))
@@ -307,7 +308,7 @@ Vielleicht mit Fußnoten?"""))
             return None
         ar = ar.spawn(t,
                       master_instance=self,
-                      title=unicode(group),
+                      title=str(group),
                       filter=models.Q(account__group=group), **kw)
 
         # print 20120606, sar
@@ -398,10 +399,10 @@ Vielleicht mit Fußnoten?"""))
                     # if m.role and m.role.header:
                         # header = m.role.header
                     if m.person.gender == dd.Genders.male and not mr:
-                        header = unicode(_("Mr."))
+                        header = str(_("Mr."))
                         mr = True
                     elif m.person.gender == dd.Genders.female and not mrs:
-                        header = unicode(_("Mrs."))
+                        header = str(_("Mrs."))
                         mrs = True
                     else:
                         header = ''
@@ -448,7 +449,7 @@ Vielleicht mit Fußnoten?"""))
         def render(t):
             sar = ar.spawn(t, master_instance=self)
             if sar.get_total_count():
-                yield E.h2(unicode(sar.get_title()))
+                yield E.h2(str(sar.get_title()))
                 yield sar
 
         yield render(ResultByBudget)
@@ -603,9 +604,9 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
         else:
             parts = []
             if row.account_id:
-                parts.append(unicode(row.account))
+                parts.append(str(row.account))
             if row.partner_id:
-                parts.append(unicode(row.partner))
+                parts.append(str(row.partner))
             desc = ' / '.join(parts)
         if row.todo:
             desc += " [%s]" % row.todo

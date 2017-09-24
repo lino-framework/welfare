@@ -21,6 +21,7 @@ Adds demo data for :mod:`lino_welfare.modlib.newcomers`.
 """
 
 
+from builtins import range
 from lino.utils.instantiator import Instantiator
 from lino.utils import Cycler
 

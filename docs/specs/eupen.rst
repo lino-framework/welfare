@@ -477,6 +477,7 @@ Each window layout defines a given set of fields.
 - users.Users.change_password : current, new1, new2
 - users.Users.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
 - users.Users.insert : username, email, first_name, last_name, partner, language, user_type
+- users.UsersOverview.sign_in : username, password
 - vatless.Invoices.detail : journal, number, entry_date, voucher_date, accounting_period, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, ItemsByInvoice, match, state, user, id, MovementsByVoucher
 - vatless.Invoices.insert : journal, partner, entry_date
 - vatless.InvoicesByJournal.insert : partner, entry_date
@@ -672,6 +673,7 @@ Each window layout is **viewable** by a given set of user user_types.
 - users.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - users.Users.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - users.Users.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- users.UsersOverview.sign_in : visible for all
 - vatless.Invoices.detail : visible for 500 510 admin 910
 - vatless.Invoices.insert : visible for 500 510 admin 910
 - vatless.InvoicesByJournal.insert : visible for 500 510 admin 910
@@ -762,6 +764,8 @@ Global list of all actions that have a parameter dialog.
   (main) [visible for all]: **E-Mail-Adresse** (email), **Betreff** (subject)
 - users.Users.change_password : Passwort ändern
   (main) [visible for all]: **Aktuelles Passwort** (current), **Neues Passwort** (new1), **Neues Passwort nochmal** (new2)
+- users.UsersOverview.sign_in : Sign in
+  (main) [visible for all]: **Benutzername** (username), **Passwort** (password)
 <BLANKLINE>
 
 

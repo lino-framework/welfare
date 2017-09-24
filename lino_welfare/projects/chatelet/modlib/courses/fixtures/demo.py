@@ -22,6 +22,7 @@ from __future__ import unicode_literals
 from __future__ import print_function
 
 
+from builtins import range
 from django.conf import settings
 from lino.api import dd, rt, _
 from lino.utils import Cycler

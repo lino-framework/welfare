@@ -23,6 +23,7 @@ but archived here as historic examples.
 
 """
 
+from builtins import str
 import datetime
 from decimal import Decimal
 from django.conf import settings

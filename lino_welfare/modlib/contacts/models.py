@@ -26,6 +26,7 @@ doesn't need :mod:`lino_xl.lib.vat`
 
 from __future__ import unicode_literals
 
+from builtins import str
 from lino.api import dd, rt, _
 
 from lino_xl.lib.contacts.models import *
@@ -259,7 +260,7 @@ class Persons(Persons):
         for t in super(Persons, self).get_title_tags(ar):
             yield t
         if ar.param_values.also_obsolete:
-            yield unicode(self.parameters['also_obsolete'].verbose_name)
+            yield str(self.parameters['also_obsolete'].verbose_name)
 
 
 class Company(Partner, Company):

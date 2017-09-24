@@ -47,6 +47,7 @@ Ich könnte einen management command schreiben,
 den man in so einem Fall von einer Shell aus aufrufen könnte. 
 
 """
+from __future__ import print_function
 
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
@@ -64,4 +65,4 @@ class Command(BaseCommand):
         req = model.objects.get(pk=pk)
         req.validate_request()
         #~ print req.logged_messages
-        print req.debug_messages
+        print(req.debug_messages)

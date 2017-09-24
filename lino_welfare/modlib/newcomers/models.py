@@ -27,6 +27,7 @@ See also :ref:`welfare.tested.newcomers`.
 
 """
 
+from builtins import str
 import logging
 logger = logging.getLogger(__name__)
 
@@ -268,7 +269,7 @@ eines Begleiters oder Ablehnen des Hilfeantrags."""
             yield t
         pv = ar.param_values
         if pv.new_since:
-            yield unicode(self.parameters['new_since'].verbose_name) \
+            yield str(self.parameters['new_since'].verbose_name) \
                 + ' ' + dtos(pv.new_since)
 
 

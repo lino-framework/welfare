@@ -25,6 +25,7 @@ Model mixins for `lino_welfare.modlib.aids`.
 
 from __future__ import unicode_literals
 
+from builtins import str
 import logging
 logger = logging.getLogger(__name__)
 
@@ -208,10 +209,9 @@ class Confirmable(mixins.DateRange):
         return True
 
     def disabled_fields(self, ar):
-        df = super(Confirmable, self).disabled_fields(ar)
-        if self.state == ConfirmationStates.requested:
-            return df
-        return self.CONFIRMED_FIELDS
+        if self.state != ConfirmationStates.requested:
+            return self.CONFIRMED_FIELDS
+        return super(Confirmable, self).disabled_fields(ar)
 
     def get_printable_context(self, ar=None, **kw):
         kw.update(when=self.get_period_text())
@@ -222,9 +222,9 @@ class Confirmable(mixins.DateRange):
         kw.update(when=self.get_period_text())
         at = self.get_aid_type()
         if at:
-            kw.update(what=unicode(at))
+            kw.update(what=str(at))
         else:
-            kw.update(what=unicode(self))
+            kw.update(what=str(self))
         return _("receives %(what)s %(when)s.") % kw
 
     def confirmation_address(self):
@@ -240,7 +240,7 @@ class Confirmable(mixins.DateRange):
         at = self.get_aid_type()
         if at:
             return at.get_excerpt_title()
-        return unicode(self)
+        return str(self)
 
 
 @dd.python_2_unicode_compatible

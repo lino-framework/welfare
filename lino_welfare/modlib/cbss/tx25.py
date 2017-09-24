@@ -50,6 +50,7 @@ See also:
 
 from __future__ import unicode_literals
 
+from builtins import str
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_text
@@ -74,7 +75,7 @@ def rn2date(rd):
 
 def deldate(n):
     if hasattr(n, 'DelDate'):
-        return [' (' + unicode(_('until ')) +
+        return [' (' + str(_('until ')) +
                 dd.dtos(rn2date(n.DelDate)) + ')']
     return []
 
@@ -86,11 +87,11 @@ def deldate(n):
     # return []
 
 def simpletype(v):
-    return Info(xghtml.E.b(unicode(v)))
+    return Info(xghtml.E.b(str(v)))
 
 
 def boldstring(v):
-    return Info(xghtml.E.b(unicode(v)))
+    return Info(xghtml.E.b(str(v)))
 
 
 def validate_element(c):
@@ -263,9 +264,9 @@ def IssuerType(n):
     # prefixes can be empty since this is a xs:choice
     info = Info().addfrom(n, 'Place', '', PlaceType)
     info.addfrom(n, 'Province', '', ProvinceType, ' (%s)' %
-                 unicode(_("Province")))
+                 str(_("Province")))
     info.addfrom(n, 'PosteDiplomatique', '', DiplomaticPostType, ' (%s)' %
-                 unicode(_("Diplomatic post")))
+                 str(_("Diplomatic post")))
     return info
 
 
@@ -1082,7 +1083,7 @@ class RowFactory(object):
         n = n.NationalNumber
         info = Info(
             E.b(n.NationalNumber),
-            ' (' + unicode(cbss2gender(n.Sex)) + ')')
+            ' (' + str(cbss2gender(n.Sex)) + ')')
         yield self.datarow(n, n.Date, info)
 
     def IT019(self, n, name):

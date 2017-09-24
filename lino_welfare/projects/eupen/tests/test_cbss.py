@@ -25,6 +25,7 @@ without any fixture. You can run only these tests by issuing::
 
   
 """
+from builtins import str
 import datetime
 import logging
 logger = logging.getLogger(__name__)
@@ -73,7 +74,7 @@ class QuickTest(TestCase):
         try:
             req.validate_request()
         except Warning as e:
-            self.assertEqual(unicode(e), "")
+            self.assertEqual(str(e), "")
             pass
 
         req.birth_date = IncompleteDate(1938, 0, 0)

@@ -23,6 +23,7 @@ The :xfile:`ui.py` module for `lino_welfare.modlib.debts`.
 
 from __future__ import unicode_literals
 
+from builtins import str
 import logging
 logger = logging.getLogger(__name__)
 
@@ -344,7 +345,7 @@ TODO: more explanations....
         eg = ar.master_instance
         if eg is None:
             return None
-        return unicode(eg.group)
+        return str(eg.group)
         
     @classmethod
     def get_handle_name(self, ar):
