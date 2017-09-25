@@ -3,7 +3,6 @@
 .. autosummary::
    :toctree:
 
-   test_beid
    test_ddh
    test_dupe_clients
    test_households

@@ -213,7 +213,7 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
             master_instance=obj)
         obj.check_plausibility(ar, fix=False)
         s = ar.to_rst()
-        print(s)
+        # print(s)
         self.assertEqual(s, """\
 *(★) Malformed SSIN '68060105329' must be '680601 053-29'.*
 """)
@@ -222,7 +222,7 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
         ar = rt.modules.plausibility.ProblemsByOwner.request(
             master_instance=obj)
         s = ar.to_rst()
-        print(s)
+        # print(s)
         self.assertEqual(s, "\n")
         
         # Last attempt for this card. No similar person exists. Create
