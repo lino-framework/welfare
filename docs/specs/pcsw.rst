@@ -167,7 +167,7 @@ Einfügen in Klienten (Begleitet)
 There are a lot of data fields:
 
 >>> len(d.data.keys())
-69
+70
 
 >>> print(' '.join(sorted(d.data.keys())))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
@@ -182,7 +182,7 @@ groupHidden gsm households_MembersByPerson humanlinks_LinksByHuman id
 id_document image in_belgium_since is_obsolete language languageHidden
 last_name middle_name modified national_id nationality
 nationalityHidden needs_residence_permit needs_work_permit
-noble_condition obstacles overview phone refusal_reason
+noble_condition obstacles overview phone plausibility_ProblemsByOwner refusal_reason
 refusal_reasonHidden remarks residence_type residence_typeHidden
 residence_until row_class seeking_since skills unavailable_until
 unavailable_why unemployed_since uploads_UploadsByClient
