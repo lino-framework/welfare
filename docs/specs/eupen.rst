@@ -776,7 +776,7 @@ Menu walk
 Here is the output of :func:`walk_menu_items
 <lino.api.doctests.walk_menu_items>` for this database:
 
->>> walk_menu_items('rolf')
+>>> walk_menu_items('rolf', severe=False)
 ... #doctest: -ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte --> Personen : 103
 - Kontakte -->  Klienten : 58
