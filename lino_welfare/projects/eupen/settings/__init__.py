@@ -86,7 +86,7 @@ class Site(Site):
             
         super(Site, self).do_site_startup()
 
-        from lino.modlib.changes.models import watch_changes as wc
+        from lino.utils.watch import watch_changes as wc
 
         wc(self.modules.contacts.Partner)
         wc(self.modules.contacts.Person, master_key='partner_ptr')

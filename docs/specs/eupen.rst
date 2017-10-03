@@ -448,12 +448,12 @@ Each window layout defines a given set of fields.
 - outbox.Mails.detail : subject, project, date, user, sent, id, owner, outbox_AttachmentsByMail, uploads_UploadsByController, body
 - outbox.Mails.insert : project, subject, body
 - pcsw.Clients.create_visit : user, summary
-- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, dupable_clients_SimilarClients, humanlinks_LinksByHuman, cbss_relations, households_MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, uploads_UploadsByClient, cvs_emitted, cv_LanguageKnowledgesByPerson, skills, obstacles, excerpts_ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
+- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, dupable_clients_SimilarClients, humanlinks_LinksByHuman, cbss_relations, households_MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, uploads_UploadsByClient, cvs_emitted, cv_LanguageKnowledgesByPerson, skills, obstacles, excerpts_ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, plausibility_ProblemsByOwner, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, cv_LanguageKnowledge, dupable_clients_Word, pcsw_Dispense, properties_PersonProperty, addresses_Address, sepa_Account, reason
 - pcsw.Clients.refuse_client : reason, remark
 - plausibility.Checkers.detail : value, text
-- plausibility.Problems.detail : user, owner, checker, id, message
+- plausibility.Problems.detail : checker, owner, message, user, id
 - properties.PropGroups.detail : id, name, name_fr, name_en
 - properties.PropTypes.detail : id, name, name_fr, name_en, choicelist, default_value
 - properties.Properties.detail : id, group, type, name, name_fr, name_en
@@ -776,7 +776,7 @@ Menu walk
 Here is the output of :func:`walk_menu_items
 <lino.api.doctests.walk_menu_items>` for this database:
 
->>> walk_menu_items('rolf')
+>>> walk_menu_items('rolf', severe=False)
 ... #doctest: -ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte --> Personen : 103
 - Kontakte -->  Klienten : 58

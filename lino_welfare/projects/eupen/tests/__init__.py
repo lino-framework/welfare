@@ -22,6 +22,7 @@ The test suite for this project.
 .. autosummary::
    :toctree:
 
+   test_beid
    test_watchtim
    test_broken_gfks
    test_clients

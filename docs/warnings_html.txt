@@ -1,2 +1,0 @@
-[31m/media/dell1tb/work/welfare/docs/api/lino_welfare.modlib.polls.rst:1: WARNING: unknown document: /dev/plugins
-[39;49;00m

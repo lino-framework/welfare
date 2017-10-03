@@ -73,7 +73,7 @@ class BeIdTests(RemoteAuthTestCase):
 
         # is it the right settings module?
         self.assertEqual(os.environ['DJANGO_SETTINGS_MODULE'],
-                         'lino_welfare.projects.std.settings.demo')
+                         'lino_welfare.projects.eupen.settings.demo')
 
         self.assertEqual(settings.MIDDLEWARE_CLASSES, (
             'django.middleware.common.CommonMiddleware',
@@ -215,20 +215,15 @@ Click OK to apply the following changes for JEFFIN Jean (100) :<br/>First name :
         s = ar.to_rst()
         # print(s)
         self.assertEqual(s, """\
-=========================================================== ========================= =============
- Message                                                     Plausibility checker      Responsible
------------------------------------------------------------ ------------------------- -------------
- (★) Malformed SSIN '68060105329' must be '680601 053-29'.   Check for invalid SSINs   robin
-=========================================================== ========================= =============
-
+*(★) Malformed SSIN '68060105329' must be '680601 053-29'.*
 """)
 
         obj.check_plausibility(ar, fix=True)
         ar = rt.modules.plausibility.ProblemsByOwner.request(
             master_instance=obj)
         s = ar.to_rst()
-        print(s)
-        self.assertEqual(s, "No data to display\n")
+        # print(s)
+        self.assertEqual(s, "\n")
         
         # Last attempt for this card. No similar person exists. Create
         # new client from eid.

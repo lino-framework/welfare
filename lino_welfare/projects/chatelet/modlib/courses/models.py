@@ -23,9 +23,6 @@ Does some adaptions.
 from __future__ import unicode_literals
 from __future__ import print_function
 
-import logging
-logger = logging.getLogger(__name__)
-
 from lino.api import dd, _
 
 from lino_xl.lib.courses.models import *
@@ -112,6 +109,7 @@ class Enrolment(Enrolment):
 
 class Line(Line):
     class Meta:
+        app_label = 'courses'
         verbose_name = _("Workshop series")
         verbose_name_plural = _('Workshop lines')
         abstract = dd.is_abstract_model(__name__, 'Line')
