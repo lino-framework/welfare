@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -46,9 +46,10 @@ Lino Welfare accounting:
 from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
-from django.conf import settings
 
 from lino.api import dd, rt
+
+from lino_xl.lib.accounts.choicelists import CommonAccounts, AccountTypes
 
 current_group = None
 
@@ -58,9 +59,8 @@ def objects():
     from lino_xl.lib.ledger.fixtures.std import objects as std_objects
     yield std_objects()
 
-    Group = rt.modules.accounts.Group
-    Account = rt.modules.accounts.Account
-    AccountTypes = rt.modules.accounts.AccountTypes
+    Group = rt.models.accounts.Group
+    Account = rt.models.accounts.Account
 
     def group(ref, type, name):
         global current_group
@@ -79,44 +79,23 @@ def objects():
 
     # yield group('10', 'capital', _("Capital"))
     yield group('40', 'assets', _("Receivables"))
-    obj = account(
-        '4000', 'assets', _("Customers"),
-        clearable=True, needs_partner=True)
-    yield obj
-    # if sales:
-    #     settings.SITE.site_config.update(clients_account=obj)
+    yield CommonAccounts.customers.create_object(group=current_group)
 
     yield group('44', 'assets', _("Liabilities"))
-    a4400 = account(
-        '4400', 'liabilities', _("Suppliers"),
-        clearable=True, needs_partner=True)
-    yield a4400
-    settings.SITE.site_config.update(suppliers_account=a4400)
-
-    a4450 = account(
-        '4450', 'liabilities', _("Disbursement orders to execute"),
-        clearable=True, needs_partner=True)
-    yield a4450
+    yield CommonAccounts.suppliers.create_object(group=current_group)
+    yield CommonAccounts.disbursement_orders.create_object(group=current_group)
+    # a4450 = account(
+    #     '4450', 'liabilities', _("Disbursement orders to execute"),
+    #     clearable=True, needs_partner=True)
+    # yield a4450
     
-    # a4460 = account('4460', 'liabilities',
-    #                 _("Instructions to execute"), clearable=True)
-    # yield a4460
-    # settings.SITE.site_config.update(suppliers_account=a4400)
-
     yield group('55', 'assets', _("Financial institutes"))
-    yield account("5500", 'bank_accounts', "KBC")
-    # a5600 = account("5600", 'bank_accounts', _("Disbursement orders"))
-    # yield a5600
-    yield account("5700", 'bank_accounts', _("Cash"))
+    yield CommonAccounts.best_bank.create_object(group=current_group)
+    yield CommonAccounts.cash.create_object(group=current_group)
 
     yield group('58', 'assets', _("Current transactions"))
-    a5800 = account("5800", 'bank_accounts', _("Payment Orders"),
-                    clearable=True, needs_partner=False)
-    yield a5800
-    # a5810 = account("5810", 'bank_accounts', _("Aid allocations"),
-    #                 clearable=True)
-    # yield a5810
-
+    yield CommonAccounts.pending_po.create_object(group=current_group)
+    
     yield group('6', 'expenses', _("Expenses"))
     for ref, name in (
             ('832/3331/01', _("Eingliederungseinkommen")),
@@ -141,12 +120,10 @@ def objects():
             ):
         yield account(
             ref, 'expenses', name,
-            # 20160413
             purchases_allowed=True, clearable=False, needs_partner=False)
 
     yield group('7', 'incomes', _("Revenues"))
-    obj = account('7000', 'incomes', _("Sales"), sales_allowed=True)
-    yield obj
+    yield CommonAccounts.sales.create_object(sales_allowed=True)
 
     from lino_welfare.modlib.ledger.fixtures.std_journals import objects \
         as std_journals

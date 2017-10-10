@@ -25,7 +25,7 @@ from __future__ import unicode_literals
 
 from lino.api import dd, rt, _
 from lino_xl.lib.accounts.utils import CREDIT
-
+from lino_xl.lib.accounts.choicelists import CommonAccounts
 
 def objects():
 
@@ -37,9 +37,9 @@ def objects():
     InvoicesByJournal = rt.modules.vatless.InvoicesByJournal
     ProjectInvoicesByJournal = rt.modules.vatless.ProjectInvoicesByJournal
     MatchRule = rt.modules.ledger.MatchRule
-    a4400 = Account.objects.get(ref="4400")
-    a4450 = Account.objects.get(ref="4450")
-    a5800 = Account.objects.get(ref="5800")
+    a4400 = CommonAccounts.suppliers.get_object()
+    a4450 = CommonAccounts.disbursement_orders.get_object()
+    a5800 = CommonAccounts.pending_po.get_object()
 
     kw = dict(journal_group=JournalGroups.reg)
     kw.update(trade_type='purchases', ref="REG")
@@ -80,7 +80,7 @@ def objects():
 
     kw.update(journal_group=JournalGroups.zau)
     kw.update(dd.str2kw('name', _("KBC Payment Orders")))
-    kw.update(account='5800', ref="ZKBC")
+    kw.update(account=a5800, ref="ZKBC")
     kw.update(dc=CREDIT)
     jnl = PaymentOrder.create_journal(**kw)
     yield jnl

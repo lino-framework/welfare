@@ -66,7 +66,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
 - Berichte :
-  - Buchhaltung : Accounting Report, Saldenliste Generalkonten, Saldenliste Kunden, Saldenliste Lieferanten, Schuldner, Gläubiger
+  - Buchhaltung : Accounting Report, Schuldner, Gläubiger
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - System : Site-Parameter, Benutzer, Hilfetexte, Update all summary data
@@ -432,8 +432,7 @@ Each window layout defines a given set of fields.
 - jobs.Schedules.detail : id, name, name_fr, name_en
 - languages.Languages.detail : id, iso2, name, name_fr, name_en
 - ledger.AccountingReport.show : body
-- ledger.ActivityReport.show : body
-- ledger.Journals.detail : name, name_fr, name_en, ref, trade_type, seqno, id, voucher_type, journal_group, account, build_method, template, dc, force_sequence, yearly_numbering, auto_fill_suggestions, auto_check_clearings, must_declare, printed_name, printed_name_fr, printed_name_en
+- ledger.Journals.detail : name, name_fr, name_en, ref, seqno, voucher_type, journal_group, build_method, template, id, trade_type, account, partner, dc, force_sequence, yearly_numbering, auto_fill_suggestions, auto_check_clearings, must_declare, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, journal_group, voucher_type
 - ledger.PaymentTerms.detail : ref, months, days, end_of_month, name, name_fr, name_en, printed_text, printed_text_fr, printed_text_en
 - ledger.Situation.show : body
@@ -628,7 +627,6 @@ Each window layout is **viewable** by a given set of user user_types.
 - jobs.Schedules.detail : visible for 110 410 admin 910
 - languages.Languages.detail : visible for 110 410 admin 910
 - ledger.AccountingReport.show : visible for 500 510 admin 910
-- ledger.ActivityReport.show : visible for 500 510 admin 910
 - ledger.Journals.detail : visible for 510 admin 910
 - ledger.Journals.insert : visible for 510 admin 910
 - ledger.PaymentTerms.detail : visible for 510 admin 910
@@ -827,11 +825,8 @@ Here is the output of :func:`walk_menu_items
 - Erstempfang --> Verfügbare Begleiter : 3
 - Schuldnerberatung --> Klienten : 0
 - Schuldnerberatung --> Meine Budgets : 4
-- Berichte --> Buchhaltung --> Saldenliste Generalkonten : 22
-- Berichte --> Buchhaltung --> Saldenliste Kunden : 0
-- Berichte --> Buchhaltung --> Saldenliste Lieferanten : 0
-- Berichte --> Buchhaltung --> Schuldner : 8
-- Berichte --> Buchhaltung --> Gläubiger : 4
+- Berichte --> Buchhaltung --> Schuldner : 5
+- Berichte --> Buchhaltung --> Gläubiger : 10
 - Berichte --> DSBE --> Benutzer und ihre Klienten : 3
 - Konfigurierung --> System --> Benutzer : 14
 - Konfigurierung --> System --> Hilfetexte : 6
@@ -943,12 +938,12 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Buchhaltung --> Begleichungsregeln : 3
 - Explorer --> Buchhaltung --> Belege : 56
 - Explorer --> Buchhaltung --> Belegarten : 6
-- Explorer --> Buchhaltung --> Bewegungen : 515
+- Explorer --> Buchhaltung --> Bewegungen : 602
 - Explorer --> Buchhaltung --> Geschäftsjahre : 8
 - Explorer --> Buchhaltung --> Handelsarten : 3
 - Explorer --> Buchhaltung --> Journalgruppen : 5
 - Explorer --> Buchhaltung --> Rechnungen : 31
-- Explorer --> SEPA --> Bankkonten : 52
+- Explorer --> SEPA --> Bankkonten : 80
 - Explorer --> SEPA --> Importierte  Bankkonten : 34
 - Explorer --> SEPA --> Kontoauszüge : 34
 - Explorer --> SEPA --> Transaktionen : 57

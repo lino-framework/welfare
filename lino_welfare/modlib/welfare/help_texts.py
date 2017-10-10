@@ -170,7 +170,7 @@ point to an instance of Group."""),
 account."""),
     'lino_welfare.modlib.debts.Account.type' : _("""The account type of this account.  This must
 point to an item of
-lino_xl.lib.accounts.choicelists.AccountTypes."""),
+lino_xl.lib.accounts.AccountTypes."""),
     'lino_welfare.modlib.debts.Budget' : _("""A document which expresses the financial situation of a partner at
 a given date."""),
     'lino_welfare.modlib.debts.Actor' : _("""An actor of a budget is a partner who is part of the household

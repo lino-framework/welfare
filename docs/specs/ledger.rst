@@ -136,7 +136,7 @@ Here is the main menu for accountants:
   - Ausgabeanweisungen : Ausgabeanweisungen (AAW)
   - Zahlungsaufträge : KBC Zahlungsaufträge (ZKBC)
 - Berichte :
-  - Buchhaltung : Accounting Report, Saldenliste Generalkonten, Saldenliste Kunden, Saldenliste Lieferanten, Schuldner, Gläubiger
+  - Buchhaltung : Accounting Report, Schuldner, Gläubiger
 - Konfigurierung :
   - Büro : Meine Einfügetexte
   - ÖSHZ : Hilfearten, Kategorien
@@ -166,7 +166,7 @@ The account chart is made of two models: :class:`Account
 
 >>> rt.show(accounts.Groups)
 ===== ======================== ===========
- ref   Bezeichnung              Kontenart
+ ref   Bezeichnung              Kontoart
 ----- ------------------------ -----------
  40    Receivables              Vermögen
  44    Verpflichtungen          Vermögen
@@ -337,47 +337,57 @@ Users can consult the movements of a given general account.
 <BLANKLINE>
 
 
-Situation
-=========
+AccountingReport
+================
 
-The :class:`lino_xl.lib.ledger.ui.Situation` report is one of the
+The :class:`lino_xl.lib.ledger.AccountingReport` report is one of the
 well-known accounting documents. Since accounting in Lino Welfare is
 not complete (it is just a *Nebenbuchhaltung*), there are no debtors
 (Schuldner) and the situation is not expected to be balanced.
 
->>> rt.show(ledger.Situation)  #doctest: +NORMALIZE_WHITESPACE
----------
-Schuldner
----------
+>>> jan = ledger.AccountingPeriod.objects.get(ref="2013-01")
+>>> dec = ledger.AccountingPeriod.objects.get(ref="2013-12")
+>>> def test(sp, ep=None):
+...     pv = dict(start_period=sp, end_period=ep)
+...     rt.show(ledger.AccountingReport, param_values=pv)
+
+>>> test(jan, dec)
+====================================================
+General Account Balances (Periods 2013-01...2013-12)
+====================================================
 <BLANKLINE>
-========= ============== =========================== ========== =============== =======================================================================================================================================================================================================================================
- Alter     Zahlungsziel   Partner                     ID         Saldo           Belege
---------- -------------- --------------------------- ---------- --------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 129       13.01.14       Leffin Electronics          229        12,50           REG 20, REG 20, SREG 7, SREG 7, SREG 7, SREG 7, SREG 7, SREG 7, SREG 7, SREG 7, SREG 7, SREG 7, REG 7, REG 7
- 129       13.01.14       Niederau Eupen AG           228        10,00           SREG 10, SREG 10, SREG 10, SREG 10, SREG 10, SREG 10, SREG 10, SREG 10, SREG 10, SREG 10, REG 13, REG 13, REG 6, REG 6
- 98        13.02.14       IIZI kindlustusmaakler AS   223        17,45           REG 16, REG 16, SREG 5, SREG 5, SREG 5, SREG 5, SREG 5, SREG 5, SREG 5, SREG 5, SREG 5, SREG 5, REG 3
- 60        23.03.14       Ausdemwald Alfons           116        8 433,78        AAW 13:1, AAW 14:1, AAW 15:1, AAW 16:1, AAW 17:1, AAW 18:1, AAW 13:1, AAW 14:1, AAW 15:1, AAW 16:1, AAW 17:1, AAW 18:1, AAW 7:1, AAW 8:1, AAW 9:1, AAW 10:1, AAW 11:1, AAW 12:1, AAW 1:1, AAW 2:1, AAW 3:1, AAW 4:1, AAW 5:1, AAW 6:1
- 60        23.03.14       Collard Charlotte           118        8 433,78        AAW 13:2, AAW 14:2, AAW 15:2, AAW 16:2, AAW 17:2, AAW 18:2, AAW 13:2, AAW 14:2, AAW 15:2, AAW 16:2, AAW 17:2, AAW 18:2, AAW 7:2, AAW 8:2, AAW 9:2, AAW 10:2, AAW 11:2, AAW 12:2, AAW 1:2, AAW 2:2, AAW 3:2, AAW 4:2, AAW 5:2, AAW 6:2
- 60        23.03.14       Dobbelstein Dorothée        124        8 433,78        AAW 13:3, AAW 14:3, AAW 15:3, AAW 16:3, AAW 17:3, AAW 18:3, AAW 13:3, AAW 14:3, AAW 15:3, AAW 16:3, AAW 17:3, AAW 18:3, AAW 7:3, AAW 8:3, AAW 9:3, AAW 10:3, AAW 11:3, AAW 12:3, AAW 1:3, AAW 2:3, AAW 3:3, AAW 4:3, AAW 5:3, AAW 6:3
- 60        23.03.14       Emonts Daniel               128        8 433,78        AAW 13:5, AAW 14:5, AAW 15:5, AAW 16:5, AAW 17:5, AAW 18:5, AAW 13:5, AAW 14:5, AAW 15:5, AAW 16:5, AAW 17:5, AAW 18:5, AAW 7:5, AAW 8:5, AAW 9:5, AAW 10:5, AAW 11:5, AAW 12:5, AAW 1:5, AAW 2:5, AAW 3:5, AAW 4:5, AAW 5:5, AAW 6:5
- 60        23.03.14       Evers Eberhart              127        8 433,78        AAW 13:4, AAW 14:4, AAW 15:4, AAW 16:4, AAW 17:4, AAW 18:4, AAW 13:4, AAW 14:4, AAW 15:4, AAW 16:4, AAW 17:4, AAW 18:4, AAW 7:4, AAW 8:4, AAW 9:4, AAW 10:4, AAW 11:4, AAW 12:4, AAW 1:4, AAW 2:4, AAW 3:4, AAW 4:4, AAW 5:4, AAW 6:4
- **656**                                              **1293**   **42 208,85**
-========= ============== =========================== ========== =============== =======================================================================================================================================================================================================================================
+============================================ ============== =============== === =========== =========== === ============= ==============
+ Beschreibung                                 Debit before   Credit before       Debit       Kredit          Debit after   Credit after
+-------------------------------------------- -------------- --------------- --- ----------- ----------- --- ------------- --------------
+ *(4400) Lieferanten*                                                            12,50                       12,50
+ *(832/330/03F) Fonds Gas und Elektrizität*                                                  12,50                         12,50
+ **Total (2 Zeilen)**                                                            **12,50**   **12,50**       **12,50**     **12,50**
+============================================ ============== =============== === =========== =========== === ============= ==============
 <BLANKLINE>
+============================================================
+Partner Account Balances Einkauf (Periods 2013-01...2013-12)
+============================================================
+<BLANKLINE>
+====================== ============== =============== === =========== ======== === ============= ==============
+ Beschreibung           Debit before   Credit before       Debit       Kredit       Debit after   Credit after
+---------------------- -------------- --------------- --- ----------- -------- --- ------------- --------------
+ *Leffin Electronics*                                      12,50                    12,50
+ **Total (1 Zeilen)**                                      **12,50**                **12,50**
+====================== ============== =============== === =========== ======== === ============= ==============
+<BLANKLINE>
+===========================================================
+Partner Account Balances Hilfen (Periods 2013-01...2013-12)
+===========================================================
+<BLANKLINE>
+Keine Daten anzuzeigen
+==================================================================
+Partner Account Balances Begleichungen (Periods 2013-01...2013-12)
+==================================================================
+<BLANKLINE>
+Keine Daten anzuzeigen
+
+
 ---------
-Gläubiger
----------
-<BLANKLINE>
-========= ============== ===================== ========= ============ =====================================================================================================
- Alter     Zahlungsziel   Partner               ID        Saldo        Belege
---------- -------------- --------------------- --------- ------------ -----------------------------------------------------------------------------------------------------
- 129       13.01.14       Ethias s.a.           227       72,12        REG 19, REG 19, REG 12, REG 12, SREG 3, SREG 3, SREG 3, SREG 3, SREG 3
- 98        13.02.14       AS Matsalu Veevärk    221       180,28       REG 15, REG 15, REG 8, REG 8, SREG 1, SREG 1, SREG 1, SREG 1, SREG 1
- 98        13.02.14       Eesti Energia AS      222       10,00        SREG 8, SREG 8, SREG 8, SREG 8, SREG 8, SREG 8, SREG 8, SREG 8, SREG 8, SREG 8, REG 9, REG 9, REG 2
- 98        13.02.14       Maksu- ja tolliamet   224       82,78        REG 17, REG 17, REG 10, REG 10, SREG 2, SREG 2, SREG 2, SREG 2, SREG 2
- **423**                                        **894**   **345,18**
-========= ============== ===================== ========= ============ =====================================================================================================
-<BLANKLINE>
 
 TODO in above report: 
 
