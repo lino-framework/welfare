@@ -66,7 +66,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
 - Berichte :
-  - Buchhaltung : Accounting Report, Schuldner, Gläubiger
+  - Buchhaltung : Buchhaltungsbericht, Schuldner, Gläubiger
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - System : Site-Parameter, Benutzer, Hilfetexte, Update all summary data
@@ -762,7 +762,7 @@ Global list of all actions that have a parameter dialog.
   (main) [visible for all]: **E-Mail-Adresse** (email), **Betreff** (subject)
 - users.Users.change_password : Passwort ändern
   (main) [visible for all]: **Aktuelles Passwort** (current), **Neues Passwort** (new1), **Neues Passwort nochmal** (new2)
-- users.UsersOverview.sign_in : Sign in
+- users.UsersOverview.sign_in : Anmelden
   (main) [visible for all]: **Benutzername** (username), **Passwort** (password)
 <BLANKLINE>
 
