@@ -14,14 +14,6 @@ Lino Welfare à la Châtelet
     >>> startup('lino_welfare.projects.chatelet.settings.doctests')
     >>> from lino.api.doctest import *
 
-This document describes the *Châtelet* variant of Lino Welfare.
-
-- uses **internal courses**
-  (:mod:`lino_welfare.projects.chatelet.modlib.courses`, a sub-plugin
-  of :mod:`lino_xl.lib.courses`) instead of **external courses**
-  (:mod:`lino_welfare.modlib.xcourses`). And the "Courses" are labelled
-  "Workshops" ("Ateliers").
-    
 .. contents:: 
    :local:
    :depth: 2
@@ -30,7 +22,30 @@ This document describes the *Châtelet* variant of Lino Welfare.
 Overview
 --------
 
-Lino Welfare à la Chatelet went online in 2013.
+This document describes the *Châtelet* variant of Lino Welfare.
+
+Lino Welfare *à la Châtelet* went online in 2013.
+
+- uses **internal courses**
+  (:mod:`lino_welfare.projects.chatelet.modlib.courses`, a sub-plugin
+  of :mod:`lino_xl.lib.courses`) instead of **external courses**
+  (:mod:`lino_welfare.modlib.xcourses`). And the "Courses" are labelled
+  "Workshops" ("Ateliers").
+    
+
+Hidden site languages
+=====================
+
+The default language distribution (:attr:`languages
+<lino.core.site.Site.languages>`) is French, Dutch, German and
+English, but Dutch is currently hidden because we don't yet have any
+Flemish speaking users (:attr:`hidden_languages
+<lino.core.site.Site.hidden_languages>`):
+
+>>> print(' '.join([lng.name for lng in settings.SITE.languages]))
+fr nl de en
+>>> settings.SITE.hidden_languages
+'nl'
 
 
 Don't read me
@@ -40,21 +55,92 @@ The remaining part of this document is meant rather for testing than
 for explaining.
 
 
-Site settings
+The main menu
 =============
 
-The default language distribution (:attr:`languages
-<lino.core.site.Site.languages>`) is French, Dutch, German and English:
+Romain
+------
 
->>> print(' '.join([lng.name for lng in settings.SITE.languages]))
-fr nl de en
+>>> rt.login('romain').show_menu()
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+- Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
+- Bureau : Mes Notifications, Mes Extraits, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Observations, Mes problèmes de données
+- Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Rendez-vous à confirmer, Mes tâches, Mes visiteurs, Mes présences, Mes rendez-vous dépassés
+- Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis, Visiteurs qui m'attendent
+- CPAS : Bénéficiaires, Mes Interventions, Octrois à confirmer
+- Intégration :
+  - Bénéficiaires
+  - PIISs
+  - Mises à l'emploi art60§7
+  - Services utilisateurs
+  - Postes de travail
+  - Offres d'emploi
+  - Mises à l'emploi art61
+  - Stages d'immersion
+  - BCSS : Mes Requêtes IdentifyPerson, Mes Requêtes ManageAccess, Mes Requêtes Tx25
+- Ateliers : Mes Ateliers, Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers, Demandes d’inscription en attente, Demandes d’inscription confirmées
+- Nouvelles demandes : Nouveaux bénéficiaires, Agents disponibles
+- Médiation de dettes : Bénéficiaires, Mes Budgets
+- Questionnaires : Mes Questionnaires, Mes Interviews
+- Rapports :
+  - Intégration : Agents et leurs clients, Situation contrats Art 60-7, Rapport d'activité
+- Configuration :
+  - Système : Paramètres du Site, Utilisateurs, Textes d'aide, Update all summary data
+  - Endroits : Pays, Endroits
+  - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
+  - Bureau : Types d'extrait, Types de fichiers téléchargés, Types d'observation, Types d'événements, Mes Text Field Templates
+  - Calendrier : Calendriers, Locaux, Priorités, Évènements periodiques, Rôles de participants, Types d'entrée calendrier, Règles de récurrence, Calendriers externes
+  - Comptabilité : Groupes de comptes, Comptes
+  - Ateliers : Savoirs de base, Topics, Timetable Slots
+  - CPAS : Services, Raisons d’arrêt d'intervention, Types de contact client, Phases d'intégration, Activités, Types d'exclusion, Motifs de dispense, Types d'aide sociale, Catégories 
+  - Parcours : Langues, Types d'éducation, Niveaux académiques, Secteurs, Fonctions, Régimes de travail, Statuts, Types de contrat, Types de compétence sociale, Types de freins, Preuves de qualification
+  - Intégration : Types de PIIS, Motifs d’arrêt de contrat, Régimes d'évaluation, Types de mise à l'emploi art60§7, Types de poste, Horaires, Types de mise à l'emploi art.61, Types de stage d'immersion, Objectifs
+  - Nouvelles demandes : Intermédiaires, Spécificités
+  - BCSS : Secteurs, Codes fonction
+  - Médiation de dettes : Groupes de comptes, Comptes, Budget modèle
+  - Questionnaires : Listes de choix
+- Explorateur :
+  - Contacts : Personnes de contact, Partenaires, Types d'adresses, Adresses, Membres du conseil, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
+  - Système : Procurations, Types d'utilisateur, types de contenu, Notifications, Changes, All dashboard widgets, Tests de données, Problèmes de données
+  - Bureau : Extraits, Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Observations, Text Field Templates
+  - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
+  - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
+  - CPAS : Interventions, Contacts client, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
+  - Parcours : Connaissances de langue, Formations, Études, Expériences professionnelles, Connaissances de langue, Compétences professionnelles, Compétences sociales, Freins
+  - Intégration : PIISs, Mises à l'emploi art60§7, Candidatures, Services utilisateurs, Mises à l'emploi art61, Stages d'immersion, Preuves de recherche, Fiches FSE, Champs FSE
+  - Nouvelles demandes : Compétences
+  - BCSS : Requêtes IdentifyPerson, Requêtes ManageAccess, Requêtes Tx25
+  - Médiation de dettes : Budgets, Entrées
+  - Questionnaires : Questionnaires, Questions, Choix, Interviews, Choix de réponse, Answer Remarks
+- Site : à propos
 
-But Dutch is currently hidden because we don't yet have any Flemish
-speaking users (:attr:`hidden_languages
-<lino.core.site.Site.hidden_languages>`):
+Theresia
+--------
 
->>> settings.SITE.hidden_languages
-'nl'
+Theresia est un agent d'accueil. Elle ne voit pas les questionnaires,
+les données de parcours, compétences professionnelles, compétences
+sociales, freins. Elle peut faire des requètes CBSS. Elle peut
+modifier les intervention d'autres utilisateurs.
+
+
+>>> rt.login('theresia').show_menu()
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+- Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
+- Bureau : Mes Extraits, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Observations
+- Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis
+- CPAS : Mes Interventions
+- Intégration :
+  - BCSS : Mes Requêtes IdentifyPerson, Mes Requêtes ManageAccess, Mes Requêtes Tx25
+- Ateliers : Mes Ateliers, Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers
+- Configuration :
+  - Endroits : Pays, Endroits
+  - Contacts : Types d'organisation, Fonctions, Types de ménage
+  - CPAS : Services, Raisons d’arrêt d'intervention, Types de contact client, Types d'aide sociale, Catégories
+- Explorateur :
+  - Contacts : Personnes de contact, Partenaires, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
+  - CPAS : Interventions, Contacts client, Etats bénéficiaires, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
+- Site : à propos
+
 
 
 Database structure
@@ -70,7 +156,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
- accounts.Account               accounts.Accounts               12        0
+ accounts.Account               accounts.Accounts               13        0
  accounts.Group                 accounts.Groups                 7         0
  active_job_search.Proof        active_job_search.Proofs        7         10
  addresses.Address              addresses.Addresses             16        90
@@ -262,7 +348,7 @@ Each window layout defines a given set of fields.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
 - about.Models.detail : app, name, docstring, rows
-- accounts.Accounts.detail : ref, group, type, id, name, name_nl, name_de, name_en, needs_partner, clearable, default_amount
+- accounts.Accounts.detail : ref, group, type, common_account, id, name, name_nl, name_de, name_en, needs_partner, clearable, default_amount
 - accounts.Accounts.insert : ref, group, type, name, name_nl, name_de, name_en
 - accounts.Groups.detail : ref, name, name_nl, name_de, name_en, account_type, id
 - accounts.Groups.insert : name, name_nl, name_de, name_en, account_type, ref
@@ -636,94 +722,6 @@ Each window layout is **viewable** by a given set of user types.
 - users.Users.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - users.UsersOverview.sign_in : visible for all
 <BLANKLINE>
-
-
-
-The main menu
-=============
-
-Romain
-------
-
->>> rt.login('romain').show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Bureau : Mes Notifications, Mes Extraits, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Observations, Mes problèmes de données
-- Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Rendez-vous à confirmer, Mes tâches, Mes visiteurs, Mes présences, Mes rendez-vous dépassés
-- Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis, Visiteurs qui m'attendent
-- CPAS : Bénéficiaires, Mes Interventions, Octrois à confirmer
-- Intégration :
-  - Bénéficiaires
-  - PIISs
-  - Mises à l'emploi art60§7
-  - Services utilisateurs
-  - Postes de travail
-  - Offres d'emploi
-  - Mises à l'emploi art61
-  - Stages d'immersion
-  - BCSS : Mes Requêtes IdentifyPerson, Mes Requêtes ManageAccess, Mes Requêtes Tx25
-- Ateliers : Mes Ateliers, Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers, Demandes d’inscription en attente, Demandes d’inscription confirmées
-- Nouvelles demandes : Nouveaux bénéficiaires, Agents disponibles
-- Médiation de dettes : Bénéficiaires, Mes Budgets
-- Questionnaires : Mes Questionnaires, Mes Interviews
-- Rapports :
-  - Intégration : Agents et leurs clients, Situation contrats Art 60-7, Rapport d'activité
-- Configuration :
-  - Système : Paramètres du Site, Utilisateurs, Textes d'aide, Update all summary data
-  - Endroits : Pays, Endroits
-  - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
-  - Bureau : Types d'extrait, Types de fichiers téléchargés, Types d'observation, Types d'événements, Mes Text Field Templates
-  - Calendrier : Calendriers, Locaux, Priorités, Évènements periodiques, Rôles de participants, Types d'entrée calendrier, Règles de récurrence, Calendriers externes
-  - Comptabilité : Groupes de comptes, Comptes
-  - Ateliers : Savoirs de base, Topics, Timetable Slots
-  - CPAS : Services, Raisons d’arrêt d'intervention, Types de contact client, Phases d'intégration, Activités, Types d'exclusion, Motifs de dispense, Types d'aide sociale, Catégories 
-  - Parcours : Langues, Types d'éducation, Niveaux académiques, Secteurs, Fonctions, Régimes de travail, Statuts, Types de contrat, Types de compétence sociale, Types de freins, Preuves de qualification
-  - Intégration : Types de PIIS, Motifs d’arrêt de contrat, Régimes d'évaluation, Types de mise à l'emploi art60§7, Types de poste, Horaires, Types de mise à l'emploi art.61, Types de stage d'immersion, Objectifs
-  - Nouvelles demandes : Intermédiaires, Spécificités
-  - BCSS : Secteurs, Codes fonction
-  - Médiation de dettes : Groupes de comptes, Comptes, Budget modèle
-  - Questionnaires : Listes de choix
-- Explorateur :
-  - Contacts : Personnes de contact, Partenaires, Types d'adresses, Adresses, Membres du conseil, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
-  - Système : Procurations, Types d'utilisateur, types de contenu, Notifications, Changes, All dashboard widgets, Tests de données, Problèmes de données
-  - Bureau : Extraits, Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Observations, Text Field Templates
-  - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
-  - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
-  - CPAS : Interventions, Contacts client, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
-  - Parcours : Connaissances de langue, Formations, Études, Expériences professionnelles, Connaissances de langue, Compétences professionnelles, Compétences sociales, Freins
-  - Intégration : PIISs, Mises à l'emploi art60§7, Candidatures, Services utilisateurs, Mises à l'emploi art61, Stages d'immersion, Preuves de recherche, Fiches FSE, Champs FSE
-  - Nouvelles demandes : Compétences
-  - BCSS : Requêtes IdentifyPerson, Requêtes ManageAccess, Requêtes Tx25
-  - Médiation de dettes : Budgets, Entrées
-  - Questionnaires : Questionnaires, Questions, Choix, Interviews, Choix de réponse, Answer Remarks
-- Site : à propos
-
-Theresia
---------
-
-Theresia est un agent d'accueil. Elle ne voit pas les questionnaires,
-les données de parcours, compétences professionnelles, compétences
-sociales, freins. Elle peut faire des requètes CBSS. Elle peut
-modifier les intervention d'autres utilisateurs.
-
-
->>> rt.login('theresia').show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Bureau : Mes Extraits, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Observations
-- Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis
-- CPAS : Mes Interventions
-- Intégration :
-  - BCSS : Mes Requêtes IdentifyPerson, Mes Requêtes ManageAccess, Mes Requêtes Tx25
-- Ateliers : Mes Ateliers, Ateliers d'insertion sociale, Ateliers d'Insertion socioprofessionnelle, -, Séries d'ateliers
-- Configuration :
-  - Endroits : Pays, Endroits
-  - Contacts : Types d'organisation, Fonctions, Types de ménage
-  - CPAS : Services, Raisons d’arrêt d'intervention, Types de contact client, Types d'aide sociale, Catégories
-- Explorateur :
-  - Contacts : Personnes de contact, Partenaires, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
-  - CPAS : Interventions, Contacts client, Etats bénéficiaires, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
-- Site : à propos
 
 
 

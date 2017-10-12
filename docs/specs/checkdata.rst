@@ -7,7 +7,7 @@ Checking for data problems in Lino Welfare
 
 .. to test only this doc:
 
-    $ python setup.py test -s tests.SpecsTests.test_checkdata
+    $ doctest docs/specs/checkdata.rst
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.std.settings.doctests')
@@ -68,7 +68,7 @@ System --> Plausibility problems` to see them.
 >>> rt.show(plausibility.AllProblems)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ================== ============================================================= ================================================================================= ========================================
- Responsible        Controlled by                                                 Message                                                                           Plausibility checker
+ Responsible        Database object                                               Message                                                                           Checker
 ------------------ ------------------------------------------------------------- --------------------------------------------------------------------------------- ----------------------------------------
  Robin Rood         *Ascension of Jesus (29.05.2014)*                             Event conflicts with Consultation (29.05.2014 08:30) with EVERS Eberhart (127).   Check for conflicting calendar entries
  Robin Rood         *Pentecost (09.06.2014)*                                      Event conflicts with 2 other events.                                              Check for conflicting calendar entries
@@ -154,7 +154,7 @@ of selecting the :class:`SimilarClientsChecker
 ...     'dupable_clients.SimilarClientsChecker')))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ================ =========================================== ========================================================== ===========================
- Responsible      Controlled by                               Message                                                    Plausibility checker
+ Responsible      Database object                             Message                                                    Checker
 ---------------- ------------------------------------------- ---------------------------------------------------------- ---------------------------
                   *DEMEULENAERE Dorothée (122)*               Similar clients: DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Check for similar clients
  Mélanie Mélard   *DOBBELSTEIN-DEMEULENAERE Dorothée (123)*   Similar clients: DEMEULENAERE Dorothée (122)               Check for similar clients
@@ -177,7 +177,7 @@ assigned to you.
 >>> rt.login('melanie').show(plausibility.MyProblems)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ================ ======================================================================== ============================================================== ========================================
- Responsible      Controlled by                                                            Message                                                        Plausibility checker
+ Responsible      Database object                                                          Message                                                        Checker
 ---------------- ------------------------------------------------------------------------ -------------------------------------------------------------- ----------------------------------------
  Mélanie Mélard   `Rencontre (09.06.2014 10:20) with HILGERS Hildegard (133) <Detail>`__   Event conflicts with Pentecost (09.06.2014).                   Check for conflicting calendar entries
  Mélanie Mélard   `DOBBELSTEIN-DEMEULENAERE Dorothée (123) <Detail>`__                     Similar clients: DEMEULENAERE Dorothée (122)                   Check for similar clients

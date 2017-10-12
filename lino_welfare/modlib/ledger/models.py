@@ -25,7 +25,31 @@ from __future__ import unicode_literals
 from lino_xl.lib.ledger.models import *
 from lino.api import _
 from lino_xl.lib.accounts.utils import DEBIT
+from lino_xl.lib.accounts.choicelists import CommonAccounts, Liabilities
 from lino_xl.lib.ledger.choicelists import TradeTypes
+
+
+add = CommonAccounts.add_item
+add('4450', _("Disbursement orders to execute"),
+    "disbursement_orders", 'liabilities', True)
+add('4800', _("Granted aids"), "granted_aids", 'liabilities', True)
+
+# class DisbursementOrders(Liabilities):
+#     value = '4450'
+#     text = _("Disbursement orders to execute")
+#     name = "disbursement_orders"
+#     clearable = True
+#     needs_partner = True
+# CommonAccounts.add_item_instance(DisbursementOrders())
+
+# class Aids(Liabilities):
+#     value = '4800'
+#     text = _("Aids")
+#     name = "aids"
+#     clearable = True
+#     needs_partner = True
+# CommonAccounts.add_item_instance(Aids())
+
 
 JournalGroups.clear()
 add = JournalGroups.add_item
@@ -46,9 +70,9 @@ add('P', _("Purchases"), 'purchases', dc=DEBIT)
 add('A', _("Aids"), 'aids', dc=DEBIT)
 add('C', _("Clearings"), 'clearings', dc=DEBIT)
 
-TradeTypes.aids.update(
-    partner_account_field_name='aids_account',
-    partner_account_field_label=_("Aids account"))
+
+TradeTypes.purchases.update(partner_account=CommonAccounts.suppliers)
+TradeTypes.aids.update(partner_account=CommonAccounts.granted_aids)
 
 
 from lino_xl.lib.accounts.models import Account

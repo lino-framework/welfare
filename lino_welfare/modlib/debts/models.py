@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2016 Luc Saffre
+# Copyright 2012-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -112,7 +112,7 @@ class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
 
         The *account type* of this account.  This must
         point to an item of
-        :class:`lino_xl.lib.accounts.choicelists.AccountTypes`.
+        :class:`lino_xl.lib.accounts.AccountTypes`.
     
     """
     ref_max_length = settings.SITE.plugins.debts.ref_length
@@ -254,7 +254,7 @@ Vielleicht mit Fußnoten?"""))
 
         :types: an optional string specifying a set of one-letter
                 account type names. See :class:`AccountTypes
-                <lino_xl.lib.accounts.choicelists.AccountTypes>`.
+                <lino_xl.lib.accounts.AccountTypes>`.
 
         Each entry group is encapsulated as a volatile helper object
         :class:`lino_welfare.modlib.debts.ui.EntryGroup`.
@@ -278,7 +278,7 @@ Vielleicht mit Fußnoten?"""))
 
             types: an optional string specifying a set of one-letter
                    account type names. See :class: `AccountTypes
-                   <lino_xl.lib.accounts.choicelists.AccountTypes>`.
+                   <lino_xl.lib.accounts.AccountTypes>`.
 
         """
         if types is not None:

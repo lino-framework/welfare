@@ -125,9 +125,6 @@ class Site(Site):
         yield 'lino_welfare.modlib.badges'
         yield 'lino_xl.lib.boards'
 
-        if False:  # not yet ready
-            yield 'lino_xl.lib.families'
-
         # NOTE: ordering influences (1) main menu (2) fixtures loading
         # e.g. pcsw.demo creates clients needed by cbss.demo
         yield 'lino_welfare.modlib.sales'
@@ -136,6 +133,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.sepa'
         yield 'lino_cosi.lib.b2c'
         yield 'lino_welfare.modlib.finan'
+        # yield 'lino_xl.lib.bevats'
 
         # yield 'lino_xl.lib.ledger'
         yield 'lino_xl.lib.vatless'
