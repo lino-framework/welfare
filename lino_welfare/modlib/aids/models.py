@@ -40,7 +40,7 @@ from lino.utils.xmlgen.html import E
 from lino.modlib.system.choicelists import PeriodEvents
 from lino.mixins.human import parse_name
 from lino_xl.lib.contacts.mixins import ContactRelated
-from lino_xl.lib.addresses.mixins import AddressTypes
+from lino_xl.lib.addresses.choicelists import AddressTypes
 from lino_xl.lib.boards.mixins import BoardDecision
 from lino_xl.lib.excerpts.mixins import ExcerptTitle
 
