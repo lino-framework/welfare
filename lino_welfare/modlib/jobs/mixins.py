@@ -36,7 +36,7 @@ from lino_welfare.modlib.isip.mixins import (ContractPartnerBase,
                                              ContractBase)
 
 
-class JobSupplyment(ContractBase, ContractPartnerBase):
+class JobSupplyment(ContractPartnerBase, ContractBase):
     """Base class for :class:`Contract` and
     :class:`lino_welfare.modlib.art61.models.Contract`.
 

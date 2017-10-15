@@ -1,3 +1,5 @@
+.. doctest docs/specs/eupen.rst
+
 .. _welfare.tested.eupen:
 .. _welfare.specs.eupen:
 
@@ -5,10 +7,8 @@
 Lino Welfare à la Eupen
 =======================
 
-.. How to test only this document:
-
-    $ doctest docs/specs/eupen.rst
-
+.. doctest init:
+   
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
@@ -312,10 +312,10 @@ Database structure
 - aids.AidType : id, name, company, contact_person, contact_role, excerpt_title, aid_regime, confirmation_type, short_name, board, print_directly, is_integ_duty, is_urgent, confirmed_by_primary_coach, pharmacy_type, address_type, body_template, name_fr, name_en, excerpt_title_fr, excerpt_title_en
 - aids.Category : id, name, name_fr, name_en
 - aids.Granting : id, start_date, end_date, user, decision_date, board, signer, state, client, aid_type, category, request_date
-- aids.IncomeConfirmation : id, created, start_date, end_date, company, contact_person, contact_role, user, printed_by, signer, state, client, granting, remark, language, category, amount
-- aids.RefundConfirmation : id, created, start_date, end_date, company, contact_person, contact_role, user, printed_by, signer, state, client, granting, remark, language, doctor_type, doctor, pharmacy
-- aids.SimpleConfirmation : id, created, start_date, end_date, company, contact_person, contact_role, user, printed_by, signer, state, client, granting, remark, language
-- art61.Contract : id, signer1, signer2, company, contact_person, contact_role, user, printed_by, client, language, applies_from, applies_until, date_decided, date_issued, user_asd, exam_policy, ending, date_ended, duration, reference_person, responsibilities, remark, type, job_title, status, cv_duration, regime, subsidize_10, subsidize_20, subsidize_30, subsidize_40, subsidize_50
+- aids.IncomeConfirmation : id, created, start_date, end_date, user, company, contact_person, contact_role, printed_by, signer, state, client, granting, remark, language, category, amount
+- aids.RefundConfirmation : id, created, start_date, end_date, user, company, contact_person, contact_role, printed_by, signer, state, client, granting, remark, language, doctor_type, doctor, pharmacy
+- aids.SimpleConfirmation : id, created, start_date, end_date, user, company, contact_person, contact_role, printed_by, signer, state, client, granting, remark, language
+- art61.Contract : id, signer1, signer2, user, company, contact_person, contact_role, printed_by, client, language, applies_from, applies_until, date_decided, date_issued, user_asd, exam_policy, ending, date_ended, duration, reference_person, responsibilities, remark, type, job_title, status, cv_duration, regime, subsidize_10, subsidize_20, subsidize_30, subsidize_40, subsidize_50
 - art61.ContractType : id, ref, name, full_name, exam_policy, overlap_group, template, name_fr, name_en
 - b2c.Account : id, iban, bic, account_name, owner_name, last_transaction
 - b2c.Statement : id, account, statement_number, start_date, end_date, balance_start, balance_end, local_currency
@@ -373,7 +373,7 @@ Database structure
 - debts.Group : id, name, ref, account_type, entries_layout, name_fr, name_en
 - dupable_clients.Word : id, word, owner
 - esf.ClientSummary : id, printed_by, year, month, esf10, esf20, esf21, esf30, esf40, esf41, esf42, esf43, esf44, esf50, esf60, esf70, master, education_level, children_at_charge, certified_handicap, other_difficulty, result, remark
-- excerpts.Excerpt : id, project, build_time, build_method, company, contact_person, contact_role, user, owner_type, owner_id, excerpt_type, language
+- excerpts.Excerpt : id, project, build_time, build_method, user, owner_type, owner_id, company, contact_person, contact_role, excerpt_type, language
 - excerpts.ExcerptType : id, name, build_method, template, attach_to_email, email_template, certifying, remark, body_template, content_type, primary, backward_compat, print_recipient, print_directly, shortcut, name_fr, name_en
 - finan.BankStatement : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, last_item_date, balance1, balance2
 - finan.BankStatementItem : id, seqno, project, match, amount, dc, remark, account, partner, date, voucher
@@ -392,7 +392,7 @@ Database structure
 - isip.ContractType : id, name, full_name, exam_policy, overlap_group, template, ref, needs_study_type, name_fr, name_en
 - isip.ExamPolicy : id, start_date, start_time, end_date, end_time, name, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_events, event_type, name_fr, name_en
 - jobs.Candidature : id, sector, function, person, job, date_submitted, remark, state, art60, art61
-- jobs.Contract : id, signer1, signer2, company, contact_person, contact_role, user, printed_by, client, language, applies_from, applies_until, date_decided, date_issued, user_asd, exam_policy, ending, date_ended, duration, reference_person, responsibilities, remark, type, job, regime, schedule, hourly_rate, refund_rate
+- jobs.Contract : id, signer1, signer2, user, company, contact_person, contact_role, printed_by, client, language, applies_from, applies_until, date_decided, date_issued, user_asd, exam_policy, ending, date_ended, duration, reference_person, responsibilities, remark, type, job, regime, schedule, hourly_rate, refund_rate
 - jobs.ContractType : id, ref, name, full_name, exam_policy, overlap_group, template, name_fr, name_en
 - jobs.Job : id, sector, function, name, type, provider, contract_type, hourly_rate, capacity, remark
 - jobs.JobProvider : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, type, vat_id, company_ptr
@@ -410,7 +410,7 @@ Database structure
 - newcomers.Competence : id, seqno, user, faculty, weight
 - newcomers.Faculty : id, name, weight, name_fr, name_en
 - notes.EventType : id, name, remark, body, body_fr, body_en, name_fr, name_en
-- notes.Note : id, project, build_time, build_method, company, contact_person, contact_role, user, owner_type, owner_id, date, time, type, event_type, subject, body, language, important
+- notes.Note : id, project, build_time, build_method, user, owner_type, owner_id, company, contact_person, contact_role, date, time, type, event_type, subject, body, language, important
 - notes.NoteType : id, name, build_method, template, attach_to_email, email_template, important, remark, special_type, name_fr, name_en
 - notify.Message : id, created, user, owner_type, owner_id, message_type, seen, sent, body, mail_mode, subject
 - outbox.Attachment : id, owner_type, owner_id, mail
@@ -435,7 +435,7 @@ Database structure
 - sessions.Session : session_key, session_data, expire_date
 - system.SiteConfig : id, default_build_method, simulate_today, site_company, signer1, signer2, signer1_function, signer2_function, next_partner_id, propgroup_skills, propgroup_softskills, propgroup_obstacles, default_event_type, site_calendar, max_auto_events, hide_events_before, client_calendar, client_guestrole, team_guestrole, prompt_calendar, master_budget, system_note_type, job_office, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, sector, cbss_org_unit, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplate : id, user, name, description, text
-- uploads.Upload : id, project, start_date, end_date, file, mimetype, company, contact_person, contact_role, user, owner_type, owner_id, upload_area, type, description, remark, needed
+- uploads.Upload : id, project, start_date, end_date, file, mimetype, user, owner_type, owner_id, company, contact_person, contact_role, upload_area, type, description, remark, needed
 - uploads.UploadType : id, name, upload_area, max_number, wanted, shortcut, warn_expiry_unit, warn_expiry_value, name_fr, name_en
 - users.Authority : id, user, authorized
 - users.User : id, email, language, modified, created, password, last_login, username, user_type, initials, first_name, last_name, remarks, newcomer_consultations, newcomer_appointments, notify_myself, mail_mode, access_class, event_type, calendar, coaching_type, coaching_supervisor, newcomer_quota, partner
@@ -935,7 +935,7 @@ Here is the output of :func:`walk_menu_items
 >>> walk_menu_items('rolf', severe=False)
 ... #doctest: -ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte --> Personen : 103
-- Kontakte -->  Klienten : 58
+- Kontakte -->  ▶ Klienten : 58
 - Kontakte --> Organisationen : 52
 - Kontakte --> Partner (alle) : 175
 - Kontakte --> Haushalte : 15
@@ -999,7 +999,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Eigenschaften --> Fachkompetenzen : 0
 - Konfigurierung --> Eigenschaften --> Sozialkompetenzen : 0
 - Konfigurierung --> Eigenschaften --> Hindernisse : 0
-- Konfigurierung --> Büro --> Auszugsarten : 21
+- Konfigurierung --> Büro --> Auszugsarten : 22
 - Konfigurierung --> Büro --> Upload-Arten : 10
 - Konfigurierung --> Büro --> Notizarten : 14
 - Konfigurierung --> Büro --> Ereignisarten : 11
@@ -1066,7 +1066,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Datentests : 15
 - Explorer --> System --> Datenprobleme : 64
 - Explorer --> Eigenschaften --> Eigenschaften : 24
-- Explorer --> Büro --> Auszüge : 68
+- Explorer --> Büro --> Auszüge : 69
 - Explorer --> Büro --> Uploads : 12
 - Explorer --> Büro --> Upload-Bereiche : 1
 - Explorer --> Büro --> E-Mail-Ausgänge : 1

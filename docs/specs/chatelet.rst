@@ -1,14 +1,11 @@
+.. # -*- compile-command: doctest docs/specs/chatelet.rst
 .. _welfare.specs.chatelet:
 
 ==========================
 Lino Welfare à la Châtelet
 ==========================
 
-..  How to test only this document:
-
-    $ doctest docs/specs/chatelet.rst
-
-    doctest init:
+..  doctest init:
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.chatelet.settings.doctests')
@@ -233,8 +230,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  debts.Entry                    debts.Entries                   16        716
  debts.Group                    debts.Groups                    8         8
  esf.ClientSummary              esf.Summaries                   23        189
- excerpts.Excerpt               excerpts.Excerpts               12        70
- excerpts.ExcerptType           excerpts.ExcerptTypes           18        18
+ excerpts.Excerpt               excerpts.Excerpts               12        71
+ excerpts.ExcerptType           excerpts.ExcerptTypes           18        19
  gfks.HelpText                  gfks.HelpTexts                  4         5
  households.Household           households.Households           27        14
  households.Member              households.Members              14        63
@@ -820,7 +817,7 @@ Here is the output of :func:`walk_menu_items
 >>> walk_menu_items('romain')
 ... #doctest: -ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts --> Personnes : 103
-- Contacts -->  Bénéficiaires : 58
+- Contacts --> ▶ Bénéficiaires : 58
 - Contacts --> Organisations : 40
 - Contacts --> Partenaires (tous) : 163
 - Contacts --> Ménages : 15
@@ -879,7 +876,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Contacts --> Fonctions : 6
 - Configuration --> Contacts --> Conseils : 4
 - Configuration --> Contacts --> Types de ménage : 7
-- Configuration --> Bureau --> Types d'extrait : 19
+- Configuration --> Bureau --> Types d'extrait : 20
 - Configuration --> Bureau --> Types de fichiers téléchargés : 10
 - Configuration --> Bureau --> Types d'observation : 14
 - Configuration --> Bureau --> Types d'événements : 11
@@ -950,7 +947,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> All dashboard widgets : 1
 - Explorateur --> Système --> Tests de données : 12
 - Explorateur --> Système --> Problèmes de données : 0
-- Explorateur --> Bureau --> Extraits : 70
+- Explorateur --> Bureau --> Extraits : 71
 - Explorateur --> Bureau --> Fichiers téléchargés : 12
 - Explorateur --> Bureau --> Upload Areas : 1
 - Explorateur --> Bureau --> Mails envoyés : 1

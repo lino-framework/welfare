@@ -6,7 +6,7 @@ Configuring print templates
 
 .. How to test only this document:
 
-     $ python setup.py test -s tests.AdminTests.test_printing
+     $ doctest docs/admin/printing.rst
 
    Initialize doctest:
 
@@ -40,12 +40,52 @@ primitive direct printing method (see :ref:`lino.admin.printing`):
     >>> from lino.modlib.printing.mixins import Printable
     >>> for m in rt.models_by_base(Printable):
     ...     print m
+    <class 'lino_welfare.modlib.aids.models.Granting'>
+    <class 'lino_welfare.modlib.aids.models.IncomeConfirmation'>
+    <class 'lino_welfare.modlib.aids.models.RefundConfirmation'>
+    <class 'lino_welfare.modlib.aids.models.SimpleConfirmation'>
+    <class 'lino_welfare.modlib.art61.models.Contract'>
     <class 'lino_welfare.modlib.cal.models.Event'>
+    <class 'lino_welfare.modlib.cal.models.Guest'>
+    <class 'lino_xl.lib.cal.models.RecurrentEvent'>
+    <class 'lino_xl.lib.cal.models.Subscription'>
+    <class 'lino_welfare.modlib.cal.models.Task'>
+    <class 'lino_welfare.modlib.cbss.models.IdentifyPersonRequest'>
+    <class 'lino_welfare.modlib.cbss.models.ManageAccessRequest'>
+    <class 'lino_welfare.modlib.cbss.models.RetrieveTIGroupsRequest'>
+    <class 'lino_xl.lib.coachings.models.Coaching'>
+    <class 'lino_welfare.modlib.contacts.models.Company'>
+    <class 'lino_welfare.modlib.contacts.models.Partner'>
+    <class 'lino_welfare.modlib.contacts.models.Person'>
+    <class 'lino_welfare.projects.chatelet.modlib.courses.models.Course'>
+    <class 'lino_welfare.projects.chatelet.modlib.courses.models.Enrolment'>
     <class 'lino_xl.lib.courses.models.Topic'>
+    <class 'lino.modlib.dashboard.models.Widget'>
+    <class 'lino_welfare.modlib.debts.models.Budget'>
+    <class 'lino_welfare.modlib.esf.models.ClientSummary'>
     <class 'lino_xl.lib.excerpts.models.Excerpt'>
+    <class 'lino_xl.lib.finan.models.BankStatement'>
+    <class 'lino_xl.lib.finan.models.JournalEntry'>
     <class 'lino_xl.lib.finan.models.PaymentOrder'>
+    <class 'lino_welfare.modlib.households.models.Household'>
+    <class 'lino_welfare.modlib.immersion.models.Contract'>
+    <class 'lino_welfare.modlib.isip.models.Contract'>
+    <class 'lino_welfare.modlib.jobs.models.Contract'>
+    <class 'lino_welfare.modlib.jobs.models.JobProvider'>
+    <class 'lino_xl.lib.ledger.models.Voucher'>
+    <class 'lino_welfare.modlib.newcomers.models.Competence'>
     <class 'lino_welfare.modlib.notes.models.Note'>
+    <class 'lino.modlib.notify.models.Message'>
     <class 'lino_xl.lib.outbox.models.Mail'>
+    <class 'lino_welfare.modlib.pcsw.models.Client'>
+    <class 'lino.modlib.plausibility.models.Problem'>
+    <class 'lino_xl.lib.polls.models.Poll'>
+    <class 'lino_xl.lib.polls.models.Response'>
+    <class 'lino.modlib.tinymce.models.TextFieldTemplate'>
+    <class 'lino_xl.lib.uploads.models.Upload'>
+    <class 'lino.modlib.users.models.Authority'>
+    <class 'lino_xl.lib.vatless.models.AccountInvoice'>
+    <class 'lino_welfare.modlib.xcourses.models.CourseProvider'>
 
 A logical consequence is that printing an object of one of above
 models will *not* appear in the history of excerpts.
@@ -94,6 +134,7 @@ This is the list of excerpt types:
  ManageAccess Request     Yes       Yes
  Tx25 Request             Yes       Yes
  Partner                  No        No           payment_reminder.weasy.html
+ Partner                  No        No
  Enrolment                Yes       Yes                                        enrolment.body.html
  Budget                   Yes       Yes
  ESF Summary              Yes       Yes
