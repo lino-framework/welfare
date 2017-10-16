@@ -134,7 +134,7 @@ This is the list of excerpt types:
  ManageAccess Request     Yes       Yes
  Tx25 Request             Yes       Yes
  Partner                  No        No           payment_reminder.weasy.html
- Partner                  No        No
+ Person                   No        No           TermsConditions.odt
  Enrolment                Yes       Yes                                        enrolment.body.html
  Budget                   Yes       Yes
  ESF Summary              Yes       Yes

@@ -37,8 +37,8 @@ Here is a more complete list of excerpt types:
  *cbss.IdentifyPersonRequest (IdentifyPerson-Anfrage)*   Ja       Ja              IdentifyPerson-Anfrage
  *cbss.ManageAccessRequest (ManageAccess-Anfrage)*       Ja       Ja              ManageAccess-Anfrage
  *cbss.RetrieveTIGroupsRequest (Tx25-Anfrage)*           Ja       Ja              Tx25-Anfrage
- *contacts.Partner (Partner)*                            Nein     Nein            Terms & conditions          AppyPdfBuildMethod
  *contacts.Partner (Partner)*                            Nein     Nein            Zahlungserinnerung          WeasyPdfBuildMethod    payment_reminder.weasy.html
+ *contacts.Person (Person)*                              Nein     Nein            Terms & conditions          AppyPdfBuildMethod     TermsConditions.odt
  *debts.Budget (Budget)*                                 Ja       Ja              Finanzielle Situation
  *esf.ClientSummary (ESF Summary)*                       Ja       Ja              Training report             WeasyPdfBuildMethod
  *finan.BankStatement (Kontoauszug)*                     Ja       Ja              Kontoauszug
@@ -132,7 +132,7 @@ Here is a list of all demo excerpts.
  5    Simple confirmation      *Erstattung/25/05/2014/130/1*                         FAYMONVILLE Luc (130*)                                         de
  4    Refund confirmation      *AMK/27/05/2014/139/1*                                JONAS Josef (139)                                              fr
  3    Income confirmation      *EiEi/29/09/2012/116/1*                               AUSDEMWALD Alfons (116)                                        de
- 2    Terms & conditions       *Belgisches Rotes Kreuz*                                                                                             de
+ 2    Terms & conditions       *Mr Albert ADAM*
  1    Simple confirmation      *Clothes bank/22/05/2014/240/19*                      FRISCH Paul (240)             Belgisches Rotes Kreuz           de
 ==== ======================== ===================================================== ============================= ================================ ==========
 <BLANKLINE>
