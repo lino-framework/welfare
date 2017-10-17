@@ -69,14 +69,14 @@ für neue Operationen nicht benutzt werden können.""")
     # client_contact_type = dd.ForeignKey(
     #     'coachings.ClientContactType', blank=True, null=True)
 
-    def get_overview_elems(self, ar):
-        # In the base classes, Partner must come first because
-        # otherwise Django won't inherit `meta.verbose_name`. OTOH we
-        # want to get the `get_overview_elems` from AddressOwner, not
-        # from Partner (i.e. AddressLocation).
-        elems = super(Partner, self).get_overview_elems(ar)
-        elems += AddressOwner.get_overview_elems(self, ar)
-        return elems
+    # def get_overview_elems(self, ar):
+    #     # In the base classes, Partner must come first because
+    #     # otherwise Django won't inherit `meta.verbose_name`. OTOH we
+    #     # want to get the `get_overview_elems` from AddressOwner, not
+    #     # from Partner (i.e. AddressLocation).
+    #     elems = super(Partner, self).get_overview_elems(ar)
+    #     elems += AddressOwner.get_overview_elems(self, ar)
+    #     return elems
 
     @classmethod
     def on_analyze(cls, site):

@@ -137,7 +137,7 @@ class Contract(JobSupplyment):
                 yield sub
 
     def get_excerpt_options(self, ar, **kw):
-        """Implements :meth:`lino.core.model.Model.get_excerpt_options`.
+        """Implements :meth:`lino.printing.Printable.get_excerpt_options`.
 
         When printing a contract, there is no recipient.
 

@@ -524,12 +524,14 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
                                     role=coaching.type.eval_guestrole)
 
     @classmethod
-    def get_printable_demo_objects(cls, excerpt_type):
-        """All contracts of a demo project are being printed.  Overrides
-        :meth:`lino_xl.lib.excerpts.mixins.Certifiable.get_printable_demo_objects`.
+    def get_printable_demo_objects(cls):
+        """All contracts of a demo project (not only one) are being printed.
+        Overrides
+        :meth:`lino.modlib.printing.Printable.get_printable_demo_objects`.
 
         """
         return cls.objects.all()
+    
 dd.update_field(ContractBase, 'signer1', default=default_signer1)
 dd.update_field(ContractBase, 'signer2', default=default_signer2)
 
