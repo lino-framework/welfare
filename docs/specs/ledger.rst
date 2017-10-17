@@ -143,7 +143,7 @@ Here is the main menu for accountants:
 - Explorer :
   - Kontakte : Partner
   - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - Buchhaltung : Rechnungen
+  - Buchhaltung : Gemeinkonten, Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
 
