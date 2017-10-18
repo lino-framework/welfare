@@ -1,14 +1,12 @@
+.. doctest docs/specs/ledger.rst
+   
 .. _welfare.specs.ledger:
 
 ===========================
 Accounting for Lino Welfare
 ===========================
 
-.. How to test only this document:
-
-    $ doctest docs/specs/ledger.rst
-    
-    doctest init:
+.. doctest init:
 
     >>> import lino ; lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.utils.xmlgen.html import E

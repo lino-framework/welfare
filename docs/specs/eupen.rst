@@ -99,7 +99,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Büro : Auszüge, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Kalendereinträge, Aufgaben, Anwesenheiten, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
-  - Buchhaltung : Begleichungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Journalgruppen, Rechnungen
+  - Buchhaltung : Gemeinkonten, Begleichungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Journalgruppen, Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
@@ -935,7 +935,7 @@ Here is the output of :func:`walk_menu_items
 >>> walk_menu_items('rolf', severe=False)
 ... #doctest: -ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte --> Personen : 103
-- Kontakte -->  ▶ Klienten : 58
+- Kontakte --> ▶ Klienten : 58
 - Kontakte --> Organisationen : 52
 - Kontakte --> Partner (alle) : 175
 - Kontakte --> Haushalte : 15
@@ -1093,6 +1093,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> ÖSHZ --> Kostenübernahmescheine : 13
 - Explorer --> ÖSHZ --> Einfache Bescheinigungen : 20
 - Explorer --> ÖSHZ --> Phonetische Wörter : 132
+- Explorer --> Buchhaltung --> Gemeinkonten : 18
 - Explorer --> Buchhaltung --> Begleichungsregeln : 3
 - Explorer --> Buchhaltung --> Belege : 56
 - Explorer --> Buchhaltung --> Belegarten : 6

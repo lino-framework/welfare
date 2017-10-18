@@ -1,12 +1,10 @@
+.. doctest docs/specs/choicelists.rst
+   
 ===========================
 Choicelists in Lino Welfare
 ===========================
 
-.. How to test only this document:
-
-    $ python setup.py test -s tests.SpecsTests.test_choicelists
-
-    doctest initializations:
+.. doctest initializations:
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
@@ -43,7 +41,7 @@ name to read the documentation):
     ...     print "%s : %s" % (value, unicode(text))
     ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
     accounts.AccountTypes : Kontoarten
-    accounts.CommonAccounts : Common accounts
+    accounts.CommonAccounts : Gemeinkonten
     addresses.AddressTypes : Adressenarten
     addresses.DataSources : Datenquellen
     aids.AidRegimes : AidRegimes
@@ -90,7 +88,7 @@ name to read the documentation):
     ledger.VoucherStates : Zustände
     ledger.VoucherTypes : Belegarten
     notes.SpecialTypes : Sondernotizarten
-    notify.MailModes : E-Mail-Benachrichtigungsmodi
+    notify.MailModes : Benachrichtigungsmodi
     notify.MessageTypes : Message Types
     outbox.RecipientTypes : RecipientTypes
     pcsw.RefusalReasons : Ablehnungsgründe
