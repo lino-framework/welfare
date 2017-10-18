@@ -1,14 +1,12 @@
+.. doctest docs/specs/ledger.rst
+   
 .. _welfare.specs.ledger:
 
 ===========================
 Accounting for Lino Welfare
 ===========================
 
-.. How to test only this document:
-
-    $ doctest docs/specs/ledger.rst
-    
-    doctest init:
+.. doctest init:
 
     >>> import lino ; lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.utils.xmlgen.html import E
@@ -143,7 +141,7 @@ Here is the main menu for accountants:
 - Explorer :
   - Kontakte : Partner
   - ÖSHZ : Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
-  - Buchhaltung : Gemeinkonten, Rechnungen
+  - Buchhaltung : Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
 
