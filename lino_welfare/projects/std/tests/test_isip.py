@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2014-2016 Luc Saffre
+# Copyright 2014-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -124,12 +124,9 @@ class QuickTest(RemoteAuthTestCase):
 Update Events for ISIP#1 (Max MUSTERMANN)...
 Generating events between 2014-07-01 and 2015-03-31 (max. 10).
 Reached upper date limit 2015-03-31
-Update Guests for Evaluation 1 (01.07.2014) with MUSTERMANN Max (102)...
-0 row(s) have been updated.
-Update Guests for Evaluation 2 (01.10.2014) with MUSTERMANN Max (102)...
-0 row(s) have been updated.
-Update Guests for Evaluation 3 (01.01.2015) with MUSTERMANN Max (102)...
-0 row(s) have been updated.
+Update presences for Evaluation 1 (01.07.2014) with MUSTERMANN Max (102) : 0 created, 0 unchanged, 0 deleted.
+Update presences for Evaluation 2 (01.10.2014) with MUSTERMANN Max (102) : 0 created, 0 unchanged, 0 deleted.
+Update presences for Evaluation 3 (01.01.2015) with MUSTERMANN Max (102) : 0 created, 0 unchanged, 0 deleted.
 3 row(s) have been updated."""
         # print(expected)
         self.assertEqual(res['info_message'], expected)

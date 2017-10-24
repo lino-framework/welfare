@@ -95,7 +95,7 @@ class TestCase(TestCase):
         response = self.client.post(
             url, post_data,
             REMOTE_USER='robin')
-        result = self.check_json_result(response, 'rows success message')
+        result = self.check_json_result(response, 'rows success message navinfo')
         self.assertEqual(result['success'], True)
         self.assertEqual(
             # result['message'],
@@ -135,7 +135,7 @@ class TestCase(TestCase):
         result = self.check_json_result(
             response,
             "detail_handler_name data_record rows "
-            "close_window success message")
+            "close_window success message navinfo")
         self.assertEqual(result['success'], True)
         self.assertEqual(
             result['message'],
