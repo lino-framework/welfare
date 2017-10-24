@@ -176,8 +176,8 @@ class Site(Site):
 
         - :class:`lino_welfare.modlib.integ.models.UsersWithClients`
         - :class:`lino_welfare.modlib.reception.models.MyWaitingVisitors`
-        - :class:`lino_xl.lib.cal.models.MyEntries`
-        - :class:`lino_xl.lib.cal.models.MyTasks`
+        - :class:`lino_xl.lib.cal.MyEntries`
+        - :class:`lino_xl.lib.cal.MyTasks`
         - ...
 
 

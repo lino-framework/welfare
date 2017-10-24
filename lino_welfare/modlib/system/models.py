@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2014 Luc Saffre
+# Copyright 2013-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -17,7 +17,7 @@
 # <http://www.gnu.org/licenses/>.
 
 """
-This module extends :mod:`lino_xl.lib.cal.models`
+
 """
 
 from __future__ import unicode_literals
