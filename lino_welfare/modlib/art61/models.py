@@ -41,7 +41,7 @@ from lino_welfare.modlib.jobs.mixins import JobSupplyment
 from .choicelists import Subsidizations
 
 from lino_xl.lib.coachings.utils import has_contracts_filter
-from lino_xl.lib.coachings.choicelists import ClientEvents, ObservedEvent
+from lino_xl.lib.clients.choicelists import ClientEvents, ObservedEvent
 
 
 class ClientHasContract(ObservedEvent):

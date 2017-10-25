@@ -28,7 +28,7 @@ from lino.utils.instantiator import Instantiator
 pcsw = dd.resolve_app('pcsw')
 contacts = dd.resolve_app('contacts')
 active_job_search = dd.resolve_app('active_job_search')
-from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.clients.choicelists import ClientStates
 
 
 def create(client, company, date, spontaneous):

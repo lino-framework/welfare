@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2015 Luc Saffre
+# Copyright 2008-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -52,7 +52,7 @@ reception = dd.resolve_app('reception')
 cal = dd.resolve_app('cal')
 cv = dd.resolve_app('cv')
 
-from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.clients.choicelists import ClientStates
 
 Company = dd.resolve_model('contacts.Company')
 
@@ -156,7 +156,7 @@ Wyggeston and Queen Elizabeth I College
 
 def objects():
 
-    ClientContactType = rt.models.coachings.ClientContactType
+    ClientContactType = rt.models.clients.ClientContactType
 
     Person = resolve_model('contacts.Person')
     Company = resolve_model('contacts.Company')
@@ -541,7 +541,7 @@ def objects():
     yield company(name="Solidaris - Mutualité socialiste et syndicale de la province de Liège", **kw)
 
     fkw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
-    cct = rt.models.coachings.ClientContactType.objects.get(**fkw)
+    cct = rt.models.clients.ClientContactType.objects.get(**fkw)
     kw = dict(client_contact_type=cct, country=belgium, city=eupen)
     yield company(
         name="Apotheke Reul",

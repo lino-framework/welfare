@@ -34,7 +34,7 @@ from lino.api import dd, rt
 
 from lino_welfare.modlib.newcomers.roles import NewcomersAgent
 
-from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.clients.choicelists import ClientStates
 from .choicelists import RefusalReasons
 
 

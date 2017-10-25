@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -35,8 +35,7 @@ from lino_xl.lib.cv.mixins import SectorFunction
 from lino_welfare.modlib.isip.mixins import (
     ContractTypeBase, ContractBase, ContractPartnerBase)
 
-from lino_xl.lib.coachings.choicelists import (
-    ClientEvents, ObservedEvent )
+from lino_xl.lib.clients.choicelists import ClientEvents, ObservedEvent
 from lino_xl.lib.coachings.utils import has_contracts_filter
 
 

@@ -49,7 +49,7 @@ ClientStates
 The list of possible choices for the :attr:`Client.client_state` field.
 Default configuration is as follows:
 
->>> rt.show('coachings.ClientStates', language="de")
+>>> rt.show('clients.ClientStates', language="de")
 ====== ========== ===========
  Wert   name       Text
 ------ ---------- -----------
@@ -60,7 +60,7 @@ Default configuration is as follows:
 ====== ========== ===========
 <BLANKLINE>
 
->>> rt.show('coachings.ClientStates', language="fr")
+>>> rt.show('clients.ClientStates', language="fr")
 ====== ========== ============
  Wert   name       Text
 ------ ---------- ------------
@@ -86,12 +86,12 @@ should mark the client as **former**.
 >>> rt.login(username).user.user_type.has_required_roles([CoachingsStaff])
 True
 
->>> from lino_xl.lib.coachings.choicelists import ClientStates
+>>> from lino_xl.lib.clients.choicelists import ClientStates
 
 >>> ClientStates.required_roles
-set([<class 'lino_xl.lib.coachings.roles.CoachingsStaff'>])
+set([<class 'lino_xl.lib.contacts.roles.ContactsStaff'>])
 
->>> url = 'api/coachings/ClientStates'
+>>> url = 'api/clients/ClientStates'
 >>> url = settings.SITE.buildurl(url, fmt='json')
 >>> test_client.force_login(rt.login(username).user)
 >>> response = test_client.get(url, REMOTE_USER=username)

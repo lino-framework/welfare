@@ -269,7 +269,7 @@ ClientContactType #1 ('Apotheke')
 
 There are 4 pharmacies altogether:
 
->>> rt.show('coachings.PartnersByClientContactType', at.pharmacy_type)
+>>> rt.show('clients.PartnersByClientContactType', at.pharmacy_type)
 =================================== ===== ===============================================
  Name                                ID    Ansicht als
 ----------------------------------- ----- -----------------------------------------------
@@ -295,7 +295,7 @@ There are two grantings with this aid type:
 Usually there is at most one pharmacy among the client's client
 contacts:
 
->>> rt.show('coachings.ContactsByClient', pcsw.Client.objects.get(id=139))
+>>> rt.show(clients.ContactsByClient, pcsw.Client.objects.get(id=139))
 ==================== =============== =================== =============
  Klientenkontaktart   Organisation    Kontaktperson       Bemerkungen
 -------------------- --------------- ------------------- -------------

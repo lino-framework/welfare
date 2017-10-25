@@ -38,7 +38,7 @@ from lino_xl.lib.cal.models import *
 from lino_xl.lib.cal.utils import format_date
 from lino.modlib.office.roles import OfficeUser
 from lino_welfare.modlib.pcsw.roles import SocialAgent
-from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.clients.choicelists import ClientStates
 
 
 def you_are_busy_messages(ar):

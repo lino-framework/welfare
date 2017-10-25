@@ -1,14 +1,11 @@
+.. doctest docs/specs/clients_chatelet.rst
 .. _welfare.specs.clients.chatelet:
 
 ==================
 Clients (Chatelet)
 ==================
 
-.. How to test only this document:
-
-    $ python setup.py test -s tests.SpecsTests.test_clients_chatelet
-    
-    doctest init:
+.. doctest init:
 
     >>> import lino
     >>> lino.startup('lino_welfare.projects.chatelet.settings.doctests')
@@ -53,7 +50,7 @@ Lino Welfare à la Chatelet.
     - (newcomers_left):
       - (newcomers_left_1) [visible for all]: **Workflow** (workflow_buttons), **Document identifiant** (id_document)
       - **Spécificité** (faculty) [visible for all]
-      - **Contacts** (coachings.ContactsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]
+      - **Contacts** (clients.ContactsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]
     - **Agents disponibles** (newcomers.AvailableCoachesByClient)
   - **Interventions** (coachings.CoachingsByClient)
 - **Situation familiale** (family) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]:

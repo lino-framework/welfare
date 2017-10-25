@@ -94,7 +94,7 @@ households_Type = dd.resolve_model("households.Type")
 #~ Household = pcsw.Household
 #~ Household = households.Household
 #~ households_Type = households.Type
-from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.clients.choicelists import ClientStates
 
 CCTYPE_HEALTH_INSURANCE = 1
 CCTYPE_PHARMACY = 2
@@ -169,14 +169,14 @@ def checkcc(person, pk, nType):
         #~ dblogger.warning(u"%s : Company %s doesn't exist (please create manually in Lino).",
             #~ dd.obj2str(person),pk)
         #~ return
-    qs = rt.models.coachings.ClientContact.objects.filter(
+    qs = rt.models.clients.ClientContact.objects.filter(
         client=person,
         type__id=nType)
     if qs.count() == 0:
-        cc = rt.models.coachings.ClientContact(
+        cc = rt.models.clients.ClientContact(
             client=person,
             company_id=pk,
-            type=rt.models.coachings.ClientContactType.objects.get(id=nType))
+            type=rt.models.clients.ClientContactType.objects.get(id=nType))
         cc.save()
         dd.on_ui_created.send(sender=cc, request=REQUEST)
         #~ changes.log_create(REQUEST,cc)

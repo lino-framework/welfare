@@ -76,11 +76,11 @@ class Site(Site):
     #         yield self.models.notify.MyMessages
 
     def do_site_startup(self):
-        ctt = self.models.coachings.ClientContactTypes
+        ctt = self.models.clients.ClientContactTypes
         ctt.set_detail_layout("""
         id name can_refund is_bailiff
-        coachings.PartnersByClientContactType
-        coachings.ClientContactsByType
+        clients.PartnersByClientContactType
+        clients.ClientContactsByType
         """)
         ctt.column_names = "id name can_refund is_bailiff"
             
@@ -94,7 +94,7 @@ class Site(Site):
         wc(self.modules.pcsw.Client, master_key='partner_ptr')
 
         wc(self.modules.coachings.Coaching, master_key='client__partner_ptr')
-        wc(self.modules.coachings.ClientContact, master_key='client__partner_ptr')
+        wc(self.modules.clients.ClientContact, master_key='client__partner_ptr')
         wc(self.modules.jobs.Candidature, master_key='person__partner_ptr')
 
         # ContractBase is abstract, so it's not under self.modules

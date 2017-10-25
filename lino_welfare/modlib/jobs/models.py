@@ -48,7 +48,7 @@ from lino.utils.report import Report
 from lino_xl.lib.cv.mixins import SectorFunction
 
 from lino_xl.lib.coachings.utils import only_coached_on, has_contracts_filter
-from lino_xl.lib.coachings.choicelists import ClientEvents, ObservedEvent
+from lino_xl.lib.clients.choicelists import ClientEvents, ObservedEvent
 
 from lino_welfare.modlib.isip.mixins import (
     ContractTypeBase, ContractPartnerBase, ContractBase)

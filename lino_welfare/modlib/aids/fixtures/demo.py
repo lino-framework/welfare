@@ -28,7 +28,7 @@ from lino.api.dd import resolve_model
 from lino.utils import Cycler
 from lino.utils import mti
 from lino.api import dd, rt
-from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.clients.choicelists import ClientStates
 
 
 def objects():
@@ -36,7 +36,7 @@ def objects():
     AidType = rt.modules.aids.AidType
     Person = rt.modules.contacts.Person
     Client = rt.modules.pcsw.Client
-    ClientContactType = rt.modules.coachings.ClientContactType
+    ClientContactType = rt.modules.clients.ClientContactType
     Board = rt.modules.boards.Board
     ExcerptType = rt.modules.excerpts.ExcerptType
     ConfirmationStates = rt.modules.aids.ConfirmationStates
@@ -62,7 +62,7 @@ def objects():
     DURATIONS = Cycler(None, 1, 1, 30, 0, None, 365)
 
     fkw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
-    pharmacy_type = rt.models.coachings.ClientContactType.objects.get(**fkw)
+    pharmacy_type = rt.models.clients.ClientContactType.objects.get(**fkw)
     PHARMACIES = Cycler(rt.modules.contacts.Company.objects.filter(
         client_contact_type=pharmacy_type))
 
@@ -87,7 +87,7 @@ def objects():
     # ConfirmationTypes = rt.modules.aids.ConfirmationTypes
     RefundConfirmation = rt.modules.aids.RefundConfirmation
     IncomeConfirmation = rt.modules.aids.IncomeConfirmation
-    ClientContact = rt.modules.coachings.ClientContact
+    ClientContact = rt.modules.clients.ClientContact
 
     COACHES = Cycler(rt.modules.users.User.objects.filter(
         coaching_type__isnull=False))

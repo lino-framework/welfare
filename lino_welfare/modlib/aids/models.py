@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2016 Luc Saffre
+# Copyright 2014-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -129,7 +129,7 @@ class AidType(ContactRelated, ExcerptTitle):
     .. attribute:: pharmacy_type
 
         A pointer to the :class:`ClientContactType
-        <lino_xl.lib.coachings.models.ClientContactType>` to be used when
+        <lino_xl.lib.clients.ClientContactType>` to be used when
         selecting the pharmacy of a refund confirmation
         (:attr:`RefundConfirmation.pharmacy`).
 
@@ -168,7 +168,7 @@ class AidType(ContactRelated, ExcerptTitle):
         help_text=_("Whether grantings for this aid type are to be signed by the client's primary coach."))
 
     pharmacy_type = dd.ForeignKey(
-        'coachings.ClientContactType', blank=True, null=True)
+        'clients.ClientContactType', blank=True, null=True)
 
     address_type = AddressTypes.field(
         blank=True, null=True,
@@ -776,7 +776,7 @@ ConfirmationTypes.add_item(IncomeConfirmation, IncomeConfirmationsByGranting)
 
 
 dd.inject_field(
-    'coachings.ClientContactType',
+    'clients.ClientContactType',
     'can_refund',
     models.BooleanField(
         _("Can refund"), default=False,
@@ -820,7 +820,7 @@ class RefundConfirmation(Confirmation):
         verbose_name_plural = _("Refund confirmations")
 
     doctor_type = dd.ForeignKey(
-        'coachings.ClientContactType', verbose_name=_("Doctor type"), blank=True)
+        'clients.ClientContactType', verbose_name=_("Doctor type"), blank=True)
     doctor = dd.ForeignKey(
         'contacts.Person', verbose_name=_("Doctor"),
         blank=True, null=True)
@@ -839,7 +839,7 @@ class RefundConfirmation(Confirmation):
             # suggest a default pharmacy only if the client has define
             # exactly one pharmacy contact.
             qs = self.granting.get_pharmacies(
-                coachings_clientcontact_set_by_company__client=self.client)
+                clients_clientcontact_set_by_company__client=self.client)
             if len(qs) == 1:
                 self.pharmacy = qs[0]
             
@@ -855,7 +855,7 @@ class RefundConfirmation(Confirmation):
         if doctor_type:
             fkw.update(client_contact_type=doctor_type)
         else:
-            qs = rt.modules.coachings.ClientContactType.objects.filter(
+            qs = rt.modules.clients.ClientContactType.objects.filter(
                 can_refund=True)
             fkw.update(client_contact_type__in=qs)
             
@@ -899,7 +899,7 @@ class RefundConfirmation(Confirmation):
 
     @dd.chooser()
     def doctor_type_choices(cls):
-        return rt.modules.coachings.ClientContactType.objects.filter(
+        return rt.modules.clients.ClientContactType.objects.filter(
             can_refund=True)
 
     def full_clean(self):

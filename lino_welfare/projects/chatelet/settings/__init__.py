@@ -100,8 +100,8 @@ class Site(Site):
         super(Site, self).do_site_startup()
 
         from lino.core.inject import update_field
-        # ctt = self.models.coachings.ClientContactTypes
-        ct = self.models.coachings.ClientContact
+        # ctt = self.models.clients.ClientContactTypes
+        ct = self.models.clients.ClientContact
         ct.column_names = "company contact_person remark"
         update_field(ct, 'remark', verbose_name=_("Contact details"))
 
@@ -113,7 +113,7 @@ class Site(Site):
         wc(self.models.pcsw.Client, master_key='partner_ptr')
 
         wc(self.models.coachings.Coaching, master_key='client__partner_ptr')
-        wc(self.models.coachings.ClientContact, master_key='client__partner_ptr')
+        wc(self.models.clients.ClientContact, master_key='client__partner_ptr')
 
 
 # the following line should not be active in a checked-in version

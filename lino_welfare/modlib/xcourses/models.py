@@ -473,6 +473,12 @@ class CourseRequests(dd.Table):
     order_by = ['date_submitted']
     active_fields = 'offer'
 
+    @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(CourseRequests, self).param_defaults(ar, **kw)
+        kw.update(client_state='')
+        return kw
+
 
 class CourseRequestsByPerson(CourseRequests):
     """

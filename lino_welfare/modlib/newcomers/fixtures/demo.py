@@ -30,7 +30,7 @@ from lino.api.dd import babel_values
 from lino.api import dd, rt
 from lino.modlib.users.choicelists import UserTypes
 from lino_welfare.modlib.integ.roles import IntegrationAgent
-from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.clients.choicelists import ClientStates
 
 
 def objects():

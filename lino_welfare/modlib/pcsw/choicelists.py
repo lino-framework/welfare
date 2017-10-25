@@ -26,7 +26,7 @@ from __future__ import print_function
 from lino.modlib.system.choicelists import ObservedEvent
 from lino.api import dd, _
 
-from lino_xl.lib.coachings.choicelists import ClientEvents
+from lino_xl.lib.clients.choicelists import ClientEvents
 
 class ClientHasDispense(ObservedEvent):
     text = _("Dispense")

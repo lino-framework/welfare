@@ -67,7 +67,7 @@ Lino Welfare à la Eupen.
           - **Ablehnungsgrund** (refusal_reason) [visible for all]
         - **Verfügbare Begleiter** (newcomers.AvailableCoachesByClient)
       - (coaching_2):
-        - **Kontakte** (coachings.ContactsByClient)
+        - **Kontakte** (clients.ContactsByClient)
         - **Begleitungen** (coachings.CoachingsByClient)
     - **Hilfen** (aids_tab):
       - (aids_tab_1):

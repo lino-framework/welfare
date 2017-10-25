@@ -31,7 +31,7 @@ from lino.utils import Cycler
 from lino.api import dd, rt
 
 from django.conf import settings
-from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.clients.choicelists import ClientStates
 
 
 def objects():

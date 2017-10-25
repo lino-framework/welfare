@@ -50,7 +50,7 @@ from lino.utils.ssin import generate_ssin
 
 Company = dd.resolve_model('contacts.Company')
 
-from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.clients.choicelists import ClientStates
 
 def objects():
 

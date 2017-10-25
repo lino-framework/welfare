@@ -38,8 +38,8 @@ cv = dd.resolve_app('cv')
 # properties = dd.resolve_app('properties')
 
 from lino_xl.lib.coachings.utils import has_contracts_filter
-from lino_xl.lib.coachings.choicelists import ClientEvents, ObservedEvent
-from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.clients.choicelists import ClientEvents, ObservedEvent
+from lino_xl.lib.clients.choicelists import ClientStates
 from lino_xl.lib.coachings.desktop import CoachingEndings
 
 

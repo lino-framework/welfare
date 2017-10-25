@@ -1,14 +1,11 @@
+.. doctest docs/specs/ddh.rst
 .. _welfare.specs.ddh:
 
 =============================
 Preventing accidental deletes
 =============================
 
-.. How to test only this document:
-
-    $ doctest docs/specs/ddh.rst
-    
-    doctest init:
+.. doctest init:
 
     >>> import lino
     >>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
@@ -59,15 +56,15 @@ Lino Welfare:
   - PROTECT : cbss.ManageAccessRequest.purpose
 - cbss.Sector :
   - PROTECT : cbss.ManageAccessRequest.sector
-- coachings.ClientContactType :
-  - PROTECT : aids.AidType.pharmacy_type, aids.RefundConfirmation.doctor_type, coachings.ClientContact.type, contacts.Partner.client_contact_type
+- clients.ClientContactType :
+  - PROTECT : aids.AidType.pharmacy_type, aids.RefundConfirmation.doctor_type, clients.ClientContact.type, contacts.Partner.client_contact_type
 - coachings.CoachingEnding :
   - PROTECT : coachings.Coaching.ending
 - coachings.CoachingType :
   - PROTECT : coachings.Coaching.type, coachings.CoachingEnding.type, users.User.coaching_type
 - contacts.Company :
   - CASCADE : jobs.JobProvider.company_ptr, xcourses.CourseProvider.company_ptr
-  - PROTECT : aids.AidType.company, aids.IncomeConfirmation.company, aids.RefundConfirmation.company, aids.RefundConfirmation.pharmacy, aids.SimpleConfirmation.company, art61.Contract.company, cal.Room.company, coachings.ClientContact.company, contacts.Role.company, debts.Entry.bailiff, excerpts.Excerpt.company, isip.ContractPartner.company, jobs.Contract.company, ledger.Journal.partner, notes.Note.company, pcsw.Client.health_insurance, pcsw.Client.pharmacy, system.SiteConfig.site_company, uploads.Upload.company    
+  - PROTECT : aids.AidType.company, aids.IncomeConfirmation.company, aids.RefundConfirmation.company, aids.RefundConfirmation.pharmacy, aids.SimpleConfirmation.company, art61.Contract.company, cal.Room.company, clients.ClientContact.company, contacts.Role.company, debts.Entry.bailiff, excerpts.Excerpt.company, isip.ContractPartner.company, jobs.Contract.company, ledger.Journal.partner, notes.Note.company, pcsw.Client.health_insurance, pcsw.Client.pharmacy, system.SiteConfig.site_company, uploads.Upload.company    
 - contacts.CompanyType :
   - PROTECT : contacts.Company.type
 - contacts.Partner :
@@ -75,11 +72,11 @@ Lino Welfare:
   - PROTECT : cal.Guest.partner, debts.Actor.partner, debts.Budget.partner, debts.Entry.partner, finan.BankStatementItem.partner, finan.JournalEntryItem.partner, finan.PaymentOrderItem.partner, ledger.Movement.partner, outbox.Recipient.partner, users.User.partner, vatless.AccountInvoice.partner
 - contacts.Person :
   - CASCADE : pcsw.Client.person_ptr
-  - PROTECT : aids.AidType.contact_person, aids.IncomeConfirmation.contact_person, aids.RefundConfirmation.contact_person, aids.RefundConfirmation.doctor, aids.SimpleConfirmation.contact_person, art61.Contract.contact_person, art61.Contract.signer1, art61.Contract.signer2, boards.Member.person, cal.Room.contact_person, coachings.ClientContact.contact_person, contacts.Role.person, excerpts.Excerpt.contact_person, households.Member.person, humanlinks.Link.child, humanlinks.Link.parent, isip.Contract.signer1, isip.Contract.signer2, isip.ContractPartner.contact_person, jobs.Contract.contact_person, jobs.Contract.signer1, jobs.Contract.signer2, notes.Note.contact_person, system.SiteConfig.signer1, system.SiteConfig.signer2, uploads.Upload.contact_person
+  - PROTECT : aids.AidType.contact_person, aids.IncomeConfirmation.contact_person, aids.RefundConfirmation.contact_person, aids.RefundConfirmation.doctor, aids.SimpleConfirmation.contact_person, art61.Contract.contact_person, art61.Contract.signer1, art61.Contract.signer2, boards.Member.person, cal.Room.contact_person, clients.ClientContact.contact_person, contacts.Role.person, excerpts.Excerpt.contact_person, households.Member.person, humanlinks.Link.child, humanlinks.Link.parent, isip.Contract.signer1, isip.Contract.signer2, isip.ContractPartner.contact_person, jobs.Contract.contact_person, jobs.Contract.signer1, jobs.Contract.signer2, notes.Note.contact_person, system.SiteConfig.signer1, system.SiteConfig.signer2, uploads.Upload.contact_person
 - contacts.Role :
   - PROTECT : pcsw.Client.job_office_contact
 - contacts.RoleType :
-  - PROTECT : aids.AidType.contact_role, aids.IncomeConfirmation.contact_role, aids.RefundConfirmation.contact_role, aids.SimpleConfirmation.contact_role, art61.Contract.contact_role, boards.Member.role, cal.Room.contact_role, coachings.ClientContact.contact_role, contacts.Role.type, excerpts.Excerpt.contact_role, isip.ContractPartner.contact_role, jobs.Contract.contact_role, notes.Note.contact_role, system.SiteConfig.signer1_function, system.SiteConfig.signer2_function, uploads.Upload.contact_role
+  - PROTECT : aids.AidType.contact_role, aids.IncomeConfirmation.contact_role, aids.RefundConfirmation.contact_role, aids.SimpleConfirmation.contact_role, art61.Contract.contact_role, boards.Member.role, cal.Room.contact_role, clients.ClientContact.contact_role, contacts.Role.type, excerpts.Excerpt.contact_role, isip.ContractPartner.contact_role, jobs.Contract.contact_role, notes.Note.contact_role, system.SiteConfig.signer1_function, system.SiteConfig.signer2_function, uploads.Upload.contact_role
 - contenttypes.ContentType :
   - PROTECT : cal.Event.owner_type, cal.Task.owner_type, changes.Change.master_type, changes.Change.object_type, excerpts.Excerpt.owner_type, excerpts.ExcerptType.content_type, gfks.HelpText.content_type, notes.Note.owner_type, notify.Message.owner_type, outbox.Attachment.owner_type, outbox.Mail.owner_type, plausibility.Problem.owner_type, uploads.Upload.owner_type
 - countries.Country :
@@ -168,7 +165,7 @@ Lino Welfare:
   - PROTECT : pcsw.Client.aid_type
 - pcsw.Client :
   - CASCADE : aids.IncomeConfirmation.client, aids.RefundConfirmation.client, aids.SimpleConfirmation.client, coachings.Coaching.client, cv.LanguageKnowledge.person, dupable_clients.Word.owner, pcsw.Dispense.client, properties.PersonProperty.person
-  - PROTECT : aids.Granting.client, art61.Contract.client, cal.Event.project, cal.Task.project, cbss.IdentifyPersonRequest.person, cbss.ManageAccessRequest.person, cbss.RetrieveTIGroupsRequest.person, coachings.ClientContact.client, cv.Experience.person, cv.Study.person, cv.Training.person, esf.ClientSummary.master, excerpts.Excerpt.project, finan.BankStatementItem.project, finan.JournalEntry.project, finan.JournalEntryItem.project, finan.PaymentOrderItem.project, isip.Contract.client, jobs.Candidature.person, jobs.Contract.client, ledger.Movement.project, notes.Note.project, outbox.Mail.project, pcsw.Conviction.client, pcsw.Exclusion.person, uploads.Upload.project, vatless.AccountInvoice.project, vatless.InvoiceItem.project, xcourses.CourseRequest.person
+  - PROTECT : aids.Granting.client, art61.Contract.client, cal.Event.project, cal.Task.project, cbss.IdentifyPersonRequest.person, cbss.ManageAccessRequest.person, cbss.RetrieveTIGroupsRequest.person, clients.ClientContact.client, cv.Experience.person, cv.Study.person, cv.Training.person, esf.ClientSummary.master, excerpts.Excerpt.project, finan.BankStatementItem.project, finan.JournalEntry.project, finan.JournalEntryItem.project, finan.PaymentOrderItem.project, isip.Contract.client, jobs.Candidature.person, jobs.Contract.client, ledger.Movement.project, notes.Note.project, outbox.Mail.project, pcsw.Conviction.client, pcsw.Exclusion.person, uploads.Upload.project, vatless.AccountInvoice.project, vatless.InvoiceItem.project, xcourses.CourseRequest.person
 - pcsw.DispenseReason :
   - PROTECT : pcsw.Dispense.reason
 - pcsw.ExclusionType :

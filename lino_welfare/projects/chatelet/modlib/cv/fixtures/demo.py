@@ -23,7 +23,7 @@ from builtins import range
 from lino.utils import Cycler
 from lino.api import rt
 
-from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.clients.choicelists import ClientStates
 
 def objects():
 

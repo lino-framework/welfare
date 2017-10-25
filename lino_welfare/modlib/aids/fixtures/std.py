@@ -99,7 +99,7 @@ def objects():
         fr="Remboursement de frais médicaux")
     kw.update(short_name="AMK")
     fkw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
-    cct_pharmacy = rt.models.coachings.ClientContactType.objects.get(**fkw)
+    cct_pharmacy = rt.models.clients.ClientContactType.objects.get(**fkw)
     kw.update(pharmacy_type=cct_pharmacy)
     kw.update(body_template='medical_refund.body.html')
     kw.update(dd.str2kw('excerpt_title', _("Attestation")))

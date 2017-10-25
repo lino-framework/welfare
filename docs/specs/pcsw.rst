@@ -5,12 +5,11 @@
 General PCSW
 ============
 
-..
-  To test only this document, run::
+..  To test only this document, run::
 
-    $ doctest docs/specs/pcsw.rst
+      $ doctest docs/specs/pcsw.rst
 
-  doctest init:
+    doctest init:
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.std.settings.doctests')
@@ -66,13 +65,13 @@ ClientEvents
 =========== =========== ========================
  value       name        text
 ----------- ----------- ------------------------
- active      active      Coaching
  created     created     Created
  modified    modified    Modified
  note        note        Note
  learning    learning    Learning
  dispense    dispense    Dispense
  penalty     penalty     Penalty
+ active      active      Coaching
  isip        isip        ISIP
  jobs        jobs        Art60§7 job supplyment
  available   available   Available
