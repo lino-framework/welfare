@@ -70,12 +70,12 @@ from lino_welfare.modlib.cbss.choicelists import OK_STATES
 from lino.utils import ssin
 
 from lino import mixins
+from lino.utils.dates import daterange_text
 
 from lino_xl.lib.coachings.utils import (
-    add_coachings_filter, daterange_text,
-    has_contracts_filter)
+    add_coachings_filter, has_contracts_filter)
 
-from lino_xl.lib.coachings.choicelists import ClientEvents, ClientStates
+from lino_xl.lib.clients.choicelists import ClientEvents, ClientStates
 from lino_xl.lib.coachings.mixins import Coachable
 from lino_xl.lib.cv.mixins import BiographyOwner
 
@@ -574,7 +574,7 @@ class ClientDetail(dd.DetailLayout):
 
     coaching = dd.Panel("""
     newcomers_left:20 newcomers.AvailableCoachesByClient:40
-    coachings.ContactsByClient:20 coachings.CoachingsByClient:40
+    clients.ContactsByClient:20 coachings.CoachingsByClient:40
     """, label=_("Coaches"))
 
     newcomers_left = dd.Panel("""
@@ -711,10 +711,10 @@ Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
         only_primary=models.BooleanField(
             _("Only primary clients"), default=False, help_text=u"""\
 Nur Klienten, die eine effektive <b>primäre</b> Begleitung haben."""),
-        client_state=ClientStates.field(
-            blank=True, default='',
-            help_text=u"""\
-Nur Klienten mit diesem Status (Aktenzustand)."""),
+#         client_state=ClientStates.field(
+#             blank=True, default='',
+#             help_text=u"""\
+# Nur Klienten mit diesem Status (Aktenzustand)."""),
         #~ new_since = models.DateField(_("Newly coached since"),blank=True),
         **contacts.Persons.parameters)
     params_layout = """
@@ -722,6 +722,12 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
     client_state coached_by and_coached_by start_date end_date \
     observed_event only_primary
     """
+
+    @classmethod
+    def param_defaults(self, ar, **kw):
+        kw = super(Clients, self).param_defaults(ar, **kw)
+        kw.update(client_state='')
+        return kw
 
     @classmethod
     def get_request_queryset(self, ar):
@@ -810,8 +816,8 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         # else:
         #     raise Warning(repr(ce))
 
-        if pv.client_state:
-            qs = qs.filter(client_state=pv.client_state)
+        # if pv.client_state:
+        #     qs = qs.filter(client_state=pv.client_state)
 
         if pv.nationality:
             qs = qs.filter(nationality__exact=pv.nationality)
@@ -829,8 +835,8 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
         if pv.observed_event:
             yield str(pv.observed_event)
 
-        if pv.client_state:
-            yield str(pv.client_state)
+        # if pv.client_state:
+        #     yield str(pv.client_state)
 
         if pv.start_date is None or pv.end_date is None:
             period = None
@@ -870,7 +876,6 @@ Nur Klienten mit diesem Status (Aktenzustand)."""),
             yield 'yellow'
         #~ if not obj.has_valid_card_data():
             #~ return 'red'
-
 
 class CoachedClients(Clients):
     required_roles = dd.login_required(SocialAgent)

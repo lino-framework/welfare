@@ -1,14 +1,11 @@
+.. doctest docs/specs/courses.rst
 .. _welfare.specs.xcourses:
 
 ================
 External courses
 ================
 
-.. to test only this document:
-
-    $ doctest docs/specs/courses.rst
-    
-    doctest init:
+.. doctest init:
     
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')

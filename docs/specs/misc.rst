@@ -201,7 +201,7 @@ Some choices lists:
 >>> kw = dict()
 >>> fields = 'count rows'
 >>> demo_get(
-...    'rolf', 'choices/coachings/ContactsByClient/company?type=1', fields, 4, **kw)
+...    'rolf', 'choices/clients/ContactsByClient/company?type=1', fields, 4, **kw)
 
 >>> demo_get(
 ...    'rolf', 'choices/aids/IncomeConfirmations/aid_type', fields, 11, **kw)

@@ -1,4 +1,4 @@
-.. # -*- compile-command: doctest docs/specs/chatelet.rst
+.. doctest docs/specs/chatelet.rst
 .. _welfare.specs.chatelet:
 
 ==========================
@@ -148,7 +148,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-60 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, excerpts, welfare, uploads, outbox, extensible, cal, reception, accounts, badges, boards, sales, coachings, pcsw, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, plausibility, tinymce, sessions.
+61 apps: lino_startup, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, excerpts, uploads, outbox, extensible, cal, reception, accounts, badges, boards, coachings, clients, pcsw, welfare, sales, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, plausibility, tinymce, sessions.
 135 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -187,8 +187,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        6
  cbss.Sector                    cbss.Sectors                    11        209
  changes.Change                 changes.Changes                 10        0
- coachings.ClientContact        coachings.ClientContacts        7         14
- coachings.ClientContactType    coachings.ClientContactTypes    7         10
+ clients.ClientContact          clients.ClientContacts          7         14
+ clients.ClientContactType      clients.ClientContactTypes      7         10
  coachings.Coaching             coachings.Coachings             8         90
  coachings.CoachingEnding       coachings.CoachingEndings       7         4
  coachings.CoachingType         coachings.CoachingTypes         8         3
@@ -396,7 +396,7 @@ Each window layout defines a given set of fields.
 - cbss.RetrieveTIGroupsRequests.detail : id, person, user, sent, status, printed, national_id, language, history, environment, ticket, info_messages, debug_messages
 - cbss.RetrieveTIGroupsRequests.insert : person, national_id, language, history
 - changes.Changes.detail : time, user, type, master, object, id, diff
-- coachings.ClientContactTypes.detail : id, name, name_nl, name_de, name_en
+- clients.ClientContactTypes.detail : id, name, name_nl, name_de, name_en
 - coachings.CoachingEndings.detail : id, name, name_nl, name_de, name_en, seqno
 - coachings.Coachings.create_visit : user, summary
 - contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, id, language, activity, is_obsolete, created, modified
@@ -589,7 +589,7 @@ Each window layout is **viewable** by a given set of user types.
 - cbss.RetrieveTIGroupsRequests.detail : visible for 100 110 120 200 210 300 400 410 admin 910
 - cbss.RetrieveTIGroupsRequests.insert : visible for 100 110 120 200 210 300 400 410 admin 910
 - changes.Changes.detail : visible for admin 910
-- coachings.ClientContactTypes.detail : visible for 110 210 410 admin 910
+- clients.ClientContactTypes.detail : visible for 110 210 410 800 admin 910
 - coachings.CoachingEndings.detail : visible for 110 210 410 admin 910
 - coachings.Coachings.create_visit : visible for 110 210 410 admin 910
 - contacts.Companies.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910

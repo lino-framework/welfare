@@ -64,8 +64,8 @@ name to read the documentation):
     cbss.RequestLanguages : RequestLanguages
     cbss.RequestStates : Zustände
     changes.ChangeTypes : Änderungsarten
-    coachings.ClientEvents : Beobachtungskriterien
-    coachings.ClientStates : Bearbeitungszustände Klienten
+    clients.ClientEvents : Beobachtungskriterien
+    clients.ClientStates : Bearbeitungszustände Klienten
     contacts.PartnerEvents : Beobachtungskriterien
     countries.PlaceTypes : PlaceTypes
     cv.CefLevel : CEF-Kategorien

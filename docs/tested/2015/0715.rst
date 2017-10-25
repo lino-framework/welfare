@@ -1,14 +1,11 @@
+.. doctest docs/tested/2015/0715.rst
 .. _welfare.tested.20150715:
 
 ====================================
 Reception clerk sees "Career" tab
 ====================================
 
-.. How to test just this document:
-
-    $ doctest docs/tested/2015/0715.rst
-    
-    doctest init:
+.. doctest init:
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.std.settings.doctests')
@@ -106,7 +103,7 @@ during :func:`lino.utils.jsgen.py2js`:
 ...     print(py2js(lh.main.elements))
 >>> with_user_profile(theresia.user_type, f)
 ... #doctest: +NORMALIZE_WHITESPACE
-[ general_panel1029, contact_panel1056, coaching_panel1284, aids_tab_panel1380, work_tab_1_panel1409, history_panel2141 ]
+[ general_panel1027, contact_panel1054, coaching_panel1282, aids_tab_panel1378, work_tab_1_panel1407, history_panel2139 ]
 
 I can even render the :file:`lino*.js` files (at least once):
 

@@ -39,7 +39,7 @@ from .choicelists import *
 config = dd.plugins.isip
 
 from lino_xl.lib.coachings.utils import has_contracts_filter
-from lino_xl.lib.coachings.choicelists import ClientEvents, ObservedEvent
+from lino_xl.lib.clients.choicelists import ClientEvents, ObservedEvent
 
 from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
 from lino_welfare.modlib.integ.roles import IntegrationAgent

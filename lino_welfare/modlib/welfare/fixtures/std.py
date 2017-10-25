@@ -29,7 +29,7 @@ from lino.api import dd, rt
 
 def objects():
 
-    ClientContactType = rt.models.coachings.ClientContactType
+    ClientContactType = rt.models.clients.ClientContactType
     kw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
     cct = ClientContactType(**kw)
     yield cct

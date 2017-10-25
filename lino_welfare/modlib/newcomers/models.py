@@ -59,7 +59,7 @@ from .roles import NewcomersAgent, NewcomersOperator
 
 # users = dd.resolve_app('users')
 pcsw = dd.resolve_app('pcsw', strict=True)
-from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.clients.choicelists import ClientStates
 
 WORKLOAD_BASE = decimal.Decimal('10')  # normal number of newcomers per month
 MAX_WEIGHT = decimal.Decimal('10')

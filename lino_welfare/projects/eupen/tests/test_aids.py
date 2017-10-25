@@ -20,10 +20,6 @@
 
 You can run only these tests by issuing::
 
-  $ python setup.py test -s tests.DemoTests.test_eupen
-
-Or::
-
   $ cd lino_welfare/projects/eupen
   $ python manage.py test tests.test_aids
 
@@ -56,7 +52,7 @@ class TestCase(TestCase):
         RefundConfirmations = rt.actors.aids.RefundConfirmations
         User = settings.SITE.user_model
         Client = rt.models.pcsw.Client
-        ClientContactType = rt.models.coachings.ClientContactType
+        ClientContactType = rt.models.clients.ClientContactType
 
         robin = self.create_obj(
             User, username='robin', user_type=UserTypes.admin)

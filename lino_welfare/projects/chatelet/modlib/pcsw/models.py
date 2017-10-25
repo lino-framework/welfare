@@ -84,7 +84,7 @@ class ClientDetail(ClientDetail):
     newcomers_left = dd.Panel("""
     workflow_buttons id_document
     faculty:12
-    coachings.ContactsByClient:20
+    clients.ContactsByClient:20
     """, required_roles=dd.login_required((NewcomersAgent, NewcomersOperator)))
 
     suche = dd.Panel("""

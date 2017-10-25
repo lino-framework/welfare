@@ -354,8 +354,8 @@ class Migrator(Migrator):
 
         """
         globals_dict.update(   
-            pcsw_ClientContact=resolve_model("coachings.ClientContact"),
-            pcsw_ClientContactType=resolve_model("coachings.ClientContactType"),
+            pcsw_ClientContact=resolve_model("clients.ClientContact"),
+            pcsw_ClientContactType=resolve_model("clients.ClientContactType"),
             pcsw_Coaching=resolve_model("coachings.Coaching"),
             pcsw_CoachingEnding=resolve_model("coachings.CoachingEnding"),
             pcsw_CoachingType=resolve_model("coachings.CoachingType"))

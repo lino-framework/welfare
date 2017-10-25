@@ -67,7 +67,7 @@ für neue Operationen nicht benutzt werden können.""")
     hidden_columns = 'created modified activity'
 
     # client_contact_type = dd.ForeignKey(
-    #     'coachings.ClientContactType', blank=True, null=True)
+    #     'clients.ClientContactType', blank=True, null=True)
 
     # def get_overview_elems(self, ar):
     #     # In the base classes, Partner must come first because

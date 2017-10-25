@@ -72,7 +72,7 @@ class Site(Site):
         """
         super(Site, self).setup_plugins()
         self.plugins.accounts.configure(ref_length=16)
-        self.plugins.coachings.configure(client_model='pcsw.Client')
+        self.plugins.clients.configure(client_model='pcsw.Client')
         self.plugins.addresses.configure(partner_model='contacts.Partner')
         self.plugins.excerpts.configure(responsible_user='melanie')
         # self.plugins.extjs.configure(enter_submits_form=True)
@@ -112,9 +112,6 @@ class Site(Site):
 
         yield 'lino_xl.lib.excerpts'
         
-        yield 'lino_welfare.modlib.welfare'
-        
-        # yield 'lino_welfare.modlib.welfare'
         yield 'lino_xl.lib.uploads'
         yield 'lino_xl.lib.outbox'
 
@@ -125,10 +122,15 @@ class Site(Site):
         yield 'lino_welfare.modlib.badges'
         yield 'lino_xl.lib.boards'
 
+        yield 'lino_welfare.modlib.pcsw'
+        # yield 'lino_xl.lib.clients'
+        # yield 'lino_xl.lib.coachings'
+        yield 'lino_welfare.modlib.welfare'
+        
         # NOTE: ordering influences (1) main menu (2) fixtures loading
         # e.g. pcsw.demo creates clients needed by cbss.demo
         yield 'lino_welfare.modlib.sales'
-        yield 'lino_welfare.modlib.pcsw'
+        # yield 'lino_welfare.modlib.pcsw'
         yield 'lino_welfare.modlib.ledger'
         yield 'lino_welfare.modlib.sepa'
         yield 'lino_cosi.lib.b2c'

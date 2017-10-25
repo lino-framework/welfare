@@ -45,7 +45,7 @@ pcsw = dd.resolve_app('pcsw')
 coachings = dd.resolve_app('coachings')
 extensible = dd.resolve_app('extensible')
 
-from lino_xl.lib.coachings.choicelists import ClientStates
+from lino_xl.lib.clients.choicelists import ClientStates
 from lino_xl.lib.coachings.desktop import CoachingsByClient
 
 # Make EntriesByDay available also for reception agents who are not in
@@ -250,7 +250,7 @@ class Clients(pcsw.CoachedClients):  # see blog 2013/0817
 
     Visible to user user_types in group "reception".
     It differs from :class:`CoachedClients
-    <lino_xl.lib.coachings.desktop.CoachedClients>` by the visible columns.
+    <lino_xl.lib.coachings.CoachedClients>` by the visible columns.
 
     """
     required_roles = dd.login_required((OfficeUser, OfficeOperator))
