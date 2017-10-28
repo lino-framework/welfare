@@ -57,7 +57,7 @@ contacts = dd.resolve_app('contacts')
 cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
 from lino_xl.lib.beid.mixins import BeIdCardHolder
-from lino.modlib.plausibility.choicelists import Checker
+from lino.modlib.checkdata.choicelists import Checker
 # from lino.modlib.vatless.mixins import PartnerDetailMixin
 
 from lino_xl.lib.contacts.roles import SimpleContactsUser
@@ -631,7 +631,7 @@ class ClientDetail(dd.DetailLayout):
     unavailable_until:15 unavailable_why:30
     is_obsolete created modified
     remarks
-    plausibility.ProblemsByOwner:25 contacts.RolesByPerson:20
+    checkdata.ProblemsByOwner:25 contacts.RolesByPerson:20
     """, label=_("Miscellaneous"),
         required_roles=dd.login_required(SocialStaff))
 
@@ -915,7 +915,7 @@ class SSINChecker(ClientChecker):
     verbose_name = _("Check for valid identification")
     need_valid_card_data = (ClientStates.coached, ClientStates.newcomer)
     
-    def get_plausibility_problems(self, obj, fix=False):
+    def get_checkdata_problems(self, obj, fix=False):
 
         if obj.client_state in self.need_valid_card_data \
            and not obj.has_valid_card_data():

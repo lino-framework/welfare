@@ -172,7 +172,8 @@ There are a lot of data fields:
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
 AgentsByClient MovementsByProject activity activityHidden age
 birth_country birth_countryHidden birth_date birth_place broker
-brokerHidden cbss_relations civil_state civil_stateHidden client_state
+brokerHidden cbss_relations checkdata_ProblemsByOwner civil_state
+civil_stateHidden client_state
 client_stateHidden created cv_LanguageKnowledgesByPerson declared_name
 disable_editing disabled_fields
 dupable_clients_SimilarClients email excerpts_ExcerptsByProject
@@ -181,7 +182,7 @@ groupHidden gsm households_MembersByPerson humanlinks_LinksByHuman id
 id_document image in_belgium_since is_obsolete language languageHidden
 last_name middle_name modified national_id nationality
 nationalityHidden needs_residence_permit needs_work_permit
-noble_condition obstacles overview phone plausibility_ProblemsByOwner refusal_reason
+noble_condition obstacles overview phone refusal_reason
 refusal_reasonHidden remarks residence_type residence_typeHidden
 residence_until row_class seeking_since skills unavailable_until
 unavailable_why unemployed_since uploads_UploadsByClient

@@ -249,12 +249,12 @@ class Migrator(Migrator):
 - rename fields cal.EventType.fse_field to esf_field andpcsw.Client.has_fse to has_esf, ignore fse.client_summary
 - rename PaymentInstructionsByJournal to DisbursementOrdersByJournal
 - remove all ledger vouchers
-- remove all plausibility problems because checker names have changed
+- remove all checkdata problems because checker names have changed
   (please run yourself checkdata after migration)
 
         """
         bv2kw = globals_dict['bv2kw']
-        globals_dict.update(create_plausibility_problem=noop)
+        globals_dict.update(create_checkdata_problem=noop)
         globals_dict.update(create_fse_clientsummary=noop)
         cal_EventType = rt.models.cal.EventType
         contacts_Person = rt.models.contacts.Person

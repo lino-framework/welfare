@@ -106,7 +106,7 @@ Lino Welfare à la Chatelet.
   - (misc_2) [visible for all]: **obsolete** (is_obsolete), **ESF data** (has_esf), **Créé** (created), **Modifié** (modified)
   - **Remarques** (remarks) [visible for all]
   - (misc_4) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
-    - **Problèmes de données** (plausibility_ProblemsByOwner)
+    - **Problèmes de données** (checkdata_ProblemsByOwner)
     - **contact pour** (contacts.RolesByPerson)
 - **Médiation de dettes** (debts) [visible for 120 300 admin 910]:
   - **Is partner of these budgets:** (debts.BudgetsByPartner)

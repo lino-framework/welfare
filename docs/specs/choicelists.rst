@@ -64,6 +64,7 @@ name to read the documentation):
     cbss.RequestLanguages : RequestLanguages
     cbss.RequestStates : Zustände
     changes.ChangeTypes : Änderungsarten
+    checkdata.Checkers : Datentests
     clients.ClientEvents : Beobachtungskriterien
     clients.ClientStates : Bearbeitungszustände Klienten
     contacts.PartnerEvents : Beobachtungskriterien
@@ -92,7 +93,6 @@ name to read the documentation):
     notify.MessageTypes : Message Types
     outbox.RecipientTypes : RecipientTypes
     pcsw.RefusalReasons : Ablehnungsgründe
-    plausibility.Checkers : Datentests
     printing.BuildMethods : BuildMethods
     properties.DoYouLike : DoYouLike
     properties.HowWell : HowWell

@@ -16,14 +16,14 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Runs some tests about :mod:`lino.modlib.plausibility` problems
+"""Runs some tests about :mod:`lino.modlib.checkdata` problems
 specific to Lino Welfare.
 
 You can run only these tests by issuing::
 
   $ go welfare
   $ cd lino_welfare/projects/std
-  $ python manage.py test tests.test_plausibility
+  $ python manage.py test tests.test_checkdata
 
 
 See also :mod:`lino.projects.min2.tests.test_addresses`.
@@ -55,7 +55,7 @@ class TestCase(RemoteAuthTestCase):
         Client = rt.models.pcsw.Client
         Address = rt.models.addresses.Address
         Place = rt.models.countries.Place
-        Problem = rt.models.plausibility.Problem
+        Problem = rt.models.checkdata.Problem
         Message = rt.models.notify.Message
         eupen = Place.objects.get(name="Eupen")
 
@@ -79,21 +79,21 @@ class TestCase(RemoteAuthTestCase):
 
         # "Owner with address, but no address record"
         # Detect problems for one client:
-        doe.partner_ptr.check_plausibility(ar, fix=False)
+        doe.partner_ptr.check_data(ar, fix=False)
         assert_check(
             doe.partner_ptr,
             "(\u2605) Owner with address, but no address record.")
         addr = doe.get_primary_address()
         self.assertEqual(addr, None)
 
-        doe.check_plausibility(ar, fix=False)
+        doe.check_data(ar, fix=False)
         assert_check(
             doe,
             "Neither valid eId data nor alternative identifying document.")
 
         # Fix the problems for both:
-        doe.partner_ptr.check_plausibility(ar, fix=True)
-        mow.partner_ptr.check_plausibility(ar, fix=True)
+        doe.partner_ptr.check_data(ar, fix=True)
+        mow.partner_ptr.check_data(ar, fix=True)
         # problems have been fixed:
         assert_check(doe.partner_ptr)
         assert_check(mow.partner_ptr)
