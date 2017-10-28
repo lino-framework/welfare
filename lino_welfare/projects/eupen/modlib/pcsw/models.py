@@ -173,7 +173,7 @@ class ClientDetail(ClientDetail, PartnerDetailMixin):
     is_cpas is_senior is_obsolete
     created modified
     remarks:30 remarks2:30
-    plausibility.ProblemsByOwner:30 contacts.RolesByPerson:20
+    checkdata.ProblemsByOwner:30 contacts.RolesByPerson:20
     """, label=_("Miscellaneous"),
         required_roles=dd.login_required((SocialStaff, ContactsStaff)))
 

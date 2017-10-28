@@ -199,7 +199,6 @@ class UsersWithClients(dd.VirtualTable):
             coached_by=obj, start_date=t, end_date=t))
 
 
-# @dd.receiver(dd.database_ready)
 @dd.receiver(dd.post_analyze)
 def on_database_ready(sender, **kw):
     """

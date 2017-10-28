@@ -13,7 +13,7 @@ Checking for data problems in Lino Welfare
     >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
 
-Lino Welfare offers some functionality for managing plausibility
+Lino Welfare offers some functionality for managing data
 problems.
 
 See also :ref:`book.specs.checkdata`.
@@ -23,20 +23,20 @@ Data checkers available in Lino Welfare
 =======================================
 
 In the web interface you can select :menuselection:`Explorer -->
-System --> Plausibility checkers` to see a table of all available
+System --> Data checkers` to see a table of all available
 checkers.
 
 .. 
-    >>> show_menu_path(plausibility.Checkers)
-    Explorer --> System --> Plausibility checkers
+    >>> show_menu_path(checkdata.Checkers)
+    Explorer --> System --> Data checkers
     
->>> rt.show(plausibility.Checkers)
+>>> rt.show(checkdata.Checkers)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ======================================= ==================================================
  value                                   text
 --------------------------------------- --------------------------------------------------
  printing.CachedPrintableChecker         Check for missing target files
- countries.PlaceChecker                  Check plausibility of geographical places.
+ countries.PlaceChecker                  Check data of geographical places.
  addresses.AddressOwnerChecker           Check for missing or non-primary address records
  cal.EventGuestChecker                   Entries without participants
  cal.ConflictingEventsChecker            Check for conflicting calendar entries
@@ -59,14 +59,14 @@ Showing all problems
 ====================
 The demo database deliberately contains some data problems.
 In the web interface you can select :menuselection:`Explorer -->
-System --> Plausibility problems` to see them.
+System --> Data problems` to see them.
 
 ..
-    >>> show_menu_path(plausibility.AllProblems)
-    Explorer --> System --> Plausibility problems
+    >>> show_menu_path(checkdata.AllProblems)
+    Explorer --> System --> Data problems
 
 
->>> rt.show(plausibility.AllProblems)
+>>> rt.show(checkdata.AllProblems)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ================== ============================================================= ================================================================================= ========================================
  Responsible        Database object                                               Message                                                                           Checker
@@ -149,8 +149,8 @@ given type ("checker"). The following snippet simulates the situation
 of selecting the :class:`SimilarClientsChecker
 <lino_welfare.modlib.dupable_clients.models.SimilarClientsChecker>`.
 
->>> Checkers = rt.actors.plausibility.Checkers
->>> rt.show(plausibility.AllProblems,
+>>> Checkers = rt.actors.checkdata.Checkers
+>>> rt.show(checkdata.AllProblems,
 ...     param_values=dict(checker=Checkers.get_by_value(
 ...     'dupable_clients.SimilarClientsChecker')))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
@@ -168,14 +168,14 @@ My problems
 ===========
 
 In the web interface you can select :menuselection:`Office -->
-Plausibility problems assigned to me` to see a list of all problems
+Data problems assigned to me` to see a list of all problems
 assigned to you.
 
 ..
-    >>> show_menu_path(plausibility.MyProblems)
-    Office --> Plausibility problems assigned to me
+    >>> show_menu_path(checkdata.MyProblems)
+    Office --> Data problems assigned to me
 
->>> rt.login('melanie').show(plausibility.MyProblems)
+>>> rt.login('melanie').show(checkdata.MyProblems)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ================ ======================================================================== ============================================================== ========================================
  Responsible      Database object                                                          Message                                                        Checker

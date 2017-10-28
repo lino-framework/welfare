@@ -66,7 +66,7 @@ class SimilarClientsChecker(ClientChecker):
     """
     verbose_name = _("Check for similar clients")
 
-    def get_plausibility_problems(self, obj, fix=False):
+    def get_checkdata_problems(self, obj, fix=False):
         lst = list(obj.find_similar_instances(1))
         if len(lst):
             msg = _("Similar clients: {clients}").format(

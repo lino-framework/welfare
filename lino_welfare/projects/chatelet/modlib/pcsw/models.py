@@ -141,7 +141,7 @@ class ClientDetail(ClientDetail):
     unavailable_until:15 unavailable_why:30 #aid_type
     is_obsolete has_esf created modified
     remarks
-    plausibility.ProblemsByOwner:30 contacts.RolesByPerson:20
+    checkdata.ProblemsByOwner:30 contacts.RolesByPerson:20
     """, label=_("Miscellaneous"), required_roles=dd.login_required(SocialStaff))
 
     contracts = dd.Panel("""

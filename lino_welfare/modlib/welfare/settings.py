@@ -170,7 +170,7 @@ class Site(Site):
 
         yield 'lino.modlib.export_excel'
         yield 'lino_welfare.modlib.dupable_clients'
-        yield 'lino.modlib.plausibility'
+        yield 'lino.modlib.checkdata'
         yield 'lino.modlib.tinymce'
 
     def get_dashboard_items(self, user):

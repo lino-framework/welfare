@@ -1,14 +1,11 @@
+.. doctest docs/admin/printing.rst
 .. _welfare.admin.printing:
 
 ===========================
 Configuring print templates
 ===========================
 
-.. How to test only this document:
-
-     $ doctest docs/admin/printing.rst
-
-   Initialize doctest:
+.. Initialize doctest:
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.std.settings.doctests')
@@ -53,6 +50,7 @@ primitive direct printing method (see :ref:`lino.admin.printing`):
     <class 'lino_welfare.modlib.cbss.models.IdentifyPersonRequest'>
     <class 'lino_welfare.modlib.cbss.models.ManageAccessRequest'>
     <class 'lino_welfare.modlib.cbss.models.RetrieveTIGroupsRequest'>
+    <class 'lino.modlib.checkdata.models.Problem'>
     <class 'lino_xl.lib.coachings.models.Coaching'>
     <class 'lino_welfare.modlib.contacts.models.Company'>
     <class 'lino_welfare.modlib.contacts.models.Partner'>
@@ -78,7 +76,6 @@ primitive direct printing method (see :ref:`lino.admin.printing`):
     <class 'lino.modlib.notify.models.Message'>
     <class 'lino_xl.lib.outbox.models.Mail'>
     <class 'lino_welfare.modlib.pcsw.models.Client'>
-    <class 'lino.modlib.plausibility.models.Problem'>
     <class 'lino_xl.lib.polls.models.Poll'>
     <class 'lino_xl.lib.polls.models.Response'>
     <class 'lino.modlib.tinymce.models.TextFieldTemplate'>

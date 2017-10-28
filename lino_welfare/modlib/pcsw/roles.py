@@ -20,7 +20,7 @@ from lino.modlib.users.roles import AuthorshipTaker
 from lino.modlib.office.roles import OfficeUser, OfficeStaff
 from lino_xl.lib.polls.roles import PollsUser, PollsStaff
 from lino_xl.lib.beid.roles import BeIdUser
-from lino.modlib.plausibility.roles import PlausibilityUser
+from lino.modlib.checkdata.roles import CheckdataUser
 from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_welfare.modlib.aids.roles import AidsStaff, AidsUser
 from lino_xl.lib.sepa.roles import SepaUser, SepaStaff
@@ -31,7 +31,7 @@ from lino_xl.lib.contacts.roles import ContactsStaff, ContactsUser
 
 
 class SocialAgent(OfficeUser, ContactsUser, CBSSUser, BeIdUser,
-                  PlausibilityUser, AidsUser, PollsUser, SepaUser,
+                  CheckdataUser, AidsUser, PollsUser, SepaUser,
                   CoursesUser, ExcerptsUser, CoachingsUser,
                   AuthorshipTaker):
     """A **social agent** is a user who does individual coaching of

@@ -202,7 +202,7 @@ class OverlappingContractsChecker(ClientChecker):
     """
     verbose_name = _("Check for overlapping contracts")
 
-    def get_plausibility_problems(self, obj, fix=False):
+    def get_checkdata_problems(self, obj, fix=False):
         msg = '  '.join(OverlappingContractsTest(obj).check_all())
         if msg:
             yield (False, msg)

@@ -304,7 +304,7 @@ Database structure
 ==================
 
 >>> print(analyzer.show_database_structure())
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - accounts.Account : id, ref, seqno, name, group, type, common_account, needs_partner, clearable, default_amount, name_fr, name_en, sales_allowed, purchases_allowed, wages_allowed, taxes_allowed, clearings_allowed, bank_po_allowed
 - accounts.Group : id, name, ref, account_type, name_fr, name_en
 - addresses.Address : id, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, data_source, address_type, partner, remark, primary
@@ -339,6 +339,7 @@ Database structure
 - cbss.RetrieveTIGroupsRequest : id, user, printed_by, person, sent, status, environment, ticket, request_xml, response_xml, debug_messages, info_messages, national_id, language, history
 - cbss.Sector : id, name, code, subcode, abbr, abbr_fr, abbr_en, name_fr, name_en
 - changes.Change : id, time, type, user, object_type, object_id, master_type, master_id, diff, changed_fields
+- checkdata.Problem : id, user, owner_type, owner_id, checker, message
 - clients.ClientContact : id, company, contact_person, contact_role, type, client, remark
 - clients.ClientContactType : id, name, name_fr, name_en, is_bailiff, can_refund
 - coachings.Coaching : id, start_date, end_date, user, client, type, primary, ending
@@ -417,14 +418,13 @@ Database structure
 - outbox.Recipient : id, mail, partner, type, address, name
 - pcsw.Activity : id, name, lst104
 - pcsw.AidType : id, name, name_fr, name_en
-- pcsw.Client : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, title, first_name, middle_name, last_name, gender, birth_date, person_ptr, client_state, national_id, birth_country, birth_place, nationality, card_number, card_valid_from, card_valid_until, card_type, card_issuer, noble_condition, group, civil_state, residence_type, in_belgium_since, residence_until, unemployed_since, seeking_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type, declared_name, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_office_contact, refusal_reason, remarks2, gesdos_id, tim_id, is_cpas, is_senior, health_insurance, pharmacy, income_ag, income_wg, income_kg, income_rente, income_misc, job_agents, broker, faculty, has_esf
+- pcsw.Client : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, title, first_name, middle_name, last_name, gender, birth_date, person_ptr, national_id, birth_country, birth_place, nationality, card_number, card_valid_from, card_valid_until, card_type, card_issuer, noble_condition, client_state, group, civil_state, residence_type, in_belgium_since, residence_until, unemployed_since, seeking_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type, declared_name, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_office_contact, refusal_reason, remarks2, gesdos_id, tim_id, is_cpas, is_senior, health_insurance, pharmacy, income_ag, income_wg, income_kg, income_rente, income_misc, job_agents, broker, faculty, has_esf
 - pcsw.Conviction : id, client, date, prejudicial, designation
 - pcsw.Dispense : id, client, reason, remarks, start_date, end_date
 - pcsw.DispenseReason : id, seqno, name, name_fr, name_en
 - pcsw.Exclusion : id, person, type, excluded_from, excluded_until, remark
 - pcsw.ExclusionType : id, name
 - pcsw.PersonGroup : id, name, ref_name, active
-- plausibility.Problem : id, user, owner_type, owner_id, checker, message
 - properties.PersonProperty : id, group, property, value, person, remark
 - properties.PropChoice : id, type, value, text, text_fr, text_en
 - properties.PropGroup : id, name, name_fr, name_en
@@ -432,12 +432,12 @@ Database structure
 - properties.Property : id, name, group, type, name_fr, name_en
 - sepa.Account : id, partner, iban, bic, remark, primary, account_type, managed
 - sessions.Session : session_key, session_data, expire_date
-- system.SiteConfig : id, default_build_method, simulate_today, site_company, signer1, signer2, signer1_function, signer2_function, next_partner_id, default_event_type, site_calendar, max_auto_events, hide_events_before, client_calendar, client_guestrole, team_guestrole, propgroup_skills, propgroup_softskills, propgroup_obstacles, prompt_calendar, master_budget, system_note_type, job_office, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, sector, cbss_org_unit, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
+- system.SiteConfig : id, default_build_method, simulate_today, site_company, signer1, signer2, signer1_function, signer2_function, next_partner_id, default_event_type, site_calendar, max_auto_events, hide_events_before, client_calendar, client_guestrole, team_guestrole, prompt_calendar, propgroup_skills, propgroup_softskills, propgroup_obstacles, master_budget, system_note_type, job_office, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, sector, cbss_org_unit, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplate : id, user, name, description, text
 - uploads.Upload : id, project, start_date, end_date, file, mimetype, user, owner_type, owner_id, company, contact_person, contact_role, upload_area, type, description, remark, needed
 - uploads.UploadType : id, name, upload_area, max_number, wanted, shortcut, warn_expiry_unit, warn_expiry_value, name_fr, name_en
 - users.Authority : id, user, authorized
-- users.User : id, email, language, modified, created, password, last_login, username, user_type, initials, first_name, last_name, remarks, newcomer_consultations, newcomer_appointments, notify_myself, mail_mode, coaching_type, coaching_supervisor, access_class, event_type, calendar, newcomer_quota, partner
+- users.User : id, email, language, modified, created, password, last_login, username, user_type, initials, first_name, last_name, remarks, newcomer_consultations, newcomer_appointments, notify_myself, mail_mode, access_class, event_type, calendar, coaching_type, coaching_supervisor, newcomer_quota, partner
 - vatless.AccountInvoice : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, state, voucher_ptr, project, partner, payment_term, match, bank_account, your_ref, due_date, amount
 - vatless.InvoiceItem : id, seqno, project, account, voucher, title, amount
 - xcourses.Course : id, offer, title, start_date, remark
@@ -516,6 +516,8 @@ Each window layout defines a given set of fields.
 - cbss.RetrieveTIGroupsRequests.detail : id, person, user, sent, status, printed, national_id, language, history, environment, ticket, info_messages, debug_messages
 - cbss.RetrieveTIGroupsRequests.insert : person, national_id, language, history
 - changes.Changes.detail : time, user, type, master, object, id, diff
+- checkdata.Checkers.detail : value, text
+- checkdata.Problems.detail : checker, owner, message, user, id
 - clients.ClientContactTypes.detail : id, name, name_fr, name_en, can_refund, is_bailiff
 - coachings.CoachingEndings.detail : id, name, name_fr, name_en, seqno
 - coachings.Coachings.create_visit : user, summary
@@ -604,12 +606,10 @@ Each window layout defines a given set of fields.
 - outbox.Mails.detail : subject, project, date, user, sent, id, owner, outbox_AttachmentsByMail, uploads_UploadsByController, body
 - outbox.Mails.insert : project, subject, body
 - pcsw.Clients.create_visit : user, summary
-- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, dupable_clients_SimilarClients, humanlinks_LinksByHuman, cbss_relations, households_MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, uploads_UploadsByClient, cvs_emitted, cv_LanguageKnowledgesByPerson, skills, obstacles, excerpts_ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, plausibility_ProblemsByOwner, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
+- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, dupable_clients_SimilarClients, humanlinks_LinksByHuman, cbss_relations, households_MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, uploads_UploadsByClient, cvs_emitted, cv_LanguageKnowledgesByPerson, skills, obstacles, excerpts_ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, checkdata_ProblemsByOwner, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, cv_LanguageKnowledge, dupable_clients_Word, pcsw_Dispense, properties_PersonProperty, addresses_Address, sepa_Account, reason
 - pcsw.Clients.refuse_client : reason, remark
-- plausibility.Checkers.detail : value, text
-- plausibility.Problems.detail : checker, owner, message, user, id
 - properties.PropGroups.detail : id, name, name_fr, name_en
 - properties.PropTypes.detail : id, name, name_fr, name_en, choicelist, default_value
 - properties.Properties.detail : id, group, type, name, name_fr, name_en
@@ -711,6 +711,8 @@ Each window layout is **viewable** by a given set of user user_types.
 - cbss.RetrieveTIGroupsRequests.detail : visible for 100 110 120 200 210 300 400 410 admin 910
 - cbss.RetrieveTIGroupsRequests.insert : visible for 100 110 120 200 210 300 400 410 admin 910
 - changes.Changes.detail : visible for admin 910
+- checkdata.Checkers.detail : visible for admin 910
+- checkdata.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - clients.ClientContactTypes.detail : visible for 110 210 410 800 admin 910
 - coachings.CoachingEndings.detail : visible for 110 210 410 admin 910
 - coachings.Coachings.create_visit : visible for 110 210 410 admin 910
@@ -803,8 +805,6 @@ Each window layout is **viewable** by a given set of user user_types.
 - pcsw.Clients.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - pcsw.Clients.merge_row : visible for 110 210 410 800 admin 910
 - pcsw.Clients.refuse_client : visible for 120 200 220 300 admin 910
-- plausibility.Checkers.detail : visible for admin 910
-- plausibility.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - properties.PropGroups.detail : visible for admin 910
 - properties.PropTypes.detail : visible for admin 910
 - properties.Properties.detail : visible for admin 910
