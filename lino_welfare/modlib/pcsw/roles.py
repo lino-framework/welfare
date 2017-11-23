@@ -16,6 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
+from lino.core.roles import SiteUser
 from lino.modlib.users.roles import AuthorshipTaker
 from lino.modlib.office.roles import OfficeUser, OfficeStaff
 from lino_xl.lib.polls.roles import PollsUser, PollsStaff
@@ -30,7 +31,7 @@ from lino_xl.lib.coachings.roles import CoachingsUser, CoachingsStaff
 from lino_xl.lib.contacts.roles import ContactsStaff, ContactsUser
 
 
-class SocialAgent(OfficeUser, ContactsUser, CBSSUser, BeIdUser,
+class SocialAgent(SiteUser, OfficeUser, ContactsUser, CBSSUser, BeIdUser,
                   CheckdataUser, AidsUser, PollsUser, SepaUser,
                   CoursesUser, ExcerptsUser, CoachingsUser,
                   AuthorshipTaker):

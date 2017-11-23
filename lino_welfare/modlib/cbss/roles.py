@@ -17,9 +17,9 @@
 # <http://www.gnu.org/licenses/>.
 
 # from lino_xl.lib.contacts.roles import ContactsUser
-from lino.core.roles import SiteUser
+from lino.core.roles import UserRole
 
-class CBSSUser(SiteUser):
+class CBSSUser(UserRole):
     pass
 
 

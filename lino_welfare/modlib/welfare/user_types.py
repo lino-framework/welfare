@@ -22,7 +22,7 @@ See :ref:`welfare.specs.users`
 
 """
 
-from lino.core.roles import UserRole, SiteAdmin, Supervisor, login_required
+from lino.core.roles import UserRole, SiteUser, SiteAdmin, Supervisor, login_required
 from lino.modlib.users.roles import AuthorshipTaker
 from lino.modlib.office.roles import OfficeOperator, OfficeStaff, OfficeUser
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
@@ -43,7 +43,7 @@ from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
                                                  NewcomersOperator)
 
 
-class AccountantManager(LedgerStaff, ContactsUser, OfficeUser,
+class AccountantManager(SiteUser, LedgerStaff, ContactsUser, OfficeUser,
                         ExcerptsUser, AidsStaff, SepaStaff):
     """Like an **accountant**, but also has access to configuration.
 
@@ -65,7 +65,7 @@ class SiteAdmin(
     """The site adminstrator has permission for everything."""
 
 
-class ReceptionClerk(AuthorshipTaker, OfficeOperator,
+class ReceptionClerk(SiteUser, AuthorshipTaker, OfficeOperator,
                      ContactsStaff, AidsStaff, CBSSUser, BeIdUser,
                      SepaUser, CoursesUser, ExcerptsUser,
                      CoachingsStaff):
@@ -78,7 +78,7 @@ class ReceptionClerk(AuthorshipTaker, OfficeOperator,
     pass
 
 
-class ReceptionClerkNewcomers(AuthorshipTaker, SimpleContactsUser,
+class ReceptionClerkNewcomers(SiteUser, AuthorshipTaker, SimpleContactsUser,
                               OfficeOperator,
                               ExcerptsUser,
                               # OfficeUser,
@@ -107,7 +107,7 @@ class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator,
     pass
 
 
-class LedgerUser(LedgerUser, ContactsUser, OfficeUser, ExcerptsUser,
+class LedgerUser(SiteUser, LedgerUser, ContactsUser, OfficeUser, ExcerptsUser,
                  AidsStaff, SepaStaff):
     """An **accountant** is a user who enters invoices, bank statements,
     payment orders and other ledger operations.
@@ -122,7 +122,7 @@ class SecurityAdvisor(SiteAdmin, SecurityAdvisor):
 class NewcomersConsultant(NewcomersAgent, SocialAgent):
     pass
 
-class Supervisor(Supervisor, AuthorshipTaker, OfficeOperator,
+class Supervisor(SiteUser, Supervisor, AuthorshipTaker, OfficeOperator,
                  ContactsStaff, AidsStaff, NewcomersOperator,
                  ExcerptsUser, SepaUser, CoursesUser):
     """A backoffice user who can act as others."""
