@@ -742,8 +742,8 @@ Each window layout is **viewable** by a given set of user user_types.
 - cv.StudiesByPerson.insert : visible for 100 110 120 admin 910
 - cv.StudyTypes.detail : visible for 110 admin 910
 - cv.StudyTypes.insert : visible for 110 admin 910
-- cv.Trainings.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- cv.Trainings.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- cv.Trainings.detail : visible for 100 110 120 admin 910
+- cv.Trainings.insert : visible for 100 110 120 admin 910
 - debts.Accounts.detail : visible for admin 910
 - debts.Accounts.insert : visible for admin 910
 - debts.Budgets.detail : visible for admin 910

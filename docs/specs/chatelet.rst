@@ -610,8 +610,8 @@ Each window layout is **viewable** by a given set of user types.
 - courses.Activities.insert : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.Activities.print_presence_sheet : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.Activities.print_presence_sheet_html : visible for 100 110 120 200 210 300 400 410 800 admin 910
-- courses.Enrolments.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- courses.Enrolments.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- courses.Enrolments.detail : visible for 100 110 120 200 210 300 400 410 800 admin 910
+- courses.Enrolments.insert : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.EnrolmentsByCourse.insert : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.EnrolmentsByPupil.insert : visible for 100 110 120 200 210 300 400 410 800 admin 910
 - courses.Lines.detail : visible for 100 110 120 200 210 300 400 410 800 admin 910
@@ -634,8 +634,8 @@ Each window layout is **viewable** by a given set of user types.
 - cv.StudiesByPerson.insert : visible for 100 110 120 admin 910
 - cv.StudyTypes.detail : visible for 110 admin 910
 - cv.StudyTypes.insert : visible for 110 admin 910
-- cv.Trainings.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- cv.Trainings.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- cv.Trainings.detail : visible for 100 110 120 admin 910
+- cv.Trainings.insert : visible for 100 110 120 admin 910
 - debts.Accounts.detail : visible for admin 910
 - debts.Accounts.insert : visible for admin 910
 - debts.Budgets.detail : visible for admin 910
