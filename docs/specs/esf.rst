@@ -1,3 +1,5 @@
+.. doctest docs/specs/esf.rst 
+
 .. _welfare.specs.fse:
 .. _welfare.specs.esf:
 
@@ -5,11 +7,7 @@
 Statistiques pour le Fonds Social Européen
 ==========================================
 
-..  To test only this document:
-
-    $ python setup.py test -s tests.SpecsTests.test_esf
-
-    doctest initialization:
+..  doctest initialization:
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.chatelet.settings.doctests')
@@ -176,6 +174,7 @@ lequel seront totalisés les heures.
 ---------------------------------------- ---------------------------------------- ------------------------------- ------------------------ ------------------------------
  Jours fériés                             Feiertage                                Holidays                        Non
  Réunion                                  Versammlung                              Meeting                         Non
+ Internal                                 Internal                                 Internal                        Non
  Internal meetings with client            Internal meetings with client            Internal meetings with client   Oui                      Séance d’information
  Évaluation                               Auswertung                               Evaluation                      Oui                      Entretien individuel
  Consultations avec le bénéficiaire       Beratungen mit Klient                    Consultations with client       Non

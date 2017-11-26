@@ -172,8 +172,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cal.Calendar                   cal.Calendars                   7         12
  cal.Event                      cal.OneEvent                    24        538
  cal.EventPolicy                cal.EventPolicies               20        6
- cal.EventType                  cal.EventTypes                  21        11
- cal.Guest                      cal.Guests                      9         582
+ cal.EventType                  cal.EventTypes                  22        12
+ cal.Guest                      cal.Guests                      9         578
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15
@@ -886,7 +886,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Calendrier --> Priorités : 5
 - Configuration --> Calendrier --> Évènements periodiques : 16
 - Configuration --> Calendrier --> Rôles de participants : 5
-- Configuration --> Calendrier --> Types d'entrée calendrier : 12
+- Configuration --> Calendrier --> Types d'entrée calendrier : 13
 - Configuration --> Calendrier --> Règles de récurrence : 7
 - Configuration --> Calendrier --> Calendriers externes : 1
 - Configuration --> Comptabilité --> Groupes de comptes : 1
@@ -956,7 +956,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Bureau --> Text Field Templates : 3
 - Explorateur --> Calendrier --> Entrées calendrier : 290
 - Explorateur --> Calendrier --> Tâches : 35
-- Explorateur --> Calendrier --> Présences : 583
+- Explorateur --> Calendrier --> Présences : 579
 - Explorateur --> Calendrier --> Abonnements : 10
 - Explorateur --> Calendrier --> Event states : 5
 - Explorateur --> Calendrier --> Guest states : 9
