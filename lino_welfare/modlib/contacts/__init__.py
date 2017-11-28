@@ -1,4 +1,4 @@
-# Copyright 2013-2016 Luc Saffre
+# Copyright 2013-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -27,6 +27,8 @@ from django.utils.translation import ugettext_lazy as _
 
 class Plugin(Plugin):
 
+    use_vcard_export = False
+    
     extends_models = ['Partner', 'Person', 'Company']
 
     def setup_main_menu(self, site, user_type, main):
