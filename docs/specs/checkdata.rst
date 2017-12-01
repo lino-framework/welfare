@@ -1,3 +1,4 @@
+.. doctest docs/specs/checkdata.rst
 .. _welfare.specs.checkdata:
 .. _welfare.tested.plausibility:
 
@@ -5,10 +6,8 @@
 Checking for data problems in Lino Welfare
 ==========================================
 
-.. to test only this doc:
-
-    $ doctest docs/specs/checkdata.rst
-
+..  doctest init:
+   
     >>> from lino import startup
     >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
@@ -17,6 +16,12 @@ Lino Welfare offers some functionality for managing data
 problems.
 
 See also :ref:`book.specs.checkdata`.
+
+
+..  preliminary:
+   
+    >>> cal.Event.get_default_table()
+    lino_xl.lib.cal.ui.OneEvent
 
 
 Data checkers available in Lino Welfare

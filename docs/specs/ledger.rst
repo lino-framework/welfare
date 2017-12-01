@@ -8,7 +8,8 @@ Accounting for Lino Welfare
 
 .. doctest init:
 
-    >>> import lino ; lino.startup('lino_welfare.projects.eupen.settings.doctests')
+    >>> import lino
+    >>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.utils.xmlgen.html import E
     >>> from lino.api.doctest import *
     >>> from lino.api import rt
@@ -128,7 +129,7 @@ Here is the main menu for accountants:
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen
 - Kalender : Kalender, Meine Termine, Unbestätigte Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
-- Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
+- Empfang : Klienten, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - Buchhaltung :
   - Rechnungseingänge : Rechnungseingänge (REG), Sammelrechnungen (SREG)
   - Ausgabeanweisungen : Ausgabeanweisungen (AAW)

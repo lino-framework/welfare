@@ -1,21 +1,18 @@
+.. doctest docs/specs/main.rst
 .. _welfare.tested.main:
 
 ===================
 The admin main page
 ===================
 
-.. How to test only this document:
-
-    $ doctest docs/specs/main.rst
-    
-    doctest init:
+..  doctest init:
     
     >>> from lino import startup
     >>> startup('lino_welfare.projects.std.settings.doctests')
     >>> from lino.api.doctest import *
 
 
-A technical tour into the :mod:`lino_welfare.modlib.main` module.
+A technical tour into the main page of :ref:`welfare`.
 
 .. contents::
    :depth: 2
