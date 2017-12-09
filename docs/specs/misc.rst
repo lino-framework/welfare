@@ -235,22 +235,20 @@ profiles that can see it.
 
 
 
-Visibility of merge action
-==========================
+.. Visibility of merge action
+   ==========================
 
-Here is a list of the tables that have the
-:class:`lino.core.merge.MergeAction` and the user types that can
-see it.
+..  Here is a list of the tables that have the
+    :class:`lino.core.merge.MergeAction` and the user types that can
+    see it.
 
-
-
->>> from lino.core.merge import MergeAction
->>> print(analyzer.show_action_permissions(MergeAction))
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- contacts.Companies.merge_row : visible for 110 210 410 800 admin 910
-- countries.Places.merge_row : visible for 110 210 410 800 admin 910
-- pcsw.Clients.merge_row : visible for 110 210 410 800 admin 910
-<BLANKLINE>
+    >>> from lino.core.merge import MergeAction
+    >>> print(analyzer.show_action_permissions(MergeAction))
+    ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF +SKIP
+    - contacts.Companies.merge_row : visible for 110 210 410 800 admin 910
+    - countries.Places.merge_row : visible for 110 210 410 800 admin 910
+    - pcsw.Clients.merge_row : visible for 110 210 410 800 admin 910
+    <BLANKLINE>
 
 
 
