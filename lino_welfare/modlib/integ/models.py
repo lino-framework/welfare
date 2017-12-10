@@ -498,7 +498,8 @@ class StudyTypesAndContracts(cv.StudyTypes, dd.VentilatingTable):
         return qs.filter(count__gte=1)
         #~ return qs
 
-    @dd.virtualfield(dd.ForeignKey('cv.StudyType', _("Description")))
+    @dd.virtualfield(dd.ForeignKey(
+        'cv.StudyType'))  # , verbose_name=_("Description")))
     def description(self, obj, ar):
         return obj
 
