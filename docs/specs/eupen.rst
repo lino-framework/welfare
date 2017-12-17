@@ -30,7 +30,7 @@ it was the first Lino who went into production. This was in 2010.
 - 140 models
 - 539 views
 - 15 user types
-- 151 dialog actions
+- 150 dialog actions
 <BLANKLINE>
 
 
@@ -552,7 +552,6 @@ Each window layout defines a given set of fields.
 - changes.Changes.merge_row : merge_to, reason
 - checkdata.Checkers.detail : value, text
 - checkdata.Problems.detail : checker, owner, message, user, id
-- checkdata.Problems.merge_row : merge_to, reason
 - clients.ClientContactTypes.detail : id, name, name_fr, name_en, can_refund, is_bailiff
 - clients.ClientContactTypes.merge_row : merge_to, reason
 - clients.ClientContacts.merge_row : merge_to, reason
@@ -568,7 +567,7 @@ Each window layout defines a given set of fields.
 - contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, payment_term, vatless_VouchersByPartner, ledger_MovementsByPartner, is_obsolete, created, modified
 - contacts.Partners.insert : name, email
 - contacts.Partners.merge_row : merge_to, addresses_Address, sepa_Account, reason
-- contacts.Persons.create_household : partner, type, head
+- contacts.Persons.create_household : head, type, partner
 - contacts.Persons.detail : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, households_MembersByPerson, humanlinks_LinksByHuman, remarks, payment_term, vatless_VouchersByPartner, ledger_MovementsByPartner, activity, url, client_contact_type, is_obsolete, created, modified
 - contacts.Persons.insert : first_name, last_name, gender, email
 - contacts.Persons.merge_row : merge_to, addresses_Address, sepa_Account, reason
@@ -647,6 +646,7 @@ Each window layout defines a given set of fields.
 - households.Households.merge_row : merge_to, households_Member, addresses_Address, sepa_Account, reason
 - households.HouseholdsByType.detail : type, prefix, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url
 - households.Members.merge_row : merge_to, reason
+- households.MembersByPerson.insert : person, role, household, primary
 - households.Types.detail : name, name_fr, name_en
 - households.Types.merge_row : merge_to, reason
 - humanlinks.Links.detail : parent, type, child
@@ -884,7 +884,6 @@ Each window layout is **viewable** by a given set of user user_types.
 - changes.Changes.merge_row : visible for admin 910
 - checkdata.Checkers.detail : visible for admin 910
 - checkdata.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- checkdata.Problems.merge_row : visible for admin 910
 - clients.ClientContactTypes.detail : visible for 110 210 410 800 admin 910
 - clients.ClientContactTypes.merge_row : visible for admin 910
 - clients.ClientContacts.merge_row : visible for admin 910
@@ -979,6 +978,7 @@ Each window layout is **viewable** by a given set of user user_types.
 - households.Households.merge_row : visible for admin 910
 - households.HouseholdsByType.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - households.Members.merge_row : visible for admin 910
+- households.MembersByPerson.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - households.Types.detail : visible for 110 210 410 800 admin 910
 - households.Types.merge_row : visible for admin 910
 - humanlinks.Links.detail : visible for 110 210 410 800 admin 910
@@ -1230,8 +1230,6 @@ Global list of all actions that have a parameter dialog.
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - changes.Changes.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
-- checkdata.Problems.merge_row : Fusionieren
-  (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - clients.ClientContactTypes.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - clients.ClientContacts.merge_row : Fusionieren
@@ -1257,7 +1255,7 @@ Global list of all actions that have a parameter dialog.
   - **Auch vergängliche verknüpfte Objekte überweisen** (keep_volatiles): **Adressen** (addresses_Address), **Bankkonten** (sepa_Account)
   - **Begründung** (reason)
 - contacts.Persons.create_household : Haushalt erstellen
-  (main) [visible for all]: **Partner** (partner), **Haushaltsart** (type), **Vorstand** (head)
+  (main) [visible for all]: **Vorstand** (head), **Haushaltsart** (type), **Partner** (partner)
 - contacts.Persons.merge_row : Fusionieren
   (main) [visible for all]:
   - **nach...** (merge_to)

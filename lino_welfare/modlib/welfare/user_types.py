@@ -24,6 +24,7 @@ See :ref:`welfare.specs.users`
 
 from lino.core.roles import UserRole, SiteUser, SiteAdmin, Supervisor, login_required
 from lino.modlib.users.roles import AuthorshipTaker
+from lino.modlib.about.roles import SiteSearcher
 from lino.modlib.office.roles import OfficeOperator, OfficeStaff, OfficeUser
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsStaff, ContactsUser, SimpleContactsUser
@@ -54,6 +55,7 @@ class AccountantManager(SiteUser, LedgerStaff, ContactsUser, OfficeUser,
 
 class SiteAdmin(
         SiteAdmin,
+        SiteSearcher,
         IntegrationStaff,
         DebtsStaff,
         LedgerStaff,

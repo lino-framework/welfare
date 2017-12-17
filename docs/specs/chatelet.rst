@@ -432,7 +432,6 @@ Each window layout defines a given set of fields.
 - changes.Changes.merge_row : merge_to, reason
 - checkdata.Checkers.detail : value, text
 - checkdata.Problems.detail : checker, owner, message, user, id
-- checkdata.Problems.merge_row : merge_to, reason
 - clients.ClientContactTypes.detail : id, name, name_nl, name_de, name_en
 - clients.ClientContactTypes.merge_row : merge_to, reason
 - clients.ClientContacts.merge_row : merge_to, reason
@@ -448,7 +447,7 @@ Each window layout defines a given set of fields.
 - contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, is_obsolete, created, modified
 - contacts.Partners.insert : name, email
 - contacts.Partners.merge_row : merge_to, addresses_Address, reason
-- contacts.Persons.create_household : partner, type, head
+- contacts.Persons.create_household : head, type, partner
 - contacts.Persons.detail : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, households_MembersByPerson, humanlinks_LinksByHuman, remarks, activity, url, client_contact_type, is_obsolete, created, modified
 - contacts.Persons.insert : first_name, last_name, gender, email
 - contacts.Persons.merge_row : merge_to, cv_LanguageKnowledge, cv_Obstacle, cv_Skill, cv_SoftSkill, addresses_Address, reason
@@ -537,6 +536,7 @@ Each window layout defines a given set of fields.
 - households.Households.merge_row : merge_to, households_Member, addresses_Address, reason
 - households.HouseholdsByType.detail : type, prefix, name, language, id, country, region, city, zip_code, street_prefix, street, street_no, street_box, addr2, phone, gsm, email, url
 - households.Members.merge_row : merge_to, reason
+- households.MembersByPerson.insert : person, role, household, primary
 - households.Types.detail : name, name_nl, name_de, name_en
 - households.Types.merge_row : merge_to, reason
 - humanlinks.Links.detail : parent, type, child
@@ -757,7 +757,6 @@ Each window layout is **viewable** by a given set of user types.
 - changes.Changes.merge_row : visible for admin 910
 - checkdata.Checkers.detail : visible for admin 910
 - checkdata.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- checkdata.Problems.merge_row : visible for admin 910
 - clients.ClientContactTypes.detail : visible for 110 210 410 800 admin 910
 - clients.ClientContactTypes.merge_row : visible for admin 910
 - clients.ClientContacts.merge_row : visible for admin 910
@@ -862,6 +861,7 @@ Each window layout is **viewable** by a given set of user types.
 - households.Households.merge_row : visible for admin 910
 - households.HouseholdsByType.detail : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - households.Members.merge_row : visible for admin 910
+- households.MembersByPerson.insert : visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910
 - households.Types.detail : visible for 110 210 410 800 admin 910
 - households.Types.merge_row : visible for admin 910
 - humanlinks.Links.detail : visible for 110 210 410 800 admin 910
@@ -1103,8 +1103,6 @@ options.
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - changes.Changes.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
-- checkdata.Problems.merge_row : Fusionner
-  (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - clients.ClientContactTypes.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - clients.ClientContacts.merge_row : Fusionner
@@ -1124,7 +1122,7 @@ options.
 - contacts.Partners.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Adresses** (addresses_Address), **Raison** (reason)
 - contacts.Persons.create_household : Créer un ménage
-  (main) [visible for all]: **Partenaire** (partner), **Type de ménage** (type), **Chef de ménage** (head)
+  (main) [visible for all]: **Chef de ménage** (head), **Type de ménage** (type), **Partenaire** (partner)
 - contacts.Persons.merge_row : Fusionner
   (main) [visible for all]:
   - **vers...** (merge_to)
