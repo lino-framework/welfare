@@ -37,9 +37,9 @@ checkers.
     
 >>> rt.show(checkdata.Checkers)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-======================================= ==================================================
+======================================= ===================================================
  value                                   text
---------------------------------------- --------------------------------------------------
+--------------------------------------- ---------------------------------------------------
  printing.CachedPrintableChecker         Check for missing target files
  countries.PlaceChecker                  Check data of geographical places.
  addresses.AddressOwnerChecker           Check for missing or non-primary address records
@@ -54,8 +54,9 @@ checkers.
  isip.OverlappingContractsChecker        Check for overlapping contracts
  ledger.VoucherChecker                   Check integrity of ledger movements
  sepa.BankAccountChecker                 Check for partner mismatches in bank accounts
+ aids.ConfirmationChecker                Check for confirmations outside of granted period
  dupable_clients.SimilarClientsChecker   Check for similar clients
-======================================= ==================================================
+======================================= ===================================================
 <BLANKLINE>
 
 

@@ -1,18 +1,14 @@
+.. doctest docs/specs/users.rst
 .. _welfare.specs.users:
 
 =============
 Users
 =============
 
-.. How to test only this document:
+..  doctest init:
 
-    $ python setup.py test -s tests.SpecsTests.test_users
-    
-    doctest init:
-
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
+    >>> from lino import startup
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
 
 This document describes how Lino Welfare uses the
@@ -26,28 +22,28 @@ User types
 
 The default set of user types for Lino Welfare is defined in
 :mod:`lino_welfare.modlib.welfare.user_types` and leads to the
-following list of profiles:
+following list:
 
 >>> rt.show(users.UserTypes)
-======= =========== =============================== ==================================================================
- value   name        text                            User role
-------- ----------- ------------------------------- ------------------------------------------------------------------
- 000     anonymous   Anonymous                       lino.core.roles.UserRole
- 100                 Integration agent               lino_welfare.modlib.integ.roles.IntegrationAgent
- 110                 Integration agent (Manager)     lino_welfare.modlib.integ.roles.IntegrationStaff
- 120                 Integration agent (Newcomers)   lino_welfare.modlib.welfare.user_types.IntegrationAgentNewcomers
- 200                 Newcomers consultant            lino_welfare.modlib.welfare.user_types.NewcomersConsultant
- 210                 Reception clerk                 lino_welfare.modlib.welfare.user_types.ReceptionClerk
- 220                 Newcomers reception clerk       lino_welfare.modlib.welfare.user_types.ReceptionClerkNewcomers
- 300                 Debts consultant                lino_welfare.modlib.debts.roles.DebtsUser
- 400                 Social agent                    lino_welfare.modlib.pcsw.roles.SocialAgent
- 410                 Social agent (Manager)          lino_welfare.modlib.pcsw.roles.SocialStaff
- 500                 Accountant                      lino_welfare.modlib.welfare.user_types.LedgerUser
- 510                 Accountant (Manager)            lino_welfare.modlib.welfare.user_types.AccountantManager
- 800                 Supervisor                      lino_welfare.modlib.welfare.user_types.Supervisor
- 900     admin       Administrator                   lino_welfare.modlib.welfare.user_types.SiteAdmin
- 910                 Security advisor                lino_welfare.modlib.welfare.user_types.SecurityAdvisor
-======= =========== =============================== ==================================================================
+====== =========== ================================== ==================================================================
+ Wert   name        Text                               User role
+------ ----------- ---------------------------------- ------------------------------------------------------------------
+ 000    anonymous   Anonym                             lino.core.roles.Anonymous
+ 100                Begleiter im DSBE                  lino_welfare.modlib.integ.roles.IntegrationAgent
+ 110                Begleiter im DSBE (Manager)        lino_welfare.modlib.integ.roles.IntegrationStaff
+ 120                Begleiter im DSBE (+Erstempfang)   lino_welfare.modlib.welfare.user_types.IntegrationAgentNewcomers
+ 200                Berater Erstempfang                lino_welfare.modlib.welfare.user_types.NewcomersConsultant
+ 210                Empfangsschalter                   lino_welfare.modlib.welfare.user_types.ReceptionClerk
+ 220                Empfangsschalter (+Erstempfang)    lino_welfare.modlib.welfare.user_types.ReceptionClerkNewcomers
+ 300                Schuldenberater                    lino_welfare.modlib.debts.roles.DebtsUser
+ 400                Sozi                               lino_welfare.modlib.pcsw.roles.SocialAgent
+ 410                Sozi (Manager)                     lino_welfare.modlib.pcsw.roles.SocialStaff
+ 500                Buchhalter                         lino_welfare.modlib.welfare.user_types.LedgerUser
+ 510                Accountant (Manager)               lino_welfare.modlib.welfare.user_types.AccountantManager
+ 800                Supervisor                         lino_welfare.modlib.welfare.user_types.Supervisor
+ 900    admin       Verwalter                          lino_welfare.modlib.welfare.user_types.SiteAdmin
+ 910                Security advisor                   lino_welfare.modlib.welfare.user_types.SecurityAdvisor
+====== =========== ================================== ==================================================================
 <BLANKLINE>
 
 
@@ -88,7 +84,7 @@ Authorities
 Alicia, Hubert and Mélanie give "authority" to Theresia to do their
 work when they are absent.
 
->>> rt.show(rt.actors.users.Authorities)
+>>> rt.show(rt.actors.users.Authorities, language="en")
 ==== ================= =================
  ID   Author            User
 ---- ----------------- -----------------

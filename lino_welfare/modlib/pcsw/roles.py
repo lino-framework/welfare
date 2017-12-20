@@ -36,7 +36,8 @@ class SocialAgent(SiteUser, OfficeUser, ContactsUser, CBSSUser, BeIdUser,
                   CheckdataUser, AidsUser, PollsUser, SepaUser,
                   CoursesUser, ExcerptsUser, CoachingsUser,
                   AuthorshipTaker, GuestOperator):
-    """A **social agent** is a user who does individual coaching of
+    """
+    A **social agent** is a user who does individual coaching of
     clients.  Certain privacy-relevant client data is visible only
     to social agents.
 
@@ -45,7 +46,8 @@ class SocialAgent(SiteUser, OfficeUser, ContactsUser, CBSSUser, BeIdUser,
 
 class SocialStaff(SocialAgent, OfficeStaff, ContactsStaff, AidsStaff,
                   PollsStaff, SepaStaff, CoachingsStaff):
-    """A **social staff member** is a social agent who has access to more
+    """
+    A **social staff member** is a social agent who has access to more
     technical information about welfare clients.  For example the
     `Miscellaneous` panel.
 

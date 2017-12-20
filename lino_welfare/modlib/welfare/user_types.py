@@ -22,7 +22,7 @@ See :ref:`welfare.specs.users`
 
 """
 
-from lino.core.roles import UserRole, SiteUser, SiteAdmin, Supervisor, login_required
+from lino.core.roles import Anonymous, SiteUser, SiteAdmin, Supervisor, login_required
 from lino.modlib.users.roles import AuthorshipTaker
 from lino.modlib.about.roles import SiteSearcher
 from lino.modlib.office.roles import OfficeOperator, OfficeStaff, OfficeUser
@@ -73,7 +73,8 @@ class ReceptionClerk(SiteUser, AuthorshipTaker, OfficeOperator,
                      ContactsStaff, AidsStaff, CBSSUser, BeIdUser,
                      SepaUser, CoursesUser, ExcerptsUser,
                      CoachingsStaff):
-    """A **reception clerk** is a user who is not a *social agent* but
+    """
+    A **reception clerk** is a user who is not a *social agent* but
     receives clients and does certain administrative tasks (in Eupen
     they call them `back office
     <https://en.wikipedia.org/wiki/Back_office>`__).
@@ -95,7 +96,8 @@ class ReceptionClerkNewcomers(SiteUser, AuthorshipTaker, SimpleContactsUser,
                               # ContactsStaff,
                               # AidsStaff, CBSSUser, BeIdUser, SepaUser,
                               # ):
-    """A **newcomers reception clerk** is a *reception clerk* who also
+    """
+    A **newcomers reception clerk** is a *reception clerk* who also
     can assign coaches to clients.
 
     """
@@ -104,7 +106,8 @@ class ReceptionClerkNewcomers(SiteUser, AuthorshipTaker, SimpleContactsUser,
 
 class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator,
                                 DebtsUser):
-    """A **newcomers integration agent** is an *integration agent* who
+    """
+    A **newcomers integration agent** is an *integration agent* who
     also can assign coaches to clients and create budgets for debts
     mediation.
 
@@ -114,7 +117,8 @@ class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator,
 
 class LedgerUser(SiteUser, LedgerUser, ContactsUser, OfficeUser, ExcerptsUser,
                  AidsStaff, SepaStaff):
-    """An **accountant** is a user who enters invoices, bank statements,
+    """
+    An **accountant** is a user who enters invoices, bank statements,
     payment orders and other ledger operations.
 
     """
@@ -142,7 +146,7 @@ UserTypes.clear()
 
 add = UserTypes.add_item
 
-add('000', _("Anonymous"), UserRole, name='anonymous',
+add('000', _("Anonymous"), Anonymous, name='anonymous',
     readonly=True, authenticated=False)
 add('100', _("Integration agent"),             IntegrationAgent)
 add('110', _("Integration agent (Manager)"),   IntegrationStaff)

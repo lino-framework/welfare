@@ -1643,7 +1643,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Benachrichtigungen : 14
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> All dashboard widgets : 1
-- Explorer --> System --> Datentests : 15
+- Explorer --> System --> Datentests : 16
 - Explorer --> System --> Datenprobleme : 64
 - Explorer --> Eigenschaften --> Eigenschaften : 24
 - Explorer --> Büro --> Auszüge : 69

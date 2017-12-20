@@ -2,16 +2,18 @@
 Benutzer
 ================
 
-Benutzerprofile
+Benutzerarten
 ===============
 
-Damit ein Benutzer sich anmelden kann, muss sein
-:ddref:`users.User.user_type` einen der folgenden Werte enthalten:
+Damit ein Benutzer sich anmelden kann, muss das Feld
+:ddref:`users.User.user_type` ausgefüllt sein.  Es gibt folgende
+Benutzerarten:
 
 .. py2rst::
 
     from lino.api import rt
-    rt.show('users.UserTypes', stripped=False)
+    rt.show('users.UserTypes', column_names="value text remark", stripped=False)
+    
     
 
 Technisches
@@ -23,3 +25,4 @@ Technische Details unter :ref:`welfare.specs.users`.
    :mod:`lino_welfare.modlib.welfare.roles` (außer wenn
    :attr:`user_types_module
    <lino.core.site.Site.user_types_module>` verändert wurde).
+

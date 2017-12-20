@@ -304,7 +304,7 @@ We use the user types defined in
 ======= =========== ============================================ ==================================================================
  value   name        text                                         User role
 ------- ----------- -------------------------------------------- ------------------------------------------------------------------
- 000     anonymous   Anonyme                                      lino.core.roles.UserRole
+ 000     anonymous   Anonyme                                      lino.core.roles.Anonymous
  100                 Agent d'insertion                            lino_welfare.modlib.integ.roles.IntegrationAgent
  110                 Agent d'insertion (chef de service)          lino_welfare.modlib.integ.roles.IntegrationStaff
  120                 Agent d'insertion (nouveaux bénéficiaires)   lino_welfare.modlib.welfare.user_types.IntegrationAgentNewcomers
@@ -1489,7 +1489,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> Notifications : 13
 - Explorateur --> Système --> Changes : 0
 - Explorateur --> Système --> All dashboard widgets : 1
-- Explorateur --> Système --> Tests de données : 12
+- Explorateur --> Système --> Tests de données : 13
 - Explorateur --> Système --> Problèmes de données : 0
 - Explorateur --> Bureau --> Extraits : 71
 - Explorateur --> Bureau --> Fichiers téléchargés : 12

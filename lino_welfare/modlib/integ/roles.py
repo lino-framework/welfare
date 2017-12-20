@@ -25,7 +25,8 @@ from lino_welfare.modlib.xcourses.roles import CoursesUser, CoursesStaff
 from lino_welfare.modlib.newcomers.roles import NewcomersOperator
 
 class IntegrationAgent(SocialAgent, CareerUser, CoursesUser):
-    """A *social agent* who can see database content specific to
+    """
+    A *social agent* who can see database content specific to
     integration work: CV, language courses, workshops, ...
 
     See also :class:`lino_welfare.modlib.pcsw.choicelists.SocialAgent`.
