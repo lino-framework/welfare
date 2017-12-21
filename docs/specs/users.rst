@@ -24,26 +24,26 @@ The default set of user types for Lino Welfare is defined in
 :mod:`lino_welfare.modlib.welfare.user_types` and leads to the
 following list:
 
->>> rt.show(users.UserTypes)
-====== =========== ================================== ==================================================================
- Wert   name        Text                               User role
------- ----------- ---------------------------------- ------------------------------------------------------------------
- 000    anonymous   Anonym                             lino.core.roles.Anonymous
- 100                Begleiter im DSBE                  lino_welfare.modlib.integ.roles.IntegrationAgent
- 110                Begleiter im DSBE (Manager)        lino_welfare.modlib.integ.roles.IntegrationStaff
- 120                Begleiter im DSBE (+Erstempfang)   lino_welfare.modlib.welfare.user_types.IntegrationAgentNewcomers
- 200                Berater Erstempfang                lino_welfare.modlib.welfare.user_types.NewcomersConsultant
- 210                Empfangsschalter                   lino_welfare.modlib.welfare.user_types.ReceptionClerk
- 220                Empfangsschalter (+Erstempfang)    lino_welfare.modlib.welfare.user_types.ReceptionClerkNewcomers
- 300                Schuldenberater                    lino_welfare.modlib.debts.roles.DebtsUser
- 400                Sozi                               lino_welfare.modlib.pcsw.roles.SocialAgent
- 410                Sozi (Manager)                     lino_welfare.modlib.pcsw.roles.SocialStaff
- 500                Buchhalter                         lino_welfare.modlib.welfare.user_types.LedgerUser
- 510                Accountant (Manager)               lino_welfare.modlib.welfare.user_types.AccountantManager
- 800                Supervisor                         lino_welfare.modlib.welfare.user_types.Supervisor
- 900    admin       Verwalter                          lino_welfare.modlib.welfare.user_types.SiteAdmin
- 910                Security advisor                   lino_welfare.modlib.welfare.user_types.SecurityAdvisor
-====== =========== ================================== ==================================================================
+>>> rt.show(users.UserTypes, language="en")
+======= =========== =============================== ==================================================================
+ value   name        text                            User role
+------- ----------- ------------------------------- ------------------------------------------------------------------
+ 000     anonymous   Anonymous                       lino.core.roles.Anonymous
+ 100                 Integration agent               lino_welfare.modlib.integ.roles.IntegrationAgent
+ 110                 Integration agent (Manager)     lino_welfare.modlib.integ.roles.IntegrationStaff
+ 120                 Integration agent (Newcomers)   lino_welfare.modlib.welfare.user_types.IntegrationAgentNewcomers
+ 200                 Newcomers consultant            lino_welfare.modlib.welfare.user_types.NewcomersConsultant
+ 210                 Reception clerk                 lino_welfare.modlib.welfare.user_types.ReceptionClerk
+ 220                 Newcomers reception clerk       lino_welfare.modlib.welfare.user_types.ReceptionClerkNewcomers
+ 300                 Debts consultant                lino_welfare.modlib.debts.roles.DebtsUser
+ 400                 Social agent                    lino_welfare.modlib.pcsw.roles.SocialAgent
+ 410                 Social agent (Manager)          lino_welfare.modlib.pcsw.roles.SocialStaff
+ 500                 Accountant                      lino_welfare.modlib.welfare.user_types.LedgerUser
+ 510                 Accountant (Manager)            lino_welfare.modlib.welfare.user_types.AccountantManager
+ 800                 Supervisor                      lino_welfare.modlib.welfare.user_types.Supervisor
+ 900     admin       Administrator                   lino_welfare.modlib.welfare.user_types.SiteAdmin
+ 910                 Security advisor                lino_welfare.modlib.welfare.user_types.SecurityAdvisor
+======= =========== =============================== ==================================================================
 <BLANKLINE>
 
 
@@ -67,14 +67,56 @@ An integration agent (manager) has some staff permissions but is not a
 >>> p110.has_required_roles([SiteStaff])
 False
 
-A reception clerk is a
-:class:`lino_xl.lib.contacts.roles.ContactsStaff`:
+A reception clerk is a :class:`lino_xl.lib.contacts.ContactsStaff`:
 
 >>> p210 = users.UserTypes.get_by_value('210')
 >>> p210.has_required_roles([SiteStaff])
 False
 >>> p210.has_required_roles([ContactsStaff])
 True
+
+A reception clerk is an :class:`OfficeOperator`:
+
+>>> from lino_welfare.modlib.welfare.user_types import OfficeOperator
+>>> p210.has_required_roles([OfficeOperator])
+True
+
+A reception clerk can see the :guilabel:`Calendar` tab because it
+contains the :class:`EntriesByClient
+<lino_welfare.modlib.cal.EntriesByClient>` panel.
+
+>>> rt.models.cal.EntriesByClient.get_view_permission(p210)
+True
+
+>>> print(py2rst(pcsw.Clients.detail_layout['calendar']))
+**Kalender** (calendar) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
+- **Kalendereinträge** (cal.EntriesByClient)
+- **Aufgaben** (cal.TasksByProject) [visible for 100 110 120 200 300 400 410 500 510 admin 910]
+<BLANKLINE>
+
+
+Demo users
+==========
+
+>>> rt.show('users.Users', language="en")
+========== ============================= ============ ===========
+ Username   User type                     First name   Last name
+---------- ----------------------------- ------------ -----------
+ alicia     Integration agent             Alicia       Allmanns
+ caroline   Newcomers consultant          Caroline     Carnol
+ hubert     Integration agent             Hubert       Huppertz
+ judith     Social agent                  Judith       Jousten
+ kerstin    Debts consultant              Kerstin      Kerres
+ melanie    Integration agent (Manager)   Mélanie      Mélard
+ nicolas
+ patrick    Security advisor              Patrick      Paraneau
+ robin      Administrator                 Robin        Rood
+ rolf       Administrator                 Rolf         Rompen
+ romain     Administrator                 Romain       Raffault
+ theresia   Reception clerk               Theresia     Thelen
+ wilfried   Accountant                    Wilfried     Willems
+========== ============================= ============ ===========
+<BLANKLINE>
 
 
 

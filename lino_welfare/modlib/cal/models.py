@@ -220,7 +220,7 @@ class EntriesByClient(Events):
     """Events where :attr:`Event.project` **or** one guest is this client.
 
     """
-    required_roles = dd.login_required(OfficeUser)
+    required_roles = dd.login_required((OfficeUser, OfficeOperator))
     # master_key = 'project'
     # master = 'cal.Event'
     master = 'pcsw.Client'

@@ -390,6 +390,10 @@ class ConfirmationChecker(Checker):
         return obj.client.get_primary_coach()
 
     def get_checkdata_problems(self, obj, fix=False):
+        if obj.granting is None:
+            msg = _("Confirmation without granting")
+            yield (False, msg)
+            return
         gp = obj.granting.get_period()
         if obj.start_date or obj.end_date:
             cp = obj.get_period()
