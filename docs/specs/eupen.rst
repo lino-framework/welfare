@@ -1,5 +1,4 @@
 .. doctest docs/specs/eupen.rst
-
 .. _welfare.tested.eupen:
 .. _welfare.specs.eupen:
 
@@ -840,7 +839,7 @@ Each window layout is **viewable** by a given set of user user_types.
 - cal.Calendars.detail : visible for 110 410 admin 910
 - cal.Calendars.insert : visible for 110 410 admin 910
 - cal.Calendars.merge_row : visible for admin 910
-- cal.EntriesByClient.insert : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- cal.EntriesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - cal.EventPolicies.merge_row : visible for admin 910
 - cal.EventTypes.detail : visible for 110 410 admin 910
 - cal.EventTypes.insert : visible for 110 410 admin 910

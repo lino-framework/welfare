@@ -110,9 +110,9 @@ Lino Welfare à la Eupen.
     - **Historie** (history) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]:
       - **Ereignisse/Notizen** (notes.NotesByProject)
       - **Bestehende Auszüge** (excerpts_ExcerptsByProject)
-    - **Kalender** (calendar) [visible for 100 110 120 200 300 400 410 500 510 admin 910]:
+    - **Kalender** (calendar) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
       - **Kalendereinträge** (cal.EntriesByClient)
-      - **Aufgaben** (cal.TasksByProject)
+      - **Aufgaben** (cal.TasksByProject) [visible for 100 110 120 200 300 400 410 500 510 admin 910]
     - **Bewegungen** (MovementsByProject) [visible for 500 510 admin 910]
     - **Sonstiges** (misc) [visible for 110 210 410 800 admin 910]:
       - (misc_1) [visible for all]: **Beruf** (activity), **Zustand** (client_state), **Adelstitel** (noble_condition), **Nicht verfügbar bis** (unavailable_until), **Grund** (unavailable_why)

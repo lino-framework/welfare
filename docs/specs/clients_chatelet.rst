@@ -98,9 +98,9 @@ Lino Welfare à la Chatelet.
     - **Fichiers téléchargés** (uploads.UploadsByClient)
     - **Existing excerpts** (excerpts_ExcerptsByProject)
     - **Fiches FSE** (esf.SummariesByClient) [visible for 100 110 120 admin 910]
-- **Calendrier** (calendar) [visible for 100 110 120 200 300 400 410 500 510 admin 910]:
+- **Calendrier** (calendar) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
   - **Entrées calendrier** (cal.EntriesByClient)
-  - **Tâches** (cal.TasksByProject)
+  - **Tâches** (cal.TasksByProject) [visible for 100 110 120 200 300 400 410 500 510 admin 910]
 - **Divers** (misc) [visible for 110 410 admin 910]:
   - (misc_1) [visible for all]: **Activité** (activity), **État** (client_state), **Titre de noblesse** (noble_condition), **Indisponible jusque** (unavailable_until), **raison** (unavailable_why)
   - (misc_2) [visible for all]: **obsolete** (is_obsolete), **ESF data** (has_esf), **Créé** (created), **Modifié** (modified)
