@@ -48,7 +48,7 @@ This document describes the functionality implemented by the
  BG33WODO90876019575940                  07.09.15           *Arens Annette*                       AS Express Post
  BG89NKTJ64315412156435                  07.09.15           *Altenberg Hans*                      IIZI kindlustusmaakler AS
  BG45LMDF68752666847493                  07.09.15           *Ausdemwald Alfons*                   Leffin Electronics
- CR8983545319950684230                   07.09.15           *Bastiaensen Laurent*                 R-Cycle Sperrgutsortierzentrum
+ MK42869572001783450                     07.09.15           *Bastiaensen Laurent*                 R-Cycle Sperrgutsortierzentrum
  CY94595189933551887423183914            07.09.15           *Collard Charlotte*                   Brocal Catherine
  CY67178463066674360903454329            07.09.15           *Charlier Ulrike*                     Baguette Stéphanie
  CZ9233597294072726325676                07.09.15           *Chantraine Marc*                     Gerkens Gerd

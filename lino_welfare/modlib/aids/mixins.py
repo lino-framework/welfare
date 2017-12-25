@@ -41,6 +41,7 @@ from lino import mixins
 from lino.utils.xmlgen.html import E
 from lino.utils.ranges import encompass
 
+from lino.modlib.checkdata.choicelists import Checker
 from lino.modlib.users.mixins import UserAuthored
 from lino_xl.lib.contacts.mixins import ContactRelated
 from lino_xl.lib.excerpts.mixins import Certifiable
@@ -294,6 +295,7 @@ class Confirmation(
         if self.granting is None:
             return
         if False:  # deactivated 20170318 after #1354
+            # since 20171220 the following logic is implemented as a data checker instead because Lino should complain about the problem,
             gp = self.granting.get_period()
             if self.start_date or self.end_date:
                 cp = self.get_period()
@@ -379,3 +381,27 @@ dd.update_field(Confirmation, 'contact_person',
                 verbose_name=_("Recipient (Person)"))
 
 
+class ConfirmationChecker(Checker):
+    model = Confirmation
+
+    verbose_name = _("Check for confirmations outside of granted period")
+    
+    def get_responsible_user(self, obj):
+        return obj.client.get_primary_coach()
+
+    def get_checkdata_problems(self, obj, fix=False):
+        if obj.granting is None:
+            msg = _("Confirmation without granting")
+            yield (False, msg)
+            return
+        gp = obj.granting.get_period()
+        if obj.start_date or obj.end_date:
+            cp = obj.get_period()
+            if not encompass(gp, cp):
+                msg = _(
+                    "Date range %(p1)s lies outside of granted "
+                    "period %(p2)s.") % dict(
+                        p2=rangefmt(gp), p1=rangefmt(cp))
+                yield (False, msg)
+                
+ConfirmationChecker.activate()

@@ -81,7 +81,7 @@ class TestCase(TestCase):
         rh = rt.actors.cv.ObstaclesByPerson.get_handle()
         colnames = [col.name for col in rh.get_columns()]
         self.assertEqual(
-            'type user detected_date remark id workflow_buttons overview mobile_item person',
+            'type user detected_date remark id workflow_buttons mobile_item overview person',
             ' '.join(colnames))
 
         url = "/api/cv/ObstaclesByPerson"

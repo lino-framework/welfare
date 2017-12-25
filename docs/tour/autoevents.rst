@@ -1,14 +1,11 @@
+.. doctest docs/tour/autoevents.rst
 .. _welfare.tour.autoevents:
 
 =========================
 Automatic calendar events
 =========================
 
-.. How to test only this document:
-
-    $ doctest docs/tour/autoevents.rst
-    
-    doctest init:
+..  doctest init:
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.std.settings.doctests')

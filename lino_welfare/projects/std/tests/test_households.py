@@ -109,32 +109,33 @@ class BeIdTests(RemoteAuthTestCase):
 
         fieldname = 'households_MembersByPerson'
         html = result['data'][fieldname]
-        soup = BeautifulSoup(html)
+        soup = BeautifulSoup(html, 'lxml')
     
         links = soup.find_all('a')
-        self.assertEqual(len(links), 6)
-        self.assertEqual(links[0].string, 'Married couple')
-        self.assertEqual(links[1].get_text(), 'Divorced couple')
+        self.assertEqual(len(links), 2)
+        self.assertEqual(links[0].string, 'Join an existing household')
+        self.assertEqual(links[1].get_text(), 'create a new one')
         js = links[0]['href']
-
-        # javascript:Lino.contacts.Persons.create_household.run(\
-        # "ext-comp-1359",{
-        # "field_values": { "head": "JEFFIN Jean (116)", "headHidden":
-        # 116, "typeHidden": 1, "partner": null, "partnerHidden":
-        # null, "type": "Married" }, "param_values": {
-        # "also_obsolete": false, "gender": null, "genderHidden": null
-        # }, "base_params": { } })
-
+        start = "javascript:Lino.households.MembersByPerson.insert.run"
+        self.assertEqual(js.startswith(start), True)
+        
+        js = links[1]['href']
         start = ('javascript:Lino.contacts.Persons.create_household.'
                  'run("ext-comp-1359",')
         self.assertEqual(js.startswith(start), True)
         js = js[len(start):-1]
         d = AttrDict(json.loads(js))
 
-        self.assertEqual(' '.join(d.keys()),
-                         'field_values param_values base_params')
+        self.assertEqual(
+            ' '.join(sorted(d.keys())),
+            'base_params field_values param_values record_id')
         self.assertEqual(len(d.field_values), 6)
-        self.assertEqual(len(d.param_values), 3)
+        self.assertEqual(
+            list(sorted(d.field_values.keys())), 
+            ['head', 'headHidden',
+             'partner', 'partnerHidden',
+             'type', 'typeHidden'])
+        self.assertEqual(len(d.param_values), 17)
         self.assertEqual(len(d.base_params), 0)
 
         fv = AttrDict(d.field_values)
@@ -147,7 +148,7 @@ class BeIdTests(RemoteAuthTestCase):
 
         # When user klicks OK:
         url = "/api/contacts/Persons/116"
-        url += "?fv=&fv=1&fv=116&an=create_household"
+        url += "?fv=116&fv=&fv=1&an=create_household"
 
         # The 20150130 problem was because the ActionFormPanel added
         # param_values. When klicking OK, it sometimes added the

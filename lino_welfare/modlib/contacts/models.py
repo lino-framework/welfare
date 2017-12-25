@@ -32,13 +32,13 @@ from lino.api import dd, rt, _
 from lino_xl.lib.contacts.models import *
 # from lino_xl.lib.contacts.models import *
 
-from lino_xl.lib.addresses.mixins import AddressOwner
+# from lino_xl.lib.addresses.mixins import AddressOwner
 from lino_xl.lib.vatless.mixins import PartnerDetailMixin
 
 
 @dd.python_2_unicode_compatible
 class Partner(
-        Partner, AddressOwner, mixins.CreatedModified,
+        Partner, mixins.CreatedModified,
         dd.ImportedFields):
 
     """Extends :class:`lino_xl.lib.contacts.models.Partner` by adding the

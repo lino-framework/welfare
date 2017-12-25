@@ -210,14 +210,15 @@ Since this is not very human-readable, we are going to analyze it with
 
 >>> print(soup.get_text(' ', strip=True))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF
-DUBOIS Robin (179) ist ☐ Vorstand in Robin & Lisa Dubois-Lahm (Getrennt) Haushalt erstellen : Ehepaar / Geschiedenes Paar / Faktischer Haushalt / Legale Wohngemeinschaft / Getrennt / Sonstige
+DUBOIS Robin (179) ist ☐ Vorstand in Robin & Lisa Dubois-Lahm (Getrennt)
+Bestehendem Haushalt beitreten oder einen neuen erstellen .
 
 >>> links = soup.find_all('a')
 
 It contains eight links:
 
 >>> len(links)
-8
+4
 
 The first link is the disabled checkbox for the :attr:`primary
 <lino.modlib.households.models.Member.primary>` field:
@@ -229,7 +230,7 @@ The first link is the disabled checkbox for the :attr:`primary
 Clicking on this would run the following JavaScript:
 
 >>> print(links[0].get('href'))
-javascript:Lino.households.Members.set_primary("ext-comp-1351",true,9,{  })
+javascript:Lino.households.Members.set_primary("ext-comp-1351",false,9,{  })
 
 The next link is the name of the household, and clicking on it would
 equally execute some Javascript code:
@@ -243,14 +244,19 @@ javascript:Lino.households.Households.detail.run("ext-comp-1351",{ "record_id": 
 The third link is:
 
 >>> print(links[2].string)
-Ehepaar
+Bestehendem Haushalt beitreten
 >>> print(links[2].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.contacts.Persons.create_household.run("ext-comp-1351",{
-"base_params": { }, "field_values": { "head": "DUBOIS Robin (179)",
-"headHidden": 179, "partner": null, "partnerHidden": null, "type":
-"Ehepaar", "typeHidden": 1 }, "param_values": { "also_obsolete":
-false, "gender": null, "genderHidden": null } })
+javascript:Lino.households.MembersByPerson.insert.run("ext-comp-1351",{
+"base_params": { "person": 179 }, "data_record": { "data": {
+"disable_editing": false, "disabled_fields": { "birth_date": true,
+"first_name": true, "gender": true, "last_name": true }, "household":
+null, "householdHidden": null, "id": null, "person": "DUBOIS Robin
+(179)", "personHidden": 179, "primary": false, "role": "Kind",
+"roleHidden": "05" }, "phantom": true, "title": "Einf\u00fcgen in
+Mitgliedschaft in Haushalten" }, "param_values": { "aged_from": null,
+"aged_to": null, "end_date": null, "gender": null, "genderHidden":
+null, "start_date": null } })
 
 
 The :func:`lino.api.doctest.get_json_soup` automates this trick:
@@ -258,7 +264,7 @@ The :func:`lino.api.doctest.get_json_soup` automates this trick:
 >>> soup = get_json_soup('rolf', 'integ/Clients/179', 'households_MembersByPerson')
 >>> links = soup.find_all('a')
 >>> len(links)
-8
+4
 
 
 The household summary

@@ -22,13 +22,15 @@ See :ref:`welfare.specs.users`
 
 """
 
-from lino.core.roles import UserRole, SiteAdmin, Supervisor, login_required
+from lino.core.roles import Anonymous, SiteUser, SiteAdmin, Supervisor, login_required
 from lino.modlib.users.roles import AuthorshipTaker
+from lino.modlib.about.roles import SiteSearcher
 from lino.modlib.office.roles import OfficeOperator, OfficeStaff, OfficeUser
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsStaff, ContactsUser, SimpleContactsUser
 from lino_xl.lib.ledger.roles import LedgerStaff, LedgerUser
 from lino_xl.lib.sepa.roles import SepaStaff
+from lino_xl.lib.cal.roles import GuestOperator
 from lino_xl.lib.sepa.roles import SepaUser
 from lino_xl.lib.courses.roles import CoursesUser
 from lino_xl.lib.beid.roles import BeIdUser
@@ -43,7 +45,7 @@ from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
                                                  NewcomersOperator)
 
 
-class AccountantManager(LedgerStaff, ContactsUser, OfficeUser,
+class AccountantManager(SiteUser, LedgerStaff, ContactsUser, OfficeUser,
                         ExcerptsUser, AidsStaff, SepaStaff):
     """Like an **accountant**, but also has access to configuration.
 
@@ -53,6 +55,7 @@ class AccountantManager(LedgerStaff, ContactsUser, OfficeUser,
 
 class SiteAdmin(
         SiteAdmin,
+        SiteSearcher,
         IntegrationStaff,
         DebtsStaff,
         LedgerStaff,
@@ -65,11 +68,13 @@ class SiteAdmin(
     """The site adminstrator has permission for everything."""
 
 
-class ReceptionClerk(AuthorshipTaker, OfficeOperator,
+class ReceptionClerk(SiteUser, AuthorshipTaker, OfficeOperator,
+                     GuestOperator,
                      ContactsStaff, AidsStaff, CBSSUser, BeIdUser,
                      SepaUser, CoursesUser, ExcerptsUser,
                      CoachingsStaff):
-    """A **reception clerk** is a user who is not a *social agent* but
+    """
+    A **reception clerk** is a user who is not a *social agent* but
     receives clients and does certain administrative tasks (in Eupen
     they call them `back office
     <https://en.wikipedia.org/wiki/Back_office>`__).
@@ -78,8 +83,9 @@ class ReceptionClerk(AuthorshipTaker, OfficeOperator,
     pass
 
 
-class ReceptionClerkNewcomers(AuthorshipTaker, SimpleContactsUser,
+class ReceptionClerkNewcomers(SiteUser, AuthorshipTaker, SimpleContactsUser,
                               OfficeOperator,
+                              GuestOperator,
                               ExcerptsUser,
                               # OfficeUser,
                               # SocialAgent,
@@ -90,7 +96,8 @@ class ReceptionClerkNewcomers(AuthorshipTaker, SimpleContactsUser,
                               # ContactsStaff,
                               # AidsStaff, CBSSUser, BeIdUser, SepaUser,
                               # ):
-    """A **newcomers reception clerk** is a *reception clerk* who also
+    """
+    A **newcomers reception clerk** is a *reception clerk* who also
     can assign coaches to clients.
 
     """
@@ -99,7 +106,8 @@ class ReceptionClerkNewcomers(AuthorshipTaker, SimpleContactsUser,
 
 class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator,
                                 DebtsUser):
-    """A **newcomers integration agent** is an *integration agent* who
+    """
+    A **newcomers integration agent** is an *integration agent* who
     also can assign coaches to clients and create budgets for debts
     mediation.
 
@@ -107,9 +115,10 @@ class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator,
     pass
 
 
-class LedgerUser(LedgerUser, ContactsUser, OfficeUser, ExcerptsUser,
+class LedgerUser(SiteUser, LedgerUser, ContactsUser, OfficeUser, ExcerptsUser,
                  AidsStaff, SepaStaff):
-    """An **accountant** is a user who enters invoices, bank statements,
+    """
+    An **accountant** is a user who enters invoices, bank statements,
     payment orders and other ledger operations.
 
     """
@@ -122,7 +131,8 @@ class SecurityAdvisor(SiteAdmin, SecurityAdvisor):
 class NewcomersConsultant(NewcomersAgent, SocialAgent):
     pass
 
-class Supervisor(Supervisor, AuthorshipTaker, OfficeOperator,
+class Supervisor(SiteUser, Supervisor, AuthorshipTaker, OfficeOperator,
+                 GuestOperator,
                  ContactsStaff, AidsStaff, NewcomersOperator,
                  ExcerptsUser, SepaUser, CoursesUser):
     """A backoffice user who can act as others."""
@@ -136,7 +146,7 @@ UserTypes.clear()
 
 add = UserTypes.add_item
 
-add('000', _("Anonymous"), UserRole, name='anonymous',
+add('000', _("Anonymous"), Anonymous, name='anonymous',
     readonly=True, authenticated=False)
 add('100', _("Integration agent"),             IntegrationAgent)
 add('110', _("Integration agent (Manager)"),   IntegrationStaff)

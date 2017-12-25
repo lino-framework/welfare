@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -16,10 +16,10 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-from lino.core.roles import SiteUser
+from lino.core.roles import UserRole
 
 
-class AidsUser(SiteUser):
+class AidsUser(UserRole):
     """A user who can issue aids grantings and confirmations."""
     pass
 

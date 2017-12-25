@@ -25,6 +25,7 @@ from __future__ import unicode_literals
 from builtins import range
 from builtins import next
 from builtins import str
+import six
 import datetime
 ONE_DAY = datetime.timedelta(days=1)
 
@@ -895,7 +896,7 @@ def objects():
         yield jobs.Job(provider=PROVIDERS.pop(),
                        type=JTYPES.pop(),
                        contract_type=JOBS_CONTRACT_TYPES.pop(),
-                       name=str(f),
+                       name=six.text_type(f),
                        remark=REMARKS.pop(),
                        sector=SECTORS.pop(), function=f)
 
