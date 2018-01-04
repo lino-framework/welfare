@@ -72,7 +72,8 @@ class Categories(dd.Table):
 
 
 class AidType(ContactRelated, ExcerptTitle):
-    """The type of aid being granted to a client.  Every granting has a
+    """
+    The type of aid being granted to a client.  Every granting has a
     mandatory field :attr:`Granting.aid_type` which points to an
     :class:`AidType` instance.
 
@@ -132,7 +133,6 @@ class AidType(ContactRelated, ExcerptTitle):
         <lino_xl.lib.clients.ClientContactType>` to be used when
         selecting the pharmacy of a refund confirmation
         (:attr:`RefundConfirmation.pharmacy`).
-
     """
 
     # templates_group = 'aids/Aid'

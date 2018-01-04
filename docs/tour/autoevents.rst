@@ -103,6 +103,9 @@ command.
 >>> ses = rt.login('robin')
 >>> translation.activate('en')
 
+>>> ses.get_user().user_type.hidden_languages
+set([LanguageInfo(django_code='nl', name='nl', index=3, suffix='_nl')])
+
 >>> ses.show(isip.ExamPolicies)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ==================== ========================= ======================
