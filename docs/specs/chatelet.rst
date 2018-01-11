@@ -458,7 +458,7 @@ Each window layout defines a given set of fields.
 - countries.Countries.merge_row : merge_to, reason
 - countries.Places.detail : name, name_nl, name_de, name_en, country, inscode, zip_code, parent, type, id
 - countries.Places.merge_row : merge_to, reason
-- courses.Activities.detail : line, teacher, start_date, end_date, start_time, end_time, room, workflow_buttons, id, user, name, description, description_nl, description_de, description_en, max_events, max_date, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, enrolments_until, max_places, confirmed, free_places, print_actions, EnrolmentsByCourse
+- courses.Activities.detail : line, teacher, start_date, start_time, end_time, end_date, room, workflow_buttons, id, user, name, description, description_nl, description_de, description_en, max_events, max_date, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, enrolments_until, max_places, confirmed, free_places, print_actions, EnrolmentsByCourse
 - courses.Activities.insert : line, teacher, name, start_date
 - courses.Activities.merge_row : merge_to, reason
 - courses.Activities.print_presence_sheet : start_date, end_date, show_remarks, show_states
