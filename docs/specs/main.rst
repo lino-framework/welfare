@@ -40,7 +40,7 @@ it is much work to maintain.
 129
 
 >>> print(links[0].text)
-Suche
+Suchen
 
 >>> tables = soup.find_all('table')
 >>> len(tables)

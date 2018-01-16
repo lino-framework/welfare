@@ -106,3 +106,14 @@ Kitchen (12/05/2014)
 
 
 
+>>> with translation.override('fr'):
+...   show_fields(rt.models.courses.Course, 'start_date end_date')
++---------------+--------------+------------------------------------------------------------+
+| Internal name | Verbose name | Help text                                                  |
++===============+==============+============================================================+
+| start_date    | Date début   | La date (de début) de la première rencontre à générer.     |
++---------------+--------------+------------------------------------------------------------+
+| end_date      | Date de fin  | La date de fin de la première rencontre à générer.         |
+|               |              | Laisser vide si les rencontres durent moins d'une journée. |
++---------------+--------------+------------------------------------------------------------+
+
