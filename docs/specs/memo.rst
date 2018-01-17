@@ -1,14 +1,11 @@
+.. doctest docs/specs/memo.rst
 .. _welfare.specs.memo:
 
 ==========================
 Lino Welfare memo commands
 ==========================
 
-.. How to test only this document:
-
-    $ python setup.py test -s tests.SpecsTests.test_memo
-    
-    doctest init:
+.. doctest init:
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.demo')
@@ -60,12 +57,7 @@ Usage examples:
     
     >>> print(ses.parse_memo("See [urlhttp://www.example.com]."))
     See [urlhttp://www.example.com].
-
-    A pitfall is when your editor inserted a non-breaking space:
-    
-    >>> print(ses.parse_memo("See [url&nbsp;http://www.example.com example]."))
-    See <a href="&nbsp;http://www.example.com" target="_blank">example</a>.
-    
+   
 
 .. _memo.note:
 
