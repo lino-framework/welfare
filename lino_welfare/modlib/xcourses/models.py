@@ -33,6 +33,7 @@ from django.utils.translation import pgettext_lazy as pgettext
 
 from lino.api import dd
 from lino.mixins.printable import DirectPrintAction
+from lino.modlib.uploads.mixins import UploadController
 
 from .roles import CoursesUser, CoursesStaff
 from lino_welfare.modlib.pcsw.roles import SocialAgent
@@ -330,8 +331,7 @@ class UnRegisterCandidate(dd.ChangeStateAction):
         #~ return kw
         ar.success(**kw)
 
-
-class CourseRequest(dd.Model):
+class CourseRequest(UploadController):
 
     """A Course Request is created when a certain Person expresses her
     wish to participate in a Course with a certain CourseContent.

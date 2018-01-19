@@ -67,15 +67,25 @@ class ContractDetail(dd.DetailLayout):
     id:8 client:25 user:15 language:8
     type goal company contact_person contact_role
     applies_from applies_until exam_policy
+    # sector_function:30 remark:30 person_printed 
     sector function
     reference_person printed
     date_decided date_issued date_ended ending:20
-    responsibilities
+    remark #responsibilities
     """
 
     right = """
     cal.EntriesByController
     cal.TasksByController
+    """
+
+    sector_function = """
+    sector
+    function
+    """
+    person_printed = """
+    reference_person
+    printed
     """
 
     main = """

@@ -1,3 +1,4 @@
+.. doctest docs/specs/uploads.rst
 .. _welfare.specs.uploads:
 
 =============
@@ -16,7 +17,7 @@ Uploads
 
 A technical tour into the :mod:`lino_welfare.modlib.uploads` plugin.
 
-Lino Welfare extends the standard :mod:`lino.modlib.uploads` plugin
+Lino Welfare extends the standard :mod:`lino_xl.lib.uploads` plugin
 into a system which helps social agents to manage certain documents
 about their clients. For example, integration agents want to get a
 reminder when the driving license of one of their client is going to
@@ -26,13 +27,16 @@ expire.
    :depth: 2
 
     
-A few things that should pass, otherwise don't expect the remaining
-tests to pass:
+.. A few things that should pass, otherwise don't expect the remaining
+   tests to pass:
 
->>> print(settings.SETTINGS_MODULE)
-lino_welfare.projects.eupen.settings.doctests
->>> dd.today()
-datetime.date(2014, 5, 22)
+    >>> print(settings.SETTINGS_MODULE)
+    lino_welfare.projects.eupen.settings.doctests
+    >>> dd.today()
+    datetime.date(2014, 5, 22)
+
+    >>> print(dd.plugins.uploads)
+    lino_xl.lib.uploads (extends_models=['UploadType', 'Upload'])
 
 .. Some of the following tests rely on the right value for the
    contenttype id of `pcsw.Client` model. If the following line

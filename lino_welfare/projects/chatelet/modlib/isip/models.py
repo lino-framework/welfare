@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014 Luc Saffre
+# Copyright 2014-2018 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -19,12 +19,7 @@
 from __future__ import unicode_literals
 from __future__ import print_function
 
-import logging
-logger = logging.getLogger(__name__)
-
-from django.utils.translation import ugettext_lazy as _
-
-from lino.api import dd, rt
+from lino.api import dd, rt, _
 
 from lino_welfare.modlib.isip.models import *
 
@@ -34,7 +29,7 @@ class ContractDetail(dd.DetailLayout):
     id:8 client:25 type user:15 user_asd:15
     study_type applies_from applies_until exam_policy language:8
     date_decided date_issued printed date_ended ending:20
-    stages  goals
+    uploads.UploadsByController cal.TasksByController
     """, label=_("General"))
 
     # partners = dd.Panel("""
@@ -46,8 +41,8 @@ class ContractDetail(dd.DetailLayout):
     """, label=_("Evaluations"))
 
     duties = dd.Panel("""
+    stages  goals
     duties_asd  duties_dsbe  duties_person
-    cal.TasksByController
     """, label=_("Duties"))
 
     main = "general duties evaluations PartnersByContract"

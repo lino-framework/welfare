@@ -412,6 +412,15 @@ class EntriesByContract(dd.Table):
         kwargs.update(start_date=_("Date"))
         return kwargs
 
+# from lino_xl.lib.uploads.models import UploadsByClient
+
+# class UploadsByContract(UploadsByClient):
+#     @classmethod
+#     def create_instance(self, ar, **kw):
+#         obj = super(UploadsByContract, self).create_instance(ar, **kw)
+#         obj.owner = obj.project
+#         return obj
+
 
 @dd.receiver(dd.post_analyze)
 def customize_cv(sender, **kw):
