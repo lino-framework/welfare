@@ -21,13 +21,13 @@ Overview
 --------
 
 Lino Welfare à la Eupen is the oldest Lino application in the world,
-it was the first Lino who went into production. This was in 2010.
+it was the first Lino that went into production. This was in 2010.
 
 
 >>> print(analyzer.show_complexity_factors())
 - 65 plugins
 - 140 models
-- 539 views
+- 540 views
 - 15 user types
 - 150 dialog actions
 <BLANKLINE>
@@ -97,7 +97,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Eigenschaften : Eigenschaften
   - Büro : Auszüge, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Kalendereinträge, Aufgaben, Anwesenheiten, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
-  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
+  - ÖSHZ : Begleitungen, Klientenkontakte, Standard-Klientenkontaktarten, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
   - Buchhaltung : Gemeinkonten, Begleichungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Journalgruppen, Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
@@ -197,7 +197,7 @@ to explicitly override the language of :meth:`show_menu
   - Kontakte : Kontaktpersonen, Partner, Adressenarten, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - Kalender : Aufgaben, Abonnements
-  - ÖSHZ : Begleitungen, Klientenkontakte, AG-Sperren, Vorstrafen, Klienten, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - ÖSHZ : Begleitungen, Klientenkontakte, Standard-Klientenkontaktarten, AG-Sperren, Vorstrafen, Klienten, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
@@ -292,7 +292,7 @@ Empfangsschalter
   - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Hilfearten, Kategorien
 - Explorer :
   - Kontakte : Kontaktpersonen, Partner, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
-  - ÖSHZ : Begleitungen, Klientenkontakte, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - ÖSHZ : Begleitungen, Klientenkontakte, Standard-Klientenkontaktarten, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
 
@@ -340,7 +340,7 @@ Database structure
 - changes.Change : id, time, type, user, object_type, object_id, master_type, master_id, diff, changed_fields
 - checkdata.Problem : id, user, owner_type, owner_id, checker, message
 - clients.ClientContact : id, company, contact_person, contact_role, type, client, remark
-- clients.ClientContactType : id, name, name_fr, name_en, is_bailiff, can_refund
+- clients.ClientContactType : id, name, known_contact_type, name_fr, name_en, is_bailiff, can_refund
 - coachings.Coaching : id, start_date, end_date, user, client, type, primary, ending
 - coachings.CoachingEnding : id, seqno, name, type, name_fr, name_en
 - coachings.CoachingType : id, name, does_integ, does_gss, eval_guestrole, name_fr, name_en
@@ -1647,7 +1647,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Eigenschaften --> Eigenschaften : 24
 - Explorer --> Büro --> Auszüge : 69
 - Explorer --> Büro --> Uploads : 12
-- Explorer --> Büro --> Upload-Bereiche : 1
+- Explorer --> Büro --> Upload-Bereiche : 2
 - Explorer --> Büro --> E-Mail-Ausgänge : 1
 - Explorer --> Büro --> Anhänge : 1
 - Explorer --> Büro --> Ereignisse/Notizen : 112
@@ -1661,6 +1661,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Kalender --> Aufgaben-Zustände : 5
 - Explorer --> ÖSHZ --> Begleitungen : 91
 - Explorer --> ÖSHZ --> Klientenkontakte : 15
+- Explorer --> ÖSHZ --> Standard-Klientenkontaktarten : 2
 - Explorer --> ÖSHZ --> AG-Sperren : 1
 - Explorer --> ÖSHZ --> Vorstrafen : 1
 - Explorer --> ÖSHZ --> Klienten : 58

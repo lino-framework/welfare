@@ -67,6 +67,7 @@ name to read the documentation):
     checkdata.Checkers : Datentests
     clients.ClientEvents : Beobachtungskriterien
     clients.ClientStates : Bearbeitungszustände Klienten
+    clients.KnownContactTypes : Standard-Klientenkontaktarten
     contacts.PartnerEvents : Beobachtungskriterien
     countries.PlaceTypes : PlaceTypes
     cv.CefLevel : CEF-Kategorien

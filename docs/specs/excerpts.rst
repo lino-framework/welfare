@@ -38,7 +38,7 @@ Here is a more complete list of excerpt types:
  *cbss.ManageAccessRequest (ManageAccess-Anfrage)*       Ja       Ja              ManageAccess-Anfrage
  *cbss.RetrieveTIGroupsRequest (Tx25-Anfrage)*           Ja       Ja              Tx25-Anfrage
  *contacts.Partner (Partner)*                            Nein     Nein            Zahlungserinnerung          WeasyPdfBuildMethod    payment_reminder.weasy.html
- *contacts.Person (Person)*                              Nein     Nein            Terms & conditions          AppyPdfBuildMethod     TermsConditions.odt
+ *contacts.Person (Person)*                              Nein     Nein            Nutzungsbestimmungen        AppyPdfBuildMethod     TermsConditions.odt
  *debts.Budget (Budget)*                                 Ja       Ja              Finanzielle Situation
  *esf.ClientSummary (ESF Summary)*                       Ja       Ja              Training report             WeasyPdfBuildMethod
  *finan.BankStatement (Kontoauszug)*                     Ja       Ja              Kontoauszug

@@ -102,7 +102,7 @@ Romain
   - Bureau : Extraits, Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Observations, Text Field Templates
   - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
-  - CPAS : Interventions, Contacts client, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
+  - CPAS : Interventions, Contacts client, Types de contact connus, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
   - Parcours : Connaissances de langue, Formations, Études, Expériences professionnelles, Connaissances de langue, Compétences professionnelles, Compétences sociales, Freins
   - Intégration : PIISs, Mises à l'emploi art60§7, Candidatures, Services utilisateurs, Mises à l'emploi art61, Stages d'immersion, Preuves de recherche, Fiches FSE, Champs FSE
   - Nouvelles demandes : Compétences
@@ -135,7 +135,7 @@ modifier les intervention d'autres utilisateurs.
   - CPAS : Services, Raisons d’arrêt d'intervention, Types de contact client, Types d'aide sociale, Catégories
 - Explorateur :
   - Contacts : Personnes de contact, Partenaires, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
-  - CPAS : Interventions, Contacts client, Etats bénéficiaires, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
+  - CPAS : Interventions, Contacts client, Types de contact connus, Etats bénéficiaires, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
 - Site : à propos
 
 
@@ -189,7 +189,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  changes.Change                 changes.Changes                 10        0
  checkdata.Problem              checkdata.Problems              6         0
  clients.ClientContact          clients.ClientContacts          7         14
- clients.ClientContactType      clients.ClientContactTypes      7         10
+ clients.ClientContactType      clients.ClientContactTypes      8         10
  coachings.Coaching             coachings.Coachings             8         90
  coachings.CoachingEnding       coachings.CoachingEndings       7         4
  coachings.CoachingType         coachings.CoachingTypes         8         3
@@ -545,7 +545,7 @@ Each window layout defines a given set of fields.
 - immersion.ContractTypes.detail : id, name, name_nl, name_de, name_en, exam_policy, template, overlap_group, full_name
 - immersion.ContractTypes.insert : name, name_nl, name_de, name_en, exam_policy
 - immersion.ContractTypes.merge_row : merge_to, reason
-- immersion.Contracts.detail : id, client, user, language, type, goal, company, contact_person, contact_role, applies_from, applies_until, exam_policy, sector, function, reference_person, printed, date_decided, date_issued, date_ended, ending, responsibilities
+- immersion.Contracts.detail : id, client, user, language, type, goal, company, contact_person, contact_role, applies_from, applies_until, exam_policy, sector, function, reference_person, printed, date_decided, date_issued, date_ended, ending, remark
 - immersion.Contracts.insert : client, company, type, goal
 - immersion.Contracts.merge_row : merge_to, reason
 - immersion.Goals.detail : id, name, name_nl, name_de, name_en
@@ -557,7 +557,7 @@ Each window layout defines a given set of fields.
 - isip.ContractPartners.merge_row : merge_to, reason
 - isip.ContractTypes.detail : id, ref, exam_policy, needs_study_type, name, name_nl, name_de, name_en, full_name
 - isip.ContractTypes.merge_row : merge_to, reason
-- isip.Contracts.detail : id, client, type, user, user_asd, study_type, applies_from, applies_until, exam_policy, language, date_decided, date_issued, printed, date_ended, ending, stages, goals, duties_asd, duties_dsbe, duties_person
+- isip.Contracts.detail : id, client, type, user, user_asd, study_type, applies_from, applies_until, exam_policy, language, date_decided, date_issued, printed, date_ended, ending, uploads_UploadsByController, stages, goals, duties_asd, duties_dsbe, duties_person
 - isip.Contracts.insert : client, type
 - isip.Contracts.merge_row : merge_to, isip_ContractPartner, reason
 - isip.ExamPolicies.detail : id, name, name_nl, name_de, name_en, max_events, every, every_unit, event_type, monday, tuesday, wednesday, thursday, friday, saturday, sunday
@@ -1493,7 +1493,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> Problèmes de données : 0
 - Explorateur --> Bureau --> Extraits : 71
 - Explorateur --> Bureau --> Fichiers téléchargés : 12
-- Explorateur --> Bureau --> Upload Areas : 1
+- Explorateur --> Bureau --> Upload Areas : 2
 - Explorateur --> Bureau --> Mails envoyés : 1
 - Explorateur --> Bureau --> Pièces jointes : 1
 - Explorateur --> Bureau --> Observations : 112
@@ -1511,6 +1511,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Ateliers --> États d'inscription : 6
 - Explorateur --> CPAS --> Interventions : 91
 - Explorateur --> CPAS --> Contacts client : 15
+- Explorateur --> CPAS --> Types de contact connus : 2
 - Explorateur --> CPAS --> Exclusions : 1
 - Explorateur --> CPAS --> Antécédents judiciaires : 1
 - Explorateur --> CPAS --> Bénéficiaires : 58

@@ -51,22 +51,21 @@ Configuring upload types
 This is the list of upload types:
 
 >>> rt.login('rolf').show(uploads.UploadTypes)
-==== ============================ ======== ============= ========================= ====================== ============================
- ID   Bezeichnung                  Wanted   Max. number   Ablaufwarnung (Einheit)   Ablaufwarnung (Wert)   Upload shortcut
----- ---------------------------- -------- ------------- ------------------------- ---------------------- ----------------------------
- 2    Arbeitserlaubnis             Ja       1             monatlich                 2
- 1    Aufenthaltserlaubnis         Ja       1             monatlich                 2
- 7    Behindertenausweis           Nein     -1                                      1
- 8    Diplom                       Ja       -1                                      1
- 3    Führerschein                 Ja       1             monatlich                 1
- 4    Identifizierendes Dokument   Ja       1             monatlich                 1                      Identifizierendes Dokument
- 9    Personalausweis              Nein     -1                                      1
- 5    Vertrag                      Nein     -1                                      1
- 6    Ärztliche Bescheinigung      Nein     -1                                      1
-                                            **-1**                                  **11**
-==== ============================ ======== ============= ========================= ====================== ============================
+==== ============================ ======== ================ ============= ========================= ====================== ============================
+ ID   Bezeichnung                  Wanted   Upload-Bereich   Max. number   Ablaufwarnung (Einheit)   Ablaufwarnung (Wert)   Upload shortcut
+---- ---------------------------- -------- ---------------- ------------- ------------------------- ---------------------- ----------------------------
+ 2    Arbeitserlaubnis             Ja       Allgemein        1             monatlich                 2
+ 1    Aufenthaltserlaubnis         Ja       Allgemein        1             monatlich                 2
+ 7    Behindertenausweis           Nein     Allgemein        -1                                      1
+ 8    Diplom                       Ja       Allgemein        -1                                      1
+ 3    Führerschein                 Ja       Allgemein        1             monatlich                 1
+ 4    Identifizierendes Dokument   Ja       Allgemein        1             monatlich                 1                      Identifizierendes Dokument
+ 9    Personalausweis              Nein     Allgemein        -1                                      1
+ 5    Vertrag                      Nein     Allgemein        -1                                      1
+ 6    Ärztliche Bescheinigung      Nein     Allgemein        -1                                      1
+                                                             **-1**                                  **11**
+==== ============================ ======== ================ ============= ========================= ====================== ============================
 <BLANKLINE>
-
 
 
 
