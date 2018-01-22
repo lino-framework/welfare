@@ -134,6 +134,7 @@ class Summaries(dd.Table):
     results
     """
     allow_create = False
+    hide_sums = True
     # insert_layout = """
     # master
     # education_level result

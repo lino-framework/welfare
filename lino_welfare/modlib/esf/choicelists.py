@@ -99,6 +99,8 @@ class HoursField(StatisticalField):
             help_text=self.text)
 
     def daterange2hours(self, sd, ed, summary):
+        if summary.year is None:
+            return
         if sd and ed:
             ssd = datetime.date(summary.year, summary.month or 1, 1)
             sd = max(sd, ssd)

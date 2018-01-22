@@ -1,1 +1,0 @@
-[31;01m/media/dell1tb/work/welfare/docs_de/aids.rst:192: WARNING: no such column: clients_clientcontacttype.common_contact_type[39;49;00m
