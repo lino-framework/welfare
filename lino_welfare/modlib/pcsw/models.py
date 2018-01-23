@@ -170,6 +170,8 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         abstract = dd.is_abstract_model(__name__, 'Client')
         #~ ordering = ['last_name','first_name']
 
+    quick_search_fields = "prefix name phone gsm street national_id"
+    
     group = models.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
                               verbose_name=_("Integration phase"))
 

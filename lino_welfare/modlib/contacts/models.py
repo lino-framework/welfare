@@ -58,7 +58,7 @@ class Partner(
 
     hidden_columns = 'created modified activity'
 
-    quick_search_fields = "prefix name phone gsm street national_id"
+    quick_search_fields = "prefix name phone gsm street"
     
     is_obsolete = models.BooleanField(
         verbose_name=_("obsolete"), default=False, help_text=u"""\
