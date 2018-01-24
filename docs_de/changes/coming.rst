@@ -2,72 +2,79 @@
 Kommende Version
 ================
 
-- Die Mitarbeiter des Sekretariats/Backoffice/Empfang können jetzt
-  zusätzlich die Reiter "Kalender" und "Verträge" sehen.
+Zur Zeit unter **testlino** einsehbar.
 
-- In Klienten kann man jetzt per Schnellsuche wieder nach Adresse und
-  Nationalregisternummer suchen (so wie es früher schon mal war).
+- **Kontauszüge um den Jahreswechsel herum** wurden bisher nicht
+  importiert, weil Lino da einen Fehlalarm "different years" auslöste.
+  Wenn die neue Version aktiviert worden ist, müssten die fehlenden
+  Auszüge automatisch (beim nächsten Import) erscheinen.
 
-- Tipp : um einen Klienten nach seiner Partnernummer zu finden, kann
-  man im Schnellsuche-Feld ein "#" vor die Nummer setzen.
+- `Prüfung Datumsbereich Beschlüsse & Bescheinigungen`_ (siehe unten)
+  
+- Die Mitarbeiter des Sekretariats/Backoffice/Empfang
+  (Benutzeraart 210) können jetzt zusätzlich die Reiter "Kalender" und
+  "Verträge" sehen.
+
+- In Klienten kann man jetzt wieder **per Schnellsuche nach Adresse
+  und Nationalregisternummer** suchen (so wie es früher schon mal
+  war).
+
+- Tipp : um einen **Klienten nach seiner Partnernummer zu finden**,
+  kann man im Schnellsuche-Feld ein "#" vor die Nummer setzen.
 
 - Ungefragte Änderung: Es gibt jetzt einen Quicklink `[Suchen]`, mit
-  dem man eine Schnellsuche in allen Tabellen auf einmal durchführen
-  kann. Feedback erwünscht.
+  dem man eine **Schnellsuche in allen Tabellen** auf einmal
+  durchführen kann. Feedback erwünscht.
 
 - Deutlichere Fehlermeldung im Fall eines Problems bei der Verbindung
   zur Datenbank.
 
-- `Prüfung Datumsbereich Beschlüsse & Bescheinigungen`_  
-
-  
 
 Prüfung Datumsbereich Beschlüsse & Bescheinigungen
 --------------------------------------------------
 
-Wir haben endlich die Erklärung für :ticket:`1354` gefunden : es ist
-üblich, dass ein Hilfebeschluss zunächst ohne Enddatum registriert
-wird, und dass daraus dann eine Serie von Bestätigungen ebenfalls
-ohne Enddatum erstellt werden. Wenn dann irgendwann der Beschluss
-abgeschlossen wird, dann setzt der verantwortliche Sozi auf dem
-Beschluss ein Enddatum ein und erstellt ggf einen neuen
-Beschluss. Was Lino in diesem Moment nicht meldete, war, dass
-dadurch -zumindest für Lino- alle Bescheinigungen ungültig wurden,
-deren Enddatum leer war : Wenn der Beschluss ein bekanntes Enddatum
-hat, dann darf die Bescheinigung nicht ohne Enddatum sein. Diese
-Regel hat bis März 2017 regelmäßig zum Verlust von Bescheinigungen
-geführt, weil Lino den Regelverstoß erst bei der Datenmigration
-bemerkte und betroffene Bescheinigungen löschte. Ich schrieb dir
-dann zwar immer, dass auch wieder eine Serie von ungültigen
-Bescheinigungen gelöscht worden waren, aber weil keiner eine Ahnung
-hatte, worum es genau ging, habt ihr euch erst Anfang 2017 erstmals
-beschwert, dass manche Bescheinigungen nicht mehr in Lino drin sind,
-obschon sie eindeutig in Lino erstellt und gedruckt worden
-waren. Woraufhin ich die -wie wir annahmen allzu strenge- Regel
-entfernt habe. Seitdem hatten die Benutzer Narrenfreiheit und haben
-dann auch prompt versehentlich neue Bescheinigungen zu alten
+Wir haben die Erklärung für :ticket:`1354` gefunden : es ist üblich,
+dass ein Hilfebeschluss zunächst ohne Enddatum registriert wird, und
+dass daraus dann eine Serie von Bestätigungen ebenfalls ohne Enddatum
+erstellt werden. Wenn dann irgendwann der Beschluss abgeschlossen
+wird, dann setzt der verantwortliche Sozi auf dem Beschluss ein
+Enddatum ein und erstellt ggf einen neuen Beschluss. Was Lino in
+diesem Moment nicht meldete, war, dass dadurch -zumindest für Lino-
+alle Bescheinigungen ungültig wurden, deren Enddatum leer war : Wenn
+der Beschluss ein bekanntes Enddatum hat, dann darf die Bescheinigung
+nicht ohne Enddatum sein. Diese Regel hat bis März 2017 regelmäßig zum
+Verlust von Bescheinigungen geführt, weil Lino den Regelverstoß erst
+bei der Datenmigration bemerkte und betroffene Bescheinigungen
+löschte. Ich berichtete dann zwar immer, dass wieder eine Serie von
+ungültigen Bescheinigungen gelöscht worden waren, aber weil keiner
+eine Ahnung hatte, worum es genau ging, habt ihr euch erst Anfang 2017
+erstmals beschwert, dass manche Bescheinigungen nicht mehr in Lino
+drin sind. Woraufhin ich die -wie wir annahmen allzu strenge- Regel
+entfernt habe. Aber seitdem hatten die Benutzer Narrenfreiheit und
+haben dann auch prompt versehentlich neue Bescheinigungen zu alten
 Hilfebeschlüssen ausgedruckt.
 
-Soweit die Erklärung. Jetzt mein Lösungsvorschlag.
+Soweit die Erklärung. Jetzt die Lösung bzw. der Anfang davon.
 
-  1) ich entschärfe die Regel : wenn der Beschluss ein Enddatum hat,
-     dann darf das Enddatum der Bescheinigung leer sein. Wenn sie
-     eines hat, dann darf es nicht nach dem Enddatum des Beschlusses
-     liegen.
+1) ich habe die Regel entschärft : wenn der Beschluss ein Enddatum
+   hat, dann darf das Enddatum der Bescheinigung leer sein. Wenn sie
+   eines hat, dann darf es nicht nach dem Enddatum des Beschlusses
+   liegen.
 
-  2) mit der entschärften Regel lassen wir den Integritätstest
-     (checkdata) neu laufen. Dadurch werden die momentan 682
-     Fehlwarnungen auf ein paar Dutzend echte Warnungen reduziert.
+2) mit der entschärften Regel haben wir den Integritätstest
+   (checkdata) neu laufen lassen. Dadurch wurden die ursprünglich 682
+   Fehlwarnungen auf ein paar Dutzend echte Warnungen reduziert.
 
-  3) Ich schalte die (entschärfte) Prüfung wieder auf "hart" (also
-     Lino prüft es schon bei der Eingabe, nicht erst im nächtlichen
-     checkdata).
+TODO: Ich sollte die (entschärfte) Prüfung wieder auf "hart" schalten,
+damit Lino es schon bei der Eingabe prüft und nicht erst im
+nächtlichen checkdata.
 
-Frage an euch : Aber was machen wir dann mit diesen paar Dutzend
-echten Warnungen? Beispiel: AMK/01.10.14/22346/4232. Also das sind
-Bescheinigungen, deren Datenbereich tatsächlich ungültig ist. Wenn
-wir die (entschärfte) Prüfung wieder auf hart schalten, dann würden
-diese echt falschen Bescheinigungen wieder gelöscht.
+Aber was machen wir dann mit diesen paar Dutzend echten Warnungen?
+Beispiel: AMK/01.10.14/22346/4232. Also das sind Bescheinigungen,
+deren Datenbereich tatsächlich ungültig ist. Wenn wir die
+(entschärfte) Prüfung wieder auf hart schalten, dann würden diese echt
+falschen Bescheinigungen wieder gelöscht.  Was sagt ihr dazu? Ich sehe
+zwei Möglichkeiten:
 
 a) Das wollen wir nicht, denn die sind ja ausgestellt worden und
    rausgegangen. Also Lino muss ein System kriegen, mit dem man
