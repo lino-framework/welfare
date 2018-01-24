@@ -29,6 +29,8 @@ Zur Zeit unter **testlino** einsehbar.
 - Deutlichere Fehlermeldung im Fall eines Problems bei der Verbindung
   zur Datenbank.
 
+- Lino schlug par défaut "Pflegemutter" statt "Mutter" vor.
+
 
 Prüfung Datumsbereich Beschlüsse & Bescheinigungen
 --------------------------------------------------
