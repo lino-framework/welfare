@@ -31,6 +31,10 @@ Zur Zeit unter **testlino** einsehbar.
 
 - Lino schlug par défaut "Pflegemutter" statt "Mutter" vor.
 
+- Beim Einfügen eines Termins vom Klienten aus ist das Dialogfenster
+  optimiert: Enddatum steht dort jetzt nicht mehr, und die Eintragsart
+  wurde hinzugefügt.
+
 
 Prüfung Datumsbereich Beschlüsse & Bescheinigungen
 --------------------------------------------------

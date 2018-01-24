@@ -718,7 +718,7 @@ class CandidaturesByPerson(Candidatures):
     """
     ...
     """
-    required_roles = dd.login_required(SocialAgent)
+    required_roles = dd.login_required((SocialAgent, SocialCoordinator))
     master_key = 'person'
     column_names = 'date_submitted job:25 sector function ' \
                    'art60 art61 remark state *'
