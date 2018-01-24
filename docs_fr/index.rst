@@ -41,6 +41,7 @@ Table des matières
    jobs
    /glossaire
    /help/index
+   /changes/index
 
 
 

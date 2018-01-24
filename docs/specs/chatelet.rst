@@ -230,7 +230,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        716
  debts.Group                    debts.Groups                    8         8
- esf.ClientSummary              esf.Summaries                   23        189
+ esf.ClientSummary              esf.Summaries                   23        252
  excerpts.Excerpt               excerpts.Excerpts               12        71
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        19
  gfks.HelpText                  gfks.HelpTexts                  4         5
@@ -389,6 +389,7 @@ Each window layout defines a given set of fields.
 - cal.Calendars.insert : name, name_nl, name_de, name_en, color
 - cal.Calendars.merge_row : merge_to, reason
 - cal.EntriesByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
+- cal.EntriesByProject.insert : start_date, start_time, end_time, summary, event_type
 - cal.EventPolicies.merge_row : merge_to, reason
 - cal.EventTypes.detail : name, name_nl, name_de, name_en, event_label, event_label_nl, event_label_de, event_label_en, max_conflicting, max_days, esf_field, email_template, id, all_rooms, locks_user, invite_client, is_appointment, attach_to_email
 - cal.EventTypes.insert : name, name_nl, name_de, name_en, invite_client
@@ -714,6 +715,7 @@ Each window layout is **viewable** by a given set of user types.
 - cal.Calendars.insert : visible for 110 410 admin 910
 - cal.Calendars.merge_row : visible for admin 910
 - cal.EntriesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
+- cal.EntriesByProject.insert : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - cal.EventPolicies.merge_row : visible for admin 910
 - cal.EventTypes.detail : visible for 110 410 admin 910
 - cal.EventTypes.insert : visible for 110 410 admin 910
@@ -1537,7 +1539,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Intégration --> Mises à l'emploi art61 : 8
 - Explorateur --> Intégration --> Stages d'immersion : 7
 - Explorateur --> Intégration --> Preuves de recherche : 11
-- Explorateur --> Intégration --> Fiches FSE : 189
+- Explorateur --> Intégration --> Fiches FSE : 252
 - Explorateur --> Intégration --> Champs FSE : 12
 - Explorateur --> Nouvelles demandes --> Compétences : 8
 - Explorateur --> BCSS --> Requêtes IdentifyPerson : 6

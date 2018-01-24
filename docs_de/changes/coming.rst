@@ -6,34 +6,38 @@ Zur Zeit unter **testlino** einsehbar.
 
 - **Kontauszüge um den Jahreswechsel herum** wurden bisher nicht
   importiert, weil Lino da einen Fehlalarm "different years" auslöste.
-  Wenn die neue Version aktiviert worden ist, müssten die fehlenden
-  Auszüge automatisch (beim nächsten Import) erscheinen.
+  In der testlino kann man das jetzt noch nicht sehen, aber wenn die
+  neue Version aktiviert worden ist, müssten die fehlenden Auszüge
+  automatisch (nach dem nächsten Import) erscheinen.
 
 - `Prüfung Datumsbereich Beschlüsse & Bescheinigungen`_ (siehe unten)
   
-- Die Mitarbeiter des Sekretariats/Backoffice/Empfang
-  (Benutzeraart 210) können jetzt zusätzlich die Reiter "Kalender" und
+- Die Mitarbeiter des Sekretariats/Backoffice/Empfang (Benutzerart 210
+  "Empfangsschalter") können jetzt auch die Reiter "Kalender" und
   "Verträge" sehen.
 
 - In Klienten kann man jetzt wieder **per Schnellsuche nach Adresse
   und Nationalregisternummer** suchen (so wie es früher schon mal
   war).
 
-- Tipp : um einen **Klienten nach seiner Partnernummer zu finden**,
-  kann man im Schnellsuche-Feld ein "#" vor die Nummer setzen.
+- Tipp : um einen Klienten nach seiner ID (Partnernummer) zu finden,
+  kann man im Schnellsuch-Feld ein "#" vor die Nummer setzen.  Das
+  Gleiche gilt auch für Verträge, Auszüge etc.
 
-- Ungefragte Änderung: Es gibt jetzt einen Quicklink `[Suchen]`, mit
-  dem man eine **Schnellsuche in allen Tabellen** auf einmal
-  durchführen kann. Feedback erwünscht.
-
-- Deutlichere Fehlermeldung im Fall eines Problems bei der Verbindung
-  zur Datenbank.
 
 - Lino schlug par défaut "Pflegemutter" statt "Mutter" vor.
 
 - Beim Einfügen eines Termins vom Klienten aus ist das Dialogfenster
   optimiert: Enddatum steht dort jetzt nicht mehr, und die Eintragsart
   wurde hinzugefügt.
+
+- Eine ungefragte Änderung: Es gibt jetzt einen Quicklink `[Suchen]`,
+  mit dem man eine **Schnellsuche in allen Tabellen** auf einmal
+  durchführen kann. Momentan ist die Funktion nur sichtbar für
+  Systemverwalter. Feedback erwünscht.
+
+- Deutlichere Fehlermeldung im Fall eines Problems bei der Verbindung
+  zur Datenbank.
 
 
 Prüfung Datumsbereich Beschlüsse & Bescheinigungen
