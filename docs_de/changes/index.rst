@@ -1,3 +1,5 @@
+.. _weleup.changes:
+
 ==================================
 Änderungen in Lino Welfare "Eupen"
 ==================================

@@ -1,15 +1,11 @@
+.. doctest docs/specs/clients_eupen.rst
 .. _welfare.specs.clients.eupen:
 
 ===============
 Clients (Eupen)
 ===============
 
-.. How to test only this document:
-
-    $ doctest docs/specs/clients_eupen.rst
-    
-    doctest init:
-
+..  doctest init:
     >>> import lino
     >>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *

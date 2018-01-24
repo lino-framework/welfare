@@ -83,7 +83,8 @@ True
 
 A reception clerk can see the :guilabel:`Calendar` tab because it
 contains the :class:`EntriesByClient
-<lino_welfare.modlib.cal.EntriesByClient>` panel.
+<lino_welfare.modlib.cal.EntriesByClient>` panel.  Since 20180124 also
+TasksByProject of that tab.
 
 >>> rt.models.cal.EntriesByClient.get_view_permission(p210)
 True
@@ -91,7 +92,7 @@ True
 >>> print(py2rst(pcsw.Clients.detail_layout['calendar']))
 **Kalender** (calendar) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
 - **Kalendereinträge** (cal.EntriesByClient)
-- **Aufgaben** (cal.TasksByProject) [visible for 100 110 120 200 300 400 410 500 510 admin 910]
+- **Aufgaben** (cal.TasksByProject)
 <BLANKLINE>
 
 

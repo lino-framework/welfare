@@ -1,3 +1,5 @@
+.. _welcht.changes:
+
 ========================================
 Changements dans Lino Welfare "Châtelet"
 ========================================
