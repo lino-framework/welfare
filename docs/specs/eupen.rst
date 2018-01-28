@@ -1674,7 +1674,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> ÖSHZ --> Einkommensbescheinigungen : 59
 - Explorer --> ÖSHZ --> Kostenübernahmescheine : 13
 - Explorer --> ÖSHZ --> Einfache Bescheinigungen : 20
-- Explorer --> ÖSHZ --> Phonetische Wörter : 132
+- Explorer --> ÖSHZ --> Phonetische Wörter : 131
 - Explorer --> Buchhaltung --> Gemeinkonten : 18
 - Explorer --> Buchhaltung --> Begleichungsregeln : 3
 - Explorer --> Buchhaltung --> Belege : 56
