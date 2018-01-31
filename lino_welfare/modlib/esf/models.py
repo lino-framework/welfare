@@ -79,15 +79,17 @@ class ClientSummary(Certifiable, Summary):
             qs, 'event__start_date', partner=self.master)
         yield (self.collect_from_guest, qs)
 
-        qs = rt.models.immersion.Contract.objects.all()
-        qs = self.add_date_filter(
-            qs, 'applies_from', client=self.master)
-        yield (self.collect_from_immersion_contract, qs)
+        if dd.is_installed('immersion'):
+            qs = rt.models.immersion.Contract.objects.all()
+            qs = self.add_date_filter(
+                qs, 'applies_from', client=self.master)
+            yield (self.collect_from_immersion_contract, qs)
 
-        qs = rt.models.jobs.Contract.objects.all()
-        qs = self.add_date_filter(
-            qs, 'applies_from', client=self.master)
-        yield (self.collect_from_jobs_contract, qs)
+        if dd.is_installed('jobs'):
+            qs = rt.models.jobs.Contract.objects.all()
+            qs = self.add_date_filter(
+                qs, 'applies_from', client=self.master)
+            yield (self.collect_from_jobs_contract, qs)
 
     def reset_summary_data(self):
         for sf in StatisticalFields.objects():

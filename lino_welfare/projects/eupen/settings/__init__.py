@@ -43,7 +43,7 @@ class Site(Site):
     # use_websockets = True
 
     demo_fixtures = """std std2 few_languages props all_countries
-    demo payments demo2 cbss checkdata""".split()
+    demo payments demo2 cbss checkdata checksummaries""".split()
 
     def get_default_language(self):
         return 'de'
