@@ -1700,7 +1700,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> DSBE --> Stellenanfragen : 75
 - Explorer --> DSBE --> Vertragspartner : 39
 - Explorer --> DSBE --> Art.61-Konventionen : 8
-- Explorer --> DSBE --> ESF Summaries : 0
+- Explorer --> DSBE --> ESF Summaries : 252
 - Explorer --> DSBE --> ESF fields : 12
 - Explorer --> Kurse --> Kurse : 4
 - Explorer --> Kurse --> Kursanfragen : 20
