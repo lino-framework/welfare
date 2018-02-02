@@ -74,12 +74,12 @@ Lino Welfare à la Chatelet.
     - **Antécédents judiciaires** (pcsw.ConvictionsByClient)
   - **Autres freins** (obstacles) [visible for all]
 - **PIIS** (isip_tab) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]:
-  - **PIISs** (isip.ContractsByClient) [visible for 100 110 120 200 300 400 410 admin 910]
+  - **PIISs** (isip.ContractsByClient) [visible for 100 110 120 210 admin 910]
   - **Octrois d'aide** (aids.GrantingsByClient)
 - **O.I.** (courses_tab) [visible for 100 110 120 200 210 300 400 410 800 admin 910]:
   - **Ateliers d'insertion sociale** (courses.BasicEnrolmentsByPupil)
   - **Ateliers d'Insertion socioprofessionnelle** (courses.JobEnrolmentsByPupil)
-- **Stages d'immersion** (immersion.ContractsByClient) [visible for 100 110 120 admin 910]
+- **Stages d'immersion** (immersion.ContractsByClient) [visible for 100 110 120 210 admin 910]
 - **RAE** (job_search_1) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]:
   - (suche):
     - (suche_1) [visible for all]: **cherche du travail** (is_seeking), **Inoccupé depuis** (unemployed_since), **Cherche du travail depuis** (seeking_since), **Suspendu jusque** (work_permit_suspended_until)
@@ -88,10 +88,10 @@ Lino Welfare à la Chatelet.
   - (papers) [visible for 100 110 120 200 300 400 410 admin 910]:
     - **Preuves de recherche** (active_job_search.ProofsByClient) [visible for 100 110 120 admin 910]
     - **Interviews** (polls_ResponsesByPartner)
-- **Mise à l'emploi** (contracts) [visible for 100 110 120 200 300 400 410 admin 910]:
+- **Mise à l'emploi** (contracts) [visible for 100 110 120 200 210 300 400 410 admin 910]:
   - **Candidatures** (jobs.CandidaturesByPerson)
   - **Mises à l'emploi art60§7** (jobs.ContractsByClient)
-  - **Mises à l'emploi art.61 et activations** (art61.ContractsByClient) [visible for 100 110 120 admin 910]
+  - **Mises à l'emploi art.61 et activations** (art61.ContractsByClient) [visible for 100 110 120 210 admin 910]
 - **Historique** (history) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]:
   - **Observations** (notes.NotesByProject)
   - (history_right):
@@ -100,7 +100,7 @@ Lino Welfare à la Chatelet.
     - **Fiches FSE** (esf.SummariesByClient) [visible for 100 110 120 admin 910]
 - **Calendrier** (calendar) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
   - **Entrées calendrier** (cal.EntriesByClient)
-  - **Tâches** (cal.TasksByProject) [visible for 100 110 120 200 300 400 410 500 510 admin 910]
+  - **Tâches** (cal.TasksByProject)
 - **Divers** (misc) [visible for 110 410 admin 910]:
   - (misc_1) [visible for all]: **Activité** (activity), **État** (client_state), **Titre de noblesse** (noble_condition), **Indisponible jusque** (unavailable_until), **raison** (unavailable_why)
   - (misc_2) [visible for all]: **obsolete** (is_obsolete), **ESF data** (has_esf), **Créé** (created), **Modifié** (modified)

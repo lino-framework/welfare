@@ -1,3 +1,4 @@
+.. doctest docs/specs/dupable_clients.rst
 .. _welfare.tested.dupe_clients:
 
 ===========================
@@ -8,11 +9,7 @@ Lino Welfare offers some functionality for avoiding duplicate
 :class:`Client <lino_welfare.modlib.pcsw.models.Client>` records.
 
 
-..  To test just this document, run::
-
-    $ python setup.py test -s tests.SpecsTests.test_dupable
-
-    doctest init:
+..  doctest init:
 
     >>> from __future__ import print_function, unicode_literals
     >>> import lino
@@ -62,7 +59,7 @@ See :class:`lino.mixins.dupable.PhoneticWordBase`.
  159   Radermacher Guido       *RTRMKR*, *KT*
  161   Radermacher Hedi        *RTRMKR*, *HT*
  173   Radermecker Rik         *RTRMKR*, *RK*
- 165   da Vinci David          *T*, *FNS*, *TFT*
+ 165   da Vinci David          *FNS*, *TFT*
  166   van Veen Vincent        *FN*, *FNSNT*
  168   Östges Otto             *ASTJS*, *AT*
 ===== ======================= =======================

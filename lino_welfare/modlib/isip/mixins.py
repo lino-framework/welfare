@@ -36,6 +36,8 @@ from lino import mixins
 from lino.utils import mti
 
 from lino.modlib.users.mixins import UserAuthored
+from lino.modlib.uploads.mixins import UploadController
+from lino.modlib.uploads.choicelists import UploadAreas
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino_xl.lib.cal.mixins import EventGenerator
 from lino_xl.lib.contacts.mixins import ContactRelated
@@ -211,7 +213,8 @@ OverlappingContractsChecker.activate()
 
 
 @dd.python_2_unicode_compatible
-class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
+class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
+                   UploadController):
     """Abstract base class for all *integration contracts* (an unofficial
     term), i.e.  :class:`isip.Contract
     <lino_welfare.modlib.isip.models.Contract>` :class:`jobs.Contract
@@ -315,6 +318,9 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored):
         # return u'%s#%s (%s)' % (self._meta.verbose_name, self.pk,
         #                         self.client.get_full_name(salutation=False))
 
+    def get_upload_area(self):
+        return UploadAreas.contract
+    
     def get_excerpt_title(self):
         """The printed title of a contract specifies just the contract type
         (not the number and name of client).

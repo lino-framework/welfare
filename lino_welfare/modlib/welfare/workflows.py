@@ -53,3 +53,11 @@ ExcerptsByProject.required_roles = dd.login_required(
 #     m.define_action(merge_row=dd.MergeAction(
 #         m, required_roles=set([ContactsStaff])))
 
+
+
+from lino.modlib.uploads.choicelists import UploadAreas
+UploadAreas.clear()
+add = UploadAreas.add_item
+add('10', _("Contract"), 'contract')
+add('90', _("General"), 'general')
+

@@ -53,7 +53,7 @@ from lino_xl.lib.clients.choicelists import ClientEvents, ObservedEvent
 from lino_welfare.modlib.isip.mixins import (
     ContractTypeBase, ContractPartnerBase, ContractBase)
 
-from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
+from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent, SocialCoordinator
 from lino_welfare.modlib.integ.roles import IntegrationAgent
 
 from .mixins import JobSupplyment
@@ -363,6 +363,7 @@ class Contracts(isip.ContractBaseTable):
 class ContractsByClient(Contracts):
     """Shows the *Art60§7 job supplyments* for this client.
     """
+    required_roles = dd.login_required((SocialAgent, SocialCoordinator))
     master_key = 'client'
     auto_fit_column_widths = True
     column_names = "applies_from applies_until date_ended duration type " \
@@ -717,7 +718,7 @@ class CandidaturesByPerson(Candidatures):
     """
     ...
     """
-    required_roles = dd.login_required(SocialAgent)
+    required_roles = dd.login_required((SocialAgent, SocialCoordinator))
     master_key = 'person'
     column_names = 'date_submitted job:25 sector function ' \
                    'art60 art61 remark state *'

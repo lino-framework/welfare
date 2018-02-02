@@ -1,3 +1,4 @@
+.. doctest docs/specs/uploads.rst
 .. _welfare.specs.uploads:
 
 =============
@@ -16,7 +17,7 @@ Uploads
 
 A technical tour into the :mod:`lino_welfare.modlib.uploads` plugin.
 
-Lino Welfare extends the standard :mod:`lino.modlib.uploads` plugin
+Lino Welfare extends the standard :mod:`lino_xl.lib.uploads` plugin
 into a system which helps social agents to manage certain documents
 about their clients. For example, integration agents want to get a
 reminder when the driving license of one of their client is going to
@@ -26,13 +27,16 @@ expire.
    :depth: 2
 
     
-A few things that should pass, otherwise don't expect the remaining
-tests to pass:
+.. A few things that should pass, otherwise don't expect the remaining
+   tests to pass:
 
->>> print(settings.SETTINGS_MODULE)
-lino_welfare.projects.eupen.settings.doctests
->>> dd.today()
-datetime.date(2014, 5, 22)
+    >>> print(settings.SETTINGS_MODULE)
+    lino_welfare.projects.eupen.settings.doctests
+    >>> dd.today()
+    datetime.date(2014, 5, 22)
+
+    >>> print(dd.plugins.uploads)
+    lino_xl.lib.uploads (extends_models=['UploadType', 'Upload'])
 
 .. Some of the following tests rely on the right value for the
    contenttype id of `pcsw.Client` model. If the following line
@@ -47,22 +51,21 @@ Configuring upload types
 This is the list of upload types:
 
 >>> rt.login('rolf').show(uploads.UploadTypes)
-==== ============================ ======== ============= ========================= ====================== ============================
- ID   Bezeichnung                  Wanted   Max. number   Ablaufwarnung (Einheit)   Ablaufwarnung (Wert)   Upload shortcut
----- ---------------------------- -------- ------------- ------------------------- ---------------------- ----------------------------
- 2    Arbeitserlaubnis             Ja       1             monatlich                 2
- 1    Aufenthaltserlaubnis         Ja       1             monatlich                 2
- 7    Behindertenausweis           Nein     -1                                      1
- 8    Diplom                       Ja       -1                                      1
- 3    Führerschein                 Ja       1             monatlich                 1
- 4    Identifizierendes Dokument   Ja       1             monatlich                 1                      Identifizierendes Dokument
- 9    Personalausweis              Nein     -1                                      1
- 5    Vertrag                      Nein     -1                                      1
- 6    Ärztliche Bescheinigung      Nein     -1                                      1
-                                            **-1**                                  **11**
-==== ============================ ======== ============= ========================= ====================== ============================
+==== ============================ ======== ================ ============= ========================= ====================== ============================
+ ID   Bezeichnung                  Wanted   Upload-Bereich   Max. number   Ablaufwarnung (Einheit)   Ablaufwarnung (Wert)   Upload shortcut
+---- ---------------------------- -------- ---------------- ------------- ------------------------- ---------------------- ----------------------------
+ 2    Arbeitserlaubnis             Ja       Allgemein        1             monatlich                 2
+ 1    Aufenthaltserlaubnis         Ja       Allgemein        1             monatlich                 2
+ 7    Behindertenausweis           Nein     Allgemein        -1                                      1
+ 8    Diplom                       Ja       Allgemein        -1                                      1
+ 3    Führerschein                 Ja       Allgemein        1             monatlich                 1
+ 4    Identifizierendes Dokument   Ja       Allgemein        1             monatlich                 1                      Identifizierendes Dokument
+ 9    Personalausweis              Nein     Allgemein        -1                                      1
+ 5    Vertrag                      Nein     Allgemein        -1                                      1
+ 6    Ärztliche Bescheinigung      Nein     Allgemein        -1                                      1
+                                                             **-1**                                  **11**
+==== ============================ ======== ================ ============= ========================= ====================== ============================
 <BLANKLINE>
-
 
 
 

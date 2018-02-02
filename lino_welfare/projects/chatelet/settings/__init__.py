@@ -36,6 +36,8 @@ class Site(Site):
     demo cbss demo2 checksummaries""".split()
 
     migration_class = 'lino_welfare.projects.chatelet.migrate.Migrator'
+    
+    # custom_layouts_module = 'lino_welfare.projects.chatelet.layouts'
 
     def get_apps_modifiers(self, **kw):
         kw = super(Site, self).get_apps_modifiers(**kw)

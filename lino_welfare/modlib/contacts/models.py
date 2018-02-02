@@ -56,6 +56,10 @@ class Partner(
 
     """
 
+    hidden_columns = 'created modified activity'
+
+    quick_search_fields = "prefix name phone gsm street"
+    
     is_obsolete = models.BooleanField(
         verbose_name=_("obsolete"), default=False, help_text=u"""\
 Altfälle sind Partner, deren Stammdaten nicht mehr gepflegt werden und
@@ -63,8 +67,6 @@ für neue Operationen nicht benutzt werden können.""")
 
     activity = models.ForeignKey("pcsw.Activity",
                                  blank=True, null=True)
-
-    hidden_columns = 'created modified activity'
 
     # client_contact_type = dd.ForeignKey(
     #     'clients.ClientContactType', blank=True, null=True)

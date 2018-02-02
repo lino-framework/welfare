@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2018 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -30,6 +30,7 @@ from lino.api import dd
 from lino_welfare.modlib.isip.mixins import ContractBaseTable
 
 from lino_welfare.modlib.integ.roles import IntegrationAgent, IntegrationStaff
+from lino_welfare.modlib.pcsw.roles import SocialCoordinator
 
 
 class Goals(dd.Table):
@@ -67,15 +68,25 @@ class ContractDetail(dd.DetailLayout):
     id:8 client:25 user:15 language:8
     type goal company contact_person contact_role
     applies_from applies_until exam_policy
+    # sector_function:30 remark:30 person_printed 
     sector function
     reference_person printed
     date_decided date_issued date_ended ending:20
-    responsibilities
+    remark #responsibilities
     """
 
     right = """
     cal.EntriesByController
     cal.TasksByController
+    """
+
+    sector_function = """
+    sector
+    function
+    """
+    person_printed = """
+    reference_person
+    printed
     """
 
     main = """
@@ -119,6 +130,7 @@ class Contracts(ContractBaseTable):
 class ContractsByClient(Contracts):
     """
     """
+    required_roles = dd.login_required((IntegrationAgent, SocialCoordinator))
     master_key = 'client'
     auto_fit_column_widths = True
     column_names = ('applies_from applies_until type '

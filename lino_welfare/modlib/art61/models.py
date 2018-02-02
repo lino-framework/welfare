@@ -42,6 +42,7 @@ from .choicelists import Subsidizations
 
 from lino_xl.lib.coachings.utils import has_contracts_filter
 from lino_xl.lib.clients.choicelists import ClientEvents, ObservedEvent
+from lino_welfare.modlib.pcsw.roles import SocialCoordinator
 
 
 class ClientHasContract(ObservedEvent):
@@ -212,6 +213,7 @@ class Contracts(ContractBaseTable):
 class ContractsByClient(Contracts):
     """Shows the *Art61 job supplyments* for this client.
     """
+    required_roles = dd.login_required((IntegrationAgent, SocialCoordinator))
     label = _("Art61 job supplyments and activations")
     master_key = 'client'
     auto_fit_column_widths = True

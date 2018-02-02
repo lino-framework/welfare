@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2017 Luc Saffre
+# Copyright 2008-2018 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -43,6 +43,7 @@ from lino_xl.lib.clients.choicelists import ClientEvents, ObservedEvent
 
 from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
 from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino_welfare.modlib.pcsw.roles import SocialCoordinator
 
 
 class ClientHasContract(ObservedEvent):
@@ -367,6 +368,7 @@ class MyContracts(Contracts):
 
 
 class ContractsByClient(Contracts):
+    required_roles = dd.login_required((IntegrationAgent, SocialCoordinator))
     master_key = 'client'
     column_names = ('applies_from applies_until type '
                     'user study_type date_ended ending *')
@@ -411,6 +413,15 @@ class EntriesByContract(dd.Table):
     def override_column_headers(self, ar, **kwargs):
         kwargs.update(start_date=_("Date"))
         return kwargs
+
+# from lino_xl.lib.uploads.models import UploadsByClient
+
+# class UploadsByContract(UploadsByClient):
+#     @classmethod
+#     def create_instance(self, ar, **kw):
+#         obj = super(UploadsByContract, self).create_instance(ar, **kw)
+#         obj.owner = obj.project
+#         return obj
 
 
 @dd.receiver(dd.post_analyze)

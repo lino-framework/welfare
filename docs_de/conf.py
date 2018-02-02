@@ -11,7 +11,7 @@ configure(globals(), 'lino_welfare.projects.eupen.settings.doctests')
 
 extensions += ['atelier.sphinxconf.blog']
 extensions += ['lino.sphinxcontrib.logo']
-extensions += ['lino.sphinxcontrib.actordoc']
+# extensions += ['lino.sphinxcontrib.actordoc']
 
 
 intersphinx_mapping = {}
@@ -176,3 +176,5 @@ html_theme_options = {
     "font_family": my_font_family,
     "head_font_family": my_font_family,
 }
+
+extlinks.update(ticket=('http://bugs.saffre-rumma.net/tickets/Ticket/%s', '#'))

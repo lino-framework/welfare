@@ -99,6 +99,8 @@ class HoursField(StatisticalField):
             help_text=self.text)
 
     def daterange2hours(self, sd, ed, summary):
+        if summary.year is None:
+            return
         if sd and ed:
             ssd = datetime.date(summary.year, summary.month or 1, 1)
             sd = max(sd, ssd)
@@ -107,7 +109,7 @@ class HoursField(StatisticalField):
                 datetime.date(summary.year, summary.month or 12, 1))
             ed = min(ed, sed)
             nb_of_days = weekdays(sd, ed)
-            return Duration("38:00") * nb_of_days / 7
+            return Duration("38:00") * nb_of_days / 5
             # return Duration("8:00") * nb_of_days
 
 

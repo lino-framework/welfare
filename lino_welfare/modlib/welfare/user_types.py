@@ -38,6 +38,7 @@ from lino_welfare.modlib.cbss.roles import CBSSUser, SecurityAdvisor
 from lino_xl.lib.coachings.roles import CoachingsStaff
 from lino_welfare.modlib.pcsw.roles import SocialAgent
 from lino_welfare.modlib.pcsw.roles import SocialStaff
+from lino_welfare.modlib.pcsw.roles import SocialCoordinator
 from lino_welfare.modlib.aids.roles import AidsStaff
 from lino_welfare.modlib.integ.roles import IntegrationAgent, IntegrationStaff
 from lino_welfare.modlib.debts.roles import DebtsUser, DebtsStaff
@@ -72,7 +73,7 @@ class ReceptionClerk(SiteUser, AuthorshipTaker, OfficeOperator,
                      GuestOperator,
                      ContactsStaff, AidsStaff, CBSSUser, BeIdUser,
                      SepaUser, CoursesUser, ExcerptsUser,
-                     CoachingsStaff):
+                     SocialCoordinator, CoachingsStaff):
     """
     A **reception clerk** is a user who is not a *social agent* but
     receives clients and does certain administrative tasks (in Eupen

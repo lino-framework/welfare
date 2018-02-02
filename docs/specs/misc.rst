@@ -270,7 +270,7 @@ see it.
 - cal.EntriesByClient.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - cal.EntriesByController.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - cal.EntriesByDay.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
-- cal.EntriesByProject.duplicate : visible for 100 110 120 200 300 400 410 500 510 admin 910
+- cal.EntriesByProject.duplicate : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - cal.EntriesByRoom.duplicate : visible for 110 410 admin 910
 - cal.EntriesByType.duplicate : visible for 110 410 admin 910
 - cal.EventTypes.duplicate : visible for 110 410 admin 910

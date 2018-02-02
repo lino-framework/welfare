@@ -48,6 +48,8 @@ from lino.core.utils import get_field
 from lino_xl.lib.cal.utils import update_reminder
 from lino_xl.lib.cal.choicelists import DurationUnits
 from lino.modlib.uploads.choicelists import Shortcuts
+from lino.modlib.uploads.mixins import UploadController
+
 from lino_xl.lib.notes.choicelists import SpecialTypes
 from lino_xl.lib.notes.mixins import Notable
 from lino_welfare.modlib.dupable_clients.mixins import DupableClient
@@ -88,7 +90,7 @@ from .actions import RefuseClient, MarkClientFormer
 
 @dd.python_2_unicode_compatible
 class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
-             DupableClient, Coachable, Notable):
+             DupableClient, Coachable, Notable, UploadController):
 
     """Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
     :class:`lino_xl.lib.beid.models.BeIdCardHolder`.
@@ -168,6 +170,8 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         abstract = dd.is_abstract_model(__name__, 'Client')
         #~ ordering = ['last_name','first_name']
 
+    quick_search_fields = "prefix name phone gsm street national_id"
+    
     group = models.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
                               verbose_name=_("Integration phase"))
 
