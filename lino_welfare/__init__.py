@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2002-2016 Luc Saffre
+# Copyright 2002-2018 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -37,4 +37,4 @@ doc_trees = ['docs', 'docs_de', 'docs_fr']
 intersphinx_urls = dict(docs="http://welfare.lino-framework.org")
 intersphinx_urls.update(docs_de="http://de.welfare.lino-framework.org")
 intersphinx_urls.update(docs_fr="http://fr.welfare.lino-framework.org")
-srcref_url = 'https://github.com/lsaffre/lino-welfare/blob/master/%s'
+srcref_url = 'https://github.com/lino-framework/welfare/blob/master/%s'
