@@ -1,0 +1,86 @@
+[31m/media/dell1tb/work/welfare/docs_de/aids.rst:81: WARNING: Unknown directive type "django2rst".
+
+.. django2rst::
+
+   rt.show(aids.AidTypes, column_names="name excerpt_title confirmed_by_primary_coach body_template confirmation_type")[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/aids.rst:99: WARNING: Unknown directive type "django2rst".
+
+.. django2rst::
+
+   rt.show(aids.ConfirmationTypes, column_names="text et_template")[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/aids.rst:140: WARNING: Unknown directive type "django2rst".
+
+.. django2rst::
+
+   rt.show(aids.AidTypes, column_names="name body_template")[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/aids.rst:174: WARNING: Unknown directive type "django2rst".
+
+.. django2rst::
+
+   from django.utils import translation
+   from lino.utils.xmlgen.html import E
+   ses = rt.login('alicia')
+   translation.activate('de')
+   for msg in settings.SITE.get_welcome_messages(ses):
+       print(E.tostring(msg))[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/aids.rst:192: WARNING: Unknown directive type "django2rst".
+
+.. django2rst::
+
+    from __future__ import unicode_literals
+    from django.utils import translation
+    from atelier.rstgen import header
+    ses = rt.login("rolf")
+    translation.activate('de')
+
+    for at in aids.AidType.objects.exclude(confirmation_type=''):
+        M = at.confirmation_type.model
+        qs = M.objects.filter(granting__aid_type=at)
+        obj = qs[0]
+        ex = obj.printed_by
+        if ex:
+            print(header(5, unicode(at)))
+            print(header(6, "Beispiel"))
+            print("")
+            print(".. raw:: html")
+            print("")
+            for ln in ses.get_data_value(ex, 'preview').splitlines():
+                print("    " + ln)
+            print("")
+
+            print(header(6, "Vorlage"))
+            print("::")
+            print("")
+            for ln in ses.get_data_value(ex, 'body_template_content').splitlines():
+                print("    " + ln)
+            print("")
+
+    print("")[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/excerpts.rst:62: WARNING: Unknown directive type "django2rst".
+
+.. django2rst::
+
+   from lino_xl.lib.excerpts.doctools import show_excerpts
+   print(show_excerpts())[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/klienten.rst:27: WARNING: Unknown interpreted text role "menupath".[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/klienten.rst:30: WARNING: Unknown interpreted text role "menupath".[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/klienten.rst:35: WARNING: Unknown interpreted text role "menupath".[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/klienten.rst:38: WARNING: Unknown interpreted text role "menupath".[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/klienten.rst:41: WARNING: Unknown interpreted text role "menupath".[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/klienten.rst:55: WARNING: Unknown directive type "fields_list".
+
+.. fields_list:: pcsw.Client
+   unemployed_since seeking_since unavailable_until[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/klienten.rst:58: WARNING: Unknown interpreted text role "ddref".[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/partner.rst:17: WARNING: Unknown directive type "django2rst".
+
+.. django2rst::
+
+   with dd.translation.override('de'):
+       contacts.Partner.print_subclasses_graph()[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/users.rst:8: WARNING: Unknown interpreted text role "ddref".[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/watch_tim.rst:42: WARNING: Unknown interpreted text role "ddref".[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/watch_tim.rst:54: WARNING: Unknown interpreted text role "ddref".[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/watch_tim.rst:56: WARNING: Unknown interpreted text role "ddref".[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/watch_tim.rst:59: WARNING: Unknown interpreted text role "ddref".[39;49;00m
+[31m/media/dell1tb/work/welfare/docs_de/watch_tim.rst:208: WARNING: Unknown interpreted text role "ddref".[39;49;00m
