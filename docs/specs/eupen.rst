@@ -77,7 +77,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Buchhaltung : Buchhaltungsbericht, Schuldner, Gläubiger
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
-  - System : Site-Parameter, Benutzer, Hilfetexte, Update all summary data
+  - System : Site-Parameter, Benutzer, Hilfetexte
   - Orte : Länder, Orte
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
@@ -436,7 +436,7 @@ Database structure
 - uploads.Upload : id, project, start_date, end_date, file, mimetype, user, owner_type, owner_id, company, contact_person, contact_role, upload_area, type, description, remark, needed
 - uploads.UploadType : id, name, upload_area, max_number, wanted, shortcut, warn_expiry_unit, warn_expiry_value, name_fr, name_en
 - users.Authority : id, user, authorized
-- users.User : id, email, language, modified, created, password, last_login, username, user_type, initials, first_name, last_name, remarks, newcomer_consultations, newcomer_appointments, notify_myself, mail_mode, access_class, event_type, calendar, coaching_type, coaching_supervisor, newcomer_quota, partner
+- users.User : id, email, language, modified, created, start_date, end_date, password, last_login, username, user_type, initials, first_name, last_name, remarks, newcomer_consultations, newcomer_appointments, notify_myself, mail_mode, access_class, event_type, calendar, coaching_type, coaching_supervisor, newcomer_quota, partner
 - vatless.AccountInvoice : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, state, voucher_ptr, project, partner, payment_term, match, bank_account, your_ref, due_date, amount
 - vatless.InvoiceItem : id, seqno, project, account, voucher, title, amount
 - xcourses.Course : id, offer, title, start_date, remark
@@ -1700,7 +1700,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> DSBE --> Stellenanfragen : 75
 - Explorer --> DSBE --> Vertragspartner : 39
 - Explorer --> DSBE --> Art.61-Konventionen : 8
-- Explorer --> DSBE --> ESF Summaries : 252
+- Explorer --> DSBE --> ESF Summaries : 189
 - Explorer --> DSBE --> ESF fields : 12
 - Explorer --> Kurse --> Kurse : 4
 - Explorer --> Kurse --> Kursanfragen : 20
