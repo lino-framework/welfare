@@ -588,7 +588,7 @@ class ActivityReport(Report):
         # start_date=models.DateField(verbose_name=_("Period from")),
         # end_date=models.DateField(verbose_name=_("until")),
         include_jobs=models.BooleanField(
-            verbose_name=dd.apps.jobs.verbose_name),
+            verbose_name=dd.plugins.jobs.verbose_name),
         include_isip=models.BooleanField(verbose_name=_("ISIP")),
     )
 

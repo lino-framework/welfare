@@ -1,0 +1,12 @@
+[31mNone:3: WARNING: Unexpected indentation.[39;49;00m
+[31mNone:6: WARNING: Unexpected indentation.[39;49;00m
+[31;01m/media/dell1tb/work/welfare/docs/specs/clients_eupen.rst:11: WARNING: Block quote ends without a blank line; unexpected unindent.[39;49;00m
+[31;01m/media/dell1tb/work/welfare/docs/specs/clients_eupen.rst:16: WARNING: Block quote ends without a blank line; unexpected unindent.[39;49;00m
+[31mNone:19: WARNING: Unexpected indentation.[39;49;00m
+[31mNone:23: WARNING: Unexpected indentation.[39;49;00m
+[31;01m/media/dell1tb/work/welfare/docs/specs/clients_eupen.rst:29: WARNING: Block quote ends without a blank line; unexpected unindent.[39;49;00m
+[31mNone:39: WARNING: Unexpected indentation.[39;49;00m
+[31;01m/media/dell1tb/work/welfare/docs/specs/clients_eupen.rst:41: WARNING: Block quote ends without a blank line; unexpected unindent.[39;49;00m
+[31mNone:53: WARNING: Unexpected indentation.[39;49;00m
+[31;01m/media/dell1tb/work/welfare/docs/specs/clients_eupen.rst:56: WARNING: Block quote ends without a blank line; unexpected unindent.[39;49;00m
+[31mNone:76: WARNING: Unexpected indentation.[39;49;00m

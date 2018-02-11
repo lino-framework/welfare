@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2017 Luc Saffre
+# Copyright 2013-2018 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -130,7 +130,7 @@ class SiteConfigDetail(dd.DetailLayout):
         cbss_org_unit sector ssdn_user_id ssdn_email
         cbss_http_username cbss_http_password
         """,
-        label=dd.apps.cbss.verbose_name,
+        label=dd.plugins.cbss.verbose_name,
         required_roles=dd.login_required(CBSSUser))
 
 
