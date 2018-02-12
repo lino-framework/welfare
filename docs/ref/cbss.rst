@@ -20,7 +20,7 @@ Ce module supporte la gestion des requêtes suivantes:
     Here is an incomplete list (conversion in progress) of the
     "information types" handled by Lino:
 
-    .. django2rst::
+    .. lino2rst:: 
 
         from django.utils import translation
         from lino_welfare.modlib.cbss.tx25 import HANDLERS

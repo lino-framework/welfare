@@ -31,7 +31,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 from lino import mixins
 
-config = dd.apps.badges
+config = dd.plugins.badges
 
 
 class Badge(mixins.BabelNamed):

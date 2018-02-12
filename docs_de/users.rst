@@ -9,10 +9,9 @@ Damit ein Benutzer sich anmelden kann, muss das Feld
 :ddref:`users.User.user_type` ausgefüllt sein.  Es gibt folgende
 Benutzerarten:
 
-.. py2rst::
+.. lino2rst::
 
-    from lino.api import rt
-    rt.show('users.UserTypes', column_names="value text remark", stripped=False)
+    rt.show(users.UserTypes, column_names="value text remark", stripped=False)
     
     
 

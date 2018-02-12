@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2018 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -40,13 +40,13 @@ class TestCase(TestCase):
     maxDiff = None
 
     def test01(self):
-        """Test whether BrokenGFKs works as expected.
+        """
+        Test whether BrokenGFKs works as expected.
 
         We create a Client and a Note whose owner field points to that
         client.  And then, when we have all these database objects
         (generically) related to our client, we delete that
         client. Django does not prevent us from doing it.
-
         """
 
         from django.db.models.deletion import ProtectedError

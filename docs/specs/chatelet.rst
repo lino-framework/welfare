@@ -82,7 +82,7 @@ Romain
 - Rapports :
   - Intégration : Agents et leurs clients, Situation contrats Art 60-7, Rapport d'activité
 - Configuration :
-  - Système : Paramètres du Site, Utilisateurs, Textes d'aide, Update all summary data
+  - Système : Paramètres du Site, Utilisateurs, Textes d'aide
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
   - Bureau : Types d'extrait, Types de fichiers téléchargés, Types d'observation, Types d'événements, Mes Text Field Templates
@@ -230,7 +230,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        716
  debts.Group                    debts.Groups                    8         8
- esf.ClientSummary              esf.Summaries                   23        252
+ esf.ClientSummary              esf.Summaries                   23        189
  excerpts.Excerpt               excerpts.Excerpts               12        71
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        19
  gfks.HelpText                  gfks.HelpTexts                  4         5
@@ -287,7 +287,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  uploads.Upload                 uploads.Uploads                 17        11
  uploads.UploadType             uploads.UploadTypes             11        9
  users.Authority                users.Authorities               3         3
- users.User                     users.Users                     24        12
+ users.User                     users.Users                     26        12
 ============================== =============================== ========= =======
 <BLANKLINE>
 
@@ -1539,7 +1539,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Intégration --> Mises à l'emploi art61 : 8
 - Explorateur --> Intégration --> Stages d'immersion : 7
 - Explorateur --> Intégration --> Preuves de recherche : 11
-- Explorateur --> Intégration --> Fiches FSE : 252
+- Explorateur --> Intégration --> Fiches FSE : 189
 - Explorateur --> Intégration --> Champs FSE : 12
 - Explorateur --> Nouvelles demandes --> Compétences : 8
 - Explorateur --> BCSS --> Requêtes IdentifyPerson : 6

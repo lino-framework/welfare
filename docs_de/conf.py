@@ -11,7 +11,7 @@ configure(globals(), 'lino_welfare.projects.eupen.settings.doctests')
 
 extensions += ['atelier.sphinxconf.blog']
 extensions += ['lino.sphinxcontrib.logo']
-# extensions += ['lino.sphinxcontrib.actordoc']
+extensions += ['lino.sphinxcontrib.actordoc']
 
 
 intersphinx_mapping = {}

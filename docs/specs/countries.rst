@@ -54,9 +54,8 @@ points to another (the "real") country.
 
 The following database fields refer to a country:
 
-.. py2rst::
+.. lino2rst::
 
-   from lino.api import rt
    tpl = "- :class:`{1} <{0}.{1}>`  :attr:`{2} <{0}.{1}.{2}>`"
    for m, f in rt.modules.countries.Country._lino_ddh.fklist:
        print(tpl.format(m.__module__, m.__name__, f.name))

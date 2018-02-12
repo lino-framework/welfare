@@ -98,12 +98,12 @@ been "compiled" for a given user interface, in our case
 LayoutHandle for lino.core.layouts.InsertLayout on lino_welfare.modlib.aids.models.IncomeConfirmationsByGranting
 
 >>> lh.main.__class__
-<class 'lino.modlib.extjs.elems.DetailMainPanel'>
+<class 'lino.core.elems.DetailMainPanel'>
 
 
-The :mod:`lino.modlib.extjs.elems` module contains "Layout Elements"
-or "Widgets". The only purpose of these objects is to generate
-Javascript.  They are ExtJS (version 3) specific.  
+The :mod:`lino.core.elems` module contains "Layout Elements" or
+"Widgets". The only purpose of these objects is to generate
+Javascript.  They are ExtJS (version 3) specific.
 
 They all inherit from :class:`lino.utils.jsgen.Component`, which is
 part of :mod:`lino.utils.jsgen`, which is a general framework for

@@ -78,7 +78,7 @@ Hilfearten
 
 Hier eine Liste der Hilfearten, die Lino kennt:
 
-.. django2rst::
+.. lino2rst::
 
    rt.show(aids.AidTypes, column_names="name excerpt_title confirmed_by_primary_coach body_template confirmation_type")
 
@@ -96,7 +96,7 @@ eine neue Version nötig.
 
 Hier eine Liste der Bestätigungsarten, die Lino kennt:
 
-.. django2rst::
+.. lino2rst::
 
    rt.show(aids.ConfirmationTypes, column_names="text et_template")
 
@@ -137,7 +137,7 @@ mit *Jinja gerendert wird. Welche Textkörper-Vorlage verwendet wird,
 ergibt sich aus der verwendeten *Hilfeart*. Hier die
 Standardkonfiguration:
 
-.. django2rst::
+.. lino2rst::
 
    rt.show(aids.AidTypes, column_names="name body_template")
 
@@ -171,8 +171,9 @@ Hilfebeschlüsse
 Alicia hat 2 Hilfebestätigungen zu unterschreiben. Dies kriegt sie als
 Willkommensmeldung präsentiert:
 
-.. django2rst::
+.. py2rst::
 
+   from lino.api.doctest import *
    from django.utils import translation
    from lino.utils.xmlgen.html import E
    ses = rt.login('alicia')
@@ -189,9 +190,9 @@ Für die Hilfearten aus obiger Liste, für die eine Textkörpervorlage
 definiert ist (also für wir nicht bloß den generischen
 Bestätigungstext haben) hier die gleichen Texte als HTML:
 
-.. django2rst::
+.. py2rst::
 
-    from __future__ import unicode_literals
+    from lino.api.doctest import *
     from django.utils import translation
     from atelier.rstgen import header
     ses = rt.login("rolf")

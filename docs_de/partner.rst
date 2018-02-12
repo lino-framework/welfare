@@ -14,7 +14,7 @@ Kontaktperson in einer Firma, ...
 
 Lino unterscheidet folgende **Arten von Partnern**:
 
-.. django2rst:: 
+.. lino2rst:: 
 
    with dd.translation.override('de'):
        contacts.Partner.print_subclasses_graph()

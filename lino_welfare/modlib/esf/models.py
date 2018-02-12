@@ -61,9 +61,9 @@ class ClientSummary(Certifiable, Summary):
         _("Remark"),
         blank=True, max_length=200)
 
-    @classmethod
-    def get_summary_master_model(cls):
-        return rt.models.pcsw.Client
+    # @classmethod
+    # def get_summary_master_model(cls):
+    #     return rt.models.pcsw.Client
 
     @classmethod
     def get_summary_masters(cls):

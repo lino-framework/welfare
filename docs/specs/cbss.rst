@@ -64,8 +64,9 @@ False
 And your :class:`SiteConfig <lino.modlib.system.models.SiteConfig>`
 has the following additional fields:
 
-.. django2rst::
+.. py2rst:: 
 
+   from lino.api.doctest import *
    from lino.api.doctest import *
    show_fields(rt.models.system.SiteConfig, 
        "sector cbss_org_unit ssdn_user_id cbss_http_password")
