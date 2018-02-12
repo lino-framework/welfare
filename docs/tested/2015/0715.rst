@@ -54,15 +54,14 @@ We are talking about the detail layout of a client, defined by
 >>> print(lh)
 LayoutHandle for lino_welfare.modlib.pcsw.models.ClientDetail on lino_welfare.modlib.pcsw.models.Clients
 
-Let's get the `career` panel. It is a
-:class:`lino.modlib.extjs.elems.Panel`:
+Let's get the `career` panel. It is a :class:`lino.core.elems.Panel`:
 
 >>> # career_panel = lh.main.find_by_name('career')
 >>> career_panel = with_user_profile(ia_user_type, lh.main.find_by_name, 'career')
 >>> career_panel
 <Panel career in lino_welfare.modlib.pcsw.models.ClientDetail on lino_welfare.modlib.pcsw.models.Clients>
 >>> career_panel.__class__
-<class 'lino.modlib.extjs.elems.Panel'>
+<class 'lino.core.elems.Panel'>
 
 To see this panel, you need to be an integration agent:
 
