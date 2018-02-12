@@ -27,7 +27,7 @@ Lino Welfare à la Eupen.
 .. py2rst::
     from lino.api.doctest import *
     with translation.override('de'):
-      print(py2rst(pcsw.Clients.detail_layout))
+      print(py2rst(pcsw.Clients.detail_layout, False))
 
 ..
     >>> from lino.utils.diag import py2rst
