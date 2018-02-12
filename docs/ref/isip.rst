@@ -127,9 +127,9 @@ Models
 
     The demo database has the following examination policies:
 
-    .. django2rst::
+    .. lino2rst:: 
 
-        rt.show('isip.ExamPolicies')
+        rt.show(isip.ExamPolicies)
 
 
 .. class:: ContractEnding
@@ -139,7 +139,7 @@ Models
 
     The demo database has the following contract endings:
 
-    .. django2rst::
+    .. lino2rst:: 
 
         rt.show('isip.ContractEndings')
 
@@ -155,7 +155,7 @@ Choicelists
 
     The demo database has the following contract events:
 
-    .. django2rst::
+    .. lino2rst:: 
 
-        rt.show('isip.ContractEvents')
+        rt.show(isip.ContractEvents)
 

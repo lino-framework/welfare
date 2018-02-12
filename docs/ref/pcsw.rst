@@ -46,7 +46,7 @@ Coaching
 
   TODO: Rename this table to `IntegrationPhase`.
 
-  .. django2rst:: 
+  .. lino2rst:: 
 
       rt.show(pcsw.PersonGroups)
 
@@ -57,14 +57,16 @@ Coaching
 
 .. class:: DispenseReason
 
-  .. django2rst:: 
+  .. lino2rst:: 
 
       rt.show(pcsw.DispenseReasons)
 
 
 .. class:: ExclusionType
 
-  .. django2rst:: rt.show(pcsw.ExclusionTypes)
+  .. lino2rst:: 
+
+      rt.show(pcsw.ExclusionTypes)
 
 
 .. class:: AidType

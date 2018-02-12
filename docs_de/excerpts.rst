@@ -59,7 +59,7 @@ Beispiele von von Ausdrucken aus der Demo-Datenbank
 
 Hier einige Beispiele von Ausdrucken aus der Demo-Datenbank.
 
-.. django2rst::
+.. lino2rst::
 
    from lino_xl.lib.excerpts.doctools import show_excerpts
    print(show_excerpts())

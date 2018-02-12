@@ -31,7 +31,7 @@ Choicelists
     List of possible choices for the
     :attr:`LanguageKnowledge.cef_level` field.
     
-    .. django2rst::
-        
-        rt.show(cv.CefLevel)
+  .. lino2rst:: 
+
+      rt.show(cv.CefLevel)
 

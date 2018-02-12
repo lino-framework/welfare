@@ -24,14 +24,12 @@ the :class:`ClientDetail
 <lino_welfare.projects.eupen.modlib.pcsw.models.ClientDetail>` of a
 Lino Welfare à la Eupen.
 
-.. py2rst::
-    from lino.api.doctest import *
+.. lino2rst::
     with translation.override('de'):
-      print(py2rst(pcsw.Clients.detail_layout, False))
+      print(py2rst(pcsw.Clients.detail_layout))
 
 ..
-    >>> from lino.utils.diag import py2rst
-    >>> print(py2rst(pcsw.Clients.detail_layout, True))
+    >>> print(py2rst(pcsw.Clients.detail_layout))
     ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
     (main) [visible for all]:
     - **Person** (general):

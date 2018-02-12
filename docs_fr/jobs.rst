@@ -19,8 +19,9 @@ sont gérés en collaboration avec des entreprises ou institutions
 spécialisées à l'accqueil temporaire de personnes à intégrer.
 Exemple:
 
-.. django2rst:: 
+.. py2rst:: 
 
+    from lino.api.doctest import *
     rt.show(jobs.Jobs.request(limit=4))
     
 Lino appelle "employant" l'entreprise ou l'organisme dans laquelle le
@@ -36,8 +37,9 @@ contrats sur un poste donné sont de meme type). La liste des types de
 mise à l'emploi est définie dans :menuselection:`Configuration -->
 Intégration --> Types de mise à l'emploi`. Par exemple:
 
-.. django2rst:: 
+.. py2rst:: 
 
+    from lino.api.doctest import *
     rt.show(jobs.ContractType)
 
 
