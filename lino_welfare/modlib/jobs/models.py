@@ -652,7 +652,7 @@ class Candidature(SectorFunction):
         verbose_name=_("Remark"))
 
     state = CandidatureStates.field(
-        default=CandidatureStates.active.as_callable)
+        default=CandidatureStates.as_callable('active'))
 
     art60 = models.BooleanField(
         _("Art.60"), default=False, help_text=_(

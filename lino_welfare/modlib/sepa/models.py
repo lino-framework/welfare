@@ -55,7 +55,7 @@ class Account(Account):
     """
 
     account_type = AccountTypes.field(
-        default=AccountTypes.giro.as_callable)
+        default=AccountTypes.as_callable('giro'))
     managed = models.BooleanField(
         _("Managed"), default=False,
         help_text=_("Whether this account is being managed by the PCSW."))

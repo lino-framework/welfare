@@ -364,7 +364,7 @@ class CourseRequest(UploadController):
 
 
     state = CourseRequestStates.field(
-        default=CourseRequestStates.candidate.as_callable)
+        default=CourseRequestStates.as_callable('candidate'))
 
     course = models.ForeignKey(
         "xcourses.Course", blank=True, null=True,

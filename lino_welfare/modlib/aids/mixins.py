@@ -158,7 +158,7 @@ class Confirmable(mixins.DateRange):
     )
 
     state = ConfirmationStates.field(
-        default=ConfirmationStates.requested.as_callable)
+        default=ConfirmationStates.as_callable('requested'))
 
     sign = SignConfirmation()
     revoke = RevokeConfirmation()

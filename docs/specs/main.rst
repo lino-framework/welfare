@@ -48,11 +48,11 @@ Suchen
 
 >>> for h in soup.find_all('h2'):
 ...     print(h.text.strip())
-Benutzer und ihre Klienten ⍐
-Wartende Besucher ⍐
-Meine Termine ⍐
-Meine überfälligen Termine ⍐
-Meine Benachrichtigungen ⍐
+Benutzer und ihre Klienten ⏏
+Wartende Besucher ⏏
+Meine Termine ⏏
+Meine überfälligen Termine ⏏
+Meine Benachrichtigungen ⏏
 
 
 >>> test_client.force_login(rt.login('robin').user)
@@ -63,8 +63,8 @@ Meine Benachrichtigungen ⍐
 >>> soup = BeautifulSoup(result['html'], 'lxml')
 >>> for h in soup.find_all('h2'):
 ...     print(h.text.strip())
-Users with their Clients ⍐
-Waiting visitors ⍐
-My appointments ⍐
-My overdue appointments ⍐
-My Notification messages ⍐
+Users with their Clients ⏏
+Waiting visitors ⏏
+My appointments ⏏
+My overdue appointments ⏏
+My Notification messages ⏏

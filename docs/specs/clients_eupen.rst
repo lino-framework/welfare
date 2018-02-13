@@ -25,8 +25,10 @@ the :class:`ClientDetail
 Lino Welfare à la Eupen.
 
 .. lino2rst::
+   
+    from lino.api.doctest import *
     with translation.override('de'):
-      print(py2rst(pcsw.Clients.detail_layout))
+      print(py2rst(pcsw.Clients.detail_layout, False))
 
 ..
     >>> print(py2rst(pcsw.Clients.detail_layout))
