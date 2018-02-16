@@ -31,7 +31,7 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-from lino.utils.xmlgen.html import E
+from etgen.html import E
 
 from lino.api import dd, rt
 

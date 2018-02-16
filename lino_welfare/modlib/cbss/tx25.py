@@ -58,7 +58,7 @@ from django.utils.encoding import force_text
 from lino.api import dd
 from lino.utils import AttrDict, IncompleteDate
 
-from lino.utils.xmlgen import html as xghtml
+from etgen import html as xghtml
 E = xghtml.E
 
 from .utils import cbss2gender

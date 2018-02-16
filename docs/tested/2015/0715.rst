@@ -9,7 +9,7 @@ Reception clerk sees "Career" tab
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.std.settings.doctests')
-    >>> from lino.utils.xmlgen.html import E
+    >>> from etgen.html import E
     >>> from lino.api.doctest import *
     >>> from lino.utils.jsgen import with_user_profile
 

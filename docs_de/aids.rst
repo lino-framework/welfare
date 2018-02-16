@@ -175,7 +175,7 @@ Willkommensmeldung präsentiert:
 
    from lino.api.doctest import *
    from django.utils import translation
-   from lino.utils.xmlgen.html import E
+   from etgen.html import E
    ses = rt.login('alicia')
    translation.activate('de')
    for msg in settings.SITE.get_welcome_messages(ses):

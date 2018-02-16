@@ -10,7 +10,7 @@ Accounting for Lino Welfare
 
     >>> import lino
     >>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
-    >>> from lino.utils.xmlgen.html import E
+    >>> from etgen.html import E
     >>> from lino.api.doctest import *
     >>> from lino.api import rt
 
