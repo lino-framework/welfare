@@ -28,7 +28,7 @@ from django.conf import settings
 
 from lino.api import rt, dd, _
 from lino import mixins
-from lino.utils.xmlgen.html import E
+from etgen.html import E
 from lino.modlib.summaries.mixins import Summary
 
 from lino_welfare.modlib.integ.roles import IntegrationAgent

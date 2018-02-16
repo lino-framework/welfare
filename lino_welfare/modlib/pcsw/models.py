@@ -40,7 +40,7 @@ from django.utils import translation
 from django.contrib.humanize.templatetags.humanize import naturaltime
 
 from lino.utils import join_elems
-from lino.utils.xmlgen.html import E
+from etgen.html import E
 
 from lino.api import dd, rt
 from lino.core.utils import get_field

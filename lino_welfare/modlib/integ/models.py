@@ -18,7 +18,7 @@ from django.db import models
 from django.db.utils import DatabaseError
 from django.conf import settings
 
-from lino.utils.xmlgen.html import E
+from etgen.html import E
 from lino.utils.report import Report
 from lino.mixins import ObservedDateRange
 from lino.modlib.users.choicelists import UserTypes

@@ -35,7 +35,7 @@ from django.core.exceptions import ValidationError
 from django.utils.encoding import force_text
 
 from lino.api import dd, rt, _, pgettext
-from lino.utils.xmlgen.html import E
+from etgen.html import E
 from lino import mixins
 
 from lino_xl.lib.accounts.choicelists import AccountTypes

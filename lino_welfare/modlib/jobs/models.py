@@ -41,7 +41,7 @@ from django.utils.encoding import force_text
 from lino.api import dd, rt
 from lino import mixins
 
-from lino.utils.xmlgen.html import E
+from etgen.html import E
 from lino.utils.htmlgen import UL
 from lino.utils.report import Report
 

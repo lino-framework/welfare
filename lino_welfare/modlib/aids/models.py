@@ -35,7 +35,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd, rt
 from lino import mixins
 
-from lino.utils.xmlgen.html import E
+from etgen.html import E
 
 from lino.modlib.system.choicelists import PeriodEvents
 from lino.mixins.human import parse_name
