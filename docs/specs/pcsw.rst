@@ -198,7 +198,7 @@ The detail action
 The following would have detected a bug which caused the MTI navigator
 to not work (bug has been fixed :blogref:`20150227`) :
 
->>> from lino.utils.xmlgen.html import E
+>>> from etgen.html import E
 >>> p = contacts.Person.objects.get(pk=178)
 >>> cli = pcsw.Client.objects.get(pk=178)
 

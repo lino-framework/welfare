@@ -14,7 +14,7 @@ CBSS connection for Lino Welfare
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
-    >>> from lino.utils.xmlgen.html import E
+    >>> from etgen.html import E
     >>> from lino.api.doctest import *
 
 The :mod:`lino_welfare.modlib.cbss` plugin adds functionality for
