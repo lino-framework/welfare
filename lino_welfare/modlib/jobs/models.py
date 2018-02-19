@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2017 Luc Saffre
+# Copyright 2008-2018 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -42,7 +42,6 @@ from lino.api import dd, rt
 from lino import mixins
 
 from etgen.html import E
-from lino.utils.htmlgen import UL
 from lino.utils.report import Report
 
 from lino_xl.lib.cv.mixins import SectorFunction
