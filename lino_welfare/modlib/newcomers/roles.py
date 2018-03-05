@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015-2017 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -24,14 +24,11 @@
 
 from lino_xl.lib.beid.roles import BeIdUser
 from lino_xl.lib.contacts.roles import ContactsUser
-# from lino_welfare.modlib.pcsw.roles import SocialAgent
 
 
-# class NewcomersAgent(SocialAgent):
 class NewcomersAgent(BeIdUser):
-    """A **newcomers agent** is a *social agent* who also manages
-    newcomers.
-
+    """
+    A **newcomers agent** manages new client applications.
     """
     pass
 
