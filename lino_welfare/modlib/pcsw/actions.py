@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2017 Luc Saffre
+# Copyright 2008-2018 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -36,7 +36,6 @@ from lino_welfare.modlib.newcomers.roles import NewcomersAgent
 
 from lino_xl.lib.clients.choicelists import ClientStates
 from .choicelists import RefusalReasons
-
 
 class ChangeStateAction(dd.Action):
     show_in_bbar = False
@@ -90,7 +89,7 @@ class RefuseClient(ChangeStateAction):
         # 20170412 seems that mysql does not support newstr:
         body = six.text_type(body)
         obj.emit_system_note(ar, subject=subject, body=body)
-        mt = rt.models.notify.MessageTypes.action
+        mt = rt.models.notify.MessageTypes.coachings
         
         if subject:
             def msg(user, mm):
@@ -121,7 +120,7 @@ class MarkClientFormer(ChangeStateAction):
         # run the query before we end the coachings:
         recipients = list(obj.get_change_observers())
 
-        mt = rt.models.notify.MessageTypes.action
+        mt = rt.models.notify.MessageTypes.coachings
         def doit(ar):
             obj.client_state = self.target_state
             obj.full_clean()

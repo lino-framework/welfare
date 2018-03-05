@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2016 Luc Saffre
+# Copyright 2008-2018 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -64,6 +64,7 @@ from lino.modlib.checkdata.choicelists import Checker
 
 from lino_xl.lib.contacts.roles import SimpleContactsUser
 # from lino.modlib.office.roles import OfficeOperator
+
 from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
                                                  NewcomersOperator)
 from lino_welfare.modlib.integ.roles import IntegrationAgent
@@ -74,16 +75,14 @@ from lino.utils import ssin
 from lino import mixins
 from lino.utils.dates import daterange_text
 
-from lino_xl.lib.coachings.utils import (
-    add_coachings_filter, has_contracts_filter)
-
+from lino_xl.lib.beid.choicelists import CivilStates, ResidenceTypes
 from lino_xl.lib.clients.choicelists import ClientEvents, ClientStates
+from lino_xl.lib.coachings.utils import add_coachings_filter
 from lino_xl.lib.coachings.mixins import Coachable
 from lino_xl.lib.cv.mixins import BiographyOwner
 
 from .roles import SocialAgent, SocialStaff
 from .choicelists import RefusalReasons
-from lino_xl.lib.beid.choicelists import CivilStates, ResidenceTypes
 
 from .actions import RefuseClient, MarkClientFormer
 

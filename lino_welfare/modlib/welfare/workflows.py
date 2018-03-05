@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2017 Luc Saffre
+# Copyright 2017-2018 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -61,3 +61,9 @@ add = UploadAreas.add_item
 add('10', _("Contract"), 'contract')
 add('90', _("General"), 'general')
 
+# from lino.modlib.notify.choicelists import MessageTypes
+# MessageTypes.clear()
+# add = MessageTypes.add_item
+# add('100', _("System event"), 'system')
+# add('200', pgettext("message type", "Change"), 'change')
+# add('300', _("Action"), 'action')
