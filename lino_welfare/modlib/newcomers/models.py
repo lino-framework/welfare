@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2016 Luc Saffre
+# Copyright 2012-2018 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -46,7 +46,8 @@ from lino.utils.choosers import chooser
 from lino import mixins
 from django.conf import settings
 from lino_xl.lib.cal.choicelists import amonthago
-from lino_xl.lib.notes.actions import NotableAction
+# from lino_xl.lib.notes.actions import NotableAction
+from lino.modlib.notify.actions import NotifyingAction
 from lino.modlib.users.choicelists import UserTypes
 from lino.modlib.users.mixins import My, UserAuthored
 
@@ -409,8 +410,9 @@ Mehrbelastung, die dieser Neuantrag im Falle einer Zuweisung diesem Benutzer ver
         return obj._score
 
 
-class AssignCoach(NotableAction):
-    """Assign this agent as coach for this client.  This will set the
+class AssignCoach(NotifyingAction):
+    """
+    Assign this agent as coach for this client.  This will set the
     client's state to `Coached` and send a notification to the new
     coach.
 
@@ -420,7 +422,6 @@ class AssignCoach(NotableAction):
 
     This action is available only in the
     :class:`AvailableCoachesByClient` table.
-
     """
     label = _("Assign")
     required_roles = dd.login_required((NewcomersAgent, NewcomersOperator))
@@ -481,9 +482,9 @@ class AssignCoach(NotableAction):
 
 
 class AvailableCoachesByClient(AvailableCoaches):
-    """List of users available for coaching this client.  Visible only to
-Newcomers consultants.
-
+    """
+    List of users available for coaching this client.  Visible only to
+    Newcomers consultants.
     """
     master = 'pcsw.Client'
     label = _("Available Coaches")

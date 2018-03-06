@@ -94,7 +94,7 @@ class RefuseClient(ChangeStateAction):
         if subject:
             def msg(user, mm):
                 return (subject, body)
-            rt.models.notify.Message.emit_message(
+            rt.models.notify.Message.emit_notification(
                 ar, obj, mt, msg, recipients)
             
         kw = dict()
@@ -104,9 +104,9 @@ class RefuseClient(ChangeStateAction):
 
 
 class MarkClientFormer(ChangeStateAction):
-    """Change client's state to 'former'. This will also end any active
+    """
+    Change client's state to 'former'. This will also end any active
     coachings.
-
     """
     label = _("Former")
     required_states = 'coached'
@@ -134,7 +134,7 @@ class MarkClientFormer(ChangeStateAction):
             
             def msg(user, mm):
                 return (body, body)
-            rt.models.notify.Message.emit_message(
+            rt.models.notify.Message.emit_notification(
                 ar, obj, mt, msg, recipients)
             ar.success(**kw)
             
@@ -148,10 +148,7 @@ class MarkClientFormer(ChangeStateAction):
             doit(ar)
         else:
             def ok(ar):
-                # subject = _("{0} state set to former")
-                # obj.emit_system_note(ar, obj, subject, body)
                 for co in qs:
-                    # co.state = CoachingStates.ended
                     co.end_date = dd.today()
                     co.save()
                 doit(ar)
