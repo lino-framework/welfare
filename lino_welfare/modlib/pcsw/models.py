@@ -303,24 +303,6 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
             elems += E.p(*notes, class_="lino-info-red")
         return elems
 
-    def unused_before_state_change(obj, ar, oldstate, newstate):
-        # now implemented as MarkClientFormer
-        if newstate.name == 'former':
-            qs = obj.coachings_by_client.filter(end_date__isnull=True)
-            if qs.count():
-                def ok(ar):
-                    # subject = _("{0} state set to former")
-                    # obj.emit_system_note(ar, obj, subject, body)
-                    for co in qs:
-                        # co.state = CoachingStates.ended
-                        co.end_date = dd.today()
-                        co.save()
-                    ar.success(refresh=True)
-                return ar.confirm(
-                    ok,
-                    _("This will end %(count)d coachings of %(client)s.")
-                    % dict(count=qs.count(), client=str(obj)))
-
     def update_owned_instance(self, owned):
         owned.project = self
         super(Client, self).update_owned_instance(owned)

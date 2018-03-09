@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016-2017 Luc Saffre
+# Copyright 2016-2018 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -16,19 +16,15 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Miscellaneous tests about the notification framework
+"""
+Miscellaneous tests about the notification framework
 (:mod:`lino.modlib.notify` and :mod:`lino_xl.lib.notes`). Consult the
 source code of this module.
 
 You can run these tests individually by issuing::
 
-  $ python setup.py test -s tests.DemoTests.test_std
-
-Or::
-
-  $ cd lino_welfare/projects/std
+  $ cd lino_welfare/projects/chatelet
   $ python manage.py test tests.test_notify
-
 """
 
 from __future__ import unicode_literals
@@ -52,11 +48,14 @@ class TestCase(TestCase):
     maxDiff = None
 
     def check_notifications(self, expected=''):
-        """Hint: when `expected` is empty, then the found result is being
-        printed to stdout so you can copy it into your code.
-
         """
-        ar = rt.actors.notify.Messages.request()
+        Check whether the database contains notification messages as
+        expected.
+
+        Hint: when `expected` is empty, then the found result is being
+        printed to stdout so you can copy it into your code.
+        """
+        ar = rt.models.notify.Messages.request()
         rst = ar.to_rst(column_names="subject owner user")
         if expected:
             self.assertEquivalent(expected, rst)
@@ -65,7 +64,7 @@ class TestCase(TestCase):
         # print rst  # handy when something fails
 
     def check_notes(self, expected=''):
-        ar = rt.actors.notes.Notes.request()
+        ar = rt.models.notes.Notes.request()
         rst = ar.to_rst(column_names="id user project subject")
         if expected:
             self.assertEquivalent(expected, rst)
@@ -73,7 +72,7 @@ class TestCase(TestCase):
             print(rst)
 
     def check_coachings(self, expected=''):
-        ar = rt.actors.coachings.Coachings.request()
+        ar = rt.models.coachings.Coachings.request()
         rst = ar.to_rst(
             column_names="id client start_date end_date user primary")
         if expected:
@@ -102,9 +101,9 @@ class TestCase(TestCase):
         Coaching = rt.models.coachings.Coaching
         ContentType = rt.models.contenttypes.ContentType
 
-        self.assertEqual(settings.SITE.use_websockets, True)
+        self.assertEqual(settings.SITE.use_websockets, False)
 
-        self.create_obj(
+        robin = self.create_obj(
             User, username='robin',
             user_type=UserTypes.admin, language="en")
         caroline = self.create_obj(
@@ -112,7 +111,7 @@ class TestCase(TestCase):
             user_type='200', language="fr")
         alicia = self.create_obj(
             User, username='alícia', first_name="Alicia",
-            user_type='900', language="fr")
+            user_type='120', language="fr")
         roger = self.create_obj(
             User, username='róger', user_type='400',
             language="en")
@@ -190,16 +189,14 @@ class TestCase(TestCase):
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)
 
-        self.assertEqual(Message.objects.count(), 2)
-
+        # self.assertEqual(Message.objects.count(), 2)
         # self.check_notifications()
         self.check_notifications("""
-=================================================== ======================== ==============
- Sujet                                               Lié à                    Destinataire
---------------------------------------------------- ------------------------ --------------
- GÉRARD First (100) a commencé d'attendre caróline                            caróline
- Alicia modified GÉRARD Seconda (101)                *GÉRARD Seconda (101)*   róger
-=================================================== ======================== ==============
+=================================================== ======= ==============
+ Sujet                                               Lié à   Destinataire
+--------------------------------------------------- ------- --------------
+ GÉRARD First (100) a commencé d'attendre caróline           caróline
+=================================================== ======= ==============
 """)
 
         # When a coaching is modified, all active coaches of that
@@ -210,19 +207,19 @@ class TestCase(TestCase):
         data.update(mt=51)
         data.update(mk=second.pk)
         kwargs = dict(data=urlencode(data))
-        kwargs['REMOTE_USER'] = 'alícia'
-        self.client.force_login(alicia)
+        kwargs['REMOTE_USER'] = 'robin'
+        self.client.force_login(robin)
         url = '/api/coachings/CoachingsByClient/{}'.format(second_roger.pk)
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)
 
-        #self.check_notifications()
+        # self.check_notifications()
         self.check_notifications("""
-================================== ==================== ==============
- Sujet                              Lié à                Destinataire
----------------------------------- -------------------- --------------
- Alicia modified róger / Gérard S   *róger / Gérard S*   róger
-================================== ==================== ==============
+================================== ==================== ===========
+ Subject                            Controlled by        Recipient
+---------------------------------- -------------------- -----------
+ robin a modifié róger / Gérard S   *róger / Gérard S*   Alicia
+================================== ==================== ===========
 """)
 
         # AssignCoach. we are going to Assign caroline as coach for
@@ -243,13 +240,13 @@ class TestCase(TestCase):
         # self.assertEqual(Coaching.objects.count(), 1)
         # self.check_coachings()
         self.check_coachings("""
-==== ====================== ======================== ============ ============= ==========
- ID   Bénéficiaire           En intervention depuis   au           Intervenant   Primaire
----- ---------------------- ------------------------ ------------ ------------- ----------
- 1    GÉRARD Seconda (101)   01/05/2013               01/05/2014   caróline      Non
- 2    GÉRARD Seconda (101)   02/05/2014                            róger         Non
- 3    GÉRARD Seconda (101)   20/05/2014                            Alicia        Non
-==== ====================== ======================== ============ ============= ==========
+==== ====================== ============== ============ ========== =========
+ ID   Client                 Coached from   until        Coach      Primary
+---- ---------------------- -------------- ------------ ---------- ---------
+ 1    GÉRARD Seconda (101)   01/05/2013     01/05/2014   caróline   No
+ 2    GÉRARD Seconda (101)   02/05/2014                  róger      No
+ 3    GÉRARD Seconda (101)   20/05/2014                  Alicia     No
+==== ====================== ============== ============ ========== =========
 """)
 
         self.assertEqual(Note.objects.count(), 0)
@@ -365,6 +362,9 @@ class TestCase(TestCase):
         Message.objects.all().delete()
         Note.objects.all().delete()
 
+        self.create_obj(
+            Coaching, client=first, start_date=i2d(20130501), user=roger)
+        
         first.client_state = ClientStates.newcomer
         first.save()
 
@@ -376,10 +376,12 @@ class TestCase(TestCase):
         url = '/api/pcsw/Clients/{}'.format(first.pk)
         res = self.client.get(url, **kwargs)
         self.assertEqual(res.status_code, 200)
+        # self.check_notifications("")
         self.check_notifications("""
 ========================================================= ====================== ==============
  Sujet                                                     Lié à                  Destinataire
 --------------------------------------------------------- ---------------------- --------------
+ Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   róger
  Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   caróline
 ========================================================= ====================== ==============
 """)
@@ -443,6 +445,7 @@ class TestCase(TestCase):
         res = self.client.put(url, **kwargs)
         self.assertEqual(res.status_code, 200)
         # self.check_notifications()
+        # self.check_notifications("Aucun enregistrement")
         self.check_notifications("""
 =============================== ================== ==============
  Sujet                           Lié à              Destinataire
@@ -452,6 +455,7 @@ class TestCase(TestCase):
 """)
 
         
+        self.assertEqual(Message.objects.count(), 1)
         msg = Message.objects.all()[0]
         # print msg.body
         self.assertEquivalent(msg.body, """

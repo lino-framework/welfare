@@ -164,4 +164,5 @@ add('800', _("Supervisor"),                    Supervisor)
 add('900', _("Administrator"),                 SiteAdmin, name='admin')
 add('910', _("Security advisor"),              SecurityAdvisor)
 
-
+from lino.modlib.notify.choicelists import MessageTypes
+UserTypes.get_by_value('400').mask_notifications(MessageTypes.change)

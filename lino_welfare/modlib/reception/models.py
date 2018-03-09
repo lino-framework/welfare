@@ -173,8 +173,8 @@ class CreateClientVisit(dd.Action):
                 client=client, user=pv.user)
             return (subject, '')
         recipients = [ (pv.user, pv.user.mail_mode) ]
-        mt = rt.actors.notify.MessageTypes.coachings
-        rt.models.notify.Message.emit_message(
+        mt = rt.actors.notify.MessageTypes.reception
+        rt.models.notify.Message.emit_notification(
             ar, client, mt, msg, recipients)
         ar.success(refresh=True)
         

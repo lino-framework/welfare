@@ -60,6 +60,9 @@ class Note(Note):
     
     person = property(get_person)
 
+    def get_notify_message_type(self):
+        return rt.models.notify.MessageTypes.coachings
+    
 
 class NoteDetail(NoteDetail):
 

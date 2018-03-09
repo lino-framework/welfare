@@ -61,9 +61,3 @@ add = UploadAreas.add_item
 add('10', _("Contract"), 'contract')
 add('90', _("General"), 'general')
 
-# from lino.modlib.notify.choicelists import MessageTypes
-# MessageTypes.clear()
-# add = MessageTypes.add_item
-# add('100', _("System event"), 'system')
-# add('200', pgettext("message type", "Change"), 'change')
-# add('300', _("Action"), 'action')
