@@ -300,7 +300,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
             notes.append(E.b(ar.obj2html(note, note.subject)))
         if len(notes):
             notes = join_elems(notes, " / ")
-            elems += E.p(*notes, class_="lino-info-red")
+            elems += E.p(*notes, **{'class':"lino-info-red"})
         return elems
 
     def update_owned_instance(self, owned):

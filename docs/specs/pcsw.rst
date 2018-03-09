@@ -215,14 +215,14 @@ removed at the same time:
 >>> ses = rt.login('robin', renderer=settings.SITE.kernel.extjs_renderer)
 >>> ar = contacts.Partners.request_from(ses)
 >>> ar.renderer = settings.SITE.kernel.extjs_renderer
->>> print(E.tostring(ar.obj2html(p)))
+>>> print(tostring(ar.obj2html(p)))
 <a href="javascript:Lino.contacts.Persons.detail.run(null,{ &quot;record_id&quot;: 178 })">Herr Karl KELLER</a>
 
->>> print(E.tostring(ar.obj2html(cli)))
+>>> print(tostring(ar.obj2html(cli)))
 <a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 178 })">KELLER Karl (178)</a>
 >>> print(settings.SITE.kernel.extjs_renderer.instance_handler(ar, cli, None))
 Lino.pcsw.Clients.detail.run(null,{ "record_id": 178 })
->>> print(E.tostring(p.get_mti_buttons(ar)))
+>>> print(tostring(p.get_mti_buttons(ar)))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 <a href="javascript:Lino.contacts.Partners.detail.run(null,{
 &quot;record_id&quot;: 178 })">Partner</a>, <b>Person</b>, <a

@@ -383,7 +383,7 @@ Test whether everybody can display the detail of a client:
 >>> o = pcsw.Client.objects.get(id=177)
 >>> r = dd.plugins.extjs.renderer
 >>> for u in 'robin', 'alicia', 'theresia', 'caroline', 'kerstin':
-...     print(E.tostring(rt.login(u, renderer=r).obj2html(o)))
+...     print(tostring(rt.login(u, renderer=r).obj2html(o)))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
 <a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
 <a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>

@@ -179,7 +179,7 @@ Willkommensmeldung präsentiert:
    ses = rt.login('alicia')
    translation.activate('de')
    for msg in settings.SITE.get_welcome_messages(ses):
-       print(E.tostring(msg))
+       print(tostring(msg))
 
 
 

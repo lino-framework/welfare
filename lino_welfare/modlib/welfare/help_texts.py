@@ -364,8 +364,7 @@ coach."""),
 Newcomers consultants."""),
     'lino_welfare.modlib.newcomers.AvailableCoachesByClient.master' : _("""alias of lino_welfare.modlib.pcsw.models.Client"""),
     'lino_welfare.modlib.newcomers.AvailableCoachesByClient.model' : _("""alias of lino_welfare.modlib.users.models.User"""),
-    'lino_welfare.modlib.newcomers.roles.NewcomersAgent' : _("""A newcomers agent is a social agent who also manages
-newcomers."""),
+    'lino_welfare.modlib.newcomers.roles.NewcomersAgent' : _("""A newcomers agent manages new client applications."""),
     'lino_welfare.modlib.newcomers.roles.NewcomersOperator' : _("""A newcomers operator is a user who is not social agent but
 can e.g. register newcomers and assign them a coach."""),
     'lino_welfare.modlib.notes.Note' : _("""Overrides the library model, setting an alternative verbose name,

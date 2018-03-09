@@ -7,7 +7,6 @@
    test_dupe_clients
    test_households
    test_isip
-   test_notify
    test_sepa
    test_sql
 

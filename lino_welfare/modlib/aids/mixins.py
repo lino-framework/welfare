@@ -38,7 +38,7 @@ from django.utils.translation import pgettext_lazy as pgettext
 from lino.api import dd, rt
 from lino import mixins
 
-from etgen.html import E
+from etgen.html import E, tostring
 from lino.utils.ranges import encompass
 
 from lino.modlib.checkdata.choicelists import Checker
@@ -52,11 +52,11 @@ from .roles import AidsStaff
 
 
 def e2text(v):
-    return E.tostring(v)
+    return tostring(v)
 #     if isinstance(v, types.GeneratorType):
 #         return "".join([e2text(x) for x in v])
 #     if E.iselement(v):
-#         return E.tostring(v)
+#         return tostring(v)
 #     return unicode(v)
 
 
