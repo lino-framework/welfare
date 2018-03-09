@@ -85,10 +85,10 @@ Willkommensmeldung unter die Nase gerieben:
 >>> ses = rt.login('alicia')
 >>> translation.activate('de')
 >>> for msg in settings.SITE.get_welcome_messages(ses):
-...     print(E.tostring(msg))
+...     print(tostring(msg))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-<span>Du bist besch&#228;ftigt in <a href="Detail">Beschwerde (22.05.2014) mit COLLARD Charlotte (118)</a> (<b>&#9745;</b>). </span>
-<span>Du hast <b>6 Eintr&#228;ge in Zu best&#228;tigende Hilfebeschl&#252;sse</b>.</span>
+<span>Du bist beschäftigt in <a href="Detail">Beschwerde (22.05.2014) mit COLLARD Charlotte (118)</a> (<b>☑</b>). </span>
+<span>Du hast <b>6 Einträge in Zu bestätigende Hilfebeschlüsse</b>.</span>
 <b>Du hast 3 offene Datenprobleme.</b>
 
 When she clicks the link "Zu bestätigende Hilfebeschlüsse", then they show up:

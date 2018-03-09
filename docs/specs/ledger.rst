@@ -308,7 +308,7 @@ The state of a voucher
 
     >>> obj = vatless.AccountInvoice.objects.get(id=1)
     >>> ar = rt.login("robin").spawn(vatless.Invoices)
-    >>> print(E.tostring(ar.get_data_value(obj, 'workflow_buttons')))
+    >>> print(tostring(ar.get_data_value(obj, 'workflow_buttons')))
     <span><b>Registriert</b> &#8594; [Entwurf]</span>
     
 
