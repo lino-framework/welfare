@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2017 Luc Saffre
+# Copyright 2013-2018 Luc Saffre
 
 """
 The :xfile:`models` module for the :mod:`lino_welfare.modlib.integ` app.
@@ -142,7 +142,7 @@ class UsersWithClients(dd.VirtualTable):
 
     """
     required_roles = dd.login_required(IntegrationAgent)
-    label = gettext("Users with their Clients")
+    label = _("Users with their Clients")
 
     slave_grid_format = 'html'
 
@@ -455,7 +455,7 @@ class ContractsByType(dd.VentilatingTable):
 
 
 class ContractEndingsByType(ContractsByType, isip.ContractEndings):
-    label = gettext("Contract endings by type")
+    label = _("Contract endings by type")
     selector_key = 'ending'
 
 
@@ -466,7 +466,7 @@ class JobsContractEndingsByType(ContractEndingsByType):
 from lino_welfare.modlib.users.desktop import Users
 
 class ContractsPerUserAndContractType(ContractsByType, Users):
-    label = gettext("PIIS par agent et type")
+    label = _("PIIS par agent et type")
     #~ filter = Q(coaching_type=isip.COACHINGTYPE_DSBE)
     contracts_table = isip.Contracts
     observed_event = isip.ContractEvents.active
@@ -479,13 +479,13 @@ class ContractsPerUserAndContractType(ContractsByType, Users):
 
 
 class JobsContractsPerUserAndContractType(ContractsPerUserAndContractType):
-    label = gettext("Art60§7 par agent et type")
+    label = _("Art60§7 par agent et type")
     contracts_table = jobs.Contracts
     contract_type_model = jobs.ContractType
 
 
 class StudyTypesAndContracts(cv.StudyTypes, dd.VentilatingTable):
-    label = gettext("PIIS et types de formation")
+    label = _("PIIS et types de formation")
     help_text = _("""Nombre de PIIS actifs par 
     type de formation et type de contrat.""")
     contracts_table = isip.Contracts
@@ -523,7 +523,7 @@ class StudyTypesAndContracts(cv.StudyTypes, dd.VentilatingTable):
 
 
 class CompaniesAndContracts(contacts.Companies, dd.VentilatingTable):
-    label = gettext("Organisations externes et contrats")
+    label = _("Organisations externes et contrats")
     help_text = _("""Nombre de PIIS actifs par 
     organisation externe et type de contrat.""")
     contracts_table = isip.Contracts
@@ -563,7 +563,7 @@ class CompaniesAndContracts(contacts.Companies, dd.VentilatingTable):
 
 class JobProvidersAndContracts(CompaniesAndContracts):
     """Ventilates number of job supplyments by provider and type."""
-    label = gettext("Job providers and contrats")
+    label = _("Job providers and contrats")
     contracts_table = jobs.Contracts
     contract_types = jobs.ContractType
 
