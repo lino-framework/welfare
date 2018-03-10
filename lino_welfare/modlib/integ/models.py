@@ -24,7 +24,7 @@ from lino.mixins import ObservedDateRange
 from lino.modlib.users.choicelists import UserTypes
 from lino.modlib.system.choicelists import PeriodEvents
 
-from lino.api import dd, rt
+from lino.api import dd, rt, gettext
 from .roles import IntegrationAgent
 
 config = dd.plugins.integ
@@ -142,7 +142,7 @@ class UsersWithClients(dd.VirtualTable):
 
     """
     required_roles = dd.login_required(IntegrationAgent)
-    label = _("Users with their Clients")
+    label = gettext("Users with their Clients")
 
     slave_grid_format = 'html'
 
@@ -455,7 +455,7 @@ class ContractsByType(dd.VentilatingTable):
 
 
 class ContractEndingsByType(ContractsByType, isip.ContractEndings):
-    label = _("Contract endings by type")
+    label = gettext("Contract endings by type")
     selector_key = 'ending'
 
 
@@ -466,7 +466,7 @@ class JobsContractEndingsByType(ContractEndingsByType):
 from lino_welfare.modlib.users.desktop import Users
 
 class ContractsPerUserAndContractType(ContractsByType, Users):
-    label = _("PIIS par agent et type")
+    label = gettext("PIIS par agent et type")
     #~ filter = Q(coaching_type=isip.COACHINGTYPE_DSBE)
     contracts_table = isip.Contracts
     observed_event = isip.ContractEvents.active
@@ -479,13 +479,13 @@ class ContractsPerUserAndContractType(ContractsByType, Users):
 
 
 class JobsContractsPerUserAndContractType(ContractsPerUserAndContractType):
-    label = _("Art60§7 par agent et type")
+    label = gettext("Art60§7 par agent et type")
     contracts_table = jobs.Contracts
     contract_type_model = jobs.ContractType
 
 
 class StudyTypesAndContracts(cv.StudyTypes, dd.VentilatingTable):
-    label = _("PIIS et types de formation")
+    label = gettext("PIIS et types de formation")
     help_text = _("""Nombre de PIIS actifs par 
     type de formation et type de contrat.""")
     contracts_table = isip.Contracts
@@ -523,7 +523,7 @@ class StudyTypesAndContracts(cv.StudyTypes, dd.VentilatingTable):
 
 
 class CompaniesAndContracts(contacts.Companies, dd.VentilatingTable):
-    label = _("Organisations externes et contrats")
+    label = gettext("Organisations externes et contrats")
     help_text = _("""Nombre de PIIS actifs par 
     organisation externe et type de contrat.""")
     contracts_table = isip.Contracts
@@ -563,7 +563,7 @@ class CompaniesAndContracts(contacts.Companies, dd.VentilatingTable):
 
 class JobProvidersAndContracts(CompaniesAndContracts):
     """Ventilates number of job supplyments by provider and type."""
-    label = _("Job providers and contrats")
+    label = gettext("Job providers and contrats")
     contracts_table = jobs.Contracts
     contract_types = jobs.ContractType
 
@@ -604,7 +604,7 @@ class ActivityReport(Report):
 
     @classmethod
     def get_story(cls, self, ar):
-        yield E.h2(_("Introduction"))
+        yield E.h2(gettext("Introduction"))
         yield E.p("Ceci est un ", E.b("rapport"), """,
 càd un document complet généré par Lino, contenant des
 sections, des tables et du texte libre.
@@ -613,17 +613,17 @@ il vient.
 """)
         yield E.h2(UsersWithClients.label)
         yield UsersWithClients
-        yield E.h2(_("Indicateurs généraux"))
+        yield E.h2(gettext("Indicateurs généraux"))
         yield CompareRequestsTable
         yield E.p('.')
         yield PeriodicNumbers
 
-        yield E.h2(_("Causes d'arrêt des interventions"))
+        yield E.h2(gettext("Causes d'arrêt des interventions"))
         yield CoachingEndingsByUser
         #~ yield E.p('.')
         #~ yield CoachingEndingsByType
 
-        yield E.h1(isip.Contract._meta.verbose_name_plural)
+        yield E.h1(gettext(isip.Contract._meta.verbose_name_plural))
         #~ yield E.p("Voici quelques tables complètes:")
         for A in (ContractsPerUserAndContractType, CompaniesAndContracts,
                   ContractEndingsByType, StudyTypesAndContracts):
@@ -632,7 +632,7 @@ il vient.
             #     yield E.p(unicode(A.help_text))
             yield A
 
-        yield E.h1(jobs.Contract._meta.verbose_name_plural)
+        yield E.h1(gettext(jobs.Contract._meta.verbose_name_plural))
         for A in (JobsContractsPerUserAndContractType,
                   JobProvidersAndContracts, JobsContractEndingsByType):
             yield E.h2(A.label)
