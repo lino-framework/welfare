@@ -904,8 +904,7 @@ class JobsOverviewByType(Jobs):
     @dd.displayfield(_("Job"))
     def job_desc(self, obj, ar):
         chunks = [ar.obj2html(obj, str(obj.function))]
-        chunks.append(gettext("(place)"))
-        chunks.append(gettext(" at "))
+        chunks.append(str(pgettext("(place)", " at ")))
         chunks.append(ar.obj2html(obj.provider))
         chunks.append(' (%d)' % obj.capacity)
         if obj.remark:

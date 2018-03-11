@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2018 Luc Saffre
+# Copyright 2013-2018 Rumma & Ko Ltd
 
 """
 The :xfile:`models` module for the :mod:`lino_welfare.modlib.integ` app.
@@ -623,7 +623,7 @@ il vient.
         #~ yield E.p('.')
         #~ yield CoachingEndingsByType
 
-        yield E.h1(gettext(isip.Contract._meta.verbose_name_plural))
+        yield E.h1(str(isip.Contract._meta.verbose_name_plural))
         #~ yield E.p("Voici quelques tables complètes:")
         for A in (ContractsPerUserAndContractType, CompaniesAndContracts,
                   ContractEndingsByType, StudyTypesAndContracts):
@@ -632,7 +632,7 @@ il vient.
             #     yield E.p(unicode(A.help_text))
             yield A
 
-        yield E.h1(gettext(jobs.Contract._meta.verbose_name_plural))
+        yield E.h1(str(jobs.Contract._meta.verbose_name_plural))
         for A in (JobsContractsPerUserAndContractType,
                   JobProvidersAndContracts, JobsContractEndingsByType):
             yield E.h2(A.label)
