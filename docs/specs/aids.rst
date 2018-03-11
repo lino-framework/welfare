@@ -122,7 +122,7 @@ In der Demo-Datenbank gibt es 2 generierte Bescheinigungen pro Hilfeart :
 ...    obj = qs[0]
 ...    txt = obj.confirmation_text()
 ...    txt = ' '.join(txt.split())
-...    print("%s : %d" % (unicode(at), qs.count()))
+...    print("%s : %d" % (str(at), qs.count()))
 Eingliederungseinkommen : 20
 Ausländerbeihilfe : 35
 Feste Beihilfe : 3
@@ -159,7 +159,7 @@ we see that most contracts have indeed exactly 1 granting:
 [1, 3, 4, 7, 9, 10, 11, 12, 14, 17, 18, 19, 22, 24, 27, 29, 32]
 
 >>> rr = aids.IncomeConfirmationsByGranting.insert_action.action.required_roles
->>> print rt.login("rolf").get_user().user_type.has_required_roles(rr)
+>>> print(rt.login("rolf").get_user().user_type.has_required_roles(rr))
 True
 
 >>> ct = contenttypes.ContentType.objects.get_for_model(aids.Granting)
@@ -239,7 +239,7 @@ Here are the default values for their source URLs:
 
 We are interested in the last one, which defines the `onReady` function:
 
->>> on_ready = unicode(scripts[-1])
+>>> on_ready = str(scripts[-1])
 >>> len(on_ready.splitlines())
 13
 
@@ -312,9 +312,9 @@ manually choose any other pharmacy:
 >>> obj = rt.modules.aids.Granting.objects.get(id=44)
 >>> url = '/choices/aids/RefundConfirmationsByGranting/pharmacy?mt={0}&mk={1}'.format(mt, obj.id)
 >>> response = test_client.get(url, REMOTE_USER="rolf")
->>> result = json.loads(response.content)
+>>> result = json.loads(response.content.decode())
 >>> for r in result['rows']:
-...     print r['text']
+...     print(r['text'])
 <br/>
 Apotheke Reul
 Apotheke Schunck
@@ -429,9 +429,7 @@ in the `doctor` combobox, and leaving the doctor_type empty.
 >>> result.success
 False
 >>> print(result.message)
-Arzt : [u'Kann keinen neuen Arzt erstellen, wenn Art des Arztes leer ist']
-
-Doctor : ['Cannot auto-create without doctor type']
+Arzt : Kann keinen neuen Arzt erstellen, wenn Art des Arztes leer ist
 
 
 The period of a confirmation

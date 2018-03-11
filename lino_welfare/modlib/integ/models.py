@@ -611,7 +611,7 @@ sections, des tables et du texte libre.
 Dans la version écran cliquer sur un chiffre pour voir d'où
 il vient.
 """)
-        yield E.h2(UsersWithClients.label)
+        yield E.h2(str(UsersWithClients.label))
         yield UsersWithClients
         yield E.h2(gettext("Indicateurs généraux"))
         yield CompareRequestsTable
@@ -627,7 +627,7 @@ il vient.
         #~ yield E.p("Voici quelques tables complètes:")
         for A in (ContractsPerUserAndContractType, CompaniesAndContracts,
                   ContractEndingsByType, StudyTypesAndContracts):
-            yield E.h2(A.label)
+            yield E.h2(str(A.label))
             # if A.help_text:
             #     yield E.p(unicode(A.help_text))
             yield A
@@ -635,7 +635,7 @@ il vient.
         yield E.h1(str(jobs.Contract._meta.verbose_name_plural))
         for A in (JobsContractsPerUserAndContractType,
                   JobProvidersAndContracts, JobsContractEndingsByType):
-            yield E.h2(A.label)
+            yield E.h2(str(A.label))
             # if A.help_text:
             #     yield E.p(unicode(A.help_text))
             yield A
