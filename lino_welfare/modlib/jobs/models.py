@@ -38,7 +38,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
 from django.utils.encoding import force_text
 
-from lino.api import dd, rt
+from lino.api import dd, rt ,gettext
 from lino import mixins
 
 from etgen.html import E
@@ -904,7 +904,8 @@ class JobsOverviewByType(Jobs):
     @dd.displayfield(_("Job"))
     def job_desc(self, obj, ar):
         chunks = [ar.obj2html(obj, str(obj.function))]
-        chunks.append(pgettext("(place)", " at "))
+        chunks.append(gettext("(place)"))
+        chunks.append(gettext(" at "))
         chunks.append(ar.obj2html(obj.provider))
         chunks.append(' (%d)' % obj.capacity)
         if obj.remark:

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2017 Luc Saffre
+# Copyright 2013-2018 Luc Saffre
 
 """
 The :xfile:`models` module for the :mod:`lino_welfare.modlib.integ` app.
@@ -24,7 +24,7 @@ from lino.mixins import ObservedDateRange
 from lino.modlib.users.choicelists import UserTypes
 from lino.modlib.system.choicelists import PeriodEvents
 
-from lino.api import dd, rt
+from lino.api import dd, rt, gettext
 from .roles import IntegrationAgent
 
 config = dd.plugins.integ
@@ -604,7 +604,7 @@ class ActivityReport(Report):
 
     @classmethod
     def get_story(cls, self, ar):
-        yield E.h2(_("Introduction"))
+        yield E.h2(gettext("Introduction"))
         yield E.p("Ceci est un ", E.b("rapport"), """,
 càd un document complet généré par Lino, contenant des
 sections, des tables et du texte libre.
@@ -613,17 +613,17 @@ il vient.
 """)
         yield E.h2(UsersWithClients.label)
         yield UsersWithClients
-        yield E.h2(_("Indicateurs généraux"))
+        yield E.h2(gettext("Indicateurs généraux"))
         yield CompareRequestsTable
         yield E.p('.')
         yield PeriodicNumbers
 
-        yield E.h2(_("Causes d'arrêt des interventions"))
+        yield E.h2(gettext("Causes d'arrêt des interventions"))
         yield CoachingEndingsByUser
         #~ yield E.p('.')
         #~ yield CoachingEndingsByType
 
-        yield E.h1(isip.Contract._meta.verbose_name_plural)
+        yield E.h1(gettext(isip.Contract._meta.verbose_name_plural))
         #~ yield E.p("Voici quelques tables complètes:")
         for A in (ContractsPerUserAndContractType, CompaniesAndContracts,
                   ContractEndingsByType, StudyTypesAndContracts):
@@ -632,7 +632,7 @@ il vient.
             #     yield E.p(unicode(A.help_text))
             yield A
 
-        yield E.h1(jobs.Contract._meta.verbose_name_plural)
+        yield E.h1(gettext(jobs.Contract._meta.verbose_name_plural))
         for A in (JobsContractsPerUserAndContractType,
                   JobProvidersAndContracts, JobsContractEndingsByType):
             yield E.h2(A.label)
