@@ -40,7 +40,7 @@ from lino.api import ad, _
 class Plugin(ad.Plugin):
     "See :class:`lino.core.plugin.Plugin`."
     verbose_name = _("PCSW")
-    needs_plugins = ['lino_xl.lib.coachings', 'lino_xl.lib.clients']
+    needs_plugins = ['lino_xl.lib.coachings']
 
     def setup_main_menu(self, site, user_type, m):
         # mg = self.get_menu_group()

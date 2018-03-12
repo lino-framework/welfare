@@ -228,8 +228,7 @@ Lino.pcsw.Clients.detail.run(null,{ "record_id": 178 })
 &quot;record_id&quot;: 178 })">Partner</a>, <b>Person</b>, <a
 href="javascript:Lino.pcsw.Clients.detail.run(null,{
 &quot;record_id&quot;: 178 })">Klient</a> [<a
-href="javascript:Lino.contacts.Partners.del_client(null,true,178,{
-})...">&#10060;</a>]
+...javascript:Lino.contacts.Partners.del_client(null,true,178,{ })...">❌</a>]
 
 
 Virtual fields on client

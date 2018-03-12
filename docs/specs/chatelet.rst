@@ -89,7 +89,7 @@ Romain
   - Calendrier : Calendriers, Locaux, Priorités, Évènements periodiques, Rôles de participants, Types d'entrée calendrier, Règles de récurrence, Calendriers externes
   - Comptabilité : Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
-  - CPAS : Services, Raisons d’arrêt d'intervention, Types de contact client, Phases d'intégration, Activités, Types d'exclusion, Motifs de dispense, Types d'aide sociale, Catégories 
+  - CPAS : Types de contact client, Services, Raisons d’arrêt d'intervention, Phases d'intégration, Activités, Types d'exclusion, Motifs de dispense, Types d'aide sociale, Catégories
   - Parcours : Langues, Types d'éducation, Niveaux académiques, Secteurs, Fonctions, Régimes de travail, Statuts, Types de contrat, Types de compétence sociale, Types de freins, Preuves de qualification
   - Intégration : Types de PIIS, Motifs d’arrêt de contrat, Régimes d'évaluation, Types de mise à l'emploi art60§7, Types de poste, Horaires, Types de mise à l'emploi art.61, Types de stage d'immersion, Objectifs
   - Nouvelles demandes : Intermédiaires, Spécificités
@@ -102,7 +102,7 @@ Romain
   - Bureau : Extraits, Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Observations, Text Field Templates
   - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
-  - CPAS : Interventions, Contacts client, Types de contact connus, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
+  - CPAS : Contacts client, Types de contact connus, Interventions, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
   - Parcours : Connaissances de langue, Formations, Études, Expériences professionnelles, Connaissances de langue, Compétences professionnelles, Compétences sociales, Freins
   - Intégration : PIISs, Mises à l'emploi art60§7, Candidatures, Services utilisateurs, Mises à l'emploi art61, Stages d'immersion, Preuves de recherche, Fiches FSE, Champs FSE
   - Nouvelles demandes : Compétences
@@ -132,10 +132,10 @@ modifier les intervention d'autres utilisateurs.
 - Configuration :
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Types de ménage
-  - CPAS : Services, Raisons d’arrêt d'intervention, Types de contact client, Types d'aide sociale, Catégories
+  - CPAS : Types de contact client, Services, Raisons d’arrêt d'intervention, Types d'aide sociale, Catégories
 - Explorateur :
   - Contacts : Personnes de contact, Partenaires, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
-  - CPAS : Interventions, Contacts client, Types de contact connus, Etats bénéficiaires, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
+  - CPAS : Contacts client, Types de contact connus, Interventions, Etats bénéficiaires, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
 - Site : à propos
 
 
@@ -148,7 +148,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-61 apps: lino, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, excerpts, uploads, outbox, extensible, cal, reception, accounts, badges, boards, coachings, clients, pcsw, welfare, sales, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, checkdata, tinymce, sessions.
+61 apps: lino, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, excerpts, uploads, outbox, extensible, cal, reception, accounts, badges, boards, clients, coachings, pcsw, welfare, sales, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, checkdata, tinymce, sessions.
 135 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -1440,9 +1440,9 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Ateliers --> Savoirs de base : 1
 - Configuration --> Ateliers --> Topics : 1
 - Configuration --> Ateliers --> Timetable Slots : 1
+- Configuration --> CPAS --> Types de contact client : 11
 - Configuration --> CPAS --> Services : 4
 - Configuration --> CPAS --> Raisons d’arrêt d'intervention : 5
-- Configuration --> CPAS --> Types de contact client : 11
 - Configuration --> CPAS --> Phases d'intégration : 6
 - Configuration --> CPAS --> Activités : 1
 - Configuration --> CPAS --> Types d'exclusion : 3
@@ -1511,9 +1511,9 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Ateliers --> Ateliers : 8
 - Explorateur --> Ateliers --> Inscriptions : 84
 - Explorateur --> Ateliers --> États d'inscription : 6
-- Explorateur --> CPAS --> Interventions : 91
 - Explorateur --> CPAS --> Contacts client : 15
 - Explorateur --> CPAS --> Types de contact connus : 2
+- Explorateur --> CPAS --> Interventions : 91
 - Explorateur --> CPAS --> Exclusions : 1
 - Explorateur --> CPAS --> Antécédents judiciaires : 1
 - Explorateur --> CPAS --> Bénéficiaires : 58
