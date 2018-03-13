@@ -84,7 +84,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Büro : Auszugsarten, Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
   - Buchhaltung : Kontengruppen, Haushaltsartikel, Journale, Buchungsperioden, Zahlungsbedingungen
-  - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
+  - ÖSHZ : Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
   - Kurse : Kursinhalte
@@ -97,7 +97,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Eigenschaften : Eigenschaften
   - Büro : Auszüge, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Kalendereinträge, Aufgaben, Anwesenheiten, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
-  - ÖSHZ : Begleitungen, Klientenkontakte, Standard-Klientenkontaktarten, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
+  - ÖSHZ : Klientenkontakte, Standard-Klientenkontaktarten, Begleitungen, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
   - Buchhaltung : Gemeinkonten, Begleichungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Journalgruppen, Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
@@ -188,7 +188,7 @@ to explicitly override the language of :meth:`show_menu
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
   - Büro : Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
-  - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
+  - ÖSHZ : Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
   - Kurse : Kursinhalte
@@ -197,7 +197,7 @@ to explicitly override the language of :meth:`show_menu
   - Kontakte : Kontaktpersonen, Partner, Adressenarten, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - Kalender : Aufgaben, Abonnements
-  - ÖSHZ : Begleitungen, Klientenkontakte, Standard-Klientenkontaktarten, AG-Sperren, Vorstrafen, Klienten, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - ÖSHZ : Klientenkontakte, Standard-Klientenkontaktarten, Begleitungen, AG-Sperren, Vorstrafen, Klienten, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
@@ -289,10 +289,10 @@ Empfangsschalter
 - Konfigurierung :
   - Orte : Länder, Orte
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
-  - ÖSHZ : Dienste, Begleitungsbeendigungsgründe, Klientenkontaktarten, Hilfearten, Kategorien
+  - ÖSHZ : Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe, Hilfearten, Kategorien
 - Explorer :
   - Kontakte : Kontaktpersonen, Partner, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
-  - ÖSHZ : Begleitungen, Klientenkontakte, Standard-Klientenkontaktarten, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - ÖSHZ : Klientenkontakte, Standard-Klientenkontaktarten, Begleitungen, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
 
@@ -1598,9 +1598,9 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Buchhaltung --> Journale : 5
 - Konfigurierung --> Buchhaltung --> Buchungsperioden : 30
 - Konfigurierung --> Buchhaltung --> Zahlungsbedingungen : 9
+- Konfigurierung --> ÖSHZ --> Klientenkontaktarten : 11
 - Konfigurierung --> ÖSHZ --> Dienste : 4
 - Konfigurierung --> ÖSHZ --> Begleitungsbeendigungsgründe : 5
-- Konfigurierung --> ÖSHZ --> Klientenkontaktarten : 11
 - Konfigurierung --> ÖSHZ --> Integrationsphasen : 6
 - Konfigurierung --> ÖSHZ --> Berufe : 1
 - Konfigurierung --> ÖSHZ --> AG-Sperrgründe : 3
@@ -1661,9 +1661,9 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Kalender --> Termin-Zustände : 5
 - Explorer --> Kalender --> Gast-Zustände : 9
 - Explorer --> Kalender --> Aufgaben-Zustände : 5
-- Explorer --> ÖSHZ --> Begleitungen : 91
 - Explorer --> ÖSHZ --> Klientenkontakte : 15
 - Explorer --> ÖSHZ --> Standard-Klientenkontaktarten : 2
+- Explorer --> ÖSHZ --> Begleitungen : 91
 - Explorer --> ÖSHZ --> AG-Sperren : 1
 - Explorer --> ÖSHZ --> Vorstrafen : 1
 - Explorer --> ÖSHZ --> Klienten : 58
