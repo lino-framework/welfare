@@ -39,6 +39,9 @@ Zur Zeit unter **testlino** einsehbar.
 - Deutlichere Fehlermeldung im Fall eines Problems bei der Verbindung
   zur Datenbank.
 
+- Die Buttons im Fenster "Meine Einstellungen" sind jetzt oben (wie
+  gewohnt) statt unten. Und jetzt haben sie auch alle einen Hilfetext.
+
 
 Prüfung Datumsbereich Beschlüsse & Bescheinigungen
 --------------------------------------------------
