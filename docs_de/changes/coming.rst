@@ -24,7 +24,6 @@ Zur Zeit unter **testlino** einsehbar.
   kann man im Schnellsuch-Feld ein "#" vor die Nummer setzen.  Das
   Gleiche gilt auch für Verträge, Auszüge etc.
 
-
 - Lino schlug par défaut "Pflegemutter" statt "Mutter" vor.
 
 - Beim Einfügen eines Termins vom Klienten aus ist das Dialogfenster
@@ -41,6 +40,13 @@ Zur Zeit unter **testlino** einsehbar.
 
 - Die Buttons im Fenster "Meine Einstellungen" sind jetzt oben (wie
   gewohnt) statt unten. Und jetzt haben sie auch alle einen Hilfetext.
+
+- Bescheinigung Kleiderkammer (Kostenübernahme Kleidung) : Der Satz
+  "Wir bescheinigen hiermit, für folgende Personen die Kosten für den
+  Ankauf von Kleidung bis in Höhe von 20 EUR zu übernehmen:" war noch
+  nicht übersetzt. Ab jetzt "Par la présente nous confirmons la prise
+  en charge des achats de vêtements jusqu'à un montant de 20 € pour
+  les personnes suivantes:"
 
 
 Prüfung Datumsbereich Beschlüsse & Bescheinigungen

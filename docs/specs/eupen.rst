@@ -27,7 +27,7 @@ it was the first Lino that went into production. This was in 2010.
 >>> print(analyzer.show_complexity_factors())
 - 65 plugins
 - 140 models
-- 540 views
+- 541 views
 - 15 user types
 - 150 dialog actions
 <BLANKLINE>
