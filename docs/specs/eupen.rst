@@ -27,7 +27,7 @@ it was the first Lino that went into production. This was in 2010.
 >>> print(analyzer.show_complexity_factors())
 - 65 plugins
 - 140 models
-- 541 views
+- 537 views
 - 15 user types
 - 150 dialog actions
 <BLANKLINE>
@@ -461,7 +461,6 @@ Each window layout defines a given set of fields.
 >>> print(analyzer.show_window_fields())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
-- about.Models.detail : app, name, docstring, rows
 - accounts.Accounts.detail : ref, group, type, common_account, id, name, name_fr, name_en, needs_partner, clearable, default_amount, MovementsByAccount
 - accounts.Accounts.insert : ref, group, type, name, name_fr, name_en
 - accounts.Accounts.merge_row : merge_to, reason
@@ -794,7 +793,6 @@ Each window layout is **viewable** by a given set of user user_types.
 >>> print(analyzer.show_window_permissions())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : visible for all
-- about.Models.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - accounts.Accounts.detail : visible for 510 admin 910
 - accounts.Accounts.insert : visible for 510 admin 910
 - accounts.Accounts.merge_row : visible for admin 910

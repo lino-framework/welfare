@@ -344,7 +344,6 @@ Each window layout defines a given set of fields.
 >>> print(analyzer.show_window_fields())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
-- about.Models.detail : app, name, docstring, rows
 - accounts.Accounts.detail : ref, group, type, common_account, id, name, name_nl, name_de, name_en, needs_partner, clearable, default_amount
 - accounts.Accounts.insert : ref, group, type, name, name_nl, name_de, name_en
 - accounts.Accounts.merge_row : merge_to, reason
@@ -670,7 +669,6 @@ Each window layout is **viewable** by a given set of user types.
 >>> print(analyzer.show_window_permissions())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : visible for all
-- about.Models.detail : visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910
 - accounts.Accounts.detail : visible for 510 admin 910
 - accounts.Accounts.insert : visible for 510 admin 910
 - accounts.Accounts.merge_row : visible for admin 910
