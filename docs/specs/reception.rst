@@ -299,7 +299,7 @@ Create a visit
 Enregistrer consultation
 (main) [visible for all]: **Utilisateur** (user), **Raison** (summary)
 
->>> show_fields(pcsw.Clients.create_visit)
+>>> show_fields(pcsw.Clients.create_visit, all=True)
 =============== ============== ===========
  Internal name   Verbose name   Help text
 --------------- -------------- -----------
