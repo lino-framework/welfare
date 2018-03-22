@@ -245,7 +245,7 @@ Auswertung
 >>> wanted, unwanted = obj.get_wanted_auto_events(ses)
 >>> print(ses.response['info_message'])
 Generating events between 2013-03-04 and 2014-12-02 (max. 72).
-Reached upper date limit 2014-12-02
+Reached upper date limit 2014-12-02 for 7
 
 
 >>> settings.SITE.site_config.hide_events_before = None
