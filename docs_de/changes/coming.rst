@@ -48,6 +48,16 @@ Zur Zeit unter **testlino** einsehbar.
   en charge des achats de vêtements jusqu'à un montant de 20 € pour
   les personnes suivantes:"
 
+- Wenn ein Benutzer eine Vollmacht hatte, deren Feld `user` (d.h. der
+  vollmachtgebende Benutzer) leer war, dann konnte dieser Benutzer
+  sich nicht mehr anmelden bzw. bekam dann einen Fehler 500 mit
+  interner Fehlermeldung :message:`AttributeError: 'NoneType' object
+  has no attribute 'id'`.
+
+- Behoben: Fehlermeldung "AttrDict instance has no key 'immersion'"
+  beim Aktualisieren der ESF-Daten.
+
+
 
 Prüfung Datumsbereich Beschlüsse & Bescheinigungen
 --------------------------------------------------

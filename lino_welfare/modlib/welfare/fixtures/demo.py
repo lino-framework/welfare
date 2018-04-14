@@ -154,6 +154,11 @@ Wyggeston and Queen Elizabeth I College
 """.splitlines()])
 # taken from https://en.wikipedia.org/wiki/List_of_schools_in_Leicester
 
+def flexible_user_type(s):
+    if 'chatelet' in settings.SETTINGS_MODULE:
+        return s[0:1] + "20"
+    return s
+
 
 def objects():
 
@@ -265,7 +270,8 @@ def objects():
                     city=kettenis, country='BE', gender=dd.Genders.male)
     yield hubert
     hubert = User(
-        username="hubert", partner=hubert, user_type='100',
+        username="hubert", partner=hubert,
+        user_type=flexible_user_type('100'),
         coaching_type=DSBE,
         newcomer_consultations=True, newcomer_appointments=False)
     yield hubert
@@ -278,7 +284,8 @@ def objects():
         language='fr')
     yield alicia
     alicia = User(
-        username="alicia", partner=alicia, user_type='100',
+        username="alicia", partner=alicia,
+        user_type=flexible_user_type('100'),
         coaching_type=DSBE,
         newcomer_consultations=True, newcomer_appointments=True)
     yield alicia
@@ -302,7 +309,7 @@ def objects():
 
     caroline = User(
         username="caroline", first_name="Caroline", last_name="Carnol",
-        user_type='200',
+        user_type=flexible_user_type('200'),
         coaching_type=ASD,
         newcomer_consultations=True, newcomer_appointments=True)
     yield caroline
@@ -311,9 +318,9 @@ def objects():
                  email=settings.SITE.demo_email,
                  city=eupen, country='BE', gender=dd.Genders.female)
     yield obj
-
     judith = User(
-        username="judith", partner=obj, user_type='400',
+        username="judith", partner=obj,
+        user_type=flexible_user_type('400'),
         coaching_type=ASD,
         newcomer_consultations=True, newcomer_appointments=True)
     yield judith

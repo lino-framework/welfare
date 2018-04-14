@@ -33,6 +33,7 @@ from lino_xl.lib.sepa.roles import SepaStaff
 from lino_xl.lib.cal.roles import GuestOperator
 from lino_xl.lib.sepa.roles import SepaUser
 from lino_xl.lib.courses.roles import CoursesUser
+from lino_xl.lib.cv.roles import CareerUser
 from lino_xl.lib.beid.roles import BeIdUser
 from lino_welfare.modlib.cbss.roles import CBSSUser, SecurityAdvisor
 from lino_xl.lib.coachings.roles import CoachingsStaff
@@ -84,19 +85,15 @@ class ReceptionClerk(SiteUser, AuthorshipTaker, OfficeOperator,
     pass
 
 
-class ReceptionClerkNewcomers(SiteUser, AuthorshipTaker, SimpleContactsUser,
-                              OfficeOperator,
-                              GuestOperator,
-                              ExcerptsUser,
-                              # OfficeUser,
-                              # SocialAgent,
-                              # CoursesUser,
-                              NewcomersAgent,
-                              BeIdUser):
-                              # ContactsUser,
-                              # ContactsStaff,
-                              # AidsStaff, CBSSUser, BeIdUser, SepaUser,
-                              # ):
+class ReceptionClerkFlexible(SiteUser, AuthorshipTaker, SimpleContactsUser,
+                             OfficeOperator,
+                             GuestOperator,
+                             ExcerptsUser,
+                             # OfficeUser,
+                             # SocialAgent,
+                             # CoursesUser,
+                             NewcomersAgent,
+                             BeIdUser):
     """
     A **newcomers reception clerk** is a *reception clerk* who also
     can assign coaches to clients.
@@ -105,15 +102,23 @@ class ReceptionClerkNewcomers(SiteUser, AuthorshipTaker, SimpleContactsUser,
     pass
 
 
-class IntegrationAgentNewcomers(IntegrationAgent, NewcomersOperator,
-                                DebtsUser):
+class IntegrationAgentFlexible(IntegrationAgent, NewcomersOperator,
+                               DebtsUser):
     """
-    A **newcomers integration agent** is an *integration agent* who
+    A **flexible integration agent** is an *integration agent* who
     also can assign coaches to clients and create budgets for debts
     mediation.
 
     """
     pass
+
+# class SocialAgentFlexible(SocialAgent, SocialCoordinator, CareerUser):
+#     """
+#     A **flexible social agent** is an *social agent* who also can see
+#     PARCOURS – COMPÉTENCES – FREINS - STAGES D’IMMERSION - MÉDIATION
+#     DE DETTES.
+#     """
+#     pass
 
 
 class LedgerUser(SiteUser, LedgerUser, ContactsUser, OfficeUser, ExcerptsUser,
@@ -144,6 +149,7 @@ from lino.modlib.users.choicelists import UserTypes
 from lino.api import _
 
 UserTypes.clear()
+UserTypes.show_values = True
 
 add = UserTypes.add_item
 
@@ -151,13 +157,14 @@ add('000', _("Anonymous"), Anonymous, name='anonymous',
     readonly=True, authenticated=False)
 add('100', _("Integration agent"),             IntegrationAgent)
 add('110', _("Integration agent (Manager)"),   IntegrationStaff)
-add('120', _("Integration agent (Newcomers)"), IntegrationAgentNewcomers)
+add('120', _("Integration agent (Flexible)"),  IntegrationAgentFlexible)
 add('200', _("Newcomers consultant"),          NewcomersConsultant)
 add('210', _("Reception clerk"),               ReceptionClerk)
-add('220', _("Newcomers reception clerk"),     ReceptionClerkNewcomers)
+add('220', _("Reception clerk (Flexible)"),    ReceptionClerkFlexible)
 add('300', _("Debts consultant"),              DebtsUser)
 add('400', _("Social agent"),                  SocialAgent)
 add('410', _("Social agent (Manager)"),        SocialStaff)
+add('420', _("Social agent (Flexible)"),       IntegrationAgentFlexible)
 add('500', _("Accountant"),                    LedgerUser)
 add('510', _("Accountant (Manager)"),          AccountantManager)
 add('800', _("Supervisor"),                    Supervisor)
@@ -165,4 +172,4 @@ add('900', _("Administrator"),                 SiteAdmin, name='admin')
 add('910', _("Security advisor"),              SecurityAdvisor)
 
 from lino.modlib.notify.choicelists import MessageTypes
-UserTypes.get_by_value('400').mask_notifications(MessageTypes.change)
+UserTypes.get_by_value('420').mask_notifications(MessageTypes.change)

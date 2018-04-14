@@ -27,6 +27,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 
 from lino_xl.lib.contacts.roles import ContactsUser
+from lino_xl.lib.cv.roles import CareerUser
 from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
                                                  NewcomersOperator)
 from lino_welfare.modlib.integ.roles import IntegrationAgent
@@ -177,12 +178,16 @@ class ClientDetail(ClientDetail):
     competences = dd.Panel("""
     cv.SkillsByPerson badges.AwardsByHolder cv.SoftSkillsByPerson
     cv.LanguageKnowledgesByPerson skills
-    """, label=_("Competences"), required_roles=dd.login_required(IntegrationAgent))
+    """, label=_("Competences"), required_roles=dd.login_required(
+        CareerUser))
 
     obstacles_tab = dd.Panel("""
     cv.ObstaclesByPerson pcsw.ConvictionsByClient
     obstacles
-    """, label=_("Obstacles"), required_roles=dd.login_required(IntegrationAgent))
+    """, label=_("Obstacles"), required_roles=dd.login_required(
+        CareerUser))
+
+
 
 Clients.detail_layout = ClientDetail()
 

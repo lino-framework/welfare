@@ -16,6 +16,9 @@ extensions += ['atelier.sphinxconf.blog']
 extensions += ['lino.sphinxcontrib.logo']
 extensions += ['lino.sphinxcontrib.actordoc']
 
+extlinks.update(
+    ticket=('http://bugs.saffre-rumma.net/tickets/Ticket/%s', '#'))
+
 import alabaster
 extensions.append('alabaster')
 html_style = 'alabaster.css'
