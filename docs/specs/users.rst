@@ -112,23 +112,23 @@ Demo users
 ==========
 
 >>> rt.show('users.Users', language="en")
-========== ============================= ============ ===========
- Username   User type                     First name   Last name
----------- ----------------------------- ------------ -----------
- alicia     Integration agent             Alicia       Allmanns
- caroline   Newcomers consultant          Caroline     Carnol
- hubert     Integration agent             Hubert       Huppertz
- judith     Social agent                  Judith       Jousten
- kerstin    Debts consultant              Kerstin      Kerres
- melanie    Integration agent (Manager)   Mélanie      Mélard
+========== =================================== ============ ===========
+ Username   User type                           First name   Last name
+---------- ----------------------------------- ------------ -----------
+ alicia     100 (Integration agent)             Alicia       Allmanns
+ caroline   200 (Newcomers consultant)          Caroline     Carnol
+ hubert     100 (Integration agent)             Hubert       Huppertz
+ judith     400 (Social agent)                  Judith       Jousten
+ kerstin    300 (Debts consultant)              Kerstin      Kerres
+ melanie    110 (Integration agent (Manager))   Mélanie      Mélard
  nicolas
- patrick    Security advisor              Patrick      Paraneau
- robin      Administrator                 Robin        Rood
- rolf       Administrator                 Rolf         Rompen
- romain     Administrator                 Romain       Raffault
- theresia   Reception clerk               Theresia     Thelen
- wilfried   Accountant                    Wilfried     Willems
-========== ============================= ============ ===========
+ patrick    910 (Security advisor)              Patrick      Paraneau
+ robin      900 (Administrator)                 Robin        Rood
+ rolf       900 (Administrator)                 Rolf         Rompen
+ romain     900 (Administrator)                 Romain       Raffault
+ theresia   210 (Reception clerk)               Theresia     Thelen
+ wilfried   500 (Accountant)                    Wilfried     Willems
+========== =================================== ============ ===========
 <BLANKLINE>
 
 
