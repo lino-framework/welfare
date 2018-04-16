@@ -37,6 +37,7 @@ primitive direct printing method (see :ref:`lino.admin.printing`):
     >>> from lino.modlib.printing.mixins import Printable
     >>> for m in rt.models_by_base(Printable):
     ...     print m
+    ...     #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF -ELLIPSIS
     <class 'lino_welfare.modlib.aids.models.Granting'>
     <class 'lino_welfare.modlib.aids.models.IncomeConfirmation'>
     <class 'lino_welfare.modlib.aids.models.RefundConfirmation'>
@@ -81,6 +82,7 @@ primitive direct printing method (see :ref:`lino.admin.printing`):
     <class 'lino.modlib.tinymce.models.TextFieldTemplate'>
     <class 'lino_xl.lib.uploads.models.Upload'>
     <class 'lino.modlib.users.models.Authority'>
+    <class 'lino_welfare.modlib.users.models.User'>
     <class 'lino_xl.lib.vatless.models.AccountInvoice'>
     <class 'lino_welfare.modlib.xcourses.models.CourseProvider'>
 

@@ -25,25 +25,26 @@ The default set of user types for Lino Welfare is defined in
 following list:
 
 >>> rt.show(users.UserTypes, language="en")
-======= =========== =============================== ==================================================================
- value   name        text                            User role
-------- ----------- ------------------------------- ------------------------------------------------------------------
- 000     anonymous   Anonymous                       lino.core.roles.Anonymous
- 100                 Integration agent               lino_welfare.modlib.integ.roles.IntegrationAgent
- 110                 Integration agent (Manager)     lino_welfare.modlib.integ.roles.IntegrationStaff
- 120                 Integration agent (Newcomers)   lino_welfare.modlib.welfare.user_types.IntegrationAgentNewcomers
- 200                 Newcomers consultant            lino_welfare.modlib.welfare.user_types.NewcomersConsultant
- 210                 Reception clerk                 lino_welfare.modlib.welfare.user_types.ReceptionClerk
- 220                 Newcomers reception clerk       lino_welfare.modlib.welfare.user_types.ReceptionClerkNewcomers
- 300                 Debts consultant                lino_welfare.modlib.debts.roles.DebtsUser
- 400                 Social agent                    lino_welfare.modlib.pcsw.roles.SocialAgent
- 410                 Social agent (Manager)          lino_welfare.modlib.pcsw.roles.SocialStaff
- 500                 Accountant                      lino_welfare.modlib.welfare.user_types.LedgerUser
- 510                 Accountant (Manager)            lino_welfare.modlib.welfare.user_types.AccountantManager
- 800                 Supervisor                      lino_welfare.modlib.welfare.user_types.Supervisor
- 900     admin       Administrator                   lino_welfare.modlib.welfare.user_types.SiteAdmin
- 910                 Security advisor                lino_welfare.modlib.welfare.user_types.SecurityAdvisor
-======= =========== =============================== ==================================================================
+======= =========== ============================== =================================================================
+ value   name        text                           User role
+------- ----------- ------------------------------ -----------------------------------------------------------------
+ 000     anonymous   Anonymous                      lino.core.roles.Anonymous
+ 100                 Integration agent              lino_welfare.modlib.integ.roles.IntegrationAgent
+ 110                 Integration agent (Manager)    lino_welfare.modlib.integ.roles.IntegrationStaff
+ 120                 Integration agent (Flexible)   lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible
+ 200                 Newcomers consultant           lino_welfare.modlib.welfare.user_types.NewcomersConsultant
+ 210                 Reception clerk                lino_welfare.modlib.welfare.user_types.ReceptionClerk
+ 220                 Reception clerk (Flexible)     lino_welfare.modlib.welfare.user_types.ReceptionClerkFlexible
+ 300                 Debts consultant               lino_welfare.modlib.debts.roles.DebtsUser
+ 400                 Social agent                   lino_welfare.modlib.pcsw.roles.SocialAgent
+ 410                 Social agent (Manager)         lino_welfare.modlib.pcsw.roles.SocialStaff
+ 420                 Social agent (Flexible)        lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible
+ 500                 Accountant                     lino_welfare.modlib.welfare.user_types.LedgerUser
+ 510                 Accountant (Manager)           lino_welfare.modlib.welfare.user_types.AccountantManager
+ 800                 Supervisor                     lino_welfare.modlib.welfare.user_types.Supervisor
+ 900     admin       Administrator                  lino_welfare.modlib.welfare.user_types.SiteAdmin
+ 910                 Security advisor               lino_welfare.modlib.welfare.user_types.SecurityAdvisor
+======= =========== ============================== =================================================================
 <BLANKLINE>
 
 
@@ -93,7 +94,7 @@ TasksByProject of that tab.
 True
 
 >>> print(py2rst(pcsw.Clients.detail_layout['calendar']))
-**Kalender** (calendar) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
+**Kalender** (calendar) [visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910]:
 - **Kalendereinträge** (cal.EntriesByClient)
 - **Aufgaben** (cal.TasksByProject)
 <BLANKLINE>
