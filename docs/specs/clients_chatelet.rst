@@ -41,22 +41,22 @@ Lino Welfare à la Chatelet.
     - **None** (image)
   - (general_2): **NISS** (national_id), **Etat civil** (civil_state), **Pays de naissance** (birth_country), **Lieu de naissance** (birth_place), **Nom déclaré** (declared_name), **besoin permis de séjour** (needs_residence_permit), **besoin permis de travail** (needs_work_permit)
   - (general_3): **en Belgique depuis** (in_belgium_since), **Titre de séjour** (residence_type), **Inscription jusque** (residence_until), **Phase d'insertion** (group), **Type d'aide sociale** (aid_type)
-  - (general_4) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
+  - (general_4) [visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910]:
     - **Rendez-vous** (reception.AppointmentsByPartner)
     - **Créer rendez-vous avec** (AgentsByClient)
     - **Inscriptions** (courses.EnrolmentsByPupil) [visible for 100 110 120 200 210 300 400 410 800 admin 910]
-- **Intervenants** (coaching) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]:
-  - (coaching_1) [visible for 110 120 200 220 300 800 admin 910]:
+- **Intervenants** (coaching) [visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910]:
+  - (coaching_1) [visible for 110 120 200 220 300 420 800 admin 910]:
     - (newcomers_left):
       - (newcomers_left_1) [visible for all]: **Workflow** (workflow_buttons), **Document identifiant** (id_document)
       - **Spécificité** (faculty) [visible for all]
-      - **Contacts** (clients.ContactsByClient) [visible for 100 110 120 200 210 220 300 400 410 500 510 800 admin 910]
+      - **Contacts** (clients.ContactsByClient) [visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910]
     - **Agents disponibles** (newcomers.AvailableCoachesByClient)
   - **Interventions** (coachings.CoachingsByClient)
 - **Situation familiale** (family) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]:
   - (family_1) [visible for all]:
-    - (family_left): **Appartenance aux ménages** (households_MembersByPerson) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910], **Garde d'enfant** (child_custody)
-    - **Composition de ménage** (households.SiblingsByPerson) [visible for 100 110 120 200 210 300 400 410 500 510 800 admin 910]
+    - (family_left): **Appartenance aux ménages** (households_MembersByPerson) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910], **Garde d'enfant** (child_custody)
+    - **Composition de ménage** (households.SiblingsByPerson) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]
   - **Liens de parenté** (humanlinks_LinksByHuman)
 - **Parcours** (career) [visible for 100 110 120 admin 910]:
   - **Études** (cv.StudiesByPerson)

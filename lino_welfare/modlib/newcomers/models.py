@@ -466,7 +466,9 @@ class AssignCoach(NotifyingAction):
         coaching = rt.models.coachings.Coaching(
             client=client, user=obj,
             start_date=settings.SITE.today(),
+            primary=True,
             type=obj.coaching_type)
+        coaching.adapt_primary()
         coaching.full_clean()
         coaching.save()
         dd.on_ui_created.send(coaching, request=ar.request)

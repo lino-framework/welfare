@@ -223,6 +223,7 @@ class EntriesByClient(Events):
     required_roles = dd.login_required((OfficeUser, OfficeOperator))
     # master_key = 'project'
     # master = 'cal.Event'
+    order_by = ["-start_date", "-start_time", "id"]
     master = 'pcsw.Client'
     auto_fit_column_widths = True
     column_names = 'when_text user summary workflow_buttons *'
