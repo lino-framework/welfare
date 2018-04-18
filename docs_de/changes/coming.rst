@@ -4,6 +4,8 @@ Kommende Version
 
 Zur Zeit unter **testlino** einsehbar.
 
+- wdav und beid ohne Java
+
 - **Kontauszüge um den Jahreswechsel herum** wurden bisher nicht
   importiert, weil Lino da einen Fehlalarm "different years" auslöste.
   In der testlino kann man das jetzt noch nicht sehen, aber wenn die
@@ -56,6 +58,19 @@ Zur Zeit unter **testlino** einsehbar.
 
 - Behoben: Fehlermeldung "AttrDict instance has no key 'immersion'"
   beim Aktualisieren der ESF-Daten.
+
+- Wenn man einen Begleiter zuweist, steht die neue Begleitung jetzt
+  automatisch auf primär. Falls es bereits einen PB gab, wird dieser
+  abgeschaltet.
+
+- Was tun, wenn ein Sozi aufhört?  end_date ausfüllen. Benutzerart
+  nicht auf leer setzen, weil man sonst nicht mehr als dieser User
+  arbeiten kann.
+
+- Kalendereinträge pro Klient werden jetzt chronologisch rückwärts
+  sortiert
+
+  
 
 
 
