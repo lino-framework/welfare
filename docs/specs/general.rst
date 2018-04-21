@@ -1,4 +1,3 @@
-.. _welfare.tested.general:
 .. _welfare.specs.general:
 
 ================================

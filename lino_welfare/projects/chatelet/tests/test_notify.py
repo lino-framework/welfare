@@ -113,7 +113,7 @@ class TestCase(TestCase):
             User, username='alícia', first_name="Alicia",
             user_type='120', language="fr")
         roger = self.create_obj(
-            User, username='róger', user_type='400',
+            User, username='róger', user_type='420',
             language="en")
 
         ses = rt.login('robin')
@@ -170,9 +170,9 @@ class TestCase(TestCase):
             msg.subject,
             "GÉRARD First (100) a commencé d'attendre caróline")
 
-        # id does *not* cause a system note:
+        # it does *not* cause a system note:
         self.assertEqual(Note.objects.count(), 0)
-
+        
         
 
         # When a client is modified, all active coaches get a
@@ -180,6 +180,7 @@ class TestCase(TestCase):
         # Note that Caroline doesn't get a notification because her
         # coaching is not active.
         # Alicia doesn't get a notification because she did it herself.
+        # Roger doesn't get notified because he is user_type 420
 
         data = dict(first_name="Seconda", an="submit_detail")
         kwargs = dict(data=urlencode(data))
@@ -273,6 +274,7 @@ class TestCase(TestCase):
 =================================== ======= ==============
 """)
 
+        # self.check_coachings("")
         self.check_coachings("""
 ==== ====================== ======================== ============ ============= ==========
  ID   Bénéficiaire           En intervention depuis   au           Intervenant   Primaire
@@ -280,7 +282,7 @@ class TestCase(TestCase):
  1    GÉRARD Seconda (101)   01/05/2013               01/05/2014   caróline      Non
  2    GÉRARD Seconda (101)   02/05/2014                            róger         Non
  3    GÉRARD Seconda (101)   20/05/2014                            Alicia        Non
- 4    GÉRARD First (100)     22/05/2014                            caróline      Non
+ 4    GÉRARD First (100)     22/05/2014                            caróline      Oui
 ==== ====================== ======================== ============ ============= ==========
 """)
 
@@ -343,7 +345,7 @@ class TestCase(TestCase):
  1    GÉRARD Seconda (101)   01/05/2013               01/05/2014   caróline      Non
  2    GÉRARD Seconda (101)   02/05/2014               22/05/2014   róger         Non
  3    GÉRARD Seconda (101)   20/05/2014               22/05/2014   Alicia        Non
- 4    GÉRARD First (100)     22/05/2014                            caróline      Non
+ 4    GÉRARD First (100)     22/05/2014                            caróline      Oui
 ==== ====================== ======================== ============ ============= ==========
 """)
         # self.check_notes()

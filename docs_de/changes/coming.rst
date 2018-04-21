@@ -4,6 +4,14 @@ Kommende Version
 
 Zur Zeit unter **testlino** einsehbar.
 
+
+TALK:
+
+- Layout des Details eines Haushalts. Hier sieht man jetzt gar nicht
+  mehr Adresse usw.  War das angefragt?
+
+DONE:
+
 - wdav und beid ohne Java
 
 - **Kontauszüge um den Jahreswechsel herum** wurden bisher nicht

@@ -2,6 +2,10 @@
 Version à venir
 ===============
 
+TALK:
+
+- Le détail d'un ménage a changé.  
+
 DONE:
 
 - Le nouveau profil 420 (Agent social (flexible)) :ticket:`2362` a les

@@ -1,5 +1,4 @@
 .. doctest docs/specs/eupen.rst
-.. _welfare.tested.eupen:
 .. _welfare.specs.eupen:
 
 =======================

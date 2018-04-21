@@ -450,9 +450,6 @@ can assign coaches to clients."""),
     'lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible' : _("""A flexible integration agent is an integration agent who
 also can assign coaches to clients and create budgets for debts
 mediation."""),
-    'lino_welfare.modlib.welfare.user_types.SocialAgentFlexible' : _("""A flexible social agent is an social agent who also can see
-PARCOURS – COMPÉTENCES – FREINS - STAGES D’IMMERSION - MÉDIATION
-DE DETTES."""),
     'lino_welfare.modlib.welfare.user_types.LedgerUser' : _("""An accountant is a user who enters invoices, bank statements,
 payment orders and other ledger operations."""),
     'lino_welfare.modlib.welfare.user_types.Supervisor' : _("""A backoffice user who can act as others."""),

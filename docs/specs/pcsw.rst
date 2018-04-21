@@ -1,18 +1,14 @@
+.. doctest docs/specs/pcsw.rst
 .. _welfare.specs.pcsw:
-.. _welfare.tested.pcsw:
 
 ============
 General PCSW
 ============
 
-..  To test only this document, run::
-
-      $ doctest docs/specs/pcsw.rst
-
-    doctest init:
+..  doctest init:
 
     >>> from lino import startup
-    >>> startup('lino_welfare.projects.std.settings.doctests')
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
 
 A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
@@ -27,63 +23,30 @@ A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
 Choicelists
 ===========
 
-CivilStates
-===========
-
->>> rt.show(beid.CivilStates)
-======= ==================== ====================
- value   name                 text
-------- -------------------- --------------------
- 10      single               Single
- 20      married              Married
- 30      widowed              Widowed
- 40      divorced             Divorced
- 50      separated            Separated
- 51      separated_de_facto   De facto separated
- 60      cohabitating         Cohabitating
-======= ==================== ====================
-<BLANKLINE>
-
-ResidenceType
-=============
-
->>> rt.show(beid.ResidenceTypes)
-======= ====== ========================
- value   name   text
-------- ------ ------------------------
- 1              Register of citizens
- 2              Register of foreigners
- 3              Waiting register
-======= ====== ========================
-<BLANKLINE>
-
-
 ClientEvents
 ============
 
->>> rt.show(pcsw.ClientEvents)
-=========== =========== ========================
- value       name        text
------------ ----------- ------------------------
- created     created     Created
- modified    modified    Modified
- note        note        Note
- learning    learning    Learning
- dispense    dispense    Dispense
- penalty     penalty     Penalty
- active      active      Coaching
- isip        isip        ISIP
- jobs        jobs        Art60§7 job supplyment
- available   available   Available
- art61       art61       Art61 job supplyment
- immersion   immersion   Immersion training
-=========== =========== ========================
+>>> show_choicelist(pcsw.ClientEvents)
+=========== =========== ===================== ========================= ========================
+ value       name        de                    fr                        en
+----------- ----------- --------------------- ------------------------- ------------------------
+ created     created     Erstellt              Créé                      Created
+ modified    modified    Bearbeitet            Modifié                   Modified
+ note        note        Notiz                 Notiz                     Note
+ dispense    dispense    Dispenz               Dispenz                   Dispense
+ penalty     penalty     AG-Sperre             AG-Sperre                 Penalty
+ active      active      Begleitung            Intervention              Coaching
+ isip        isip        VSE                   PIIS                      ISIP
+ jobs        jobs        Art.60§7-Konvention   Mise à l'emploi art60§7   Art60§7 job supplyment
+ available   available   Verfügbar             Verfügbar                 Available
+ art61       art61       Art.61-Konvention     Mise à l'emploi art.61    Art61 job supplyment
+=========== =========== ===================== ========================= ========================
 <BLANKLINE>
 
 RefusalReasons
 ==============
 
->>> rt.show(pcsw.RefusalReasons)
+>>> show_choicelist(pcsw.RefusalReasons)
 ======= ====== ==========================================
  value   name   text
 ------- ------ ------------------------------------------
@@ -97,7 +60,7 @@ RefusalReasons
 
 
 eID card summary
-----------------
+================
 
 Here a test case (fixed :blogref:`20130827`) 
 to test the new `eid_info` field:
@@ -133,8 +96,7 @@ Coaching types
 --------------
 
 >>> ses = rt.login('robin')
->>> with translation.override('de'):
-...    ses.show('coachings.CoachingTypes')
+>>> ses.show('coachings.CoachingTypes', langueg='de')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ================= ===================== =================== ====== ====== =====================
  Bezeichnung       Bezeichnung (fr)      Bezeichnung (de)    DSBE   ASD    Role in evaluations
