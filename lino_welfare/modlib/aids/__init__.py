@@ -97,7 +97,7 @@ from lino.api import ad, _
 
 
 class Plugin(ad.Plugin):
-
+    """The plugin."""
     verbose_name = _("Aids")
 
     no_date_range_veto_until = None
