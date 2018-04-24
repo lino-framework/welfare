@@ -299,7 +299,7 @@ class Confirmation(
             gp = self.granting.get_period()
             if self.start_date or self.end_date:
                 cp = self.get_period()
-                if cp[1] is None: cp[1] = cp[0]
+                if cp[1] is None: cp = (cp[0], cp[0])
                 if not encompass(gp, cp):
                     msg = _(
                         "Date range %(p1)s lies outside of granted "
@@ -395,10 +395,11 @@ class ConfirmationChecker(Checker):
             msg = _("Confirmation without granting")
             yield (False, msg)
             return
+        # same code as in full_clean
         gp = obj.granting.get_period()
         if obj.start_date or obj.end_date:
             cp = obj.get_period()
-            if cp[1] is None: cp[1] = cp[0]
+            if cp[1] is None: cp = (cp[0], cp[0])
             if not encompass(gp, cp):
                 msg = _(
                     "Date range %(p1)s lies outside of granted "
