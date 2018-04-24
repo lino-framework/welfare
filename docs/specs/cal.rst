@@ -1,14 +1,11 @@
+.. doctest docs/specs/cal.rst
 .. _welfare.specs.cal:
 
 ==================================
 Calendar functions in Lino Welfare
 ==================================
 
-.. How to test only this document:
-
-    $ doctest docs/specs/cal.rst
-    
-    doctest init:
+.. doctest init:
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
@@ -49,19 +46,20 @@ each other's calendars:
 >>> from lino.modlib.office.roles import OfficeUser
 >>> for p in users.UserTypes.items():
 ...     if p.has_required_roles([OfficeUser]):
-...         print repr(p), unicode(p)
+...         print(p)
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
-users.UserTypes:100 Begleiter im DSBE
-users.UserTypes:110 Begleiter im DSBE (Manager)
-users.UserTypes:120 Begleiter im DSBE (+Erstempfang)
-users.UserTypes:200 Berater Erstempfang
-users.UserTypes:300 Schuldenberater
-users.UserTypes:400 Sozi
-users.UserTypes:410 Sozi (Manager)
-users.UserTypes:500 Buchhalter
-users.UserTypes:510 Accountant (Manager)
-users.UserTypes.admin:900 Verwalter
-users.UserTypes:910 Security advisor
+100 (Begleiter im DSBE)
+110 (Sozialarbeiter DSBE (Verwalter))
+120 (Sozialarbeiter DSBE (flexibel))
+200 (Berater Erstempfang)
+300 (Schuldenberater)
+400 (Sozi)
+410 (Sozialarbeiter (Verwalter))
+420 (Sozialarbeiter ASD (flexibel))
+500 (Buchhalter)
+510 (Buchhalter (Verwalter))
+900 (Verwalter)
+910 (Security advisor)
 
 
 

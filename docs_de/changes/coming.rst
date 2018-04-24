@@ -7,8 +7,10 @@ Zur Zeit unter **testlino** einsehbar.
 
 TALK:
 
+- A oder B?
+
 - Layout des Details eines Haushalts. Hier sieht man jetzt gar nicht
-  mehr Adresse usw.  War das angefragt?
+  mehr Adresse usw.  War das angefragt? Ist das erwünscht?
 
 DONE:
 

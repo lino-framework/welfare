@@ -34,11 +34,11 @@ False
 
 >>> ia_user_type = users.UserTypes.get_by_value('100')
 >>> print(ia_user_type)
-Integration agent
+100 (Integration agent)
 
 >>> rc_user_type = users.UserTypes.get_by_value('210')
 >>> print(rc_user_type)
-Reception clerk
+210 (Reception clerk)
 
 
 We are talking about the detail layout of a client, defined by

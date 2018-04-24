@@ -1,17 +1,14 @@
+.. doctest docs/specs/households.rst 
 .. _welfare.specs.households:
 
 ==========
 Households
 ==========
 
-.. How to test only this document:
-
-    $ doctest docs/specs/households.rst 
-
-    doctest init:
+.. doctest init:
 
     >>> from lino import startup
-    >>> startup('lino_welfare.projects.std.settings.doctests')
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
 
 The :mod:`lino_welfare.modlib.households` plugin is an extension of 
@@ -35,10 +32,14 @@ contains fictive family links.
 >>> print(paul.id)
 240
 >>> print(paul)
-Mr Paul FRISCH
+Herr Paul FRISCH
+
+His primary household consists of 2 adults and 3 children:
 
 >>> print(rt.modules.households.get_household_summary(paul))
-2 adults and 3 children
+2 Erwachsene und 3 Kinder
+
+
 
 >>> test_client.force_login(rt.login('rolf').user)
 
@@ -273,18 +274,18 @@ The utility function `get_household_summary
 <lino_welfare.modlib.households.models.get_household_summary>`_ is
 used for printing certain aid confirmations. Some examples:
 
->>> for cli in pcsw.Client.objects.all():
+>>> for cli in pcsw.Client.objects.order_by('id'):
 ...     s = households.get_household_summary(cli)
 ...     if not s.endswith("ist in keinem Haushalt"):
-...         print unicode(cli), ':', s
-BRAUN Bruno (259) : BRAUN Bruno (259) ist in mehreren Haushalten zugleich
-DENON Denis (180*) : 1 Erwachsener und 1 Kind
+...         print(u"{} : {}".format(cli, s))
+VANDENMEULENBOS Marie-Louise (174) : 2 Erwachsene
+LAHM Lisa (176) : 2 Erwachsene
 DUBOIS Robin (179) : 2 Erwachsene
-FRISCH Paul (240) : 2 Erwachsene und 3 Kinder
+DENON Denis (180*) : 1 Erwachsener und 1 Kind
 JEANÉMART Jérôme (181) : 2 Erwachsene
 KASENNOVA Tatjana (213) : 1 Erwachsener und 1 Kind
-LAHM Lisa (176) : 2 Erwachsene
-VANDENMEULENBOS Marie-Louise (174) : 2 Erwachsene
+FRISCH Paul (240) : 2 Erwachsene und 3 Kinder
+BRAUN Bruno (259) : BRAUN Bruno (259) ist in mehreren Haushalten zugleich
 
 
 

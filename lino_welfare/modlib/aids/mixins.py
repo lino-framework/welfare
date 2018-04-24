@@ -290,21 +290,31 @@ class Confirmation(
             return '%s/%s' % (self.granting, self.pk)
         return '%s #%s' % (self._meta.verbose_name, self.pk)
 
+    def get_date_range_veto(obj):
+        """
+        Return an error message if this confirmation lies outside of
+        granted period.
+        """
+        pk = dd.plugins.aids.no_date_range_veto_until
+        if pk and obj.pk and obj.pk <= pk:
+            return
+        gp = obj.granting.get_period()
+        if obj.start_date or obj.end_date:
+            cp = obj.get_period()
+            if cp[1] is None: cp = (cp[0], cp[0])
+            if not encompass(gp, cp):
+                return _(
+                    "Date range %(p1)s lies outside of granted "
+                    "period %(p2)s.") % dict(
+                        p2=rangefmt(gp), p1=rangefmt(cp))
+                
     def full_clean(self):
         super(Confirmation, self).full_clean()
         if self.granting is None:
             return
-        if False:  # deactivated 20170318 after #1354
-            # since 20171220 the following logic is implemented as a data checker instead because Lino should complain about the problem,
-            gp = self.granting.get_period()
-            if self.start_date or self.end_date:
-                cp = self.get_period()
-                if cp[1] is None: cp = (cp[0], cp[0])
-                if not encompass(gp, cp):
-                    msg = _(
-                        "Date range %(p1)s lies outside of granted "
-                        "period %(p2)s.") % dict(p2=rangefmt(gp), p1=rangefmt(cp))
-                    raise ValidationError(msg)
+        msg = self.get_date_range_veto()
+        if msg is not None:
+            raise ValidationError(msg)
         if not self.language:
             obj = self.recipient
             if obj is None:
@@ -395,16 +405,8 @@ class ConfirmationChecker(Checker):
             msg = _("Confirmation without granting")
             yield (False, msg)
             return
-        # same code as in full_clean
-        gp = obj.granting.get_period()
-        if obj.start_date or obj.end_date:
-            cp = obj.get_period()
-            if cp[1] is None: cp = (cp[0], cp[0])
-            if not encompass(gp, cp):
-                msg = _(
-                    "Date range %(p1)s lies outside of granted "
-                    "period %(p2)s.") % dict(
-                        p2=rangefmt(gp), p1=rangefmt(cp))
-                yield (False, msg)
-                
+        msg = obj.get_date_range_veto()
+        if msg is not None:
+            yield (False, msg)
+        
 ConfirmationChecker.activate()

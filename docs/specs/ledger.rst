@@ -111,7 +111,7 @@ user_type of an accountant
 
 >>> p = rt.login('wilfried').get_user().user_type
 >>> print(p)
-Buchhalter
+500 (Buchhalter)
 
 Accountants have no direct contact with clients and probably won't use
 the calendar.  But for the first prototype they get :class:`OfficeUser

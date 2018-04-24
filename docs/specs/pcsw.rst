@@ -18,6 +18,8 @@ A technical tour into the :mod:`lino_welfare.modlib.pcsw` module.
    :depth: 2
 
 
+.. >>> len(settings.SITE.languages)
+   3
 
 
 Choicelists
@@ -47,13 +49,13 @@ RefusalReasons
 ==============
 
 >>> show_choicelist(pcsw.RefusalReasons)
-======= ====== ==========================================
- value   name   text
-------- ------ ------------------------------------------
- 10             Information request (No coaching needed)
- 20             PCSW is not competent
- 30             Client did not return
-======= ====== ==========================================
+======= ====== ============================================= ============================================ ==========================================
+ value   name   de                                            fr                                           en
+------- ------ --------------------------------------------- -------------------------------------------- ------------------------------------------
+ 10      None   Information (keine Begleitung erforderlich)   Demande d'information (pas d'intervention)   Information request (No coaching needed)
+ 20      None   ÖSHZ ist nicht zuständig                      CPAS n'est pas compétent                     PCSW is not competent
+ 30      None   Antragsteller ist nicht zurück gekommen       Client n'est plus revenu                     Client did not return
+======= ====== ============================================= ============================================ ==========================================
 <BLANKLINE>
 
 
@@ -65,48 +67,51 @@ eID card summary
 Here a test case (fixed :blogref:`20130827`) 
 to test the new `eid_info` field:
 
->>> soup = get_json_soup('rolf', 'pcsw/Clients/177', 'overview')
->>> print(soup.get_text("\n"))
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-Ansicht als Partner ,  Person , Klient
-Herr
-Bernd 
-Brecht
-Deutschland
-Adressen verwalten
-Karte Nr. 591413288107 (Belgischer Staatsbürger), ausgestellt durch Eupen, gültig von 19.08.11 bis 19.08.16
-
 >>> soup = get_json_soup('rolf', 'pcsw/Clients/116', 'overview')
 >>> print(soup.get_text("\n"))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-Ansicht als Partner , Person , Klient
-Herr
-Alfons 
-Ausdemwald
+Ansicht als Partner ,  Person , Klient
+Herr 
+Alfons Ausdemwald
 Am Bahndamm
 4700 Eupen
 Adressen verwalten
 Karte Nr. 123456789012 (C (Personalausweis für Ausländer)), ausgestellt durch Eupen
 , gültig von 19.08.12 bis 18.08.13
 Muss eID-Karte einlesen!
-Do not offer coffee
+Keinen Kaffee anbieten
+>>> soup = get_json_soup('rolf', 'pcsw/Clients/118', 'overview')
+>>> print(soup.get_text("\n"))
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+Ansicht als Partner ,  Person ,  Klient
+Frau 
+Charlotte Collard
+Auf dem Spitzberg
+4700 Eupen
+Adressen verwalten
+Karte Nr. 591413288107 (Belgischer Staatsbürger), ausgestellt durch Eupen, gültig von 19.08.11 bis 19.08.16
 
 
 Coaching types
 --------------
 
->>> ses = rt.login('robin')
->>> ses.show('coachings.CoachingTypes', langueg='de')
+>>> ses = rt.login('rolf')
+>>> ses.show('coachings.CoachingTypes')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-================= ===================== =================== ====== ====== =====================
- Bezeichnung       Bezeichnung (fr)      Bezeichnung (de)    DSBE   ASD    Role in evaluations
------------------ --------------------- ------------------- ------ ------ ---------------------
- General           SSG                   ASD                 Nein   Ja     Kollege
- Integ             SI                    DSBE                Ja     Nein   Kollege
- Debts mediation   Médiation de dettes   Schuldnerberatung   Nein   Nein
-================= ===================== =================== ====== ====== =====================
+=================== ====== ====== =====================
+ Bezeichnung         DSBE   ASD    Role in evaluations
+------------------- ------ ------ ---------------------
+ ASD                 Nein   Ja     Kollege
+ DSBE                Ja     Nein   Kollege
+ Schuldnerberatung   Nein   Nein
+=================== ====== ====== =====================
 <BLANKLINE>
 
+.. note: above table shows only Bezeichnung in German because the othe
+   languages are hidden:
+
+   >>> [lng.name for lng in ses.user.user_type.hidden_languages]
+   ['fr', 'en']
 
 
 Creating a new client
@@ -128,27 +133,29 @@ Einfügen in Klienten (Begleitet)
 There are a lot of data fields:
 
 >>> len(d.data.keys())
-70
+85
 
 >>> print(' '.join(sorted(d.data.keys())))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
 AgentsByClient MovementsByProject activity activityHidden age
 birth_country birth_countryHidden birth_date birth_place broker
-brokerHidden cbss_relations checkdata_ProblemsByOwner civil_state
-civil_stateHidden client_state
-client_stateHidden created cv_LanguageKnowledgesByPerson declared_name
-disable_editing disabled_fields
-dupable_clients_SimilarClients email excerpts_ExcerptsByProject
-faculty facultyHidden fax first_name gender genderHidden group
-groupHidden gsm households_MembersByPerson humanlinks_LinksByHuman id
-id_document image in_belgium_since is_obsolete language languageHidden
-last_name middle_name modified national_id nationality
+brokerHidden cbss_identify_person cbss_manage_access cbss_relations
+cbss_retrieve_ti_groups cbss_summary checkdata_ProblemsByOwner
+civil_state civil_stateHidden client_state client_stateHidden created
+cv_LanguageKnowledgesByPerson cvs_emitted declared_name
+disable_editing disabled_fields dupable_clients_SimilarClients email
+excerpts_ExcerptsByProject faculty facultyHidden fax first_name gender
+genderHidden gesdos_id group groupHidden gsm
+households_MembersByPerson humanlinks_LinksByHuman id id_document
+image in_belgium_since income_ag income_kg income_misc income_rente
+income_wg is_cpas is_obsolete is_senior job_agents language
+languageHidden last_name middle_name modified national_id nationality
 nationalityHidden needs_residence_permit needs_work_permit
 noble_condition obstacles overview phone refusal_reason
-refusal_reasonHidden remarks residence_type residence_typeHidden
-residence_until row_class seeking_since skills unavailable_until
-unavailable_why unemployed_since uploads_UploadsByClient
-work_permit_suspended_until workflow_buttons
+refusal_reasonHidden remarks remarks2 residence_type
+residence_typeHidden row_class seeking_since skills tim_id
+unavailable_until unavailable_why unemployed_since
+uploads_UploadsByClient work_permit_suspended_until workflow_buttons
 
 
 
@@ -206,5 +213,5 @@ runtime errors.
 ...     for k in vfields:
 ...         counters[k].add(getattr(cli, k))
 >>> [len(counters[k]) for k in vfields]
-[1, 21, 18, 4, 1, 1, 18, 18]
+[1, 20, 21, 4, 1, 1, 21, 21]
 
