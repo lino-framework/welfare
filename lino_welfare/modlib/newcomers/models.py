@@ -23,7 +23,7 @@ Defines the models :class:`Broker`, :class:`Faculty` and
 Tables like :class:`NewClients`, :class:`AvailableCoaches`,
 :class:`AvailableCoachesByClient`.
 
-See also :ref:`welfare.tested.newcomers`.
+See also :ref:`welfare.specs.newcomers`.
 
 """
 

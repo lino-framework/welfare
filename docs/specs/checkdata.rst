@@ -1,6 +1,5 @@
 .. doctest docs/specs/checkdata.rst
 .. _welfare.specs.checkdata:
-.. _welfare.tested.plausibility:
 
 ==========================================
 Checking for data problems in Lino Welfare

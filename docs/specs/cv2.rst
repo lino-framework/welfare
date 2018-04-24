@@ -1,4 +1,3 @@
-.. _welfare.tested.cv2:
 .. _welfare.specs.cv2:
 
 =====================

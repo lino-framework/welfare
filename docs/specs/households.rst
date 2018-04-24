@@ -1,5 +1,4 @@
 .. _welfare.specs.households:
-.. _welfare.tested.households:
 
 ==========
 Households

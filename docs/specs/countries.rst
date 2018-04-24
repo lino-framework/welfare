@@ -1,5 +1,4 @@
 .. _welfare.specs.countries:
-.. _welfare.tested.countries:
 
 =============
 Countries

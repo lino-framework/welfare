@@ -1,5 +1,5 @@
 .. doctest docs/specs/dupable_clients.rst
-.. _welfare.tested.dupe_clients:
+.. _welfare.specs.dupe_clients:
 
 ===========================
 Avoiding duplicate clients

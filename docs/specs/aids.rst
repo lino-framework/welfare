@@ -1,6 +1,5 @@
 .. doctest docs/specs/aids.rst
 .. _welfare.specs.aids:
-.. _welfare.tested.aids:
 
 ======================
 The Social Aids module

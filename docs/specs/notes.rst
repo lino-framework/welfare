@@ -1,4 +1,4 @@
-.. _welfare.tested.notes:
+.. _welfare.specs.notes:
 
 =============
 Notes

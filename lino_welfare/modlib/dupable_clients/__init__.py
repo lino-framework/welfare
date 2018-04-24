@@ -21,7 +21,7 @@ Like :mod:`lino_xl.lib.dupable_partners`, but specialized for
 `pcsw.Client`.
 
 Examples and test cases in
-:ref:`welfare.tested.dupe_clients`.
+:ref:`welfare.specs.dupe_clients`.
 and
 :mod:`lino_welfare.projects.std.tests.test_dupe_clients`.
 

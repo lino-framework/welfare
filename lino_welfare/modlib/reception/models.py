@@ -290,7 +290,7 @@ client. Per user you have two possible buttons: (1) a prompt
 consultation (client will wait in the lounge until the user receives
 them) or (2) a scheduled appointment in the user's calendar.
 
-Tested document about :ref:`welfare.tested.reception.AgentsByClient`
+Tested document about :ref:`welfare.specs.reception.AgentsByClient`
 
     """
     label = _("Create appointment with")

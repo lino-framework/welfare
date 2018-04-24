@@ -27,7 +27,7 @@ configure(globals(), 'lino_welfare.projects.std.settings.doctests')
 from importlib import import_module
 intersphinx_mapping = {}
 #for n in 'atelier'.split():
-for n in 'atelier lino_book lino_cosi'.split():
+for n in 'atelier eidreader lino_book lino_cosi'.split():
     m = import_module(n)
     n = n.replace('_', "")
     intersphinx_mapping[n] = (m.intersphinx_urls['docs'], None)

@@ -1,5 +1,4 @@
 .. _welfare.specs.reception:
-.. _welfare.tested.reception:
 
 ===================
 Reception
@@ -20,7 +19,7 @@ A technical tour into the :mod:`lino_welfare.modlib.reception` module.
    :depth: 2
 
 
-.. _welfare.tested.reception.AppointmentsByPartner:
+.. _welfare.specs.reception.AppointmentsByPartner:
 
 AppointmentsByPartner
 =====================
@@ -74,7 +73,7 @@ functionality can click on the dates to see their detail:
 
 
 
-.. _welfare.tested.reception.AgentsByClient:
+.. _welfare.specs.reception.AgentsByClient:
 
 AgentsByClient
 ==============

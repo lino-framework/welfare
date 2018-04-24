@@ -1,5 +1,5 @@
 .. doctest docs/specs/main.rst
-.. _welfare.tested.main:
+.. _welfare.specs.main:
 
 ===================
 The admin main page

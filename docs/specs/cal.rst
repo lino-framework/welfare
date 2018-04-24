@@ -1,4 +1,3 @@
-.. _welfare.tested.cal:
 .. _welfare.specs.cal:
 
 ==================================

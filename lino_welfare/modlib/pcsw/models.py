@@ -259,8 +259,8 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
 
     def get_first_meeting(self, today=None):
         """Return the last note of type "First meeting" for this client.
-        Usage example see :ref:`welfare.tested.debts` and
-        :ref:`welfare.tested.notes`.
+        Usage example see :ref:`welfare.specs.debts` and
+        :ref:`welfare.specs.notes`.
 
         """
         if today is None:

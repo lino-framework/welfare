@@ -1,5 +1,4 @@
 .. _welfare.specs.jobs:
-.. _welfare.tested.jobs:
 
 ===============
 The Jobs plugin

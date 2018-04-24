@@ -1,4 +1,4 @@
-.. _welfare.tested.art61:
+.. _welfare.specs.art61:
 
 ==========================
 Article 61 job supplyments

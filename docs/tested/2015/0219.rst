@@ -1,4 +1,4 @@
-.. _welfare.tested.20150219:
+.. _welfare.specs.20150219:
 
 ==========================================
 Inspecting a FormLayout and its JavaScript

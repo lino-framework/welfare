@@ -1,4 +1,4 @@
-.. _welfare.tested.20150717:
+.. _welfare.specs.20150717:
 
 =====================================
 <ParamsPanel main ...has no variables

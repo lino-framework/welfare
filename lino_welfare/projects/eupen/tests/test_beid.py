@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2017 Luc Saffre
+# Copyright 2014-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -24,9 +24,6 @@ You can run only these tests by issuing::
   $ cd lino_welfare/projects/std
   $ python manage.py test tests.test_beid
 
-Or::
-
-  $ python setup.py test -s tests.DemoTests.test_std
 
 """
 
