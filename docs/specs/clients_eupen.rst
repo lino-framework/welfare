@@ -110,7 +110,7 @@ Lino Welfare à la Eupen.
       - **Kalendereinträge** (cal.EntriesByClient)
       - **Aufgaben** (cal.TasksByProject)
     - **Bewegungen** (MovementsByProject) [visible for 500 510 admin 910]
-    - **Sonstiges** (misc) [visible for 110 210 410 800 admin 910]:
+    - **Sonstiges** (misc) [visible for 110 120 210 410 420 800 admin 910]:
       - (misc_1) [visible for all]: **Beruf** (activity), **Zustand** (client_state), **Adelstitel** (noble_condition), **Nicht verfügbar bis** (unavailable_until), **Grund** (unavailable_why)
       - (misc_2) [visible for all]: **Sozialhilfeempfänger** (is_cpas), **Altenheim** (is_senior), **veraltet** (is_obsolete)
       - (misc_3) [visible for all]: **Erstellt** (created), **Bearbeitet** (modified)

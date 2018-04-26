@@ -801,10 +801,10 @@ Each window layout is **viewable** by a given set of user user_types.
 - addresses.Addresses.detail : visible for admin 910
 - addresses.Addresses.insert : visible for admin 910
 - addresses.Addresses.merge_row : visible for admin 910
-- aids.AidTypes.detail : visible for 110 210 410 500 510 800 admin 910
-- aids.AidTypes.insert : visible for 110 210 410 500 510 800 admin 910
+- aids.AidTypes.detail : visible for 110 120 210 410 420 500 510 800 admin 910
+- aids.AidTypes.insert : visible for 110 120 210 410 420 500 510 800 admin 910
 - aids.AidTypes.merge_row : visible for admin 910
-- aids.Categories.detail : visible for 110 210 410 500 510 800 admin 910
+- aids.Categories.detail : visible for 110 120 210 410 420 500 510 800 admin 910
 - aids.Categories.merge_row : visible for admin 910
 - aids.Grantings.detail : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
 - aids.Grantings.insert : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
@@ -819,7 +819,7 @@ Each window layout is **viewable** by a given set of user user_types.
 - aids.SimpleConfirmations.detail : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
 - aids.SimpleConfirmations.merge_row : visible for admin 910
 - aids.SimpleConfirmationsByGranting.insert : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
-- art61.ContractTypes.detail : visible for 110 admin 910
+- art61.ContractTypes.detail : visible for 110 120 420 admin 910
 - art61.ContractTypes.merge_row : visible for admin 910
 - art61.Contracts.detail : visible for 100 110 120 420 admin 910
 - art61.Contracts.insert : visible for 100 110 120 420 admin 910
@@ -834,17 +834,17 @@ Each window layout is **viewable** by a given set of user user_types.
 - boards.Boards.insert : visible for admin 910
 - boards.Boards.merge_row : visible for admin 910
 - boards.Members.merge_row : visible for admin 910
-- cal.Calendars.detail : visible for 110 410 admin 910
-- cal.Calendars.insert : visible for 110 410 admin 910
+- cal.Calendars.detail : visible for 110 120 410 420 admin 910
+- cal.Calendars.insert : visible for 110 120 410 420 admin 910
 - cal.Calendars.merge_row : visible for admin 910
 - cal.EntriesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByProject.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EventPolicies.merge_row : visible for admin 910
-- cal.EventTypes.detail : visible for 110 410 admin 910
-- cal.EventTypes.insert : visible for 110 410 admin 910
+- cal.EventTypes.detail : visible for 110 120 410 420 admin 910
+- cal.EventTypes.insert : visible for 110 120 410 420 admin 910
 - cal.EventTypes.merge_row : visible for admin 910
-- cal.Events.detail : visible for 110 410 admin 910
-- cal.Events.insert : visible for 110 410 admin 910
+- cal.Events.detail : visible for 110 120 410 420 admin 910
+- cal.Events.insert : visible for 110 120 410 420 admin 910
 - cal.GuestRoles.detail : visible for admin 910
 - cal.GuestRoles.merge_row : visible for admin 910
 - cal.GuestStates.wf1 : visible for 100 110 120 200 210 220 300 400 410 420 800 admin 910
@@ -855,16 +855,16 @@ Each window layout is **viewable** by a given set of user user_types.
 - cal.Guests.merge_row : visible for admin 910
 - cal.OneEvent.merge_row : visible for admin 910
 - cal.Priorities.merge_row : visible for admin 910
-- cal.RecurrentEvents.detail : visible for 110 410 admin 910
-- cal.RecurrentEvents.insert : visible for 110 410 admin 910
+- cal.RecurrentEvents.detail : visible for 110 120 410 420 admin 910
+- cal.RecurrentEvents.insert : visible for 110 120 410 420 admin 910
 - cal.RecurrentEvents.merge_row : visible for admin 910
 - cal.RemoteCalendars.merge_row : visible for admin 910
-- cal.Rooms.detail : visible for 110 410 admin 910
-- cal.Rooms.insert : visible for 110 410 admin 910
+- cal.Rooms.detail : visible for 110 120 410 420 admin 910
+- cal.Rooms.insert : visible for 110 120 410 420 admin 910
 - cal.Rooms.merge_row : visible for admin 910
 - cal.Subscriptions.merge_row : visible for admin 910
-- cal.Tasks.detail : visible for 110 410 admin 910
-- cal.Tasks.insert : visible for 110 410 admin 910
+- cal.Tasks.detail : visible for 110 120 410 420 admin 910
+- cal.Tasks.insert : visible for 110 120 410 420 admin 910
 - cal.Tasks.merge_row : visible for admin 910
 - cal.TasksByController.insert : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cbss.IdentifyPersonRequests.detail : visible for 100 110 120 200 210 300 400 410 420 admin 910
@@ -882,13 +882,13 @@ Each window layout is **viewable** by a given set of user user_types.
 - changes.Changes.merge_row : visible for admin 910
 - checkdata.Checkers.detail : visible for admin 910
 - checkdata.Problems.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
-- clients.ClientContactTypes.detail : visible for 110 210 410 800 admin 910
+- clients.ClientContactTypes.detail : visible for 110 120 210 410 420 800 admin 910
 - clients.ClientContactTypes.merge_row : visible for admin 910
 - clients.ClientContacts.merge_row : visible for admin 910
-- coachings.CoachingEndings.detail : visible for 110 210 410 admin 910
+- coachings.CoachingEndings.detail : visible for 110 120 210 410 420 admin 910
 - coachings.CoachingEndings.merge_row : visible for admin 910
 - coachings.CoachingTypes.merge_row : visible for admin 910
-- coachings.Coachings.create_visit : visible for 110 210 410 admin 910
+- coachings.Coachings.create_visit : visible for 110 120 210 410 420 admin 910
 - coachings.Coachings.merge_row : visible for admin 910
 - contacts.Companies.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - contacts.Companies.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
@@ -903,35 +903,35 @@ Each window layout is **viewable** by a given set of user user_types.
 - contacts.Persons.merge_row : visible for admin 910
 - contacts.RoleTypes.merge_row : visible for admin 910
 - contacts.Roles.merge_row : visible for admin 910
-- countries.Countries.detail : visible for 110 210 410 800 admin 910
-- countries.Countries.insert : visible for 110 210 410 800 admin 910
+- countries.Countries.detail : visible for 110 120 210 410 420 800 admin 910
+- countries.Countries.insert : visible for 110 120 210 410 420 800 admin 910
 - countries.Countries.merge_row : visible for admin 910
-- countries.Places.detail : visible for 110 210 410 800 admin 910
+- countries.Places.detail : visible for 110 120 210 410 420 800 admin 910
 - countries.Places.merge_row : visible for admin 910
-- cv.Durations.detail : visible for 110 admin 910
+- cv.Durations.detail : visible for 110 120 420 admin 910
 - cv.Durations.merge_row : visible for admin 910
-- cv.EducationLevels.detail : visible for 110 admin 910
+- cv.EducationLevels.detail : visible for 110 120 420 admin 910
 - cv.EducationLevels.merge_row : visible for admin 910
-- cv.Experiences.detail : visible for 110 admin 910
+- cv.Experiences.detail : visible for 110 120 420 admin 910
 - cv.Experiences.merge_row : visible for admin 910
 - cv.ExperiencesByPerson.insert : visible for 100 110 120 420 admin 910
-- cv.Functions.detail : visible for 110 admin 910
+- cv.Functions.detail : visible for 110 120 420 admin 910
 - cv.Functions.merge_row : visible for admin 910
 - cv.LanguageKnowledges.merge_row : visible for admin 910
 - cv.LanguageKnowledgesByPerson.detail : visible for 100 110 120 420 admin 910
 - cv.LanguageKnowledgesByPerson.insert : visible for 100 110 120 420 admin 910
 - cv.PersonProperties.merge_row : visible for admin 910
-- cv.Regimes.detail : visible for 110 admin 910
+- cv.Regimes.detail : visible for 110 120 420 admin 910
 - cv.Regimes.merge_row : visible for admin 910
-- cv.Sectors.detail : visible for 110 admin 910
+- cv.Sectors.detail : visible for 110 120 420 admin 910
 - cv.Sectors.merge_row : visible for admin 910
-- cv.Statuses.detail : visible for 110 admin 910
+- cv.Statuses.detail : visible for 110 120 420 admin 910
 - cv.Statuses.merge_row : visible for admin 910
-- cv.Studies.detail : visible for 110 admin 910
+- cv.Studies.detail : visible for 110 120 420 admin 910
 - cv.Studies.merge_row : visible for admin 910
 - cv.StudiesByPerson.insert : visible for 100 110 120 420 admin 910
-- cv.StudyTypes.detail : visible for 110 admin 910
-- cv.StudyTypes.insert : visible for 110 admin 910
+- cv.StudyTypes.detail : visible for 110 120 420 admin 910
+- cv.StudyTypes.insert : visible for 110 120 420 admin 910
 - cv.StudyTypes.merge_row : visible for admin 910
 - cv.Trainings.detail : visible for 100 110 120 420 admin 910
 - cv.Trainings.insert : visible for 100 110 120 420 admin 910
@@ -977,32 +977,32 @@ Each window layout is **viewable** by a given set of user user_types.
 - households.HouseholdsByType.detail : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
 - households.Members.merge_row : visible for admin 910
 - households.MembersByPerson.insert : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
-- households.Types.detail : visible for 110 210 410 800 admin 910
+- households.Types.detail : visible for 110 120 210 410 420 800 admin 910
 - households.Types.merge_row : visible for admin 910
-- humanlinks.Links.detail : visible for 110 210 410 800 admin 910
-- humanlinks.Links.insert : visible for 110 210 410 800 admin 910
+- humanlinks.Links.detail : visible for 110 120 210 410 420 800 admin 910
+- humanlinks.Links.insert : visible for 110 120 210 410 420 800 admin 910
 - humanlinks.Links.merge_row : visible for admin 910
 - integ.ActivityReport.show : visible for 100 110 120 420 admin 910
-- isip.ContractEndings.detail : visible for 110 410 admin 910
+- isip.ContractEndings.detail : visible for 110 120 410 420 admin 910
 - isip.ContractEndings.merge_row : visible for admin 910
-- isip.ContractPartners.detail : visible for 110 410 admin 910
+- isip.ContractPartners.detail : visible for 110 120 410 420 admin 910
 - isip.ContractPartners.merge_row : visible for admin 910
-- isip.ContractTypes.detail : visible for 110 410 admin 910
+- isip.ContractTypes.detail : visible for 110 120 410 420 admin 910
 - isip.ContractTypes.merge_row : visible for admin 910
 - isip.Contracts.detail : visible for 100 110 120 200 300 400 410 420 admin 910
 - isip.Contracts.insert : visible for 100 110 120 200 300 400 410 420 admin 910
 - isip.Contracts.merge_row : visible for admin 910
-- isip.ExamPolicies.detail : visible for 110 410 admin 910
+- isip.ExamPolicies.detail : visible for 110 120 410 420 admin 910
 - isip.ExamPolicies.merge_row : visible for admin 910
 - jobs.Candidatures.merge_row : visible for admin 910
-- jobs.ContractTypes.detail : visible for 110 410 admin 910
+- jobs.ContractTypes.detail : visible for 110 120 410 420 admin 910
 - jobs.ContractTypes.merge_row : visible for admin 910
 - jobs.Contracts.detail : visible for 100 110 120 200 300 400 410 420 admin 910
 - jobs.Contracts.insert : visible for 100 110 120 200 300 400 410 420 admin 910
 - jobs.Contracts.merge_row : visible for admin 910
 - jobs.JobProviders.detail : visible for 100 110 120 420 admin 910
 - jobs.JobProviders.merge_row : visible for admin 910
-- jobs.JobTypes.detail : visible for 110 410 admin 910
+- jobs.JobTypes.detail : visible for 110 120 410 420 admin 910
 - jobs.JobTypes.merge_row : visible for admin 910
 - jobs.Jobs.detail : visible for 100 110 120 420 admin 910
 - jobs.Jobs.insert : visible for 100 110 120 420 admin 910
@@ -1010,9 +1010,9 @@ Each window layout is **viewable** by a given set of user user_types.
 - jobs.JobsOverview.show : visible for 100 110 120 420 admin 910
 - jobs.Offers.detail : visible for 100 110 120 420 admin 910
 - jobs.Offers.merge_row : visible for admin 910
-- jobs.Schedules.detail : visible for 110 410 admin 910
+- jobs.Schedules.detail : visible for 110 120 410 420 admin 910
 - jobs.Schedules.merge_row : visible for admin 910
-- languages.Languages.detail : visible for 110 410 admin 910
+- languages.Languages.detail : visible for 110 120 410 420 admin 910
 - languages.Languages.merge_row : visible for admin 910
 - ledger.AccountingPeriods.merge_row : visible for admin 910
 - ledger.AccountingReport.show : visible for 500 510 admin 910
@@ -1028,21 +1028,21 @@ Each window layout is **viewable** by a given set of user user_types.
 - newcomers.AvailableCoachesByClient.assign_coach : visible for 110 120 200 220 300 420 800 admin 910
 - newcomers.Brokers.merge_row : visible for admin 910
 - newcomers.Competences.merge_row : visible for admin 910
-- newcomers.Faculties.detail : visible for 110 410 admin 910
-- newcomers.Faculties.insert : visible for 110 410 admin 910
+- newcomers.Faculties.detail : visible for 110 120 410 420 admin 910
+- newcomers.Faculties.insert : visible for 110 120 410 420 admin 910
 - newcomers.Faculties.merge_row : visible for admin 910
-- notes.EventTypes.detail : visible for 110 410 admin 910
+- notes.EventTypes.detail : visible for 110 120 410 420 admin 910
 - notes.EventTypes.merge_row : visible for admin 910
-- notes.NoteTypes.detail : visible for 110 410 admin 910
-- notes.NoteTypes.insert : visible for 110 410 admin 910
+- notes.NoteTypes.detail : visible for 110 120 410 420 admin 910
+- notes.NoteTypes.insert : visible for 110 120 410 420 admin 910
 - notes.NoteTypes.merge_row : visible for admin 910
 - notes.Notes.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - notes.Notes.merge_row : visible for admin 910
 - notify.Messages.merge_row : visible for admin 910
 - outbox.Attachments.merge_row : visible for admin 910
-- outbox.Mails.detail : visible for 110 410 admin 910
-- outbox.Mails.insert : visible for 110 410 admin 910
+- outbox.Mails.detail : visible for 110 120 410 420 admin 910
+- outbox.Mails.insert : visible for 110 120 410 420 admin 910
 - outbox.Mails.merge_row : visible for admin 910
 - outbox.Recipients.merge_row : visible for admin 910
 - pcsw.Activities.merge_row : visible for admin 910
@@ -1077,10 +1077,10 @@ Each window layout is **viewable** by a given set of user user_types.
 - tinymce.TextFieldTemplates.detail : visible for admin 910
 - tinymce.TextFieldTemplates.insert : visible for admin 910
 - tinymce.TextFieldTemplates.merge_row : visible for admin 910
-- uploads.AllUploads.detail : visible for 110 410 admin 910
-- uploads.AllUploads.insert : visible for 110 410 admin 910
-- uploads.UploadTypes.detail : visible for 110 410 admin 910
-- uploads.UploadTypes.insert : visible for 110 410 admin 910
+- uploads.AllUploads.detail : visible for 110 120 410 420 admin 910
+- uploads.AllUploads.insert : visible for 110 120 410 420 admin 910
+- uploads.UploadTypes.detail : visible for 110 120 410 420 admin 910
+- uploads.UploadTypes.insert : visible for 110 120 410 420 admin 910
 - uploads.UploadTypes.merge_row : visible for admin 910
 - uploads.Uploads.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - uploads.Uploads.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
@@ -1101,19 +1101,20 @@ Each window layout is **viewable** by a given set of user user_types.
 - vatless.InvoicesByJournal.insert : visible for 500 510 admin 910
 - vatless.ProjectInvoicesByJournal.detail : visible for 500 510 admin 910
 - vatless.ProjectInvoicesByJournal.insert : visible for 500 510 admin 910
-- xcourses.CourseContents.detail : visible for 110 admin 910
+- xcourses.CourseContents.detail : visible for 110 120 420 admin 910
 - xcourses.CourseContents.merge_row : visible for admin 910
 - xcourses.CourseOffers.detail : visible for 100 110 120 420 admin 910
 - xcourses.CourseOffers.insert : visible for 100 110 120 420 admin 910
 - xcourses.CourseOffers.merge_row : visible for admin 910
 - xcourses.CourseProviders.detail : visible for 100 110 120 420 admin 910
 - xcourses.CourseProviders.merge_row : visible for admin 910
-- xcourses.CourseRequests.detail : visible for 110 admin 910
+- xcourses.CourseRequests.detail : visible for 110 120 420 admin 910
 - xcourses.CourseRequests.merge_row : visible for admin 910
-- xcourses.Courses.detail : visible for 110 admin 910
-- xcourses.Courses.insert : visible for 110 admin 910
+- xcourses.Courses.detail : visible for 110 120 420 admin 910
+- xcourses.Courses.insert : visible for 110 120 420 admin 910
 - xcourses.Courses.merge_row : visible for admin 910
 <BLANKLINE>
+
 
 
 
@@ -1134,8 +1135,8 @@ per user user_type.
 - newcomers.ClientsByFaculty.read_beid : visible for 100 110 120 200 210 220 300 400 410 420 800 admin 910
 - newcomers.NewClients.find_by_beid : visible for 120 200 220 300 420 admin 910
 - newcomers.NewClients.read_beid : visible for 120 200 220 300 420 admin 910
-- pcsw.AllClients.find_by_beid : visible for 110 410 admin 910
-- pcsw.AllClients.read_beid : visible for 110 410 admin 910
+- pcsw.AllClients.find_by_beid : visible for 110 120 410 420 admin 910
+- pcsw.AllClients.read_beid : visible for 110 120 410 420 admin 910
 - pcsw.Clients.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 420 800 admin 910
 - pcsw.Clients.read_beid : visible for 100 110 120 200 210 220 300 400 410 420 800 admin 910
 - pcsw.ClientsByNationality.find_by_beid : visible for 100 110 120 200 210 220 300 400 410 420 800 admin 910

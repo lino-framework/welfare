@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2017 Luc Saffre
+# Copyright 2015-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -26,11 +26,11 @@ from lino_welfare.modlib.newcomers.roles import NewcomersOperator
 
 class IntegrationAgent(SocialAgent, CareerUser, CoursesUser):
     """
-    A *social agent* who can see database content specific to
-    integration work: CV, language courses, workshops, ...
+    An **integration agent** is a *social agent* who can see database
+    content specific to integration work: CV, language courses,
+    workshops, ...
 
     See also :class:`lino_welfare.modlib.pcsw.choicelists.SocialAgent`.
-
     """
 
 

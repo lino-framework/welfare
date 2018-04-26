@@ -102,8 +102,7 @@ class ReceptionClerkFlexible(SiteUser, AuthorshipTaker, SimpleContactsUser,
     pass
 
 
-class IntegrationAgentFlexible(IntegrationAgent, NewcomersOperator,
-                               DebtsUser):
+class IntegrationAgentFlexible(IntegrationStaff, DebtsUser):
     """
     A **flexible integration agent** is an *integration agent* who
     also can assign coaches to clients and create budgets for debts
