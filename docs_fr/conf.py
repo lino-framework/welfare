@@ -9,8 +9,12 @@ templates_path = []
 from lino.sphinxcontrib import configure
 configure(globals(), 'lino_welfare.projects.chatelet.settings.doctests')
 
+# from atelier.sphinxconf import interproject
+# interproject.configure(globals())
+intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
-interproject.configure(globals())
+interproject.configure(globals(), 'lino lino_xl lino_welfare')
+
 
 extensions += ['atelier.sphinxconf.blog']
 extensions += ['lino.sphinxcontrib.logo']

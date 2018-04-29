@@ -15,11 +15,14 @@ extensions += ['lino.sphinxcontrib.actordoc']
 
 
 intersphinx_mapping = {}
-from importlib import import_module
-for n in 'lino lino_welfare'.split():
-    m = import_module(n)
-    n = n.replace('_', '')
-    intersphinx_mapping[n] = (m.intersphinx_urls['docs'], None)
+from atelier.sphinxconf import interproject
+interproject.configure(globals(), 'lino lino_xl lino_welfare')
+
+# from importlib import import_module
+# for n in 'lino lino_welfare'.split():
+#     m = import_module(n)
+#     n = n.replace('_', '')
+#     intersphinx_mapping[n] = (m.intersphinx_urls['docs'], None)
 
 
 import alabaster

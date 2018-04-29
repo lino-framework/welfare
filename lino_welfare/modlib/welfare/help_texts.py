@@ -5,6 +5,11 @@ from django.utils.translation import ugettext_lazy as _
 
 help_texts = {
     'lino_welfare.migrate.Migrator' : _("""The standard migrator for welfare."""),
+    'lino_welfare.modlib.aids.Plugin' : _("""The plugin."""),
+    'lino_welfare.modlib.aids.Plugin.no_date_range_veto_until' : _("""Optionally specify the primary key (an integer) of the last
+granting for whose confirmations you want to suppress checking of
+date range.  This is useful for keeping legacy confirmations that
+have been issued before the rule was activated."""),
     'lino_welfare.modlib.aids.ConfirmationTypes' : _("""A list of the models that may be used as confirmation."""),
     'lino_welfare.modlib.aids.ConfirmationTypes.et_template' : _("""The template defined for the ExcerptType defined for this
 confirmation type."""),
@@ -237,8 +242,9 @@ columns (coachings per PersonGroup table."""),
     'lino_welfare.modlib.integ.JobProvidersAndContracts.model' : _("""alias of lino_welfare.modlib.contacts.models.Company"""),
     'lino_welfare.modlib.integ.ActivityReport' : _("""Gives an overview about the work of the Integration Service during
 a given period."""),
-    'lino_welfare.modlib.integ.roles.IntegrationAgent' : _("""A social agent who can see database content specific to
-integration work: CV, language courses, workshops, …"""),
+    'lino_welfare.modlib.integ.roles.IntegrationAgent' : _("""An integration agent is a social agent who can see database
+content specific to integration work: CV, language courses,
+workshops, …"""),
     'lino_welfare.modlib.isip.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.isip.OverlapGroups' : _("""The list of all known overlap groups to be selected for the
 overlap_group
