@@ -124,9 +124,9 @@ class QuickTest(RemoteAuthTestCase):
 Update Events for ISIP#1 (Max MUSTERMANN)...
 Generating events between 2014-07-01 and 2015-03-31 (max. 10).
 Reached upper date limit 2015-03-31 for 3
-Update presences for Evaluation 1 (01.07.2014) with MUSTERMANN Max (102) : 0 created, 0 unchanged, 0 deleted.
-Update presences for Evaluation 2 (01.10.2014) with MUSTERMANN Max (102) : 0 created, 0 unchanged, 0 deleted.
-Update presences for Evaluation 3 (01.01.2015) with MUSTERMANN Max (102) : 0 created, 0 unchanged, 0 deleted.
+Update presences for Evaluation 1 (01.07.2014) with MUSTERMANN Max (101) : 0 created, 0 unchanged, 0 deleted.
+Update presences for Evaluation 2 (01.10.2014) with MUSTERMANN Max (101) : 0 created, 0 unchanged, 0 deleted.
+Update presences for Evaluation 3 (01.01.2015) with MUSTERMANN Max (101) : 0 created, 0 unchanged, 0 deleted.
 3 row(s) have been updated."""
         # print(expected)
         self.assertEqual(res['info_message'], expected)

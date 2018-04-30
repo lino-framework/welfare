@@ -73,7 +73,7 @@ class QuickTest(RemoteAuthTestCase):
         
 
         nt = create(EventType, name="System note")
-        settings.SITE.site_config.system_note_type = nt
+        settings.SITE.site_config.update(system_note_type=nt)
 
         kw = dict()
         kw.update(first_name="Max")
