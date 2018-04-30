@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2018 Luc Saffre
+# Copyright 2015-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -51,10 +51,10 @@ class TestCase(TestCase):
 
         from django.db.models.deletion import ProtectedError
 
-        Client = rt.modules.pcsw.Client
-        Note = rt.modules.notes.Note
+        Client = rt.models.pcsw.Client
+        Note = rt.models.notes.Note
         # ContentType = rt.modules.contenttypes.ContentType
-        BrokenGFKs = rt.modules.gfks.BrokenGFKs
+        BrokenGFKs = rt.models.gfks.BrokenGFKs
 
         def create_related_objects():
             cli = Client(first_name="John", last_name="Doe")
