@@ -247,7 +247,7 @@ Generating events between 2013-03-04 and 2014-12-02 (max. 72).
 Reached upper date limit 2014-12-02 for 7
 
 
->>> settings.SITE.site_config.hide_events_before = None
+>>> settings.SITE.site_config.update(hide_events_before=None)
 
 >>> ses.show(cal.EntriesByController.request(obj),
 ... column_names="when_html summary")

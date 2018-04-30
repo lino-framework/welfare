@@ -37,7 +37,7 @@ The :class:`EntriesByController
 <lino_xl.lib.cal.ui.EntriesByController>` table shows the evaluation
 events which have been generated.
 
->>> settings.SITE.site_config.hide_events_before = None
+>>> settings.SITE.site_config.update(hide_events_before=None)
 
 For example let's look at ISIP contract #26 of the demo database.
 
