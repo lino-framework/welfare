@@ -225,7 +225,7 @@ Evaluations of a contract
 -------------------------
 
 >>> obj = jobs.Contract.objects.get(pk=6)
->>> print(unicode(obj.client))
+>>> print(str(obj.client))
 LAMBERTZ Guido (142)
 
 >>> obj.active_period()
@@ -234,7 +234,7 @@ LAMBERTZ Guido (142)
 >>> obj.update_cal_rset()
 ExamPolicy #3 ('Alle 3 Monate')
 
->>> print(unicode(obj.update_cal_rset().event_type))
+>>> print(str(obj.update_cal_rset().event_type))
 Auswertung
 >>> print(obj.update_cal_rset().event_type.max_conflicting)
 4

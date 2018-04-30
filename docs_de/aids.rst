@@ -204,7 +204,7 @@ Bestätigungstext haben) hier die gleichen Texte als HTML:
         obj = qs[0]
         ex = obj.printed_by
         if ex:
-            print(header(5, unicode(at)))
+            print(header(5, str(at)))
             print(header(6, "Beispiel"))
             print("")
             print(".. raw:: html")

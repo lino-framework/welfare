@@ -234,7 +234,7 @@ The above is coded in
     ...     ar = cal.EntriesByController.request(master_instance=obj)
     ...     names = set([e.user.username for e in ar])
     ...     if len(names) > 1:
-    ...         l.append(unicode(obj))
+    ...         l.append(str(obj))
     >>> print(len(l))
     15
     >>> print(', '.join(l))

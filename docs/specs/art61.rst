@@ -66,7 +66,7 @@ The printed document
 >>> html = ar.get_data_value(obj.printed_by, 'preview')
 >>> soup = BeautifulSoup(html, 'lxml')
 >>> for h in soup.find_all('h1'):
-...     print(unicode(h))
+...     print(str(h))
 <h1>Mise à l'emploi art.61
 </h1>
 

@@ -318,7 +318,7 @@ Movements
 Users can consult the movements of a given general account.
 
 >>> obj = accounts.Account.get_by_ref('820/333/01')
->>> print(unicode(obj))
+>>> print(str(obj))
 (820/333/01) Vorschuss auf Vergütungen o.ä.
 
 >>> rt.show(ledger.MovementsByAccount, obj)

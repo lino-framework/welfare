@@ -75,7 +75,7 @@ French-speaking PCSWs use a custom template imposed by FOREM when
 printing immersion trainings with some external partner.
 
 >>> obj = immersion.Contract.objects.get(pk=3)
->>> print(unicode(obj.company))
+>>> print(str(obj.company))
 Rumma & Ko OÜ
 >>> bm = printing.BuildMethods.appyodt
 >>> ex = obj.printed_by
