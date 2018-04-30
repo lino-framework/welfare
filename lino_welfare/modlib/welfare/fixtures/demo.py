@@ -344,6 +344,7 @@ def objects():
         ))
     yield obj
     settings.SITE.site_config.update(client_guestrole=obj)
+    yield settings.SITE.site_config
 
     yield cal.GuestRole(**dd.babelkw('name',
                                      de=u"Vorsitzender",
@@ -373,6 +374,7 @@ def objects():
     obj = calendar(**kw)
     yield obj
     settings.SITE.site_config.update(prompt_calendar=obj)
+    yield settings.SITE.site_config
 
     kw = dict(invite_client=True)
     kw.update(dd.str2kw("name", _("External meetings with client")))

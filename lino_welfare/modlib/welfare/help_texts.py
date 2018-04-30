@@ -116,7 +116,7 @@ lino_welfare.modlib.cbss.models.ManageAccessRequest."""),
     'lino_welfare.modlib.cbss.QueryRegisters.ALL' : _("""Query both registers."""),
     'lino_welfare.modlib.cbss.CBSSRequest' : _("""Common Abstract Base Class for SSDNRequest
 and NewStyleRequest"""),
-    'lino_welfare.modlib.cbss.CBSSRequest.wsdl_parts' : _("""alias of builtins.NotImplementedError"""),
+    'lino_welfare.modlib.cbss.CBSSRequest.wsdl_parts' : _("""alias of exceptions.NotImplementedError"""),
     'lino_welfare.modlib.cbss.SSDNRequest' : _("""Abstract Base Class for Models that represent SSDN (“classic”)
 requests."""),
     'lino_welfare.modlib.cbss.NewStyleRequest' : _("""Abstract Base Class for Models that represent
