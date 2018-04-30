@@ -65,8 +65,8 @@ Let's get the `career` panel. It is a :class:`lino.core.elems.Panel`:
 
 To see this panel, you need to be an integration agent:
 
->>> career_panel.required_roles
-set([<class 'lino_welfare.modlib.integ.roles.IntegrationAgent'>])
+>>> career_panel.required_roles == {IntegrationAgent}
+True
 
 Theresia is a reception clerk
 (:class:`lino_welfare.modlib.welfare.user_types.ReceptionClerk`):
