@@ -139,9 +139,7 @@ class TestCase(TestCase):
             user=alicia)
 
         nt = self.create_obj(NoteType, name="System note")
-        sc = settings.SITE.site_config
-        sc.system_note_type = nt
-        sc.save()
+        settings.SITE.site_config.update(system_note_type=nt)
 
         consultation = self.create_obj(EventType, name="consultation")
 
