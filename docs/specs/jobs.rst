@@ -1,19 +1,19 @@
+.. doctest docs/specs/jobs.rst
 .. _welfare.specs.jobs:
 
 ===============
 The Jobs plugin
 ===============
 
-.. to test only this document:
-
-    $ doctest docs/specs/jobs.rst
-    
-    doctest initialization:
+.. doctest initialization:
     
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
 
+    Repair database after uncomplete test run:
+    >>> settings.SITE.site_config.update(hide_events_before=i2d(20140401))
+    
 
 The :mod:`lino_welfare.modlib.jobs` plugin provides functionality for
 managing *job supplyment* (German *Art-60§7-Konventionen*, French
@@ -291,6 +291,14 @@ conflicting events:
 EventType #5 ('Auswertung')
 >>> e.event_type.max_conflicting
 4
+
+
+
+After modifying :attr:`hide_events_before
+<lino.modlib.system.SiteConfig.hide_events_before>` we must tidy up
+and reset it in order to not disturb other test cases:
+
+>>> settings.SITE.site_config.update(hide_events_before=i2d(20140401))
 
 
 JobsOverview
