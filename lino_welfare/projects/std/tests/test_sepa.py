@@ -51,21 +51,21 @@ class TestCase(RemoteAuthTestCase):
 
         self.assertEqual(acc.iban, "EE252200001100817338")
 
-        expected = "{'iban': [u'EE IBANs must contain 20 characters.']}"
+        expected = "EE IBANs must contain 20 characters."
         acc = Account(partner=cli, iban="EE")
         try:
             acc.full_clean()
             self.fail("Expected {0}".format(expected))
         except ValidationError as e:
-            self.assertEqual(str(e), expected)
+            self.assertEqual(e.messages, [expected])
 
-        expected = "{'iban': [u'BE IBANs must contain 16 characters.']}"
+        expected = "BE IBANs must contain 16 characters."
         acc = Account(partner=cli, iban="BE")
         try:
             acc.full_clean()
             self.fail("Expected {0}".format(expected))
         except ValidationError as e:
-            self.assertEqual(str(e), expected)
+            self.assertEqual(e.messages, [expected])
 
             
             
