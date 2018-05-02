@@ -50,6 +50,7 @@ class TestCase(TestCase):
         """Test whether 
 
         """
+        print("20180502 test_aids.test_aids()")
         RefundConfirmation = rt.models.aids.RefundConfirmation
         Granting = rt.models.aids.Granting
         AidType = rt.models.aids.AidType

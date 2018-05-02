@@ -52,7 +52,8 @@ class QuickTest(RemoteAuthTestCase):
     maxDiff = None
 
     def test01(self):
-        from lino.api.shell import cal, pcsw, isip, users, contacts
+        print("20180502 test_clients.test01()")
+        from lino.api.shell import pcsw, users
         # NoteType = rt.models.notes.NoteType
         EventType = rt.models.notes.EventType
         Note = rt.models.notes.Note

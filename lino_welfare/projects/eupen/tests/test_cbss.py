@@ -52,6 +52,7 @@ class QuickTest(TestCase):
 
     def test01(self):
 
+        print("20180502 test_cbss.test01()")
         settings.SITE.startup()  # create cache/wsdl files
 
         root = create_and_get(settings.SITE.user_model, username='root')
