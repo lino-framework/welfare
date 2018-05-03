@@ -1,8 +1,7 @@
 from atelier.test import make_docs_suite
 
-# temporarily disabled:
-# def load_tests(loader, standard_tests, pattern):
-#     return make_docs_suite(
-#         "docs", addenv=dict(LINO_LOGLEVEL="INFO"))
+def load_tests(loader, standard_tests, pattern):
+    return make_docs_suite(
+        "docs", addenv=dict(LINO_LOGLEVEL="INFO"))
 
 

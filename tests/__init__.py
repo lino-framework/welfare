@@ -28,19 +28,19 @@ class DemoTests(BaseTestCase):
     """
 
     def test_std(self):
-        print("20180502 test_std()")
+        # print("20180502 test_std()")
         cwd = self.project_root.child(
             'lino_welfare', 'projects', 'std').absolute()
         self.run_django_manage_test(cwd)
     
     def test_eupen(self):
-        print("20180502 test_eupen()")
+        # print("20180502 test_eupen()")
         cwd = self.project_root.child(
             'lino_welfare', 'projects', 'eupen').absolute()
         self.run_django_manage_test(cwd)
 
     def test_chatelet(self):
-        print("20180502 test_chatelet()")
+        # print("20180502 test_chatelet()")
         cwd = self.project_root.child(
             'lino_welfare', 'projects', 'chatelet').absolute()
         self.run_django_manage_test(cwd)

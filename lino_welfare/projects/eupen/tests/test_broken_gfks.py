@@ -48,7 +48,7 @@ class TestCase(TestCase):
         (generically) related to our client, we delete that
         client. Django does not prevent us from doing it.
         """
-        print("20180502 test_broken_gfks.test_01()")
+        # print("20180502 test_broken_gfks.test_01()")
 
         from django.db.models.deletion import ProtectedError
 

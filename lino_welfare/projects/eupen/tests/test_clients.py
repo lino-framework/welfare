@@ -52,7 +52,7 @@ class QuickTest(RemoteAuthTestCase):
     maxDiff = None
 
     def test01(self):
-        print("20180503 test_clients.test01()")
+        # print("20180503 test_clients.test01()")
         from lino.api.shell import pcsw, users
         # NoteType = rt.models.notes.NoteType
         EventType = rt.models.notes.EventType
@@ -114,4 +114,4 @@ Raison de refus: CPAS n'est pas compétent
 Wohnt noch in Lüttich. Wollte nach Eupen ziehen. Noch nicht zuständigg"""
         self.assertEqual(expected, msg.body)
         
-        print("20180503 test_clients.test01() done")
+        # print("20180503 test_clients.test01() done")
