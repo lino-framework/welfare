@@ -497,11 +497,11 @@ TODO: more explanations....
             return str(obj.total)
         return "%s / %s" % (obj.total, obj.periods)
 
-    @dd.virtualfield(models.ForeignKey('contacts.Partner'))
+    @dd.virtualfield(dd.ForeignKey('contacts.Partner'))
     def partner(self, obj, ar):
         return obj.partner
 
-    @dd.virtualfield(models.ForeignKey(
+    @dd.virtualfield(dd.ForeignKey(
         'contacts.Company', verbose_name=_("Debt collection agency")))
     def bailiff(self, obj, ar):
         return obj.bailiff

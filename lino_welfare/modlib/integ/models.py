@@ -77,7 +77,7 @@ class Clients(pcsw.CoachedClients):
     id aid_type language:10"
 
     parameters = dict(
-        group=models.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
+        group=dd.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
                                 verbose_name=_("Integration phase")),
         language=dd.ForeignKey('languages.Language',
                                verbose_name=_("Language knowledge"),

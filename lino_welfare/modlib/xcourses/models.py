@@ -134,7 +134,7 @@ class CourseOffer(dd.Model):
     """
 
     provider = dd.ForeignKey('xcourses.CourseProvider')
-    #~ provider = models.ForeignKey(CourseProvider,
+    #~ provider = dd.ForeignKey(CourseProvider,
         #~ verbose_name=_("Course provider"))
     #~ """
     #~ Der Kursanbieter (eine :class:`Company`)
@@ -185,7 +185,7 @@ class Course(dd.Model):
         verbose_name = _("Course")
         verbose_name_plural = _('Courses')
 
-    offer = models.ForeignKey("xcourses.CourseOffer")
+    offer = dd.ForeignKey("xcourses.CourseOffer")
 
     title = models.CharField(
         max_length=200,
@@ -343,12 +343,12 @@ class CourseRequest(UploadController):
         verbose_name = _("Course Requests")
         verbose_name_plural = _('Course Requests')
 
-    person = models.ForeignKey("pcsw.Client",
+    person = dd.ForeignKey("pcsw.Client",
                                help_text="Le client qui désire suivre un cours.")
 
-    offer = models.ForeignKey("xcourses.CourseOffer", blank=True, null=True)
+    offer = dd.ForeignKey("xcourses.CourseOffer", blank=True, null=True)
 
-    content = models.ForeignKey("xcourses.CourseContent",
+    content = dd.ForeignKey("xcourses.CourseContent",
                                 verbose_name=_("Course content"),
                                 help_text=u"Der gewünschte Kursinhalt.)")
 
@@ -366,7 +366,7 @@ class CourseRequest(UploadController):
     state = CourseRequestStates.field(
         default=CourseRequestStates.as_callable('candidate'))
 
-    course = models.ForeignKey(
+    course = dd.ForeignKey(
         "xcourses.Course", blank=True, null=True,
         help_text=_("The course which satisfies this request. "
                     "Leave blank on open requests."),
@@ -420,10 +420,10 @@ class CourseRequest(UploadController):
     def setup_parameters(cls, fields):
         fields.update(
             request_state=CourseRequestStates.field(blank=True),
-            course_content=models.ForeignKey(
+            course_content=dd.ForeignKey(
                 "xcourses.CourseContent", blank=True),
-            course_offer=models.ForeignKey("xcourses.CourseOffer", blank=True),
-            course_provider=models.ForeignKey(
+            course_offer=dd.ForeignKey("xcourses.CourseOffer", blank=True),
+            course_provider=dd.ForeignKey(
                 'xcourses.CourseProvider', blank=True))
         fields.update(CLIENTS_TABLE.parameters)
         super(CourseRequest, cls).setup_parameters(fields)
@@ -561,10 +561,10 @@ class PendingCourseRequests(CourseRequests):
     filter = models.Q(course__isnull=True)
     # parameters = dict(
     #     request_state=CourseRequestStates.field(blank=True),
-    #     course_content=models.ForeignKey(
+    #     course_content=dd.ForeignKey(
     #         "courses.CourseContent", blank=True),
-    #     course_offer=models.ForeignKey("courses.CourseOffer", blank=True),
-    #     course_provider=models.ForeignKey(
+    #     course_offer=dd.ForeignKey("courses.CourseOffer", blank=True),
+    #     course_provider=dd.ForeignKey(
     #         'courses.CourseProvider', blank=True),
     #     **CLIENTS_TABLE.parameters)
     params_layout = CLIENTS_TABLE.params_layout + """\

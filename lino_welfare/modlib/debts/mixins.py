@@ -36,7 +36,7 @@ class SequencedBudgetComponent(mixins.Sequenced):
     class Meta:
         abstract = True
 
-    budget = models.ForeignKey('debts.Budget')
+    budget = dd.ForeignKey('debts.Budget')
 
     def get_siblings(self):
         "Overrides :meth:`lino.mixins.Sequenced.get_siblings`"

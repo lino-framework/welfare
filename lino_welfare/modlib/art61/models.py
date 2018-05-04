@@ -191,7 +191,7 @@ class Contracts(ContractBaseTable):
     """
 
     parameters = dict(
-        type=models.ForeignKey(
+        type=dd.ForeignKey(
             'art61.ContractType', blank=True,
             verbose_name=_("Only job supplies of type")),
         **ContractBaseTable.parameters)

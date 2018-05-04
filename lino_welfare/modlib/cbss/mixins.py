@@ -87,7 +87,7 @@ class CBSSRequest(UserAuthored, mixins.Duplicable, Certifiable):
     class Meta:
         abstract = True
 
-    person = models.ForeignKey(
+    person = dd.ForeignKey(
         'pcsw.Client',
         verbose_name=_("Client"))
 

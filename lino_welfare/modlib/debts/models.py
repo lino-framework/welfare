@@ -122,7 +122,7 @@ class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
         verbose_name_plural = _("Accounts")
         ordering = ['ref']
 
-    group = models.ForeignKey('debts.Group')
+    group = dd.ForeignKey('debts.Group')
     type = AccountTypes.field()
     required_for_household = models.BooleanField(
         _("Required for Households"), default=False)
@@ -163,7 +163,7 @@ class Budget(UserAuthored, Certifiable, mixins.Duplicable):
     date = models.DateField(
         _("Date"), blank=True,
         default=dd.today)
-    partner = models.ForeignKey('contacts.Partner')
+    partner = dd.ForeignKey('contacts.Partner')
     print_todos = models.BooleanField(
         _("Print to-do list"),
         default=False,
@@ -469,7 +469,7 @@ class Actor(ActorBase, SequencedBudgetComponent):
 
     allow_cascaded_delete = ['budget']
 
-    partner = models.ForeignKey('contacts.Partner', blank=True)
+    partner = dd.ForeignKey('contacts.Partner', blank=True)
     header = models.CharField(_("Header"), max_length=20, blank=True)
     remark = dd.RichTextField(_("Remark"), format="html", blank=True)
 
@@ -505,14 +505,14 @@ class Entry(SequencedBudgetComponent):
 
     allow_cascaded_delete = ['budget']
 
-    # group = models.ForeignKey(AccountGroup)
+    # group = dd.ForeignKey(AccountGroup)
     account_type = AccountTypes.field(blank=True)
-    account = models.ForeignKey('debts.Account')
-    partner = models.ForeignKey('contacts.Partner', blank=True, null=True)
+    account = dd.ForeignKey('debts.Account')
+    partner = dd.ForeignKey('contacts.Partner', blank=True, null=True)
     # name = models.CharField(_("Remark"),max_length=200,blank=True)
     # amount = dd.PriceField(_("Amount"),default=0)
     amount = dd.PriceField(_("Amount"), blank=True, null=True)
-    actor = models.ForeignKey(Actor,
+    actor = dd.ForeignKey(Actor,
                               blank=True, null=True,
         help_text="""\
 Hier optional einen Akteur angeben, wenn der Eintrag 
@@ -551,7 +551,7 @@ Eventueller Betrag monatlicher Rückzahlungen, über deren Zahlung nicht verhand
 Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
     """)
 
-    bailiff = models.ForeignKey(
+    bailiff = dd.ForeignKey(
         'contacts.Company',
         verbose_name=_("Debt collection agency"),
         help_text=_("Leave empty for simple debts, otherwise select \
@@ -672,7 +672,7 @@ dd.inject_field(
 # dd.inject_field(
 #     'system.SiteConfig',
 #     'debts_bailiff_type',
-#     models.ForeignKey("clients.ClientContactType",
+#     dd.ForeignKey("clients.ClientContactType",
 #                       blank=True, null=True,
 #                       verbose_name=_("Bailiff"),
 #                       related_name='bailiff_type_sites',
@@ -681,7 +681,7 @@ dd.inject_field(
 dd.inject_field(
     'system.SiteConfig',
     'master_budget',
-    models.ForeignKey(
+    dd.ForeignKey(
         "debts.Budget",
         blank=True, null=True,
         verbose_name=_("Master budget"),

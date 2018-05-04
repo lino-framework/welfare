@@ -57,7 +57,7 @@ class PersonProperty(properties.PropertyOccurence):
         verbose_name = _("Property")
         verbose_name_plural = _("Properties")
 
-    person = models.ForeignKey(dd.plugins.cv.person_model)
+    person = dd.ForeignKey(dd.plugins.cv.person_model)
     remark = models.CharField(max_length=200,
                               blank=True,  # null=True,
                               verbose_name=_("Remark"))
@@ -137,7 +137,7 @@ def customize_siteconfig():
     dd.inject_field(
         'system.SiteConfig',
         'propgroup_skills',
-        models.ForeignKey(
+        dd.ForeignKey(
             'properties.PropGroup',
             blank=True, null=True,
             verbose_name=_("Skills Property Group"),
@@ -148,7 +148,7 @@ def customize_siteconfig():
     dd.inject_field(
         'system.SiteConfig',
         'propgroup_softskills',
-        models.ForeignKey(
+        dd.ForeignKey(
             'properties.PropGroup',
             blank=True, null=True,
             verbose_name=_("Soft Skills Property Group"),
@@ -159,7 +159,7 @@ def customize_siteconfig():
     dd.inject_field(
         'system.SiteConfig',
         'propgroup_obstacles',
-        models.ForeignKey(
+        dd.ForeignKey(
             'properties.PropGroup',
             blank=True, null=True,
             verbose_name=_("Obstacles Property Group"),

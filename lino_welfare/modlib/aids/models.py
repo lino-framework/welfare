@@ -149,7 +149,7 @@ class AidType(ContactRelated, ExcerptTitle):
 
     short_name = models.CharField(max_length=50, blank=True)
 
-    board = models.ForeignKey('boards.Board', blank=True, null=True)
+    board = dd.ForeignKey('boards.Board', blank=True, null=True)
 
     print_directly = models.BooleanField(_("Print directly"), default=True)
 
@@ -267,9 +267,9 @@ class Granting(Confirmable, BoardDecision):
 
     objects = GrantingManager()
 
-    client = models.ForeignKey('pcsw.Client')
-    aid_type = models.ForeignKey('aids.AidType')
-    category = models.ForeignKey('aids.Category', blank=True, null=True)
+    client = dd.ForeignKey('pcsw.Client')
+    aid_type = dd.ForeignKey('aids.AidType')
+    category = dd.ForeignKey('aids.Category', blank=True, null=True)
     request_date = models.DateField(
         _("Date of request"), blank=True, null=True)
 
@@ -708,7 +708,7 @@ class IncomeConfirmation(Confirmation):
         verbose_name = _("Income confirmation")
         verbose_name_plural = _("Income confirmations")
 
-    category = models.ForeignKey('aids.Category', blank=True, null=True)
+    category = dd.ForeignKey('aids.Category', blank=True, null=True)
 
     amount = dd.PriceField(_("Amount"), blank=True, null=True)
 

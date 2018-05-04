@@ -62,7 +62,7 @@ def customize_siteconfig(sender, **kw):
 
     dd.inject_field('system.SiteConfig',
                     'job_office',
-                    models.ForeignKey('contacts.Company',
+                    dd.ForeignKey('contacts.Company',
                                       blank=True, null=True,
                                       verbose_name=_("Local job office"),
                                       related_name='job_office_sites',
@@ -71,7 +71,7 @@ def customize_siteconfig(sender, **kw):
 
     dd.inject_field('system.SiteConfig',
                     'residence_permit_upload_type',
-                    models.ForeignKey("uploads.UploadType",
+                    dd.ForeignKey("uploads.UploadType",
                                       blank=True, null=True,
                                       verbose_name=_(
                                           "Upload Type for residence permit"),
@@ -80,7 +80,7 @@ def customize_siteconfig(sender, **kw):
     dd.inject_field('system.SiteConfig',
                     'work_permit_upload_type',
                     #~ UploadType.objects.get(pk=2)
-                    models.ForeignKey("uploads.UploadType",
+                    dd.ForeignKey("uploads.UploadType",
                                       blank=True, null=True,
                                       verbose_name=_(
                                           "Upload Type for work permit"),
@@ -88,7 +88,7 @@ def customize_siteconfig(sender, **kw):
 
     dd.inject_field('system.SiteConfig',
                     'driving_licence_upload_type',
-                    models.ForeignKey("uploads.UploadType",
+                    dd.ForeignKey("uploads.UploadType",
                                       blank=True, null=True,
                                       verbose_name=_(
                                           "Upload Type for driving licence"),

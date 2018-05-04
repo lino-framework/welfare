@@ -89,7 +89,7 @@ class Purpose(mixins.BabelNamed):
         unique_together = ['sector_code', 'code']
     sector_code = models.IntegerField(_("Sector"), blank=True, null=True)
     # sector_subcode = models.IntegerField(max_length=2,verbose_name=_("Subsector"),blank=True,null=True)
-    # sector = models.ForeignKey(Sector,blank=True,null=True)
+    # sector = dd.ForeignKey(Sector,blank=True,null=True)
     # code = models.CharField(max_length=3,verbose_name=_("Code"))
     code = models.IntegerField(_("Code"))
 
@@ -324,14 +324,14 @@ class ManageAccessRequest(SSDNRequest, WithPerson):
 # It can be used for list,
 # when information about sectors is required.""")
 
-    sector = models.ForeignKey(
+    sector = dd.ForeignKey(
         'cbss.Sector', # on_delete=models.PROTECT,
         editable=False, help_text="""\
 For register and unregister this element is ignored. 
 It can be used for list, 
 when information about sectors is required.""")
 
-    purpose = models.ForeignKey(
+    purpose = dd.ForeignKey(
         'cbss.Purpose',
         # blank=True,null=True,
         help_text="""\
@@ -608,7 +608,7 @@ def customize_system(sender, **kw):
 
     dd.inject_field('system.SiteConfig',
                     'sector',
-                    models.ForeignKey(Sector,
+                    dd.ForeignKey(Sector,
                                       blank=True, null=True,
             help_text="""\
     The CBSS sector/subsector of the requesting organization.        

@@ -65,7 +65,7 @@ class Partner(
 Altfälle sind Partner, deren Stammdaten nicht mehr gepflegt werden und
 für neue Operationen nicht benutzt werden können.""")
 
-    activity = models.ForeignKey("pcsw.Activity",
+    activity = dd.ForeignKey("pcsw.Activity",
                                  blank=True, null=True)
 
     # client_contact_type = dd.ForeignKey(

@@ -128,7 +128,7 @@ class PersonProperty(dd.Model):
 
     allow_cascaded_delete = ['person']
 
-    person = models.ForeignKey(config.person_model)
+    person = dd.ForeignKey(config.person_model)
     remark = models.CharField(max_length=200,
                               blank=True,  # null=True,
                               verbose_name=_("Remark"))

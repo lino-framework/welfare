@@ -234,12 +234,12 @@ class Contract(ContractBase):
         verbose_name = _("ISIP")
         verbose_name_plural = _("ISIPs")
 
-    type = models.ForeignKey(
+    type = dd.ForeignKey(
         "isip.ContractType",
         related_name="%(app_label)s_%(class)s_set_by_type",
         verbose_name=_("Contract Type"), blank=True)
 
-    study_type = models.ForeignKey('cv.StudyType', blank=True, null=True)
+    study_type = dd.ForeignKey('cv.StudyType', blank=True, null=True)
 
     stages = dd.RichTextField(
         _("stages"),
@@ -260,7 +260,7 @@ class Contract(ContractBase):
         _("duties person"),
         blank=True, null=True, format='html')
 
-    user_dsbe = models.ForeignKey(
+    user_dsbe = dd.ForeignKey(
         "users.User",
         verbose_name=_("responsible (IS)"),
         related_name="%(app_label)s_%(class)s_set_by_user_dsbe",
@@ -327,8 +327,8 @@ class Contracts(ContractBaseTable):
     """, window_size=(60, 'auto'))
 
     parameters = dict(
-        type=models.ForeignKey(ContractType, blank=True),
-        study_type=models.ForeignKey('cv.StudyType', blank=True),
+        type=dd.ForeignKey(ContractType, blank=True),
+        study_type=dd.ForeignKey('cv.StudyType', blank=True),
         **ContractBaseTable.parameters)
 
     params_layout = """

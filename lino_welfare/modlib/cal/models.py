@@ -129,7 +129,7 @@ dd.inject_field(
 @dd.python_2_unicode_compatible
 class Event(Event):
 
-    # course = models.ForeignKey(
+    # course = dd.ForeignKey(
     #     "courses.Course", blank=True, null=True,
     #     help_text=_("Fill in only if this event is a session of a course."))
 

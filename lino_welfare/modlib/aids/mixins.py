@@ -150,7 +150,7 @@ class Confirmable(mixins.DateRange):
     manager_roles_required = dd.login_required()
     workflow_state_field = 'state'
 
-    signer = models.ForeignKey(
+    signer = dd.ForeignKey(
         settings.SITE.user_model,
         verbose_name=pgettext("aids", "Signer"),
         blank=True, null=True,
@@ -176,7 +176,7 @@ class Confirmable(mixins.DateRange):
 
     @classmethod
     def setup_parameters(cls, fields):
-        fields.update(signer=models.ForeignKey(
+        fields.update(signer=dd.ForeignKey(
             settings.SITE.user_model,
             verbose_name=pgettext("aids", "Signer"),
             blank=True, null=True))
@@ -265,7 +265,7 @@ class Confirmation(
 
     client = dd.ForeignKey(
         'pcsw.Client', related_name="%(app_label)s_%(class)s_set_by_client")
-    granting = models.ForeignKey('aids.Granting', blank=True, null=True)
+    granting = dd.ForeignKey('aids.Granting', blank=True, null=True)
     remark = dd.RichTextField(
         _("Remark"), blank=True, format='html')
     language = dd.LanguageField(blank=True)

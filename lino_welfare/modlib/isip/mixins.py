@@ -272,7 +272,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
     class Meta:
         abstract = True
 
-    client = models.ForeignKey(
+    client = dd.ForeignKey(
         'pcsw.Client',
         related_name="%(app_label)s_%(class)s_set_by_client")
 
@@ -285,18 +285,18 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
     date_issued = models.DateField(
         blank=True, null=True, verbose_name=_("date issued"))
 
-    user_asd = models.ForeignKey(
+    user_asd = dd.ForeignKey(
         "users.User",
         verbose_name=_("responsible (ASD)"),
         related_name="%(app_label)s_%(class)s_set_by_user_asd",
         blank=True, null=True)
 
-    exam_policy = models.ForeignKey(
+    exam_policy = dd.ForeignKey(
         "isip.ExamPolicy",
         related_name="%(app_label)s_%(class)s_set",
         blank=True, null=True)
 
-    ending = models.ForeignKey(
+    ending = dd.ForeignKey(
         "isip.ContractEnding",
         related_name="%(app_label)s_%(class)s_set",
         blank=True, null=True)
@@ -574,11 +574,11 @@ class ContractBaseTable(dd.Table):
             _("Successfully ended"),
             blank=True,
             help_text="""Contrats terminés avec succès."""),
-        ending=models.ForeignKey(
+        ending=dd.ForeignKey(
             'isip.ContractEnding',
             blank=True, null=True,
             help_text="""Nur Konventionen mit diesem Beendigungsgrund."""),
-        company=models.ForeignKey(
+        company=dd.ForeignKey(
             'contacts.Company',
             blank=True, null=True,
             help_text=_("Only contracts with this company as partner."))

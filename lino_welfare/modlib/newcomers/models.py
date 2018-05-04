@@ -142,7 +142,7 @@ class Competence(UserAuthored, mixins.Sequenced):
         verbose_name = _("Competence")
         verbose_name_plural = _("Competences")
 
-    faculty = models.ForeignKey('newcomers.Faculty')
+    faculty = dd.ForeignKey('newcomers.Faculty')
     weight = models.IntegerField(
         _("Work effort"),  # Arbeitsaufwand
         blank=True,
@@ -289,7 +289,7 @@ class AvailableCoaches(Users):
     label = _("Available Coaches")
     column_names = 'name_column workflow_buttons:10 primary_clients new_clients newcomer_quota current_weight added_weight score'
     parameters = dict(
-        for_client=models.ForeignKey(
+        for_client=dd.ForeignKey(
             'pcsw.Client',
             verbose_name=_("Show suggested agents for"), blank=True),
         since=models.DateField(
