@@ -172,7 +172,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
     quick_search_fields = "prefix name phone gsm street national_id"
     
     group = dd.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
-                              verbose_name=_("Integration phase"))
+                          verbose_name=_("Integration phase"))
 
     civil_state = CivilStates.field(blank=True)
 
@@ -432,7 +432,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
             return c.applies_until
 
     @dd.virtualfield(dd.ForeignKey('contacts.Company',
-                                       _("Working at ")))
+                                   verbose_name=_("Working at ")))
     def contract_company(obj, ar):
         c = obj.get_active_contract()
         if isinstance(c, rt.modules.jobs.Contract):
@@ -1056,8 +1056,8 @@ class Exclusion(dd.Model):
 
     person = dd.ForeignKey('pcsw.Client')
     type = dd.ForeignKey("pcsw.ExclusionType",
-                             verbose_name=_("Reason"),
-                             blank=True, null=True)
+                         verbose_name=_("Reason"),
+                         blank=True, null=True)
     excluded_from = models.DateField(blank=True, null=True,
                                      verbose_name=_("Excluded from"))
     excluded_until = models.DateField(blank=True, null=True,
