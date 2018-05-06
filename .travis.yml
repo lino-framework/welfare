@@ -1,7 +1,7 @@
 language: python
 python:
-  - "2.7"
-  - "3.6"
+  - 2.7
+  - 3.6
 # env:
 #   - DJANGO=1.11.13
 
@@ -15,20 +15,21 @@ install:
   - pip install -U setuptools
   - pip install coveralls
   - # pip install Django==$DJANGO
-  - test -e "requirements.$TRAVIS_BRANCH.txt" && ( pip install -r "requirements.$TRAVIS_BRANCH.txt" ) || ( pip install -r requirements.txt )
-  - pip install .
+  - if [[ $TRAVIS_PYTHON_VERSION == 3.6 ]]; then pip install -r requirements.python3.txt; else pip install -r requirements.txt;  fi
+#   - test -e "requirements.$TRAVIS_BRANCH.txt" && ( pip install -r "requirements.$TRAVIS_BRANCH.txt" ) || ( pip install -r requirements.txt )
+  - pip install -e .
   - pip freeze
 
 script:
   - export LINO_CACHE_ROOT=$TRAVIS_BUILD_DIR/lino_cache
   - mkdir $LINO_CACHE_ROOT
-  - #inv cov
-  - inv prep test
+  - inv cov --no-html
+#  - inv prep test
 #  - python setup.py test
 
 # if [[ $TRAVIS_PYTHON_VERSION == 2* ]]; then inv cov; fi;
 
 after_success:
-  - #coveralls
+  - coveralls
 
 
