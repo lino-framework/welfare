@@ -26,7 +26,7 @@ configure(globals(), 'lino_welfare.projects.std.settings.doctests')
 
 intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
-interproject.configure(globals(), 'atelier eidreader lino_book lino_cosi')
+interproject.configure(globals(), 'atelier lino_book lino_cosi')
 
 from django.conf import settings
 settings.SITE.title = "Lino Welfare Reference Manual"
