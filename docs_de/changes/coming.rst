@@ -7,12 +7,17 @@ Zur Zeit unter **testlino** einsehbar.
 
 TALK:
 
-- A oder B?
-
 - Layout des Details eines Haushalts. Hier sieht man jetzt gar nicht
   mehr Adresse usw.  War das angefragt? Ist das erwünscht?
 
 DONE:
+
+- In *slave panels* ist die Phantomzeile abgeschafft, deshalb kann man
+  jetzt im Panel "NotesByClient" nicht mehr einfach doppelklicken, um
+  eine neue Notiz zu erstellen.  Aber dafür kann man dort auf
+  irgendeiner Zeile rechten Mausklick machen und im Kontxtmenü "Neu"
+  wählen.  Oder irgendeine Zeile mit linkem Mausklick markieren und
+  dann Taste :kbd:`Insert` drücken.
 
 - wdav und beid ohne Java
 
@@ -140,3 +145,7 @@ b) Es ist uns egal, wenn Lino diese Bescheinigungen
    löscht. Hauptsache, dass die entschärfte Regel wieder aktiviert
    wird und es zukünftig nicht mehr zu solchen echten Fehlern kommt.
 
+Weil keine Antwort kam, habe ich eine dritte Möglichkeit programmiert:
+:attr:`lino_welfare.modlib.aids.Plugin.no_date_range_veto_until`. Also
+:menuselection:`Explorer --> ÖSHZ --> Hilfebeschlüsse` um die letzte
+Nummer zu sehen (3942 am 07.05.18).
