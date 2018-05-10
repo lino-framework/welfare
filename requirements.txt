@@ -8,11 +8,11 @@
 
 # welfare needs book for building the docs, and book needs all the
 # following:
--e git+https://github.com/lino-framework/noi.git#egg=lino_noi
--e git+https://github.com/lino-framework/voga.git#egg=lino_voga
--e git+https://github.com/lino-framework/avanti.git#egg=lino_avanti
--e git+https://github.com/lino-framework/vilma.git#egg=lino_vilma
--e git+https://github.com/lino-framework/care.git#egg=lino_care
--e git+https://github.com/lino-framework/tera.git#egg=lino_tera
--e git+https://github.com/lino-framework/book.git#egg=lino_book
+# -e git+https://github.com/lino-framework/noi.git#egg=lino_noi
+# -e git+https://github.com/lino-framework/voga.git#egg=lino_voga
+# -e git+https://github.com/lino-framework/avanti.git#egg=lino_avanti
+# -e git+https://github.com/lino-framework/vilma.git#egg=lino_vilma
+# -e git+https://github.com/lino-framework/care.git#egg=lino_care
+# -e git+https://github.com/lino-framework/tera.git#egg=lino_tera
+# -e git+https://github.com/lino-framework/book.git#egg=lino_book
 

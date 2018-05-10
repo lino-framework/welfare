@@ -129,15 +129,3 @@ You may want to maintain a set of your own configuration contexts.
     $ python manage.py runserver
 
 
-Java applets
-============
-
-- Certain functionalities require two Java applets :ref:`davlink` and
-  :ref:`eidreader` which are also available from GitHub. Simply clone
-  them::
-
-    $ git clone https://github.com/lsaffre/davlink.git
-    $ git clone https://github.com/lsaffre/eidreader.git
-
-
-    
