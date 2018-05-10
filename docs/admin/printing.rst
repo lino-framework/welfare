@@ -23,7 +23,8 @@ Which database objects are printable?
 
 While most database models in Lino Welfare are being printed using
 excerpts (see `Excerpt types`_ below), some models still use the more
-primitive direct printing method (see :ref:`lino.admin.printing`):
+primitive direct printing method (see `Printing
+<http://lino-framework.org/admin/index.html#printing>`__):
 
 - :class:`notes.Note <lino_welfare.modlib.notes.models.Note>`,
   :class:`cal.Event<lino_welfare.modlib.cal.models.Event>` and
@@ -93,7 +94,8 @@ We did not yet test what happens if you define an excerpt type for one
 of the above models.
 
 For configuring the printing of these models, see
-:ref:`lino.admin.printing`.
+`Printing
+<http://lino-framework.org/admin/index.html#printing>`__.
 
 
 Main templates
@@ -113,8 +115,9 @@ designing the template itself.
 Excerpt types
 =============  
 
-See :ref:`lino.admin.excerpts` for a general introduction to
-excerpt-based printing.
+See `Database excerpts
+<http://xl.lino-framework.org/specs/excerpts.html>`__ for a general
+introduction to excerpt-based printing.
 
 This is the list of excerpt types:
 
