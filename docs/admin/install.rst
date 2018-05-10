@@ -11,8 +11,8 @@ demonstrations using the built-in demo databases.
 From inside a code repository
 =============================
 
-- Install Lino (the framework) as documented in
-  :ref:`lino.dev.install`.
+- Install Lino (the framework) as documented in `Installing Lino
+  <http://lino-framework.org/dev/install.html>`__.
 
 - Lino Welfare requires some additional system packages (Tidy,
   LibreOffice and UNO)::
