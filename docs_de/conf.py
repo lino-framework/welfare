@@ -16,7 +16,9 @@ extensions += ['lino.sphinxcontrib.actordoc']
 
 intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
-interproject.configure(globals(), 'lino lino_xl lino_welfare')
+interproject.configure(globals(), 'lino_welfare')
+intersphinx_mapping['book'] = (
+    'http://www.lino-framework.org', None)
 
 # from importlib import import_module
 # for n in 'lino lino_welfare'.split():

@@ -13,7 +13,9 @@ configure(globals(), 'lino_welfare.projects.chatelet.settings.doctests')
 # interproject.configure(globals())
 intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
-interproject.configure(globals(), 'lino lino_xl lino_welfare')
+interproject.configure(globals(), 'lino_welfare')
+intersphinx_mapping['book'] = (
+    'http://www.lino-framework.org', None)
 
 
 extensions += ['atelier.sphinxconf.blog']
