@@ -298,7 +298,7 @@ Tested document about :ref:`welfare.specs.reception.AgentsByClient`
     column_names = "user coaching_type actions"
     # master = 'pcsw.Client'
     master_key = 'client'
-    slave_grid_format = 'html'
+    display_mode = 'html'
     # auto_fit_column_widths = True
 
     @classmethod

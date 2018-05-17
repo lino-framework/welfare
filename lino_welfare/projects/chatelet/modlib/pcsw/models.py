@@ -192,10 +192,10 @@ class ClientDetail(ClientDetail):
 Clients.detail_layout = ClientDetail()
 
 households = dd.resolve_app('households')
-households.SiblingsByPerson.slave_grid_format = 'grid'
+households.SiblingsByPerson.display_mode = 'grid'
 
 # humanlinks = dd.resolve_app('humanlinks')
-# humanlinks.LinksByHuman.slave_grid_format = 'grid'
+# humanlinks.LinksByHuman.display_mode = 'grid'
 
 # cv = dd.resolve_app('cv')
 # cv.ExperiencesByPerson.column_names = "company start_date end_date \
@@ -239,5 +239,5 @@ notes.Note.hidden_elements = dd.fields_list(
 
 
 uploads = dd.resolve_app('uploads')
-uploads.UploadsByClient.slave_grid_format = 'grid'
+uploads.UploadsByClient.display_mode = 'grid'
 

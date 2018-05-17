@@ -331,7 +331,7 @@ TODO: more explanations....
 
     """
     master = EntryGroup
-    slave_grid_format = 'html'
+    display_mode = 'html'
     # _account_type = None
 
     # @classmethod
@@ -536,7 +536,7 @@ TODO: more explanations....
 class SummaryTable(dd.VirtualTable):
     auto_fit_column_widths = True
     column_names = "desc amount"
-    slave_grid_format = 'html'
+    display_mode = 'html'
 
     @classmethod
     def get_title_base(self, ar):
@@ -669,7 +669,7 @@ class DistByBudget(EntriesByBudget):
     filter = models.Q(distribute=True)
     label = _("Debts distribution")
     known_values = dict(account_type=AccountTypes.liabilities)
-    slave_grid_format = 'html'
+    display_mode = 'html'
     help_text = _("""\
 Répartition au marc-le-franc.
 A table with one row per entry in Liabilities which has "distribute" checked,

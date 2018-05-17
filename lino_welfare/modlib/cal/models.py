@@ -416,7 +416,7 @@ assigned_to event_type room workflow_buttons *'
 class EntriesByController(EntriesByController):
     column_names = 'when_html summary user \
     assigned_to workflow_buttons *'
-    slave_grid_format = 'grid'
+    display_mode = 'grid'
 
 # EntriesByController.column_names = 'when_html summary user \
 # assigned_to workflow_buttons *'

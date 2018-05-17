@@ -144,7 +144,7 @@ class UsersWithClients(dd.VirtualTable):
     required_roles = dd.login_required(IntegrationAgent)
     label = _("Users with their Clients")
 
-    slave_grid_format = 'html'
+    display_mode = 'html'
 
     @classmethod
     def get_data_rows(self, ar):
@@ -242,7 +242,7 @@ class CompareRequestsTable(dd.VirtualTable):
     label = _("Evolution générale")
     auto_fit_column_widths = True
     column_names = "description old_value new_value"
-    slave_grid_format = 'html'
+    display_mode = 'html'
     hide_sums = True
 
     @dd.displayfield(_("Description"))
@@ -307,7 +307,7 @@ class PeriodicNumbers(dd.VirtualTable):
     label = _("Indicateurs d'activité")
     auto_fit_column_widths = True
     column_names = "description number"
-    slave_grid_format = 'html'
+    display_mode = 'html'
     hide_sums = True
 
     @dd.displayfield(_("Description"))

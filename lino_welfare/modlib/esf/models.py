@@ -154,7 +154,7 @@ class SummariesByClient(Summaries):
     master_key = 'master'
     auto_fit_column_widths = True
     required_roles = dd.login_required(IntegrationAgent)
-    # slave_grid_format = 'html'
+    # display_mode = 'html'
     # insert_layout = """
     # education_level result
     # remark
