@@ -32,8 +32,8 @@ def objects():
     CourseAreas = rt.models.courses.CourseAreas
     Line = rt.models.courses.Line
     Course = rt.models.courses.Course
-    EventType = rt.modules.cal.EventType
-    Pupil = rt.modules.pcsw.Client
+    EventType = rt.models.cal.EventType
+    Pupil = rt.models.pcsw.Client
     Enrolment = rt.models.courses.Enrolment
     EnrolmentStates = rt.models.courses.EnrolmentStates
 

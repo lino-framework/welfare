@@ -68,7 +68,7 @@ This document describes the functionality implemented by the
 ================================= ===== ================== ===================================== ================================ ==================
 <BLANKLINE>
 
->>> obj = rt.modules.contacts.Partner.objects.get(name="Belgisches Rotes Kreuz")
+>>> obj = rt.models.contacts.Partner.objects.get(name="Belgisches Rotes Kreuz")
 >>> rt.show(sepa.AccountsByClient, obj)
 ========== ============================== ===== ======== =========== ==============
  Kontoart   IBAN                           BIC   Primär   Verwaltet   Kontoauszüge

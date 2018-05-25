@@ -38,8 +38,8 @@ class TestCase(RemoteAuthTestCase):
     fixtures = ['few_countries', 'few_cities', 'demo_users']
 
     def test(self):
-        Client = rt.modules.pcsw.Client
-        Word = rt.modules.dupable_clients.Word
+        Client = rt.models.pcsw.Client
+        Word = rt.models.dupable_clients.Word
 
         argnames = "first_name last_name birth_date national_id".split()
 

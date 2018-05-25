@@ -59,7 +59,7 @@ class JobSupplyment(ContractPartnerBase, ContractBase):
 
     @dd.chooser()
     def ending_choices(cls):
-        return rt.modules.isip.ContractEnding.objects.filter(use_in_jobs=True)
+        return rt.models.isip.ContractEnding.objects.filter(use_in_jobs=True)
 
     def full_clean(self, *args, **kw):
         if self.client_id is not None:

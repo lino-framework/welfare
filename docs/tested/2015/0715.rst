@@ -44,7 +44,7 @@ False
 We are talking about the detail layout of a client, defined by
 :class:`lino_welfare.projects.eupen.modlib.pcsw.models.ClientDetail`:
 
->>> dtl = rt.modules.pcsw.Clients.detail_layout
+>>> dtl = rt.models.pcsw.Clients.detail_layout
 >>> dtl  #doctest: +ELLIPSIS
 <lino_welfare.modlib.pcsw.models.ClientDetail object at ...>
 >>> dtl.__class__

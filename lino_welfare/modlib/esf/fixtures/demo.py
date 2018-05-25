@@ -7,7 +7,7 @@ FIELDS = Cycler(StatisticalFields.objects())
 
 
 def objects():
-    EventType = rt.modules.cal.EventType
+    EventType = rt.models.cal.EventType
     for et in EventType.objects.all():
         if et.invite_client:
             et.esf_field = FIELDS.pop()

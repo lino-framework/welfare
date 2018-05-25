@@ -26,14 +26,14 @@ from lino.api import dd, rt, _
 
 def excerpt_types():  # also used for migration to 1.1.11
 
-    ContentType = rt.modules.contenttypes.ContentType
-    ExcerptType = rt.modules.excerpts.ExcerptType
+    ContentType = rt.models.contenttypes.ContentType
+    ExcerptType = rt.models.excerpts.ExcerptType
 
     attType = Instantiator(ExcerptType,
                            # build_method='appypdf',
                            email_template='Default.eml.html').build
     
-    Shortcuts = rt.modules.excerpts.Shortcuts
+    Shortcuts = rt.models.excerpts.Shortcuts
 
     yield attType(
         body_template='presence_certificate.body.html',

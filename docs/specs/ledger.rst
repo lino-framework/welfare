@@ -63,8 +63,8 @@ also used by :ref:`cosi`:
 
 Some shortcuts:
 
->>> Journal = rt.modules.ledger.Journal
->>> Journals = rt.modules.ledger.Journals
+>>> Journal = rt.models.ledger.Journal
+>>> Journals = rt.models.ledger.Journals
 
 
 

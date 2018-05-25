@@ -320,7 +320,7 @@ class Confirmation(
             if obj is None:
                 self.language = self.client.language
             else:
-                if isinstance(obj, rt.modules.contacts.Role):
+                if isinstance(obj, rt.models.contacts.Role):
                     self.language = obj.person.language
                 else:
                     self.language = obj.language
@@ -355,7 +355,7 @@ class Confirmation(
 
     def get_granting(self, **aidtype_filter):
         if self.granting_id:
-            return rt.modules.aids.Granting.objects.get_by_aidtype(
+            return rt.models.aids.Granting.objects.get_by_aidtype(
                 self.granting.client, self, **aidtype_filter)
 
     def get_urgent_granting(self):

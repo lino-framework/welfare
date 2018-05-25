@@ -54,7 +54,7 @@ class TestCase(TestCase):
         RefundConfirmation = rt.models.aids.RefundConfirmation
         Granting = rt.models.aids.Granting
         AidType = rt.models.aids.AidType
-        RefundConfirmations = rt.actors.aids.RefundConfirmations
+        RefundConfirmations = rt.models.aids.RefundConfirmations
         User = settings.SITE.user_model
         Client = rt.models.pcsw.Client
         ClientContactType = rt.models.clients.ClientContactType

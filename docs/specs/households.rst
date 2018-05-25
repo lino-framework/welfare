@@ -36,7 +36,7 @@ Herr Paul FRISCH
 
 His primary household consists of 2 adults and 3 children:
 
->>> print(rt.modules.households.get_household_summary(paul))
+>>> print(rt.models.households.get_household_summary(paul))
 2 Erwachsene und 3 Kinder
 
 

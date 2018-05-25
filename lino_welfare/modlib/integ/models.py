@@ -345,13 +345,13 @@ class PeriodicNumbers(dd.VirtualTable):
             #~ cells.append(ar)
             #~ return cells
         yield add(
-            rt.actors.coachings.Coachings,
+            rt.models.coachings.Coachings,
             observed_event=PeriodEvents.started, coaching_type=DSBE)
         yield add(
-            rt.actors.coachings.Coachings,
+            rt.models.coachings.Coachings,
             observed_event=PeriodEvents.active, coaching_type=DSBE)
         yield add(
-            rt.actors.coachings.Coachings,
+            rt.models.coachings.Coachings,
             observed_event=PeriodEvents.ended, coaching_type=DSBE)
 
         yield add(pcsw.Clients, observed_event=pcsw.ClientEvents.active)
@@ -389,7 +389,7 @@ class CoachingEndingsByUser(dd.VentilatingTable, CoachingEndings):
                 if user is not None:
                     pv.update(coached_by=user)
                 pv.update(ending=obj)
-                return rt.actors.coachings.Coachings.request(param_values=pv)
+                return rt.models.coachings.Coachings.request(param_values=pv)
             return func
 
         user_types = [p for p in UserTypes.items()
@@ -416,7 +416,7 @@ class CoachingEndingsByType(dd.VentilatingTable, CoachingEndings):
                 if ct is not None:
                     pv.update(coaching_type=ct)
                 pv.update(ending=obj)
-                return rt.actors.coachings.Coachings.request(
+                return rt.models.coachings.Coachings.request(
                     param_values=pv)
             return func
         for ct in rt.models.coachings.CoachingType.objects.all():

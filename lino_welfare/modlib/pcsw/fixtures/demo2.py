@@ -19,13 +19,13 @@ from lino_welfare.modlib.pcsw.fixtures.std import (
 
 
 def objects():
-    Upload = rt.modules.uploads.Upload
-    UploadType = rt.modules.uploads.UploadType
-    Client = rt.modules.pcsw.Client
+    Upload = rt.models.uploads.Upload
+    UploadType = rt.models.uploads.UploadType
+    Client = rt.models.pcsw.Client
 
     # create some random uploads, all uploaded by hubert
     hubert = rt.login('hubert')
-    CLIENTS = Cycler(rt.modules.pcsw.CoachedClients.request(user=hubert))
+    CLIENTS = Cycler(rt.models.pcsw.CoachedClients.request(user=hubert))
     UPLOAD_TYPES = Cycler(UploadType.objects.all())
     if len(CLIENTS) == 0:
         raise Exception("There are no clients?!")

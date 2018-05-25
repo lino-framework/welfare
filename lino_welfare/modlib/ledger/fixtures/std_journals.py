@@ -29,14 +29,14 @@ from lino_xl.lib.accounts.choicelists import CommonAccounts
 
 def objects():
 
-    Account = rt.modules.accounts.Account
-    JournalGroups = rt.modules.ledger.JournalGroups
-    BankStatement = rt.modules.finan.BankStatement
-    PaymentOrder = rt.modules.finan.PaymentOrder
-    DisbursementOrdersByJournal = rt.modules.finan.DisbursementOrdersByJournal
-    InvoicesByJournal = rt.modules.vatless.InvoicesByJournal
-    ProjectInvoicesByJournal = rt.modules.vatless.ProjectInvoicesByJournal
-    MatchRule = rt.modules.ledger.MatchRule
+    Account = rt.models.accounts.Account
+    JournalGroups = rt.models.ledger.JournalGroups
+    BankStatement = rt.models.finan.BankStatement
+    PaymentOrder = rt.models.finan.PaymentOrder
+    DisbursementOrdersByJournal = rt.models.finan.DisbursementOrdersByJournal
+    InvoicesByJournal = rt.models.vatless.InvoicesByJournal
+    ProjectInvoicesByJournal = rt.models.vatless.ProjectInvoicesByJournal
+    MatchRule = rt.models.ledger.MatchRule
     a4400 = CommonAccounts.suppliers.get_object()
     a4450 = CommonAccounts.disbursement_orders.get_object()
     a5800 = CommonAccounts.pending_po.get_object()
@@ -61,7 +61,7 @@ def objects():
     yield MatchRule(journal=jnl, account=a4400)
 
     if dd.is_installed('client_vouchers'):
-        ClientVoucher = rt.modules.client_vouchers.ClientVoucher
+        ClientVoucher = rt.models.client_vouchers.ClientVoucher
         kw = dict(journal_group=JournalGroups.aids)
         kw.update(trade_type='aids', ref="AIDS")
         kw.update(dd.str2kw('name', _("Aid allocations")))

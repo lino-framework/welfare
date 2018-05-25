@@ -118,7 +118,7 @@ Partner #227 ('Ethias s.a.')
 It is a collective invoice whose costs are distributed over five
 clients:
 
->>> rt.login('wilfried').show(rt.modules.vatless.ItemsByInvoice, obj)
+>>> rt.login('wilfried').show(rt.models.vatless.ItemsByInvoice, obj)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ============================ =================================== =========== ============== ============
  Klient                       Haushaltsartikel                    Betrag      Beschreibung   Bearbeiten
@@ -137,7 +137,7 @@ This invoice is registered, and ledger movements have been created:
 
 >>> obj.state
 <VoucherStates.registered:20>
->>> rt.show(rt.modules.ledger.MovementsByVoucher, obj)
+>>> rt.show(rt.models.ledger.MovementsByVoucher, obj)
 =================================== ============================ =================== =========== =========== ============ ===========
  Haushaltsartikel                    Klient                       Zahlungsempfänger   Debit       Kredit      Match        Beglichen
 ----------------------------------- ---------------------------- ------------------- ----------- ----------- ------------ -----------
@@ -159,14 +159,14 @@ This invoice is registered, and ledger movements have been created:
 The first five movements are *cleared* because their account is not
 :attr:`clearable <lino_xl.lib.accounts.Account.clearable>`.
 
->>> cost_account = rt.modules.accounts.Account.objects.get(ref="832/330/01")
+>>> cost_account = rt.models.accounts.Account.objects.get(ref="832/330/01")
 >>> cost_account.clearable
 False
 
 The other five movements go into the suppliers account, which is
 clearable:
 
->>> suppliers_account = rt.modules.accounts.Account.objects.get(ref="4400")
+>>> suppliers_account = rt.models.accounts.Account.objects.get(ref="4400")
 >>> suppliers_account.clearable
 True
 
@@ -199,17 +199,17 @@ The partner is usually some company.
 >>> obj.partner
 Partner #227 ('Ethias s.a.')
 
->>> rt.login('rolf').show(rt.modules.vatless.VouchersByPartner, obj.partner)
+>>> rt.login('rolf').show(rt.models.vatless.VouchersByPartner, obj.partner)
 Beleg erstellen in Journal **Sammelrechnungen (SREG)**, **Rechnungseingänge (REG)**
 
 Our partner has 11 movements which are not yet *cleared*.
 
->>> rt.show(rt.modules.ledger.MovementsByPartner, obj.partner)
+>>> rt.show(rt.models.ledger.MovementsByPartner, obj.partner)
 **15 offene Bewegungen (-93.44 €)**
 
 Let's look at the detail of these movements:
 
->>> rt.show(rt.modules.ledger.MovementsByPartner, obj.partner, nosummary=True)
+>>> rt.show(rt.models.ledger.MovementsByPartner, obj.partner, nosummary=True)
 ========== ========== ==================================================================== =========== ============ ============ ===========
  Valuta     Beleg      Beschreibung                                                         Debit       Kredit       Match        Beglichen
 ---------- ---------- -------------------------------------------------------------------- ----------- ------------ ------------ -----------
@@ -242,7 +242,7 @@ but the payment has not yet been executed.
 
 Let's look at one of these movements via its client.
 
->>> client = rt.modules.pcsw.Client.objects.get(pk=128)
+>>> client = rt.models.pcsw.Client.objects.get(pk=128)
 >>> print(client)
 EMONTS Daniel (128)
 

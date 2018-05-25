@@ -50,7 +50,7 @@ def main():
     assert infile.endswith('.xml')
     outfile = infile[:-4] + '_garbled.xml'
 
-    qs = rt.modules.pcsw.Client.objects.filter(national_id__isnull=False)
+    qs = rt.models.pcsw.Client.objects.filter(national_id__isnull=False)
     qs = qs.exclude(birth_date='')
     # print [o.national_id for o in qs]
     CLIENTS = Cycler(qs)
@@ -61,7 +61,7 @@ def main():
     FIRST_NAMES = Cycler(demonames.MALE_FIRST_NAMES_FRANCE,
                          demonames.FEMALE_FIRST_NAMES_FRANCE)
     
-    # rt.modules.contacts.Person.objects.all().values_list(
+    # rt.models.contacts.Person.objects.all().values_list(
     #         'first_name', flat=True))
     # FIRST_NAMES = Cycler(['FIRST_NAME'])
     searches.append(Search("//r:FirstName/r:Label", FIRST_NAMES, dict()))
@@ -72,7 +72,7 @@ def main():
         demonames.LAST_NAMES_BELGIUM,
         demonames.LAST_NAMES_MUSLIM, demonames.LAST_NAMES_AFRICAN)
     # LAST_NAMES = Cycler(
-    #     rt.modules.contacts.Person.objects.all().values_list(
+    #     rt.models.contacts.Person.objects.all().values_list(
     #         'last_name', flat=True))
     # LAST_NAMES = Cycler(['LAST_NAME'])
 

@@ -37,15 +37,15 @@ from lino_xl.lib.clients.choicelists import ClientStates
 def objects():
     yield lib_objects()
 
-    Client = rt.modules.pcsw.Client
-    Company = rt.modules.contacts.Company
-    Journal = rt.modules.ledger.Journal
-    AccountInvoice = rt.modules.vatless.AccountInvoice
-    InvoiceItem = rt.modules.vatless.InvoiceItem
-    Account = rt.modules.accounts.Account
-    AccountTypes = rt.modules.accounts.AccountTypes
-    PaymentOrder = rt.modules.finan.PaymentOrder
-    PaymentOrderItem = rt.modules.finan.PaymentOrderItem
+    Client = rt.models.pcsw.Client
+    Company = rt.models.contacts.Company
+    Journal = rt.models.ledger.Journal
+    AccountInvoice = rt.models.vatless.AccountInvoice
+    InvoiceItem = rt.models.vatless.InvoiceItem
+    Account = rt.models.accounts.Account
+    AccountTypes = rt.models.accounts.AccountTypes
+    PaymentOrder = rt.models.finan.PaymentOrder
+    PaymentOrderItem = rt.models.finan.PaymentOrderItem
 
     CLIENTS = Cycler(Client.objects.filter(
         client_state=ClientStates.coached)[:5])
@@ -94,7 +94,7 @@ def objects():
 
     refs = ('832/3331/01', '832/330/01', '832/330/03F',
             '832/330/03', '832/3343/21', '832/334/27')
-    ACCOUNTS = list(rt.modules.accounts.Account.objects.filter(ref__in=refs))
+    ACCOUNTS = list(rt.models.accounts.Account.objects.filter(ref__in=refs))
     AMOUNTS = Cycler(D('648.91'), D('817.36'), D('544.91'), D('800.08'))
     jnl = Journal.get_by_ref('AAW')
     for i in range(3):

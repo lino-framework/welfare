@@ -113,7 +113,7 @@ class ContractTypeBase(mixins.BabelNamed):
 
     @dd.chooser(simple_values=True)
     def template_choices(cls):
-        bm = rt.modules.printing.BuildMethods.get_system_default()
+        bm = rt.models.printing.BuildMethods.get_system_default()
         return rt.find_template_config_files(
             bm.template_ext, cls.templates_group)
 
@@ -139,7 +139,7 @@ class ContractPartnerBase(ContactRelated):
 
     @dd.chooser()
     def contact_role_choices(cls):
-        return rt.modules.contacts.RoleType.objects.filter(
+        return rt.models.contacts.RoleType.objects.filter(
             use_in_contracts=True)
 
 
@@ -349,7 +349,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
 
     @dd.chooser()
     def ending_choices(cls):
-        return rt.modules.isip.ContractEnding.objects.filter(use_in_isip=True)
+        return rt.models.isip.ContractEnding.objects.filter(use_in_isip=True)
 
     def applies_until_changed(self, ar):
         self.date_ended = self.applies_until
@@ -475,7 +475,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
         ap = self.active_period()
         ap = AttrDict(start_date=ap[0], end_date=ap[1])
         # print(20170529, ap)
-        return rt.modules.aids.Granting.objects.get_by_aidtype(
+        return rt.models.aids.Granting.objects.get_by_aidtype(
             self.client, ap, **aidtype_filter)
 
     def get_aid_type(self):
@@ -510,7 +510,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
             return
         Guest = rt.models.cal.Guest
         Person = rt.models.contacts.Person
-        # GuestStates = rt.modules.cal.GuestStates
+        # GuestStates = rt.models.cal.GuestStates
         # st = GuestStates.accepted
         # yield Guest(event=event,
         #             partner=client,

@@ -91,9 +91,9 @@ which contains non-ascii characters:
     >> context.update(self=obj)
     >> context.update(self=obj)
     >> target = "tmp.odt"
-    >> #bm = rt.modules.printing.BuildMethods.appyodt
+    >> #bm = rt.models.printing.BuildMethods.appyodt
     >> #action = obj.do_print.bound_action.action
-    >> #action = rt.modules.excerpts.Excerpt.do_print
+    >> #action = rt.models.excerpts.Excerpt.do_print
     >> # tplfile = bm.get_template_file(ar, action, obj)
     >> tplfile = settings.SITE.find_config_file('Default.odt', 'isip/Contract')
 

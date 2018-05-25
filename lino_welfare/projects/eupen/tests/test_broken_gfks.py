@@ -54,7 +54,7 @@ class TestCase(TestCase):
 
         Client = rt.models.pcsw.Client
         Note = rt.models.notes.Note
-        # ContentType = rt.modules.contenttypes.ContentType
+        # ContentType = rt.models.contenttypes.ContentType
         BrokenGFKs = rt.models.gfks.BrokenGFKs
 
         def create_related_objects():

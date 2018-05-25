@@ -36,8 +36,8 @@ UPLOADTYPE_DRIVING_LICENSE = 3
 
 
 def uploads_objects():
-    Recurrencies = rt.modules.cal.Recurrencies
-    UploadType = rt.modules.uploads.UploadType
+    Recurrencies = rt.models.cal.Recurrencies
+    UploadType = rt.models.uploads.UploadType
 
     kw = dict(
         warn_expiry_unit=Recurrencies.monthly,

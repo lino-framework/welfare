@@ -23,7 +23,7 @@ from lino.utils import Cycler
 
 def objects():
     ses = rt.login()
-    Client = rt.modules.pcsw.Client
+    Client = rt.models.pcsw.Client
     CLIENTS = Cycler(Client.objects.all())
     for obj in lino_objects():
         if obj.__class__.__name__ == 'Event':

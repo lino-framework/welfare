@@ -98,8 +98,8 @@ class GDLoader(CsvLoader):
         kw['first_name'] = camelize(kw['first_name'])
         kw['last_name'] = camelize(kw['last_name'])
 
-        Country = rt.modules.countries.Country
-        Client = rt.modules.pcsw.Client
+        Country = rt.models.countries.Country
+        Client = rt.models.pcsw.Client
         nation = kw.pop('nation').strip()
 
         if nation:

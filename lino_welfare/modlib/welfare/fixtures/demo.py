@@ -184,7 +184,7 @@ def objects():
 
     Place = resolve_model('countries.Place')
     #~ Job = resolve_model('jobs.Job')
-    #~ Place = settings.SITE.modules.countries.Place
+    #~ Place = settings.SITE.models.countries.Place
     StudyType = resolve_model('cv.StudyType')
     #~ Country = resolve_model('countries.Country')
     Property = resolve_model('properties.Property')
@@ -1145,7 +1145,7 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
 
     # create a primary ClientAddress for each Client.
     # no longer needed. done by checkdata.fixtures.demo2
-    # for obj in settings.SITE.modules.contacts.Partner.objects.all():
+    # for obj in settings.SITE.models.contacts.Partner.objects.all():
     #     obj.repairdata()
 
     # have partners speak different languages
@@ -1158,7 +1158,7 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
             if len(settings.SITE.languages) > 2:
                 ld += [settings.SITE.languages[2].django_code]
         LANGS = Cycler(ld)
-        for obj in settings.SITE.modules.contacts.Partner.objects.all():
+        for obj in settings.SITE.models.contacts.Partner.objects.all():
             obj.language = LANGS.pop()
             obj.save()
 

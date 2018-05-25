@@ -20,9 +20,9 @@ def main():
 
     settings.SITE.use_davlink = False
 
-    Tx25 = rt.modules.cbss.RetrieveTIGroupsRequests
-    # ExcerptType = rt.modules.excerpts.ExcerptType
-    # Tx25 = rt.modules.jobs.JobsOverview
+    Tx25 = rt.models.cbss.RetrieveTIGroupsRequests
+    # ExcerptType = rt.models.excerpts.ExcerptType
+    # Tx25 = rt.models.jobs.JobsOverview
 
     # et = ExcerptType.get_for_model(Tx25.model)
     # if not et.primary:

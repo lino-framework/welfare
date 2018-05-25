@@ -26,7 +26,7 @@ current_group = None
 
 
 def objects():
-    User = rt.modules.users.User
+    User = rt.models.users.User
     wilfried = User(username="wilfried",
                     first_name="Wilfried", last_name="Willems",
                     user_type='500')

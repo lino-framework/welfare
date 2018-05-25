@@ -174,7 +174,7 @@ customize_siteconfig()
 
 @dd.receiver(dd.post_analyze)
 def set_detail_layouts(sender=None, **kwargs):
-    rt.modules.properties.Properties.set_detail_layout("""
+    rt.models.properties.Properties.set_detail_layout("""
     id group type
     name
     cv.PersonPropsByProp

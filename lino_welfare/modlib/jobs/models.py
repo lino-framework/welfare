@@ -237,7 +237,7 @@ class Contract(JobSupplyment):
 
     @dd.chooser()
     def company_choices(cls):
-        return rt.modules.jobs.JobProvider.objects.all()
+        return rt.models.jobs.JobProvider.objects.all()
 
     @dd.chooser(simple_values=True)
     def duration_choices(cls):
@@ -1053,7 +1053,7 @@ class JobsOverview(Report):
 
 @dd.receiver(dd.post_analyze)
 def set_detail_layouts(sender=None, **kwargs):
-    rt.modules.cv.Regimes.set_detail_layout("""
+    rt.models.cv.Regimes.set_detail_layout("""
     id name
     cv.ExperiencesByRegime
     jobs.ContractsByRegime

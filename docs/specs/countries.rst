@@ -56,10 +56,10 @@ The following database fields refer to a country:
 .. lino2rst::
 
    tpl = "- :class:`{1} <{0}.{1}>`  :attr:`{2} <{0}.{1}.{2}>`"
-   for m, f in rt.modules.countries.Country._lino_ddh.fklist:
+   for m, f in rt.models.countries.Country._lino_ddh.fklist:
        print(tpl.format(m.__module__, m.__name__, f.name))
 
->>> for m, f in rt.modules.countries.Country._lino_ddh.fklist:
+>>> for m, f in rt.models.countries.Country._lino_ddh.fklist:
 ...     print dd.full_model_name(m), f.name
 addresses.Address country
 contacts.Partner country

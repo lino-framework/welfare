@@ -134,7 +134,7 @@ class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
     def full_clean(self, *args, **kw):
         if self.group_id is not None:
             if not self.ref:
-                qs = rt.modules.debts.Account.objects.all()
+                qs = rt.models.debts.Account.objects.all()
                 self.ref = str(qs.count() + 1)
             if not self.name:
                 self.name = self.group.name
@@ -260,7 +260,7 @@ Vielleicht mit Fußnoten?"""))
         :class:`lino_welfare.modlib.debts.ui.EntryGroup`.
 
         """
-        Group = rt.modules.debts.Group
+        Group = rt.models.debts.Group
         kw.update(entries_layout__gt='')
         if types is not None:
             kw.update(
@@ -284,7 +284,7 @@ Vielleicht mit Fußnoten?"""))
         if types is not None:
             kw.update(account_type__in=[AccountTypes.items_dict[t]
                       for t in types])
-        Group = rt.modules.debts.Group
+        Group = rt.models.debts.Group
         for g in Group.objects.filter(**kw).order_by('ref'):
             if Entry.objects.filter(budget=self, account__group=g).count():
                 yield g
@@ -350,9 +350,9 @@ Vielleicht mit Fußnoten?"""))
         If the budget is empty, fill it with default entries
         by copying the master_budget.
         """
-        Entry = rt.modules.debts.Entry
-        Actor = rt.modules.debts.Actor
-        Account = rt.modules.debts.Account
+        Entry = rt.models.debts.Entry
+        Actor = rt.models.debts.Actor
+        Account = rt.models.debts.Account
         if not self.partner_id or self.printed_by is not None:
             return
         if self.entry_set.all().count() > 0:
@@ -576,11 +576,11 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
     @dd.chooser()
     def account_choices(cls, account_type):
         # print '20120918 account_choices', account_type
-        return rt.modules.debts.Account.objects.filter(type=account_type)
+        return rt.models.debts.Account.objects.filter(type=account_type)
 
     @dd.chooser()
     def bailiff_choices(self):
-        qs = rt.modules.contacts.Companies.request().data_iterator
+        qs = rt.models.contacts.Companies.request().data_iterator
         qs = qs.filter(client_contact_type__is_bailiff=True)
         return qs
 

@@ -371,7 +371,7 @@ class AvailableCoaches(Users):
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self, obj, ar):
         #~ return pcsw.ClientsByCoach1.request(ar.ui,master_instance=obj)
-        return rt.actors.coachings.CoachingsByUser.request(master_instance=obj)
+        return rt.models.coachings.CoachingsByUser.request(master_instance=obj)
 
     #~ @dd.requestfield(_("Active clients"))
     #~ def active_clients(self,obj,ar):

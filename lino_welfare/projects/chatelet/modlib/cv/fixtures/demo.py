@@ -27,9 +27,9 @@ from lino_xl.lib.clients.choicelists import ClientStates
 
 def objects():
 
-    Obstacle = rt.modules.cv.Obstacle
-    ObstacleType = rt.modules.cv.ObstacleType
-    Client = rt.modules.pcsw.Client
+    Obstacle = rt.models.cv.Obstacle
+    ObstacleType = rt.models.cv.ObstacleType
+    Client = rt.models.pcsw.Client
 
     CLIENTS = Cycler(Client.objects.filter(
         client_state=ClientStates.coached)[10:15])

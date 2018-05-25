@@ -154,7 +154,7 @@ given type ("checker"). The following snippet simulates the situation
 of selecting the :class:`SimilarClientsChecker
 <lino_welfare.modlib.dupable_clients.models.SimilarClientsChecker>`.
 
->>> Checkers = rt.actors.checkdata.Checkers
+>>> Checkers = rt.models.checkdata.Checkers
 >>> rt.show(checkdata.AllProblems,
 ...     param_values=dict(checker=Checkers.get_by_value(
 ...     'dupable_clients.SimilarClientsChecker')))

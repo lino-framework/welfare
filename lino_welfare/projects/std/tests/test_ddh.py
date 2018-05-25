@@ -52,13 +52,13 @@ class DDHTests(RemoteAuthTestCase):
 
     def test01(self):
         from lino.modlib.users.choicelists import UserTypes
-        Client = rt.modules.pcsw.Client
-        User = rt.modules.users.User
-        Person = rt.modules.contacts.Person
-        Partner = rt.modules.contacts.Partner
-        Country = rt.modules.countries.Country
-        Address = rt.modules.addresses.Address
-        Note = rt.modules.notes.Note
+        Client = rt.models.pcsw.Client
+        User = rt.models.users.User
+        Person = rt.models.contacts.Person
+        Partner = rt.models.contacts.Partner
+        Country = rt.models.countries.Country
+        Address = rt.models.addresses.Address
+        Note = rt.models.notes.Note
 
         u = User(username='robin',
                  user_type=UserTypes.admin,
@@ -133,7 +133,7 @@ class DDHTests(RemoteAuthTestCase):
               "1 Events/Notes refer to it."
         check_vetos(Note(project=cl), msg)
 
-        ct = rt.modules.contenttypes.ContentType.objects.get_for_model(Client)
+        ct = rt.models.contenttypes.ContentType.objects.get_for_model(Client)
         check_vetos(Note(owner_type=ct, owner_id=pa.pk), msg)
 
         msg = "Cannot delete Person John DOE because " \

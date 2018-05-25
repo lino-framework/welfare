@@ -23,9 +23,9 @@ from lino.utils import Cycler
 
 
 def objects():
-    Client = rt.modules.pcsw.Client
-    Property = rt.modules.properties.Property
-    PP = rt.modules.cv.PersonProperty
+    Client = rt.models.pcsw.Client
+    Property = rt.models.properties.Property
+    PP = rt.models.cv.PersonProperty
 
     PERSONS = Cycler(Client.objects.all())
     for prop in Property.objects.order_by('id'):

@@ -39,8 +39,8 @@ class TestCase(RemoteAuthTestCase):
     # fixtures = ['few_countries', 'few_cities', 'demo_users']
 
     def test(self):
-        Client = rt.modules.pcsw.Client
-        Account = rt.modules.sepa.Account
+        Client = rt.models.pcsw.Client
+        Account = rt.models.sepa.Account
 
         cli = Client(first_name="Ott", last_name="Karu")
         cli.full_clean()

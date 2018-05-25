@@ -47,7 +47,7 @@ class ConfirmationType(dd.Choice):
         super(ConfirmationType, self).__init__(value, text, name)
 
     def get_aidtypes(self):
-        return rt.modules.aids.AidType.objects.filter(confirmation_type=self)
+        return rt.models.aids.AidType.objects.filter(confirmation_type=self)
 
 
 class ConfirmationTypes(dd.ChoiceList):
@@ -70,7 +70,7 @@ class ConfirmationTypes(dd.ChoiceList):
 
     @dd.virtualfield(models.CharField(_("Template"), max_length=20))
     def et_template(cls, choice, ar):
-        et = rt.modules.excerpts.ExcerptType.get_for_model(choice.model)
+        et = rt.models.excerpts.ExcerptType.get_for_model(choice.model)
         if et:
             return et.template
 

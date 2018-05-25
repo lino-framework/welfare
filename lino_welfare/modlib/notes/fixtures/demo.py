@@ -28,10 +28,10 @@ from lino.api import dd, rt, _
 
 
 def objects():
-    Note = rt.modules.notes.Note
-    NTYPES = Cycler(rt.modules.notes.NoteType.objects.all())
-    USERS = Cycler(rt.modules.users.User.objects.all())
-    CLIENTS = Cycler(rt.modules.pcsw.Client.objects.all())
+    Note = rt.models.notes.Note
+    NTYPES = Cycler(rt.models.notes.NoteType.objects.all())
+    USERS = Cycler(rt.models.users.User.objects.all())
+    CLIENTS = Cycler(rt.models.pcsw.Client.objects.all())
 
     yield lib_objects()
 

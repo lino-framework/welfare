@@ -150,8 +150,8 @@ Gonna copy .../lino_welfare/modlib/welfare/config/excerpts/Default.odt to .../co
 Yet another series of GET requests
 ==================================
 
->>> RetrieveTIGroupsRequest = rt.modules.cbss.RetrieveTIGroupsRequest
->>> ContentType = rt.modules.contenttypes.ContentType
+>>> RetrieveTIGroupsRequest = rt.models.cbss.RetrieveTIGroupsRequest
+>>> ContentType = rt.models.contenttypes.ContentType
 
 >>> json_fields = 'count rows title success no_data_text param_values'
 >>> kw = dict(fmt='json', limit=10, start=0)

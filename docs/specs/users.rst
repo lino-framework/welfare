@@ -85,7 +85,7 @@ Authorities
 Alicia, Hubert and Mélanie give "authority" to Theresia to do their
 work when they are absent.
 
->>> rt.show(rt.actors.users.Authorities, language="en")
+>>> rt.show(rt.models.users.Authorities, language="en")
 ==== ================= =================
  ID   Author            User
 ---- ----------------- -----------------

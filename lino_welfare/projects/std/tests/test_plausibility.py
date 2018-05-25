@@ -64,7 +64,7 @@ class TestCase(RemoteAuthTestCase):
             got = tuple(p.message for p in qs)
             self.assertEqual(got, expected)
 
-        ar = rt.modules.pcsw.Clients.request()
+        ar = rt.models.pcsw.Clients.request()
         doe = create(
             ar, Client, first_name="John", last_name="Doe", city=eupen)
 

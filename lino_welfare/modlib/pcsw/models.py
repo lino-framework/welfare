@@ -268,7 +268,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         qs = SpecialTypes.first_meeting.get_notes(
             project=self, date__lte=today).order_by('date', 'time')
         # qs = self.notes_note_set_by_project.order_by('date', 'time')
-        # nt = rt.modules.notes.NoteType.objects.get(id=note_type)
+        # nt = rt.models.notes.NoteType.objects.get(id=note_type)
         # qs = qs.filter(type=nt)
         if qs.count():
             return qs.reverse()[0]
@@ -295,7 +295,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         # elems.append(E.br())
         elems.append(ar.get_data_value(self, 'eid_info'))
         notes = []
-        for note in rt.modules.notes.Note.objects.filter(
+        for note in rt.models.notes.Note.objects.filter(
                 project=self, important=True):
             notes.append(E.b(ar.obj2html(note, note.subject)))
         if len(notes):
@@ -435,7 +435,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
                                    verbose_name=_("Working at ")))
     def contract_company(obj, ar):
         c = obj.get_active_contract()
-        if isinstance(c, rt.modules.jobs.Contract):
+        if isinstance(c, rt.models.jobs.Contract):
             return c.company
 
     @dd.displayfield(_("Active contract"))
@@ -443,7 +443,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         c = obj.get_active_contract()
         if c is not None:
             txt = str(daterange_text(c.applies_from, c.applies_until))
-            if isinstance(c, rt.modules.jobs.Contract):
+            if isinstance(c, rt.models.jobs.Contract):
                 if c.company is not None:
                     # txt += unicode(pgettext("(place)", " at "))
                     # txt += '\n'
@@ -458,8 +458,8 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         :meth:`lino_xl.lib.beid.mixins.BeIdCardHolder.get_beid_diffs`.
 
         """
-        Address = rt.modules.addresses.Address
-        DataSources = rt.modules.addresses.DataSources
+        Address = rt.models.addresses.Address
+        DataSources = rt.models.addresses.DataSources
         diffs = []
         objects = [self]
         kw = dict(partner=self, data_source=DataSources.eid)
