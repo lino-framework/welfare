@@ -5,12 +5,17 @@ from django.utils.translation import ugettext_lazy as _
 
 help_texts = {
     'lino_welfare.migrate.Migrator' : _("""The standard migrator for welfare."""),
+    'lino_welfare.modlib.aids.Plugin' : _("""The plugin."""),
+    'lino_welfare.modlib.aids.Plugin.no_date_range_veto_until' : _("""Optionally specify the primary key (an integer) of the last
+granting for whose confirmations you want to suppress checking of
+date range.  This is useful for keeping legacy confirmations that
+have been issued before the rule was activated."""),
     'lino_welfare.modlib.aids.ConfirmationTypes' : _("""A list of the models that may be used as confirmation."""),
     'lino_welfare.modlib.aids.ConfirmationTypes.et_template' : _("""The template defined for the ExcerptType defined for this
 confirmation type."""),
-    'lino_welfare.modlib.aids.mixins.SignConfirmation' : _("""Sign this database object."""),
-    'lino_welfare.modlib.aids.mixins.Confirmable' : _("""Base class for both Granting and Confirmation."""),
-    'lino_welfare.modlib.aids.mixins.Confirmation' : _("""Base class for all aid confirmations."""),
+    'lino_welfare.modlib.aids.SignConfirmation' : _("""Sign this database object."""),
+    'lino_welfare.modlib.aids.Confirmable' : _("""Base class for both Granting and Confirmation."""),
+    'lino_welfare.modlib.aids.Confirmation' : _("""Base class for all aid confirmations."""),
     'lino_welfare.modlib.aids.AidType' : _("""The type of aid being granted to a client.  Every granting has a
 mandatory field Granting.aid_type which points to an
 AidType instance."""),
@@ -109,16 +114,16 @@ lino_welfare.modlib.cbss.models.ManageAccessRequest."""),
     'lino_welfare.modlib.cbss.QueryRegisters.PRIMARY' : _("""Query only the primary register."""),
     'lino_welfare.modlib.cbss.QueryRegisters.SECONDARY' : _("""Query only the secondary register."""),
     'lino_welfare.modlib.cbss.QueryRegisters.ALL' : _("""Query both registers."""),
-    'lino_welfare.modlib.cbss.mixins.CBSSRequest' : _("""Common Abstract Base Class for SSDNRequest
+    'lino_welfare.modlib.cbss.CBSSRequest' : _("""Common Abstract Base Class for SSDNRequest
 and NewStyleRequest"""),
-    'lino_welfare.modlib.cbss.mixins.CBSSRequest.wsdl_parts' : _("""alias of exceptions.NotImplementedError"""),
-    'lino_welfare.modlib.cbss.mixins.SSDNRequest' : _("""Abstract Base Class for Models that represent SSDN (“classic”)
+    'lino_welfare.modlib.cbss.CBSSRequest.wsdl_parts' : _("""alias of exceptions.NotImplementedError"""),
+    'lino_welfare.modlib.cbss.SSDNRequest' : _("""Abstract Base Class for Models that represent SSDN (“classic”)
 requests."""),
-    'lino_welfare.modlib.cbss.mixins.NewStyleRequest' : _("""Abstract Base Class for Models that represent
+    'lino_welfare.modlib.cbss.NewStyleRequest' : _("""Abstract Base Class for Models that represent
 “new style” requests to the CBSS (and responses)."""),
-    'lino_welfare.modlib.cbss.mixins.SSIN' : _("""Abstract base for Requests that have a field national_id and a method 
+    'lino_welfare.modlib.cbss.SSIN' : _("""Abstract base for Requests that have a field national_id and a method 
 get_ssin()."""),
-    'lino_welfare.modlib.cbss.mixins.WithPerson' : _("""Mixin for models that have certain fields"""),
+    'lino_welfare.modlib.cbss.WithPerson' : _("""Mixin for models that have certain fields"""),
     'lino_welfare.modlib.cbss.Sector' : _("""Default values filled from
 lino_welfare.modlib.cbss.fixtures.sectors."""),
     'lino_welfare.modlib.cbss.Purpose' : _("""Codes qualité (Hoedanigheidscodes).
@@ -155,9 +160,9 @@ lino_xl.lib.sales.models.ClientVoucher)."""),
 (the latter holds simply the default value for the former).
 It means: for how many months the entered amount counts.
 Default value is 1. For yearly amounts set it to 12."""),
-    'lino_welfare.modlib.debts.mixins.ActorBase' : _("""Base class for both the volatile MainActor and the
+    'lino_welfare.modlib.debts.ActorBase' : _("""Base class for both the volatile MainActor and the
 Actor model."""),
-    'lino_welfare.modlib.debts.mixins.MainActor' : _("""A volatile object that represents the budget partner as actor"""),
+    'lino_welfare.modlib.debts.MainActor' : _("""A volatile object that represents the budget partner as actor"""),
     'lino_welfare.modlib.debts.Group' : _("""A group of accounts."""),
     'lino_welfare.modlib.debts.Account' : _("""An account is an item of an account chart used to collect
 ledger transactions or other accountable items."""),
@@ -205,7 +210,7 @@ PrintLiabilitiesByBudget and PrintAssetsByBudget)."""),
 same as total, otherwise it is total * 12 / periods."""),
     'lino_welfare.modlib.debts.PrintEntriesByBudget.master' : _("""alias of EntryGroup"""),
     'lino_welfare.modlib.dupable_clients.Plugin' : _("""See lino.core.plugin.Plugin."""),
-    'lino_welfare.modlib.dupable_clients.mixins.DupableClient' : _("""Model mixin to add to the base classes of your application’s
+    'lino_welfare.modlib.dupable_clients.DupableClient' : _("""Model mixin to add to the base classes of your application’s
 pcsw.Client model."""),
     'lino_welfare.modlib.dupable_clients.Word' : _("""Phonetic word for pcsw.Client.
 See lino.mixins.dupable.PhoneticWordBase."""),
@@ -237,46 +242,47 @@ columns (coachings per PersonGroup table."""),
     'lino_welfare.modlib.integ.JobProvidersAndContracts.model' : _("""alias of lino_welfare.modlib.contacts.models.Company"""),
     'lino_welfare.modlib.integ.ActivityReport' : _("""Gives an overview about the work of the Integration Service during
 a given period."""),
-    'lino_welfare.modlib.integ.roles.IntegrationAgent' : _("""A social agent who can see database content specific to
-integration work: CV, language courses, workshops, …"""),
+    'lino_welfare.modlib.integ.roles.IntegrationAgent' : _("""An integration agent is a social agent who can see database
+content specific to integration work: CV, language courses,
+workshops, …"""),
     'lino_welfare.modlib.isip.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.isip.OverlapGroups' : _("""The list of all known overlap groups to be selected for the
 overlap_group
 of a contract type."""),
-    'lino_welfare.modlib.isip.mixins.ContractTypeBase' : _("""Base class for all ContractType models."""),
-    'lino_welfare.modlib.isip.mixins.ContractTypeBase.full_name' : _("""The full description of this contract type as used in printed
+    'lino_welfare.modlib.isip.ContractTypeBase' : _("""Base class for all ContractType models."""),
+    'lino_welfare.modlib.isip.ContractTypeBase.full_name' : _("""The full description of this contract type as used in printed
 documents."""),
-    'lino_welfare.modlib.isip.mixins.ContractTypeBase.exam_policy' : _("""The default examination policy to be used for contracts of
+    'lino_welfare.modlib.isip.ContractTypeBase.exam_policy' : _("""The default examination policy to be used for contracts of
 this type."""),
-    'lino_welfare.modlib.isip.mixins.ContractTypeBase.overlap_group' : _("""The overlap group to use when checking whether two contracts
+    'lino_welfare.modlib.isip.ContractTypeBase.overlap_group' : _("""The overlap group to use when checking whether two contracts
 are overlapping or not. See OverlappingContractsTest.
 If this field is empty, Lino does not check at all for
 overlapping contracts."""),
-    'lino_welfare.modlib.isip.mixins.ContractTypeBase.template' : _("""The main template to use instead of the default template
+    'lino_welfare.modlib.isip.ContractTypeBase.template' : _("""The main template to use instead of the default template
 defined on the excerpt type."""),
-    'lino_welfare.modlib.isip.mixins.OverlappingContractsTest' : _("""Volatile object used to test for overlapping contracts.  It is
+    'lino_welfare.modlib.isip.OverlappingContractsTest' : _("""Volatile object used to test for overlapping contracts.  It is
 responsible for issuing the following error messages:"""),
-    'lino_welfare.modlib.isip.mixins.OverlappingContractsChecker' : _("""A given client cannot have two active contracts at the same time."""),
-    'lino_welfare.modlib.isip.mixins.ContractBase' : _("""Abstract base class for all integration contracts (an unofficial
+    'lino_welfare.modlib.isip.OverlappingContractsChecker' : _("""A given client cannot have two active contracts at the same time."""),
+    'lino_welfare.modlib.isip.ContractBase' : _("""Abstract base class for all integration contracts (an unofficial
 term), i.e.  isip.Contract jobs.Contract and
 immersions.Contract"""),
-    'lino_welfare.modlib.isip.mixins.ContractBase.client' : _("""The client for whom this contract is done."""),
-    'lino_welfare.modlib.isip.mixins.ContractBase.applies_from' : _("""The start date of the contract."""),
-    'lino_welfare.modlib.isip.mixins.ContractBase.applies_until' : _("""The planned end date of this contract."""),
-    'lino_welfare.modlib.isip.mixins.ContractBase.date_ended' : _("""The date when this contract was effectively ended.
+    'lino_welfare.modlib.isip.ContractBase.client' : _("""The client for whom this contract is done."""),
+    'lino_welfare.modlib.isip.ContractBase.applies_from' : _("""The start date of the contract."""),
+    'lino_welfare.modlib.isip.ContractBase.applies_until' : _("""The planned end date of this contract."""),
+    'lino_welfare.modlib.isip.ContractBase.date_ended' : _("""The date when this contract was effectively ended.
 This field is set to the same value as applies_until."""),
-    'lino_welfare.modlib.isip.mixins.ContractBase.ending' : _("""The reason of prematured ending.  Pointer to
+    'lino_welfare.modlib.isip.ContractBase.ending' : _("""The reason of prematured ending.  Pointer to
 ContractEnding"""),
-    'lino_welfare.modlib.isip.mixins.ContractBase.date_issued' : _("""When the contract was issued to the client and signed by them."""),
-    'lino_welfare.modlib.isip.mixins.ContractBase.date_decided' : _("""When the contract was ratified by the responsible board."""),
-    'lino_welfare.modlib.isip.mixins.ContractBase.language' : _("""The language of this contract. Default value is the client’s
+    'lino_welfare.modlib.isip.ContractBase.date_issued' : _("""When the contract was issued to the client and signed by them."""),
+    'lino_welfare.modlib.isip.ContractBase.date_decided' : _("""When the contract was ratified by the responsible board."""),
+    'lino_welfare.modlib.isip.ContractBase.language' : _("""The language of this contract. Default value is the client’s
 language."""),
-    'lino_welfare.modlib.isip.mixins.ContractBase.type' : _("""The type of this contract. Pointer to a subclass of
+    'lino_welfare.modlib.isip.ContractBase.type' : _("""The type of this contract. Pointer to a subclass of
 ContractTypeBase."""),
-    'lino_welfare.modlib.isip.mixins.ContractBaseTable' : _("""Base for contract tables. Defines the following parameter fields:"""),
-    'lino_welfare.modlib.isip.mixins.ContractBaseTable.ending' : _("""Show only contracts with the specified
+    'lino_welfare.modlib.isip.ContractBaseTable' : _("""Base for contract tables. Defines the following parameter fields:"""),
+    'lino_welfare.modlib.isip.ContractBaseTable.ending' : _("""Show only contracts with the specified
 ContractEnding."""),
-    'lino_welfare.modlib.isip.mixins.ContractBaseTable.ending_success' : _("""Select “Yes” to show only contracts whose ending
+    'lino_welfare.modlib.isip.ContractBaseTable.ending_success' : _("""Select “Yes” to show only contracts whose ending
 ContractEnding has
 is_success
 checked."""),
@@ -299,7 +305,7 @@ Pointer to ContractType."""),
     'lino_welfare.modlib.isip.Contract.study_type' : _("""The type of study that is going to be followed during this
 contract."""),
     'lino_welfare.modlib.jobs.Plugin' : _("""See lino.core.plugin.Plugin."""),
-    'lino_welfare.modlib.jobs.mixins.JobSupplyment' : _("""Base class for Contract and
+    'lino_welfare.modlib.jobs.JobSupplyment' : _("""Base class for Contract and
 lino_welfare.modlib.art61.models.Contract."""),
     'lino_welfare.modlib.jobs.Schedule' : _("""List of choices for jobs.Contract.schedule field."""),
     'lino_welfare.modlib.jobs.JobProvider' : _("""A job provider (Stellenanbieter, Services utilisateurs) is an
@@ -375,8 +381,8 @@ overview panel of
 the person linked to this note."""),
     'lino_welfare.modlib.notes.Note.person' : _("""An alias to lino_xl.lib.notes.models.Note.project."""),
     'lino_welfare.modlib.pcsw.Plugin' : _("""See lino.core.plugin.Plugin."""),
-    'lino_welfare.modlib.pcsw.actions.RefuseClient' : _("""Refuse this newcomer request."""),
-    'lino_welfare.modlib.pcsw.actions.MarkClientFormer' : _("""Change client’s state to ‘former’. This will also end any active
+    'lino_welfare.modlib.pcsw.RefuseClient' : _("""Refuse this newcomer request."""),
+    'lino_welfare.modlib.pcsw.MarkClientFormer' : _("""Change client’s state to ‘former’. This will also end any active
 coachings."""),
     'lino_welfare.modlib.pcsw.Client' : _("""Inherits from lino_welfare.modlib.contacts.models.Person and
 lino_xl.lib.beid.models.BeIdCardHolder."""),
@@ -445,9 +451,9 @@ to the standard models (lino.modlib.users.models.User)."""),
     'lino_welfare.modlib.welfare.user_types.ReceptionClerk' : _("""A reception clerk is a user who is not a social agent but
 receives clients and does certain administrative tasks (in Eupen
 they call them back office)."""),
-    'lino_welfare.modlib.welfare.user_types.ReceptionClerkNewcomers' : _("""A newcomers reception clerk is a reception clerk who also
+    'lino_welfare.modlib.welfare.user_types.ReceptionClerkFlexible' : _("""A newcomers reception clerk is a reception clerk who also
 can assign coaches to clients."""),
-    'lino_welfare.modlib.welfare.user_types.IntegrationAgentNewcomers' : _("""A newcomers integration agent is an integration agent who
+    'lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible' : _("""A flexible integration agent is an integration agent who
 also can assign coaches to clients and create budgets for debts
 mediation."""),
     'lino_welfare.modlib.welfare.user_types.LedgerUser' : _("""An accountant is a user who enters invoices, bank statements,

@@ -53,11 +53,12 @@ class DebtsTests(RemoteAuthTestCase):
     # override_djangosite_settings = dict(use_java=True)
 
     def test01(self):
+        # print("20180502 test_debts.test01()")
 
-        # Member = rt.modules.households.Member
-        Household = rt.modules.households.Household
-        Person = rt.modules.contacts.Person
-        Genders = rt.modules.system.Genders
+        # Member = rt.models.households.Member
+        Household = rt.models.households.Household
+        Person = rt.models.contacts.Person
+        Genders = rt.models.system.Genders
         Budget = rt.models.debts.Budget
         Actor = rt.models.debts.Actor
         Entry = rt.models.debts.Entry

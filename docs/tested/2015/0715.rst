@@ -1,5 +1,5 @@
 .. doctest docs/tested/2015/0715.rst
-.. _welfare.tested.20150715:
+.. _welfare.specs.20150715:
 
 ====================================
 Reception clerk sees "Career" tab
@@ -34,17 +34,17 @@ False
 
 >>> ia_user_type = users.UserTypes.get_by_value('100')
 >>> print(ia_user_type)
-Integration agent
+100 (Integration agent)
 
 >>> rc_user_type = users.UserTypes.get_by_value('210')
 >>> print(rc_user_type)
-Reception clerk
+210 (Reception clerk)
 
 
 We are talking about the detail layout of a client, defined by
 :class:`lino_welfare.projects.eupen.modlib.pcsw.models.ClientDetail`:
 
->>> dtl = rt.modules.pcsw.Clients.detail_layout
+>>> dtl = rt.models.pcsw.Clients.detail_layout
 >>> dtl  #doctest: +ELLIPSIS
 <lino_welfare.modlib.pcsw.models.ClientDetail object at ...>
 >>> dtl.__class__
@@ -65,8 +65,8 @@ Let's get the `career` panel. It is a :class:`lino.core.elems.Panel`:
 
 To see this panel, you need to be an integration agent:
 
->>> career_panel.required_roles
-set([<class 'lino_welfare.modlib.integ.roles.IntegrationAgent'>])
+>>> career_panel.required_roles == {IntegrationAgent}
+True
 
 Theresia is a reception clerk
 (:class:`lino_welfare.modlib.welfare.user_types.ReceptionClerk`):
@@ -102,7 +102,7 @@ during :func:`lino.utils.jsgen.py2js`:
 ...     print(py2js(lh.main.elements))
 >>> with_user_profile(theresia.user_type, f)
 ... #doctest: +NORMALIZE_WHITESPACE
-[ general_panel1908, contact_panel1935, coaching_panel2163, aids_tab_panel2259, work_tab_1_panel2288, contracts_panel2946, history_panel3020, calendar_panel3099 ]
+[ general_panel1903, contact_panel1930, coaching_panel2158, aids_tab_panel2254, work_tab_1_panel2283, contracts_panel2941, history_panel3015, calendar_panel3094 ]
 
 I can even render the :file:`lino*.js` files (at least once):
 

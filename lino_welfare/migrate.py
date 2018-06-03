@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2017 Luc Saffre
+# Copyright 2011-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -16,13 +16,13 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""This is a real-world example of how the application developer
-can provide automatic data migrations for :ref:`dpy`.
+"""
+This is a real-world example of how the application developer
+can provide automatic data migrations.
 
-This module is used because a :ref:`welfare` Site has
+This module is used because a :ref:`welfare` site has
 :attr:`migration_class <lino.core.site.Site.migration_class>` set to
 ``"lino_welfare.migrate.Migrator"``.
-
 """
 
 import logging
@@ -57,11 +57,11 @@ class Migrator(Migrator):
 
         """
 
-        globals_dict.update(contenttypes_HelpText=rt.modules.gfks.HelpText)
+        globals_dict.update(contenttypes_HelpText=rt.models.gfks.HelpText)
 
         if dd.is_installed('sepa'):
             self.sepa_accounts = []
-            contacts_Partner = rt.modules.contacts.Partner
+            contacts_Partner = rt.models.contacts.Partner
 
             def create_contacts_partner(id, modified, created, country_id, city_id, zip_code, region_id, addr1, street_prefix, street, street_no, street_box, addr2, name, language, email, url, phone, gsm, fax, remarks, is_obsolete, activity_id, client_contact_type_id, iban, bic):
 
@@ -99,7 +99,7 @@ class Migrator(Migrator):
             globals_dict.update(create_contacts_partner=create_contacts_partner)
 
             def check_sepa_accounts(loader):
-                Account = rt.modules.sepa.Account
+                Account = rt.models.sepa.Account
                 for pk, bic, iban in self.sepa_accounts:
                     try:
                         Account.objects.get(partner_id=pk, bic=bic, iban=iban)
@@ -124,7 +124,7 @@ class Migrator(Migrator):
         # no need to convert civil_state to new codification here (see
         # 20151013)
 
-        # CivilState = rt.modules.pcsw.CivilState
+        # CivilState = rt.models.pcsw.CivilState
         pcsw_Client = globals_dict['pcsw_Client']
         contacts_Person = globals_dict['contacts_Person']
         create_mti_child = globals_dict['create_mti_child']
@@ -195,10 +195,10 @@ class Migrator(Migrator):
         self.after_load(after_load)
 
         bv2kw = globals_dict['bv2kw']
-        accounts_Group = rt.modules.accounts.Group
-        accounts_Account = rt.modules.accounts.Account
-        debts_Group = rt.modules.debts.Group
-        debts_Account = rt.modules.debts.Account
+        accounts_Group = rt.models.accounts.Group
+        accounts_Account = rt.models.accounts.Account
+        debts_Group = rt.models.debts.Group
+        debts_Account = rt.models.debts.Account
 
         def create_accounts_group(id, name, chart, ref, account_type, entries_layout):
             kw = dict()
@@ -360,8 +360,8 @@ class Migrator(Migrator):
             pcsw_CoachingEnding=resolve_model("coachings.CoachingEnding"),
             pcsw_CoachingType=resolve_model("coachings.CoachingType"))
 
-        settings.SITE.modules.pcsw.CivilState = settings.SITE.modules.beid.CivilStates
-        settings.SITE.modules.pcsw.ResidenceType = settings.SITE.modules.beid.ResidenceTypes
+        settings.SITE.models.pcsw.CivilState = settings.SITE.models.beid.CivilStates
+        settings.SITE.models.pcsw.ResidenceType = settings.SITE.models.beid.ResidenceTypes
 
         if dd.is_installed('xcourses'):
             globals_dict.update(

@@ -52,7 +52,8 @@ class QuickTest(RemoteAuthTestCase):
     maxDiff = None
 
     def test01(self):
-        from lino.api.shell import cal, pcsw, isip, users, contacts
+        # print("20180503 test_clients.test01()")
+        from lino.api.shell import pcsw, users
         # NoteType = rt.models.notes.NoteType
         EventType = rt.models.notes.EventType
         Note = rt.models.notes.Note
@@ -73,7 +74,7 @@ class QuickTest(RemoteAuthTestCase):
         
 
         nt = create(EventType, name="System note")
-        settings.SITE.site_config.system_note_type = nt
+        settings.SITE.site_config.update(system_note_type=nt)
 
         kw = dict()
         kw.update(first_name="Max")
@@ -112,3 +113,5 @@ robin a classé [client 100] (M. Max MUSTERMANN) comme <b>Refusé</b>.
 Raison de refus: CPAS n'est pas compétent
 Wohnt noch in Lüttich. Wollte nach Eupen ziehen. Noch nicht zuständigg"""
         self.assertEqual(expected, msg.body)
+        
+        # print("20180503 test_clients.test01() done")

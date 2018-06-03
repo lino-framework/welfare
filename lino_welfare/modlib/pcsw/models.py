@@ -171,8 +171,8 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
 
     quick_search_fields = "prefix name phone gsm street national_id"
     
-    group = models.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
-                              verbose_name=_("Integration phase"))
+    group = dd.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
+                          verbose_name=_("Integration phase"))
 
     civil_state = CivilStates.field(blank=True)
 
@@ -195,7 +195,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         _("Needs work permit"), default=False)
     work_permit_suspended_until = models.DateField(
         blank=True, null=True, verbose_name=_("suspended until"))
-    aid_type = models.ForeignKey("pcsw.AidType", blank=True, null=True)
+    aid_type = dd.ForeignKey("pcsw.AidType", blank=True, null=True)
         #~ verbose_name=_("aid type"))
 
     declared_name = models.BooleanField(_("Declared name"), default=False)
@@ -212,7 +212,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
     obstacles = models.TextField(_("Other obstacles"), blank=True, null=True)
     skills = models.TextField(_("Other skills"), blank=True, null=True)
 
-    job_office_contact = models.ForeignKey(
+    job_office_contact = dd.ForeignKey(
         "contacts.Role",
         blank=True, null=True,
         verbose_name=_(
@@ -259,8 +259,8 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
 
     def get_first_meeting(self, today=None):
         """Return the last note of type "First meeting" for this client.
-        Usage example see :ref:`welfare.tested.debts` and
-        :ref:`welfare.tested.notes`.
+        Usage example see :ref:`welfare.specs.debts` and
+        :ref:`welfare.specs.notes`.
 
         """
         if today is None:
@@ -268,7 +268,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         qs = SpecialTypes.first_meeting.get_notes(
             project=self, date__lte=today).order_by('date', 'time')
         # qs = self.notes_note_set_by_project.order_by('date', 'time')
-        # nt = rt.modules.notes.NoteType.objects.get(id=note_type)
+        # nt = rt.models.notes.NoteType.objects.get(id=note_type)
         # qs = qs.filter(type=nt)
         if qs.count():
             return qs.reverse()[0]
@@ -295,7 +295,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         # elems.append(E.br())
         elems.append(ar.get_data_value(self, 'eid_info'))
         notes = []
-        for note in rt.modules.notes.Note.objects.filter(
+        for note in rt.models.notes.Note.objects.filter(
                 project=self, important=True):
             notes.append(E.b(ar.obj2html(note, note.subject)))
         if len(notes):
@@ -431,11 +431,11 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         if c is not None:
             return c.applies_until
 
-    @dd.virtualfield(models.ForeignKey('contacts.Company',
-                                       _("Working at ")))
+    @dd.virtualfield(dd.ForeignKey('contacts.Company',
+                                   verbose_name=_("Working at ")))
     def contract_company(obj, ar):
         c = obj.get_active_contract()
-        if isinstance(c, rt.modules.jobs.Contract):
+        if isinstance(c, rt.models.jobs.Contract):
             return c.company
 
     @dd.displayfield(_("Active contract"))
@@ -443,7 +443,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         c = obj.get_active_contract()
         if c is not None:
             txt = str(daterange_text(c.applies_from, c.applies_until))
-            if isinstance(c, rt.modules.jobs.Contract):
+            if isinstance(c, rt.models.jobs.Contract):
                 if c.company is not None:
                     # txt += unicode(pgettext("(place)", " at "))
                     # txt += '\n'
@@ -458,8 +458,8 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         :meth:`lino_xl.lib.beid.mixins.BeIdCardHolder.get_beid_diffs`.
 
         """
-        Address = rt.modules.addresses.Address
-        DataSources = rt.modules.addresses.DataSources
+        Address = rt.models.addresses.Address
+        DataSources = rt.models.addresses.DataSources
         diffs = []
         objects = [self]
         kw = dict(partner=self, data_source=DataSources.eid)
@@ -677,11 +677,11 @@ class Clients(contacts.Persons):
     detail_layout = ClientDetail()
 
     parameters = mixins.ObservedDateRange(
-        coached_by=models.ForeignKey(
+        coached_by=dd.ForeignKey(
             'users.User', blank=True, null=True,
             verbose_name=_("Coached by"), help_text=u"""\
 Nur Klienten, die eine Begleitung mit diesem Benutzer haben."""),
-        and_coached_by=models.ForeignKey(
+        and_coached_by=dd.ForeignKey(
             'users.User', blank=True, null=True,
             verbose_name=_("and by"), help_text=u"""\
 Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
@@ -1054,10 +1054,10 @@ class Exclusion(dd.Model):
         verbose_name = _("Penalty")
         verbose_name_plural = _('Penalties')
 
-    person = models.ForeignKey('pcsw.Client')
-    type = models.ForeignKey("pcsw.ExclusionType",
-                             verbose_name=_("Reason"),
-                             blank=True, null=True)
+    person = dd.ForeignKey('pcsw.Client')
+    type = dd.ForeignKey("pcsw.ExclusionType",
+                         verbose_name=_("Reason"),
+                         blank=True, null=True)
     excluded_from = models.DateField(blank=True, null=True,
                                      verbose_name=_("Excluded from"))
     excluded_until = models.DateField(blank=True, null=True,
@@ -1095,7 +1095,7 @@ class Conviction(dd.Model):
         verbose_name = _("Conviction")
         verbose_name_plural = _('Convictions')
 
-    client = models.ForeignKey('pcsw.Client')
+    client = dd.ForeignKey('pcsw.Client')
     date = models.DateField(_("Date"), blank=True)
     prejudicial = models.BooleanField(_("Prejudicial"), default=False)
     designation = models.CharField(

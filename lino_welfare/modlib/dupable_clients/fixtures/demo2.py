@@ -26,7 +26,7 @@ from lino.api import rt
 
 def objects():
 
-    for o in rt.modules.pcsw.Client.objects.all():
+    for o in rt.models.pcsw.Client.objects.all():
         o.update_dupable_words()
 
     return []

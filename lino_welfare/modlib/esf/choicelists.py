@@ -96,7 +96,7 @@ class HoursField(StatisticalField):
     def create_field(self):
         return dd.DurationField(
             self.short_name, default=ZERO,
-            help_text=self.text)
+            help_text=self.text, max_length=8)
 
     def daterange2hours(self, sd, ed, summary):
         if summary.year is None:

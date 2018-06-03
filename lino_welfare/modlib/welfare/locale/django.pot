@@ -1,22 +1,22 @@
 # Translations template for lino-welfare.
-# Copyright (C) 2017 ORGANIZATION
+# Copyright (C) 2018 ORGANIZATION
 # This file is distributed under the same license as the lino-welfare
 # project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 17.10.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-29 06:53+0200\n"
+"POT-Creation-Date: 2018-04-29 07:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.1\n"
+"Generated-By: Babel 2.5.3\n"
 
 #: lino_welfare/modlib/active_job_search/__init__.py:34
 msgid "Active Job Search"
@@ -36,14 +36,14 @@ msgstr ""
 
 #: lino_welfare/modlib/active_job_search/models.py:42
 #: lino_welfare/modlib/badges/models.py:59
-#: lino_welfare/modlib/cal/models.py:373 lino_welfare/modlib/cbss/tx25.py:352
+#: lino_welfare/modlib/cal/models.py:374 lino_welfare/modlib/cbss/tx25.py:352
 #: lino_welfare/modlib/cbss/tx25.py:399 lino_welfare/modlib/cbss/tx25.py:408
 #: lino_welfare/modlib/cbss/tx25.py:420 lino_welfare/modlib/cbss/tx25.py:511
 #: lino_welfare/modlib/cbss/tx25.py:523 lino_welfare/modlib/debts/models.py:164
-#: lino_welfare/modlib/isip/models.py:412
+#: lino_welfare/modlib/isip/models.py:414
 #: lino_welfare/modlib/jobs/models.py:897
 #: lino_welfare/modlib/jobs/models.py:1018
-#: lino_welfare/modlib/pcsw/models.py:1114
+#: lino_welfare/modlib/pcsw/models.py:1099
 #: lino_welfare/projects/chatelet/modlib/cv/models.py:249
 msgid "Date"
 msgstr ""
@@ -79,7 +79,7 @@ msgstr ""
 
 #: lino_welfare/modlib/aids/__init__.py:101
 #: lino_welfare/modlib/ledger/models.py:70
-#: lino_welfare/modlib/pcsw/models.py:608
+#: lino_welfare/modlib/pcsw/models.py:593
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:136
 msgid "Aids"
 msgstr ""
@@ -93,7 +93,7 @@ msgid "Aid confirmation types"
 msgstr ""
 
 #: lino_welfare/modlib/aids/choicelists.py:71
-#: lino_welfare/modlib/isip/mixins.py:110
+#: lino_welfare/modlib/isip/mixins.py:112
 msgid "Template"
 msgstr ""
 
@@ -125,51 +125,51 @@ msgstr ""
 msgid "Confirmed"
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:71
+#: lino_welfare/modlib/aids/mixins.py:72
 msgctxt "aids"
 msgid "Sign"
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:77
+#: lino_welfare/modlib/aids/mixins.py:78
 msgid "You sign this confirmation, making most fields read-only."
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:99
+#: lino_welfare/modlib/aids/mixins.py:100
 #, python-format
 msgid "You confirm that %(client)s %(text)s"
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:100
-#: lino_welfare/modlib/aids/mixins.py:130
+#: lino_welfare/modlib/aids/mixins.py:101
+#: lino_welfare/modlib/aids/mixins.py:131
 msgid "Are you sure?"
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:104
+#: lino_welfare/modlib/aids/mixins.py:105
 msgctxt "aids"
 msgid "Revoke"
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:110
+#: lino_welfare/modlib/aids/mixins.py:111
 msgid "You revoke your signatore from this confirmation."
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:129
+#: lino_welfare/modlib/aids/mixins.py:130
 #, python-format
 msgid "You revoke your confirmation that %(client)s %(text)s"
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:154
-#: lino_welfare/modlib/aids/mixins.py:180
+#: lino_welfare/modlib/aids/mixins.py:155
+#: lino_welfare/modlib/aids/mixins.py:181
 msgctxt "aids"
 msgid "Signer"
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:228
+#: lino_welfare/modlib/aids/mixins.py:229
 #, python-format
 msgid "receives %(what)s %(when)s."
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:269
+#: lino_welfare/modlib/aids/mixins.py:270
 #: lino_welfare/modlib/badges/models.py:64 lino_welfare/modlib/cv/models.py:63
 #: lino_welfare/modlib/debts/models.py:474
 #: lino_welfare/modlib/debts/models.py:531 lino_welfare/modlib/esf/models.py:61
@@ -178,39 +178,47 @@ msgstr ""
 #: lino_welfare/modlib/jobs/models.py:515
 #: lino_welfare/modlib/jobs/models.py:651
 #: lino_welfare/modlib/jobs/models.py:837
-#: lino_welfare/modlib/pcsw/actions.py:60
-#: lino_welfare/modlib/pcsw/models.py:1019
-#: lino_welfare/modlib/pcsw/models.py:1080
+#: lino_welfare/modlib/pcsw/actions.py:59
+#: lino_welfare/modlib/pcsw/models.py:1004
+#: lino_welfare/modlib/pcsw/models.py:1065
 #: lino_welfare/modlib/projects/models.py:58
-#: lino_welfare/modlib/xcourses/models.py:199
+#: lino_welfare/modlib/xcourses/models.py:200
 #: lino_welfare/modlib/xcourses/models.py:377
 #: lino_welfare/projects/chatelet/modlib/cv/models.py:134
 msgid "Remark"
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:301
+#: lino_welfare/modlib/aids/mixins.py:306
 #, python-format
 msgid "Date range %(p1)s lies outside of granted period %(p2)s."
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:372
+#: lino_welfare/modlib/aids/mixins.py:385
 #: lino_welfare/modlib/cbss/models.py:345
 msgid "Period from"
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:374
+#: lino_welfare/modlib/aids/mixins.py:387
 #: lino_welfare/modlib/aids/models.py:326
-#: lino_welfare/modlib/pcsw/models.py:1025
-#: lino_welfare/modlib/pcsw/models.py:1079
+#: lino_welfare/modlib/pcsw/models.py:1010
+#: lino_welfare/modlib/pcsw/models.py:1064
 msgid "until"
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:377
+#: lino_welfare/modlib/aids/mixins.py:390
 msgid "Recipient (Organization)"
 msgstr ""
 
-#: lino_welfare/modlib/aids/mixins.py:379
+#: lino_welfare/modlib/aids/mixins.py:392
 msgid "Recipient (Person)"
+msgstr ""
+
+#: lino_welfare/modlib/aids/mixins.py:398
+msgid "Check for confirmations outside of granted period"
+msgstr ""
+
+#: lino_welfare/modlib/aids/mixins.py:405
+msgid "Confirmation without granting"
 msgstr ""
 
 #: lino_welfare/modlib/aids/models.py:58
@@ -388,7 +396,7 @@ msgstr ""
 #: lino_welfare/modlib/aids/fixtures/demo.py:64
 #: lino_welfare/modlib/aids/fixtures/std.py:101
 #: lino_welfare/modlib/aids/models.py:828
-#: lino_welfare/modlib/welfare/fixtures/demo.py:543
+#: lino_welfare/modlib/welfare/fixtures/demo.py:551
 #: lino_welfare/modlib/welfare/fixtures/std.py:33
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:53
 msgid "Pharmacy"
@@ -482,39 +490,39 @@ msgstr ""
 msgid "PTP"
 msgstr ""
 
-#: lino_welfare/modlib/art61/models.py:48
-#: lino_welfare/modlib/art61/models.py:103
+#: lino_welfare/modlib/art61/models.py:49
+#: lino_welfare/modlib/art61/models.py:104
 msgid "Art61 job supplyment"
 msgstr ""
 
-#: lino_welfare/modlib/art61/models.py:78
+#: lino_welfare/modlib/art61/models.py:79
 msgid "Art61 job supplyment type"
 msgstr ""
 
-#: lino_welfare/modlib/art61/models.py:79
+#: lino_welfare/modlib/art61/models.py:80
 msgid "Art61 job supplyment types"
 msgstr ""
 
-#: lino_welfare/modlib/art61/models.py:104
+#: lino_welfare/modlib/art61/models.py:105
 msgid "Art61 job supplyments"
 msgstr ""
 
-#: lino_welfare/modlib/art61/models.py:108
-#: lino_welfare/modlib/jobs/models.py:226
+#: lino_welfare/modlib/art61/models.py:109
+#: lino_welfare/modlib/jobs/models.py:225
 #: lino_welfare/projects/chatelet/modlib/cv/models.py:191
 #: lino_welfare/projects/chatelet/modlib/cv/models.py:242
 msgid "Type"
 msgstr ""
 
-#: lino_welfare/modlib/art61/models.py:115
+#: lino_welfare/modlib/art61/models.py:116
 msgid "Job title"
 msgstr ""
 
-#: lino_welfare/modlib/art61/models.py:195
+#: lino_welfare/modlib/art61/models.py:196
 msgid "Only job supplies of type"
 msgstr ""
 
-#: lino_welfare/modlib/art61/models.py:215
+#: lino_welfare/modlib/art61/models.py:217
 msgid "Art61 job supplyments and activations"
 msgstr ""
 
@@ -604,55 +612,56 @@ msgstr ""
 msgid "Managed by"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:270
+#: lino_welfare/modlib/cal/models.py:271
 msgid "Notes"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:350
+#: lino_welfare/modlib/cal/models.py:351
 #: lino_welfare/modlib/client_vouchers/ui.py:52
-#: lino_welfare/modlib/contacts/models.py:131
-#: lino_welfare/modlib/contacts/models.py:201
-#: lino_welfare/modlib/contacts/models.py:290
+#: lino_welfare/modlib/contacts/models.py:133
+#: lino_welfare/modlib/contacts/models.py:203
+#: lino_welfare/modlib/contacts/models.py:292
 #: lino_welfare/modlib/debts/ui.py:142 lino_welfare/modlib/finan/models.py:35
-#: lino_welfare/modlib/isip/models.py:303
+#: lino_welfare/modlib/isip/models.py:304
 #: lino_welfare/modlib/system/models.py:114
 #: lino_welfare/modlib/users/desktop.py:37
-#: lino_welfare/projects/chatelet/modlib/isip/models.py:38
+#: lino_welfare/modlib/welfare/workflows.py:62
+#: lino_welfare/projects/chatelet/modlib/isip/models.py:33
 msgid "General"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:354 lino_welfare/modlib/finan/models.py:40
+#: lino_welfare/modlib/cal/models.py:355 lino_welfare/modlib/finan/models.py:40
 msgid "More"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:370
+#: lino_welfare/modlib/cal/models.py:371
 #: lino_welfare/modlib/integ/fixtures/std.py:45
 msgid "Appointment"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:375
+#: lino_welfare/modlib/cal/models.py:376
 msgid "Summary"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:389
+#: lino_welfare/modlib/cal/models.py:390
 #, python-format
 msgid "Created appointment for %(user)s with %(partner)s"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:427
+#: lino_welfare/modlib/cal/models.py:428
 msgid "Task"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:428
+#: lino_welfare/modlib/cal/models.py:429
 msgid "Tasks"
 msgstr ""
 
-#: lino_welfare/modlib/cal/models.py:432
+#: lino_welfare/modlib/cal/models.py:433
 msgid "Delegated to client"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/__init__.py:50
-#: lino_welfare/modlib/pcsw/models.py:503
+#: lino_welfare/modlib/pcsw/models.py:488
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:208
 msgid "CBSS"
 msgstr ""
@@ -732,7 +741,7 @@ msgstr ""
 msgid "German"
 msgstr ""
 
-#: lino_welfare/modlib/cbss/mixins.py:92 lino_welfare/modlib/pcsw/models.py:166
+#: lino_welfare/modlib/cbss/mixins.py:92 lino_welfare/modlib/pcsw/models.py:167
 #: lino_welfare/projects/chatelet/modlib/pcsw/config/pcsw/Coaching/coaching.body.html:17
 msgid "Client"
 msgstr ""
@@ -854,8 +863,8 @@ msgid "Tx25 Requests"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/models.py:484
-#: lino_welfare/modlib/pcsw/models.py:615
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:119
+#: lino_welfare/modlib/pcsw/models.py:600
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:120
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:156
 msgid "History"
 msgstr ""
@@ -1028,7 +1037,7 @@ msgstr ""
 msgid "Organization"
 msgstr ""
 
-#: lino_welfare/modlib/cbss/tx25.py:846 lino_welfare/modlib/isip/models.py:82
+#: lino_welfare/modlib/cbss/tx25.py:846 lino_welfare/modlib/isip/models.py:83
 msgid "Reference"
 msgstr ""
 
@@ -1273,8 +1282,8 @@ msgid "Identity Cards"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/tx25.py:1270
-#: lino_welfare/modlib/pcsw/models.py:1018
-#: lino_welfare/modlib/pcsw/models.py:1074
+#: lino_welfare/modlib/pcsw/models.py:1003
+#: lino_welfare/modlib/pcsw/models.py:1059
 #: lino_welfare/modlib/reception/models.py:123
 #: lino_welfare/modlib/reception/models.py:151
 msgid "Reason"
@@ -1341,7 +1350,7 @@ msgstr ""
 msgid "Phonetic search"
 msgstr ""
 
-#: lino_welfare/modlib/cbss/ui.py:135 lino_welfare/modlib/esf/models.py:113
+#: lino_welfare/modlib/cbss/ui.py:135 lino_welfare/modlib/esf/models.py:115
 msgid "Results"
 msgstr ""
 
@@ -1391,62 +1400,62 @@ msgstr ""
 msgid "Ledger"
 msgstr ""
 
-#: lino_welfare/modlib/contacts/__init__.py:41
+#: lino_welfare/modlib/contacts/__init__.py:43
 msgid "Partners (all)"
 msgstr ""
 
-#: lino_welfare/modlib/contacts/models.py:60
+#: lino_welfare/modlib/contacts/models.py:64
 msgid "obsolete"
 msgstr ""
 
-#: lino_welfare/modlib/contacts/models.py:104
+#: lino_welfare/modlib/contacts/models.py:106
 msgid "Cannot delete companies and persons imported from TIM"
 msgstr ""
 
-#: lino_welfare/modlib/contacts/models.py:150
-#: lino_welfare/modlib/contacts/models.py:221
-#: lino_welfare/modlib/contacts/models.py:309
+#: lino_welfare/modlib/contacts/models.py:152
+#: lino_welfare/modlib/contacts/models.py:223
+#: lino_welfare/modlib/contacts/models.py:311
 msgid "Contact"
 msgstr ""
 
-#: lino_welfare/modlib/contacts/models.py:162
-#: lino_welfare/modlib/contacts/models.py:234
-#: lino_welfare/modlib/contacts/models.py:324
-#: lino_welfare/modlib/pcsw/models.py:635
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:145
+#: lino_welfare/modlib/contacts/models.py:164
+#: lino_welfare/modlib/contacts/models.py:236
+#: lino_welfare/modlib/contacts/models.py:326
+#: lino_welfare/modlib/pcsw/models.py:620
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:146
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:177
 msgid "Miscellaneous"
 msgstr ""
 
-#: lino_welfare/modlib/contacts/models.py:171
+#: lino_welfare/modlib/contacts/models.py:173
 #: lino_welfare/modlib/households/models.py:96
-#: lino_welfare/modlib/pcsw/models.py:551
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:52
+#: lino_welfare/modlib/pcsw/models.py:536
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:53
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:93
 msgid "Person"
 msgstr ""
 
-#: lino_welfare/modlib/contacts/models.py:172
+#: lino_welfare/modlib/contacts/models.py:174
 msgid "Persons"
 msgstr ""
 
-#: lino_welfare/modlib/contacts/models.py:244
+#: lino_welfare/modlib/contacts/models.py:246
 msgid "Also obsolete data"
 msgstr ""
 
-#: lino_welfare/modlib/contacts/models.py:245
+#: lino_welfare/modlib/contacts/models.py:247
 msgid "Show also obsolete records."
 msgstr ""
 
-#: lino_welfare/modlib/contacts/models.py:269
+#: lino_welfare/modlib/contacts/models.py:271
 msgid "Organisation"
 msgstr ""
 
-#: lino_welfare/modlib/contacts/models.py:270
+#: lino_welfare/modlib/contacts/models.py:272
 msgid "Organisations"
 msgstr ""
 
-#: lino_welfare/modlib/contacts/models.py:272
+#: lino_welfare/modlib/contacts/models.py:274
 msgid "VAT id"
 msgstr ""
 
@@ -1611,7 +1620,7 @@ msgid ""
 msgstr ""
 
 #: lino_welfare/modlib/debts/models.py:187
-#: lino_welfare/modlib/integ/models.py:606
+#: lino_welfare/modlib/integ/models.py:607
 msgid "Introduction"
 msgstr ""
 
@@ -1703,8 +1712,7 @@ msgstr ""
 #: lino_welfare/modlib/debts/ui.py:478 lino_welfare/modlib/debts/ui.py:546
 #: lino_welfare/modlib/debts/ui.py:723 lino_welfare/modlib/integ/models.py:248
 #: lino_welfare/modlib/integ/models.py:313
-#: lino_welfare/modlib/integ/models.py:501
-#: lino_welfare/modlib/xcourses/models.py:142
+#: lino_welfare/modlib/xcourses/models.py:143
 msgid "Description"
 msgstr ""
 
@@ -1785,8 +1793,8 @@ msgstr ""
 #: lino_welfare/modlib/integ/models.py:399
 #: lino_welfare/modlib/integ/models.py:424
 #: lino_welfare/modlib/integ/models.py:454
-#: lino_welfare/modlib/integ/models.py:521
-#: lino_welfare/modlib/integ/models.py:560
+#: lino_welfare/modlib/integ/models.py:522
+#: lino_welfare/modlib/integ/models.py:561
 msgid "Total"
 msgstr ""
 
@@ -1929,59 +1937,59 @@ msgstr ""
 msgid "Epreuve d’évaluation réussie sans titre spécifique"
 msgstr ""
 
-#: lino_welfare/modlib/esf/choicelists.py:173
+#: lino_welfare/modlib/esf/choicelists.py:175
 msgid "ESF field"
 msgstr ""
 
-#: lino_welfare/modlib/esf/choicelists.py:174
+#: lino_welfare/modlib/esf/choicelists.py:176
 msgid "ESF fields"
 msgstr ""
 
-#: lino_welfare/modlib/esf/choicelists.py:182
+#: lino_welfare/modlib/esf/choicelists.py:184
 msgid "Informative sessions"
 msgstr ""
 
-#: lino_welfare/modlib/esf/choicelists.py:186
+#: lino_welfare/modlib/esf/choicelists.py:188
 msgid "Individual consultation"
 msgstr ""
 
-#: lino_welfare/modlib/esf/choicelists.py:189
+#: lino_welfare/modlib/esf/choicelists.py:191
 msgid "Evaluation of external training"
 msgstr ""
 
-#: lino_welfare/modlib/esf/choicelists.py:192
+#: lino_welfare/modlib/esf/choicelists.py:194
 msgid "Certified integration service"
 msgstr ""
 
-#: lino_welfare/modlib/esf/choicelists.py:195
+#: lino_welfare/modlib/esf/choicelists.py:197
 msgid "Level tests"
 msgstr ""
 
-#: lino_welfare/modlib/esf/choicelists.py:198
+#: lino_welfare/modlib/esf/choicelists.py:200
 msgid "IT basics"
 msgstr ""
 
-#: lino_welfare/modlib/esf/choicelists.py:201
+#: lino_welfare/modlib/esf/choicelists.py:203
 msgid "Mobility"
 msgstr ""
 
-#: lino_welfare/modlib/esf/choicelists.py:204
+#: lino_welfare/modlib/esf/choicelists.py:206
 msgid "Remedial teaching"
 msgstr ""
 
-#: lino_welfare/modlib/esf/choicelists.py:207
+#: lino_welfare/modlib/esf/choicelists.py:209
 msgid "Wake up!"
 msgstr ""
 
-#: lino_welfare/modlib/esf/choicelists.py:212
+#: lino_welfare/modlib/esf/choicelists.py:214
 msgid "Getting a professional situation"
 msgstr ""
 
-#: lino_welfare/modlib/esf/choicelists.py:217
+#: lino_welfare/modlib/esf/choicelists.py:219
 msgid "Cyber Job"
 msgstr ""
 
-#: lino_welfare/modlib/esf/choicelists.py:220
+#: lino_welfare/modlib/esf/choicelists.py:222
 msgid "Art 60§7 job supplyment"
 msgstr ""
 
@@ -2005,7 +2013,7 @@ msgstr ""
 msgid "Other difficulty"
 msgstr ""
 
-#: lino_welfare/modlib/esf/models.py:168
+#: lino_welfare/modlib/esf/models.py:171
 msgid "ESF data"
 msgstr ""
 
@@ -2085,11 +2093,11 @@ msgid "responsibilities"
 msgstr ""
 
 #: lino_welfare/modlib/immersion/models.py:127
-#: lino_welfare/modlib/isip/models.py:264
+#: lino_welfare/modlib/isip/models.py:265
 msgid "responsible (IS)"
 msgstr ""
 
-#: lino_welfare/modlib/immersion/ui.py:102
+#: lino_welfare/modlib/immersion/ui.py:113
 msgid "Only immersion trainings of type"
 msgstr ""
 
@@ -2130,7 +2138,7 @@ msgid "Integration Clients"
 msgstr ""
 
 #: lino_welfare/modlib/integ/models.py:81
-#: lino_welfare/modlib/pcsw/models.py:172
+#: lino_welfare/modlib/pcsw/models.py:175
 msgid "Integration phase"
 msgstr ""
 
@@ -2155,7 +2163,7 @@ msgid "Users with their Clients"
 msgstr ""
 
 #: lino_welfare/modlib/integ/models.py:187
-#: lino_welfare/modlib/newcomers/models.py:370
+#: lino_welfare/modlib/newcomers/models.py:371
 msgid "Primary clients"
 msgstr ""
 
@@ -2213,36 +2221,36 @@ msgid ""
 "    type de formation et type de contrat."
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:525
+#: lino_welfare/modlib/integ/models.py:526
 msgid "Organisations externes et contrats"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:526
+#: lino_welfare/modlib/integ/models.py:527
 msgid ""
 "Nombre de PIIS actifs par \n"
 "    organisation externe et type de contrat."
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:565
+#: lino_welfare/modlib/integ/models.py:566
 msgid "Job providers and contrats"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:584
+#: lino_welfare/modlib/integ/models.py:585
 msgid "Activity Report"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:591
+#: lino_welfare/modlib/integ/models.py:592
 #: lino_welfare/modlib/isip/__init__.py:44
-#: lino_welfare/modlib/isip/models.py:233
-#: lino_welfare/modlib/isip/models.py:308
+#: lino_welfare/modlib/isip/models.py:234
+#: lino_welfare/modlib/isip/models.py:309
 msgid "ISIP"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:615
+#: lino_welfare/modlib/integ/models.py:616
 msgid "Indicateurs généraux"
 msgstr ""
 
-#: lino_welfare/modlib/integ/models.py:620
+#: lino_welfare/modlib/integ/models.py:621
 msgid "Causes d'arrêt des interventions"
 msgstr ""
 
@@ -2325,177 +2333,177 @@ msgstr ""
 msgid "Trainings"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:102
+#: lino_welfare/modlib/isip/mixins.py:104
 msgid "Full name"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:173
+#: lino_welfare/modlib/isip/mixins.py:175
 #, python-format
 msgid "Date range %(p1)s lies outside of coached period %(p2)s."
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:179
+#: lino_welfare/modlib/isip/mixins.py:181
 msgid "Date range overlaps with {ctype} #{id}."
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:192
+#: lino_welfare/modlib/isip/mixins.py:194
 #, python-format
 msgid "%(ctype)s #%(id)s : %(msg)s"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:203
+#: lino_welfare/modlib/isip/mixins.py:205
 msgid "Check for overlapping contracts"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:278
+#: lino_welfare/modlib/isip/mixins.py:281
 msgid "applies from"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:279
+#: lino_welfare/modlib/isip/mixins.py:282
 msgid "applies until"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:281
+#: lino_welfare/modlib/isip/mixins.py:284
 msgid "date decided"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:283
+#: lino_welfare/modlib/isip/mixins.py:286
 msgid "date issued"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:287
+#: lino_welfare/modlib/isip/mixins.py:290
 msgid "responsible (ASD)"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:301
+#: lino_welfare/modlib/isip/mixins.py:304
 #: lino_welfare/modlib/xcourses/models.py:383
 msgid "date ended"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:402
+#: lino_welfare/modlib/isip/mixins.py:408
 msgid "Contract ends before it started."
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:418
+#: lino_welfare/modlib/isip/mixins.py:424
 msgid "You must specify a contract type."
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:450
+#: lino_welfare/modlib/isip/mixins.py:456
 #, python-format
 msgid "Evaluation %d"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:461
+#: lino_welfare/modlib/isip/mixins.py:467
 msgid "Contract ends in a month"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:568
+#: lino_welfare/modlib/isip/mixins.py:574
 msgid "Successfully ended"
 msgstr ""
 
-#: lino_welfare/modlib/isip/mixins.py:578
+#: lino_welfare/modlib/isip/mixins.py:584
 msgid "Only contracts with this company as partner."
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:79
+#: lino_welfare/modlib/isip/models.py:80
 msgid "ISIP Type"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:80
+#: lino_welfare/modlib/isip/models.py:81
 msgid "ISIP Types"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:84
+#: lino_welfare/modlib/isip/models.py:85
 msgid "needs Study type"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:113
+#: lino_welfare/modlib/isip/models.py:114
 msgid "Examination Policy"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:114
+#: lino_welfare/modlib/isip/models.py:115
 msgid "Examination Policies"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:119
+#: lino_welfare/modlib/isip/models.py:120
 msgid "Generated events will receive this type."
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:149
+#: lino_welfare/modlib/isip/models.py:150
 msgid "Reason of termination"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:150
+#: lino_welfare/modlib/isip/models.py:151
 msgid "Contract termination reasons"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:152
+#: lino_welfare/modlib/isip/models.py:153
 msgid "designation"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:155
-#: lino_welfare/modlib/jobs/models.py:279
-#: lino_welfare/modlib/pcsw/actions.py:103
-#: lino_welfare/modlib/pcsw/actions.py:133
+#: lino_welfare/modlib/isip/models.py:156
+#: lino_welfare/modlib/jobs/models.py:278
+#: lino_welfare/modlib/pcsw/actions.py:102
+#: lino_welfare/modlib/pcsw/actions.py:132
 msgid "Success"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:157
+#: lino_welfare/modlib/isip/models.py:158
 msgid "Require date ended"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:184
+#: lino_welfare/modlib/isip/models.py:185
 msgid "Contract partner"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:185
+#: lino_welfare/modlib/isip/models.py:186
 msgid "Contract partners"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:192
+#: lino_welfare/modlib/isip/models.py:193
 msgid "duties company"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:234
+#: lino_welfare/modlib/isip/models.py:235
 msgid "ISIPs"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:239
+#: lino_welfare/modlib/isip/models.py:240
 #: lino_welfare/modlib/jobs/models.py:506
 msgid "Contract Type"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:244
+#: lino_welfare/modlib/isip/models.py:245
 msgid "stages"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:247
+#: lino_welfare/modlib/isip/models.py:248
 msgid "goals"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:250
+#: lino_welfare/modlib/isip/models.py:251
 msgid "duties ASD"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:253
+#: lino_welfare/modlib/isip/models.py:254
 msgid "duties DSBE"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:256
+#: lino_welfare/modlib/isip/models.py:257
 msgid "duties PCSW"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:259
+#: lino_welfare/modlib/isip/models.py:260
 msgid "duties person"
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:288
+#: lino_welfare/modlib/isip/models.py:289
 msgid ""
 "Cannot print {} because there is no active aid confirmation and Duties "
 "(PCSW) is empty."
 msgstr ""
 
-#: lino_welfare/modlib/isip/models.py:401
+#: lino_welfare/modlib/isip/models.py:403
 msgid "Proceedings"
 msgstr ""
 
@@ -2507,58 +2515,58 @@ msgstr ""
 msgid "duration (days)"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:68 lino_welfare/modlib/jobs/models.py:218
+#: lino_welfare/modlib/jobs/models.py:67 lino_welfare/modlib/jobs/models.py:217
 msgid "Art60§7 job supplyment"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:83
+#: lino_welfare/modlib/jobs/models.py:82
 msgid "Work Schedule"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:84
+#: lino_welfare/modlib/jobs/models.py:83
 msgid "Work Schedules"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:113
+#: lino_welfare/modlib/jobs/models.py:112
 msgid "Job Provider"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:114
+#: lino_welfare/modlib/jobs/models.py:113
 msgid "Job Providers"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:135
+#: lino_welfare/modlib/jobs/models.py:134
 #: lino_welfare/modlib/jobs/models.py:491
 msgid "Jobs"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:182
+#: lino_welfare/modlib/jobs/models.py:181
 msgid "Art60§7 job supplyment type"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:183
+#: lino_welfare/modlib/jobs/models.py:182
 msgid "Art60§7 job supplyment types"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:219
+#: lino_welfare/modlib/jobs/models.py:218
 msgid "Art60§7 job supplyments"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:235
+#: lino_welfare/modlib/jobs/models.py:234
 #: lino_welfare/modlib/jobs/models.py:508
 msgid "hourly rate"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:236
+#: lino_welfare/modlib/jobs/models.py:235
 msgid "refund rate"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:278
+#: lino_welfare/modlib/jobs/models.py:277
 #, python-format
 msgid "(%d candidatures have been marked inactive)"
 msgstr ""
 
-#: lino_welfare/modlib/jobs/models.py:346
+#: lino_welfare/modlib/jobs/models.py:345
 msgid "Only contracts of type"
 msgstr ""
 
@@ -2572,9 +2580,9 @@ msgstr ""
 
 #: lino_welfare/modlib/jobs/models.py:444
 #: lino_welfare/modlib/jobs/models.py:495
-#: lino_welfare/modlib/xcourses/models.py:91
-#: lino_welfare/modlib/xcourses/models.py:121
-#: lino_welfare/modlib/xcourses/models.py:192
+#: lino_welfare/modlib/xcourses/models.py:92
+#: lino_welfare/modlib/xcourses/models.py:122
+#: lino_welfare/modlib/xcourses/models.py:193
 msgid "Name"
 msgstr ""
 
@@ -2587,7 +2595,7 @@ msgid "selection until"
 msgstr ""
 
 #: lino_welfare/modlib/jobs/models.py:453
-#: lino_welfare/modlib/xcourses/models.py:194
+#: lino_welfare/modlib/xcourses/models.py:195
 msgid "start date"
 msgstr ""
 
@@ -2707,8 +2715,8 @@ msgid "Job Types"
 msgstr ""
 
 #: lino_welfare/modlib/jobs/models.py:835
-#: lino_welfare/modlib/pcsw/models.py:938
-#: lino_welfare/modlib/pcsw/models.py:1117
+#: lino_welfare/modlib/pcsw/models.py:923
+#: lino_welfare/modlib/pcsw/models.py:1102
 msgid "Designation"
 msgstr ""
 
@@ -2899,111 +2907,111 @@ msgstr ""
 msgid "Newcomers"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:76
+#: lino_welfare/modlib/newcomers/models.py:77
 msgid "Broker"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:77
+#: lino_welfare/modlib/newcomers/models.py:78
 msgid "Brokers"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:104
+#: lino_welfare/modlib/newcomers/models.py:105
 msgid "Faculty"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:105
+#: lino_welfare/modlib/newcomers/models.py:106
 msgid "Faculties"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:108
-#: lino_welfare/modlib/newcomers/models.py:146
+#: lino_welfare/modlib/newcomers/models.py:109
+#: lino_welfare/modlib/newcomers/models.py:147
 msgid "Work effort"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:141
+#: lino_welfare/modlib/newcomers/models.py:142
 msgid "Competence"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:142
-#: lino_welfare/modlib/pcsw/models.py:652
+#: lino_welfare/modlib/newcomers/models.py:143
+#: lino_welfare/modlib/pcsw/models.py:637
 #: lino_welfare/projects/chatelet/modlib/cv/models.py:156
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:180
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:181
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:195
 msgid "Competences"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:160
+#: lino_welfare/modlib/newcomers/models.py:161
 msgid "User"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:230
-#: lino_welfare/modlib/newcomers/models.py:379
+#: lino_welfare/modlib/newcomers/models.py:231
+#: lino_welfare/modlib/newcomers/models.py:380
 msgid "New Clients"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:243
-#: lino_welfare/modlib/newcomers/models.py:295
+#: lino_welfare/modlib/newcomers/models.py:244
+#: lino_welfare/modlib/newcomers/models.py:296
 msgid "New clients since"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:283
+#: lino_welfare/modlib/newcomers/models.py:284
 msgid "List of users available for new coachings"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:288
-#: lino_welfare/modlib/newcomers/models.py:489
+#: lino_welfare/modlib/newcomers/models.py:289
+#: lino_welfare/modlib/newcomers/models.py:492
 msgid "Available Coaches"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:293
+#: lino_welfare/modlib/newcomers/models.py:294
 msgid "Show suggested agents for"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:297
+#: lino_welfare/modlib/newcomers/models.py:298
 msgid "New clients are those whose coaching started after this date"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:320
+#: lino_welfare/modlib/newcomers/models.py:321
 msgid "Only for clients with given `faculty`."
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:355
+#: lino_welfare/modlib/newcomers/models.py:356
 #, python-format
 msgid "No coaches available for %s."
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:383
+#: lino_welfare/modlib/newcomers/models.py:384
 msgid "Current workload"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:392
-#: lino_welfare/modlib/newcomers/models.py:403
+#: lino_welfare/modlib/newcomers/models.py:393
+#: lino_welfare/modlib/newcomers/models.py:404
 msgid "Added workload"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:425
+#: lino_welfare/modlib/newcomers/models.py:426
 msgid "Assign"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:435
+#: lino_welfare/modlib/newcomers/models.py:436
 #, python-format
 msgid "%(client)s assigned to %(coach)s"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:442
+#: lino_welfare/modlib/newcomers/models.py:443
 #, python-format
 msgid "%(client)s is now coached by %(coach)s for %(faculty)s."
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:505
+#: lino_welfare/modlib/newcomers/models.py:508
 msgid "Newcomers Quota"
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:522
+#: lino_welfare/modlib/newcomers/models.py:525
 msgid "The Broker who sent this Newcomer."
 msgstr ""
 
-#: lino_welfare/modlib/newcomers/models.py:530
+#: lino_welfare/modlib/newcomers/models.py:533
 msgid "The Faculty this client has been attributed to."
 msgstr ""
 
@@ -3027,35 +3035,34 @@ msgstr ""
 msgid "PCSW"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/actions.py:44
+#: lino_welfare/modlib/pcsw/actions.py:43
 msgid "This will put {client} into state <b>{state}</b>."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/actions.py:46
+#: lino_welfare/modlib/pcsw/actions.py:45
 msgid "{user} marked {client} as <b>{state}</b>."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/actions.py:53
+#: lino_welfare/modlib/pcsw/actions.py:52
 msgid "Refuse"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/actions.py:112
+#: lino_welfare/modlib/pcsw/actions.py:111
 msgid "Former"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/actions.py:161
-#: lino_welfare/modlib/pcsw/models.py:318
+#: lino_welfare/modlib/pcsw/actions.py:157
 #, python-format
 msgid "This will end %(count)d coachings of %(client)s."
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/choicelists.py:32
-#: lino_welfare/modlib/pcsw/models.py:1014
+#: lino_welfare/modlib/pcsw/models.py:999
 msgid "Dispense"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/choicelists.py:44
-#: lino_welfare/modlib/pcsw/models.py:1069
+#: lino_welfare/modlib/pcsw/models.py:1054
 msgid "Penalty"
 msgstr ""
 
@@ -3079,312 +3086,312 @@ msgstr ""
 msgid "Client did not return"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:167
+#: lino_welfare/modlib/pcsw/models.py:168
 msgid "Clients"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:179
+#: lino_welfare/modlib/pcsw/models.py:182
 msgid "Lives in Belgium since"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:181
+#: lino_welfare/modlib/pcsw/models.py:184
 msgid "Residence until"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:183
+#: lino_welfare/modlib/pcsw/models.py:186
 msgid "Unemployed since"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:184
+#: lino_welfare/modlib/pcsw/models.py:187
 msgid "Since when the client has not been employed in any regular job."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:187
+#: lino_welfare/modlib/pcsw/models.py:190
 msgid "Seeking work since"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:188
+#: lino_welfare/modlib/pcsw/models.py:191
 msgid "Since when the client is seeking for a job."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:190
+#: lino_welfare/modlib/pcsw/models.py:193
 msgid "Needs residence permit"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:192
+#: lino_welfare/modlib/pcsw/models.py:195
 msgid "Needs work permit"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:194
+#: lino_welfare/modlib/pcsw/models.py:197
 msgid "suspended until"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:198
+#: lino_welfare/modlib/pcsw/models.py:201
 msgid "Declared name"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:200
+#: lino_welfare/modlib/pcsw/models.py:203
 msgid "is seeking work"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:204
+#: lino_welfare/modlib/pcsw/models.py:207
 msgid "Unavailable until"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:207
+#: lino_welfare/modlib/pcsw/models.py:210
 msgid "reason"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:209
+#: lino_welfare/modlib/pcsw/models.py:212
 msgid "Other obstacles"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:210
+#: lino_welfare/modlib/pcsw/models.py:213
 msgid "Other skills"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:215
+#: lino_welfare/modlib/pcsw/models.py:218
 msgid "Contact person at local job office"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:328
+#: lino_welfare/modlib/pcsw/models.py:313
 msgid "Circular reference"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:355
+#: lino_welfare/modlib/pcsw/models.py:340
 msgid "eID card expires in 2 months"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:359
+#: lino_welfare/modlib/pcsw/models.py:344
 msgid "becomes available again in 1 month"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:362
+#: lino_welfare/modlib/pcsw/models.py:347
 msgid "work permit suspension ends in 1 month"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:384
+#: lino_welfare/modlib/pcsw/models.py:369
 msgid "eID card expires"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:388
+#: lino_welfare/modlib/pcsw/models.py:373
 msgid "becomes available again"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:392
+#: lino_welfare/modlib/pcsw/models.py:377
 msgid "work permit suspension ends"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:395
+#: lino_welfare/modlib/pcsw/models.py:380
 msgid "coaching ends"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:437
+#: lino_welfare/modlib/pcsw/models.py:422
 msgid "Contract starts"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:443
+#: lino_welfare/modlib/pcsw/models.py:428
 msgid "Contract ends"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:450
+#: lino_welfare/modlib/pcsw/models.py:435
 msgid "Working at "
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:456
+#: lino_welfare/modlib/pcsw/models.py:441
 msgid "Active contract"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:573
+#: lino_welfare/modlib/pcsw/models.py:558
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:114
 msgid "Human Links"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:578
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:82
+#: lino_welfare/modlib/pcsw/models.py:563
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:83
 msgid "Coaches"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:601
+#: lino_welfare/modlib/pcsw/models.py:586
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:130
 msgid "Job search"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:627
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:137
+#: lino_welfare/modlib/pcsw/models.py:612
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:138
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:168
 msgid "Calendar"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:642
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:175
+#: lino_welfare/modlib/pcsw/models.py:627
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:176
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:185
 msgid "Career"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:647
+#: lino_welfare/modlib/pcsw/models.py:632
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:190
 msgid "Languages"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:658
+#: lino_welfare/modlib/pcsw/models.py:643
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:201
 msgid "Contracts"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:697
+#: lino_welfare/modlib/pcsw/models.py:682
 msgid "Coached by"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:701
+#: lino_welfare/modlib/pcsw/models.py:686
 msgid "and by"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:705
+#: lino_welfare/modlib/pcsw/models.py:690
 msgid "Nationality"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:708
+#: lino_welfare/modlib/pcsw/models.py:693
 msgid "Extended filter criteria, e.g.:"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:710
+#: lino_welfare/modlib/pcsw/models.py:695
 msgid "Active: All those who have some active coaching."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:712
+#: lino_welfare/modlib/pcsw/models.py:697
 msgid "Only primary clients"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:851
+#: lino_welfare/modlib/pcsw/models.py:836
 msgid "and"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:856
+#: lino_welfare/modlib/pcsw/models.py:841
 #, python-format
 msgid " on %(date)s"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:860
+#: lino_welfare/modlib/pcsw/models.py:845
 #, python-format
 msgid "Coached on %s"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:915
+#: lino_welfare/modlib/pcsw/models.py:900
 msgid "Check for valid identification"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:924
+#: lino_welfare/modlib/pcsw/models.py:909
 msgid "Neither valid eId data nor alternative identifying document."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:939
+#: lino_welfare/modlib/pcsw/models.py:924
 msgid "Reference name"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:940
+#: lino_welfare/modlib/pcsw/models.py:925
 msgid "Considered active"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:945
+#: lino_welfare/modlib/pcsw/models.py:930
 msgid "Integration Phase"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:946
+#: lino_welfare/modlib/pcsw/models.py:931
 msgid "Integration Phases"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:953
+#: lino_welfare/modlib/pcsw/models.py:938
 msgid "Liste des phases d'intégration possibles."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:968
+#: lino_welfare/modlib/pcsw/models.py:953
 msgid "activity"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:969
+#: lino_welfare/modlib/pcsw/models.py:954
 msgid "activities"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:971
+#: lino_welfare/modlib/pcsw/models.py:956
 msgid "Appears in Listing 104"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:978
+#: lino_welfare/modlib/pcsw/models.py:963
 msgid "Liste des \"activités\" ou \"codes profession\"."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:993
+#: lino_welfare/modlib/pcsw/models.py:978
 msgid "Dispense reason"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:994
+#: lino_welfare/modlib/pcsw/models.py:979
 msgid "Dispense reasons"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1003
+#: lino_welfare/modlib/pcsw/models.py:988
 msgid "A list of reasons for being dispensed"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1015
+#: lino_welfare/modlib/pcsw/models.py:1000
 msgid "Dispenses"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1022
+#: lino_welfare/modlib/pcsw/models.py:1007
 msgid "Dispensed from"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1030
+#: lino_welfare/modlib/pcsw/models.py:1015
 msgid "Liste de dispenses"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1048
+#: lino_welfare/modlib/pcsw/models.py:1033
 msgid "Exclusion Type"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1049
+#: lino_welfare/modlib/pcsw/models.py:1034
 msgid "Exclusion Types"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1058
+#: lino_welfare/modlib/pcsw/models.py:1043
 msgid ""
 "Liste des raisons possibles d'arrêter temporairement \n"
 "    le paiement d'une aide financière prévue."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1070
+#: lino_welfare/modlib/pcsw/models.py:1055
 msgid "Penalties"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1077
+#: lino_welfare/modlib/pcsw/models.py:1062
 msgid "Excluded from"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1093
+#: lino_welfare/modlib/pcsw/models.py:1078
 msgid "Liste des exclusions."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1110
+#: lino_welfare/modlib/pcsw/models.py:1095
 msgid "Conviction"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1111
+#: lino_welfare/modlib/pcsw/models.py:1096
 msgid "Convictions"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1115
+#: lino_welfare/modlib/pcsw/models.py:1100
 msgid "Prejudicial"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1150
+#: lino_welfare/modlib/pcsw/models.py:1135
 msgid "aid type"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1151
+#: lino_welfare/modlib/pcsw/models.py:1136
 msgid "aid types"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/models.py:1155
+#: lino_welfare/modlib/pcsw/models.py:1140
 msgid "Liste des types d'aide financière."
 msgstr ""
 
@@ -3406,6 +3413,7 @@ msgid "Identifying document"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/fixtures/std.py:67
+#: lino_welfare/modlib/welfare/workflows.py:61
 msgid "Contract"
 msgstr ""
 
@@ -3570,7 +3578,7 @@ msgid "Managed"
 msgstr ""
 
 #: lino_welfare/modlib/sepa/models.py:61
-#: lino_welfare/modlib/welfare/help_texts.py:433
+#: lino_welfare/modlib/welfare/help_texts.py:439
 msgid "Whether this account is being managed by the PCSW."
 msgstr ""
 
@@ -3632,61 +3640,73 @@ msgid "The standard migrator for welfare."
 msgstr ""
 
 #: lino_welfare/modlib/welfare/help_texts.py:8
-msgid "A list of the models that may be used as confirmation."
+msgid "The plugin."
 msgstr ""
 
 #: lino_welfare/modlib/welfare/help_texts.py:9
+msgid ""
+"Optionally specify the primary key (an integer) of the last\n"
+"granting for whose confirmations you want to suppress checking of\n"
+"date range.  This is useful for keeping legacy confirmations that\n"
+"have been issued before the rule was activated."
+msgstr ""
+
+#: lino_welfare/modlib/welfare/help_texts.py:13
+msgid "A list of the models that may be used as confirmation."
+msgstr ""
+
+#: lino_welfare/modlib/welfare/help_texts.py:14
 msgid ""
 "The template defined for the ExcerptType defined for this\n"
 "confirmation type."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:11
+#: lino_welfare/modlib/welfare/help_texts.py:16
 msgid "Sign this database object."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:12
+#: lino_welfare/modlib/welfare/help_texts.py:17
 msgid "Base class for both Granting and Confirmation."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:13
+#: lino_welfare/modlib/welfare/help_texts.py:18
 msgid "Base class for all aid confirmations."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:14
+#: lino_welfare/modlib/welfare/help_texts.py:19
 msgid ""
 "The type of aid being granted to a client.  Every granting has a\n"
 "mandatory field Granting.aid_type which points to an\n"
 "AidType instance."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:17
+#: lino_welfare/modlib/welfare/help_texts.py:22
 msgid ""
 "The short name for internal use, e.g. when a user must select\n"
 "an aid type from a combobox."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:19
+#: lino_welfare/modlib/welfare/help_texts.py:24
 msgid ""
 "The database model to use for issuing an aid confirmation of\n"
 "this type. This is a mandatory pointer to\n"
 "ConfirmationTypes."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:22
+#: lino_welfare/modlib/welfare/help_texts.py:27
 msgid ""
 "The designation of this aid type as seen by the user e.g. when\n"
 "selecting an aid type."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:24
+#: lino_welfare/modlib/welfare/help_texts.py:29
 msgid ""
 "The text to print as title in confirmations.\n"
 "See also\n"
 "lino_xl.lib.excerpts.mixins.ExcerptTitle.excerpt_title."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:27
+#: lino_welfare/modlib/welfare/help_texts.py:32
 msgid ""
 "The body template to use when printing a confirmation of this type.\n"
 "If this field is empty, Lino uses the excerpt type’s\n"
@@ -3694,224 +3714,220 @@ msgid ""
 "See also /admin/printing."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:31
+#: lino_welfare/modlib/welfare/help_texts.py:36
 msgid ""
 "Whether aid grantings of this type are considered as urgent.\n"
 "This is used by Confirmation.get_urgent_granting()"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:33
+#: lino_welfare/modlib/welfare/help_texts.py:38
 msgid ""
 "Pointer to the default lino_xl.lib.boards.models.Board\n"
 "for aid projects of this type."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:35
+#: lino_welfare/modlib/welfare/help_texts.py:40
 msgid ""
 "Whether grantings for this aid type are to be signed by the\n"
 "client’s primary coach (see Client.get_primary_coach)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:37
+#: lino_welfare/modlib/welfare/help_texts.py:42
 msgid ""
 "A pointer to the ClientContactType to be used when\n"
 "selecting the pharmacy of a refund confirmation\n"
 "(RefundConfirmation.pharmacy)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:40
+#: lino_welfare/modlib/welfare/help_texts.py:45
 msgid ""
 "An aid granting is the principal promise that a given client\n"
 "gets a given aid during a given period."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:42
+#: lino_welfare/modlib/welfare/help_texts.py:47
 msgid "Pointer to the lino_welfare.modlib.pcsw.models.Client."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:43
+#: lino_welfare/modlib/welfare/help_texts.py:48
 msgid ""
 "The type of aid being granted. Mandatory.\n"
 "Pointer to the AidType."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:45
+#: lino_welfare/modlib/welfare/help_texts.py:50
 msgid ""
 "Pointer to the user who is expected to “sign” this granting\n"
 "(i.e. to confirm that it is real)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:47
+#: lino_welfare/modlib/welfare/help_texts.py:52
 msgid ""
 "Pointer to the Board\n"
 "which decided to allocate this aid project."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:49
+#: lino_welfare/modlib/welfare/help_texts.py:54
 msgid "Currently only used for printing an isip.Contract."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:50
+#: lino_welfare/modlib/welfare/help_texts.py:55
 msgid "The default table for Granting."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:51
-#: lino_welfare/modlib/welfare/help_texts.py:54
-#: lino_welfare/modlib/welfare/help_texts.py:61
+#: lino_welfare/modlib/welfare/help_texts.py:56
+#: lino_welfare/modlib/welfare/help_texts.py:59
+#: lino_welfare/modlib/welfare/help_texts.py:66
 msgid "alias of Granting"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:52
+#: lino_welfare/modlib/welfare/help_texts.py:57
 msgid "Abstract base class for all confirmation tables."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:53
+#: lino_welfare/modlib/welfare/help_texts.py:58
 msgid "Shows the confirmations issued for a given granting."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:55
+#: lino_welfare/modlib/welfare/help_texts.py:60
 msgid ""
 "This is when a social agent confirms that a client benefits of some\n"
 "simple aid during a given period."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:57
+#: lino_welfare/modlib/welfare/help_texts.py:62
 msgid ""
 "This is when a social agent confirms that a client benefits of a\n"
 "given income during a given period."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:59
+#: lino_welfare/modlib/welfare/help_texts.py:64
 msgid ""
 "Show the confirmations of a Granting whose aid_type has\n"
 "IncomeConfirmation as confirmation_type."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:62
+#: lino_welfare/modlib/welfare/help_texts.py:67
 msgid "alias of IncomeConfirmation"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:63
+#: lino_welfare/modlib/welfare/help_texts.py:68
 msgid ""
 "This is when a social agent confirms that a client benefits of a\n"
 "refund aid (Kostenrückerstattung) during a given period."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:65
+#: lino_welfare/modlib/welfare/help_texts.py:70
 msgid ""
 "A customized variant of the standard SubmitInsert which prints the "
 "Confirmation after\n"
 "successful creation (if AidType.print_directly is checked)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:67
-#: lino_welfare/modlib/welfare/help_texts.py:76
-#: lino_welfare/modlib/welfare/help_texts.py:79
-#: lino_welfare/modlib/welfare/help_texts.py:149
-#: lino_welfare/modlib/welfare/help_texts.py:207
-#: lino_welfare/modlib/welfare/help_texts.py:216
-#: lino_welfare/modlib/welfare/help_texts.py:217
-#: lino_welfare/modlib/welfare/help_texts.py:230
-#: lino_welfare/modlib/welfare/help_texts.py:242
-#: lino_welfare/modlib/welfare/help_texts.py:301
-#: lino_welfare/modlib/welfare/help_texts.py:345
-#: lino_welfare/modlib/welfare/help_texts.py:378
+#: lino_welfare/modlib/welfare/help_texts.py:72
+#: lino_welfare/modlib/welfare/help_texts.py:81
+#: lino_welfare/modlib/welfare/help_texts.py:84
+#: lino_welfare/modlib/welfare/help_texts.py:154
+#: lino_welfare/modlib/welfare/help_texts.py:212
+#: lino_welfare/modlib/welfare/help_texts.py:221
+#: lino_welfare/modlib/welfare/help_texts.py:222
+#: lino_welfare/modlib/welfare/help_texts.py:235
+#: lino_welfare/modlib/welfare/help_texts.py:248
+#: lino_welfare/modlib/welfare/help_texts.py:307
+#: lino_welfare/modlib/welfare/help_texts.py:351
+#: lino_welfare/modlib/welfare/help_texts.py:383
 msgid "See lino.core.plugin.Plugin."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:68
-#: lino_welfare/modlib/welfare/help_texts.py:312
+#: lino_welfare/modlib/welfare/help_texts.py:73
+#: lino_welfare/modlib/welfare/help_texts.py:318
 msgid ""
 "This is the homologue of isip.ContractType (see there for\n"
 "general documentation)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:70
-#: lino_welfare/modlib/welfare/help_texts.py:227
-#: lino_welfare/modlib/welfare/help_texts.py:236
-#: lino_welfare/modlib/welfare/help_texts.py:314
+#: lino_welfare/modlib/welfare/help_texts.py:75
+#: lino_welfare/modlib/welfare/help_texts.py:320
 msgid "alias of ContractType"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:71
+#: lino_welfare/modlib/welfare/help_texts.py:76
 msgid ""
 "An “Art61 job supplyment” is an agreement between the PCSW and a\n"
 "private company…"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:73
+#: lino_welfare/modlib/welfare/help_texts.py:78
 msgid "Shows the Art61 job supplyments for this client."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:74
-#: lino_welfare/modlib/welfare/help_texts.py:81
-#: lino_welfare/modlib/welfare/help_texts.py:228
-#: lino_welfare/modlib/welfare/help_texts.py:320
-#: lino_welfare/modlib/welfare/help_texts.py:333
-#: lino_welfare/modlib/welfare/help_texts.py:357
-#: lino_welfare/modlib/welfare/help_texts.py:365
-#: lino_welfare/modlib/welfare/help_texts.py:404
-#: lino_welfare/modlib/welfare/help_texts.py:418
-#: lino_welfare/modlib/welfare/help_texts.py:425
-#: lino_welfare/modlib/welfare/help_texts.py:430
-#: lino_welfare/modlib/welfare/help_texts.py:471
-msgid "alias of Client"
+#: lino_welfare/modlib/welfare/help_texts.py:79
+#: lino_welfare/modlib/welfare/help_texts.py:86
+#: lino_welfare/modlib/welfare/help_texts.py:233
+#: lino_welfare/modlib/welfare/help_texts.py:326
+#: lino_welfare/modlib/welfare/help_texts.py:339
+#: lino_welfare/modlib/welfare/help_texts.py:363
+#: lino_welfare/modlib/welfare/help_texts.py:371
+#: lino_welfare/modlib/welfare/help_texts.py:424
+#: lino_welfare/modlib/welfare/help_texts.py:431
+#: lino_welfare/modlib/welfare/help_texts.py:436
+#: lino_welfare/modlib/welfare/help_texts.py:477
+msgid "alias of lino_welfare.modlib.pcsw.models.Client"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:75
-#: lino_welfare/modlib/welfare/help_texts.py:229
-#: lino_welfare/modlib/welfare/help_texts.py:321
-#: lino_welfare/modlib/welfare/help_texts.py:324
-#: lino_welfare/modlib/welfare/help_texts.py:340
+#: lino_welfare/modlib/welfare/help_texts.py:80
+#: lino_welfare/modlib/welfare/help_texts.py:327
+#: lino_welfare/modlib/welfare/help_texts.py:330
+#: lino_welfare/modlib/welfare/help_texts.py:346
 msgid "alias of Contract"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:77
+#: lino_welfare/modlib/welfare/help_texts.py:82
 msgid ""
 "A string referring to the model which represents the badge holder in\n"
 "your application.  Default value is 'contacts.Person'."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:80
+#: lino_welfare/modlib/welfare/help_texts.py:85
 msgid "Events where Event.project or one guest is this client."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:82
+#: lino_welfare/modlib/welfare/help_texts.py:87
 msgid "alias of Event"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:83
+#: lino_welfare/modlib/welfare/help_texts.py:88
 msgid "Virtual field which returns the partner if it is a client."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:84
+#: lino_welfare/modlib/welfare/help_texts.py:89
 msgid ""
 "The descriptor for this plugin. See\n"
 "lino.core.plugin.Plugin."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:86
+#: lino_welfare/modlib/welfare/help_texts.py:91
 msgid ""
 "Whether executing requests should try to really connect to the\n"
 "CBSS.  Real requests would fail with a timeout if run from behind\n"
 "an IP address that is not registered at the CBSS."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:89
+#: lino_welfare/modlib/welfare/help_texts.py:94
 msgid "Either None or one of ‘test’, ‘acpt’ or ‘prod’."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:90
+#: lino_welfare/modlib/welfare/help_texts.py:95
 msgid "The status of a CBSSRequest."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:91
+#: lino_welfare/modlib/welfare/help_texts.py:96
 msgid ""
 "Possible values for the action field of a\n"
 "lino_welfare.modlib.cbss.models.ManageAccessRequest."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:93
+#: lino_welfare/modlib/welfare/help_texts.py:98
 msgid ""
 "Ce service est sollicité au moment du démarrage de l’enquête\n"
 "sociale.  Le CPAS déclare au réseau de la sécurité sociale qu’il\n"
@@ -3925,159 +3941,159 @@ msgid ""
 "différentes."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:103
+#: lino_welfare/modlib/welfare/help_texts.py:108
 msgid "L’opération contraire est aussi mise à disposition."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:104
+#: lino_welfare/modlib/welfare/help_texts.py:109
 msgid ""
 "Il est en plus possible d’obtenir une liste des enregistrements\n"
 "dans le répertoire sectoriel des CPAS à la SmalS-MvM ainsi qu’au\n"
 "sein du réseau BCSS."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:107
+#: lino_welfare/modlib/welfare/help_texts.py:112
 msgid ""
 "Possible values for the query_register field of a\n"
 "lino_welfare.modlib.cbss.models.ManageAccessRequest."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:109
+#: lino_welfare/modlib/welfare/help_texts.py:114
 msgid "Query only the primary register."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:110
+#: lino_welfare/modlib/welfare/help_texts.py:115
 msgid "Query only the secondary register."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:111
+#: lino_welfare/modlib/welfare/help_texts.py:116
 msgid "Query both registers."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:112
+#: lino_welfare/modlib/welfare/help_texts.py:117
 msgid ""
 "Common Abstract Base Class for SSDNRequest\n"
 "and NewStyleRequest"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:114
-msgid "alias of NotImplementedError"
+#: lino_welfare/modlib/welfare/help_texts.py:119
+msgid "alias of exceptions.NotImplementedError"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:115
+#: lino_welfare/modlib/welfare/help_texts.py:120
 msgid ""
 "Abstract Base Class for Models that represent SSDN (“classic”)\n"
 "requests."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:117
+#: lino_welfare/modlib/welfare/help_texts.py:122
 msgid ""
 "Abstract Base Class for Models that represent\n"
 "“new style” requests to the CBSS (and responses)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:119
+#: lino_welfare/modlib/welfare/help_texts.py:124
 msgid ""
 "Abstract base for Requests that have a field national_id and a method \n"
 "get_ssin()."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:121
+#: lino_welfare/modlib/welfare/help_texts.py:126
 msgid "Mixin for models that have certain fields"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:122
+#: lino_welfare/modlib/welfare/help_texts.py:127
 msgid ""
 "Default values filled from\n"
 "lino_welfare.modlib.cbss.fixtures.sectors."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:124
+#: lino_welfare/modlib/welfare/help_texts.py:129
 msgid ""
 "Codes qualité (Hoedanigheidscodes).\n"
 "This table is usually filled with the official codes\n"
 "by lino_welfare.modlib.cbss.fixtures.purposes."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:127
+#: lino_welfare/modlib/welfare/help_texts.py:132
 msgid "A request to the IdentifyPerson service."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:128
+#: lino_welfare/modlib/welfare/help_texts.py:133
 msgid "A request to the ManageAccess service."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:129
+#: lino_welfare/modlib/welfare/help_texts.py:134
 msgid "Pointer to Sector."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:130
+#: lino_welfare/modlib/welfare/help_texts.py:135
 msgid "Pointer to Purpose."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:131
+#: lino_welfare/modlib/welfare/help_texts.py:136
 msgid ""
 "The action to perform.  This must be one of the values in\n"
 "lino_welfare.modlib.cbss.choicelists.ManageActions"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:133
+#: lino_welfare/modlib/welfare/help_texts.py:138
 msgid ""
 "The register to be query.\n"
 "This must be one of the values in\n"
 "lino_welfare.modlib.cbss.choicelists.QueryRegisters"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:136
+#: lino_welfare/modlib/welfare/help_texts.py:141
 msgid "A request to the RetrieveTIGroups service (aka Tx25)"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:137
+#: lino_welfare/modlib/welfare/help_texts.py:142
 msgid ""
 "The result of a Tx25 consist of data rows, each of which has a\n"
 "given type.  Consult the source code of this class to see how it\n"
 "works."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:140
+#: lino_welfare/modlib/welfare/help_texts.py:145
 msgid ""
 "Displays the response of an RetrieveTIGroupsRequest\n"
 "as a table."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:142
-msgid "alias of RetrieveTIGroupsRequest"
+#: lino_welfare/modlib/welfare/help_texts.py:147
+msgid "alias of lino_welfare.modlib.cbss.models.RetrieveTIGroupsRequest"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:143
+#: lino_welfare/modlib/welfare/help_texts.py:148
 msgid ""
 "Base class for virtual tables which show highly confidential data\n"
 "which must be visible only to the user who made the request (and\n"
 "to security advisors)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:146
+#: lino_welfare/modlib/welfare/help_texts.py:151
 msgid ""
 "Displays the response of an IdentifyPersonRequest\n"
 "as a table."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:148
-msgid "alias of IdentifyPersonRequest"
+#: lino_welfare/modlib/welfare/help_texts.py:153
+msgid "alias of lino_welfare.modlib.cbss.models.IdentifyPersonRequest"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:150
+#: lino_welfare/modlib/welfare/help_texts.py:155
 msgid "An item of an ClientVoucher."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:151
+#: lino_welfare/modlib/welfare/help_texts.py:156
 msgid ""
 "Shows all simple invoices of a given journal (whose\n"
 "Journal.voucher_type must be\n"
 "lino_xl.lib.sales.models.ClientVoucher)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:154
+#: lino_welfare/modlib/welfare/help_texts.py:159
 msgid ""
 "Used for Entry.periods and Account.periods\n"
 "(the latter holds simply the default value for the former).\n"
@@ -4085,124 +4101,124 @@ msgid ""
 "Default value is 1. For yearly amounts set it to 12."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:158
+#: lino_welfare/modlib/welfare/help_texts.py:163
 msgid ""
 "Base class for both the volatile MainActor and the\n"
 "Actor model."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:160
+#: lino_welfare/modlib/welfare/help_texts.py:165
 msgid "A volatile object that represents the budget partner as actor"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:161
+#: lino_welfare/modlib/welfare/help_texts.py:166
 msgid "A group of accounts."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:162
+#: lino_welfare/modlib/welfare/help_texts.py:167
 msgid ""
 "An account is an item of an account chart used to collect\n"
 "ledger transactions or other accountable items."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:164
+#: lino_welfare/modlib/welfare/help_texts.py:169
 msgid ""
 "The multilingual designation of this account, as the users see\n"
 "it."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:166
+#: lino_welfare/modlib/welfare/help_texts.py:171
 msgid ""
 "The account group to which this account belongs.  This must\n"
 "point to an instance of Group."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:168
+#: lino_welfare/modlib/welfare/help_texts.py:173
 msgid "The sequence number of this account within its group."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:169
+#: lino_welfare/modlib/welfare/help_texts.py:174
 msgid ""
 "An optional unique name which can be used to reference a given\n"
 "account."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:171
+#: lino_welfare/modlib/welfare/help_texts.py:176
 msgid ""
 "The account type of this account.  This must\n"
 "point to an item of\n"
 "lino_xl.lib.accounts.AccountTypes."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:174
+#: lino_welfare/modlib/welfare/help_texts.py:179
 msgid ""
 "A document which expresses the financial situation of a partner at\n"
 "a given date."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:176
+#: lino_welfare/modlib/welfare/help_texts.py:181
 msgid ""
 "An actor of a budget is a partner who is part of the household\n"
 "for which the budget has been established."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:178
+#: lino_welfare/modlib/welfare/help_texts.py:183
 msgid "A detail row of a Budget."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:179
+#: lino_welfare/modlib/welfare/help_texts.py:184
 msgid ""
 "The amount of money. An empty amount is different from a zero\n"
 "amount in that the latter will be printed while the former\n"
 "not."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:182
+#: lino_welfare/modlib/welfare/help_texts.py:187
 msgid "The related Account."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:183
+#: lino_welfare/modlib/welfare/help_texts.py:188
 msgid "The global table of all account groups."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:184
-msgid "alias of Group"
+#: lino_welfare/modlib/welfare/help_texts.py:189
+msgid "alias of lino_welfare.modlib.debts.models.Group"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:185
+#: lino_welfare/modlib/welfare/help_texts.py:190
 msgid "The table used to edit Actors in a Budget’s detail."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:186
+#: lino_welfare/modlib/welfare/help_texts.py:191
+#: lino_welfare/modlib/welfare/help_texts.py:197
+#: lino_welfare/modlib/welfare/help_texts.py:199
+msgid "alias of lino_welfare.modlib.debts.models.Budget"
+msgstr ""
+
 #: lino_welfare/modlib/welfare/help_texts.py:192
-#: lino_welfare/modlib/welfare/help_texts.py:194
-msgid "alias of Budget"
+msgid "alias of lino_welfare.modlib.debts.models.Actor"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:187
-msgid "alias of Actor"
-msgstr ""
-
-#: lino_welfare/modlib/welfare/help_texts.py:188
+#: lino_welfare/modlib/welfare/help_texts.py:193
 msgid "Defines the Detail form of a Budget."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:189
+#: lino_welfare/modlib/welfare/help_texts.py:194
 msgid ""
 "Base class for lists of Budgets.\n"
 "Serves as base for MyBudgets and BudgetsByPartner,\n"
 "but is directly used by Explorer ‣ Debts ‣Budgets."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:193
+#: lino_welfare/modlib/welfare/help_texts.py:198
 msgid "Base class for the tables used to edit Entries by budget."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:195
-msgid "alias of Entry"
+#: lino_welfare/modlib/welfare/help_texts.py:200
+msgid "alias of lino_welfare.modlib.debts.models.Entry"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:196
+#: lino_welfare/modlib/welfare/help_texts.py:201
 msgid ""
 "Volatile object used to encapsulate the account groups which have\n"
 "some data in a given budget.  Entry groups are instantiated and\n"
@@ -4211,47 +4227,47 @@ msgid ""
 "PrintEntriesByBudget tables."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:201
+#: lino_welfare/modlib/welfare/help_texts.py:206
 msgid ""
 "Base class for the printable tables of entries by budget\n"
 "(PrintExpensesByBudget, PrintIncomesByBudget,\n"
 "PrintLiabilitiesByBudget and PrintAssetsByBudget)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:204
+#: lino_welfare/modlib/welfare/help_texts.py:209
 msgid ""
 "Shows the yearly amount. For entries with periodicity 12 this is the\n"
 "same as total, otherwise it is total * 12 / periods."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:206
+#: lino_welfare/modlib/welfare/help_texts.py:211
 msgid "alias of EntryGroup"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:208
+#: lino_welfare/modlib/welfare/help_texts.py:213
 msgid ""
 "Model mixin to add to the base classes of your application’s\n"
 "pcsw.Client model."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:210
+#: lino_welfare/modlib/welfare/help_texts.py:215
 msgid ""
 "Phonetic word for pcsw.Client.\n"
 "See lino.mixins.dupable.PhoneticWordBase."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:212
+#: lino_welfare/modlib/welfare/help_texts.py:217
 msgid "Shows the other clients who are similar to this one."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:213
+#: lino_welfare/modlib/welfare/help_texts.py:218
 msgid ""
 "If several clients have similar names, their coach should fill at\n"
 "least their birth_date and national_id to assert their\n"
 "identity."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:218
+#: lino_welfare/modlib/welfare/help_texts.py:223
 msgid ""
 "Every immersion training has a mandatory field\n"
 "Contract.type which points to this.  The immersion\n"
@@ -4259,84 +4275,97 @@ msgid ""
 "trainings that use it."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:222
+#: lino_welfare/modlib/welfare/help_texts.py:227
 msgid "Translatable description."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:223
+#: lino_welfare/modlib/welfare/help_texts.py:228
 msgid "See lino_welfare.modlib.isip.mixins.ContractTypeBase.template"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:224
+#: lino_welfare/modlib/welfare/help_texts.py:229
 msgid "An immersion training."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:225
-msgid "alias of Goal"
-msgstr ""
-
-#: lino_welfare/modlib/welfare/help_texts.py:226
-msgid "The default table for ContractType instances."
+#: lino_welfare/modlib/welfare/help_texts.py:230
+msgid "alias of lino_welfare.modlib.immersion.models.Goal"
 msgstr ""
 
 #: lino_welfare/modlib/welfare/help_texts.py:231
+msgid "The default table for ContractType instances."
+msgstr ""
+
+#: lino_welfare/modlib/welfare/help_texts.py:232
+msgid "alias of lino_welfare.modlib.immersion.models.ContractType"
+msgstr ""
+
+#: lino_welfare/modlib/welfare/help_texts.py:234
+msgid "alias of lino_welfare.modlib.immersion.models.Contract"
+msgstr ""
+
+#: lino_welfare/modlib/welfare/help_texts.py:236
 msgid ""
 "Whether to show only primary coachings in the dynamic ventilation\n"
 "columns (coachings per PersonGroup table."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:233
+#: lino_welfare/modlib/welfare/help_texts.py:238
 msgid "An overview table for agents of the integration service."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:234
+#: lino_welfare/modlib/welfare/help_texts.py:239
 msgid "This is one of the tables of the ActivityReport."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:235
+#: lino_welfare/modlib/welfare/help_texts.py:240
 msgid "Ventilates number of job supplyments by provider and type."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:237
-msgid "alias of Company"
+#: lino_welfare/modlib/welfare/help_texts.py:241
+msgid "alias of lino_welfare.modlib.jobs.models.ContractType"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:238
+#: lino_welfare/modlib/welfare/help_texts.py:242
+msgid "alias of lino_welfare.modlib.contacts.models.Company"
+msgstr ""
+
+#: lino_welfare/modlib/welfare/help_texts.py:243
 msgid ""
 "Gives an overview about the work of the Integration Service during\n"
 "a given period."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:240
+#: lino_welfare/modlib/welfare/help_texts.py:245
 msgid ""
-"A social agent who can see database content specific to\n"
-"integration work: CV, language courses, workshops, …"
+"An integration agent is a social agent who can see database\n"
+"content specific to integration work: CV, language courses,\n"
+"workshops, …"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:243
+#: lino_welfare/modlib/welfare/help_texts.py:249
 msgid ""
 "The list of all known overlap groups to be selected for the\n"
 "overlap_group\n"
 "of a contract type."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:246
+#: lino_welfare/modlib/welfare/help_texts.py:252
 msgid "Base class for all ContractType models."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:247
+#: lino_welfare/modlib/welfare/help_texts.py:253
 msgid ""
 "The full description of this contract type as used in printed\n"
 "documents."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:249
+#: lino_welfare/modlib/welfare/help_texts.py:255
 msgid ""
 "The default examination policy to be used for contracts of\n"
 "this type."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:251
+#: lino_welfare/modlib/welfare/help_texts.py:257
 msgid ""
 "The overlap group to use when checking whether two contracts\n"
 "are overlapping or not. See OverlappingContractsTest.\n"
@@ -4344,84 +4373,84 @@ msgid ""
 "overlapping contracts."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:255
+#: lino_welfare/modlib/welfare/help_texts.py:261
 msgid ""
 "The main template to use instead of the default template\n"
 "defined on the excerpt type."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:257
+#: lino_welfare/modlib/welfare/help_texts.py:263
 msgid ""
 "Volatile object used to test for overlapping contracts.  It is\n"
 "responsible for issuing the following error messages:"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:259
+#: lino_welfare/modlib/welfare/help_texts.py:265
 msgid "A given client cannot have two active contracts at the same time."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:260
+#: lino_welfare/modlib/welfare/help_texts.py:266
 msgid ""
 "Abstract base class for all integration contracts (an unofficial\n"
 "term), i.e.  isip.Contract jobs.Contract and\n"
 "immersions.Contract"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:263
+#: lino_welfare/modlib/welfare/help_texts.py:269
 msgid "The client for whom this contract is done."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:264
+#: lino_welfare/modlib/welfare/help_texts.py:270
 msgid "The start date of the contract."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:265
+#: lino_welfare/modlib/welfare/help_texts.py:271
 msgid "The planned end date of this contract."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:266
+#: lino_welfare/modlib/welfare/help_texts.py:272
 msgid ""
 "The date when this contract was effectively ended.\n"
 "This field is set to the same value as applies_until."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:268
+#: lino_welfare/modlib/welfare/help_texts.py:274
 msgid ""
 "The reason of prematured ending.  Pointer to\n"
 "ContractEnding"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:270
+#: lino_welfare/modlib/welfare/help_texts.py:276
 msgid "When the contract was issued to the client and signed by them."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:271
+#: lino_welfare/modlib/welfare/help_texts.py:277
 msgid "When the contract was ratified by the responsible board."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:272
+#: lino_welfare/modlib/welfare/help_texts.py:278
 msgid ""
 "The language of this contract. Default value is the client’s\n"
 "language."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:274
+#: lino_welfare/modlib/welfare/help_texts.py:280
 msgid ""
 "The type of this contract. Pointer to a subclass of\n"
 "ContractTypeBase."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:276
+#: lino_welfare/modlib/welfare/help_texts.py:282
 msgid "Base for contract tables. Defines the following parameter fields:"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:277
+#: lino_welfare/modlib/welfare/help_texts.py:283
 msgid ""
 "Show only contracts with the specified\n"
 "ContractEnding."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:279
+#: lino_welfare/modlib/welfare/help_texts.py:285
 msgid ""
 "Select “Yes” to show only contracts whose ending\n"
 "ContractEnding has\n"
@@ -4429,35 +4458,35 @@ msgid ""
 "checked."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:283
+#: lino_welfare/modlib/welfare/help_texts.py:289
 msgid "The type of an isip.Contract."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:284
+#: lino_welfare/modlib/welfare/help_texts.py:290
 msgid ""
 "Whether contracts of this type need their study_type\n"
 "field filled in."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:286
+#: lino_welfare/modlib/welfare/help_texts.py:292
 msgid ""
 "An examination policy is mostly a RecurrenceSet used for generating\n"
 "“evaluation meetings”.  That is, Lino automatically suggests dates\n"
 "where the agent invites the client."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:289
+#: lino_welfare/modlib/welfare/help_texts.py:295
 msgid "A possible reason for premature termination of a contract."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:290
+#: lino_welfare/modlib/welfare/help_texts.py:296
 msgid ""
 "Represents a third-party external partner who participates in this\n"
 "contract. For every partner there is a rich text field describing\n"
 "their duties."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:293
+#: lino_welfare/modlib/welfare/help_texts.py:299
 msgid ""
 "An ISIP (called “PIIS” in French and “VSE” in German) is a\n"
 "convention or contract between the PCSW and a young client that\n"
@@ -4465,29 +4494,29 @@ msgid ""
 "the client’s scholar education."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:297
+#: lino_welfare/modlib/welfare/help_texts.py:303
 msgid ""
 "The type of this contract.\n"
 "Pointer to ContractType."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:299
+#: lino_welfare/modlib/welfare/help_texts.py:305
 msgid ""
 "The type of study that is going to be followed during this\n"
 "contract."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:302
+#: lino_welfare/modlib/welfare/help_texts.py:308
 msgid ""
 "Base class for Contract and\n"
 "lino_welfare.modlib.art61.models.Contract."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:304
+#: lino_welfare/modlib/welfare/help_texts.py:310
 msgid "List of choices for jobs.Contract.schedule field."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:305
+#: lino_welfare/modlib/welfare/help_texts.py:311
 msgid ""
 "A job provider (Stellenanbieter, Services utilisateurs) is an\n"
 "organisation where the work will be executed. They are not\n"
@@ -4495,289 +4524,295 @@ msgid ""
 "service or a private company."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:309
+#: lino_welfare/modlib/welfare/help_texts.py:315
 msgid "This is the same as CompanyDetail, except that we"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:310
+#: lino_welfare/modlib/welfare/help_texts.py:316
 msgid "The table of all job providers."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:311
+#: lino_welfare/modlib/welfare/help_texts.py:317
 msgid "alias of JobProvider"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:315
+#: lino_welfare/modlib/welfare/help_texts.py:321
 msgid "An Art60§7 job supplyment is a contract bla bla…"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:316
+#: lino_welfare/modlib/welfare/help_texts.py:322
 msgid ""
 "If applies_from and duration are set, then the\n"
 "default value for applies_until is computed assuming 26\n"
 "workdays per month:"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:319
+#: lino_welfare/modlib/welfare/help_texts.py:325
 msgid "Shows the Art60§7 job supplyments for this client."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:322
+#: lino_welfare/modlib/welfare/help_texts.py:328
 msgid "Shows Job Contracts for a given Regime."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:323
-msgid "alias of Regime"
+#: lino_welfare/modlib/welfare/help_texts.py:329
+msgid "alias of lino_xl.lib.cv.models.Regime"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:325
+#: lino_welfare/modlib/welfare/help_texts.py:331
 msgid "A Job Offer"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:326
+#: lino_welfare/modlib/welfare/help_texts.py:332
 msgid "A job is a place where a Client can work. The Job Provider"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:327
+#: lino_welfare/modlib/welfare/help_texts.py:333
 msgid "A candidature is when a client applies for a known Job."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:328
+#: lino_welfare/modlib/welfare/help_texts.py:334
 msgid ""
 "Whether an art.61 (art.60) contract can satisfy this\n"
 "candidature. Check at least one of them."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:330
+#: lino_welfare/modlib/welfare/help_texts.py:336
 msgid "List of Candidatures."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:331
-#: lino_welfare/modlib/welfare/help_texts.py:334
+#: lino_welfare/modlib/welfare/help_texts.py:337
+#: lino_welfare/modlib/welfare/help_texts.py:340
 msgid "alias of Candidature"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:332
+#: lino_welfare/modlib/welfare/help_texts.py:338
 msgid "…"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:335
+#: lino_welfare/modlib/welfare/help_texts.py:341
 msgid "Shows the Candidatures or Experiences for this Offer."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:336
+#: lino_welfare/modlib/welfare/help_texts.py:342
 msgid "alias of Offer"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:337
+#: lino_welfare/modlib/welfare/help_texts.py:343
 msgid ""
 "The list of Job Types is used for statistical analysis,\n"
 "e.g. in :class:``"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:339
+#: lino_welfare/modlib/welfare/help_texts.py:345
 msgid "Shows the Job contracts owned by this user."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:341
+#: lino_welfare/modlib/welfare/help_texts.py:347
 msgid "alias of JobType"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:342
+#: lino_welfare/modlib/welfare/help_texts.py:348
 msgid "alias of Job"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:343
+#: lino_welfare/modlib/welfare/help_texts.py:349
 msgid ""
 "An overview of the jobs and the candidates working there or\n"
 "applying for it."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:346
+#: lino_welfare/modlib/welfare/help_texts.py:352
 msgid ""
 "A Broker (Vermittler) is an external institution who suggests\n"
 "newcomers."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:348
+#: lino_welfare/modlib/welfare/help_texts.py:354
 msgid "List of Brokers on this site."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:349
+#: lino_welfare/modlib/welfare/help_texts.py:355
 msgid "alias of Broker"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:350
+#: lino_welfare/modlib/welfare/help_texts.py:356
 msgid ""
 "A Faculty (Fachbereich) is a conceptual (not organizational)\n"
 "department of this PCSW.  Each Newcomer will be assigned to one\n"
 "and only one Faculty, based on his/her needs."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:353
+#: lino_welfare/modlib/welfare/help_texts.py:359
 msgid ""
 "A competence is when a given user is declared to be competent\n"
 "in a given faculty."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:355
+#: lino_welfare/modlib/welfare/help_texts.py:361
 msgid ""
 "A variant of pcsw.CoachedClients designed for newcomers\n"
 "consultants."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:358
+#: lino_welfare/modlib/welfare/help_texts.py:364
 msgid "List of users available for new coachings."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:359
-#: lino_welfare/modlib/welfare/help_texts.py:366
-msgid "alias of User"
+#: lino_welfare/modlib/welfare/help_texts.py:365
+#: lino_welfare/modlib/welfare/help_texts.py:372
+msgid "alias of lino_welfare.modlib.users.models.User"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:360
+#: lino_welfare/modlib/welfare/help_texts.py:366
 msgid ""
 "Assign this agent as coach for this client.  This will set the\n"
 "client’s state to Coached and send a notification to the new\n"
 "coach."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:363
+#: lino_welfare/modlib/welfare/help_texts.py:369
 msgid ""
 "List of users available for coaching this client.  Visible only to\n"
 "Newcomers consultants."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:367
-msgid ""
-"A newcomers agent is a social agent who also manages\n"
-"newcomers."
+#: lino_welfare/modlib/welfare/help_texts.py:373
+msgid "A newcomers agent manages new client applications."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:369
+#: lino_welfare/modlib/welfare/help_texts.py:374
 msgid ""
 "A newcomers operator is a user who is not social agent but\n"
 "can e.g. register newcomers and assign them a coach."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:371
+#: lino_welfare/modlib/welfare/help_texts.py:376
 msgid ""
 "Overrides the library model, setting an alternative verbose name,\n"
 "adding a real database field important and the\n"
 "person property."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:374
+#: lino_welfare/modlib/welfare/help_texts.py:379
 msgid ""
 "Checking this will cause this note to appear in the\n"
 "overview panel of\n"
 "the person linked to this note."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:377
+#: lino_welfare/modlib/welfare/help_texts.py:382
 msgid "An alias to lino_xl.lib.notes.models.Note.project."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:379
+#: lino_welfare/modlib/welfare/help_texts.py:384
 msgid "Refuse this newcomer request."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:380
+#: lino_welfare/modlib/welfare/help_texts.py:385
 msgid ""
 "Change client’s state to ‘former’. This will also end any active\n"
 "coachings."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:382
+#: lino_welfare/modlib/welfare/help_texts.py:387
 msgid ""
 "Inherits from lino_welfare.modlib.contacts.models.Person and\n"
 "lino_xl.lib.beid.models.BeIdCardHolder."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:384
+#: lino_welfare/modlib/welfare/help_texts.py:389
 msgid "Whether Lino should make ESF summaries for this client."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:385
+#: lino_welfare/modlib/welfare/help_texts.py:390
 msgid "A panel with general information about this client."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:386
+#: lino_welfare/modlib/welfare/help_texts.py:391
 msgid ""
 "A virtual field displaying a group of shortcut links for managing CVs\n"
 "(Curriculum Vitaes)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:388
+#: lino_welfare/modlib/welfare/help_texts.py:393
 msgid ""
 "A virtual field displaying a group of buttons for managing the\n"
 "“identifying document”, i.e. an uploaded document which has been\n"
 "used as alternative to the eID card."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:391
+#: lino_welfare/modlib/welfare/help_texts.py:396
 msgid ""
 "Pointer to PersonGroup.\n"
 "The intergration phase of this client."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:393
+#: lino_welfare/modlib/welfare/help_texts.py:398
 msgid ""
 "The civil state of this client. Allowed choices are defined in\n"
 "CivilState."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:395
+#: lino_welfare/modlib/welfare/help_texts.py:400
 msgid "Pointer to ClientStates."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:396
+#: lino_welfare/modlib/welfare/help_texts.py:401
 msgid ""
 "The date when this client got unemployed and stopped to have a\n"
 "regular work."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:398
+#: lino_welfare/modlib/welfare/help_texts.py:403
 msgid ""
 "The date when this client registered as unemployed and started\n"
 "to look for a new job."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:400
-msgid "alias of Word"
+#: lino_welfare/modlib/welfare/help_texts.py:405
+msgid "alias of lino_welfare.modlib.dupable_clients.models.Word"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:401
+#: lino_welfare/modlib/welfare/help_texts.py:406
 msgid "The list that opens by Contacts ‣ Clients."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:402
+#: lino_welfare/modlib/welfare/help_texts.py:407
 msgid ""
 "If not empty, show only Clients whose client_state equals\n"
 "the specified value."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:405
+#: lino_welfare/modlib/welfare/help_texts.py:409
+msgid "alias of Client"
+msgstr ""
+
+#: lino_welfare/modlib/welfare/help_texts.py:410
 msgid ""
 "Clients must have either valid eId data or an alternative\n"
 "identifying document."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:407
+#: lino_welfare/modlib/welfare/help_texts.py:412
 msgid ""
 "A social agent is a user who does individual coaching of\n"
 "clients.  Certain privacy-relevant client data is visible only\n"
 "to social agents."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:410
+#: lino_welfare/modlib/welfare/help_texts.py:415
 msgid ""
 "A social staff member is a social agent who has access to more\n"
 "technical information about welfare clients.  For example the\n"
 "Miscellaneous panel."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:413
+#: lino_welfare/modlib/welfare/help_texts.py:418
+msgid "Reception clerks (210) can see contracts."
+msgstr ""
+
+#: lino_welfare/modlib/welfare/help_texts.py:419
 msgid ""
 "A ButtonsTable which shows\n"
 "all users who are candidates responsible of new client\n"
@@ -4786,27 +4821,27 @@ msgid ""
 "(subst_user and current_project)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:419
+#: lino_welfare/modlib/welfare/help_texts.py:425
 msgid ""
 "Create an appointment from a client for this client with a user to\n"
 "be selected manually."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:421
+#: lino_welfare/modlib/welfare/help_texts.py:427
 msgid "Create a prompt event from a client."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:422
+#: lino_welfare/modlib/welfare/help_texts.py:428
 msgid ""
 "Call a prompt event from a Coaching.  See also\n"
 "lino_xl.lib.reception.models.create_prompt_event()."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:424
+#: lino_welfare/modlib/welfare/help_texts.py:430
 msgid "The list that opens by Reception ‣ Clients."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:426
+#: lino_welfare/modlib/welfare/help_texts.py:432
 msgid ""
 "Shows the users for whom an appointment can be made with this\n"
 "client. Per user you have two possible buttons: (1) a prompt\n"
@@ -4814,15 +4849,15 @@ msgid ""
 "them) or (2) a scheduled appointment in the user’s calendar."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:431
-msgid "alias of Coaching"
+#: lino_welfare/modlib/welfare/help_texts.py:437
+msgid "alias of lino_xl.lib.coachings.models.Coaching"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:432
+#: lino_welfare/modlib/welfare/help_texts.py:438
 msgid "A bank account of a partner."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:434
+#: lino_welfare/modlib/welfare/help_texts.py:440
 msgid ""
 "Shows the accounts for a given client. This includes additional\n"
 "information managed,\n"
@@ -4830,85 +4865,85 @@ msgid ""
 "statements."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:438
-msgid "alias of Partner"
+#: lino_welfare/modlib/welfare/help_texts.py:444
+msgid "alias of lino_welfare.modlib.contacts.models.Partner"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:439
+#: lino_welfare/modlib/welfare/help_texts.py:445
 msgid "alias of Account"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:440
+#: lino_welfare/modlib/welfare/help_texts.py:446
 msgid "Layout of User Detail in Lino Welfare."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:441
+#: lino_welfare/modlib/welfare/help_texts.py:447
 msgid ""
 "The users.User model used in Lino Welfare.  We add a few fields\n"
 "to the standard models (lino.modlib.users.models.User)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:443
+#: lino_welfare/modlib/welfare/help_texts.py:449
 msgid "Like an accountant, but also has access to configuration."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:444
+#: lino_welfare/modlib/welfare/help_texts.py:450
 msgid "The site adminstrator has permission for everything."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:445
+#: lino_welfare/modlib/welfare/help_texts.py:451
 msgid ""
 "A reception clerk is a user who is not a social agent but\n"
 "receives clients and does certain administrative tasks (in Eupen\n"
 "they call them back office)."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:448
+#: lino_welfare/modlib/welfare/help_texts.py:454
 msgid ""
 "A newcomers reception clerk is a reception clerk who also\n"
 "can assign coaches to clients."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:450
+#: lino_welfare/modlib/welfare/help_texts.py:456
 msgid ""
-"A newcomers integration agent is an integration agent who\n"
+"A flexible integration agent is an integration agent who\n"
 "also can assign coaches to clients and create budgets for debts\n"
 "mediation."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:453
+#: lino_welfare/modlib/welfare/help_texts.py:459
 msgid ""
 "An accountant is a user who enters invoices, bank statements,\n"
 "payment orders and other ledger operations."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:455
+#: lino_welfare/modlib/welfare/help_texts.py:461
 msgid "A backoffice user who can act as others."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:456
+#: lino_welfare/modlib/welfare/help_texts.py:462
 msgid "A CourseProvider is a Company that offers Courses."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:457
+#: lino_welfare/modlib/welfare/help_texts.py:463
 msgid ""
 "Same as CompanyDetail, except that we add a tab\n"
 "Courses."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:459
+#: lino_welfare/modlib/welfare/help_texts.py:465
 msgid "Table of all course providers"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:460
+#: lino_welfare/modlib/welfare/help_texts.py:466
 msgid "alias of CourseProvider"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:461
+#: lino_welfare/modlib/welfare/help_texts.py:467
 msgid "Ein Kursinhalt (z.B. “Französisch”, “Deutsch”, “Alphabétisation”,…)"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:462
+#: lino_welfare/modlib/welfare/help_texts.py:468
 msgid ""
 "Ein konkreter Kurs, der an einem bestimmten Datum beginnt.\n"
 "Für jeden Kurs muss ein entsprechendes Angebot existieren, \n"
@@ -4918,53 +4953,53 @@ msgid ""
 "Kurs muss ein Angebot erstellt werden."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:468
+#: lino_welfare/modlib/welfare/help_texts.py:474
 msgid ""
 "A Course Request is created when a certain Person expresses her\n"
 "wish to participate in a Course with a certain CourseContent."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:470
+#: lino_welfare/modlib/welfare/help_texts.py:476
 msgid "Shows the course requests of a client."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:472
-#: lino_welfare/modlib/welfare/help_texts.py:475
 #: lino_welfare/modlib/welfare/help_texts.py:478
-#: lino_welfare/modlib/welfare/help_texts.py:482
+#: lino_welfare/modlib/welfare/help_texts.py:481
 #: lino_welfare/modlib/welfare/help_texts.py:484
+#: lino_welfare/modlib/welfare/help_texts.py:488
+#: lino_welfare/modlib/welfare/help_texts.py:490
 msgid "alias of CourseRequest"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:473
+#: lino_welfare/modlib/welfare/help_texts.py:479
 msgid "Table of CourseRequest instances of a Course."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:474
-#: lino_welfare/modlib/welfare/help_texts.py:477
-#: lino_welfare/modlib/welfare/help_texts.py:481
+#: lino_welfare/modlib/welfare/help_texts.py:480
+#: lino_welfare/modlib/welfare/help_texts.py:483
+#: lino_welfare/modlib/welfare/help_texts.py:487
 msgid "alias of Course"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:476
+#: lino_welfare/modlib/welfare/help_texts.py:482
 msgid "List of participating candidates for the given Course."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:479
+#: lino_welfare/modlib/welfare/help_texts.py:485
 msgid ""
 "List of Candidates for the given Course\n"
 "which are not registiered."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:483
+#: lino_welfare/modlib/welfare/help_texts.py:489
 msgid "List of pending course requests."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:485
+#: lino_welfare/modlib/welfare/help_texts.py:491
 msgid "Adds two text fields motivation and problems."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:486
+#: lino_welfare/modlib/welfare/help_texts.py:492
 msgid ""
 "Select only clients who are “learning” during the given date.\n"
 "That is, who have an active Study, Training or\n"
@@ -4973,37 +5008,37 @@ msgid ""
 "this criteria."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:491
+#: lino_welfare/modlib/welfare/help_texts.py:497
 msgid ""
 "A proof is some document which certifies that a given person\n"
 "has a given skill."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:493
+#: lino_welfare/modlib/welfare/help_texts.py:499
 msgid ""
 "Abstract base for Skill, SoftSkill and\n"
 "Obstacle."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:495
+#: lino_welfare/modlib/welfare/help_texts.py:501
 msgid ""
 "An obstacle is an observed fact or characteristic of a client\n"
 "which might be reason to not get a given job."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:497
+#: lino_welfare/modlib/welfare/help_texts.py:503
 msgid "A pointer to ObstacleType."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:498
+#: lino_welfare/modlib/welfare/help_texts.py:504
 msgid "The agent who observed this obstacle."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:499
+#: lino_welfare/modlib/welfare/help_texts.py:505
 msgid "The date when the agent observed this obstacle."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/help_texts.py:500
+#: lino_welfare/modlib/welfare/help_texts.py:506
 msgid "Miscellaneous tests on an empty database."
 msgstr ""
 
@@ -5033,63 +5068,67 @@ msgid ""
 "contract."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:139
+#: lino_welfare/modlib/welfare/user_types.py:155
 msgid "Anonymous"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:141
+#: lino_welfare/modlib/welfare/user_types.py:157
 msgid "Integration agent"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:142
+#: lino_welfare/modlib/welfare/user_types.py:158
 msgid "Integration agent (Manager)"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:143
-msgid "Integration agent (Newcomers)"
+#: lino_welfare/modlib/welfare/user_types.py:159
+msgid "Integration agent (Flexible)"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:144
+#: lino_welfare/modlib/welfare/user_types.py:160
 msgid "Newcomers consultant"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:145
+#: lino_welfare/modlib/welfare/user_types.py:161
 msgid "Reception clerk"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:146
-msgid "Newcomers reception clerk"
+#: lino_welfare/modlib/welfare/user_types.py:162
+msgid "Reception clerk (Flexible)"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:147
+#: lino_welfare/modlib/welfare/user_types.py:163
 msgid "Debts consultant"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:148
+#: lino_welfare/modlib/welfare/user_types.py:164
 msgid "Social agent"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:149
+#: lino_welfare/modlib/welfare/user_types.py:165
 msgid "Social agent (Manager)"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:150
+#: lino_welfare/modlib/welfare/user_types.py:166
+msgid "Social agent (Flexible)"
+msgstr ""
+
+#: lino_welfare/modlib/welfare/user_types.py:167
 msgid "Accountant"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:151
+#: lino_welfare/modlib/welfare/user_types.py:168
 msgid "Accountant (Manager)"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:152
+#: lino_welfare/modlib/welfare/user_types.py:169
 msgid "Supervisor"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:153
+#: lino_welfare/modlib/welfare/user_types.py:170
 msgid "Administrator"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/user_types.py:154
+#: lino_welfare/modlib/welfare/user_types.py:171
 msgid "Security advisor"
 msgstr ""
 
@@ -5102,105 +5141,105 @@ msgstr ""
 msgid "First meeting"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:203
+#: lino_welfare/modlib/welfare/fixtures/demo.py:209
 msgid "Colleague"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:356
+#: lino_welfare/modlib/welfare/fixtures/demo.py:364
 msgid "Consultations with client"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:357
+#: lino_welfare/modlib/welfare/fixtures/demo.py:365
 msgid "Consultation"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:370
+#: lino_welfare/modlib/welfare/fixtures/demo.py:378
 msgid "External meetings with client"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:371
-#: lino_welfare/modlib/welfare/fixtures/demo.py:390
+#: lino_welfare/modlib/welfare/fixtures/demo.py:379
+#: lino_welfare/modlib/welfare/fixtures/demo.py:398
 msgid "External meeting"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:375
+#: lino_welfare/modlib/welfare/fixtures/demo.py:383
 msgid "Informational meetings"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:376
+#: lino_welfare/modlib/welfare/fixtures/demo.py:384
 msgid "Informational meeting"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:380
+#: lino_welfare/modlib/welfare/fixtures/demo.py:388
 msgid "Internal meetings"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:381
+#: lino_welfare/modlib/welfare/fixtures/demo.py:389
 msgid "Internal meeting"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:389
+#: lino_welfare/modlib/welfare/fixtures/demo.py:397
 msgid "External meetings"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:398
+#: lino_welfare/modlib/welfare/fixtures/demo.py:406
 msgid "Private"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:532
+#: lino_welfare/modlib/welfare/fixtures/demo.py:540
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:49
 msgid "Health insurance"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:557
+#: lino_welfare/modlib/welfare/fixtures/demo.py:565
 msgid "Advocate"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:567
+#: lino_welfare/modlib/welfare/fixtures/demo.py:575
 msgid "Bailiff"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:580
+#: lino_welfare/modlib/welfare/fixtures/demo.py:588
 msgid "Debt collecting company"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:659
+#: lino_welfare/modlib/welfare/fixtures/demo.py:667
 msgid "Employment office"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:671
+#: lino_welfare/modlib/welfare/fixtures/demo.py:679
 msgid "Physician"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:679
+#: lino_welfare/modlib/welfare/fixtures/demo.py:687
 msgid "Family doctor"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:687
+#: lino_welfare/modlib/welfare/fixtures/demo.py:695
 msgid "Dentist"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:697
+#: lino_welfare/modlib/welfare/fixtures/demo.py:705
 msgid "Pediatrician"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:889
+#: lino_welfare/modlib/welfare/fixtures/demo.py:897
 msgid "A very hard job."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:891
+#: lino_welfare/modlib/welfare/fixtures/demo.py:899
 msgid "No supervisor. Only for independent people."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:1097
+#: lino_welfare/modlib/welfare/fixtures/demo.py:1105
 msgid "Urgent problem"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:1097
+#: lino_welfare/modlib/welfare/fixtures/demo.py:1105
 msgid "Complain"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:1097
+#: lino_welfare/modlib/welfare/fixtures/demo.py:1105
 msgid "Information"
 msgstr ""
 
@@ -5240,115 +5279,115 @@ msgstr ""
 
 #: lino_welfare/modlib/xcourses/__init__.py:33
 #: lino_welfare/modlib/xcourses/__init__.py:34
-#: lino_welfare/modlib/xcourses/models.py:185
+#: lino_welfare/modlib/xcourses/models.py:186
 msgid "Courses"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:52
+#: lino_welfare/modlib/xcourses/models.py:53
 msgid "Course provider"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:53
+#: lino_welfare/modlib/xcourses/models.py:54
 msgid "Course providers"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:86
+#: lino_welfare/modlib/xcourses/models.py:87
 msgid "Course Content"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:87
+#: lino_welfare/modlib/xcourses/models.py:88
 msgid "Course Contents"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:117
+#: lino_welfare/modlib/xcourses/models.py:118
 msgid "Course Offer"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:118
+#: lino_welfare/modlib/xcourses/models.py:119
 msgid "Course Offers"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:128
+#: lino_welfare/modlib/xcourses/models.py:129
 msgid "Default guest role for particpants of events."
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:184
+#: lino_welfare/modlib/xcourses/models.py:185
 msgid "Course"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:213
+#: lino_welfare/modlib/xcourses/models.py:214
 msgid "List of candidates"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:216
+#: lino_welfare/modlib/xcourses/models.py:217
 msgid "List of participants"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:262
+#: lino_welfare/modlib/xcourses/models.py:263
 msgid "List of possible states of a Course Request"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:286
+#: lino_welfare/modlib/xcourses/models.py:287
 msgctxt "courses"
 msgid "Open"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:289
+#: lino_welfare/modlib/xcourses/models.py:290
 msgctxt "courses"
 msgid "Registered"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:290
+#: lino_welfare/modlib/xcourses/models.py:291
 msgctxt "courses"
 msgid "Passed"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:291
-msgid "Award"
-msgstr ""
-
 #: lino_welfare/modlib/xcourses/models.py:292
-msgctxt "courses"
-msgid "Failed"
+msgid "Award"
 msgstr ""
 
 #: lino_welfare/modlib/xcourses/models.py:293
 msgctxt "courses"
-msgid "Aborted"
+msgid "Failed"
 msgstr ""
 
 #: lino_welfare/modlib/xcourses/models.py:294
+msgctxt "courses"
+msgid "Aborted"
+msgstr ""
+
+#: lino_welfare/modlib/xcourses/models.py:295
 msgid "Inactive"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:298
+#: lino_welfare/modlib/xcourses/models.py:299
 msgctxt "courses"
 msgid "Register"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:300
+#: lino_welfare/modlib/xcourses/models.py:301
 msgid "Register this candidate for this course."
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:308
+#: lino_welfare/modlib/xcourses/models.py:309
 msgid "Cannot register to unknown course."
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:311
+#: lino_welfare/modlib/xcourses/models.py:312
 #, python-format
 msgid "%(person)s has been registered to %(course)s"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:317
+#: lino_welfare/modlib/xcourses/models.py:318
 msgctxt "courses"
 msgid "Unregister"
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:319
+#: lino_welfare/modlib/xcourses/models.py:320
 msgid "Unregister this candidate from this course."
 msgstr ""
 
-#: lino_welfare/modlib/xcourses/models.py:328
+#: lino_welfare/modlib/xcourses/models.py:329
 #, python-format
 msgid "%(person)s has been unregistered from %(course)s"
 msgstr ""
@@ -5557,7 +5596,7 @@ msgid "Obstacle"
 msgstr ""
 
 #: lino_welfare/projects/chatelet/modlib/cv/models.py:241
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:185
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:187
 msgid "Obstacles"
 msgstr ""
 
@@ -5581,15 +5620,15 @@ msgstr ""
 msgid "Family problems"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/isip/models.py:46
+#: lino_welfare/projects/chatelet/modlib/isip/models.py:41
 msgid "Evaluations"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/isip/models.py:51
+#: lino_welfare/projects/chatelet/modlib/isip/models.py:46
 msgid "Duties"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:71
+#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:72
 msgid "Family situation"
 msgstr ""
 
@@ -5597,7 +5636,7 @@ msgstr ""
 msgid "Coach"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/settings/__init__.py:106
+#: lino_welfare/projects/chatelet/settings/__init__.py:108
 msgid "Contact details"
 msgstr ""
 

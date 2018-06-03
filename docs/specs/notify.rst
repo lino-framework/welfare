@@ -142,7 +142,7 @@ I was not possible until now to override the `verbose_name` of the
 
 
 >>> ses = rt.login("robin")
->>> ses.show(rt.actors.notify.AllMessages)
+>>> ses.show(rt.models.notify.AllMessages)
 ===================== ======================================= ================== ====== =====================
  Created               Subject                                 Recipient          seen   sent
 --------------------- --------------------------------------- ------------------ ------ ---------------------
@@ -162,7 +162,7 @@ I was not possible until now to override the `verbose_name` of the
 ===================== ======================================= ================== ====== =====================
 <BLANKLINE>
 
->>> ses.show(rt.actors.notify.MyMessages)
+>>> ses.show(rt.models.notify.MyMessages)
 ===================== ==================================== ============== ==========
  Created               Subject                              Message Type   Workflow
 --------------------- ------------------------------------ -------------- ----------

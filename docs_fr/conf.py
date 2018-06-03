@@ -9,12 +9,21 @@ templates_path = []
 from lino.sphinxcontrib import configure
 configure(globals(), 'lino_welfare.projects.chatelet.settings.doctests')
 
+# from atelier.sphinxconf import interproject
+# interproject.configure(globals())
+intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
-interproject.configure(globals())
+interproject.configure(globals(), 'lino_welfare')
+intersphinx_mapping['book'] = (
+    'http://www.lino-framework.org', None)
+
 
 extensions += ['atelier.sphinxconf.blog']
 extensions += ['lino.sphinxcontrib.logo']
 extensions += ['lino.sphinxcontrib.actordoc']
+
+extlinks.update(
+    ticket=('http://bugs.saffre-rumma.net/tickets/Ticket/%s', '#'))
 
 import alabaster
 extensions.append('alabaster')

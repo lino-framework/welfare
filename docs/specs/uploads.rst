@@ -95,7 +95,7 @@ Identifizierendes Dokument: *8*
 Here is another client with three uploads:
 
 >>> oldclient = pcsw.Client.objects.get(pk=124)
->>> print(unicode(oldclient))
+>>> print(str(oldclient))
 DOBBELSTEIN Dorothée (124)
 
 >>> rt.show(uploads.UploadsByClient, oldclient)
@@ -122,10 +122,10 @@ My uploads
 
 Most users can open two tables which show "their" uploads.
 
->>> print(unicode(uploads.MyUploads.label))
+>>> print(str(uploads.MyUploads.label))
 Meine Uploads
 
->>> print(unicode(uploads.MyExpiringUploads.label))
+>>> print(str(uploads.MyExpiringUploads.label))
 Ablaufende Uploads
 
 This is the MyUploads table for Theresia:

@@ -1,4 +1,4 @@
-# Copyright 2014-2015 Luc Saffre
+# Copyright 2014-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -97,8 +97,16 @@ from lino.api import ad, _
 
 
 class Plugin(ad.Plugin):
-
+    """The plugin."""
     verbose_name = _("Aids")
+
+    no_date_range_veto_until = None
+    """
+    Optionally specify the primary key (an integer) of the last
+    granting for whose confirmations you want to suppress checking of
+    date range.  This is useful for keeping legacy confirmations that
+    have been issued before the rule was activated.
+    """
 
     def setup_main_menu(config, site, user_type, m):
         menu_host = site.plugins.pcsw

@@ -29,8 +29,8 @@ from lino.api import rt, dd
 
 
 def objects():
-    TT = rt.modules.immersion.ContractType
-    Goal = rt.modules.immersion.Goal
+    TT = rt.models.immersion.ContractType
+    Goal = rt.models.immersion.Goal
 
     def str2obj(model, name, **kwargs):
         kwargs.update(dd.str2kw('name', name))
@@ -51,6 +51,6 @@ def objects():
         primary=True, certifying=True,
         #template='Default.odt',
         **dd.str2kw('name', _("Immersion training")))
-    yield rt.modules.excerpts.ExcerptType.update_for_model(
+    yield rt.models.excerpts.ExcerptType.update_for_model(
         'immersion.Contract', **kw)
 

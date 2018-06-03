@@ -43,13 +43,13 @@ class Signers(dd.Model):
     class Meta:
         abstract = True
 
-    signer1 = models.ForeignKey(
+    signer1 = dd.ForeignKey(
         "contacts.Person",
         related_name="%(app_label)s_%(class)s_set_by_signer1",
         #~ default=default_signer1,
         verbose_name=_("Secretary"))
 
-    signer2 = models.ForeignKey(
+    signer2 = dd.ForeignKey(
         "contacts.Person",
         related_name="%(app_label)s_%(class)s_set_by_signer2",
         #~ default=default_signer2,

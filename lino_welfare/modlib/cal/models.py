@@ -45,7 +45,7 @@ def you_are_busy_messages(ar):
     """Yield :message:`You are busy in XXX` messages for the welcome
 page."""
 
-    events = rt.modules.cal.Event.objects.filter(
+    events = rt.models.cal.Event.objects.filter(
         user=ar.get_user(), guest__state=GuestStates.busy).distinct()
     if events.count() > 0:
         chunks = [str(_("You are busy in "))]
@@ -129,7 +129,7 @@ dd.inject_field(
 @dd.python_2_unicode_compatible
 class Event(Event):
 
-    # course = models.ForeignKey(
+    # course = dd.ForeignKey(
     #     "courses.Course", blank=True, null=True,
     #     help_text=_("Fill in only if this event is a session of a course."))
 
@@ -204,8 +204,8 @@ class Event(Event):
         if client is None:
             return
         if self.event_type and self.event_type.invite_client:
-            Guest = rt.modules.cal.Guest
-            GuestStates = rt.modules.cal.GuestStates
+            Guest = rt.models.cal.Guest
+            GuestStates = rt.models.cal.GuestStates
             st = GuestStates.accepted
             yield Guest(event=self,
                         partner=client,
@@ -223,6 +223,7 @@ class EntriesByClient(Events):
     required_roles = dd.login_required((OfficeUser, OfficeOperator))
     # master_key = 'project'
     # master = 'cal.Event'
+    order_by = ["-start_date", "-start_time", "id"]
     master = 'pcsw.Client'
     auto_fit_column_widths = True
     column_names = 'when_text user summary workflow_buttons *'
@@ -291,7 +292,7 @@ class Guest(Guest):
 
     @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
     def client(self, ar):
-        Client = rt.modules.pcsw.Client
+        Client = rt.models.pcsw.Client
         try:
             return Client.objects.get(pk=self.partner.pk)
         except Client.DoesNotExist:
@@ -334,7 +335,7 @@ def customize_cal(sender, **kw):
     # invite_client
     # """, window_size=(60, 'auto'))
 
-    rt.modules.cal.Guests.set_detail_layout("""
+    rt.models.cal.Guests.set_detail_layout("""
     event partner role
     state remark workflow_buttons
     waiting_since busy_since gone_since
@@ -415,7 +416,7 @@ assigned_to event_type room workflow_buttons *'
 class EntriesByController(EntriesByController):
     column_names = 'when_html summary user \
     assigned_to workflow_buttons *'
-    slave_grid_format = 'grid'
+    display_mode = 'grid'
 
 # EntriesByController.column_names = 'when_html summary user \
 # assigned_to workflow_buttons *'

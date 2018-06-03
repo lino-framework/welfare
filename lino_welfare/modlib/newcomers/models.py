@@ -23,7 +23,7 @@ Defines the models :class:`Broker`, :class:`Faculty` and
 Tables like :class:`NewClients`, :class:`AvailableCoaches`,
 :class:`AvailableCoachesByClient`.
 
-See also :ref:`welfare.tested.newcomers`.
+See also :ref:`welfare.specs.newcomers`.
 
 """
 
@@ -142,7 +142,7 @@ class Competence(UserAuthored, mixins.Sequenced):
         verbose_name = _("Competence")
         verbose_name_plural = _("Competences")
 
-    faculty = models.ForeignKey('newcomers.Faculty')
+    faculty = dd.ForeignKey('newcomers.Faculty')
     weight = models.IntegerField(
         _("Work effort"),  # Arbeitsaufwand
         blank=True,
@@ -289,7 +289,7 @@ class AvailableCoaches(Users):
     label = _("Available Coaches")
     column_names = 'name_column workflow_buttons:10 primary_clients new_clients newcomer_quota current_weight added_weight score'
     parameters = dict(
-        for_client=models.ForeignKey(
+        for_client=dd.ForeignKey(
             'pcsw.Client',
             verbose_name=_("Show suggested agents for"), blank=True),
         since=models.DateField(
@@ -371,7 +371,7 @@ class AvailableCoaches(Users):
     @dd.requestfield(_("Primary clients"))
     def primary_clients(self, obj, ar):
         #~ return pcsw.ClientsByCoach1.request(ar.ui,master_instance=obj)
-        return rt.actors.coachings.CoachingsByUser.request(master_instance=obj)
+        return rt.models.coachings.CoachingsByUser.request(master_instance=obj)
 
     #~ @dd.requestfield(_("Active clients"))
     #~ def active_clients(self,obj,ar):
@@ -466,7 +466,9 @@ class AssignCoach(NotifyingAction):
         coaching = rt.models.coachings.Coaching(
             client=client, user=obj,
             start_date=settings.SITE.today(),
+            primary=True,
             type=obj.coaching_type)
+        coaching.adapt_primary()
         coaching.full_clean()
         coaching.save()
         dd.on_ui_created.send(coaching, request=ar.request)
@@ -492,7 +494,7 @@ class AvailableCoachesByClient(AvailableCoaches):
 
     assign_coach = AssignCoach()
 
-    #~ slave_grid_format = 'html'
+    #~ display_mode = 'html'
     editable = False
     hide_sums = True
 

@@ -55,10 +55,10 @@ class TestCase(TestCase):
         user.
 
         """
-        ContentType = rt.modules.contenttypes.ContentType
-        Obstacle = rt.modules.cv.Obstacle
-        ObstacleType = rt.modules.cv.ObstacleType
-        Client = rt.modules.pcsw.Client
+        ContentType = rt.models.contenttypes.ContentType
+        Obstacle = rt.models.cv.Obstacle
+        ObstacleType = rt.models.cv.ObstacleType
+        Client = rt.models.pcsw.Client
         User = settings.SITE.user_model
 
         robin = create_row(
@@ -75,10 +75,10 @@ class TestCase(TestCase):
         self.assertEqual(obj.first_name, "First")
 
         self.assertEqual(
-            rt.actors.cv.ObstaclesByPerson.column_names,
+            rt.models.cv.ObstaclesByPerson.column_names,
             "type user detected_date remark  *")
 
-        rh = rt.actors.cv.ObstaclesByPerson.get_handle()
+        rh = rt.models.cv.ObstaclesByPerson.get_handle()
         colnames = [col.name for col in rh.get_columns()]
         self.assertEqual(
             'type user detected_date remark id workflow_buttons mobile_item overview person',
@@ -117,7 +117,7 @@ class TestCase(TestCase):
         without warning.
 
         """
-        Client = rt.modules.pcsw.Client
+        Client = rt.models.pcsw.Client
         User = settings.SITE.user_model
 
         User(username='robin', user_type=UserTypes.admin).save()
@@ -147,17 +147,17 @@ class TestCase(TestCase):
 
         """
         User = settings.SITE.user_model
-        Guest = rt.modules.cal.Guest
-        Event = rt.modules.cal.Event
-        EventType = rt.modules.cal.EventType
-        GuestRole = rt.modules.cal.GuestRole
-        Recurrencies = rt.modules.cal.Recurrencies
-        Room = rt.modules.cal.Room
+        Guest = rt.models.cal.Guest
+        Event = rt.models.cal.Event
+        EventType = rt.models.cal.EventType
+        GuestRole = rt.models.cal.GuestRole
+        Recurrencies = rt.models.cal.Recurrencies
+        Room = rt.models.cal.Room
         Enrolment = rt.models.courses.Enrolment
         Course = rt.models.courses.Course
         Line = rt.models.courses.Line
         EnrolmentStates = rt.models.courses.EnrolmentStates
-        Pupil = rt.modules.pcsw.Client
+        Pupil = rt.models.pcsw.Client
 
         robin = User(username='robin', user_type=UserTypes.admin)
         robin.save()

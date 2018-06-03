@@ -157,7 +157,7 @@ class TestCase(TestCase):
         georges = Client.objects.get(id=23633)
         self.assertEqual(georges.first_name, "Georges")
 
-        ar = rt.modules.changes.ChangesByMaster.request(georges)
+        ar = rt.models.changes.ChangesByMaster.request(georges)
         self.assertEqual(ar.get_total_count(), 0)
 
         # Company becomes Client
@@ -173,7 +173,7 @@ class TestCase(TestCase):
         obj = Company(name="Müller Max Moritz", id=5088)
         obj.save()
 
-        ar = rt.modules.changes.ChangesByMaster.request(obj)
+        ar = rt.models.changes.ChangesByMaster.request(obj)
         self.assertEqual(ar.get_total_count(), 0)
         
         global PUT_MAX_MORITZ
@@ -637,7 +637,7 @@ class TestCase(TestCase):
 
 
 def changes_to_rst(master):
-    A = settings.SITE.modules.changes.ChangesByMaster
+    A = settings.SITE.models.changes.ChangesByMaster
     return A.request(master).to_rst(
         column_names='user type object diff:30 object_type object_id')
 

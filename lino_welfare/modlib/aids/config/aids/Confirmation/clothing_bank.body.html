@@ -2,11 +2,16 @@
 
 {% block intro -%}
 <p>
+{% if language == 'de' %}
 Wir bescheinigen hiermit, für folgende Personen die Kosten für den Ankauf von
 Kleidung bis in Höhe von 20 EUR zu übernehmen:
+{% else %}
+Par la présente nous confirmons la prise en charge des achats de
+vêtements jusqu'à un montant de 20 € pour les personnes suivantes:
+{% endif %}
 </p>
 <p>
-{{ ar.show(rt.modules.households.RefundsByPerson, obj.client) }}
+{{ ar.show(rt.models.households.RefundsByPerson, obj.client) }}
 </p>
 {%- endblock %}
 

@@ -24,7 +24,7 @@ from lino.api import dd, rt, _
 
 def objects():
 
-    ExcerptType = rt.modules.excerpts.ExcerptType
+    ExcerptType = rt.models.excerpts.ExcerptType
     kw = dict(
         build_method='weasy2pdf',
         certifying=True)

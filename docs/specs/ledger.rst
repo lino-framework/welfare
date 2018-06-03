@@ -63,8 +63,8 @@ also used by :ref:`cosi`:
 
 Some shortcuts:
 
->>> Journal = rt.modules.ledger.Journal
->>> Journals = rt.modules.ledger.Journals
+>>> Journal = rt.models.ledger.Journal
+>>> Journals = rt.models.ledger.Journals
 
 
 
@@ -111,7 +111,7 @@ user_type of an accountant
 
 >>> p = rt.login('wilfried').get_user().user_type
 >>> print(p)
-Buchhalter
+500 (Buchhalter)
 
 Accountants have no direct contact with clients and probably won't use
 the calendar.  But for the first prototype they get :class:`OfficeUser
@@ -309,7 +309,7 @@ The state of a voucher
     >>> obj = vatless.AccountInvoice.objects.get(id=1)
     >>> ar = rt.login("robin").spawn(vatless.Invoices)
     >>> print(tostring(ar.get_data_value(obj, 'workflow_buttons')))
-    <span><b>Registriert</b> &#8594; [Entwurf]</span>
+    <span><b>Registriert</b> → [Entwurf]</span>
     
 
 Movements
@@ -318,7 +318,7 @@ Movements
 Users can consult the movements of a given general account.
 
 >>> obj = accounts.Account.get_by_ref('820/333/01')
->>> print(unicode(obj))
+>>> print(str(obj))
 (820/333/01) Vorschuss auf Vergütungen o.ä.
 
 >>> rt.show(ledger.MovementsByAccount, obj)

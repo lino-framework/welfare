@@ -38,19 +38,19 @@ def n2dec(v):
 
 def objects():
 
-    User = rt.modules.users.User
-    Household = rt.modules.households.Household
-    Budget = rt.modules.debts.Budget
-    Entry = rt.modules.debts.Entry
-    Account = rt.modules.debts.Account
-    Company = rt.modules.contacts.Company
+    User = rt.models.users.User
+    Household = rt.models.households.Household
+    Budget = rt.models.debts.Budget
+    Entry = rt.models.debts.Entry
+    Account = rt.models.debts.Account
+    Company = rt.models.contacts.Company
 
     kerstin = User(username="kerstin",
                    first_name="Kerstin", last_name=u"Kerres",
                    user_type='300')
     yield kerstin
     user_types = [
-        p for p in rt.modules.users.UserTypes.get_list_items()
+        p for p in rt.models.users.UserTypes.get_list_items()
         if p.has_required_roles([DebtsUser])]
     USERS = Cycler(User.objects.filter(user_type__in=user_types))
 
@@ -68,7 +68,7 @@ def objects():
     LIABILITIES = Cycler(Account.objects.filter(
         type=AccountTypes.liabilities))
     EXPENSE_REMARKS = Cycler(_("Shopping"), _("Cinema"), _("Seminar"))
-    # qs = rt.modules.contacts.Companies.request().data_iterator
+    # qs = rt.models.contacts.Companies.request().data_iterator
     # qs = qs.filter(client_contact_type__is_bailiff=True)
     BAILIFFS = Cycler(
         Company.objects.filter(client_contact_type__is_bailiff=True))

@@ -34,7 +34,7 @@ Requesting for JSON data
 >>> json_fields = 'count rows title success no_data_text'
 >>> demo_get('rolf', 'api/xcourses/CourseOffers', json_fields, 4, **kw)
 
->>> ContentType = rt.modules.contenttypes.ContentType
+>>> ContentType = rt.models.contenttypes.ContentType
 >>> json_fields = 'count rows title success no_data_text param_values'
 >>> demo_get('rolf', 'api/xcourses/PendingCourseRequests', json_fields, 20, **kw)
 

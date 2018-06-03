@@ -37,7 +37,7 @@ The :class:`EntriesByController
 <lino_xl.lib.cal.ui.EntriesByController>` table shows the evaluation
 events which have been generated.
 
->>> settings.SITE.site_config.hide_events_before = None
+>>> settings.SITE.site_config.update(hide_events_before=None)
 
 For example let's look at ISIP contract #26 of the demo database.
 
@@ -234,7 +234,7 @@ The above is coded in
     ...     ar = cal.EntriesByController.request(master_instance=obj)
     ...     names = set([e.user.username for e in ar])
     ...     if len(names) > 1:
-    ...         l.append(unicode(obj))
+    ...         l.append(str(obj))
     >>> print(len(l))
     15
     >>> print(', '.join(l))

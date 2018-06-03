@@ -108,7 +108,7 @@ class Contracts(ContractBaseTable):
     """
 
     parameters = dict(
-        type=models.ForeignKey(
+        type=dd.ForeignKey(
             'immersion.ContractType', blank=True,
             verbose_name=_("Only immersion trainings of type")),
         **ContractBaseTable.parameters)

@@ -27,7 +27,7 @@ def objects():
     from lino_welfare.modlib.debts.fixtures.minimal import objects
     yield objects()
 
-    ExcerptType = rt.modules.excerpts.ExcerptType
+    ExcerptType = rt.models.excerpts.ExcerptType
     kw = dict(
         # template='Default.odt',
         certifying=True)

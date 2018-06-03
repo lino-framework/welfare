@@ -52,7 +52,7 @@ def objects():
 
     STUDY_TYPES = Cycler(cv.StudyType.objects.all())
 
-    COMPANIES = Cycler(rt.modules.contacts.Company.objects.all()[:5])
+    COMPANIES = Cycler(rt.models.contacts.Company.objects.all()[:5])
     NORMAL_CONTRACT_ENDINGS = Cycler(
         isip.ContractEnding.objects.filter(needs_date_ended=False))
     PREMATURE_CONTRACT_ENDINGS = Cycler(
@@ -60,8 +60,8 @@ def objects():
     JOBS_CONTRACT_DURATIONS = Cycler(312, 480, 624)
 
     if dd.is_installed('aids'):
-        Granting = rt.modules.aids.Granting
-        AidType = rt.modules.aids.AidType
+        Granting = rt.models.aids.Granting
+        AidType = rt.models.aids.AidType
         INTEG_DUTIES = Cycler(AidType.objects.filter(is_integ_duty=True))
 
     ar = rt.login('alicia')
@@ -229,9 +229,9 @@ def objects():
         
     if dd.is_installed('immersion'):
         # Extra loop on immersion trainings to print one of every type
-        ExcerptType = rt.modules.excerpts.ExcerptType
-        CT = rt.modules.immersion.ContractType
-        Contract = rt.modules.immersion.Contract
+        ExcerptType = rt.models.excerpts.ExcerptType
+        CT = rt.models.immersion.ContractType
+        Contract = rt.models.immersion.Contract
         ses = rt.login("alicia")
         for ct in CT.objects.all():
             # There must be at least one contract per type

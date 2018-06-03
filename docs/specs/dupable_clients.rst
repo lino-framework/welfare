@@ -1,5 +1,5 @@
 .. doctest docs/specs/dupable_clients.rst
-.. _welfare.tested.dupe_clients:
+.. _welfare.specs.dupe_clients:
 
 ===========================
 Avoiding duplicate clients
@@ -74,7 +74,7 @@ Dobbelstein-Demeulenaere as an example of accidental duplicate data
 entry.  Dorothée exists 3 times in our database:
 
 >>> for p in pcsw.Client.objects.filter(name__contains="Dorothée"):
-...     print(unicode(p))
+...     print(str(p))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 DEMEULENAERE Dorothée (122)
 DOBBELSTEIN Dorothée (124)

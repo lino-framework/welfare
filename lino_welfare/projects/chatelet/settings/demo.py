@@ -8,6 +8,8 @@ class Site(Site):
     # ignore_dates_after = datetime.date(2019, 05, 22)
     use_java = False
     # use_silk_icons = True  # temporarily
+    webdav_protocol = 'webdav'
+    beid_protocol = 'beid'
 
 
 SITE = Site(globals())

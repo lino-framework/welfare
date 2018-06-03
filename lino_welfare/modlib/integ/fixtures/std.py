@@ -47,7 +47,6 @@ def objects():
     client_calendar = event_type(invite_client=True, **kw)
     yield client_calendar
     settings.SITE.site_config.update(client_calendar=client_calendar)
-    yield settings.SITE.site_config
 
     kw = dict()
     kw.update(dd.str2kw('name', _("Evaluation")))

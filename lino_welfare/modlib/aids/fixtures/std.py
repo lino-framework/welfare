@@ -27,10 +27,10 @@ from lino.api import dd, rt
 
 def objects():
 
-    IncomeConfirmation = rt.modules.aids.IncomeConfirmation
-    RefundConfirmation = rt.modules.aids.RefundConfirmation
-    SimpleConfirmation = rt.modules.aids.SimpleConfirmation
-    ConfirmationTypes = rt.modules.aids.ConfirmationTypes
+    IncomeConfirmation = rt.models.aids.IncomeConfirmation
+    RefundConfirmation = rt.models.aids.RefundConfirmation
+    SimpleConfirmation = rt.models.aids.SimpleConfirmation
+    ConfirmationTypes = rt.models.aids.ConfirmationTypes
 
     aidType = Instantiator(
         'aids.AidType',
@@ -139,7 +139,7 @@ def objects():
     kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
 
-    croix_rouge = rt.modules.contacts.Company(name="Belgisches Rotes Kreuz")
+    croix_rouge = rt.models.contacts.Company(name="Belgisches Rotes Kreuz")
     yield croix_rouge
 
     kw = dd.babelkw(
@@ -190,9 +190,9 @@ def objects():
     yield Decider(**dd.str2kw(
         'name', _("Permanent Board (PB)")))  # Ständiges Präsidium (SP)
 
-    ContentType = rt.modules.contenttypes.ContentType
-    ExcerptType = rt.modules.excerpts.ExcerptType
-    ConfirmationTypes = rt.modules.aids.ConfirmationTypes
+    ContentType = rt.models.contenttypes.ContentType
+    ExcerptType = rt.models.excerpts.ExcerptType
+    ConfirmationTypes = rt.models.aids.ConfirmationTypes
     for ct in ConfirmationTypes.items():
         kw = dict(
             body_template='certificate.body.html',

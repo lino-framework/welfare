@@ -149,7 +149,7 @@ class AidType(ContactRelated, ExcerptTitle):
 
     short_name = models.CharField(max_length=50, blank=True)
 
-    board = models.ForeignKey('boards.Board', blank=True, null=True)
+    board = dd.ForeignKey('boards.Board', blank=True, null=True)
 
     print_directly = models.BooleanField(_("Print directly"), default=True)
 
@@ -218,7 +218,7 @@ class AidTypes(dd.Table):
 class GrantingManager(models.Manager):
 
     def get_by_aidtype(self, client, period, **aidtype_filter):
-        at_list = rt.modules.aids.AidType.objects.filter(**aidtype_filter)
+        at_list = rt.models.aids.AidType.objects.filter(**aidtype_filter)
         qs = self.get_queryset()
         qs = qs.filter(client=client, aid_type__in=at_list)
         qs = PeriodEvents.active.add_filter(qs, period)
@@ -267,9 +267,9 @@ class Granting(Confirmable, BoardDecision):
 
     objects = GrantingManager()
 
-    client = models.ForeignKey('pcsw.Client')
-    aid_type = models.ForeignKey('aids.AidType')
-    category = models.ForeignKey('aids.Category', blank=True, null=True)
+    client = dd.ForeignKey('pcsw.Client')
+    aid_type = dd.ForeignKey('aids.AidType')
+    category = dd.ForeignKey('aids.Category', blank=True, null=True)
     request_date = models.DateField(
         _("Date of request"), blank=True, null=True)
 
@@ -298,7 +298,7 @@ class Granting(Confirmable, BoardDecision):
     def get_pharmacies(self, **kw):
         pt = self.aid_type.pharmacy_type
         if pt:
-            return rt.modules.contacts.Company.objects.filter(
+            return rt.models.contacts.Company.objects.filter(
                 client_contact_type=pt, **kw)
         return []
 
@@ -530,13 +530,13 @@ class Confirmations(dd.Table):
 
     @dd.virtualfield(models.IntegerField(_("Adults")))
     def num_adults(self, obj, ar):
-        ac = rt.modules.households.RefundsByPerson.get_adults_and_children(
+        ac = rt.models.households.RefundsByPerson.get_adults_and_children(
             obj.client, obj.start_date or obj.end_date or dd.today())
         return ac[0]
 
     @dd.virtualfield(models.IntegerField(_("Children")))
     def num_children(self, obj, ar):
-        ac = rt.modules.households.RefundsByPerson.get_adults_and_children(
+        ac = rt.models.households.RefundsByPerson.get_adults_and_children(
             obj.client, obj.start_date or obj.end_date or dd.today())
         return ac[1]
             
@@ -708,7 +708,7 @@ class IncomeConfirmation(Confirmation):
         verbose_name = _("Income confirmation")
         verbose_name_plural = _("Income confirmations")
 
-    category = models.ForeignKey('aids.Category', blank=True, null=True)
+    category = dd.ForeignKey('aids.Category', blank=True, null=True)
 
     amount = dd.PriceField(_("Amount"), blank=True, null=True)
 
@@ -855,11 +855,11 @@ class RefundConfirmation(Confirmation):
         if doctor_type:
             fkw.update(client_contact_type=doctor_type)
         else:
-            qs = rt.modules.clients.ClientContactType.objects.filter(
+            qs = rt.models.clients.ClientContactType.objects.filter(
                 can_refund=True)
             fkw.update(client_contact_type__in=qs)
             
-        return rt.modules.contacts.Person.objects.filter(**fkw)
+        return rt.models.contacts.Person.objects.filter(**fkw)
 
     def create_doctor_choice(self, text):
         """The :meth:`create_FOO_choice
@@ -884,7 +884,7 @@ class RefundConfirmation(Confirmation):
         """
         if not self.doctor_type_id:
             raise ValidationError(_("Cannot auto-create without doctor type"))
-        Person = rt.modules.contacts.Person
+        Person = rt.models.contacts.Person
         kw = parse_name(text)
         if len(kw) != 2:
             raise ValidationError(
@@ -899,7 +899,7 @@ class RefundConfirmation(Confirmation):
 
     @dd.chooser()
     def doctor_type_choices(cls):
-        return rt.modules.clients.ClientContactType.objects.filter(
+        return rt.models.clients.ClientContactType.objects.filter(
             can_refund=True)
 
     def full_clean(self):

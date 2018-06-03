@@ -33,7 +33,7 @@ from lino.utils import Cycler
 
 def demo_polls():
 
-    polls = rt.modules.polls
+    polls = rt.models.polls
 
     name = dd.str2kw('name', _("Acquired"))['name']
     acquired = polls.ChoiceSet.objects.get(name=name)
@@ -135,8 +135,8 @@ Antécédents judiciaires?
 
 def demo_responses():
 
-    pcsw = rt.modules.pcsw
-    polls = rt.modules.polls
+    pcsw = rt.models.pcsw
+    polls = rt.models.polls
     PARTNERS = Cycler(pcsw.Client.objects.all())
     alicia = settings.SITE.user_model.objects.get(username="alicia")
 
@@ -160,8 +160,8 @@ def demo_responses():
                 yield polls.AnswerChoice(response=r, question=q, choice=c)
                 i += 1
 
-    first = rt.modules.polls.Poll.get_by_ref("INI")
-    rae = rt.modules.polls.Poll.get_by_ref("RAE")
+    first = rt.models.polls.Poll.get_by_ref("INI")
+    rae = rt.models.polls.Poll.get_by_ref("RAE")
 
     p = PARTNERS.pop()
     yield response(-80, True, p, first)

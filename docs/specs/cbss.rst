@@ -1,5 +1,4 @@
 .. _cbss:
-.. _welfare.tested.cbss:
 .. _welfare.specs.cbss:
 
 ================================

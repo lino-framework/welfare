@@ -34,15 +34,15 @@ from lino.api import dd
 from lino_xl.lib.tim2lino.utils import TimLoader
 from lino_xl.lib.sepa.utils import be2iban
 
-User = rt.modules.users.User
-accounts = rt.modules.accounts
-ledger = rt.modules.ledger
-vatless = rt.modules.vatless
-finan = rt.modules.finan
-contacts = rt.modules.contacts
-pcsw = rt.modules.pcsw
-sepa = rt.modules.sepa
-# Account = rt.modules.accounts.Account
+User = rt.models.users.User
+accounts = rt.models.accounts
+ledger = rt.models.ledger
+vatless = rt.models.vatless
+finan = rt.models.finan
+contacts = rt.models.contacts
+pcsw = rt.models.pcsw
+sepa = rt.models.sepa
+# Account = rt.models.accounts.Account
 
 
 def get_user_or_none(m, pk):
@@ -102,9 +102,9 @@ WANTED_ACCOUNTS = """
 
 
 def wanted_accounts():
-    Account = rt.modules.accounts.Account
-    AccountTypes = rt.modules.accounts.AccountTypes
-    # Group = rt.modules.accounts.Group
+    Account = rt.models.accounts.Account
+    AccountTypes = rt.models.accounts.AccountTypes
+    # Group = rt.models.accounts.Group
     # grp = Group.objects.all()
     for ln in WANTED_ACCOUNTS.splitlines():
         ln = ln.strip()
@@ -129,9 +129,9 @@ class TimLoader(TimLoader):
 
     def unused_load_jnl_alias(self, row, **kw):
         if row.alias == 'IMP':
-            finan = rt.modules.finan
-            ledger = rt.modules.ledger
-            # accounts = rt.modules.accounts
+            finan = rt.models.finan
+            ledger = rt.models.ledger
+            # accounts = rt.models.accounts
             # idgen = row.idgen.strip()
             idgrj = row.idgrj.strip()
             if idgrj == "AAW":
@@ -495,16 +495,16 @@ class Command(BaseCommand):
             models.append(vt.model)
 
         # from lino_xl.lib.ledger.mixins import VoucherItem
-        # models = list(rt.models_by_base(rt.modules.ledger.Voucher))
+        # models = list(rt.models_by_base(rt.models.ledger.Voucher))
         # models += list(rt.models_by_base(VoucherItem))
 
         # from lino_xl.lib.finan.mixins import (FinancialVoucher,
         #                                         FinancialVoucherItem)
         # models = list(rt.models_by_base(FinancialVoucher))
         # models += list(rt.models_by_base(FinancialVoucherItem))
-        # # models.append(rt.modules.ledger.Journal)
-        # models.append(rt.modules.ledger.Voucher)
-        models.append(rt.modules.ledger.Movement)
+        # # models.append(rt.models.ledger.Journal)
+        # models.append(rt.models.ledger.Voucher)
+        models.append(rt.models.ledger.Movement)
         if True:
             for m in models:
                 qs = m.objects.all()

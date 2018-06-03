@@ -4,10 +4,8 @@
 Lino Welfare Functional Specification
 =====================================
 
-This section contains `functional specifications
-<https://en.wikipedia.org/wiki/Functional_specification>`_,
-i.e. documents which describe and test the functionality of some part
-of Lino Welfare.
+This section contains functional specifications, i.e. documents which
+describe and test the functionality of some part of Lino Welfare.
 
 
 General
@@ -21,6 +19,7 @@ General
    clients
    coachings
    users
+   usertypes
    pcsw
    clients
    newcomers
@@ -82,3 +81,5 @@ Châtelet
    courses2
    esf
 
+
+   

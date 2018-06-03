@@ -1,4 +1,4 @@
-.. _welfare.tested.newcomers:
+.. _welfare.specs.newcomers:
 
 =======================
 Newcomers (tested tour)

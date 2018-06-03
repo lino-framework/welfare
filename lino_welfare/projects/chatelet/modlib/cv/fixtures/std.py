@@ -35,10 +35,10 @@ def objects():
     yield stdobjects()
 
     def proof(name):
-        return rt.modules.cv.Proof(**dd.str2kw('name', name))
+        return rt.models.cv.Proof(**dd.str2kw('name', name))
 
     def obstacle_type(name):
-        return rt.modules.cv.ObstacleType(**dd.str2kw('name', name))
+        return rt.models.cv.ObstacleType(**dd.str2kw('name', name))
 
     yield proof(_("Declarative"))
     yield proof(_("Certificate"))

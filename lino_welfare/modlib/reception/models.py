@@ -173,7 +173,7 @@ class CreateClientVisit(dd.Action):
                 client=client, user=pv.user)
             return (subject, '')
         recipients = [ (pv.user, pv.user.mail_mode) ]
-        mt = rt.actors.notify.MessageTypes.reception
+        mt = rt.models.notify.MessageTypes.reception
         rt.models.notify.Message.emit_notification(
             ar, client, mt, msg, recipients)
         ar.success(refresh=True)
@@ -290,7 +290,7 @@ client. Per user you have two possible buttons: (1) a prompt
 consultation (client will wait in the lounge until the user receives
 them) or (2) a scheduled appointment in the user's calendar.
 
-Tested document about :ref:`welfare.tested.reception.AgentsByClient`
+Tested document about :ref:`welfare.specs.reception.AgentsByClient`
 
     """
     label = _("Create appointment with")
@@ -298,7 +298,7 @@ Tested document about :ref:`welfare.tested.reception.AgentsByClient`
     column_names = "user coaching_type actions"
     # master = 'pcsw.Client'
     master_key = 'client'
-    slave_grid_format = 'html'
+    display_mode = 'html'
     # auto_fit_column_widths = True
 
     @classmethod

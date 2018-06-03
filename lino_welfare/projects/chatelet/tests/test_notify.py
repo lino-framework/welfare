@@ -113,7 +113,7 @@ class TestCase(TestCase):
             User, username='alícia', first_name="Alicia",
             user_type='120', language="fr")
         roger = self.create_obj(
-            User, username='róger', user_type='400',
+            User, username='róger', user_type='420',
             language="en")
 
         ses = rt.login('robin')
@@ -139,9 +139,7 @@ class TestCase(TestCase):
             user=alicia)
 
         nt = self.create_obj(NoteType, name="System note")
-        sc = settings.SITE.site_config
-        sc.system_note_type = nt
-        sc.save()
+        settings.SITE.site_config.update(system_note_type=nt)
 
         consultation = self.create_obj(EventType, name="consultation")
 
@@ -170,9 +168,9 @@ class TestCase(TestCase):
             msg.subject,
             "GÉRARD First (100) a commencé d'attendre caróline")
 
-        # id does *not* cause a system note:
+        # it does *not* cause a system note:
         self.assertEqual(Note.objects.count(), 0)
-
+        
         
 
         # When a client is modified, all active coaches get a
@@ -180,6 +178,7 @@ class TestCase(TestCase):
         # Note that Caroline doesn't get a notification because her
         # coaching is not active.
         # Alicia doesn't get a notification because she did it herself.
+        # Roger doesn't get notified because he is user_type 420
 
         data = dict(first_name="Seconda", an="submit_detail")
         kwargs = dict(data=urlencode(data))
@@ -273,6 +272,7 @@ class TestCase(TestCase):
 =================================== ======= ==============
 """)
 
+        # self.check_coachings("")
         self.check_coachings("""
 ==== ====================== ======================== ============ ============= ==========
  ID   Bénéficiaire           En intervention depuis   au           Intervenant   Primaire
@@ -280,7 +280,7 @@ class TestCase(TestCase):
  1    GÉRARD Seconda (101)   01/05/2013               01/05/2014   caróline      Non
  2    GÉRARD Seconda (101)   02/05/2014                            róger         Non
  3    GÉRARD Seconda (101)   20/05/2014                            Alicia        Non
- 4    GÉRARD First (100)     22/05/2014                            caróline      Non
+ 4    GÉRARD First (100)     22/05/2014                            caróline      Oui
 ==== ====================== ======================== ============ ============= ==========
 """)
 
@@ -343,7 +343,7 @@ class TestCase(TestCase):
  1    GÉRARD Seconda (101)   01/05/2013               01/05/2014   caróline      Non
  2    GÉRARD Seconda (101)   02/05/2014               22/05/2014   róger         Non
  3    GÉRARD Seconda (101)   20/05/2014               22/05/2014   Alicia        Non
- 4    GÉRARD First (100)     22/05/2014                            caróline      Non
+ 4    GÉRARD First (100)     22/05/2014                            caróline      Oui
 ==== ====================== ======================== ============ ============= ==========
 """)
         # self.check_notes()
@@ -459,6 +459,6 @@ class TestCase(TestCase):
         msg = Message.objects.all()[0]
         # print msg.body
         self.assertEquivalent(msg.body, """
-<div><p>Subject: test 2<br />Client: [client 101] (Seconda G&#201;RARD)</p><p>Alicia modified [note 4] (test 2):</p><ul><li><b>Body</b> : 1 lines added</li><li><b>Subject</b> : test --&gt; test 2</li></ul></div>
+<div><p>Subject: test 2<br/>Client: [client 101] (Seconda GÉRARD)</p><p>Alicia modified [note 4] (test 2):</p><ul><li><b>Body</b> : 1 lines added</li><li><b>Subject</b> : test --&gt; test 2</li></ul></div>
 """)
 

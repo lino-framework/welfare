@@ -40,7 +40,7 @@ from lino.api import rt
 
 def objects():
 
-    cbss = rt.modules.cbss
+    cbss = rt.models.cbss
 
     DEMO_REQUESTS = [
         [cbss.IdentifyPersonRequest,
@@ -91,7 +91,7 @@ def objects():
 
     User = settings.SITE.user_model
     root = User.objects.get(username='hubert')
-    Client = rt.modules.pcsw.Client
+    Client = rt.models.pcsw.Client
     # CLIENTS = Cycler(Client.objects.all().order_by('id'))
     # mustermann = CLIENTS.pop()
     # print 20150512, Client.objects.all()

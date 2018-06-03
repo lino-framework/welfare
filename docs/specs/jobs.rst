@@ -1,20 +1,19 @@
+.. doctest docs/specs/jobs.rst
 .. _welfare.specs.jobs:
-.. _welfare.tested.jobs:
 
 ===============
 The Jobs plugin
 ===============
 
-.. to test only this document:
-
-    $ doctest docs/specs/jobs.rst
-    
-    doctest initialization:
+.. doctest initialization:
     
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
 
+    Repair database after uncomplete test run:
+    >>> settings.SITE.site_config.update(hide_events_before=i2d(20140401))
+    
 
 The :mod:`lino_welfare.modlib.jobs` plugin provides functionality for
 managing *job supplyment* (German *Art-60§7-Konventionen*, French
@@ -226,7 +225,7 @@ Evaluations of a contract
 -------------------------
 
 >>> obj = jobs.Contract.objects.get(pk=6)
->>> print(unicode(obj.client))
+>>> print(str(obj.client))
 LAMBERTZ Guido (142)
 
 >>> obj.active_period()
@@ -235,7 +234,7 @@ LAMBERTZ Guido (142)
 >>> obj.update_cal_rset()
 ExamPolicy #3 ('Alle 3 Monate')
 
->>> print(unicode(obj.update_cal_rset().event_type))
+>>> print(str(obj.update_cal_rset().event_type))
 Auswertung
 >>> print(obj.update_cal_rset().event_type.max_conflicting)
 4
@@ -245,10 +244,10 @@ Auswertung
 >>> wanted, unwanted = obj.get_wanted_auto_events(ses)
 >>> print(ses.response['info_message'])
 Generating events between 2013-03-04 and 2014-12-02 (max. 72).
-Reached upper date limit 2014-12-02
+Reached upper date limit 2014-12-02 for 7
 
 
->>> settings.SITE.site_config.hide_events_before = None
+>>> settings.SITE.site_config.update(hide_events_before=None)
 
 >>> ses.show(cal.EntriesByController.request(obj),
 ... column_names="when_html summary")
@@ -292,6 +291,14 @@ conflicting events:
 EventType #5 ('Auswertung')
 >>> e.event_type.max_conflicting
 4
+
+
+
+After modifying :attr:`hide_events_before
+<lino.modlib.system.SiteConfig.hide_events_before>` we must tidy up
+and reset it in order to not disturb other test cases:
+
+>>> settings.SITE.site_config.update(hide_events_before=i2d(20140401))
 
 
 JobsOverview
@@ -375,7 +382,7 @@ Printing this report caused a "NotImplementedError: <i> inside
 >>> settings.SITE.default_build_method = "appyodt"
 >>> obj = ses.spawn(jobs.JobsOverview).create_instance()
 >>> rv = ses.run(obj.do_print)  #doctest: +ELLIPSIS
-appy.pod render .../lino/modlib/printing/config/report/Default.odt -> .../media/webdav/userdocs/appyodt/jobs.JobsOverview.odt (language='de',params={'raiseOnError': True, 'ooPort': 8100, 'pythonWithUnoPath': ...}
+appy.pod render .../lino/modlib/printing/config/report/Default.odt -> .../media/webdav/userdocs/appyodt/jobs.JobsOverview.odt
 
 >>> print(rv['success'])
 True

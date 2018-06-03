@@ -23,9 +23,9 @@ from lino.api import dd, rt, _
 
 def objects():
 
-    ExcerptType = rt.modules.excerpts.ExcerptType
+    ExcerptType = rt.models.excerpts.ExcerptType
     Enrolment = rt.models.courses.Enrolment
-    # ContentType = rt.modules.contenttypes.ContentType
+    # ContentType = rt.models.contenttypes.ContentType
     kw = dict(
         # template='Default.odt',
         body_template='enrolment.body.html',

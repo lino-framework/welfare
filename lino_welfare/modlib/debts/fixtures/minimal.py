@@ -27,11 +27,11 @@ from lino.utils.instantiator import Instantiator
 
 
 def objects():
-    AccountTypes = rt.modules.accounts.AccountTypes
-    TableLayouts = rt.modules.debts.TableLayouts
+    AccountTypes = rt.models.accounts.AccountTypes
+    TableLayouts = rt.models.debts.TableLayouts
     # c = accounts.Chart(name="debts.default")
     # yield c
-    # c = rt.modules.accounts.AccountCharts.debts
+    # c = rt.models.accounts.AccountCharts.debts
     group = Instantiator('debts.Group').build
     g = group(
         ref="10", account_type=AccountTypes.incomes,

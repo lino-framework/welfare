@@ -2097,7 +2097,7 @@ class Migrator(Migrator):
         Replaced field `active` by `state` in :ref:`welfare.jobs.Candidature`.
         """
         jobs_Candidature = resolve_model("jobs.Candidature")
-        CandidatureStates = settings.SITE.modules.jobs.CandidatureStates
+        CandidatureStates = settings.SITE.models.jobs.CandidatureStates
 
         def create_jobs_candidature(id, sector_id, function_id, person_id, job_id, date_submitted, remark, active):
             kw = dict()
@@ -3036,7 +3036,7 @@ def doit(a, b):
 
         def after_load(loader):
             "create primary address for all Partners"
-            for o in settings.SITE.modules.contacts.Partner.objects.all():
+            for o in settings.SITE.models.contacts.Partner.objects.all():
                 o.repairdata()
         self.after_load(after_load)
 
@@ -3558,8 +3558,8 @@ valid_until to end_date.
         from lino_xl.lib.accounts.choicelists import AccountCharts
         bv2kw = globals_dict['bv2kw']
 
-        accounts_Group = rt.modules.accounts.Group
-        accounts_Account = rt.modules.accounts.Account
+        accounts_Group = rt.models.accounts.Group
+        accounts_Account = rt.models.accounts.Account
 
         def create_accounts_group(id, name, chart_id, ref, account_type, entries_layout):
             kw = dict()

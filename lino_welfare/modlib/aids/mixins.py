@@ -150,7 +150,7 @@ class Confirmable(mixins.DateRange):
     manager_roles_required = dd.login_required()
     workflow_state_field = 'state'
 
-    signer = models.ForeignKey(
+    signer = dd.ForeignKey(
         settings.SITE.user_model,
         verbose_name=pgettext("aids", "Signer"),
         blank=True, null=True,
@@ -176,7 +176,7 @@ class Confirmable(mixins.DateRange):
 
     @classmethod
     def setup_parameters(cls, fields):
-        fields.update(signer=models.ForeignKey(
+        fields.update(signer=dd.ForeignKey(
             settings.SITE.user_model,
             verbose_name=pgettext("aids", "Signer"),
             blank=True, null=True))
@@ -265,7 +265,7 @@ class Confirmation(
 
     client = dd.ForeignKey(
         'pcsw.Client', related_name="%(app_label)s_%(class)s_set_by_client")
-    granting = models.ForeignKey('aids.Granting', blank=True, null=True)
+    granting = dd.ForeignKey('aids.Granting', blank=True, null=True)
     remark = dd.RichTextField(
         _("Remark"), blank=True, format='html')
     language = dd.LanguageField(blank=True)
@@ -290,26 +290,37 @@ class Confirmation(
             return '%s/%s' % (self.granting, self.pk)
         return '%s #%s' % (self._meta.verbose_name, self.pk)
 
+    def get_date_range_veto(obj):
+        """
+        Return an error message if this confirmation lies outside of
+        granted period.
+        """
+        pk = dd.plugins.aids.no_date_range_veto_until
+        if pk and obj.pk and obj.pk <= pk:
+            return
+        gp = obj.granting.get_period()
+        if obj.start_date or obj.end_date:
+            cp = obj.get_period()
+            if cp[1] is None: cp = (cp[0], cp[0])
+            if not encompass(gp, cp):
+                return _(
+                    "Date range %(p1)s lies outside of granted "
+                    "period %(p2)s.") % dict(
+                        p2=rangefmt(gp), p1=rangefmt(cp))
+                
     def full_clean(self):
         super(Confirmation, self).full_clean()
         if self.granting is None:
             return
-        if False:  # deactivated 20170318 after #1354
-            # since 20171220 the following logic is implemented as a data checker instead because Lino should complain about the problem,
-            gp = self.granting.get_period()
-            if self.start_date or self.end_date:
-                cp = self.get_period()
-                if not encompass(gp, cp):
-                    msg = _(
-                        "Date range %(p1)s lies outside of granted "
-                        "period %(p2)s.") % dict(p2=rangefmt(gp), p1=rangefmt(cp))
-                    raise ValidationError(msg)
+        msg = self.get_date_range_veto()
+        if msg is not None:
+            raise ValidationError(msg)
         if not self.language:
             obj = self.recipient
             if obj is None:
                 self.language = self.client.language
             else:
-                if isinstance(obj, rt.modules.contacts.Role):
+                if isinstance(obj, rt.models.contacts.Role):
                     self.language = obj.person.language
                 else:
                     self.language = obj.language
@@ -344,7 +355,7 @@ class Confirmation(
 
     def get_granting(self, **aidtype_filter):
         if self.granting_id:
-            return rt.modules.aids.Granting.objects.get_by_aidtype(
+            return rt.models.aids.Granting.objects.get_by_aidtype(
                 self.granting.client, self, **aidtype_filter)
 
     def get_urgent_granting(self):
@@ -394,14 +405,8 @@ class ConfirmationChecker(Checker):
             msg = _("Confirmation without granting")
             yield (False, msg)
             return
-        gp = obj.granting.get_period()
-        if obj.start_date or obj.end_date:
-            cp = obj.get_period()
-            if not encompass(gp, cp):
-                msg = _(
-                    "Date range %(p1)s lies outside of granted "
-                    "period %(p2)s.") % dict(
-                        p2=rangefmt(gp), p1=rangefmt(cp))
-                yield (False, msg)
-                
+        msg = obj.get_date_range_veto()
+        if msg is not None:
+            yield (False, msg)
+        
 ConfirmationChecker.activate()

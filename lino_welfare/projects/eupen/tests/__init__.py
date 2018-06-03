@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2017 Luc Saffre
+# Copyright 2014-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -22,7 +22,6 @@ The test suite for this project.
 .. autosummary::
    :toctree:
 
-   test_beid
    test_watchtim
    test_broken_gfks
    test_clients

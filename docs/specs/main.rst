@@ -1,5 +1,5 @@
 .. doctest docs/specs/main.rst
-.. _welfare.tested.main:
+.. _welfare.specs.main:
 
 ===================
 The admin main page
@@ -8,7 +8,7 @@ The admin main page
 ..  doctest init:
     
     >>> from lino import startup
-    >>> startup('lino_welfare.projects.std.settings.doctests')
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
 
 
@@ -37,7 +37,7 @@ it is much work to maintain.
 
 >>> links = soup.find_all('a')
 >>> len(links)
-129
+126
 
 >>> print(links[0].text)
 Suchen

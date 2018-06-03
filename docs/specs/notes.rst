@@ -1,4 +1,4 @@
-.. _welfare.tested.notes:
+.. _welfare.specs.notes:
 
 =============
 Notes
@@ -46,7 +46,7 @@ type.
 
 >>> from django.utils.translation import ugettext_lazy as _
 >>> flt = dd.str2kw("name", _("First meeting"))
->>> fm = rt.modules.notes.NoteType.objects.get(**flt)
+>>> fm = rt.models.notes.NoteType.objects.get(**flt)
 >>> ses = rt.login('rolf')
 >>> ses.show(notes.NotesByType, fm, column_names="id project")
 ===== =========================================
@@ -66,8 +66,8 @@ type.
 
 Client 124 has a first meeting, while client 125 doesn't:
 
->>> rt.modules.pcsw.Client.objects.get(pk=124).get_first_meeting()
+>>> rt.models.pcsw.Client.objects.get(pk=124).get_first_meeting()
 Note #19 ('Ereignis/Notiz #19')
->>> rt.modules.pcsw.Client.objects.get(pk=125).get_first_meeting()
+>>> rt.models.pcsw.Client.objects.get(pk=125).get_first_meeting()
 
 

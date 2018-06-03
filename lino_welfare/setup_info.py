@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2002-2018 Luc Saffre
+# Copyright 2002-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -28,15 +28,14 @@
 import six
 
 requires = ['lino-cosi',
-            # 'vobject',
             'pytidylib', 'channels<2',
             'django-iban', 'metafone', 'weasyprint',
-            # 'cairocffi<0.7'] # seems that < 0.7 no longer required
             'cairocffi']
 if six.PY2:
     requires.append('suds')
 else:
-    requires.append('suds-py3')
+    # requires.append('suds-py3')
+    requires.append('suds-jurko')
 
     
     

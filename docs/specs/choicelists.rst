@@ -38,8 +38,9 @@ name to read the documentation):
 
     >>> from lino.core.choicelists import choicelist_choices
     >>> for value, text in choicelist_choices():
-    ...     print "%s : %s" % (value, unicode(text))
+    ...     print("%s : %s" % (value, str(text)))
     ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+    about.TimeZones : Time zones
     accounts.AccountTypes : Kontoarten
     accounts.CommonAccounts : Gemeinkonten
     addresses.AddressTypes : Adressenarten

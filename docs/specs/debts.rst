@@ -1,5 +1,4 @@
 .. _welfare.specs.debts:
-.. _welfare.tested.debts:
 
 ===============
 Debts mediation

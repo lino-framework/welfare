@@ -33,9 +33,9 @@ def objects():
 
     if False:  # done in lino_welfare/modlib/integ/fixtures/
 
-        TT = Cycler(rt.modules.immersion.ContractType.objects.all())
-        TG = Cycler(rt.modules.immersion.Goal.objects.all())
-        Training = rt.modules.immersion.Contract
+        TT = Cycler(rt.models.immersion.ContractType.objects.all())
+        TG = Cycler(rt.models.immersion.Goal.objects.all())
+        Training = rt.models.immersion.Contract
 
         alicia = rt.login('alicia').get_user()
         selected_clients = (131, 149, 161)

@@ -27,6 +27,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 
 from lino_xl.lib.contacts.roles import ContactsUser
+from lino_xl.lib.cv.roles import CareerUser
 from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
                                                  NewcomersOperator)
 from lino_welfare.modlib.integ.roles import IntegrationAgent
@@ -177,20 +178,24 @@ class ClientDetail(ClientDetail):
     competences = dd.Panel("""
     cv.SkillsByPerson badges.AwardsByHolder cv.SoftSkillsByPerson
     cv.LanguageKnowledgesByPerson skills
-    """, label=_("Competences"), required_roles=dd.login_required(IntegrationAgent))
+    """, label=_("Competences"), required_roles=dd.login_required(
+        CareerUser))
 
     obstacles_tab = dd.Panel("""
     cv.ObstaclesByPerson pcsw.ConvictionsByClient
     obstacles
-    """, label=_("Obstacles"), required_roles=dd.login_required(IntegrationAgent))
+    """, label=_("Obstacles"), required_roles=dd.login_required(
+        CareerUser))
+
+
 
 Clients.detail_layout = ClientDetail()
 
 households = dd.resolve_app('households')
-households.SiblingsByPerson.slave_grid_format = 'grid'
+households.SiblingsByPerson.display_mode = 'grid'
 
 # humanlinks = dd.resolve_app('humanlinks')
-# humanlinks.LinksByHuman.slave_grid_format = 'grid'
+# humanlinks.LinksByHuman.display_mode = 'grid'
 
 # cv = dd.resolve_app('cv')
 # cv.ExperiencesByPerson.column_names = "company start_date end_date \
@@ -234,5 +239,5 @@ notes.Note.hidden_elements = dd.fields_list(
 
 
 uploads = dd.resolve_app('uploads')
-uploads.UploadsByClient.slave_grid_format = 'grid'
+uploads.UploadsByClient.display_mode = 'grid'
 

@@ -33,7 +33,7 @@ from lino_xl.lib.beid.mixins import get_image_path
 
 def objects():
 
-    Client = rt.modules.pcsw.Client
+    Client = rt.models.pcsw.Client
 
     for obj in Client.objects.exclude(card_number=''):
         fn = obj.get_image_path()

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2018 Luc Saffre
+# Copyright 2015-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -48,13 +48,14 @@ class TestCase(TestCase):
         (generically) related to our client, we delete that
         client. Django does not prevent us from doing it.
         """
+        # print("20180502 test_broken_gfks.test_01()")
 
         from django.db.models.deletion import ProtectedError
 
-        Client = rt.modules.pcsw.Client
-        Note = rt.modules.notes.Note
-        # ContentType = rt.modules.contenttypes.ContentType
-        BrokenGFKs = rt.modules.gfks.BrokenGFKs
+        Client = rt.models.pcsw.Client
+        Note = rt.models.notes.Note
+        # ContentType = rt.models.contenttypes.ContentType
+        BrokenGFKs = rt.models.gfks.BrokenGFKs
 
         def create_related_objects():
             cli = Client(first_name="John", last_name="Doe")

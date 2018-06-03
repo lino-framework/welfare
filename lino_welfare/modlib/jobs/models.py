@@ -226,7 +226,7 @@ class Contract(JobSupplyment):
         related_name="%(app_label)s_%(class)s_set_by_type",
         blank=True)
 
-    job = models.ForeignKey("jobs.Job")
+    job = dd.ForeignKey("jobs.Job")
     regime = dd.ForeignKey(
         'cv.Regime', blank=True, null=True,
         related_name="jobs_contracts")
@@ -237,7 +237,7 @@ class Contract(JobSupplyment):
 
     @dd.chooser()
     def company_choices(cls):
-        return rt.modules.jobs.JobProvider.objects.all()
+        return rt.models.jobs.JobProvider.objects.all()
 
     @dd.chooser(simple_values=True)
     def duration_choices(cls):
@@ -340,7 +340,7 @@ class Contracts(isip.ContractBaseTable):
     """, window_size=(60, 'auto'))
 
     parameters = dict(
-        type=models.ForeignKey(
+        type=dd.ForeignKey(
             'jobs.ContractType', blank=True,
             verbose_name=_("Only contracts of type")),
         **isip.ContractBaseTable.parameters)
@@ -443,7 +443,7 @@ class Offer(SectorFunction):
                             blank=True,
                             verbose_name=_("Name"))
 
-    provider = models.ForeignKey(JobProvider,
+    provider = dd.ForeignKey(JobProvider,
                                  blank=True, null=True)
 
     selection_from = models.DateField(_("selection from"),
@@ -494,14 +494,14 @@ class Job(SectorFunction):
     name = models.CharField(max_length=100,
                             verbose_name=_("Name"))
 
-    type = models.ForeignKey("jobs.JobType",
+    type = dd.ForeignKey("jobs.JobType",
                              blank=True, null=True,
                              verbose_name=_("Job Type"))
 
-    provider = models.ForeignKey('jobs.JobProvider',
+    provider = dd.ForeignKey('jobs.JobProvider',
                                  blank=True, null=True)
 
-    contract_type = models.ForeignKey('jobs.ContractType',
+    contract_type = dd.ForeignKey('jobs.ContractType',
                                       blank=True, null=True,
                                       verbose_name=_("Contract Type"))
 
@@ -560,7 +560,7 @@ class Job(SectorFunction):
     #~ class Meta:
         #~ verbose_name = _("Job Wish")
         #~ verbose_name_plural = _('Job Wishes')
-    #~ person = models.ForeignKey("contacts.Person")
+    #~ person = dd.ForeignKey("contacts.Person")
 
 #~ class Wishes(dd.Table):
     #~ model = Wish
@@ -638,9 +638,9 @@ class Candidature(SectorFunction):
         verbose_name_plural = _('Job Candidatures')
         get_latest_by = 'date_submitted'
 
-    person = models.ForeignKey('pcsw.Client')
+    person = dd.ForeignKey('pcsw.Client')
 
-    job = models.ForeignKey("jobs.Job", blank=True, null=True)
+    job = dd.ForeignKey("jobs.Job", blank=True, null=True)
 
     date_submitted = models.DateField(
         _("date submitted"),
@@ -666,11 +666,11 @@ class Candidature(SectorFunction):
     # def setup_parameters(cls, **fields):
     #     fields = super(Candidature, cls).setup_parameters(**fields)
     #     fields.update(state=CandidatureStates.field(blank=True))
-    #     fields.update(job=models.ForeignKey(
+    #     fields.update(job=dd.ForeignKey(
     #         'jobs.Job', blank=True, null=True))
-    #     fields.update(function=models.ForeignKey(
+    #     fields.update(function=dd.ForeignKey(
     #         'cv.Function', blank=True, null=True))
-    #     fields.update(person=models.ForeignKey(
+    #     fields.update(person=dd.ForeignKey(
     #         'pcsw.Client', blank=True, null=True))
     #     return fields
 
@@ -895,8 +895,8 @@ class JobsOverviewByType(Jobs):
 
     parameters = dict(
         date=models.DateField(blank=True, null=True, verbose_name=_("Date")),
-        contract_type=models.ForeignKey(ContractType, blank=True, null=True),
-        #~ job_type = models.ForeignKey(JobType,blank=True,null=True),
+        contract_type=dd.ForeignKey(ContractType, blank=True, null=True),
+        #~ job_type = dd.ForeignKey(JobType,blank=True,null=True),
     )
 
     params_panel_hidden = True
@@ -904,8 +904,7 @@ class JobsOverviewByType(Jobs):
     @dd.displayfield(_("Job"))
     def job_desc(self, obj, ar):
         chunks = [ar.obj2html(obj, str(obj.function))]
-        chunks.append(gettext("(place)"))
-        chunks.append(gettext(" at "))
+        chunks.append(str(pgettext("(place)", " at ")))
         chunks.append(ar.obj2html(obj.provider))
         chunks.append(' (%d)' % obj.capacity)
         if obj.remark:
@@ -1017,8 +1016,8 @@ class JobsOverview(Report):
     parameters = dict(
         today=models.DateField(
             blank=True, null=True, verbose_name=_("Date")),
-        #~ contract_type = models.ForeignKey(ContractType,blank=True,null=True),
-        job_type=models.ForeignKey(JobType, blank=True, null=True),
+        #~ contract_type = dd.ForeignKey(ContractType,blank=True,null=True),
+        job_type=dd.ForeignKey(JobType, blank=True, null=True),
     )
     params_panel_hidden = True
 
@@ -1054,7 +1053,7 @@ class JobsOverview(Report):
 
 @dd.receiver(dd.post_analyze)
 def set_detail_layouts(sender=None, **kwargs):
-    rt.modules.cv.Regimes.set_detail_layout("""
+    rt.models.cv.Regimes.set_detail_layout("""
     id name
     cv.ExperiencesByRegime
     jobs.ContractsByRegime

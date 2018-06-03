@@ -32,14 +32,14 @@ from lino_xl.lib.clients.choicelists import ClientStates
 
 
 def objects():
-    Granting = rt.modules.aids.Granting
-    AidType = rt.modules.aids.AidType
-    Person = rt.modules.contacts.Person
-    Client = rt.modules.pcsw.Client
-    ClientContactType = rt.modules.clients.ClientContactType
-    Board = rt.modules.boards.Board
-    ExcerptType = rt.modules.excerpts.ExcerptType
-    ConfirmationStates = rt.modules.aids.ConfirmationStates
+    Granting = rt.models.aids.Granting
+    AidType = rt.models.aids.AidType
+    Person = rt.models.contacts.Person
+    Client = rt.models.pcsw.Client
+    ClientContactType = rt.models.clients.ClientContactType
+    Board = rt.models.boards.Board
+    ExcerptType = rt.models.excerpts.ExcerptType
+    ConfirmationStates = rt.models.aids.ConfirmationStates
 
     Project = resolve_model('pcsw.Client')
     qs = Project.objects.filter(client_state=ClientStates.coached)
@@ -63,7 +63,7 @@ def objects():
 
     fkw = dd.str2kw('name', _("Pharmacy"))  # Apotheke
     pharmacy_type = rt.models.clients.ClientContactType.objects.get(**fkw)
-    PHARMACIES = Cycler(rt.modules.contacts.Company.objects.filter(
+    PHARMACIES = Cycler(rt.models.contacts.Company.objects.filter(
         client_contact_type=pharmacy_type))
 
     for i, at in enumerate(AidType.objects.all()):
@@ -84,16 +84,16 @@ def objects():
                 g.state = CONFIRMSTATES.pop()
             yield g
 
-    # ConfirmationTypes = rt.modules.aids.ConfirmationTypes
-    RefundConfirmation = rt.modules.aids.RefundConfirmation
-    IncomeConfirmation = rt.modules.aids.IncomeConfirmation
-    ClientContact = rt.modules.clients.ClientContact
+    # ConfirmationTypes = rt.models.aids.ConfirmationTypes
+    RefundConfirmation = rt.models.aids.RefundConfirmation
+    IncomeConfirmation = rt.models.aids.IncomeConfirmation
+    ClientContact = rt.models.clients.ClientContact
 
-    COACHES = Cycler(rt.modules.users.User.objects.filter(
+    COACHES = Cycler(rt.models.users.User.objects.filter(
         coaching_type__isnull=False))
 
     AMOUNTS = Cycler(123, 234, 345, 456, 678)
-    CATEGORIES = Cycler(rt.modules.aids.Category.objects.all())
+    CATEGORIES = Cycler(rt.models.aids.Category.objects.all())
 
     # create 1 or 2 confirmations per granting
     urgent_aid_generated = 0
@@ -146,7 +146,7 @@ def objects():
     if False:  # no need to print them all.
                # lino_welfare.modlib.welfare.fixtures.demo2 is enough.
         ses = rt.login('theresia')
-        for at in rt.modules.aids.AidType.objects.exclude(
+        for at in rt.models.aids.AidType.objects.exclude(
                 confirmation_type=''):
             M = at.confirmation_type.model
             et = ExcerptType.get_for_model(M)

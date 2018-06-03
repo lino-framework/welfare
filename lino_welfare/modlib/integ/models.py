@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2018 Luc Saffre
+# Copyright 2013-2018 Rumma & Ko Ltd
 
 """
 The :xfile:`models` module for the :mod:`lino_welfare.modlib.integ` app.
@@ -77,7 +77,7 @@ class Clients(pcsw.CoachedClients):
     id aid_type language:10"
 
     parameters = dict(
-        group=models.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
+        group=dd.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
                                 verbose_name=_("Integration phase")),
         language=dd.ForeignKey('languages.Language',
                                verbose_name=_("Language knowledge"),
@@ -144,7 +144,7 @@ class UsersWithClients(dd.VirtualTable):
     required_roles = dd.login_required(IntegrationAgent)
     label = _("Users with their Clients")
 
-    slave_grid_format = 'html'
+    display_mode = 'html'
 
     @classmethod
     def get_data_rows(self, ar):
@@ -242,7 +242,7 @@ class CompareRequestsTable(dd.VirtualTable):
     label = _("Evolution générale")
     auto_fit_column_widths = True
     column_names = "description old_value new_value"
-    slave_grid_format = 'html'
+    display_mode = 'html'
     hide_sums = True
 
     @dd.displayfield(_("Description"))
@@ -307,7 +307,7 @@ class PeriodicNumbers(dd.VirtualTable):
     label = _("Indicateurs d'activité")
     auto_fit_column_widths = True
     column_names = "description number"
-    slave_grid_format = 'html'
+    display_mode = 'html'
     hide_sums = True
 
     @dd.displayfield(_("Description"))
@@ -345,13 +345,13 @@ class PeriodicNumbers(dd.VirtualTable):
             #~ cells.append(ar)
             #~ return cells
         yield add(
-            rt.actors.coachings.Coachings,
+            rt.models.coachings.Coachings,
             observed_event=PeriodEvents.started, coaching_type=DSBE)
         yield add(
-            rt.actors.coachings.Coachings,
+            rt.models.coachings.Coachings,
             observed_event=PeriodEvents.active, coaching_type=DSBE)
         yield add(
-            rt.actors.coachings.Coachings,
+            rt.models.coachings.Coachings,
             observed_event=PeriodEvents.ended, coaching_type=DSBE)
 
         yield add(pcsw.Clients, observed_event=pcsw.ClientEvents.active)
@@ -389,7 +389,7 @@ class CoachingEndingsByUser(dd.VentilatingTable, CoachingEndings):
                 if user is not None:
                     pv.update(coached_by=user)
                 pv.update(ending=obj)
-                return rt.actors.coachings.Coachings.request(param_values=pv)
+                return rt.models.coachings.Coachings.request(param_values=pv)
             return func
 
         user_types = [p for p in UserTypes.items()
@@ -416,7 +416,7 @@ class CoachingEndingsByType(dd.VentilatingTable, CoachingEndings):
                 if ct is not None:
                     pv.update(coaching_type=ct)
                 pv.update(ending=obj)
-                return rt.actors.coachings.Coachings.request(
+                return rt.models.coachings.Coachings.request(
                     param_values=pv)
             return func
         for ct in rt.models.coachings.CoachingType.objects.all():
@@ -611,7 +611,7 @@ sections, des tables et du texte libre.
 Dans la version écran cliquer sur un chiffre pour voir d'où
 il vient.
 """)
-        yield E.h2(UsersWithClients.label)
+        yield E.h2(str(UsersWithClients.label))
         yield UsersWithClients
         yield E.h2(gettext("Indicateurs généraux"))
         yield CompareRequestsTable
@@ -623,19 +623,19 @@ il vient.
         #~ yield E.p('.')
         #~ yield CoachingEndingsByType
 
-        yield E.h1(gettext(isip.Contract._meta.verbose_name_plural))
+        yield E.h1(str(isip.Contract._meta.verbose_name_plural))
         #~ yield E.p("Voici quelques tables complètes:")
         for A in (ContractsPerUserAndContractType, CompaniesAndContracts,
                   ContractEndingsByType, StudyTypesAndContracts):
-            yield E.h2(A.label)
+            yield E.h2(str(A.label))
             # if A.help_text:
             #     yield E.p(unicode(A.help_text))
             yield A
 
-        yield E.h1(gettext(jobs.Contract._meta.verbose_name_plural))
+        yield E.h1(str(jobs.Contract._meta.verbose_name_plural))
         for A in (JobsContractsPerUserAndContractType,
                   JobProvidersAndContracts, JobsContractEndingsByType):
-            yield E.h2(A.label)
+            yield E.h2(str(A.label))
             # if A.help_text:
             #     yield E.p(unicode(A.help_text))
             yield A

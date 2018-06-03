@@ -73,7 +73,7 @@ def cbss2civilstate(node):
 
 
 def cbss2country(code):
-    Country = rt.modules.countries.Country
+    Country = rt.models.countries.Country
     try:
         return Country.objects.get(inscode=code)
     except Country.DoesNotExist:

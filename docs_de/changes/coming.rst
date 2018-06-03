@@ -4,6 +4,23 @@ Kommende Version
 
 Zur Zeit unter **testlino** einsehbar.
 
+
+TALK:
+
+- Layout des Details eines Haushalts. Hier sieht man jetzt gar nicht
+  mehr Adresse usw.  War das angefragt? Ist das erwünscht?
+
+DONE:
+
+- In *slave panels* ist die Phantomzeile abgeschafft, deshalb kann man
+  jetzt im Panel "NotesByClient" nicht mehr einfach doppelklicken, um
+  eine neue Notiz zu erstellen.  Aber dafür kann man dort auf
+  irgendeiner Zeile rechten Mausklick machen und im Kontxtmenü "Neu"
+  wählen.  Oder irgendeine Zeile mit linkem Mausklick markieren und
+  dann Taste :kbd:`Insert` drücken.
+
+- wdav und beid ohne Java
+
 - **Kontauszüge um den Jahreswechsel herum** wurden bisher nicht
   importiert, weil Lino da einen Fehlalarm "different years" auslöste.
   In der testlino kann man das jetzt noch nicht sehen, aber wenn die
@@ -24,7 +41,6 @@ Zur Zeit unter **testlino** einsehbar.
   kann man im Schnellsuch-Feld ein "#" vor die Nummer setzen.  Das
   Gleiche gilt auch für Verträge, Auszüge etc.
 
-
 - Lino schlug par défaut "Pflegemutter" statt "Mutter" vor.
 
 - Beim Einfügen eines Termins vom Klienten aus ist das Dialogfenster
@@ -38,6 +54,39 @@ Zur Zeit unter **testlino** einsehbar.
 
 - Deutlichere Fehlermeldung im Fall eines Problems bei der Verbindung
   zur Datenbank.
+
+- Die Buttons im Fenster "Meine Einstellungen" sind jetzt oben (wie
+  gewohnt) statt unten. Und jetzt haben sie auch alle einen Hilfetext.
+
+- Bescheinigung Kleiderkammer (Kostenübernahme Kleidung) : Der Satz
+  "Wir bescheinigen hiermit, für folgende Personen die Kosten für den
+  Ankauf von Kleidung bis in Höhe von 20 EUR zu übernehmen:" war noch
+  nicht übersetzt. Ab jetzt "Par la présente nous confirmons la prise
+  en charge des achats de vêtements jusqu'à un montant de 20 € pour
+  les personnes suivantes:"
+
+- Wenn ein Benutzer eine Vollmacht hatte, deren Feld `user` (d.h. der
+  vollmachtgebende Benutzer) leer war, dann konnte dieser Benutzer
+  sich nicht mehr anmelden bzw. bekam dann einen Fehler 500 mit
+  interner Fehlermeldung :message:`AttributeError: 'NoneType' object
+  has no attribute 'id'`.
+
+- Behoben: Fehlermeldung "AttrDict instance has no key 'immersion'"
+  beim Aktualisieren der ESF-Daten.
+
+- Wenn man einen Begleiter zuweist, steht die neue Begleitung jetzt
+  automatisch auf primär. Falls es bereits einen PB gab, wird dieser
+  abgeschaltet.
+
+- Was tun, wenn ein Sozi aufhört?  end_date ausfüllen. Benutzerart
+  nicht auf leer setzen, weil man sonst nicht mehr als dieser User
+  arbeiten kann.
+
+- Kalendereinträge pro Klient werden jetzt chronologisch rückwärts
+  sortiert
+
+  
+
 
 
 Prüfung Datumsbereich Beschlüsse & Bescheinigungen
@@ -96,3 +145,7 @@ b) Es ist uns egal, wenn Lino diese Bescheinigungen
    löscht. Hauptsache, dass die entschärfte Regel wieder aktiviert
    wird und es zukünftig nicht mehr zu solchen echten Fehlern kommt.
 
+Weil keine Antwort kam, habe ich eine dritte Möglichkeit programmiert:
+:attr:`lino_welfare.modlib.aids.Plugin.no_date_range_veto_until`. Also
+:menuselection:`Explorer --> ÖSHZ --> Hilfebeschlüsse` um die letzte
+Nummer zu sehen (3942 am 07.05.18).

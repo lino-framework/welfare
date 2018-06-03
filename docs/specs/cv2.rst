@@ -1,4 +1,3 @@
-.. _welfare.tested.cv2:
 .. _welfare.specs.cv2:
 
 =====================
@@ -65,7 +64,7 @@ And the list of Study types:
 <BLANKLINE>
 
 
->>> for m, f in rt.modules.cv.StudyType._lino_ddh.fklist:
+>>> for m, f in rt.models.cv.StudyType._lino_ddh.fklist:
 ...     print dd.full_model_name(m), f.name
 cv.Study type
 cv.Training type

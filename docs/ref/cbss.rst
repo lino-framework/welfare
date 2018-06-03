@@ -27,11 +27,11 @@ Ce module supporte la gestion des requêtes suivantes:
         from atelier import rstgen
         rows = []
         for k,v in HANDLERS.items():
-            en = unicode(v[0])
+            en = str(v[0])
             with translation.override("de"):
-                de = unicode(v[0])
+                de = str(v[0])
             with translation.override("fr"):
-                fr = unicode(v[0])
+                fr = str(v[0])
             rows.append([k, en, fr, de, v[2]])
         def c(a,b): return cmp(a[0], b[0])
         rows = sorted(rows)

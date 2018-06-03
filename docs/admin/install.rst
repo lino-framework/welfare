@@ -11,8 +11,8 @@ demonstrations using the built-in demo databases.
 From inside a code repository
 =============================
 
-- Install Lino (the framework) as documented in
-  :ref:`lino.dev.install`.
+- Install Lino (the framework) as documented in `Installing Lino
+  <http://lino-framework.org/dev/install.html>`__.
 
 - Lino Welfare requires some additional system packages (Tidy,
   LibreOffice and UNO)::
@@ -129,15 +129,3 @@ You may want to maintain a set of your own configuration contexts.
     $ python manage.py runserver
 
 
-Java applets
-============
-
-- Certain functionalities require two Java applets :ref:`davlink` and
-  :ref:`eidreader` which are also available from GitHub. Simply clone
-  them::
-
-    $ git clone https://github.com/lsaffre/davlink.git
-    $ git clone https://github.com/lsaffre/eidreader.git
-
-
-    

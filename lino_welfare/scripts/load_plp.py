@@ -87,8 +87,8 @@ from lino_welfare.modlib.households.models import (
 
 from lino.api.shell import households, contacts
 
-LinkTypes = rt.modules.humanlinks.LinkTypes
-Link = rt.modules.humanlinks.Link
+LinkTypes = rt.models.humanlinks.LinkTypes
+Link = rt.models.humanlinks.Link
 
 
 def tim2lino(plptype):

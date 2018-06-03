@@ -24,16 +24,12 @@ from lino.sphinxcontrib import configure
 configure(globals(), 'lino_welfare.projects.std.settings.doctests')
 
 
-from importlib import import_module
 intersphinx_mapping = {}
-#for n in 'atelier'.split():
-for n in 'atelier lino_book lino_cosi'.split():
-    m = import_module(n)
-    n = n.replace('_', "")
-    intersphinx_mapping[n] = (m.intersphinx_urls['docs'], None)
+from atelier.sphinxconf import interproject
+interproject.configure(globals(), 'atelier lino_cosi')
+intersphinx_mapping['book'] = (
+    'http://www.lino-framework.org', None)
 
-# from atelier.sphinxconf import interproject
-# interproject.configure(globals())
 
 from django.conf import settings
 settings.SITE.title = "Lino Welfare Reference Manual"

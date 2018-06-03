@@ -37,10 +37,10 @@ class Proof(dd.Model):
         verbose_name = _("Proof of search")
         verbose_name_plural = _("Proofs of search")
 
-    client = models.ForeignKey('pcsw.Client')
+    client = dd.ForeignKey('pcsw.Client')
 
     date = models.DateField(_("Date"), blank=True, null=True)
-    company = models.ForeignKey('contacts.Company', blank=True, null=True)
+    company = dd.ForeignKey('contacts.Company', blank=True, null=True)
     spontaneous = models.BooleanField(_("Spontaneous"), default=False)
     response = models.BooleanField(_("Response to offer"), default=False)
 

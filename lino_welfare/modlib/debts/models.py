@@ -122,7 +122,7 @@ class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
         verbose_name_plural = _("Accounts")
         ordering = ['ref']
 
-    group = models.ForeignKey('debts.Group')
+    group = dd.ForeignKey('debts.Group')
     type = AccountTypes.field()
     required_for_household = models.BooleanField(
         _("Required for Households"), default=False)
@@ -134,7 +134,7 @@ class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
     def full_clean(self, *args, **kw):
         if self.group_id is not None:
             if not self.ref:
-                qs = rt.modules.debts.Account.objects.all()
+                qs = rt.models.debts.Account.objects.all()
                 self.ref = str(qs.count() + 1)
             if not self.name:
                 self.name = self.group.name
@@ -163,7 +163,7 @@ class Budget(UserAuthored, Certifiable, mixins.Duplicable):
     date = models.DateField(
         _("Date"), blank=True,
         default=dd.today)
-    partner = models.ForeignKey('contacts.Partner')
+    partner = dd.ForeignKey('contacts.Partner')
     print_todos = models.BooleanField(
         _("Print to-do list"),
         default=False,
@@ -260,7 +260,7 @@ Vielleicht mit Fußnoten?"""))
         :class:`lino_welfare.modlib.debts.ui.EntryGroup`.
 
         """
-        Group = rt.modules.debts.Group
+        Group = rt.models.debts.Group
         kw.update(entries_layout__gt='')
         if types is not None:
             kw.update(
@@ -284,7 +284,7 @@ Vielleicht mit Fußnoten?"""))
         if types is not None:
             kw.update(account_type__in=[AccountTypes.items_dict[t]
                       for t in types])
-        Group = rt.modules.debts.Group
+        Group = rt.models.debts.Group
         for g in Group.objects.filter(**kw).order_by('ref'):
             if Entry.objects.filter(budget=self, account__group=g).count():
                 yield g
@@ -350,9 +350,9 @@ Vielleicht mit Fußnoten?"""))
         If the budget is empty, fill it with default entries
         by copying the master_budget.
         """
-        Entry = rt.modules.debts.Entry
-        Actor = rt.modules.debts.Actor
-        Account = rt.modules.debts.Account
+        Entry = rt.models.debts.Entry
+        Actor = rt.models.debts.Actor
+        Account = rt.models.debts.Account
         if not self.partner_id or self.printed_by is not None:
             return
         if self.entry_set.all().count() > 0:
@@ -469,7 +469,7 @@ class Actor(ActorBase, SequencedBudgetComponent):
 
     allow_cascaded_delete = ['budget']
 
-    partner = models.ForeignKey('contacts.Partner', blank=True)
+    partner = dd.ForeignKey('contacts.Partner', blank=True)
     header = models.CharField(_("Header"), max_length=20, blank=True)
     remark = dd.RichTextField(_("Remark"), format="html", blank=True)
 
@@ -505,14 +505,14 @@ class Entry(SequencedBudgetComponent):
 
     allow_cascaded_delete = ['budget']
 
-    # group = models.ForeignKey(AccountGroup)
+    # group = dd.ForeignKey(AccountGroup)
     account_type = AccountTypes.field(blank=True)
-    account = models.ForeignKey('debts.Account')
-    partner = models.ForeignKey('contacts.Partner', blank=True, null=True)
+    account = dd.ForeignKey('debts.Account')
+    partner = dd.ForeignKey('contacts.Partner', blank=True, null=True)
     # name = models.CharField(_("Remark"),max_length=200,blank=True)
     # amount = dd.PriceField(_("Amount"),default=0)
     amount = dd.PriceField(_("Amount"), blank=True, null=True)
-    actor = models.ForeignKey(Actor,
+    actor = dd.ForeignKey(Actor,
                               blank=True, null=True,
         help_text="""\
 Hier optional einen Akteur angeben, wenn der Eintrag 
@@ -551,7 +551,7 @@ Eventueller Betrag monatlicher Rückzahlungen, über deren Zahlung nicht verhand
 Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
     """)
 
-    bailiff = models.ForeignKey(
+    bailiff = dd.ForeignKey(
         'contacts.Company',
         verbose_name=_("Debt collection agency"),
         help_text=_("Leave empty for simple debts, otherwise select \
@@ -576,11 +576,11 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
     @dd.chooser()
     def account_choices(cls, account_type):
         # print '20120918 account_choices', account_type
-        return rt.modules.debts.Account.objects.filter(type=account_type)
+        return rt.models.debts.Account.objects.filter(type=account_type)
 
     @dd.chooser()
     def bailiff_choices(self):
-        qs = rt.modules.contacts.Companies.request().data_iterator
+        qs = rt.models.contacts.Companies.request().data_iterator
         qs = qs.filter(client_contact_type__is_bailiff=True)
         return qs
 
@@ -672,7 +672,7 @@ dd.inject_field(
 # dd.inject_field(
 #     'system.SiteConfig',
 #     'debts_bailiff_type',
-#     models.ForeignKey("clients.ClientContactType",
+#     dd.ForeignKey("clients.ClientContactType",
 #                       blank=True, null=True,
 #                       verbose_name=_("Bailiff"),
 #                       related_name='bailiff_type_sites',
@@ -681,7 +681,7 @@ dd.inject_field(
 dd.inject_field(
     'system.SiteConfig',
     'master_budget',
-    models.ForeignKey(
+    dd.ForeignKey(
         "debts.Budget",
         blank=True, null=True,
         verbose_name=_("Master budget"),

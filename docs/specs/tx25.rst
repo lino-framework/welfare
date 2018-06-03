@@ -41,7 +41,7 @@ worry about how to generate a documentation page for them):
     tpl = "- {0} ({1}) : {2} "
     for name, v in HANDLERS.items():
         label, subname, itname = v
-        print(tpl.format(name, itname, unicode(label)))
+        print(tpl.format(name, itname, str(label)))
 
 
 

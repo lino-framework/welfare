@@ -111,7 +111,7 @@ class Contract(ContractBase, ContractPartnerBase, SectorFunction):
 
     # @dd.chooser()
     # def company_choices(cls):
-    #     return rt.modules.jobs.JobProvider.objects.all()
+    #     return rt.models.jobs.JobProvider.objects.all()
 
     @classmethod
     def get_certifiable_fields(cls):
