@@ -445,7 +445,7 @@ class AssignCoach(NotifyingAction):
                 client=client, coach=obj, faculty=client.faculty)
 
     def get_notify_recipients(self, ar, obj):
-        """Yield a list of users to be notified.
+        """Yield a list of (users, mailmode) tuples to be notified.
 
         """
         # obj is a User instance
