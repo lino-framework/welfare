@@ -8,7 +8,7 @@ Reception clerk sees "Career" tab
 .. doctest init:
 
     >>> from lino import startup
-    >>> startup('lino_welfare.projects.std.settings.doctests')
+    >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from etgen.html import E
     >>> from lino.api.doctest import *
     >>> from lino.utils.jsgen import with_user_profile
@@ -16,6 +16,8 @@ Reception clerk sees "Career" tab
 This document helped us to understand and solve ticket :ticket:`340`
 (discovered :blogref:`20150714`).
 
+>>> translation.activate('en')
+    
 The problem: A reception clerk in Eupen
 (:mod:`lino_welfare.projects.eupen`) should not see the career tab of
 a client, because the :attr:`required_roles
@@ -46,20 +48,20 @@ We are talking about the detail layout of a client, defined by
 
 >>> dtl = rt.models.pcsw.Clients.detail_layout
 >>> dtl  #doctest: +ELLIPSIS
-<lino_welfare.modlib.pcsw.models.ClientDetail object at ...>
+<lino_welfare.projects.eupen.modlib.pcsw.models.ClientDetail object at ...>
 >>> dtl.__class__
-<class 'lino_welfare.modlib.pcsw.models.ClientDetail'>
+<class 'lino_welfare.projects.eupen.modlib.pcsw.models.ClientDetail'>
 
 >>> lh = dtl.get_layout_handle(settings.SITE.kernel.default_ui)
 >>> print(lh)
-LayoutHandle for lino_welfare.modlib.pcsw.models.ClientDetail on lino_welfare.modlib.pcsw.models.Clients
+LayoutHandle for lino_welfare.projects.eupen.modlib.pcsw.models.ClientDetail on lino_welfare.modlib.pcsw.models.Clients
 
 Let's get the `career` panel. It is a :class:`lino.core.elems.Panel`:
 
 >>> # career_panel = lh.main.find_by_name('career')
 >>> career_panel = with_user_profile(ia_user_type, lh.main.find_by_name, 'career')
 >>> career_panel
-<Panel career in lino_welfare.modlib.pcsw.models.ClientDetail on lino_welfare.modlib.pcsw.models.Clients>
+<Panel career in lino_welfare.projects.eupen.modlib.pcsw.models.ClientDetail on lino_welfare.modlib.pcsw.models.Clients>
 >>> career_panel.__class__
 <class 'lino.core.elems.Panel'>
 
@@ -91,7 +93,7 @@ Note that the Panel objects which are not visible continue to be in
 >>> print(' '.join([e.name for e in lh.main.elements]))
 ... #doctest: +NORMALIZE_WHITESPACE
 general contact coaching aids_tab work_tab_1 career languages 
-competences contracts history calendar MovementsByProject misc debts
+competences contracts history calendar MovementsByProject misc cbss debts
 
 Lino filters removes them only when generating the js files, IOW
 during :func:`lino.utils.jsgen.py2js`:
@@ -102,7 +104,7 @@ during :func:`lino.utils.jsgen.py2js`:
 ...     print(py2js(lh.main.elements))
 >>> with_user_profile(theresia.user_type, f)
 ... #doctest: +NORMALIZE_WHITESPACE
-[ general_panel1903, contact_panel1930, coaching_panel2158, aids_tab_panel2254, work_tab_1_panel2283, contracts_panel2941, history_panel3015, calendar_panel3094 ]
+[ general_panel1680, contact_panel1707, coaching_panel1935, aids_tab_panel2050, work_tab_1_panel2078, contracts_panel2819, history_panel2893, calendar_panel2972, misc_panel3013 ]
 
 I can even render the :file:`lino*.js` files (at least once):
 

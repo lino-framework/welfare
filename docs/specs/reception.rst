@@ -170,11 +170,11 @@ It has 4 keys:
 
 >>> d.record_id
 127
->>> d.base_params
-{u'mt': 55, u'mk': 127}
+>>> d.base_params == {'mt': 56, 'mk': 127}
+True
 
->>> d.field_values
-{u'userHidden': 5, u'user': u'Hubert Huppertz', u'summary': u''}
+>>> d.field_values == {'userHidden': 5, 'user': 'Hubert Huppertz', 'summary': ''}
+True
 
 (This last line was right only since :blogref:`20150122`)
 
