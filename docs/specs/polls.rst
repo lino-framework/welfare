@@ -1,3 +1,4 @@
+.. doctest docs/specs/polls.rst
 .. _welfare.specs.polls:
 
 =====================
@@ -6,11 +7,7 @@ Polls in Lino Welfare
 
 A tested tour into the :mod:`lino_welfare.modlib.polls` plugin.
 
-.. How to test only this document:
-
-    $ python setup.py test -s tests.SpecsTests.test_polls
-
-    doctest init:
+.. doctest init:
     
     >>> from lino import startup
     >>> startup('lino_welfare.projects.chatelet.settings.doctests')
@@ -79,58 +76,56 @@ For every poll, we configure a series of questions.
 
 >>> obj = polls.Poll.get_by_ref('INI')
 >>> rt.show(polls.QuestionsByPoll, obj)
-========= ==== ======================================================================================================== =======
- N°        N°   Title                                                                                                    Titre
---------- ---- -------------------------------------------------------------------------------------------------------- -------
- 1              Pour commencer ma recherche d'emploi, je dois                                                            Oui
- 2         1    Avoir une farde de recherche d’emploi organisée                                                          Non
- 3         2    Réaliser mon curriculum vitae                                                                            Non
- 4         3    Savoir faire une lettre de motivation adaptée au poste de travail visé                                   Non
- 5         4    Respecter les modalités de candidature                                                                   Non
- 6         5    Me créer une boite e-mail appropriée à la recherche d’emploi                                             Non
- 7         6    Créer mon compte sur le site de Forem                                                                    Non
- 8         7    Mettre mon curriculum vitae sur le site du Forem                                                         Non
- 9         8    Connaître les aides à l’embauche qui me concernent                                                       Non
- 10        9    Etre préparé à l’entretien d’embauche ou téléphonique                                                    Non
- 11             Est-ce que je sais...                                                                                    Oui
- 12        1    Utiliser le site du Forem pour consulter les offres d’emploi                                             Non
- 13        2    Décoder une offre d’emploi                                                                               Non
- 14        3    Adapter mon curriculum vitae par rapport à une offre ou pour une candidature spontanée                   Non
- 15        4    Réaliser une lettre de motivation suite à une offre d’emploi                                             Non
- 16        5    Adapter une lettre de motivation par rapport à l’offre d’emploi                                          Non
- 17        6    Réaliser une lettre de motivation spontanée                                                              Non
- 18        7    Utiliser le fax pour envoyer mes candidatures                                                            Non
- 19        8    Utiliser ma boite e-mail pour envoyer mes candidatures                                                   Non
- 20        9    Mettre mon curriculum vitae en ligne sur des sites d’entreprise                                          Non
- 21        10   Compléter en ligne les formulaires de candidature                                                        Non
- 22        11   M’inscrire aux agences intérim via Internet                                                              Non
- 23        12   M’inscrire auprès d’agence de recrutement via Internet                                                   Non
- 24        13   Utiliser Internet pour faire des recherches sur une entreprise                                           Non
- 25        14   Préparer un entretien d’embauche (questions, argumentation du C.V.,…)                                    Non
- 26        15   Utiliser Internet pour gérer ma mobilité (transport en commun ou itinéraire voiture)                     Non
- 27        16   Utiliser la photocopieuse (ex : copie de lettre de motivation que j’envoie par courrier)                 Non
- 28        17   Utiliser le téléphone pour poser ma candidature                                                          Non
- 29        18   Utiliser le téléphone pour relancer ma candidature                                                       Non
- 30        19   Trouver et imprimer les formulaires de demandes d’aides à l’embauche se trouvant sur le site de l’ONEm   Non
- **465**
-========= ==== ======================================================================================================== =======
+==== ==== ======================================================================================================== =======
+ N°   N°   Title                                                                                                    Titre
+---- ---- -------------------------------------------------------------------------------------------------------- -------
+ 1         Pour commencer ma recherche d'emploi, je dois                                                            Oui
+ 2    1    Avoir une farde de recherche d’emploi organisée                                                          Non
+ 3    2    Réaliser mon curriculum vitae                                                                            Non
+ 4    3    Savoir faire une lettre de motivation adaptée au poste de travail visé                                   Non
+ 5    4    Respecter les modalités de candidature                                                                   Non
+ 6    5    Me créer une boite e-mail appropriée à la recherche d’emploi                                             Non
+ 7    6    Créer mon compte sur le site de Forem                                                                    Non
+ 8    7    Mettre mon curriculum vitae sur le site du Forem                                                         Non
+ 9    8    Connaître les aides à l’embauche qui me concernent                                                       Non
+ 10   9    Etre préparé à l’entretien d’embauche ou téléphonique                                                    Non
+ 11        Est-ce que je sais...                                                                                    Oui
+ 12   1    Utiliser le site du Forem pour consulter les offres d’emploi                                             Non
+ 13   2    Décoder une offre d’emploi                                                                               Non
+ 14   3    Adapter mon curriculum vitae par rapport à une offre ou pour une candidature spontanée                   Non
+ 15   4    Réaliser une lettre de motivation suite à une offre d’emploi                                             Non
+ 16   5    Adapter une lettre de motivation par rapport à l’offre d’emploi                                          Non
+ 17   6    Réaliser une lettre de motivation spontanée                                                              Non
+ 18   7    Utiliser le fax pour envoyer mes candidatures                                                            Non
+ 19   8    Utiliser ma boite e-mail pour envoyer mes candidatures                                                   Non
+ 20   9    Mettre mon curriculum vitae en ligne sur des sites d’entreprise                                          Non
+ 21   10   Compléter en ligne les formulaires de candidature                                                        Non
+ 22   11   M’inscrire aux agences intérim via Internet                                                              Non
+ 23   12   M’inscrire auprès d’agence de recrutement via Internet                                                   Non
+ 24   13   Utiliser Internet pour faire des recherches sur une entreprise                                           Non
+ 25   14   Préparer un entretien d’embauche (questions, argumentation du C.V.,…)                                    Non
+ 26   15   Utiliser Internet pour gérer ma mobilité (transport en commun ou itinéraire voiture)                     Non
+ 27   16   Utiliser la photocopieuse (ex : copie de lettre de motivation que j’envoie par courrier)                 Non
+ 28   17   Utiliser le téléphone pour poser ma candidature                                                          Non
+ 29   18   Utiliser le téléphone pour relancer ma candidature                                                       Non
+ 30   19   Trouver et imprimer les formulaires de demandes d’aides à l’embauche se trouvant sur le site de l’ONEm   Non
+==== ==== ======================================================================================================== =======
 <BLANKLINE>
 
 >>> obj = polls.Poll.get_by_ref('RAE')
 >>> rt.show(polls.QuestionsByPoll, obj)
-======== ==== ======================================================== =======
- N°       N°   Title                                                    Titre
--------- ---- -------------------------------------------------------- -------
- 1        1    Cherchez-vous du travail actuellement?                   Non
- 2        2    Avez-vous un CV à jour?                                  Non
- 3        3    Est-ce que vous vous présentez régulièrement au FOREM?   Non
- 4        4    Est-ce que vous consultez les petites annonces?          Non
- 5        5    Demande à l’entourage?                                   Non
- 6        6    Candidature spontanée?                                   Non
- 7        7    Antécédents judiciaires?                                 Non
- 8             Temps de travail acceptés                                Non
- **36**
-======== ==== ======================================================== =======
+==== ==== ======================================================== =======
+ N°   N°   Title                                                    Titre
+---- ---- -------------------------------------------------------- -------
+ 1    1    Cherchez-vous du travail actuellement?                   Non
+ 2    2    Avez-vous un CV à jour?                                  Non
+ 3    3    Est-ce que vous vous présentez régulièrement au FOREM?   Non
+ 4    4    Est-ce que vous consultez les petites annonces?          Non
+ 5    5    Demande à l’entourage?                                   Non
+ 6    6    Candidature spontanée?                                   Non
+ 7    7    Antécédents judiciaires?                                 Non
+ 8         Temps de travail acceptés                                Non
+==== ==== ======================================================== =======
 <BLANKLINE>
 
 

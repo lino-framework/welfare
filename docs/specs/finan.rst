@@ -1,14 +1,11 @@
+.. doctest docs/specs/finan.rst
 .. _welfare.specs.finan:
 
 ==================================
 Financial vouchers in Lino Welfare
 ==================================
 
-.. How to test only this document:
-
-    $ doctest docs/specs/finan.rst
-    
-    doctest init:
+.. doctest init:
 
     >>> import lino ; lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from etgen.html import E
@@ -106,19 +103,19 @@ list.  See :ticket:`1985`.
 >>> obj = ZKBC.voucher_type.model.objects.get(number=1, journal=ZKBC)  #doctest: -SKIP
 >>> rt.login('wilfried').show(finan.ItemsByPaymentOrder, obj)  #doctest: -SKIP
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-======== ============================ =============================== ========== ===================== ========= ============ ==================
- Nr.      Klient                       Zahlungsempfänger               Workflow   Bankkonto             Match     Betrag       Externe Referenz
--------- ---------------------------- ------------------------------- ---------- --------------------- --------- ------------ ------------------
- 1        COLLARD Charlotte (118)      Electrabel Customer Solutions              BE46 0003 2544 8336   REG 18    120,00
- 2        EVERS Eberhart (127)         Ethias s.a.                                BE79 8270 8180 3833   REG 19    5,33
- 3        AUSDEMWALD Alfons (116)      Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   15,33
- 4        COLLARD Charlotte (118)      Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   22,50
- 5        DOBBELSTEIN Dorothée (124)   Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   25,00
- 6        EVERS Eberhart (127)         Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   29,95
- 7        EMONTS Daniel (128)          Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   120,00
- 8        EVERS Eberhart (127)         Leffin Electronics                         BE38 2480 1735 7572   REG 20    12,50
- **36**                                                                                                           **350,61**
-======== ============================ =============================== ========== ===================== ========= ============ ==================
+====================== ============================ =============================== ========== ===================== ========= ============ ==================
+ Nr.                    Klient                       Zahlungsempfänger               Workflow   Bankkonto             Match     Betrag       Externe Referenz
+---------------------- ---------------------------- ------------------------------- ---------- --------------------- --------- ------------ ------------------
+ 1                      COLLARD Charlotte (118)      Electrabel Customer Solutions              BE46 0003 2544 8336   REG 18    120,00
+ 2                      EVERS Eberhart (127)         Ethias s.a.                                BE79 8270 8180 3833   REG 19    5,33
+ 3                      AUSDEMWALD Alfons (116)      Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   15,33
+ 4                      COLLARD Charlotte (118)      Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   22,50
+ 5                      DOBBELSTEIN Dorothée (124)   Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   25,00
+ 6                      EVERS Eberhart (127)         Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   29,95
+ 7                      EMONTS Daniel (128)          Niederau Eupen AG                          BE98 3480 3103 3293   SREG 10   120,00
+ 8                      EVERS Eberhart (127)         Leffin Electronics                         BE38 2480 1735 7572   REG 20    12,50
+ **Total (8 Zeilen)**                                                                                                           **350,61**
+====================== ============================ =============================== ========== ===================== ========= ============ ==================
 <BLANKLINE>
 
 

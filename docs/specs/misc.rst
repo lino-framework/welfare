@@ -267,6 +267,8 @@ see it.
 - accounts.AccountsByGroup.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.AllEntries.duplicate : visible for admin 910
 - cal.ConflictingEvents.duplicate : visible for 110 120 410 420 admin 910
+- cal.DailyPlanner.duplicate : visible for 110 120 410 420 admin 910
+- cal.DailyPlannerRows.duplicate : visible for 110 120 410 420 admin 910
 - cal.EntriesByClient.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByController.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByDay.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910

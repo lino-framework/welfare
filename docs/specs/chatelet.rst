@@ -86,7 +86,7 @@ Romain
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
   - Bureau : Types d'extrait, Types de fichiers téléchargés, Types d'observation, Types d'événements, Mes Text Field Templates
-  - Calendrier : Calendriers, Locaux, Priorités, Évènements periodiques, Rôles de participants, Types d'entrée calendrier, Règles de récurrence, Calendriers externes
+  - Calendrier : Calendriers, Locaux, Priorités, Évènements periodiques, Rôles de participants, Types d'entrée calendrier, Règles de récurrence, Calendriers externes, Lignes de planificateur
   - Comptabilité : Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
   - CPAS : Types de contact client, Services, Raisons d’arrêt d'intervention, Phases d'intégration, Activités, Types d'exclusion, Motifs de dispense, Types d'aide sociale, Catégories
@@ -149,7 +149,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 61 apps: lino, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, excerpts, uploads, outbox, extensible, cal, reception, accounts, badges, boards, clients, coachings, pcsw, welfare, sales, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, checkdata, tinymce, sessions.
-135 models:
+136 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -170,9 +170,10 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  boards.Board                   boards.Boards                   7         3
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         12
+ cal.DailyPlannerRow            cal.DailyPlannerRows            8         3
  cal.Event                      cal.OneEvent                    24        538
  cal.EventPolicy                cal.EventPolicies               20        6
- cal.EventType                  cal.EventTypes                  22        12
+ cal.EventType                  cal.EventTypes                  23        12
  cal.Guest                      cal.Guests                      9         578
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
@@ -199,7 +200,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  contacts.Person                contacts.Persons                32        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               3         135
+ contenttypes.ContentType       gfks.ContentTypes               3         136
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                11        78
  courses.Course                 courses.Activities              30        7
@@ -386,6 +387,7 @@ Each window layout defines a given set of fields.
 - cal.Calendars.detail : name, name_nl, name_de, name_en, color, id, description
 - cal.Calendars.insert : name, name_nl, name_de, name_en, color
 - cal.Calendars.merge_row : merge_to, reason
+- cal.DailyPlannerRows.merge_row : merge_to, reason
 - cal.EntriesByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
 - cal.EntriesByProject.insert : start_date, start_time, end_time, summary, event_type
 - cal.EventPolicies.merge_row : merge_to, reason
@@ -711,6 +713,7 @@ Each window layout is **viewable** by a given set of user types.
 - cal.Calendars.detail : visible for 110 120 410 420 admin 910
 - cal.Calendars.insert : visible for 110 120 410 420 admin 910
 - cal.Calendars.merge_row : visible for admin 910
+- cal.DailyPlannerRows.merge_row : visible for admin 910
 - cal.EntriesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByProject.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EventPolicies.merge_row : visible for admin 910
@@ -1061,6 +1064,8 @@ options.
 - boards.Members.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - cal.Calendars.merge_row : Fusionner
+  (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
+- cal.DailyPlannerRows.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - cal.EventPolicies.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
@@ -1432,6 +1437,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Calendrier --> Types d'entrée calendrier : 13
 - Configuration --> Calendrier --> Règles de récurrence : 7
 - Configuration --> Calendrier --> Calendriers externes : 1
+- Configuration --> Calendrier --> Lignes de planificateur : 4
 - Configuration --> Comptabilité --> Groupes de comptes : 1
 - Configuration --> Comptabilité --> Comptes : 1
 - Configuration --> Ateliers --> Savoirs de base : 1
@@ -1484,7 +1490,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Contacts --> Types de parenté : 13
 - Explorateur --> Système --> Procurations : 4
 - Explorateur --> Système --> Types d'utilisateur : 16
-- Explorateur --> Système --> types de contenu : 136
+- Explorateur --> Système --> types de contenu : 137
 - Explorateur --> Système --> Notifications : 13
 - Explorateur --> Système --> Changes : 0
 - Explorateur --> Système --> All dashboard widgets : 1

@@ -57,6 +57,7 @@ name to read the documentation):
     cal.EntryStates : Termin-Zustände
     cal.EventEvents : Beobachtungskriterien
     cal.GuestStates : Gast-Zustände
+    cal.PlannerColumns : PlannerColumns
     cal.Recurrencies : Recurrencies
     cal.TaskStates : Aufgaben-Zustände
     cal.Weekdays : Weekdays

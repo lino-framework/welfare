@@ -25,10 +25,10 @@ it was the first Lino that went into production. This was in 2010.
 
 >>> print(analyzer.show_complexity_factors())
 - 65 plugins
-- 140 models
-- 537 views
+- 141 models
+- 540 views
 - 16 user types
-- 150 dialog actions
+- 151 dialog actions
 <BLANKLINE>
 
 
@@ -81,7 +81,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Büro : Auszugsarten, Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
-  - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
+  - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender, Tagesplanerzeilen
   - Buchhaltung : Kontengruppen, Haushaltsartikel, Journale, Buchungsperioden, Zahlungsbedingungen
   - ÖSHZ : Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
@@ -186,7 +186,7 @@ to explicitly override the language of :meth:`show_menu
   - Orte : Länder, Orte
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
   - Büro : Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
-  - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
+  - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender, Tagesplanerzeilen
   - ÖSHZ : Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
@@ -320,9 +320,10 @@ Database structure
 - boards.Board : id, start_date, end_date, name, name_fr, name_en
 - boards.Member : id, board, person, role
 - cal.Calendar : id, name, description, color, name_fr, name_en
+- cal.DailyPlannerRow : id, seqno, designation, start_time, end_time, designation_fr, designation_en
 - cal.Event : id, modified, created, project, start_date, start_time, end_date, end_time, build_time, build_method, user, assigned_to, owner_type, owner_id, summary, description, access_class, sequence, auto_type, event_type, transparent, room, priority, state
 - cal.EventPolicy : id, start_date, start_time, end_date, end_time, name, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_events, event_type, name_fr, name_en
-- cal.EventType : id, seqno, name, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, start_date, event_label, max_conflicting, max_days, transparent, invite_client, name_fr, name_en, event_label_fr, event_label_en, esf_field
+- cal.EventType : id, seqno, name, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, start_date, event_label, max_conflicting, max_days, transparent, planner_column, invite_client, name_fr, name_en, event_label_fr, event_label_en, esf_field
 - cal.Guest : id, event, partner, role, state, remark, waiting_since, busy_since, gone_since
 - cal.GuestRole : id, name, name_fr, name_en
 - cal.Priority : id, name, ref, name_fr, name_en
@@ -505,6 +506,7 @@ Each window layout defines a given set of fields.
 - cal.Calendars.detail : name, name_fr, name_en, color, id, description
 - cal.Calendars.insert : name, name_fr, name_en, color
 - cal.Calendars.merge_row : merge_to, reason
+- cal.DailyPlannerRows.merge_row : merge_to, reason
 - cal.EntriesByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
 - cal.EntriesByProject.insert : start_date, start_time, end_time, summary, event_type
 - cal.EventPolicies.merge_row : merge_to, reason
@@ -837,6 +839,7 @@ Each window layout is **viewable** by a given set of user user_types.
 - cal.Calendars.detail : visible for 110 120 410 420 admin 910
 - cal.Calendars.insert : visible for 110 120 410 420 admin 910
 - cal.Calendars.merge_row : visible for admin 910
+- cal.DailyPlannerRows.merge_row : visible for admin 910
 - cal.EntriesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByProject.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EventPolicies.merge_row : visible for admin 910
@@ -1188,6 +1191,8 @@ Global list of all actions that have a parameter dialog.
 - boards.Members.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - cal.Calendars.merge_row : Fusionieren
+  (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
+- cal.DailyPlannerRows.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - cal.EventPolicies.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
@@ -1591,6 +1596,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Kalender --> Kalendereintragsarten : 12
 - Konfigurierung --> Kalender --> Wiederholungsregeln : 7
 - Konfigurierung --> Kalender --> Externe Kalender : 1
+- Konfigurierung --> Kalender --> Tagesplanerzeilen : 4
 - Konfigurierung --> Buchhaltung --> Kontengruppen : 7
 - Konfigurierung --> Buchhaltung --> Haushaltsartikel : 27
 - Konfigurierung --> Buchhaltung --> Journale : 5
@@ -1638,7 +1644,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Kontakte --> Verwandschaftsarten : 13
 - Explorer --> System --> Vollmachten : 4
 - Explorer --> System --> Benutzerarten : 16
-- Explorer --> System --> Datenbankmodelle : 141
+- Explorer --> System --> Datenbankmodelle : 142
 - Explorer --> System --> Benachrichtigungen : 14
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> All dashboard widgets : 1
