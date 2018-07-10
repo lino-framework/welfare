@@ -2,6 +2,11 @@
 Version à venir
 ===============
 
+DONE:
+
+- :ticket:`2382` : Rendez-vous extérieurs visibles pour l'accueil
+  (daily calendar planner)
+
 TODO:  
 
 - Atelier : La colonne Workflow est visible mais si on veut cliquer

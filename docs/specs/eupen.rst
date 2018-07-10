@@ -720,7 +720,7 @@ Each window layout defines a given set of fields.
 - pcsw.Clients.create_visit : user, summary
 - pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, dupable_clients_SimilarClients, humanlinks_LinksByHuman, cbss_relations, households_MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, uploads_UploadsByClient, cvs_emitted, cv_LanguageKnowledgesByPerson, skills, obstacles, excerpts_ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, checkdata_ProblemsByOwner, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
-- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, cv_LanguageKnowledge, dupable_clients_Word, pcsw_Dispense, properties_PersonProperty, addresses_Address, sepa_Account, reason
+- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, cv_LanguageKnowledge, dupable_clients_Word, esf_ClientSummary, pcsw_Dispense, properties_PersonProperty, addresses_Address, sepa_Account, reason
 - pcsw.Clients.refuse_client : reason, remark
 - pcsw.Convictions.merge_row : merge_to, reason
 - pcsw.DispenseReasons.merge_row : merge_to, reason
@@ -1439,8 +1439,9 @@ Global list of all actions that have a parameter dialog.
     - (keep_volatiles_1): **Einkommensbescheinigungen** (aids_IncomeConfirmation), **Kostenübernahmescheine** (aids_RefundConfirmation)
     - (keep_volatiles_2): **Einfache Bescheinigungen** (aids_SimpleConfirmation), **Begleitungen** (coachings_Coaching)
     - (keep_volatiles_3): **Sprachkenntnisse** (cv_LanguageKnowledge), **Phonetische Wörter** (dupable_clients_Word)
-    - (keep_volatiles_4): **Dispenzen** (pcsw_Dispense), **Eigenschaften** (properties_PersonProperty)
-    - (keep_volatiles_5): **Adressen** (addresses_Address), **Bankkonten** (sepa_Account)
+    - (keep_volatiles_4): **ESF Summaries** (esf_ClientSummary), **Dispenzen** (pcsw_Dispense)
+    - (keep_volatiles_5): **Eigenschaften** (properties_PersonProperty), **Adressen** (addresses_Address)
+    - **Bankkonten** (sepa_Account)
   - **Begründung** (reason)
 - pcsw.Clients.refuse_client : Ablehnen
   (main) [visible for all]: **Ablehnungsgrund** (reason), **Bemerkung** (remark)

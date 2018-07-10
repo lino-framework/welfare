@@ -64,7 +64,7 @@ Lino Welfare:
   - PROTECT : coachings.Coaching.type, coachings.CoachingEnding.type, users.User.coaching_type
 - contacts.Company :
   - CASCADE : jobs.JobProvider.company_ptr, xcourses.CourseProvider.company_ptr
-  - PROTECT : aids.AidType.company, aids.IncomeConfirmation.company, aids.RefundConfirmation.company, aids.RefundConfirmation.pharmacy, aids.SimpleConfirmation.company, art61.Contract.company, cal.Room.company, clients.ClientContact.company, contacts.Role.company, debts.Entry.bailiff, excerpts.Excerpt.company, isip.ContractPartner.company, jobs.Contract.company, ledger.Journal.partner, notes.Note.company, pcsw.Client.health_insurance, pcsw.Client.pharmacy, system.SiteConfig.site_company, uploads.Upload.company    
+  - PROTECT : aids.AidType.company, aids.IncomeConfirmation.company, aids.RefundConfirmation.company, aids.RefundConfirmation.pharmacy, aids.SimpleConfirmation.company, art61.Contract.company, cal.Room.company, clients.ClientContact.company, contacts.Role.company, debts.Entry.bailiff, excerpts.Excerpt.company, isip.ContractPartner.company, jobs.Contract.company, ledger.Journal.partner, notes.Note.company, pcsw.Client.health_insurance, pcsw.Client.pharmacy, system.SiteConfig.site_company, uploads.Upload.company
 - contacts.CompanyType :
   - PROTECT : contacts.Company.type
 - contacts.Partner :
@@ -164,8 +164,8 @@ Lino Welfare:
 - pcsw.AidType :
   - PROTECT : pcsw.Client.aid_type
 - pcsw.Client :
-  - CASCADE : aids.IncomeConfirmation.client, aids.RefundConfirmation.client, aids.SimpleConfirmation.client, coachings.Coaching.client, cv.LanguageKnowledge.person, dupable_clients.Word.owner, pcsw.Dispense.client, properties.PersonProperty.person
-  - PROTECT : aids.Granting.client, art61.Contract.client, cal.Event.project, cal.Task.project, cbss.IdentifyPersonRequest.person, cbss.ManageAccessRequest.person, cbss.RetrieveTIGroupsRequest.person, clients.ClientContact.client, cv.Experience.person, cv.Study.person, cv.Training.person, esf.ClientSummary.master, excerpts.Excerpt.project, finan.BankStatementItem.project, finan.JournalEntry.project, finan.JournalEntryItem.project, finan.PaymentOrderItem.project, isip.Contract.client, jobs.Candidature.person, jobs.Contract.client, ledger.Movement.project, notes.Note.project, outbox.Mail.project, pcsw.Conviction.client, pcsw.Exclusion.person, uploads.Upload.project, vatless.AccountInvoice.project, vatless.InvoiceItem.project, xcourses.CourseRequest.person
+  - CASCADE : aids.IncomeConfirmation.client, aids.RefundConfirmation.client, aids.SimpleConfirmation.client, coachings.Coaching.client, cv.LanguageKnowledge.person, dupable_clients.Word.owner, esf.ClientSummary.master, pcsw.Dispense.client, properties.PersonProperty.person
+  - PROTECT : aids.Granting.client, art61.Contract.client, cal.Event.project, cal.Task.project, cbss.IdentifyPersonRequest.person, cbss.ManageAccessRequest.person, cbss.RetrieveTIGroupsRequest.person, clients.ClientContact.client, cv.Experience.person, cv.Study.person, cv.Training.person, excerpts.Excerpt.project, finan.BankStatementItem.project, finan.JournalEntry.project, finan.JournalEntryItem.project, finan.PaymentOrderItem.project, isip.Contract.client, jobs.Candidature.person, jobs.Contract.client, ledger.Movement.project, notes.Note.project, outbox.Mail.project, pcsw.Conviction.client, pcsw.Exclusion.person, uploads.Upload.project, vatless.AccountInvoice.project, vatless.InvoiceItem.project, xcourses.CourseRequest.person
 - pcsw.DispenseReason :
   - PROTECT : pcsw.Dispense.reason
 - pcsw.ExclusionType :

@@ -608,7 +608,7 @@ Each window layout defines a given set of fields.
 - pcsw.Clients.create_visit : user, summary
 - pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, households_MembersByPerson, child_custody, humanlinks_LinksByHuman, cv_LanguageKnowledgesByPerson, skills, obstacles, is_seeking, unemployed_since, seeking_since, work_permit_suspended_until, polls_ResponsesByPartner, excerpts_ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, has_esf, created, modified, remarks, checkdata_ProblemsByOwner
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
-- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, pcsw_Dispense, cv_LanguageKnowledge, cv_Obstacle, cv_Skill, cv_SoftSkill, addresses_Address, reason
+- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, esf_ClientSummary, pcsw_Dispense, cv_LanguageKnowledge, cv_Obstacle, cv_Skill, cv_SoftSkill, addresses_Address, reason
 - pcsw.Clients.refuse_client : reason, remark
 - pcsw.Convictions.merge_row : merge_to, reason
 - pcsw.DispenseReasons.merge_row : merge_to, reason
@@ -1298,9 +1298,10 @@ options.
   - **Also reassign volatile related objects** (keep_volatiles):
     - (keep_volatiles_1): **Certificats de revenu** (aids_IncomeConfirmation), **Refund confirmations** (aids_RefundConfirmation)
     - (keep_volatiles_2): **Confirmations simple** (aids_SimpleConfirmation), **Interventions** (coachings_Coaching)
-    - (keep_volatiles_3): **Dispenses** (pcsw_Dispense), **Connaissances de langue** (cv_LanguageKnowledge)
-    - (keep_volatiles_4): **Freins** (cv_Obstacle), **Compétences professionnelles** (cv_Skill)
-    - (keep_volatiles_5): **Compétences sociales** (cv_SoftSkill), **Adresses** (addresses_Address)
+    - (keep_volatiles_3): **Fiches FSE** (esf_ClientSummary), **Dispenses** (pcsw_Dispense)
+    - (keep_volatiles_4): **Connaissances de langue** (cv_LanguageKnowledge), **Freins** (cv_Obstacle)
+    - (keep_volatiles_5): **Compétences professionnelles** (cv_Skill), **Compétences sociales** (cv_SoftSkill)
+    - **Adresses** (addresses_Address)
   - **Raison** (reason)
 - pcsw.Clients.refuse_client : Refuser
   (main) [visible for all]: **Raison de refus** (reason), **Remarque** (remark)

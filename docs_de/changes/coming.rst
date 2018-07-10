@@ -2,9 +2,14 @@
 Kommende Version
 ================
 
-Zur Zeit unter **testlino** einsehbar.
 
-DONE:
+DONE (noch nicht unter **testlino** einsehbar):
+
+- Tagesplaner (:ticket:`2382`) : z.B. 
+  Rendez-vous extérieurs visibles pour l'accueil.
+
+
+DONE (zur Zeit unter **testlino** einsehbar):
 
 - In *slave panels* ist die Phantomzeile abgeschafft, deshalb kann man
   jetzt im Panel "NotesByClient" nicht mehr einfach doppelklicken, um
@@ -84,7 +89,7 @@ DONE:
 
 
 Prüfung Datumsbereich Beschlüsse & Bescheinigungen
---------------------------------------------------
+==================================================
 
 Wir haben die Erklärung für :ticket:`1354` gefunden : es ist üblich,
 dass ein Hilfebeschluss zunächst ohne Enddatum registriert wird, und
