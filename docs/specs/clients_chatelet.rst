@@ -142,3 +142,5 @@ the :class:`SocialStaff
 >>> misc.required_roles
 set([<class 'lino_welfare.modlib.pcsw.roles.SocialStaff'>])
 
+
+

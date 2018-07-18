@@ -7,6 +7,9 @@ DONE:
 - :ticket:`2382` : Rendez-vous extérieurs visibles pour l'accueil
   (daily calendar planner)
 
+- :ticket:`2439` : Filtrer une liste de bénéficiaires par "Évènement
+  observé".
+
 TODO:  
 
 - Atelier : La colonne Workflow est visible mais si on veut cliquer
