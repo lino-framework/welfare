@@ -26,6 +26,7 @@ from lino.core.roles import Anonymous, SiteUser, SiteAdmin, Supervisor, login_re
 from lino.modlib.users.roles import AuthorshipTaker
 from lino.modlib.about.roles import SiteSearcher
 from lino.modlib.office.roles import OfficeOperator, OfficeStaff, OfficeUser
+from lino_xl.lib.notes.roles import NotesUser
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsStaff, ContactsUser, SimpleContactsUser
 from lino_xl.lib.ledger.roles import LedgerStaff, LedgerUser
@@ -71,7 +72,7 @@ class SiteAdmin(
 
 
 class ReceptionClerk(SiteUser, AuthorshipTaker, OfficeOperator,
-                     GuestOperator,
+                     GuestOperator, NotesUser,
                      ContactsStaff, AidsStaff, CBSSUser, BeIdUser,
                      SepaUser, CoursesUser, ExcerptsUser,
                      SocialCoordinator, CoachingsStaff):
@@ -86,7 +87,7 @@ class ReceptionClerk(SiteUser, AuthorshipTaker, OfficeOperator,
 
 
 class ReceptionClerkFlexible(SiteUser, AuthorshipTaker, SimpleContactsUser,
-                             OfficeOperator,
+                             OfficeOperator, NotesUser,
                              GuestOperator,
                              ExcerptsUser,
                              # OfficeUser,
@@ -137,7 +138,7 @@ class NewcomersConsultant(NewcomersAgent, SocialAgent):
     pass
 
 class Supervisor(SiteUser, Supervisor, AuthorshipTaker, OfficeOperator,
-                 GuestOperator,
+                 GuestOperator, NotesUser,
                  ContactsStaff, AidsStaff, NewcomersOperator,
                  ExcerptsUser, SepaUser, CoursesUser):
     """A backoffice user who can act as others."""
