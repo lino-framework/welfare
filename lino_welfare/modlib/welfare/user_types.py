@@ -48,29 +48,6 @@ from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
                                                  NewcomersOperator)
 
 
-class AccountantManager(SiteUser, LedgerStaff, ContactsUser, OfficeUser,
-                        ExcerptsUser, AidsStaff, SepaStaff):
-    """Like an **accountant**, but also has access to configuration.
-
-    """
-    pass
-
-
-class SiteAdmin(
-        SiteAdmin,
-        SiteSearcher,
-        IntegrationStaff,
-        DebtsStaff,
-        LedgerStaff,
-        # ContactsStaff,
-        OfficeStaff,
-        NewcomersAgent,
-        ExcerptsStaff,
-        #SocialAgent,
-        AidsStaff, SepaStaff):
-    """The site adminstrator has permission for everything."""
-
-
 class ReceptionClerk(SiteUser, AuthorshipTaker, OfficeOperator,
                      GuestOperator, NotesUser,
                      ContactsStaff, AidsStaff, CBSSUser, BeIdUser,
@@ -121,8 +98,8 @@ class IntegrationAgentFlexible(IntegrationStaff, DebtsUser):
 #     pass
 
 
-class LedgerUser(SiteUser, LedgerUser, ContactsUser, OfficeUser, ExcerptsUser,
-                 AidsStaff, SepaStaff):
+class Accountant(SiteUser, LedgerUser, ContactsUser, OfficeUser,
+                 NotesUser, ExcerptsUser, AidsStaff, SepaStaff):
     """
     An **accountant** is a user who enters invoices, bank statements,
     payment orders and other ledger operations.
@@ -131,10 +108,33 @@ class LedgerUser(SiteUser, LedgerUser, ContactsUser, OfficeUser, ExcerptsUser,
     pass
 
 
+class AccountantManager(SiteUser, LedgerStaff, ContactsUser, OfficeUser,
+                        ExcerptsUser, AidsStaff, SepaStaff, NotesUser):
+    """Like an **accountant**, but also has access to configuration.
+
+    """
+    pass
+
+
+class SiteAdmin(
+        SiteAdmin,
+        SiteSearcher,
+        IntegrationStaff,
+        DebtsStaff,
+        LedgerStaff,
+        # ContactsStaff,
+        OfficeStaff,
+        NewcomersAgent,
+        ExcerptsStaff,
+        #SocialAgent,
+        AidsStaff, SepaStaff):
+    """The site adminstrator has permission for everything."""
+
+
 class SecurityAdvisor(SiteAdmin, SecurityAdvisor):
     pass
 
-class NewcomersConsultant(NewcomersAgent, SocialAgent):
+class NewcomersConsultant(NewcomersAgent, SocialAgent, NotesUser):
     pass
 
 class Supervisor(SiteUser, Supervisor, AuthorshipTaker, OfficeOperator,
@@ -165,7 +165,7 @@ add('300', _("Debts consultant"),              DebtsUser)
 add('400', _("Social agent"),                  SocialAgent)
 add('410', _("Social agent (Manager)"),        SocialStaff)
 add('420', _("Social agent (Flexible)"),       IntegrationAgentFlexible)
-add('500', _("Accountant"),                    LedgerUser)
+add('500', _("Accountant"),                    Accountant)
 add('510', _("Accountant (Manager)"),          AccountantManager)
 add('800', _("Supervisor"),                    Supervisor)
 add('900', _("Administrator"),                 SiteAdmin, name='admin')

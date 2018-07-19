@@ -19,12 +19,13 @@
 
 """
 
-from lino_welfare.modlib.pcsw.roles import SocialAgent, SocialStaff
 from lino_xl.lib.cv.roles import CareerUser, CareerStaff
+from lino_xl.lib.notes.roles import NotesUser
+from lino_welfare.modlib.pcsw.roles import SocialAgent, SocialStaff
 from lino_welfare.modlib.xcourses.roles import CoursesUser, CoursesStaff
 from lino_welfare.modlib.newcomers.roles import NewcomersOperator
 
-class IntegrationAgent(SocialAgent, CareerUser, CoursesUser):
+class IntegrationAgent(SocialAgent, CareerUser, CoursesUser, NotesUser):
     """
     An **integration agent** is a *social agent* who can see database
     content specific to integration work: CV, language courses,

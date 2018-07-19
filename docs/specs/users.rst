@@ -20,39 +20,7 @@ This document describes how Lino Welfare uses the
 User types
 =============
 
-The default set of user types for Lino Welfare is defined in
-:mod:`lino_welfare.modlib.welfare.user_types`.  You can define your
-own local :attr:`user_types_module
-<lino.core.site.Site.user_types_module>` but we recommend using the
-standard set of user types.  See :doc:`usertypes`.
-
-The default set of user types for Lino Welfare is defined in
-:mod:`lino_welfare.modlib.welfare.user_types` and leads to the
-following list:
-
->>> rt.show(users.UserTypes, language="en")
-======= =========== ============================== =================================================================
- value   name        text                           User role
-------- ----------- ------------------------------ -----------------------------------------------------------------
- 000     anonymous   Anonymous                      lino.core.roles.Anonymous
- 100                 Integration agent              lino_welfare.modlib.integ.roles.IntegrationAgent
- 110                 Integration agent (Manager)    lino_welfare.modlib.integ.roles.IntegrationStaff
- 120                 Integration agent (Flexible)   lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible
- 200                 Newcomers consultant           lino_welfare.modlib.welfare.user_types.NewcomersConsultant
- 210                 Reception clerk                lino_welfare.modlib.welfare.user_types.ReceptionClerk
- 220                 Reception clerk (Flexible)     lino_welfare.modlib.welfare.user_types.ReceptionClerkFlexible
- 300                 Debts consultant               lino_welfare.modlib.debts.roles.DebtsUser
- 400                 Social agent                   lino_welfare.modlib.pcsw.roles.SocialAgent
- 410                 Social agent (Manager)         lino_welfare.modlib.pcsw.roles.SocialStaff
- 420                 Social agent (Flexible)        lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible
- 500                 Accountant                     lino_welfare.modlib.welfare.user_types.LedgerUser
- 510                 Accountant (Manager)           lino_welfare.modlib.welfare.user_types.AccountantManager
- 800                 Supervisor                     lino_welfare.modlib.welfare.user_types.Supervisor
- 900     admin       Administrator                  lino_welfare.modlib.welfare.user_types.SiteAdmin
- 910                 Security advisor               lino_welfare.modlib.welfare.user_types.SecurityAdvisor
-======= =========== ============================== =================================================================
-<BLANKLINE>
-
+See :doc:`usertypes`.
 
 Demo users
 ==========
