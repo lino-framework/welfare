@@ -316,7 +316,7 @@ We use the user types defined in
  400                 Agent social                          lino_welfare.modlib.pcsw.roles.SocialAgent
  410                 Agent social (Chef de service)        lino_welfare.modlib.pcsw.roles.SocialStaff
  420                 Social agent (Flexible)               lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible
- 500                 Comptable                             lino_welfare.modlib.welfare.user_types.LedgerUser
+ 500                 Comptable                             lino_welfare.modlib.welfare.user_types.Accountant
  510                 Accountant (Manager)                  lino_welfare.modlib.welfare.user_types.AccountantManager
  800                 Supervisor                            lino_welfare.modlib.welfare.user_types.Supervisor
  900     admin       Administrateur                        lino_welfare.modlib.welfare.user_types.SiteAdmin
