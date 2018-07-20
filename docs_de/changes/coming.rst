@@ -8,6 +8,8 @@ DONE (noch nicht unter **testlino** einsehbar):
 - Tagesplaner (:ticket:`2382`) : z.B. 
   Rendez-vous extérieurs visibles pour l'accueil.
 
+- :ticket:`2441` : "Intelligentere" Übersicht der Termine pro Kurs.
+  
 
 DONE (zur Zeit unter **testlino** einsehbar):
 

@@ -10,6 +10,9 @@ DONE:
 - :ticket:`2439` : Filtrer une liste de bénéficiaires par "Évènement
   observé".
 
+- :ticket:`2441` : Résumé "intelligent" des rendez-vous d'un client/atelier.
+  
+
 TODO:  
 
 - Atelier : La colonne Workflow est visible mais si on veut cliquer
