@@ -1,13 +1,12 @@
+.. doctest docs/specs/reception.rst
 .. _welfare.specs.reception:
 
 ===================
 Reception
 ===================
 
-..  How to test only this document:
-
-    $ doctest docs/specs/reception.rst
-
+..  doctest init:
+   
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *

@@ -86,6 +86,9 @@ DONE (zur Zeit unter **testlino** einsehbar):
 - Kalendereinträge pro Klient werden jetzt chronologisch rückwärts
   sortiert
 
+- Fehlermeldung bei Ausdruck einer Anwesenheitsbestätigung, wenn der
+  Gast noch nicht ausgecheckt war (:ticket:`2443`).
+
   
 
 
