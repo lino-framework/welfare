@@ -446,8 +446,6 @@ statements."""),
     'lino_welfare.modlib.users.UserDetail' : _("""Layout of User Detail in Lino Welfare."""),
     'lino_welfare.modlib.users.User' : _("""The users.User model used in Lino Welfare.  We add a few fields
 to the standard models (lino.modlib.users.models.User)."""),
-    'lino_welfare.modlib.welfare.user_types.AccountantManager' : _("""Like an accountant, but also has access to configuration."""),
-    'lino_welfare.modlib.welfare.user_types.SiteAdmin' : _("""The site adminstrator has permission for everything."""),
     'lino_welfare.modlib.welfare.user_types.ReceptionClerk' : _("""A reception clerk is a user who is not a social agent but
 receives clients and does certain administrative tasks (in Eupen
 they call them back office)."""),
@@ -456,8 +454,10 @@ can assign coaches to clients."""),
     'lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible' : _("""A flexible integration agent is an integration agent who
 also can assign coaches to clients and create budgets for debts
 mediation."""),
-    'lino_welfare.modlib.welfare.user_types.LedgerUser' : _("""An accountant is a user who enters invoices, bank statements,
+    'lino_welfare.modlib.welfare.user_types.Accountant' : _("""An accountant is a user who enters invoices, bank statements,
 payment orders and other ledger operations."""),
+    'lino_welfare.modlib.welfare.user_types.AccountantManager' : _("""Like an accountant, but also has access to configuration."""),
+    'lino_welfare.modlib.welfare.user_types.SiteAdmin' : _("""The site adminstrator has permission for everything."""),
     'lino_welfare.modlib.welfare.user_types.Supervisor' : _("""A backoffice user who can act as others."""),
     'lino_welfare.modlib.xcourses.CourseProvider' : _("""A CourseProvider is a Company that offers Courses."""),
     'lino_welfare.modlib.xcourses.CourseProviderDetail' : _("""Same as CompanyDetail, except that we add a tab

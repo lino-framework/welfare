@@ -322,17 +322,17 @@ Users can consult the movements of a given general account.
 (820/333/01) Vorschuss auf Vergütungen o.ä.
 
 >>> rt.show(ledger.MovementsByAccount, obj)
-========== ========== ===================================================== ============ ======== =======
- Valuta     Beleg      Beschreibung                                          Debit        Kredit   Match
----------- ---------- ----------------------------------------------------- ------------ -------- -------
- 22.05.14   *REG 1*    *AS Express Post* / *AUSDEMWALD Alfons (116)*         10,00
- 16.02.14   *SREG 7*   *Leffin Electronics* / *AUSDEMWALD Alfons (116)*      29,95
- 16.02.14   *SREG 7*   *Leffin Electronics* / *COLLARD Charlotte (118)*      120,00
- 16.02.14   *SREG 7*   *Leffin Electronics* / *DOBBELSTEIN Dorothée (124)*   5,33
- 16.02.14   *SREG 7*   *Leffin Electronics* / *EVERS Eberhart (127)*         12,50
- 16.02.14   *SREG 7*   *Leffin Electronics* / *EMONTS Daniel (128)*          25,00
-                       **Saldo 202.78 (6 Bewegungen)**                       **202,78**
-========== ========== ===================================================== ============ ======== =======
+========== =============== ===================================================== ============ ======== =======
+ Valuta     Beleg           Beschreibung                                          Debit        Kredit   Match
+---------- --------------- ----------------------------------------------------- ------------ -------- -------
+ 22.05.14   *REG 1/2014*    *AS Express Post* / *AUSDEMWALD Alfons (116)*         10,00
+ 16.02.14   *SREG 7/2014*   *Leffin Electronics* / *AUSDEMWALD Alfons (116)*      29,95
+ 16.02.14   *SREG 7/2014*   *Leffin Electronics* / *COLLARD Charlotte (118)*      120,00
+ 16.02.14   *SREG 7/2014*   *Leffin Electronics* / *DOBBELSTEIN Dorothée (124)*   5,33
+ 16.02.14   *SREG 7/2014*   *Leffin Electronics* / *EVERS Eberhart (127)*         12,50
+ 16.02.14   *SREG 7/2014*   *Leffin Electronics* / *EMONTS Daniel (128)*          25,00
+                            **Saldo 202.78 (6 Bewegungen)**                       **202,78**
+========== =============== ===================================================== ============ ======== =======
 <BLANKLINE>
 
 
