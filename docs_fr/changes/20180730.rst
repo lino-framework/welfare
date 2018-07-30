@@ -1,0 +1,18 @@
+==========
+2018-07-30
+==========
+
+Changements:
+
+- :ticket:`2382` : Rendez-vous extérieurs visibles pour l'accueil
+  (daily calendar planner).  Nouveau champ "Colonne planificateur"
+  dans :menuselection:`Configuration --> Calendrier --> Types d'entrée
+  calendrier`.  Nouvelle table :menuselection:`Configuration -->
+  Calendrier --> Lignes de planificateur`.
+
+- :ticket:`2441` : Les rendez-vous d'un client/atelier sont maintenant
+  résumées de manière plus "intelligente".
+
+- :ticket:`2439` : Filtrer une liste de bénéficiaires par "Évènement
+  observé" ne fonctionnais plus.  Résolu.
+
