@@ -5,11 +5,7 @@
 Uploads
 =============
 
-.. How to test only this document:
-
-    $ doctest docs/specs/uploads.rst
-
-    doctest init:
+.. doctest init:
     
     >>> import lino
     >>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
@@ -43,7 +39,7 @@ expire.
    changes, subsequent snippets need to get adapted:
 
     >>> contenttypes.ContentType.objects.get_for_model(pcsw.Client).id
-    55
+    56
 
 Configuring upload types
 ========================
@@ -241,8 +237,8 @@ It has 3 keys:
 
 >>> d.record_id
 8
->>> d.base_params
-{u'mt': 55, u'type': 4, u'mk': 121}
+>>> d.base_params == {'mt': 56, 'type': 4, 'mk': 121}
+True
 >>> print(json.dumps(d.param_values))  #doctest: +NORMALIZE_WHITESPACE
 {"userHidden": null, "upload_typeHidden": null, "end_date": null,
 "observed_eventHidden": "20", "observed_event": "Est active",
@@ -322,8 +318,8 @@ It has 3 keys:
 >>> len(d.param_values)
 10
 
->>> rmu(d.base_params)
-{'mt': 55, 'mk': 177, 'type_id': 1}
+>>> d.base_params == {'mt': 56, 'mk': 177, 'type_id': 1}
+True
 
 >>> rmu(d.data_record.keys())
 ['phantom', 'data', 'title']

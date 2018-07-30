@@ -65,6 +65,7 @@ class BeIdTests(RemoteAuthTestCase):
             'django.contrib.sessions.middleware.SessionMiddleware',
             'lino.core.auth.middleware.AuthenticationMiddleware',
             'lino.core.auth.middleware.WithUserMiddleware',
+            'lino.core.auth.middleware.DeviceTypeMiddleware',
             'lino.core.auth.middleware.RemoteUserMiddleware',
             'lino.utils.ajax.AjaxExceptionResponse'))
 
@@ -135,7 +136,7 @@ class BeIdTests(RemoteAuthTestCase):
             ['head', 'headHidden',
              'partner', 'partnerHidden',
              'type', 'typeHidden'])
-        self.assertEqual(len(d.param_values), 17)
+        self.assertEqual(len(d.param_values), 18)
         self.assertEqual(len(d.base_params), 0)
 
         fv = AttrDict(d.field_values)

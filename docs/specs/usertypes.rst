@@ -46,14 +46,13 @@ The default set of user types for Lino Welfare is defined in the
  400                 Social agent                   lino_welfare.modlib.pcsw.roles.SocialAgent
  410                 Social agent (Manager)         lino_welfare.modlib.pcsw.roles.SocialStaff
  420                 Social agent (Flexible)        lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible
- 500                 Accountant                     lino_welfare.modlib.welfare.user_types.LedgerUser
+ 500                 Accountant                     lino_welfare.modlib.welfare.user_types.Accountant
  510                 Accountant (Manager)           lino_welfare.modlib.welfare.user_types.AccountantManager
  800                 Supervisor                     lino_welfare.modlib.welfare.user_types.Supervisor
  900     admin       Administrator                  lino_welfare.modlib.welfare.user_types.SiteAdmin
  910                 Security advisor               lino_welfare.modlib.welfare.user_types.SecurityAdvisor
 ======= =========== ============================== =================================================================
 <BLANKLINE>
-
 
 
 The *Manager* variants of *Integration agent*, *Social agent* and

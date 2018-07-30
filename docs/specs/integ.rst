@@ -94,16 +94,15 @@ Configuration
 
 >>> ses.show(jobs.JobTypes)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-==== ======== ================================================ ======== ================
- ID   No.      Designation                                      Remark   Social economy
----- -------- ------------------------------------------------ -------- ----------------
- 4    4        Extern (Privat Kostenrückerstattung)                      No
- 3    3        Extern (Öffentl. VoE mit Kostenrückerstattung)            No
- 2    2        Intern                                                    No
- 5    5        Sonstige                                                  No
- 1    1        Sozialwirtschaft = "majorés"                              No
-      **15**
-==== ======== ================================================ ======== ================
+==== ===== ================================================ ======== ================
+ ID   No.   Designation                                      Remark   Social economy
+---- ----- ------------------------------------------------ -------- ----------------
+ 4    4     Extern (Privat Kostenrückerstattung)                      No
+ 3    3     Extern (Öffentl. VoE mit Kostenrückerstattung)            No
+ 2    2     Intern                                                    No
+ 5    5     Sonstige                                                  No
+ 1    1     Sozialwirtschaft = "majorés"                              No
+==== ===== ================================================ ======== ================
 <BLANKLINE>
 
 

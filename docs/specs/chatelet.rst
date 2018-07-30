@@ -86,7 +86,7 @@ Romain
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
   - Bureau : Types d'extrait, Types de fichiers téléchargés, Types d'observation, Types d'événements, Mes Text Field Templates
-  - Calendrier : Calendriers, Locaux, Priorités, Évènements periodiques, Rôles de participants, Types d'entrée calendrier, Règles de récurrence, Calendriers externes
+  - Calendrier : Calendriers, Locaux, Priorités, Évènements periodiques, Rôles de participants, Types d'entrée calendrier, Règles de récurrence, Calendriers externes, Lignes de planificateur
   - Comptabilité : Groupes de comptes, Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
   - CPAS : Types de contact client, Services, Raisons d’arrêt d'intervention, Phases d'intégration, Activités, Types d'exclusion, Motifs de dispense, Types d'aide sociale, Catégories
@@ -149,7 +149,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 61 apps: lino, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, excerpts, uploads, outbox, extensible, cal, reception, accounts, badges, boards, clients, coachings, pcsw, welfare, sales, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, checkdata, tinymce, sessions.
-135 models:
+136 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -170,9 +170,10 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  boards.Board                   boards.Boards                   7         3
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         12
+ cal.DailyPlannerRow            cal.DailyPlannerRows            8         3
  cal.Event                      cal.OneEvent                    24        538
  cal.EventPolicy                cal.EventPolicies               20        6
- cal.EventType                  cal.EventTypes                  22        12
+ cal.EventType                  cal.EventTypes                  23        12
  cal.Guest                      cal.Guests                      9         578
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
@@ -199,7 +200,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  contacts.Person                contacts.Persons                32        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               3         135
+ contenttypes.ContentType       gfks.ContentTypes               3         136
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                11        78
  courses.Course                 courses.Activities              30        7
@@ -315,7 +316,7 @@ We use the user types defined in
  400                 Agent social                          lino_welfare.modlib.pcsw.roles.SocialAgent
  410                 Agent social (Chef de service)        lino_welfare.modlib.pcsw.roles.SocialStaff
  420                 Social agent (Flexible)               lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible
- 500                 Comptable                             lino_welfare.modlib.welfare.user_types.LedgerUser
+ 500                 Comptable                             lino_welfare.modlib.welfare.user_types.Accountant
  510                 Accountant (Manager)                  lino_welfare.modlib.welfare.user_types.AccountantManager
  800                 Supervisor                            lino_welfare.modlib.welfare.user_types.Supervisor
  900     admin       Administrateur                        lino_welfare.modlib.welfare.user_types.SiteAdmin
@@ -386,6 +387,7 @@ Each window layout defines a given set of fields.
 - cal.Calendars.detail : name, name_nl, name_de, name_en, color, id, description
 - cal.Calendars.insert : name, name_nl, name_de, name_en, color
 - cal.Calendars.merge_row : merge_to, reason
+- cal.DailyPlannerRows.merge_row : merge_to, reason
 - cal.EntriesByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
 - cal.EntriesByProject.insert : start_date, start_time, end_time, summary, event_type
 - cal.EventPolicies.merge_row : merge_to, reason
@@ -606,7 +608,7 @@ Each window layout defines a given set of fields.
 - pcsw.Clients.create_visit : user, summary
 - pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, households_MembersByPerson, child_custody, humanlinks_LinksByHuman, cv_LanguageKnowledgesByPerson, skills, obstacles, is_seeking, unemployed_since, seeking_since, work_permit_suspended_until, polls_ResponsesByPartner, excerpts_ExcerptsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, has_esf, created, modified, remarks, checkdata_ProblemsByOwner
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
-- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, pcsw_Dispense, cv_LanguageKnowledge, cv_Obstacle, cv_Skill, cv_SoftSkill, addresses_Address, reason
+- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, esf_ClientSummary, pcsw_Dispense, cv_LanguageKnowledge, cv_Obstacle, cv_Skill, cv_SoftSkill, addresses_Address, reason
 - pcsw.Clients.refuse_client : reason, remark
 - pcsw.Convictions.merge_row : merge_to, reason
 - pcsw.DispenseReasons.merge_row : merge_to, reason
@@ -711,6 +713,7 @@ Each window layout is **viewable** by a given set of user types.
 - cal.Calendars.detail : visible for 110 120 410 420 admin 910
 - cal.Calendars.insert : visible for 110 120 410 420 admin 910
 - cal.Calendars.merge_row : visible for admin 910
+- cal.DailyPlannerRows.merge_row : visible for admin 910
 - cal.EntriesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByProject.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EventPolicies.merge_row : visible for admin 910
@@ -1062,6 +1065,8 @@ options.
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - cal.Calendars.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
+- cal.DailyPlannerRows.merge_row : Fusionner
+  (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - cal.EventPolicies.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - cal.EventTypes.merge_row : Fusionner
@@ -1293,9 +1298,10 @@ options.
   - **Also reassign volatile related objects** (keep_volatiles):
     - (keep_volatiles_1): **Certificats de revenu** (aids_IncomeConfirmation), **Refund confirmations** (aids_RefundConfirmation)
     - (keep_volatiles_2): **Confirmations simple** (aids_SimpleConfirmation), **Interventions** (coachings_Coaching)
-    - (keep_volatiles_3): **Dispenses** (pcsw_Dispense), **Connaissances de langue** (cv_LanguageKnowledge)
-    - (keep_volatiles_4): **Freins** (cv_Obstacle), **Compétences professionnelles** (cv_Skill)
-    - (keep_volatiles_5): **Compétences sociales** (cv_SoftSkill), **Adresses** (addresses_Address)
+    - (keep_volatiles_3): **Fiches FSE** (esf_ClientSummary), **Dispenses** (pcsw_Dispense)
+    - (keep_volatiles_4): **Connaissances de langue** (cv_LanguageKnowledge), **Freins** (cv_Obstacle)
+    - (keep_volatiles_5): **Compétences professionnelles** (cv_Skill), **Compétences sociales** (cv_SoftSkill)
+    - **Adresses** (addresses_Address)
   - **Raison** (reason)
 - pcsw.Clients.refuse_client : Refuser
   (main) [visible for all]: **Raison de refus** (reason), **Remarque** (remark)
@@ -1432,6 +1438,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Calendrier --> Types d'entrée calendrier : 13
 - Configuration --> Calendrier --> Règles de récurrence : 7
 - Configuration --> Calendrier --> Calendriers externes : 1
+- Configuration --> Calendrier --> Lignes de planificateur : 4
 - Configuration --> Comptabilité --> Groupes de comptes : 1
 - Configuration --> Comptabilité --> Comptes : 1
 - Configuration --> Ateliers --> Savoirs de base : 1
@@ -1484,7 +1491,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Contacts --> Types de parenté : 13
 - Explorateur --> Système --> Procurations : 4
 - Explorateur --> Système --> Types d'utilisateur : 16
-- Explorateur --> Système --> types de contenu : 136
+- Explorateur --> Système --> types de contenu : 137
 - Explorateur --> Système --> Notifications : 13
 - Explorateur --> Système --> Changes : 0
 - Explorateur --> Système --> All dashboard widgets : 1
@@ -1551,4 +1558,5 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Questionnaires --> Choix de réponse : 89
 - Explorateur --> Questionnaires --> Answer Remarks : 1
 <BLANKLINE>
+
 

@@ -304,7 +304,7 @@ MyEntries.column_names = 'when_text project event_type summary workflow_buttons 
 EventTypes.detail_layout = """
 name
 event_label
-max_conflicting:10 max_days:10 esf_field:20 email_template:20 id
+planner_column max_conflicting:10 max_days:10 esf_field:20 email_template:20 id
 all_rooms locks_user invite_client is_appointment attach_to_email
 EntriesByType
 """

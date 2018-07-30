@@ -120,7 +120,7 @@ Here is a list of all demo excerpts.
  17   ISIP                     *ISIP#3 (Dorothée DOBBELSTEIN)*                       DOBBELSTEIN Dorothée (124)
  16   ISIP                     *ISIP#2 (Alfons AUSDEMWALD)*                          AUSDEMWALD Alfons (116)
  15   ISIP                     *ISIP#1 (Alfons AUSDEMWALD)*                          AUSDEMWALD Alfons (116)
- 14   Payment Order            *AAW 1*                                                                                                              de
+ 14   Payment Order            *AAW 1/2014*                                                                                                         de
  13   Financial situation      *Budget 1 for Gerd & Tatjana Gerkens-Kasennova*
  12   Art61 job supplyment     *Art61 job supplyment#7 (Karl KELLER)*                KELLER Karl (178)
  11   Art61 job supplyment     *Art61 job supplyment#6 (Hedi RADERMACHER)*           RADERMACHER Hedi (161)

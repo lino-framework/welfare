@@ -25,10 +25,10 @@ it was the first Lino that went into production. This was in 2010.
 
 >>> print(analyzer.show_complexity_factors())
 - 65 plugins
-- 140 models
-- 537 views
+- 141 models
+- 541 views
 - 16 user types
-- 150 dialog actions
+- 151 dialog actions
 <BLANKLINE>
 
 
@@ -81,7 +81,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Büro : Auszugsarten, Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
-  - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
+  - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender, Tagesplanerzeilen
   - Buchhaltung : Kontengruppen, Haushaltsartikel, Journale, Buchungsperioden, Zahlungsbedingungen
   - ÖSHZ : Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
@@ -186,7 +186,7 @@ to explicitly override the language of :meth:`show_menu
   - Orte : Länder, Orte
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
   - Büro : Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
-  - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
+  - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender, Tagesplanerzeilen
   - ÖSHZ : Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
@@ -320,9 +320,10 @@ Database structure
 - boards.Board : id, start_date, end_date, name, name_fr, name_en
 - boards.Member : id, board, person, role
 - cal.Calendar : id, name, description, color, name_fr, name_en
+- cal.DailyPlannerRow : id, seqno, designation, start_time, end_time, designation_fr, designation_en
 - cal.Event : id, modified, created, project, start_date, start_time, end_date, end_time, build_time, build_method, user, assigned_to, owner_type, owner_id, summary, description, access_class, sequence, auto_type, event_type, transparent, room, priority, state
 - cal.EventPolicy : id, start_date, start_time, end_date, end_time, name, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_events, event_type, name_fr, name_en
-- cal.EventType : id, seqno, name, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, start_date, event_label, max_conflicting, max_days, transparent, invite_client, name_fr, name_en, event_label_fr, event_label_en, esf_field
+- cal.EventType : id, seqno, name, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, start_date, event_label, max_conflicting, max_days, transparent, planner_column, invite_client, name_fr, name_en, event_label_fr, event_label_en, esf_field
 - cal.Guest : id, event, partner, role, state, remark, waiting_since, busy_since, gone_since
 - cal.GuestRole : id, name, name_fr, name_en
 - cal.Priority : id, name, ref, name_fr, name_en
@@ -505,6 +506,7 @@ Each window layout defines a given set of fields.
 - cal.Calendars.detail : name, name_fr, name_en, color, id, description
 - cal.Calendars.insert : name, name_fr, name_en, color
 - cal.Calendars.merge_row : merge_to, reason
+- cal.DailyPlannerRows.merge_row : merge_to, reason
 - cal.EntriesByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
 - cal.EntriesByProject.insert : start_date, start_time, end_time, summary, event_type
 - cal.EventPolicies.merge_row : merge_to, reason
@@ -718,7 +720,7 @@ Each window layout defines a given set of fields.
 - pcsw.Clients.create_visit : user, summary
 - pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, dupable_clients_SimilarClients, humanlinks_LinksByHuman, cbss_relations, households_MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, uploads_UploadsByClient, cvs_emitted, cv_LanguageKnowledgesByPerson, skills, obstacles, excerpts_ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, checkdata_ProblemsByOwner, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
-- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, cv_LanguageKnowledge, dupable_clients_Word, pcsw_Dispense, properties_PersonProperty, addresses_Address, sepa_Account, reason
+- pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, cv_LanguageKnowledge, dupable_clients_Word, esf_ClientSummary, pcsw_Dispense, properties_PersonProperty, addresses_Address, sepa_Account, reason
 - pcsw.Clients.refuse_client : reason, remark
 - pcsw.Convictions.merge_row : merge_to, reason
 - pcsw.DispenseReasons.merge_row : merge_to, reason
@@ -837,6 +839,7 @@ Each window layout is **viewable** by a given set of user user_types.
 - cal.Calendars.detail : visible for 110 120 410 420 admin 910
 - cal.Calendars.insert : visible for 110 120 410 420 admin 910
 - cal.Calendars.merge_row : visible for admin 910
+- cal.DailyPlannerRows.merge_row : visible for admin 910
 - cal.EntriesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByProject.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EventPolicies.merge_row : visible for admin 910
@@ -1189,6 +1192,8 @@ Global list of all actions that have a parameter dialog.
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - cal.Calendars.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
+- cal.DailyPlannerRows.merge_row : Fusionieren
+  (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - cal.EventPolicies.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - cal.EventTypes.merge_row : Fusionieren
@@ -1434,8 +1439,9 @@ Global list of all actions that have a parameter dialog.
     - (keep_volatiles_1): **Einkommensbescheinigungen** (aids_IncomeConfirmation), **Kostenübernahmescheine** (aids_RefundConfirmation)
     - (keep_volatiles_2): **Einfache Bescheinigungen** (aids_SimpleConfirmation), **Begleitungen** (coachings_Coaching)
     - (keep_volatiles_3): **Sprachkenntnisse** (cv_LanguageKnowledge), **Phonetische Wörter** (dupable_clients_Word)
-    - (keep_volatiles_4): **Dispenzen** (pcsw_Dispense), **Eigenschaften** (properties_PersonProperty)
-    - (keep_volatiles_5): **Adressen** (addresses_Address), **Bankkonten** (sepa_Account)
+    - (keep_volatiles_4): **ESF Summaries** (esf_ClientSummary), **Dispenzen** (pcsw_Dispense)
+    - (keep_volatiles_5): **Eigenschaften** (properties_PersonProperty), **Adressen** (addresses_Address)
+    - **Bankkonten** (sepa_Account)
   - **Begründung** (reason)
 - pcsw.Clients.refuse_client : Ablehnen
   (main) [visible for all]: **Ablehnungsgrund** (reason), **Bemerkung** (remark)
@@ -1591,6 +1597,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Kalender --> Kalendereintragsarten : 12
 - Konfigurierung --> Kalender --> Wiederholungsregeln : 7
 - Konfigurierung --> Kalender --> Externe Kalender : 1
+- Konfigurierung --> Kalender --> Tagesplanerzeilen : 4
 - Konfigurierung --> Buchhaltung --> Kontengruppen : 7
 - Konfigurierung --> Buchhaltung --> Haushaltsartikel : 27
 - Konfigurierung --> Buchhaltung --> Journale : 5
@@ -1638,7 +1645,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Kontakte --> Verwandschaftsarten : 13
 - Explorer --> System --> Vollmachten : 4
 - Explorer --> System --> Benutzerarten : 16
-- Explorer --> System --> Datenbankmodelle : 141
+- Explorer --> System --> Datenbankmodelle : 142
 - Explorer --> System --> Benachrichtigungen : 14
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> All dashboard widgets : 1
