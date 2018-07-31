@@ -317,3 +317,66 @@ Judith Jousten
 Assign to me
 ============
 
+
+
+Do not read
+===========
+
+
+When the primary key is a OneToOneField
+---------------------------------------
+
+Before :ticket:`2436`, a OneToOneField resulted in a StoreField giving
+a single atomic value (the database object).
+
+           
+The primary key of a client is `id`:
+
+>>> pk = pcsw.Client._meta.get_field('id')
+>>> pk
+<django.db.models.fields.AutoField: id>
+
+>>> pk = pcsw.Client._meta.pk
+>>> pk
+<django.db.models.fields.related.OneToOneField: person_ptr>
+
+
+>>> pk.primary_key
+True
+
+>>> ptr = pcsw.Client._meta.get_field('person_ptr')
+>>> ptr
+<django.db.models.fields.related.OneToOneField: person_ptr>
+>>> ptr.primary_key
+True
+
+>>> ah = reception.Clients.get_handle()
+>>> pprint(ah.store.list_fields)
+((virtual)DisplayStoreField name_column,
+ (virtual)DisplayStoreField address_column,
+ StoreField 'national_id',
+ (virtual)DisplayStoreField workflow_buttons,
+ OneToOneStoreField 'person_ptr',
+ DisabledFieldsStoreField 'disabled_fields',
+ DisableEditingStoreField 'disable_editing',
+ RowClassStoreField 'row_class')
+
+
+>>> ah.store.pk
+<django.db.models.fields.related.OneToOneField: person_ptr>
+
+>>> ah.store.pk_index
+4
+>>> ah.store.list_fields[4]
+OneToOneStoreField 'person_ptr'
+
+>>> ses = rt.login("robin")
+>>> ar = reception.Clients.request(user=ses.user)
+>>> obj = pcsw.Client.objects.get(pk=116)
+>>> lst = ah.store.row2list(ar, obj)
+>>> #lst
+
+>>> lst[ah.store.pk_index]
+Person #116 ('M. Alfons AUSDEMWALD')
+
+
