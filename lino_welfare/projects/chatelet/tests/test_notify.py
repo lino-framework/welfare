@@ -149,7 +149,7 @@ class TestCase(TestCase):
             Event, event_type=consultation, user=caroline)
         guest = self.create_obj(Guest, event=event, partner=first)
 
-        self.assertEqual(str(guest), 'Presence #1 (22.05.2014)')
+        self.assertEqual(str(guest), 'Présence #1 (22.05.2014)')
 
         # Checkin a guest
 
