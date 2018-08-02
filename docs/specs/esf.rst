@@ -169,12 +169,13 @@ Par type d'entrée calendrier on doit configurer le champ FSE dans
 lequel seront totalisés les heures.
 
 >>> rt.show(cal.EventTypes, language="fr")
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ======================================== ======================================== =============================== ======================== ==============================
  Désignation                              Désignation (de)                         Désignation (en)                Inviter le bénéficiare   Champ FSE
 ---------------------------------------- ---------------------------------------- ------------------------------- ------------------------ ------------------------------
  Jours fériés                             Feiertage                                Holidays                        Non
  Réunion                                  Versammlung                              Meeting                         Non
- Internal                                 Internal                                 Internal                        Non
+ Interne                                  Intern                                   Internal                        Non
  Internal meetings with client            Internal meetings with client            Internal meetings with client   Oui                      Séance d’information
  Évaluation                               Auswertung                               Evaluation                      Oui                      Entretien individuel
  Consultations avec le bénéficiaire       Beratungen mit Klient                    Consultations with client       Non
