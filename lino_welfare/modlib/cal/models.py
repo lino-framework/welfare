@@ -42,8 +42,11 @@ from lino_xl.lib.clients.choicelists import ClientStates
 
 
 def you_are_busy_messages(ar):
-    """Yield :message:`You are busy in XXX` messages for the welcome
-page."""
+    """
+    Yield :message:`You are busy in XXX` messages for the welcome
+    page.
+
+    """
 
     events = rt.models.cal.Event.objects.filter(
         user=ar.get_user(), guest__state=GuestStates.busy).distinct()
@@ -80,6 +83,8 @@ dd.add_welcome_handler(you_are_busy_messages)
 
 class EventType(EventType):
     """
+    Adds the following fields.
+
     .. attribute:: invite_client
     .. attribute:: esf_field
 
@@ -217,8 +222,8 @@ dd.update_field(Event, 'user', verbose_name=_("Managed by"))
 
 
 class EntriesByClient(Events):
-    """Events where :attr:`Event.project` **or** one guest is this client.
-
+    """
+    Events where :attr:`Event.project` **or** one guest is this client.
     """
     required_roles = dd.login_required((OfficeUser, OfficeOperator))
     # master_key = 'project'
@@ -275,7 +280,8 @@ class TasksByClient(Tasks):
 
 class Guest(Guest):
     """
-    
+    Adds the following fields.
+
     .. attribute:: client
     
         Virtual field which returns the `partner` if it is a client.
