@@ -28,7 +28,7 @@ name to read the documentation):
 
 .. py2rst::
 
-    from lino.core.choicelists import CHOICELISTS
+    from lino.core.kernel import CHOICELISTS
     for cls in sorted(CHOICELISTS.values(), key=lambda a: str(a)):
         print("- {0} (:class:`{1} <{2}.{3}>`)".format(
             cls.verbose_name_plural or cls.verbose_name, 
@@ -36,7 +36,7 @@ name to read the documentation):
 
 .. tested, but not visible to reader:
 
-    >>> from lino.core.choicelists import choicelist_choices
+    >>> from lino.core.kernel import choicelist_choices
     >>> for value, text in choicelist_choices():
     ...     print("%s : %s" % (value, str(text)))
     ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF

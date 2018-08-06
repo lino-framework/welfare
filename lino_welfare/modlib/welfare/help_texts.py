@@ -82,9 +82,11 @@ private company…"""),
     'lino_welfare.modlib.badges.Plugin.holder_model' : _("""A string referring to the model which represents the badge holder in
 your application.  Default value is 'contacts.Person'."""),
     'lino_welfare.modlib.cal.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.cal.EventType' : _("""Adds the following fields."""),
     'lino_welfare.modlib.cal.EntriesByClient' : _("""Events where Event.project or one guest is this client."""),
     'lino_welfare.modlib.cal.EntriesByClient.master' : _("""alias of lino_welfare.modlib.pcsw.models.Client"""),
     'lino_welfare.modlib.cal.EntriesByClient.model' : _("""alias of Event"""),
+    'lino_welfare.modlib.cal.Guest' : _("""Adds the following fields."""),
     'lino_welfare.modlib.cal.Guest.client' : _("""Virtual field which returns the partner if it is a client."""),
     'lino_welfare.modlib.cbss.Plugin' : _("""The descriptor for this plugin. See
 lino.core.plugin.Plugin."""),
