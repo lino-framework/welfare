@@ -41,7 +41,7 @@ else:
     
 SETUP_INFO = dict(
     name='lino-welfare',
-    version='17.10.0',
+    version='18.04.0',
     install_requires=requires,
     test_suite='tests',
     tests_require=['pytest'],
@@ -192,15 +192,16 @@ SETUP_INFO.update(message_extractors={
         #~ })
     ],
 })
+SETUP_INFO.update(include_package_data=True)
 
-SETUP_INFO.update(package_data=dict())
+# SETUP_INFO.update(package_data=dict())
 
 
 # def add_package_data(package, *patterns):
 #     l = SETUP_INFO['package_data'].setdefault(package, [])
 #     l.extend(patterns)
 #     return l
-
+#
 # add_package_data('lino_welfare.modlib.cbss',
 #                  'WSDL/*.wsdl',
 #                  'XSD/*.xsd',
@@ -211,7 +212,7 @@ SETUP_INFO.update(package_data=dict())
 #                  'XSD/SSDN/OCMW_CPAS/Loi65Wet65/*.xsd',
 #                  'XSD/SSDN/Person/*.xsd',
 #                  'XSD/SSDN/Service/*.xsd')
-
+#
 # add_package_data('lino_welfare.modlib.cbss',
 #                  'config/cbss/RetrieveTIGroupsRequest/*.odt')
 # add_package_data('lino_welfare.modlib.cbss',
@@ -233,3 +234,4 @@ SETUP_INFO.update(package_data=dict())
 # l = add_package_data('lino_welfare.modlib.welfare')
 # for lng in 'fr de nl'.split():
 #     l.append('lino_welfare/modlib/welfare/locale/%s/LC_MESSAGES/*.mo' % lng)
+#
