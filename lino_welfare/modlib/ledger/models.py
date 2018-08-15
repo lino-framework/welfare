@@ -71,8 +71,8 @@ add('A', _("Aids"), 'aids', dc=DEBIT)
 add('C', _("Clearings"), 'clearings', dc=DEBIT)
 
 
-TradeTypes.purchases.update(partner_account=CommonAccounts.suppliers)
-TradeTypes.aids.update(partner_account=CommonAccounts.granted_aids)
+TradeTypes.purchases.update(main_account=CommonAccounts.suppliers)
+TradeTypes.aids.update(main_account=CommonAccounts.granted_aids)
 
 
 from lino_xl.lib.accounts.models import Account
