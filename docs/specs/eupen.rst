@@ -25,10 +25,10 @@ it was the first Lino that went into production. This was in 2010.
 
 >>> print(analyzer.show_complexity_factors())
 - 65 plugins
-- 141 models
-- 541 views
+- 142 models
+- 542 views
 - 16 user types
-- 151 dialog actions
+- 152 dialog actions
 <BLANKLINE>
 
 
@@ -401,6 +401,7 @@ Database structure
 - languages.Language : name, id, iso2, name_fr, name_en
 - ledger.AccountingPeriod : id, ref, start_date, end_date, state, year, remark
 - ledger.Journal : id, ref, seqno, name, build_method, template, trade_type, voucher_type, journal_group, auto_check_clearings, auto_fill_suggestions, force_sequence, account, partner, printed_name, dc, yearly_numbering, must_declare, printed_name_fr, printed_name_en, name_fr, name_en, sepa_account
+- ledger.LedgerInfo : user, entry_date
 - ledger.MatchRule : id, account, journal
 - ledger.Movement : id, project, voucher, partner, seqno, account, amount, dc, match, cleared, value_date
 - ledger.PaymentTerm : id, ref, name, days, months, end_of_month, printed_text, printed_text_fr, printed_text_en, name_fr, name_en
@@ -689,6 +690,7 @@ Each window layout defines a given set of fields.
 - ledger.Journals.detail : name, name_fr, name_en, ref, seqno, voucher_type, journal_group, build_method, template, id, trade_type, account, partner, dc, force_sequence, yearly_numbering, auto_fill_suggestions, auto_check_clearings, must_declare, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, journal_group, voucher_type
 - ledger.Journals.merge_row : merge_to, reason
+- ledger.LedgerInfoTable.merge_row : merge_to, reason
 - ledger.MatchRules.merge_row : merge_to, reason
 - ledger.Movements.merge_row : merge_to, reason
 - ledger.PaymentTerms.detail : ref, months, days, end_of_month, name, name_fr, name_en, printed_text, printed_text_fr, printed_text_en
@@ -1022,6 +1024,7 @@ Each window layout is **viewable** by a given set of user user_types.
 - ledger.Journals.detail : visible for 510 admin 910
 - ledger.Journals.insert : visible for 510 admin 910
 - ledger.Journals.merge_row : visible for admin 910
+- ledger.LedgerInfoTable.merge_row : visible for admin 910
 - ledger.MatchRules.merge_row : visible for admin 910
 - ledger.Movements.merge_row : visible for admin 910
 - ledger.PaymentTerms.detail : visible for 510 admin 910
@@ -1393,6 +1396,8 @@ Global list of all actions that have a parameter dialog.
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - ledger.Journals.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
+- ledger.LedgerInfoTable.merge_row : Fusionieren
+  (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - ledger.MatchRules.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - ledger.Movements.merge_row : Fusionieren
@@ -1645,7 +1650,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Kontakte --> Verwandschaftsarten : 13
 - Explorer --> System --> Vollmachten : 4
 - Explorer --> System --> Benutzerarten : 16
-- Explorer --> System --> Datenbankmodelle : 142
+- Explorer --> System --> Datenbankmodelle : 143
 - Explorer --> System --> Benachrichtigungen : 14
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> All dashboard widgets : 1
@@ -1680,7 +1685,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> ÖSHZ --> Kostenübernahmescheine : 13
 - Explorer --> ÖSHZ --> Einfache Bescheinigungen : 20
 - Explorer --> ÖSHZ --> Phonetische Wörter : 131
-- Explorer --> Buchhaltung --> Gemeinkonten : 18
+- Explorer --> Buchhaltung --> Gemeinkonten : 19
 - Explorer --> Buchhaltung --> Begleichungsregeln : 3
 - Explorer --> Buchhaltung --> Belege : 56
 - Explorer --> Buchhaltung --> Belegarten : 6
