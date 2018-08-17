@@ -87,7 +87,7 @@ class ClientVoucher(Voucher, ProjectRelated):
                     None, acc, not self.journal.dc, m)
                 sum += m
 
-        acc = self.get_trade_type().get_partner_account()
+        acc = self.get_trade_type().get_main_account()
         if acc is not None:
             yield self.create_movement(
                 None, acc, self.journal.dc, sum,
