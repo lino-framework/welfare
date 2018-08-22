@@ -44,7 +44,10 @@ extensions += ['lino.sphinxcontrib.actordoc']
 extensions += ['lino.sphinxcontrib.logo']
 extensions += ['sphinx.ext.autosummary']
 autosummary_generate = True
-autodoc_default_flags = ['members']
+
+# autodoc_default_flags = ['members']
+autodoc_default_options = {'members': None}
+# 20180821
 
 extensions += ['lino.sphinxcontrib.help_texts_extractor']
 help_texts_builder_targets = {
