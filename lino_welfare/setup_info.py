@@ -41,7 +41,7 @@ else:
     
 SETUP_INFO = dict(
     name='lino-welfare',
-    version='18.04.0',
+    version='18.8.0',
     install_requires=requires,
     test_suite='tests',
     tests_require=['pytest'],
