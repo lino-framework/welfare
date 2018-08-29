@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2015 Luc Saffre
+# Copyright 2012-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -26,6 +26,115 @@ from __future__ import unicode_literals
 from django.db import models
 
 from lino.api import dd, _
+
+from lino_xl.lib.accounts.utils import DEBIT, CREDIT
+from lino_xl.lib.accounts.fields import DebitOrCreditField
+from lino_xl.lib.ledger.roles import LedgerStaff
+
+
+
+class Sheet(object):
+
+    # Comptes annuels Jahresabschluss Jaarverslag  Aastaaruanne
+    verbose_name = _("Financial statement")
+
+    @classmethod
+    def account_types(cls):
+        """
+        Return a list the top-level account types included in this Sheet
+        """
+        return [o for o in AccountTypes.objects() if o.sheet == cls]
+
+
+class BalanceSheet(Sheet):
+
+    verbose_name = _("Balance sheet")  # Bilan  Bilanz  Balans  Bilanss
+
+
+class EarningsSheet(Sheet):
+
+    # Compte de résultat Gewinn- und Verlustrechnung
+    # Winst-en-verliesrekening ...
+    verbose_name = _("Profit & Loss statement")
+
+
+Sheet.objects = (BalanceSheet, EarningsSheet)
+
+
+class AccountType(dd.Choice):
+    # top_level = True
+    sheet = None
+    
+    def __init__(self, *args, **kwargs):
+        # the class attribute `name` ís used as value
+        super(AccountType, self).__init__(*args, **kwargs)
+        self.top_level = len(self.value) == 1
+
+    
+
+class AccountTypes(dd.ChoiceList):
+    verbose_name = _("Account type")
+    verbose_name_plural = _("Account types")
+    item_class = AccountType
+    column_names = 'value name text dc sheet'
+    required_roles = dd.login_required(LedgerStaff)
+    
+    @dd.virtualfield(DebitOrCreditField(_("D/C")))
+    def dc(cls, choice, ar):
+        return choice.dc
+
+    @dd.virtualfield(models.CharField(_("Sheet"), max_length=20))
+    def sheet(cls, choice, ar):
+        return choice.sheet.__name__
+
+
+add = AccountTypes.add_item_instance
+
+class Assets(AccountType):
+    value = 'A'
+    text = _("Assets")   # Aktiva, Anleihe, Vermögen, Anlage
+    name = "assets"
+    dc = DEBIT
+    sheet = BalanceSheet
+add(Assets())
+
+
+class Liabilities(AccountType):
+    value = 'L'
+    text = _("Liabilities")  # Guthaben, Schulden, Verbindlichkeit
+    name = "liabilities"
+    dc = CREDIT
+    sheet = BalanceSheet
+add(Liabilities())
+
+
+class Capital(AccountType):  # aka Owner's Equities
+    value = 'C'
+    text = _("Capital")  # Kapital
+    name = "capital"
+    dc = CREDIT
+    sheet = BalanceSheet
+add(Capital())
+
+
+class Incomes(AccountType):
+    value = 'I'
+    text = _("Incomes")  # Gain/Revenue     Einnahmen  Produits
+    name = "incomes"
+    dc = CREDIT
+    balance_sheet = True
+    sheet = EarningsSheet
+add(Incomes())
+
+
+class Expenses(AccountType):
+    value = 'E'
+    text = _("Expenses")  # Loss/Cost       Ausgaben   Charges
+    name = "expenses"
+    dc = DEBIT
+    sheet = EarningsSheet
+add(Expenses())
+
 
 
 class TableLayout(dd.Choice):

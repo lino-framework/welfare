@@ -159,30 +159,32 @@ replaced by the term "accounts".
 Anyway, these budgetary articles are in social sector accounting
 exactly what general accounts are in private sector accounting.
 
-The account chart is made of two models: :class:`Account
-<lino_xl.lib.accounts.models.Account>` and :class:`Group
-<lino_xl.lib.accounts.models.Group>`.
-
->>> rt.show(accounts.Groups)
-===== ======================== ===========
- ref   Bezeichnung              Kontoart
------ ------------------------ -----------
- 40    Receivables              Vermögen
- 44    Verpflichtungen          Vermögen
- 55    Finanzinstitute          Vermögen
- 58    Laufende Transaktionen   Vermögen
- 6     Ausgaben                 Ausgaben
- 7     Revenues                 Einkünfte
-===== ======================== ===========
-<BLANKLINE>
-
-Some expenses accounts:
-
->>> expenses = accounts.Group.objects.get(ref="6")
->>> rt.show(accounts.AccountsByGroup, expenses, column_names="ref name")
-============= ================================
+>>> rt.show(accounts.Accounts)
+============= ==================================
  Referenz      Bezeichnung
-------------- --------------------------------
+------------- ----------------------------------
+ 1000          Net income (loss)
+ 4000          Kunden
+ 4300          Offene Zahlungsaufträge
+ 4400          Lieferanten
+ 4450          Auszuführende Ausgabeanweisungen
+ 4500          Angestellte
+ 4510          Geschuldete Mehrwertsteuer
+ 4511          Rückzahlbare Mehrwertsteuer
+ 4512          Abziehbare Mehrwertsteuer
+ 4513          Deklarierte Mehrwertsteuer
+ 4600          Steuerämter
+ 4800          Granted aids
+ 4900          Wartekonto
+ 5500          BestBank
+ 5700          Kasse
+ 6010          Einkäufe von Dienstleistungen
+ 6020          Investierungskäufe
+ 6040          Wareneinkäufe
+ 6300          Löhne und Gehälter
+ 6900          Net income
+ 7000          Verkauf
+ 7900          Net loss
  820/333/01    Vorschuss auf Vergütungen o.ä.
  821/333/01    Vorschuss auf Pensionen
  822/333/01    Vorsch. Entsch. Arbeitsunfälle
@@ -202,7 +204,7 @@ Some expenses accounts:
  P82/000/00    Einn. Dritter: Weiterleitung
  P83/000/00    Unber. erh. Beträge + Erstatt.
  P87/000/00    Abhebung von pers. Guthaben
-============= ================================
+============= ==================================
 <BLANKLINE>
 
 
@@ -322,17 +324,17 @@ Users can consult the movements of a given general account.
 (820/333/01) Vorschuss auf Vergütungen o.ä.
 
 >>> rt.show(ledger.MovementsByAccount, obj)
-========== =============== ===================================================== ============ ======== =======
- Valuta     Beleg           Beschreibung                                          Debit        Kredit   Match
----------- --------------- ----------------------------------------------------- ------------ -------- -------
- 22.05.14   *REG 1/2014*    *AS Express Post* / *AUSDEMWALD Alfons (116)*         10,00
- 16.02.14   *SREG 7/2014*   *Leffin Electronics* / *AUSDEMWALD Alfons (116)*      29,95
- 16.02.14   *SREG 7/2014*   *Leffin Electronics* / *COLLARD Charlotte (118)*      120,00
- 16.02.14   *SREG 7/2014*   *Leffin Electronics* / *DOBBELSTEIN Dorothée (124)*   5,33
- 16.02.14   *SREG 7/2014*   *Leffin Electronics* / *EVERS Eberhart (127)*         12,50
- 16.02.14   *SREG 7/2014*   *Leffin Electronics* / *EMONTS Daniel (128)*          25,00
-                            **Saldo 202.78 (6 Bewegungen)**                       **202,78**
-========== =============== ===================================================== ============ ======== =======
+========== =============== ================================================================ ============ ======== =======
+ Valuta     Beleg           Beschreibung                                                     Debit        Kredit   Match
+---------- --------------- ---------------------------------------------------------------- ------------ -------- -------
+ 22.05.14   *REG 1/2014*    *AS Express Post* / *AUSDEMWALD Alfons (116)*                    10,00
+ 03.03.14   *SREG 6/2014*   *Electrabel Customer Solutions* / *AUSDEMWALD Alfons (116)*      25,00
+ 03.03.14   *SREG 6/2014*   *Electrabel Customer Solutions* / *COLLARD Charlotte (118)*      149,95
+ 03.03.14   *SREG 6/2014*   *Electrabel Customer Solutions* / *DOBBELSTEIN Dorothée (124)*   125,33
+ 03.03.14   *SREG 6/2014*   *Electrabel Customer Solutions* / *EVERS Eberhart (127)*         10,00
+ 03.03.14   *SREG 6/2014*   *Electrabel Customer Solutions* / *EMONTS Daniel (128)*          12,50
+                            **Saldo 332.78 (6 Bewegungen)**                                  **332,78**
+========== =============== ================================================================ ============ ======== =======
 <BLANKLINE>
 
 
@@ -355,29 +357,29 @@ not complete (it is just a *Nebenbuchhaltung*), there are no debtors
 Saldenliste Generalkonten (Periods 2013-01...2013-12)
 =====================================================
 <BLANKLINE>
-+--------------------------------------------+--------+--------+---+-----------+-----------+---+-----------+-----------+
-| Beschreibung                               | Debit  | Kredit |   | Debit     | Kredit    |   | Debit     | Kredit    |
-|                                            | vorher | vorher |   |           |           |   | nachher   | nachher   |
-+============================================+========+========+===+===========+===========+===+===========+===========+
-| *(4400) Lieferanten*                       |        |        |   | 12,50     |           |   | 12,50     |           |
-+--------------------------------------------+--------+--------+---+-----------+-----------+---+-----------+-----------+
-| *(832/330/03F) Fonds Gas und Elektrizität* |        |        |   |           | 12,50     |   |           | 12,50     |
-+--------------------------------------------+--------+--------+---+-----------+-----------+---+-----------+-----------+
-| **Total (2 Zeilen)**                       |        |        |   | **12,50** | **12,50** |   | **12,50** | **12,50** |
-+--------------------------------------------+--------+--------+---+-----------+-----------+---+-----------+-----------+
++-----------------------------------------+--------+--------+---+-----------+-----------+---+-----------+-----------+
+| Beschreibung                            | Debit  | Kredit |   | Debit     | Kredit    |   | Debit     | Kredit    |
+|                                         | vorher | vorher |   |           |           |   | nachher   | nachher   |
++=========================================+========+========+===+===========+===========+===+===========+===========+
+| *(4400) Lieferanten*                    |        |        |   |           | 12,50     |   |           | 12,50     |
++-----------------------------------------+--------+--------+---+-----------+-----------+---+-----------+-----------+
+| *(832/3331/01) Eingliederungseinkommen* |        |        |   | 12,50     |           |   | 12,50     |           |
++-----------------------------------------+--------+--------+---+-----------+-----------+---+-----------+-----------+
+| **Total (2 Zeilen)**                    |        |        |   | **12,50** | **12,50** |   | **12,50** | **12,50** |
++-----------------------------------------+--------+--------+---+-----------+-----------+---+-----------+-----------+
 <BLANKLINE>
 =======================================================
 Saldenliste Partner Einkauf (Periods 2013-01...2013-12)
 =======================================================
 <BLANKLINE>
-+----------------------+--------+--------+---+-----------+--------+---+-----------+---------+
-| Beschreibung         | Debit  | Kredit |   | Debit     | Kredit |   | Debit     | Kredit  |
-|                      | vorher | vorher |   |           |        |   | nachher   | nachher |
-+======================+========+========+===+===========+========+===+===========+=========+
-| *Leffin Electronics* |        |        |   | 12,50     |        |   | 12,50     |         |
-+----------------------+--------+--------+---+-----------+--------+---+-----------+---------+
-| **Total (1 Zeilen)** |        |        |   | **12,50** |        |   | **12,50** |         |
-+----------------------+--------+--------+---+-----------+--------+---+-----------+---------+
++----------------------+--------+--------+---+-------+-----------+---+---------+-----------+
+| Beschreibung         | Debit  | Kredit |   | Debit | Kredit    |   | Debit   | Kredit    |
+|                      | vorher | vorher |   |       |           |   | nachher | nachher   |
++======================+========+========+===+=======+===========+===+=========+===========+
+| *Leffin Electronics* |        |        |   |       | 12,50     |   |         | 12,50     |
++----------------------+--------+--------+---+-------+-----------+---+---------+-----------+
+| **Total (1 Zeilen)** |        |        |   |       | **12,50** |   |         | **12,50** |
++----------------------+--------+--------+---+-------+-----------+---+---------+-----------+
 <BLANKLINE>
 ======================================================
 Saldenliste Partner Hilfen (Periods 2013-01...2013-12)

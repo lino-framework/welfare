@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Luc Saffre
+# Copyright 2015-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -18,13 +18,12 @@
 
 """Defines some default journals for social accounting.
 
-
 """
 
 from __future__ import unicode_literals
 
 from lino.api import dd, rt, _
-from lino_xl.lib.accounts.utils import CREDIT
+from lino_xl.lib.accounts.utils import DEBIT
 from lino_xl.lib.accounts.choicelists import CommonAccounts
 
 def objects():
@@ -44,7 +43,7 @@ def objects():
     kw = dict(journal_group=JournalGroups.reg)
     kw.update(trade_type='purchases', ref="REG")
     kw.update(dd.str2kw('name', _("Incoming invoices")))
-    kw.update(dc=CREDIT)
+    kw.update(dc=DEBIT)
     yield ProjectInvoicesByJournal.create_journal(**kw)
 
     kw.update(ref="SREG")
@@ -81,7 +80,7 @@ def objects():
     kw.update(journal_group=JournalGroups.zau)
     kw.update(dd.str2kw('name', _("KBC Payment Orders")))
     kw.update(account=a5800, ref="ZKBC")
-    kw.update(dc=CREDIT)
+    kw.update(dc=DEBIT)
     jnl = PaymentOrder.create_journal(**kw)
     yield jnl
     yield MatchRule(journal=jnl, account=a4450)

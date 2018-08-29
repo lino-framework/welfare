@@ -43,7 +43,7 @@ def objects():
     AccountInvoice = rt.models.vatless.AccountInvoice
     InvoiceItem = rt.models.vatless.InvoiceItem
     Account = rt.models.accounts.Account
-    AccountTypes = rt.models.accounts.AccountTypes
+    # AccountTypes = rt.models.accounts.AccountTypes
     PaymentOrder = rt.models.finan.PaymentOrder
     PaymentOrderItem = rt.models.finan.PaymentOrderItem
 
@@ -56,7 +56,7 @@ def objects():
     RECIPIENTS = Cycler(qs)
     if len(RECIPIENTS) == 0:
         raise Exception("Oops, no recipients in %s" % qs)
-    ACCOUNTS = Cycler(Account.objects.filter(type=AccountTypes.expenses))
+    ACCOUNTS = Cycler(Account.objects.filter(ref__startswith="8"))
     if len(ACCOUNTS) == 0:
         raise Exception("Oops, no ACCOUNTS in %s" % ACCOUNTS)
     AMOUNTS = Cycler(10, D('12.50'), 25, D('29.95'), 120, D('5.33'))

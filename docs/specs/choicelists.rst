@@ -41,7 +41,6 @@ name to read the documentation):
     ...     print("%s : %s" % (value, str(text)))
     ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
     about.TimeZones : Time zones
-    accounts.AccountTypes : Kontoarten
     accounts.CommonAccounts : Gemeinkonten
     addresses.AddressTypes : Adressenarten
     addresses.DataSources : Datenquellen
@@ -75,6 +74,7 @@ name to read the documentation):
     cv.CefLevel : CEF-Kategorien
     cv.EducationEntryStates : EducationEntryStates
     cv.HowWell : HowWell
+    debts.AccountTypes : Kontoarten
     debts.TableLayouts : Table layouts
     esf.ParticipationCertificates : Participation Certificates
     esf.StatisticalFields : ESF fields
@@ -85,7 +85,6 @@ name to read the documentation):
     isip.ContractEvents : Beobachtungskriterien
     isip.OverlapGroups : Überlappungsgruppen
     jobs.CandidatureStates : Kandidatur-Zustände
-    ledger.FiscalYears : Geschäftsjahre
     ledger.JournalGroups : Journalgruppen
     ledger.PeriodStates : Zustände
     ledger.TradeTypes : Handelsarten

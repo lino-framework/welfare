@@ -72,6 +72,7 @@ primitive direct printing method (see `Printing
     <class 'lino_welfare.modlib.isip.models.Contract'>
     <class 'lino_welfare.modlib.jobs.models.Contract'>
     <class 'lino_welfare.modlib.jobs.models.JobProvider'>
+    <class 'lino_xl.lib.ledger.models.FiscalYear'>
     <class 'lino_xl.lib.ledger.models.Voucher'>
     <class 'lino_welfare.modlib.newcomers.models.Competence'>
     <class 'lino_welfare.modlib.notes.models.Note'>
@@ -146,6 +147,8 @@ This is the list of excerpt types:
  Immersion training       Yes       Yes                                        immersion.body.html
  ISIP                     Yes       Yes
  Art60§7 job supplyment   Yes       Yes
+ Fiscal year              No        No           annual_report.weasy.html
+ Fiscal year              Yes       Yes
  Client                   No        No           Default.odt                   pac.body.html
  Client                   No        No           cv.odt
  Client                   Yes       No           file_sheet.odt

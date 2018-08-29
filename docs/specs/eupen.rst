@@ -26,7 +26,7 @@ it was the first Lino that went into production. This was in 2010.
 >>> print(analyzer.show_complexity_factors())
 - 65 plugins
 - 142 models
-- 542 views
+- 540 views
 - 16 user types
 - 152 dialog actions
 <BLANKLINE>
@@ -82,7 +82,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Büro : Auszugsarten, Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender, Tagesplanerzeilen
-  - Buchhaltung : Kontengruppen, Haushaltsartikel, Journale, Buchungsperioden, Zahlungsbedingungen
+  - Buchhaltung : Haushaltsartikel, Journale, Geschäftsjahre, Buchungsperioden, Zahlungsbedingungen
   - ÖSHZ : Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
@@ -97,7 +97,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Büro : Auszüge, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Kalendereinträge, Aufgaben, Anwesenheiten, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
   - ÖSHZ : Klientenkontakte, Standard-Klientenkontaktarten, Begleitungen, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
-  - Buchhaltung : Gemeinkonten, Begleichungsregeln, Belege, Belegarten, Bewegungen, Geschäftsjahre, Handelsarten, Journalgruppen, Rechnungen
+  - Buchhaltung : Gemeinkonten, Begleichungsregeln, Belege, Belegarten, Bewegungen, Handelsarten, Journalgruppen, Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
@@ -303,8 +303,7 @@ Database structure
 
 >>> print(analyzer.show_database_structure())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-- accounts.Account : id, ref, seqno, name, group, type, common_account, needs_partner, clearable, default_amount, name_fr, name_en, sales_allowed, purchases_allowed, wages_allowed, taxes_allowed, clearings_allowed, bank_po_allowed
-- accounts.Group : id, name, ref, account_type, name_fr, name_en
+- accounts.Account : id, ref, seqno, name, common_account, needs_partner, clearable, default_amount, name_fr, name_en, sales_allowed, purchases_allowed, wages_allowed, taxes_allowed, clearings_allowed, bank_po_allowed
 - addresses.Address : id, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, data_source, address_type, partner, remark, primary
 - aids.AidType : id, name, company, contact_person, contact_role, excerpt_title, aid_regime, confirmation_type, short_name, board, print_directly, is_integ_duty, is_urgent, confirmed_by_primary_coach, pharmacy_type, address_type, body_template, name_fr, name_en, excerpt_title_fr, excerpt_title_en
 - aids.Category : id, name, name_fr, name_en
@@ -400,6 +399,7 @@ Database structure
 - jobs.Schedule : id, name, name_fr, name_en
 - languages.Language : name, id, iso2, name_fr, name_en
 - ledger.AccountingPeriod : id, ref, start_date, end_date, state, year, remark
+- ledger.FiscalYear : id, ref, start_date, end_date, printed_by, state
 - ledger.Journal : id, ref, seqno, name, build_method, template, trade_type, voucher_type, journal_group, auto_check_clearings, auto_fill_suggestions, force_sequence, account, partner, printed_name, dc, yearly_numbering, must_declare, printed_name_fr, printed_name_en, name_fr, name_en, sepa_account
 - ledger.LedgerInfo : user, entry_date
 - ledger.MatchRule : id, account, journal
@@ -462,12 +462,9 @@ Each window layout defines a given set of fields.
 >>> print(analyzer.show_window_fields())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
-- accounts.Accounts.detail : ref, group, type, common_account, id, name, name_fr, name_en, needs_partner, clearable, default_amount, MovementsByAccount
-- accounts.Accounts.insert : ref, group, type, name, name_fr, name_en
+- accounts.Accounts.detail : ref, common_account, sheet_item, id, name, name_fr, name_en, needs_partner, clearable, default_amount, MovementsByAccount
+- accounts.Accounts.insert : ref, sheet_item, name, name_fr, name_en
 - accounts.Accounts.merge_row : merge_to, reason
-- accounts.Groups.detail : ref, name, name_fr, name_en, account_type, id
-- accounts.Groups.insert : name, name_fr, name_en, account_type, ref
-- accounts.Groups.merge_row : merge_to, reason
 - addresses.Addresses.detail : country, city, zip_code, addr1, street, street_no, street_box, addr2, address_type, remark, data_source, partner
 - addresses.Addresses.insert : country, city, street, street_no, street_box, address_type, remark
 - addresses.Addresses.merge_row : merge_to, reason
@@ -687,6 +684,8 @@ Each window layout defines a given set of fields.
 - languages.Languages.merge_row : merge_to, reason
 - ledger.AccountingPeriods.merge_row : merge_to, reason
 - ledger.AccountingReport.show : body
+- ledger.FiscalYears.detail : ref, id, start_date, end_date, printed
+- ledger.FiscalYears.merge_row : merge_to, reason
 - ledger.Journals.detail : name, name_fr, name_en, ref, seqno, voucher_type, journal_group, build_method, template, id, trade_type, account, partner, dc, force_sequence, yearly_numbering, auto_fill_suggestions, auto_check_clearings, must_declare, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, journal_group, voucher_type
 - ledger.Journals.merge_row : merge_to, reason
@@ -799,9 +798,6 @@ Each window layout is **viewable** by a given set of user user_types.
 - accounts.Accounts.detail : visible for 510 admin 910
 - accounts.Accounts.insert : visible for 510 admin 910
 - accounts.Accounts.merge_row : visible for admin 910
-- accounts.Groups.detail : visible for 510 admin 910
-- accounts.Groups.insert : visible for 510 admin 910
-- accounts.Groups.merge_row : visible for admin 910
 - addresses.Addresses.detail : visible for admin 910
 - addresses.Addresses.insert : visible for admin 910
 - addresses.Addresses.merge_row : visible for admin 910
@@ -1021,6 +1017,8 @@ Each window layout is **viewable** by a given set of user user_types.
 - languages.Languages.merge_row : visible for admin 910
 - ledger.AccountingPeriods.merge_row : visible for admin 910
 - ledger.AccountingReport.show : visible for 500 510 admin 910
+- ledger.FiscalYears.detail : visible for 510 admin 910
+- ledger.FiscalYears.merge_row : visible for admin 910
 - ledger.Journals.detail : visible for 510 admin 910
 - ledger.Journals.insert : visible for 510 admin 910
 - ledger.Journals.merge_row : visible for admin 910
@@ -1162,8 +1160,6 @@ Global list of all actions that have a parameter dialog.
 >>> show_dialog_actions()
 ... #doctest: +REPORT_UDIFF +NORMALIZE_WHITESPACE
 - accounts.Accounts.merge_row : Fusionieren
-  (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
-- accounts.Groups.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - addresses.Addresses.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
@@ -1394,6 +1390,8 @@ Global list of all actions that have a parameter dialog.
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - ledger.AccountingPeriods.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
+- ledger.FiscalYears.merge_row : Fusionieren
+  (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - ledger.Journals.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - ledger.LedgerInfoTable.merge_row : Fusionieren
@@ -1589,7 +1587,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Eigenschaften --> Fachkompetenzen : 0
 - Konfigurierung --> Eigenschaften --> Sozialkompetenzen : 0
 - Konfigurierung --> Eigenschaften --> Hindernisse : 0
-- Konfigurierung --> Büro --> Auszugsarten : 22
+- Konfigurierung --> Büro --> Auszugsarten : 24
 - Konfigurierung --> Büro --> Upload-Arten : 10
 - Konfigurierung --> Büro --> Notizarten : 14
 - Konfigurierung --> Büro --> Ereignisarten : 11
@@ -1603,9 +1601,9 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Kalender --> Wiederholungsregeln : 7
 - Konfigurierung --> Kalender --> Externe Kalender : 1
 - Konfigurierung --> Kalender --> Tagesplanerzeilen : 4
-- Konfigurierung --> Buchhaltung --> Kontengruppen : 7
-- Konfigurierung --> Buchhaltung --> Haushaltsartikel : 27
+- Konfigurierung --> Buchhaltung --> Haushaltsartikel : 42
 - Konfigurierung --> Buchhaltung --> Journale : 5
+- Konfigurierung --> Buchhaltung --> Geschäftsjahre : 9
 - Konfigurierung --> Buchhaltung --> Buchungsperioden : 30
 - Konfigurierung --> Buchhaltung --> Zahlungsbedingungen : 9
 - Konfigurierung --> ÖSHZ --> Klientenkontaktarten : 11
@@ -1657,7 +1655,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Datentests : 16
 - Explorer --> System --> Datenprobleme : 64
 - Explorer --> Eigenschaften --> Eigenschaften : 24
-- Explorer --> Büro --> Auszüge : 69
+- Explorer --> Büro --> Auszüge : 71
 - Explorer --> Büro --> Uploads : 12
 - Explorer --> Büro --> Upload-Bereiche : 2
 - Explorer --> Büro --> E-Mail-Ausgänge : 1
@@ -1685,12 +1683,11 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> ÖSHZ --> Kostenübernahmescheine : 13
 - Explorer --> ÖSHZ --> Einfache Bescheinigungen : 20
 - Explorer --> ÖSHZ --> Phonetische Wörter : 131
-- Explorer --> Buchhaltung --> Gemeinkonten : 19
+- Explorer --> Buchhaltung --> Gemeinkonten : 22
 - Explorer --> Buchhaltung --> Begleichungsregeln : 3
 - Explorer --> Buchhaltung --> Belege : 56
 - Explorer --> Buchhaltung --> Belegarten : 6
 - Explorer --> Buchhaltung --> Bewegungen : 602
-- Explorer --> Buchhaltung --> Geschäftsjahre : 8
 - Explorer --> Buchhaltung --> Handelsarten : 3
 - Explorer --> Buchhaltung --> Journalgruppen : 5
 - Explorer --> Buchhaltung --> Rechnungen : 31

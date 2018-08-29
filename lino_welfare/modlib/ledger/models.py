@@ -25,14 +25,14 @@ from __future__ import unicode_literals
 from lino_xl.lib.ledger.models import *
 from lino.api import _
 from lino_xl.lib.accounts.utils import DEBIT
-from lino_xl.lib.accounts.choicelists import CommonAccounts, Liabilities
+from lino_xl.lib.accounts.choicelists import CommonAccounts
 from lino_xl.lib.ledger.choicelists import TradeTypes
 
 
 add = CommonAccounts.add_item
 add('4450', _("Disbursement orders to execute"),
-    "disbursement_orders", 'liabilities', True)
-add('4800', _("Granted aids"), "granted_aids", 'liabilities', True)
+    "disbursement_orders", True)
+add('4800', _("Granted aids"), "granted_aids", True)
 
 # class DisbursementOrders(Liabilities):
 #     value = '4450'

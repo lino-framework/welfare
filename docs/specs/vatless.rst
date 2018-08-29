@@ -202,7 +202,7 @@ Beleg erstellen in Journal **Sammelrechnungen (SREG)**, **Rechnungseingänge (RE
 Our partner has 11 movements which are not yet *cleared*.
 
 >>> rt.show(rt.models.ledger.MovementsByPartner, obj.partner)
-**15 offene Bewegungen (-93.44 €)**
+**15 offene Bewegungen (93.44 €)**
 
 Let's look at the detail of these movements:
 
@@ -286,5 +286,5 @@ Some choices requests
 >>> mt = contenttypes.ContentType.objects.get_for_model(vatless.InvoiceItem).pk
 >>> demo_get(
 ...    'wilfried', 'choices/vatless/ItemsByProjectInvoice/account',
-...    fields, 19, mt=mt, mk=1, **kw)
+...    fields, 22, mt=mt, mk=1, **kw)
 

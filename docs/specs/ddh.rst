@@ -24,8 +24,6 @@ Lino Welfare:
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - accounts.Account :
   - PROTECT : finan.BankStatement.item_account, finan.BankStatementItem.account, finan.JournalEntry.item_account, finan.JournalEntryItem.account, finan.PaymentOrder.item_account, finan.PaymentOrderItem.account, ledger.Journal.account, ledger.MatchRule.account, ledger.Movement.account, vatless.InvoiceItem.account
-- accounts.Group :
-  - PROTECT : accounts.Account.group
 - aids.AidType :
   - PROTECT : aids.Granting.aid_type
 - aids.Category :
@@ -107,7 +105,7 @@ Lino Welfare:
 - debts.Group :
   - PROTECT : debts.Account.group
 - excerpts.Excerpt :
-  - SET_NULL : aids.IncomeConfirmation.printed_by, aids.RefundConfirmation.printed_by, aids.SimpleConfirmation.printed_by, art61.Contract.printed_by, cbss.IdentifyPersonRequest.printed_by, cbss.ManageAccessRequest.printed_by, cbss.RetrieveTIGroupsRequest.printed_by, debts.Budget.printed_by, esf.ClientSummary.printed_by, finan.BankStatement.printed_by, finan.JournalEntry.printed_by, finan.PaymentOrder.printed_by, isip.Contract.printed_by, jobs.Contract.printed_by
+  - SET_NULL : aids.IncomeConfirmation.printed_by, aids.RefundConfirmation.printed_by, aids.SimpleConfirmation.printed_by, art61.Contract.printed_by, cbss.IdentifyPersonRequest.printed_by, cbss.ManageAccessRequest.printed_by, cbss.RetrieveTIGroupsRequest.printed_by, debts.Budget.printed_by, esf.ClientSummary.printed_by, finan.BankStatement.printed_by, finan.JournalEntry.printed_by, finan.PaymentOrder.printed_by, isip.Contract.printed_by, jobs.Contract.printed_by, ledger.FiscalYear.printed_by
 - excerpts.ExcerptType :
   - PROTECT : excerpts.Excerpt.excerpt_type
 - finan.BankStatement :
@@ -142,6 +140,8 @@ Lino Welfare:
   - PROTECT : cv.LanguageKnowledge.language, cv.Study.language, cv.Training.language
 - ledger.AccountingPeriod :
   - PROTECT : ledger.Voucher.accounting_period
+- ledger.FiscalYear :
+  - PROTECT : ledger.AccountingPeriod.year
 - ledger.Journal :
   - PROTECT : ledger.MatchRule.journal, ledger.Voucher.journal
 - ledger.PaymentTerm :

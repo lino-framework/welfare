@@ -184,7 +184,7 @@ class TimLoader(TimLoader):
         yield obj
 
     def fiscal_year(self, per):
-        return ledger.FiscalYears.get_by_value(per[:2])
+        return ledger.FiscalYear.get_by_ref(per[:2])
 
     def tim2number(self, number):
         number = number.strip()

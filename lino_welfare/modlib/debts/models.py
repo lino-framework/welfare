@@ -38,7 +38,7 @@ from lino.api import dd, rt, _, pgettext
 from etgen.html import E
 from lino import mixins
 
-from lino_xl.lib.accounts.choicelists import AccountTypes
+from .choicelists import AccountTypes
 from lino_xl.lib.excerpts.mixins import Certifiable
 from lino.modlib.users.mixins import UserAuthored
 

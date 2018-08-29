@@ -27,7 +27,7 @@ from lino.utils.instantiator import Instantiator
 
 
 def objects():
-    AccountTypes = rt.models.accounts.AccountTypes
+    AccountTypes = rt.models.debts.AccountTypes
     TableLayouts = rt.models.debts.TableLayouts
     # c = accounts.Chart(name="debts.default")
     # yield c

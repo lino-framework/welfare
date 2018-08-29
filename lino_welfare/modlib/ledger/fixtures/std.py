@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2017 Luc Saffre
+# Copyright 2015-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -45,58 +45,23 @@ Lino Welfare accounting:
 
 from __future__ import unicode_literals
 
-from django.utils.translation import ugettext_lazy as _
-
-from lino.api import dd, rt
-
-from lino_xl.lib.accounts.choicelists import CommonAccounts, AccountTypes
-
-current_group = None
-
+from lino.api import dd, rt, _
 
 def objects():
 
-    from lino_xl.lib.ledger.fixtures.std import objects as std_objects
-    yield std_objects()
+    from lino_xl.lib.ledger.fixtures import std
+    yield std.objects()
 
-    Group = rt.models.accounts.Group
     Account = rt.models.accounts.Account
 
-    def group(ref, type, name):
-        global current_group
-        current_group = Group(
-            ref=ref,
-            account_type=AccountTypes.get_by_name(type),
-            **dd.str2kw('name', name))
-        return current_group
-
-    def account(ref, type, name, **kw):
+    def account(ref, sheet_item, name, **kw):
         kw.update(dd.str2kw('name', name))
+        if dd.is_installed('sheets'):
+            Items = rt.models.sheets.Items
+            kw.update(sheet_item=Items.get_by_name(sheet_item))
         return Account(
-            group=current_group,
-            ref=ref,
-            type=AccountTypes.get_by_name(type), **kw)
+            ref=ref, **kw)
 
-    # yield group('10', 'capital', _("Capital"))
-    yield group('40', 'assets', _("Receivables"))
-    yield CommonAccounts.customers.create_object(group=current_group)
-
-    yield group('44', 'assets', _("Liabilities"))
-    yield CommonAccounts.suppliers.create_object(group=current_group)
-    yield CommonAccounts.disbursement_orders.create_object(group=current_group)
-    # a4450 = account(
-    #     '4450', 'liabilities', _("Disbursement orders to execute"),
-    #     clearable=True, needs_partner=True)
-    # yield a4450
-    
-    yield group('55', 'assets', _("Financial institutes"))
-    yield CommonAccounts.best_bank.create_object(group=current_group)
-    yield CommonAccounts.cash.create_object(group=current_group)
-
-    yield group('58', 'assets', _("Current transactions"))
-    yield CommonAccounts.pending_po.create_object(group=current_group)
-    
-    yield group('6', 'expenses', _("Expenses"))
     for ref, name in (
             ('832/3331/01', _("Eingliederungseinkommen")),
             ('832/330/01', _("Allgemeine Beihilfen")),
@@ -122,9 +87,5 @@ def objects():
             ref, 'expenses', name,
             purchases_allowed=True, clearable=False, needs_partner=False)
 
-    yield group('7', 'incomes', _("Revenues"))
-    yield CommonAccounts.sales.create_object(sales_allowed=True)
-
-    from lino_welfare.modlib.ledger.fixtures.std_journals import objects \
-        as std_journals
-    yield std_journals()
+    from lino_welfare.modlib.ledger.fixtures import std_journals
+    yield std_journals.objects()
