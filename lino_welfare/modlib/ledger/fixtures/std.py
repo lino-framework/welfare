@@ -52,7 +52,7 @@ def objects():
     from lino_xl.lib.ledger.fixtures import std
     yield std.objects()
 
-    Account = rt.models.accounts.Account
+    Account = rt.models.ledger.Account
 
     def account(ref, sheet_item, name, **kw):
         kw.update(dd.str2kw('name', name))

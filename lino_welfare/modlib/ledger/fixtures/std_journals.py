@@ -23,12 +23,12 @@
 from __future__ import unicode_literals
 
 from lino.api import dd, rt, _
-from lino_xl.lib.accounts.utils import DEBIT
-from lino_xl.lib.accounts.choicelists import CommonAccounts
+from lino_xl.lib.ledger.utils import DEBIT
+from lino_xl.lib.ledger.choicelists import CommonAccounts
 
 def objects():
 
-    Account = rt.models.accounts.Account
+    Account = rt.models.ledger.Account
     JournalGroups = rt.models.ledger.JournalGroups
     BankStatement = rt.models.finan.BankStatement
     PaymentOrder = rt.models.finan.PaymentOrder

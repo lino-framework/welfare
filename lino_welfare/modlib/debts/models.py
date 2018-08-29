@@ -112,7 +112,7 @@ class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
 
         The *account type* of this account.  This must
         point to an item of
-        :class:`lino_xl.lib.accounts.AccountTypes`.
+        :class:`lino_welfare.modlib.debts.AccountTypes`.
     
     """
     ref_max_length = settings.SITE.plugins.debts.ref_length
@@ -253,8 +253,7 @@ Vielleicht mit Fußnoten?"""))
         account group for which this budget has some data.
 
         :types: an optional string specifying a set of one-letter
-                account type names. See :class:`AccountTypes
-                <lino_xl.lib.accounts.AccountTypes>`.
+                account type names. See :class:`AccountTypes`.
 
         Each entry group is encapsulated as a volatile helper object
         :class:`lino_welfare.modlib.debts.ui.EntryGroup`.
@@ -277,8 +276,7 @@ Vielleicht mit Fußnoten?"""))
         Parameters:
 
             types: an optional string specifying a set of one-letter
-                   account type names. See :class: `AccountTypes
-                   <lino_xl.lib.accounts.AccountTypes>`.
+                   account type names. See :class: `AccountTypes`.
 
         """
         if types is not None:

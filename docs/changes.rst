@@ -421,7 +421,7 @@ Version 1.1.3 (released :blogref:`20130505`)
 - Verständlichere Benutzermeldung wenn man VSE erstellen will und 
   die Vertragsart anzugeben vergisst.
   
-- Adding a new account in :ddref:`accounts.Accounts`
+- Adding a new account in `accounts.Accounts`
   caused an internal server error `DoesNotExist`.
   
 - Wenn in TIM eine PLZ bearbeitet wurde, loggt watch_tim

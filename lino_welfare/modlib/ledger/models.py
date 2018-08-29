@@ -24,8 +24,8 @@ from __future__ import unicode_literals
 
 from lino_xl.lib.ledger.models import *
 from lino.api import _
-from lino_xl.lib.accounts.utils import DEBIT
-from lino_xl.lib.accounts.choicelists import CommonAccounts
+from lino_xl.lib.ledger.utils import DEBIT
+from lino_xl.lib.ledger.choicelists import CommonAccounts
 from lino_xl.lib.ledger.choicelists import TradeTypes
 
 
@@ -75,7 +75,7 @@ TradeTypes.purchases.update(main_account=CommonAccounts.suppliers)
 TradeTypes.aids.update(main_account=CommonAccounts.granted_aids)
 
 
-from lino_xl.lib.accounts.models import Account
+from lino_xl.lib.ledger.models import Account
 Account._meta.verbose_name = _("Budgetary article")
 Account._meta.verbose_name_plural = _("Budgetary articles")
 

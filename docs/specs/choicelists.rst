@@ -41,7 +41,6 @@ name to read the documentation):
     ...     print("%s : %s" % (value, str(text)))
     ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
     about.TimeZones : Time zones
-    accounts.CommonAccounts : Gemeinkonten
     addresses.AddressTypes : Adressenarten
     addresses.DataSources : Datenquellen
     aids.AidRegimes : AidRegimes
@@ -85,6 +84,7 @@ name to read the documentation):
     isip.ContractEvents : Beobachtungskriterien
     isip.OverlapGroups : Überlappungsgruppen
     jobs.CandidatureStates : Kandidatur-Zustände
+    ledger.CommonAccounts : Gemeinkonten
     ledger.JournalGroups : Journalgruppen
     ledger.PeriodStates : Zustände
     ledger.TradeTypes : Handelsarten

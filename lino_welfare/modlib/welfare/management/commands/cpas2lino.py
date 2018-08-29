@@ -35,14 +35,12 @@ from lino_xl.lib.tim2lino.utils import TimLoader
 from lino_xl.lib.sepa.utils import be2iban
 
 User = rt.models.users.User
-accounts = rt.models.accounts
 ledger = rt.models.ledger
 vatless = rt.models.vatless
 finan = rt.models.finan
 contacts = rt.models.contacts
 pcsw = rt.models.pcsw
 sepa = rt.models.sepa
-# Account = rt.models.accounts.Account
 
 
 def get_user_or_none(m, pk):
@@ -102,8 +100,8 @@ WANTED_ACCOUNTS = """
 
 
 def wanted_accounts():
-    Account = rt.models.accounts.Account
-    AccountTypes = rt.models.accounts.AccountTypes
+    Account = rt.models.ledger.Account
+    AccountTypes = rt.models.ledger.AccountTypes
     # Group = rt.models.accounts.Group
     # grp = Group.objects.all()
     for ln in WANTED_ACCOUNTS.splitlines():
@@ -160,7 +158,7 @@ class TimLoader(TimLoader):
 
     def row2account(self, row):
         ref = self.row2idbudref(row)
-        acc = accounts.Account.get_by_ref(ref, None)
+        acc = ledger.Account.get_by_ref(ref, None)
         if acc is None:
             if ref not in self.ignored_accounts:
                 self.ignored_accounts.add(ref)
@@ -175,11 +173,11 @@ class TimLoader(TimLoader):
         kw.update(seqno=row.recno())
         kw.update(group=self.group)
         if row.dc == "A":
-            kw.update(type=accounts.AccountTypes.expenses)
+            kw.update(type=ledger.AccountTypes.expenses)
         else:
-            kw.update(type=accounts.AccountTypes.incomes)
+            kw.update(type=ledger.AccountTypes.incomes)
         self.babel2kw('name', 'name', row, kw)
-        obj = accounts.Account(**kw)
+        obj = ledger.Account(**kw)
         # dd.logger.info("20160302 %s", dd.obj2str(obj))
         yield obj
 

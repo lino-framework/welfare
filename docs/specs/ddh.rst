@@ -22,8 +22,6 @@ Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_foreign_keys())
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- accounts.Account :
-  - PROTECT : finan.BankStatement.item_account, finan.BankStatementItem.account, finan.JournalEntry.item_account, finan.JournalEntryItem.account, finan.PaymentOrder.item_account, finan.PaymentOrderItem.account, ledger.Journal.account, ledger.MatchRule.account, ledger.Movement.account, vatless.InvoiceItem.account
 - aids.AidType :
   - PROTECT : aids.Granting.aid_type
 - aids.Category :
@@ -138,6 +136,8 @@ Lino Welfare:
   - PROTECT : jobs.Contract.schedule
 - languages.Language :
   - PROTECT : cv.LanguageKnowledge.language, cv.Study.language, cv.Training.language
+- ledger.Account :
+  - PROTECT : finan.BankStatement.item_account, finan.BankStatementItem.account, finan.JournalEntry.item_account, finan.JournalEntryItem.account, finan.PaymentOrder.item_account, finan.PaymentOrderItem.account, ledger.Journal.account, ledger.MatchRule.account, ledger.Movement.account, vatless.InvoiceItem.account
 - ledger.AccountingPeriod :
   - PROTECT : ledger.Voucher.accounting_period
 - ledger.FiscalYear :

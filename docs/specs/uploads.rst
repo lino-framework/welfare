@@ -39,7 +39,7 @@ expire.
    changes, subsequent snippets need to get adapted:
 
     >>> contenttypes.ContentType.objects.get_for_model(pcsw.Client).id
-    55
+    54
 
 Configuring upload types
 ========================
@@ -237,7 +237,7 @@ It has 3 keys:
 
 >>> d.record_id
 8
->>> d.base_params == {'mt': 55, 'type': 4, 'mk': 121}
+>>> d.base_params == {'mt': 54, 'type': 4, 'mk': 121}
 True
 >>> print(json.dumps(d.param_values))  #doctest: +NORMALIZE_WHITESPACE
 {"userHidden": null, "upload_typeHidden": null, "end_date": null,
@@ -318,7 +318,7 @@ It has 3 keys:
 >>> len(d.param_values)
 10
 
->>> d.base_params == {'mt': 55, 'mk': 177, 'type_id': 1}
+>>> d.base_params == {'mt': 54, 'mk': 177, 'type_id': 1}
 True
 
 >>> rmu(d.data_record.keys())

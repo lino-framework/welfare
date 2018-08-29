@@ -27,8 +27,8 @@ from django.db import models
 
 from lino.api import dd, _
 
-from lino_xl.lib.accounts.utils import DEBIT, CREDIT
-from lino_xl.lib.accounts.fields import DebitOrCreditField
+from lino_xl.lib.ledger.utils import DEBIT, CREDIT
+from lino_xl.lib.ledger.fields import DebitOrCreditField
 from lino_xl.lib.ledger.roles import LedgerStaff
 
 

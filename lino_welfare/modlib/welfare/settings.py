@@ -63,7 +63,7 @@ class Site(Site):
         """
         Change the default value of certain plugin settings.
 
-        - :attr:`lino_xl.lib.accounts.Plugin.ref_length` = 5
+        - :attr:`lino_xl.lib.ledger.Plugin.ref_length` = 5
         
         - :attr:`excerpts.responsible_user
           <lino_xl.lib.excerpts.Plugin.responsible_user>` is set to
@@ -71,13 +71,13 @@ class Site(Site):
 
         """
         super(Site, self).setup_plugins()
-        self.plugins.accounts.configure(ref_length=16)
         self.plugins.clients.configure(client_model='pcsw.Client')
         self.plugins.addresses.configure(partner_model='contacts.Partner')
         self.plugins.excerpts.configure(responsible_user='melanie')
         # self.plugins.extjs.configure(enter_submits_form=True)
 
         if 'ledger' in self.plugins:
+            self.plugins.ledger.configure(ref_length=16)
             self.plugins.ledger.configure(project_model='pcsw.Client')
         # self.plugins.humanlinks.configure(person_model='pcsw.Client')
         # self.plugins.households.configure(person_model='pcsw.Client')
@@ -118,7 +118,6 @@ class Site(Site):
         yield 'lino_xl.lib.extensible'
         yield 'lino_welfare.modlib.cal'
         yield 'lino_welfare.modlib.reception'
-        yield 'lino_xl.lib.accounts'
         yield 'lino_welfare.modlib.badges'
         yield 'lino_xl.lib.boards'
 

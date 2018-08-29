@@ -87,7 +87,6 @@ Romain
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
   - Bureau : Types d'extrait, Types de fichiers téléchargés, Types d'observation, Types d'événements, Mes Text Field Templates
   - Calendrier : Calendriers, Locaux, Priorités, Évènements periodiques, Rôles de participants, Types d'entrée calendrier, Règles de récurrence, Calendriers externes, Lignes de planificateur
-  - Comptabilité : Comptes
   - Ateliers : Savoirs de base, Topics, Timetable Slots
   - CPAS : Types de contact client, Services, Raisons d’arrêt d'intervention, Phases d'intégration, Activités, Types d'exclusion, Motifs de dispense, Types d'aide sociale, Catégories
   - Parcours : Langues, Types d'éducation, Niveaux académiques, Secteurs, Fonctions, Régimes de travail, Statuts, Types de contrat, Types de compétence sociale, Types de freins, Preuves de qualification
@@ -148,12 +147,11 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-61 apps: lino, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, excerpts, uploads, outbox, extensible, cal, reception, accounts, badges, boards, clients, coachings, pcsw, welfare, sales, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, checkdata, tinymce, sessions.
-135 models:
+60 apps: lino, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, excerpts, uploads, outbox, extensible, cal, reception, badges, boards, clients, coachings, pcsw, welfare, sales, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, checkdata, tinymce, sessions.
+134 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
- accounts.Account               accounts.Accounts               11        0
  active_job_search.Proof        active_job_search.Proofs        7         10
  addresses.Address              addresses.Addresses             16        90
  aids.AidType                   aids.AidTypes                   23        11
@@ -199,7 +197,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  contacts.Person                contacts.Persons                32        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               3         135
+ contenttypes.ContentType       gfks.ContentTypes               3         134
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                11        78
  courses.Course                 courses.Activities              30        7
@@ -343,9 +341,6 @@ Each window layout defines a given set of fields.
 >>> print(analyzer.show_window_fields())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
-- accounts.Accounts.detail : ref, common_account, sheet_item, id, name, name_nl, name_de, name_en, needs_partner, clearable, default_amount
-- accounts.Accounts.insert : ref, sheet_item, name, name_nl, name_de, name_en
-- accounts.Accounts.merge_row : merge_to, reason
 - active_job_search.Proofs.detail : date, client, company, id, spontaneous, response, remarks
 - active_job_search.Proofs.merge_row : merge_to, reason
 - addresses.Addresses.detail : country, city, zip_code, addr1, street, street_no, street_box, addr2, address_type, remark, data_source, partner
@@ -666,9 +661,6 @@ Each window layout is **viewable** by a given set of user types.
 >>> print(analyzer.show_window_permissions())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : visible for all
-- accounts.Accounts.detail : visible for 510 admin 910
-- accounts.Accounts.insert : visible for 510 admin 910
-- accounts.Accounts.merge_row : visible for admin 910
 - active_job_search.Proofs.detail : visible for 110 120 420 admin 910
 - active_job_search.Proofs.merge_row : visible for admin 910
 - addresses.Addresses.detail : visible for admin 910
@@ -1024,8 +1016,6 @@ options.
   (main) [visible for all]: **Question** (question), **Choix** (choice)
 - polls.ResponsesByPoll.toggle_choice : toggle_choice
   (main) [visible for all]: **Question** (question), **Choix** (choice)
-- accounts.Accounts.merge_row : Fusionner
-  (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - active_job_search.Proofs.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - addresses.Addresses.merge_row : Fusionner
@@ -1430,7 +1420,6 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Calendrier --> Règles de récurrence : 7
 - Configuration --> Calendrier --> Calendriers externes : 1
 - Configuration --> Calendrier --> Lignes de planificateur : 4
-- Configuration --> Comptabilité --> Comptes : 1
 - Configuration --> Ateliers --> Savoirs de base : 1
 - Configuration --> Ateliers --> Topics : 1
 - Configuration --> Ateliers --> Timetable Slots : 1
@@ -1481,7 +1470,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Contacts --> Types de parenté : 13
 - Explorateur --> Système --> Procurations : 4
 - Explorateur --> Système --> Types d'utilisateur : 16
-- Explorateur --> Système --> types de contenu : 136
+- Explorateur --> Système --> types de contenu : 135
 - Explorateur --> Système --> Notifications : 13
 - Explorateur --> Système --> Changes : 0
 - Explorateur --> Système --> All dashboard widgets : 1

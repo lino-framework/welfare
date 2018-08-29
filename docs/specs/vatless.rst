@@ -154,16 +154,16 @@ This invoice is registered, and ledger movements have been created:
 
 
 The first five movements are *cleared* because their account is not
-:attr:`clearable <lino_xl.lib.accounts.Account.clearable>`.
+:attr:`clearable <lino_xl.lib.ledger.Account.clearable>`.
 
->>> cost_account = rt.models.accounts.Account.objects.get(ref="832/330/01")
+>>> cost_account = rt.models.ledger.Account.objects.get(ref="832/330/01")
 >>> cost_account.clearable
 False
 
 The other five movements go into the suppliers account, which is
 clearable:
 
->>> suppliers_account = rt.models.accounts.Account.objects.get(ref="4400")
+>>> suppliers_account = rt.models.ledger.Account.objects.get(ref="4400")
 >>> suppliers_account.clearable
 True
 

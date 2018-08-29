@@ -42,8 +42,7 @@ def objects():
     Journal = rt.models.ledger.Journal
     AccountInvoice = rt.models.vatless.AccountInvoice
     InvoiceItem = rt.models.vatless.InvoiceItem
-    Account = rt.models.accounts.Account
-    # AccountTypes = rt.models.accounts.AccountTypes
+    Account = rt.models.ledger.Account
     PaymentOrder = rt.models.finan.PaymentOrder
     PaymentOrderItem = rt.models.finan.PaymentOrderItem
 
@@ -94,7 +93,7 @@ def objects():
 
     refs = ('832/3331/01', '832/330/01', '832/330/03F',
             '832/330/03', '832/3343/21', '832/334/27')
-    ACCOUNTS = list(rt.models.accounts.Account.objects.filter(ref__in=refs))
+    ACCOUNTS = list(rt.models.ledger.Account.objects.filter(ref__in=refs))
     AMOUNTS = Cycler(D('648.91'), D('817.36'), D('544.91'), D('800.08'))
     jnl = Journal.get_by_ref('AAW')
     for i in range(3):

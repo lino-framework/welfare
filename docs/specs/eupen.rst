@@ -24,7 +24,7 @@ it was the first Lino that went into production. This was in 2010.
 
 
 >>> print(analyzer.show_complexity_factors())
-- 65 plugins
+- 64 plugins
 - 142 models
 - 540 views
 - 16 user types
@@ -82,8 +82,8 @@ Rolf is the local system administrator, he has a complete menu:
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Büro : Auszugsarten, Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Prioritäten, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender, Tagesplanerzeilen
-  - Buchhaltung : Haushaltsartikel, Journale, Geschäftsjahre, Buchungsperioden, Zahlungsbedingungen
   - ÖSHZ : Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
+  - Buchhaltung : Haushaltsartikel, Journale, Geschäftsjahre, Buchungsperioden, Zahlungsbedingungen
   - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
   - Kurse : Kursinhalte
@@ -303,7 +303,6 @@ Database structure
 
 >>> print(analyzer.show_database_structure())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-- accounts.Account : id, ref, seqno, name, common_account, needs_partner, clearable, default_amount, name_fr, name_en, sales_allowed, purchases_allowed, wages_allowed, taxes_allowed, clearings_allowed, bank_po_allowed
 - addresses.Address : id, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, data_source, address_type, partner, remark, primary
 - aids.AidType : id, name, company, contact_person, contact_role, excerpt_title, aid_regime, confirmation_type, short_name, board, print_directly, is_integ_duty, is_urgent, confirmed_by_primary_coach, pharmacy_type, address_type, body_template, name_fr, name_en, excerpt_title_fr, excerpt_title_en
 - aids.Category : id, name, name_fr, name_en
@@ -398,6 +397,7 @@ Database structure
 - jobs.Offer : id, sector, function, name, provider, selection_from, selection_until, start_date, remark
 - jobs.Schedule : id, name, name_fr, name_en
 - languages.Language : name, id, iso2, name_fr, name_en
+- ledger.Account : id, ref, seqno, name, common_account, needs_partner, clearable, default_amount, name_fr, name_en, sales_allowed, purchases_allowed, wages_allowed, taxes_allowed, clearings_allowed, bank_po_allowed
 - ledger.AccountingPeriod : id, ref, start_date, end_date, state, year, remark
 - ledger.FiscalYear : id, ref, start_date, end_date, printed_by, state
 - ledger.Journal : id, ref, seqno, name, build_method, template, trade_type, voucher_type, journal_group, auto_check_clearings, auto_fill_suggestions, force_sequence, account, partner, printed_name, dc, yearly_numbering, must_declare, printed_name_fr, printed_name_en, name_fr, name_en, sepa_account
@@ -462,9 +462,6 @@ Each window layout defines a given set of fields.
 >>> print(analyzer.show_window_fields())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
-- accounts.Accounts.detail : ref, common_account, sheet_item, id, name, name_fr, name_en, needs_partner, clearable, default_amount, MovementsByAccount
-- accounts.Accounts.insert : ref, sheet_item, name, name_fr, name_en
-- accounts.Accounts.merge_row : merge_to, reason
 - addresses.Addresses.detail : country, city, zip_code, addr1, street, street_no, street_box, addr2, address_type, remark, data_source, partner
 - addresses.Addresses.insert : country, city, street, street_no, street_box, address_type, remark
 - addresses.Addresses.merge_row : merge_to, reason
@@ -684,6 +681,9 @@ Each window layout defines a given set of fields.
 - languages.Languages.merge_row : merge_to, reason
 - ledger.AccountingPeriods.merge_row : merge_to, reason
 - ledger.AccountingReport.show : body
+- ledger.Accounts.detail : ref, common_account, sheet_item, id, name, name_fr, name_en, needs_partner, clearable, default_amount, MovementsByAccount
+- ledger.Accounts.insert : ref, sheet_item, name, name_fr, name_en
+- ledger.Accounts.merge_row : merge_to, reason
 - ledger.FiscalYears.detail : ref, id, start_date, end_date, printed
 - ledger.FiscalYears.merge_row : merge_to, reason
 - ledger.Journals.detail : name, name_fr, name_en, ref, seqno, voucher_type, journal_group, build_method, template, id, trade_type, account, partner, dc, force_sequence, yearly_numbering, auto_fill_suggestions, auto_check_clearings, must_declare, printed_name, printed_name_fr, printed_name_en
@@ -795,9 +795,6 @@ Each window layout is **viewable** by a given set of user user_types.
 >>> print(analyzer.show_window_permissions())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : visible for all
-- accounts.Accounts.detail : visible for 510 admin 910
-- accounts.Accounts.insert : visible for 510 admin 910
-- accounts.Accounts.merge_row : visible for admin 910
 - addresses.Addresses.detail : visible for admin 910
 - addresses.Addresses.insert : visible for admin 910
 - addresses.Addresses.merge_row : visible for admin 910
@@ -1017,6 +1014,9 @@ Each window layout is **viewable** by a given set of user user_types.
 - languages.Languages.merge_row : visible for admin 910
 - ledger.AccountingPeriods.merge_row : visible for admin 910
 - ledger.AccountingReport.show : visible for 500 510 admin 910
+- ledger.Accounts.detail : visible for 510 admin 910
+- ledger.Accounts.insert : visible for 510 admin 910
+- ledger.Accounts.merge_row : visible for admin 910
 - ledger.FiscalYears.detail : visible for 510 admin 910
 - ledger.FiscalYears.merge_row : visible for admin 910
 - ledger.Journals.detail : visible for 510 admin 910
@@ -1159,8 +1159,6 @@ Global list of all actions that have a parameter dialog.
 
 >>> show_dialog_actions()
 ... #doctest: +REPORT_UDIFF +NORMALIZE_WHITESPACE
-- accounts.Accounts.merge_row : Fusionieren
-  (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - addresses.Addresses.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - aids.AidTypes.merge_row : Fusionieren
@@ -1390,6 +1388,8 @@ Global list of all actions that have a parameter dialog.
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - ledger.AccountingPeriods.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
+- ledger.Accounts.merge_row : Fusionieren
+  (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - ledger.FiscalYears.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
 - ledger.Journals.merge_row : Fusionieren
@@ -1601,11 +1601,6 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Kalender --> Wiederholungsregeln : 7
 - Konfigurierung --> Kalender --> Externe Kalender : 1
 - Konfigurierung --> Kalender --> Tagesplanerzeilen : 4
-- Konfigurierung --> Buchhaltung --> Haushaltsartikel : 42
-- Konfigurierung --> Buchhaltung --> Journale : 5
-- Konfigurierung --> Buchhaltung --> Geschäftsjahre : 9
-- Konfigurierung --> Buchhaltung --> Buchungsperioden : 30
-- Konfigurierung --> Buchhaltung --> Zahlungsbedingungen : 9
 - Konfigurierung --> ÖSHZ --> Klientenkontaktarten : 11
 - Konfigurierung --> ÖSHZ --> Dienste : 4
 - Konfigurierung --> ÖSHZ --> Begleitungsbeendigungsgründe : 5
@@ -1615,6 +1610,11 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> ÖSHZ --> Dispenzgründe : 5
 - Konfigurierung --> ÖSHZ --> Hilfearten : 12
 - Konfigurierung --> ÖSHZ --> Kategorien : 4
+- Konfigurierung --> Buchhaltung --> Haushaltsartikel : 42
+- Konfigurierung --> Buchhaltung --> Journale : 5
+- Konfigurierung --> Buchhaltung --> Geschäftsjahre : 9
+- Konfigurierung --> Buchhaltung --> Buchungsperioden : 30
+- Konfigurierung --> Buchhaltung --> Zahlungsbedingungen : 9
 - Konfigurierung --> Lebenslauf --> Sprachen : 6
 - Konfigurierung --> Lebenslauf --> Bildungsarten : 12
 - Konfigurierung --> Lebenslauf --> Akademische Grade : 6
