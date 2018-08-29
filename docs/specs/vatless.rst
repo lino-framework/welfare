@@ -202,7 +202,7 @@ Beleg erstellen in Journal **Sammelrechnungen (SREG)**, **Rechnungseingänge (RE
 Our partner has 11 movements which are not yet *cleared*.
 
 >>> rt.show(rt.models.ledger.MovementsByPartner, obj.partner)
-**15 offene Bewegungen (93.44 €)**
+**15 offene Bewegungen (-93.44 €)**
 
 Let's look at the detail of these movements:
 
