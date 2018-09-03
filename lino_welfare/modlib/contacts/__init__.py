@@ -21,7 +21,7 @@ Lino-Welfare extension of :mod:`lino_xl.lib.contacts`
 
 from lino_xl.lib.contacts import Plugin
 
-from django.utils.translation import string_concat
+from lino.api import string_concat
 from django.utils.translation import ugettext_lazy as _
 
 

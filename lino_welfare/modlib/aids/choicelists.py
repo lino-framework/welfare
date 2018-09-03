@@ -29,7 +29,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from django.db import models
-from django.utils.translation import string_concat
+from lino.api import string_concat
 
 from lino.api import dd, rt, _
 

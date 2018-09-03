@@ -35,7 +35,7 @@ from django.db.models import Q
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-from django.utils.translation import string_concat
+from lino.api import string_concat
 from django.utils import translation
 from django.contrib.humanize.templatetags.humanize import naturaltime
 
