@@ -21,7 +21,7 @@ Lino-Welfare extension of :mod:`lino_xl.lib.contacts`
 
 from lino_xl.lib.contacts import Plugin
 
-from lino.api import string_concat
+from django.utils.text import format_lazy
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -36,7 +36,7 @@ class Plugin(Plugin):
         m.add_action('contacts.Persons')
         m.add_action(
             'pcsw.Clients',
-            label=string_concat(
+            label=format_lazy(u"{}{}",
                 u' \u25b6 ', site.modules.pcsw.Clients.label))
         m.add_action('contacts.Companies')
         m.add_separator('-')

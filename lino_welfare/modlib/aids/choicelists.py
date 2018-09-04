@@ -29,7 +29,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 from django.db import models
-from lino.api import string_concat
+from django.utils.text import format_lazy
 
 from lino.api import dd, rt, _
 
@@ -42,7 +42,7 @@ class ConfirmationType(dd.Choice):
         self.model = model
         value = dd.full_model_name(model)
         # text = model._meta.verbose_name + ' (%s)' % dd.full_model_name(model)
-        text = string_concat(model._meta.verbose_name, " (", value, ")")
+        text = format_lazy(u"{}({})",model._meta.verbose_name,value)
         name = None
         super(ConfirmationType, self).__init__(value, text, name)
 

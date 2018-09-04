@@ -35,7 +35,7 @@ from django.db.models import Q
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-from lino.api import string_concat
+from django.utils.text import format_lazy
 from django.utils import translation
 from django.contrib.humanize.templatetags.humanize import naturaltime
 
@@ -689,7 +689,7 @@ Nur Klienten, die auch mit diesem Benutzer eine Begleitung haben."""),
             'countries.Country', blank=True, null=True,
             verbose_name=_("Nationality")),
         observed_event=ClientEvents.field(
-            blank=True, help_text=string_concat(
+            blank=True, help_text=format_lazy(u"{}{}{}",
                 _("Extended filter criteria, e.g.:"),
                 "<br/>",
                 _("Active: All those who have some active coaching."))),

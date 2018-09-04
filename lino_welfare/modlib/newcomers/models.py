@@ -35,7 +35,7 @@ import decimal
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from lino.api import string_concat
+from django.utils.text import format_lazy
 
 
 from lino.api import dd, rt
@@ -401,7 +401,7 @@ Mehrbelastung, die dieser Neuantrag im Falle einer Zuweisung diesem Benutzer ver
     #~ @dd.virtualfield(models.CharField(_("Score"),max_length=6,help_text=u"""\
     @dd.virtualfield(
         models.DecimalField(
-            string_concat(_("Added workload"), " (%)"),
+            format_lazy(u"{}{}",_("Added workload"), " (%)"),
             max_digits=8, decimal_places=2,
             help_text=u"""Mehrbelastung im Verhältnis zur Gesamtbelastung."""))
     def score(self, obj, ar):

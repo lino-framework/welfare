@@ -28,7 +28,7 @@ from decimal import Decimal
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from lino.api import string_concat
+from django.utils.text import format_lazy
 
 
 from lino.api import dd
