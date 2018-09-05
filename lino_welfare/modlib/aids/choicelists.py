@@ -42,7 +42,7 @@ class ConfirmationType(dd.Choice):
         self.model = model
         value = dd.full_model_name(model)
         # text = model._meta.verbose_name + ' (%s)' % dd.full_model_name(model)
-        text = format_lazy(u"{}({})",model._meta.verbose_name,value)
+        text = format_lazy(u"{} ({})",model._meta.verbose_name,value)
         name = None
         super(ConfirmationType, self).__init__(value, text, name)
 
