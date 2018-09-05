@@ -507,7 +507,7 @@ class AvailableCoachesByClient(AvailableCoaches):
 settings.SITE.add_user_field('newcomer_quota', models.IntegerField(
     _("Newcomers Quota"),
     default=0,
-    help_text="""\
+    help_text=u"""\
 Wieviel Arbeitszeit dieser Benutzer für Neuanträge zur Verfügung steht
 (100 = ganztags, 50 = halbtags, 0 = gar nicht).
 Wenn zwei Benutzer die gleiche Belastungspunktzahl haben,
