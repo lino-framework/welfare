@@ -59,7 +59,7 @@ class BeIdTests(RemoteAuthTestCase):
         self.assertEqual(os.environ['DJANGO_SETTINGS_MODULE'],
                          'lino_welfare.projects.std.settings.demo')
 
-        self.assertEqual(settings.MIDDLEWARE_CLASSES, (
+        self.assertEqual(settings.MIDDLEWARE, (
             'django.middleware.common.CommonMiddleware',
             'django.middleware.locale.LocaleMiddleware',
             'django.contrib.sessions.middleware.SessionMiddleware',
