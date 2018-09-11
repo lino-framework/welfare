@@ -685,7 +685,6 @@ def cbss_summary(self, ar):
             html += "<li>%d %s</li>" % (
                 n, str(t.model._meta.verbose_name_plural))
     html += '</ul></p>'
-    # html = '<div class="htmlText">%s</div>' % html
     return ar.html_text(html)
     # return html
 

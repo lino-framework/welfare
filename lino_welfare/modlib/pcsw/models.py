@@ -851,7 +851,8 @@ Nur Klienten, die eine effektive <b>primäre</b> Begleitung haben."""),
     @classmethod
     def apply_cell_format(self, ar, row, col, recno, td):
         if row.client_state == ClientStates.newcomer:
-            td.attrib.update(bgcolor="green")
+            td.set(bgcolor="green")
+            # td.attrib.update(bgcolor="green")
 
     @classmethod
     def get_row_classes(cls, obj, ar):

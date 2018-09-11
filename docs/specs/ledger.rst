@@ -135,7 +135,7 @@ Here is the main menu for accountants:
   - Ausgabeanweisungen : Ausgabeanweisungen (AAW)
   - Zahlungsaufträge : KBC Zahlungsaufträge (ZKBC)
 - Berichte :
-  - Buchhaltung : Buchhaltungsbericht, Schuldner, Gläubiger
+  - Buchhaltung : Schuldner, Gläubiger
 - Konfigurierung :
   - Büro : Meine Einfügetexte
   - ÖSHZ : Hilfearten, Kategorien
@@ -150,20 +150,26 @@ Here is the main menu for accountants:
 General accounts ("budgetary articles")
 =======================================
 
-German-speaking PCSWs are used to speak about "Haushaltsartikel" (and
-not "Konto").  The official name is indeed `Articles budgétaires
-<http://www.pouvoirslocaux.irisnet.be/fr/theme/finances/docfin/la-structure-dun-article-budgetaire>`_.
-It seems that the usage of the term "budgetary articles" is being
-replaced by the term "accounts".
+Belgian public instances use so-called budgetary articles (`Articles
+budgétaires
+<http://www.pouvoirslocaux.irisnet.be/fr/theme/finances/docfin/la-structure-dun-article-budgetaire>`_
+in French, "Haushaltsartikel" in German) for classifying their
+monetary transactions.  These budgetary articles are in public sector
+accounting exactly what general accounts are in private sector
+accounting.  It seems BTW that the usage of the term "budgetary
+articles" is being replaced by the term "accounts".
 
-Anyway, these budgetary articles are in social sector accounting
-exactly what general accounts are in private sector accounting.
+The main difference is that they are structured differently.  The demo
+database currently has a mixture of "PCMN style" and "public sector
+style" references because Lino Welfare doesn't yet offer full
+accounting reports (:mod:`lino_xl.lib.sheets`).
 
 >>> rt.show(ledger.Accounts)
 ============= ==================================
  Referenz      Bezeichnung
 ------------- ----------------------------------
  1000          Net income (loss)
+ 4             Commercial assets & liabilities
  4000          Kunden
  4300          Offene Zahlungsaufträge
  4400          Lieferanten
@@ -176,13 +182,18 @@ exactly what general accounts are in private sector accounting.
  4600          Steuerämter
  4800          Granted aids
  4900          Wartekonto
+ 5             Financial assets & liabilities
  5500          BestBank
  5700          Kasse
+ 6             Ausgaben
+ 60            Diplome
  6010          Einkäufe von Dienstleistungen
  6020          Investierungskäufe
  6040          Wareneinkäufe
+ 61            Löhne und Gehälter
  6300          Löhne und Gehälter
  6900          Net income
+ 7             Revenues
  7000          Verkauf
  7900          Net loss
  820/333/01    Vorschuss auf Vergütungen o.ä.
@@ -336,58 +347,5 @@ Users can consult the movements of a given general account.
                             **Saldo 332.78 (6 Bewegungen)**                                  **332,78**
 ========== =============== ================================================================ ============ ======== =======
 <BLANKLINE>
-
-
-AccountingReport
-================
-
-The :class:`lino_xl.lib.ledger.AccountingReport` report is one of the
-well-known accounting documents. Since accounting in Lino Welfare is
-not complete (it is just a *Nebenbuchhaltung*), there are no debtors
-(Schuldner) and the situation is not expected to be balanced.
-
->>> jan = ledger.AccountingPeriod.objects.get(ref="2013-01")
->>> dec = ledger.AccountingPeriod.objects.get(ref="2013-12")
->>> def test(sp, ep=None):
-...     pv = dict(start_period=sp, end_period=ep)
-...     rt.show(ledger.AccountingReport, param_values=pv)
-
->>> test(jan, dec)
-=====================================================
-Saldenliste Generalkonten (Periods 2013-01...2013-12)
-=====================================================
-<BLANKLINE>
-+-----------------------------------------+--------+--------+---+-----------+-----------+---+-----------+-----------+
-| Beschreibung                            | Debit  | Kredit |   | Debit     | Kredit    |   | Debit     | Kredit    |
-|                                         | vorher | vorher |   |           |           |   | nachher   | nachher   |
-+=========================================+========+========+===+===========+===========+===+===========+===========+
-| *(4400) Lieferanten*                    |        |        |   |           | 12,50     |   |           | 12,50     |
-+-----------------------------------------+--------+--------+---+-----------+-----------+---+-----------+-----------+
-| *(832/3331/01) Eingliederungseinkommen* |        |        |   | 12,50     |           |   | 12,50     |           |
-+-----------------------------------------+--------+--------+---+-----------+-----------+---+-----------+-----------+
-| **Total (2 Zeilen)**                    |        |        |   | **12,50** | **12,50** |   | **12,50** | **12,50** |
-+-----------------------------------------+--------+--------+---+-----------+-----------+---+-----------+-----------+
-<BLANKLINE>
-=======================================================
-Saldenliste Partner Einkauf (Periods 2013-01...2013-12)
-=======================================================
-<BLANKLINE>
-====================== ============= ======= =========== =============
- Beschreibung           Alter Saldo   Debit   Kredit      Neuer Saldo
----------------------- ------------- ------- ----------- -------------
- *Leffin Electronics*                         12,50       -12,50
- **Total (1 Zeilen)**                         **12,50**   **-12,50**
-====================== ============= ======= =========== =============
-<BLANKLINE>
-======================================================
-Saldenliste Partner Hilfen (Periods 2013-01...2013-12)
-======================================================
-<BLANKLINE>
-Keine Daten anzuzeigen
-=============================================================
-Saldenliste Partner Begleichungen (Periods 2013-01...2013-12)
-=============================================================
-<BLANKLINE>
-Keine Daten anzuzeigen
 
 

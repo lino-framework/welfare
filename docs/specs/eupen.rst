@@ -26,7 +26,7 @@ it was the first Lino that went into production. This was in 2010.
 >>> print(analyzer.show_complexity_factors())
 - 64 plugins
 - 142 models
-- 540 views
+- 539 views
 - 16 user types
 - 152 dialog actions
 <BLANKLINE>
@@ -73,7 +73,7 @@ Rolf is the local system administrator, he has a complete menu:
 - Erstempfang : Neue Klienten, Verfügbare Begleiter
 - Schuldnerberatung : Klienten, Meine Budgets
 - Berichte :
-  - Buchhaltung : Buchhaltungsbericht, Schuldner, Gläubiger
+  - Buchhaltung : Schuldner, Gläubiger
   - DSBE : Benutzer und ihre Klienten, Übersicht Art.60§7-Konventionen, Tätigkeitsbericht
 - Konfigurierung :
   - System : Site-Parameter, Benutzer, Hilfetexte
@@ -399,7 +399,7 @@ Database structure
 - languages.Language : name, id, iso2, name_fr, name_en
 - ledger.Account : id, ref, seqno, name, common_account, needs_partner, clearable, default_amount, name_fr, name_en, sales_allowed, purchases_allowed, wages_allowed, taxes_allowed, clearings_allowed, bank_po_allowed
 - ledger.AccountingPeriod : id, ref, start_date, end_date, state, year, remark
-- ledger.FiscalYear : id, ref, start_date, end_date, printed_by, state
+- ledger.FiscalYear : id, ref, start_date, end_date, state
 - ledger.Journal : id, ref, seqno, name, build_method, template, trade_type, voucher_type, journal_group, auto_check_clearings, auto_fill_suggestions, force_sequence, account, partner, printed_name, dc, yearly_numbering, must_declare, printed_name_fr, printed_name_en, name_fr, name_en, sepa_account
 - ledger.LedgerInfo : user, entry_date
 - ledger.MatchRule : id, account, journal
@@ -680,11 +680,9 @@ Each window layout defines a given set of fields.
 - languages.Languages.detail : id, iso2, name, name_fr, name_en
 - languages.Languages.merge_row : merge_to, reason
 - ledger.AccountingPeriods.merge_row : merge_to, reason
-- ledger.AccountingReport.show : body
 - ledger.Accounts.detail : ref, common_account, sheet_item, id, name, name_fr, name_en, needs_partner, clearable, default_amount, MovementsByAccount
 - ledger.Accounts.insert : ref, sheet_item, name, name_fr, name_en
 - ledger.Accounts.merge_row : merge_to, reason
-- ledger.FiscalYears.detail : ref, id, start_date, end_date, printed
 - ledger.FiscalYears.merge_row : merge_to, reason
 - ledger.Journals.detail : name, name_fr, name_en, ref, seqno, voucher_type, journal_group, build_method, template, id, trade_type, account, partner, dc, force_sequence, yearly_numbering, auto_fill_suggestions, auto_check_clearings, must_declare, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, journal_group, voucher_type
@@ -1013,11 +1011,9 @@ Each window layout is **viewable** by a given set of user user_types.
 - languages.Languages.detail : visible for 110 120 410 420 admin 910
 - languages.Languages.merge_row : visible for admin 910
 - ledger.AccountingPeriods.merge_row : visible for admin 910
-- ledger.AccountingReport.show : visible for 500 510 admin 910
 - ledger.Accounts.detail : visible for 510 admin 910
 - ledger.Accounts.insert : visible for 510 admin 910
 - ledger.Accounts.merge_row : visible for admin 910
-- ledger.FiscalYears.detail : visible for 510 admin 910
 - ledger.FiscalYears.merge_row : visible for admin 910
 - ledger.Journals.detail : visible for 510 admin 910
 - ledger.Journals.insert : visible for 510 admin 910
@@ -1587,7 +1583,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Eigenschaften --> Fachkompetenzen : 0
 - Konfigurierung --> Eigenschaften --> Sozialkompetenzen : 0
 - Konfigurierung --> Eigenschaften --> Hindernisse : 0
-- Konfigurierung --> Büro --> Auszugsarten : 24
+- Konfigurierung --> Büro --> Auszugsarten : 22
 - Konfigurierung --> Büro --> Upload-Arten : 10
 - Konfigurierung --> Büro --> Notizarten : 14
 - Konfigurierung --> Büro --> Ereignisarten : 11
@@ -1610,7 +1606,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> ÖSHZ --> Dispenzgründe : 5
 - Konfigurierung --> ÖSHZ --> Hilfearten : 12
 - Konfigurierung --> ÖSHZ --> Kategorien : 4
-- Konfigurierung --> Buchhaltung --> Haushaltsartikel : 42
+- Konfigurierung --> Buchhaltung --> Haushaltsartikel : 48
 - Konfigurierung --> Buchhaltung --> Journale : 5
 - Konfigurierung --> Buchhaltung --> Geschäftsjahre : 9
 - Konfigurierung --> Buchhaltung --> Buchungsperioden : 30
@@ -1655,7 +1651,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Datentests : 16
 - Explorer --> System --> Datenprobleme : 64
 - Explorer --> Eigenschaften --> Eigenschaften : 24
-- Explorer --> Büro --> Auszüge : 71
+- Explorer --> Büro --> Auszüge : 69
 - Explorer --> Büro --> Uploads : 12
 - Explorer --> Büro --> Upload-Bereiche : 2
 - Explorer --> Büro --> E-Mail-Ausgänge : 1

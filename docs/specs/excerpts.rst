@@ -46,8 +46,6 @@ Here is a more complete list of excerpt types:
  *finan.PaymentOrder (Zahlungsauftrag)*                  Ja       Ja              Zahlungsauftrag
  *isip.Contract (VSE)*                                   Ja       Ja              VSE
  *jobs.Contract (Art.60§7-Konvention)*                   Ja       Ja              Art.60§7-Konvention
- *ledger.FiscalYear (Geschäftsjahr)*                     Ja       Ja              Geschäftsjahr
- *ledger.FiscalYear (Geschäftsjahr)*                     Nein     Nein            Jahresbericht               WeasyPdfBuildMethod    annual_report.weasy.html
  *pcsw.Client (Klient)*                                  Ja       Nein            Aktenblatt                                         file_sheet.odt
  *pcsw.Client (Klient)*                                  Nein     Nein            Aktionsplan                                        Default.odt                   pac.body.html
  *pcsw.Client (Klient)*                                  Nein     Nein            Curriculum vitae            AppyRtfBuildMethod     cv.odt
@@ -67,14 +65,12 @@ Here is a list of all demo excerpts.
 ==== ======================== ===================================================== ============================= ================================ ==========
  ID   Excerpt Type             Controlled by                                         Client                        Recipient (Organization)         Language
 ---- ------------------------ ----------------------------------------------------- ----------------------------- -------------------------------- ----------
- 71   Action plan              *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
- 70   eID sheet                *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
- 69   File sheet               *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
- 68   Curriculum vitae         *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
- 67   Presence certificate     *Presence #1 (22.05.2014)*                            AUSDEMWALD Alfons (116)                                        de
- 66   Annual report            *2012*                                                                                                               de
- 65   Payment reminder         *Belgisches Rotes Kreuz*                                                                                             de
- 64   Fiscal year              *2012*                                                                                                               de
+ 69   Action plan              *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
+ 68   eID sheet                *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
+ 67   File sheet               *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
+ 66   Curriculum vitae         *AUSDEMWALD Alfons (116)*                             AUSDEMWALD Alfons (116)                                        de
+ 65   Presence certificate     *Presence #1 (22.05.2014)*                            AUSDEMWALD Alfons (116)                                        de
+ 64   Payment reminder         *Belgisches Rotes Kreuz*                                                                                             de
  63   Art60§7 job supplyment   *Art60§7 job supplyment#16 (Denis DENON)*             DENON Denis (180*)            R-Cycle Sperrgutsortierzentrum   de
  62   Art60§7 job supplyment   *Art60§7 job supplyment#15 (Denis DENON)*             DENON Denis (180*)            BISA                             de
  61   Art60§7 job supplyment   *Art60§7 job supplyment#14 (Rik RADERMECKER)*         RADERMECKER Rik (173)         BISA                             de
