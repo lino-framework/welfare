@@ -60,7 +60,7 @@ The following database fields refer to a country:
        print(tpl.format(m.__module__, m.__name__, f.name))
 
 >>> for m, f in rt.models.countries.Country._lino_ddh.fklist:
-...     print dd.full_model_name(m), f.name
+...     print ("{} {}".format(dd.full_model_name(m), f.name))
 addresses.Address country
 contacts.Partner country
 countries.Country actual_country

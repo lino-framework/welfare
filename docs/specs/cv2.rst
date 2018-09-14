@@ -65,7 +65,7 @@ And the list of Study types:
 
 
 >>> for m, f in rt.models.cv.StudyType._lino_ddh.fklist:
-...     print dd.full_model_name(m), f.name
+...     print ("{} {}".format(dd.full_model_name(m), f.name))
 cv.Study type
 cv.Training type
 isip.Contract study_type
