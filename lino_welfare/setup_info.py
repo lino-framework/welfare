@@ -34,8 +34,8 @@ requires = ['lino-cosi',
 if six.PY2:
     requires.append('suds')
 else:
-    # requires.append('suds-py3')
-    requires.append('suds-jurko')
+    requires.append('suds-py3')
+    # requires.append('suds-jurko')
 
     
     
