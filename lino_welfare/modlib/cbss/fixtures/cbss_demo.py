@@ -34,9 +34,10 @@ in order to avoid live requests to the CBSS.
 
 import os
 from django.conf import settings
+from django.utils import six
 from lino.utils import IncompleteDate
 from lino.api import rt
-
+from io import open
 
 def objects():
 
@@ -102,7 +103,10 @@ def objects():
         obj = model(**kw)
         if fn:
             fn = os.path.join(os.path.dirname(__file__), fn)
-            xml = open(fn).read().decode('utf-8')
+            if six.PY2 and False:
+                xml = open(fn).read().decode('utf-8')
+            else:
+                xml = open(fn).read()
             obj.execute_request(simulate_response=xml)
             #~ print obj.debug_messages
         yield obj
