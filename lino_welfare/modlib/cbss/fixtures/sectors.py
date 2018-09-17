@@ -22,11 +22,14 @@ http://www.bcss.fgov.be/binaries/documentation/fr/documentation/general/lijst_va
 
 """
 from builtins import next
+
+from django.utils import six
 from lino.api import dd
 from django.conf import settings
 from lino.utils import ucsv
 from lino.core.utils import resolve_model
 from os.path import join, dirname
+# from io import open
 
 GERMAN = []
 GERMAN.append((17, 1, u'ÖSHZ', u'Öffentliche Sozialhilfezentren'))
@@ -37,8 +40,12 @@ def objects():
     Sector = resolve_model('cbss.Sector')
 
     fn = join(dirname(__file__), 'lijst_van_sectoren_liste_des_secteurs.csv')
-    reader = ucsv.UnicodeReader(
-        open(fn, 'r'), encoding='latin1', delimiter=';')
+    if six.PY2:
+        reader = ucsv.UnicodeReader(
+            open(fn, 'r'), encoding='latin1', delimiter=';')
+    else:
+        reader = ucsv.UnicodeReader(
+            open(fn, 'rb'),encoding='latin-1', delimiter=';')
 
     headers = next(reader)
     if headers != [u'Sector', u'', u'verkorte naam', u'Omschrijving', u'Abréviation', u'Nom']:
@@ -46,6 +53,8 @@ def objects():
     next(reader)  # ignore second header line
     code = None
     for row in reader:
+        if len(row) == 0:
+            break
         s0 = row[0].strip()
         s1 = row[1].strip()
         if s0 or s1:

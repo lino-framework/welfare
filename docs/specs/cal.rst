@@ -277,7 +277,7 @@ also those where this client is among the guests.
     ...             #print obj, obj.event.project_id, obj.partner_id
     ...             # candidates.add(obj.event.project_id)
     ...             candidates.add(obj.partner_id)
-    >>> print sorted(candidates)
+    >>> print (sorted(candidates))
     []
 
 

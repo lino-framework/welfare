@@ -90,7 +90,7 @@ client:
 >>> from lino_xl.lib.ledger.mixins import ProjectRelated
 >>> # from lino.mixins import ProjectRelated
 >>> for m in rt.models_by_base(ProjectRelated):
-...     print m
+...     print(m)
 <class 'lino_xl.lib.finan.models.BankStatementItem'>
 <class 'lino_xl.lib.finan.models.JournalEntry'>
 <class 'lino_xl.lib.finan.models.JournalEntryItem'>

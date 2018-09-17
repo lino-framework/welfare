@@ -22,6 +22,9 @@ import os
 import traceback
 import datetime
 import logging
+
+from django.utils import six
+
 logger = logging.getLogger(__name__)
 
 
@@ -253,7 +256,10 @@ The raw XML response received.
             else:
                 self.status = RequestStates.failed
             # self.logmsg_debug(unicode(e))
-            self.logmsg_debug(traceback.format_exc(e))
+            if six.PY2:
+                self.logmsg_debug(traceback.format_exc(e))
+            else:
+                self.logmsg_debug(traceback.format_exc())
         except Exception as e:
             if self.ticket:
                 self.status = RequestStates.errors

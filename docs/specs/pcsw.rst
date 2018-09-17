@@ -123,7 +123,7 @@ Creating a new client
 >>> res.status_code
 200
 >>> d = AttrDict(json.loads(res.content))
->>> d.keys()
+>>> list(d.keys())
 [u'phantom', u'data', u'title']
 >>> d.phantom
 True

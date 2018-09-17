@@ -37,7 +37,7 @@ primitive direct printing method (see `Printing
 
     >>> from lino.modlib.printing.mixins import Printable
     >>> for m in rt.models_by_base(Printable):
-    ...     print m
+    ...     print (m)
     ...     #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF -ELLIPSIS
     <class 'lino_welfare.modlib.aids.models.Granting'>
     <class 'lino_welfare.modlib.aids.models.IncomeConfirmation'>

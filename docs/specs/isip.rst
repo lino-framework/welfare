@@ -85,7 +85,7 @@ Contracts and Grantings
 (The following is not yet very useful:)
 
 >>> for obj in isip.Contracts.request():
-...    print obj.id, obj.applies_from, repr(obj.get_granting())
+...    print ("{} {} {}".format(obj.id, obj.applies_from, repr(obj.get_granting())))
 1 2012-09-29 Granting #1 ('EiEi/29/09/2012/116')
 2 2013-08-08 None
 3 2012-10-09 Granting #3 ('EiEi/09/10/2012/118')

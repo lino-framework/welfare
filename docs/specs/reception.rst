@@ -164,7 +164,7 @@ They are a big "object" (in Python we call it a `dict`):
 
 It has 4 keys:
 
->>> d.keys()
+>>> list(d.keys())
 [u'record_id', u'field_values', u'param_values', u'base_params']
 
 >>> d.record_id
