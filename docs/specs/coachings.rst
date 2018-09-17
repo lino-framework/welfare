@@ -1,14 +1,11 @@
+.. doctest docs/specs/coachings.rst
 .. _welfare.specs.coachings:
 
 ===============
 Coachings
 ===============
 
-.. How to test only this document:
-
-    $ doctest docs/specs/coachings.rst
-    
-    doctest init:
+.. doctest init:
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
@@ -50,25 +47,25 @@ The list of possible choices for the :attr:`Client.client_state` field.
 Default configuration is as follows:
 
 >>> rt.show('clients.ClientStates', language="de")
-====== ========== ===========
- Wert   name       Text
------- ---------- -----------
+====== ========== =========== ========
+ Wert   name       Text        Symbol
+------ ---------- ----------- --------
  10     newcomer   Neuantrag
  20     refused    Abgelehnt
  30     coached    Begleitet
  50     former     Ehemalig
-====== ========== ===========
+====== ========== =========== ========
 <BLANKLINE>
 
 >>> rt.show('clients.ClientStates', language="fr")
-====== ========== ============
- Wert   name       Text
------- ---------- ------------
+====== ========== ============ ========
+ Wert   name       Text         Symbol
+------ ---------- ------------ --------
  10     newcomer   Nouveau
  20     refused    Refusé
  30     coached    Accompagné
  50     former     Ancien
-====== ========== ============
+====== ========== ============ ========
 <BLANKLINE>
 
 

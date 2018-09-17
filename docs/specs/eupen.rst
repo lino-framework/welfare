@@ -1531,7 +1531,7 @@ Here is the output of :func:`walk_menu_items
 - Büro --> Meine Ereignisse/Notizen : 9
 - Büro --> Meine Datenkontrollliste : 0
 - Kalender --> Meine Termine : 4
-- Kalender --> Überfällige Termine : 38
+- Kalender --> Überfällige Termine : 37
 - Kalender --> Unbestätigte Termine : 3
 - Kalender --> Meine Aufgaben : 1
 - Kalender --> Meine Gäste : 1

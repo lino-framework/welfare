@@ -9,6 +9,10 @@ DONE (noch nicht unter **testlino** einsehbar):
   Rendez-vous extérieurs visibles pour l'accueil.
 
 - :ticket:`2441` : "Intelligentere" Übersicht der Termine pro Kurs.
+
+- Überfällige Termine zeigt jetzt nicht mehr die von heute an, sondern
+  endet schon gestern. Denn die von heute sind ja unter "Meine
+  Termine" zu sehen.
   
 
 DONE (zur Zeit unter **testlino** einsehbar):

@@ -1359,7 +1359,7 @@ Here is the output of :func:`walk_menu_items
 - Bureau --> Mes Observations : 10
 - Bureau --> Mes problèmes de données : 0
 - Calendrier --> Mes rendez-vous : 5
-- Calendrier --> Rendez-vous dépassés : 35
+- Calendrier --> Rendez-vous dépassés : 34
 - Calendrier --> Rendez-vous à confirmer : 3
 - Calendrier --> Mes tâches : 1
 - Calendrier --> Mes visiteurs : 1
