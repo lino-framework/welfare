@@ -100,7 +100,7 @@ Romain
   - Système : Procurations, Types d'utilisateur, types de contenu, Notifications, Changes, All dashboard widgets, Tests de données, Problèmes de données
   - Bureau : Extraits, Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Observations, Text Field Templates
   - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
-  - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription
+  - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription, Course layouts
   - CPAS : Contacts client, Types de contact connus, Interventions, Exclusions, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
   - Parcours : Connaissances de langue, Formations, Études, Expériences professionnelles, Connaissances de langue, Compétences professionnelles, Compétences sociales, Freins
   - Intégration : PIISs, Mises à l'emploi art60§7, Candidatures, Services utilisateurs, Mises à l'emploi art61, Stages d'immersion, Preuves de recherche, Fiches FSE, Champs FSE
@@ -1494,6 +1494,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Ateliers --> Ateliers : 8
 - Explorateur --> Ateliers --> Inscriptions : 84
 - Explorateur --> Ateliers --> États d'inscription : 6
+- Explorateur --> Ateliers --> Course layouts : 2
 - Explorateur --> CPAS --> Contacts client : 15
 - Explorateur --> CPAS --> Types de contact connus : 2
 - Explorateur --> CPAS --> Interventions : 91

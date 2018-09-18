@@ -3,26 +3,24 @@ Kommende Version
 ================
 
 
-DONE (noch nicht unter **testlino** einsehbar):
+DONE (zur Zeit unter **testlino** einsehbar):
 
-- Tagesplaner (:ticket:`2382`) : z.B. 
-  Rendez-vous extérieurs visibles pour l'accueil.
+- Eine neue Tabelle **Tagesplaner** zeigt eine Tagesübersicht der
+  Termine aller Benutzer an, wobei die Termine je nach Art in
+  verschiedene Kolonnen ventiliert werden.  (:ticket:`2382`)
 
 - :ticket:`2441` : "Intelligentere" Übersicht der Termine pro Kurs.
 
-- Überfällige Termine zeigt jetzt nicht mehr die von heute an, sondern
-  endet schon gestern. Denn die von heute sind ja unter "Meine
+- **Überfällige Termine** zeigt jetzt nicht mehr die von heute an,
+  sondern endet schon gestern. Denn die von heute sind ja unter "Meine
   Termine" zu sehen.
-  
 
-DONE (zur Zeit unter **testlino** einsehbar):
-
-- In *slave panels* ist die Phantomzeile abgeschafft, deshalb kann man
-  jetzt im Panel "NotesByClient" nicht mehr einfach doppelklicken, um
-  eine neue Notiz zu erstellen.  Aber dafür kann man dort auf
-  irgendeiner Zeile rechten Mausklick machen und im Kontxtmenü "Neu"
-  wählen.  Oder irgendeine Zeile mit linkem Mausklick markieren und
-  dann Taste :kbd:`Insert` drücken.
+.. In *slave panels* ist die Phantomzeile abgeschafft, deshalb kann
+   man jetzt im Panel "NotesByClient" nicht mehr einfach
+   doppelklicken, um eine neue Notiz zu erstellen.  Aber dafür kann
+   man dort auf irgendeiner Zeile rechten Mausklick machen und im
+   Kontxtmenü "Neu" wählen.  Oder irgendeine Zeile mit linkem
+   Mausklick markieren und dann Taste :kbd:`Insert` drücken.
 
 - wdav und beid ohne Java
 
@@ -55,7 +53,7 @@ DONE (zur Zeit unter **testlino** einsehbar):
 - Eine ungefragte Änderung: Es gibt jetzt einen Quicklink `[Suchen]`,
   mit dem man eine **Schnellsuche in allen Tabellen** auf einmal
   durchführen kann. Momentan ist die Funktion nur sichtbar für
-  Systemverwalter. Feedback erwünscht.
+  Systemverwalter. Wartet auf Feedback.
 
 - Deutlichere Fehlermeldung im Fall eines Problems bei der Verbindung
   zur Datenbank.
