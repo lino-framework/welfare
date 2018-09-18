@@ -297,14 +297,14 @@ The state of a voucher
 .. lino2rst:: print(ledger.VoucherStates.__doc__)
 
 >>> rt.show(ledger.VoucherStates)
-====== ============ ================ ========
- Wert   name         Text             Symbol
------- ------------ ---------------- --------
+====== ============ ================ =============
+ Wert   name         Text             Button text
+------ ------------ ---------------- -------------
  10     draft        Entwurf
  20     registered   Registriert
  30     signed       Unterschrieben
  40     cancelled    Storniert
-====== ============ ================ ========
+====== ============ ================ =============
 <BLANKLINE>
 
 .. technical:

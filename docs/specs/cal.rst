@@ -27,15 +27,15 @@ Lifecycle of a calendar event
 =============================
 
 >>> rt.show(cal.EntryStates)
-====== ============ ================ ======== ======================= ======== =================== =========
- Wert   name         Text             Symbol   Teilnehmer bearbeiten   Stabil   nicht blockierend   No auto
------- ------------ ---------------- -------- ----------------------- -------- ------------------- ---------
- 10     suggested    Vorschlag        ?        Ja                      Nein     Nein                Nein
- 20     draft        Entwurf          ☐        Ja                      Nein     Nein                Nein
- 50     took_place   Stattgefunden    ☑        Ja                      Ja       Nein                Nein
- 70     cancelled    Storniert        ☒        Nein                    Ja       Ja                  Ja
- 40     published    Veröffentlicht   ☼        Ja                      Ja       Nein                Nein
-====== ============ ================ ======== ======================= ======== =================== =========
+====== ============ ================ ============= ======================= ======== =================== =========
+ Wert   name         Text             Button text   Teilnehmer bearbeiten   Stabil   nicht blockierend   No auto
+------ ------------ ---------------- ------------- ----------------------- -------- ------------------- ---------
+ 10     suggested    Vorschlag        ?             Ja                      Nein     Nein                Nein
+ 20     draft        Entwurf          ☐             Ja                      Nein     Nein                Nein
+ 50     took_place   Stattgefunden    ☑             Ja                      Ja       Nein                Nein
+ 70     cancelled    Storniert        ☒             Nein                    Ja       Ja                  Ja
+ 40     published    Veröffentlicht   ☼             Ja                      Ja       Nein                Nein
+====== ============ ================ ============= ======================= ======== =================== =========
 <BLANKLINE>
 
 

@@ -47,25 +47,25 @@ The list of possible choices for the :attr:`Client.client_state` field.
 Default configuration is as follows:
 
 >>> rt.show('clients.ClientStates', language="de")
-====== ========== =========== ========
- Wert   name       Text        Symbol
------- ---------- ----------- --------
+====== ========== =========== =============
+ Wert   name       Text        Button text
+------ ---------- ----------- -------------
  10     newcomer   Neuantrag
  20     refused    Abgelehnt
  30     coached    Begleitet
  50     former     Ehemalig
-====== ========== =========== ========
+====== ========== =========== =============
 <BLANKLINE>
 
 >>> rt.show('clients.ClientStates', language="fr")
-====== ========== ============ ========
- Wert   name       Text         Symbol
------- ---------- ------------ --------
+====== ========== ============ =============
+ Wert   name       Text         Button text
+------ ---------- ------------ -------------
  10     newcomer   Nouveau
  20     refused    Refusé
  30     coached    Accompagné
  50     former     Ancien
-====== ========== ============ ========
+====== ========== ============ =============
 <BLANKLINE>
 
 
