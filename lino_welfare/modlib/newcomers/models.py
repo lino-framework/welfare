@@ -363,9 +363,9 @@ class AvailableCoaches(Users):
                     (user._weight + user._hw) / total_weight
                 #~ logger.info("%s (%s+%s)/%s = %s%%",user.username,user._weight,user._hw,total_weight,user._score)
 
-        def fn(a, b):
-            return cmp(a._score, b._score)
-        data.sort(fn)
+        # def fn(a, b):
+        #     return cmp(a._score, b._score)
+        data.sort(key=lambda a: a._score)
         return data
 
     @dd.requestfield(_("Primary clients"))

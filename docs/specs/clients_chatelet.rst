@@ -123,13 +123,13 @@ The window itself is visible to everybody:
 >>> lh = rt.models.pcsw.Clients.detail_layout.get_layout_handle(ui)
 >>> lh.main
 <TabPanel main in lino_welfare.projects.chatelet.modlib.pcsw.models.ClientDetail on lino_welfare.modlib.pcsw.models.Clients>
->>> lh.main.required_roles
-set([])
+>>> list(lh.main.required_roles)
+[]
 
 The "General" tab is visible to everybody:
 
->>> lh['general'].required_roles
-set([])
+>>> list(lh['general'].required_roles)
+[]
 
 But e.g. the "Miscellaneous" tab is visible only to users having
 the :class:`SocialStaff
@@ -139,8 +139,8 @@ the :class:`SocialStaff
 >>> misc
 <Panel misc in lino_welfare.projects.chatelet.modlib.pcsw.models.ClientDetail on lino_welfare.modlib.pcsw.models.Clients>
 
->>> misc.required_roles
-set([<class 'lino_welfare.modlib.pcsw.roles.SocialStaff'>])
+>>> list(misc.required_roles)
+[<class 'lino_welfare.modlib.pcsw.roles.SocialStaff'>]
 
 
 
