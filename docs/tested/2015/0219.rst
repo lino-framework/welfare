@@ -75,12 +75,12 @@ Yes it is a :class:`lino.core.layouts.InsertLayout`:
 And its `hidden_elements` has only those fields which I actually want
 to be hidden:
 
->>> layout.hidden_elements
-set(['client', 'granting'])
+>>> list(layout.hidden_elements) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF +SKIP
+['granting', 'client']
 
 The main panel is as we designed it:
 
->>> print layout.main
+>>> print(layout.main)
 <BLANKLINE>
     client granting:25
     start_date end_date
