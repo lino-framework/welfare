@@ -29,7 +29,7 @@ from __future__ import unicode_literals
 from builtins import str
 
 from django.conf import settings
-from django.utils import translation
+from django.utils import translation, six
 from django.core.exceptions import ValidationError
 
 from atelier.utils import i2d
@@ -93,8 +93,12 @@ class TestCase(TestCase):
                 obj.full_clean()
                 self.fail("Expected ValidationError")
             except ValidationError as e:
-                self.assertEqual(
+                if six.PY2:
+                    self.assertEqual(
                     str(e), "[u'Date range 31/03/2018...31/03/2018 lies outside of granted period 01/04/2018....']")
+                else:
+                    self.assertEqual(
+                        str(e), "['Date range 31/03/2018...31/03/2018 lies outside of granted period 01/04/2018....']")
                 
 
         
