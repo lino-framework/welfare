@@ -144,7 +144,7 @@ def get_household_summary(person, today=None, adult_age=None):
     adults = children = 0
     for m in ar:
         if m.birth_date is not None and (
-                m.get_age(today) >= adult_age):
+                (m.get_age(today) or 0) >= adult_age):
             adults += 1
         else:
             children += 1
