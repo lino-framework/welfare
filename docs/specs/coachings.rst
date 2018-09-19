@@ -24,7 +24,7 @@ A coaching without client is not valid:
 
 >>> cli = rt.models.pcsw.Client.objects.get(id=120)
 >>> Coaching = rt.models.coachings.Coaching
->>> Coaching().full_clean()  #doctest: +ELLIPSIS
+>>> Coaching().full_clean()  #doctest: +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL +ELLIPSIS
 Traceback (most recent call last):
 ...
 ValidationError: {'client': [u'Dieses Feld darf nicht null sein.']}
@@ -85,8 +85,8 @@ True
 
 >>> from lino_xl.lib.clients.choicelists import ClientStates
 
->>> ClientStates.required_roles
-set([<class 'lino_xl.lib.contacts.roles.ContactsStaff'>])
+>>> list(ClientStates.required_roles)
+[<class 'lino_xl.lib.contacts.roles.ContactsStaff'>]
 
 >>> url = 'api/clients/ClientStates'
 >>> url = settings.SITE.buildurl(url, fmt='json')
