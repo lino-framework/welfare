@@ -103,9 +103,7 @@ Lino Welfare à la Eupen.
       - **VSEs** (isip.ContractsByClient) [visible for 100 110 120 210 420 admin 910]
       - **Stellenanfragen** (jobs.CandidaturesByPerson)
       - **Art.60§7-Konventionen** (jobs.ContractsByClient)
-    - **Historie** (history) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]:
-      - **Ereignisse/Notizen** (notes.NotesByProject)
-      - **Bestehende Auszüge** (excerpts_ExcerptsByProject)
+    - **Historie** (history) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]: **Ereignisse/Notizen** (notes_NotesByProject), **Bestehende Auszüge** (excerpts_ExcerptsByProject)
     - **Kalender** (calendar) [visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910]:
       - **Kalendereinträge** (cal.EntriesByClient)
       - **Aufgaben** (cal.TasksByProject)

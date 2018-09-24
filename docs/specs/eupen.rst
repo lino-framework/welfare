@@ -555,7 +555,7 @@ Each window layout defines a given set of fields.
 - coachings.CoachingTypes.merge_row : merge_to, reason
 - coachings.Coachings.create_visit : user, summary
 - coachings.Coachings.merge_row : merge_to, reason
-- contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, payment_term, vatless_VouchersByPartner, ledger_MovementsByPartner, id, language, activity, is_obsolete, created, modified
+- contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, notes_NotesByCompany, payment_term, vatless_VouchersByPartner, ledger_MovementsByPartner, id, language, activity, is_obsolete, created, modified
 - contacts.Companies.insert : name, email, type
 - contacts.Companies.merge_row : merge_to, addresses_Address, sepa_Account, reason
 - contacts.CompanyTypes.merge_row : merge_to, reason
@@ -665,7 +665,7 @@ Each window layout defines a given set of fields.
 - jobs.Contracts.detail : id, client, user, user_asd, language, job, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, regime, schedule, hourly_rate, refund_rate, reference_person, remark, printed, date_decided, date_issued, date_ended, ending, responsibilities
 - jobs.Contracts.insert : client, job
 - jobs.Contracts.merge_row : merge_to, reason
-- jobs.JobProviders.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax
+- jobs.JobProviders.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, notes_NotesByCompany
 - jobs.JobProviders.merge_row : merge_to, addresses_Address, sepa_Account, reason
 - jobs.JobTypes.detail : id, name, is_social
 - jobs.JobTypes.merge_row : merge_to, reason
@@ -717,7 +717,7 @@ Each window layout defines a given set of fields.
 - pcsw.Activities.merge_row : merge_to, reason
 - pcsw.AidTypes.merge_row : merge_to, reason
 - pcsw.Clients.create_visit : user, summary
-- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, dupable_clients_SimilarClients, humanlinks_LinksByHuman, cbss_relations, households_MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, uploads_UploadsByClient, cvs_emitted, cv_LanguageKnowledgesByPerson, skills, obstacles, excerpts_ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, checkdata_ProblemsByOwner, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
+- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, dupable_clients_SimilarClients, humanlinks_LinksByHuman, cbss_relations, households_MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, uploads_UploadsByClient, cvs_emitted, cv_LanguageKnowledgesByPerson, skills, obstacles, notes_NotesByProject, excerpts_ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, checkdata_ProblemsByOwner, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, cv_LanguageKnowledge, dupable_clients_Word, esf_ClientSummary, pcsw_Dispense, properties_PersonProperty, addresses_Address, sepa_Account, reason
 - pcsw.Clients.refuse_client : reason, remark
@@ -775,7 +775,7 @@ Each window layout defines a given set of fields.
 - xcourses.CourseOffers.detail : id, title, content, provider, guest_role, description
 - xcourses.CourseOffers.insert : provider, content, title
 - xcourses.CourseOffers.merge_row : merge_to, reason
-- xcourses.CourseProviders.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax
+- xcourses.CourseProviders.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, notes_NotesByCompany
 - xcourses.CourseProviders.merge_row : merge_to, addresses_Address, sepa_Account, reason
 - xcourses.CourseRequests.detail : date_submitted, person, content, offer, urgent, course, state, date_ended, id, remark, uploads_UploadsByController
 - xcourses.CourseRequests.merge_row : merge_to, reason
@@ -1645,7 +1645,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Vollmachten : 4
 - Explorer --> System --> Benutzerarten : 16
 - Explorer --> System --> Datenbankmodelle : 143
-- Explorer --> System --> Benachrichtigungen : 14
+- Explorer --> System --> Benachrichtigungen : 18
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> All dashboard widgets : 1
 - Explorer --> System --> Datentests : 16

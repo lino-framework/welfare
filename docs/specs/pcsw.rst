@@ -133,7 +133,7 @@ Einfügen in Klienten (Begleitet)
 There are a lot of data fields:
 
 >>> len(d.data.keys())
-85
+86
 
 >>> print(' '.join(sorted(d.data.keys())))
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
@@ -151,8 +151,8 @@ image in_belgium_since income_ag income_kg income_misc income_rente
 income_wg is_cpas is_obsolete is_senior job_agents language
 languageHidden last_name middle_name modified national_id nationality
 nationalityHidden needs_residence_permit needs_work_permit
-noble_condition obstacles overview phone refusal_reason
-refusal_reasonHidden remarks remarks2 residence_type
+noble_condition notes_NotesByProject obstacles overview phone
+refusal_reason refusal_reasonHidden remarks remarks2 residence_type
 residence_typeHidden row_class seeking_since skills tim_id
 unavailable_until unavailable_why unemployed_since
 uploads_UploadsByClient work_permit_suspended_until workflow_buttons
