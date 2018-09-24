@@ -170,7 +170,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cal.DailyPlannerRow            cal.DailyPlannerRows            8         3
  cal.Event                      cal.OneEvent                    24        538
  cal.EventPolicy                cal.EventPolicies               20        6
- cal.EventType                  cal.EventTypes                  23        12
+ cal.EventType                  cal.EventTypes                  24        12
  cal.Guest                      cal.Guests                      9         578
  cal.GuestRole                  cal.GuestRoles                  5         4
  cal.Priority                   cal.Priorities                  6         4
@@ -433,7 +433,7 @@ Each window layout defines a given set of fields.
 - coachings.Coachings.create_visit : user, summary
 - coachings.Coachings.merge_row : merge_to, reason
 - contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, id, language, activity, is_obsolete, created, modified
-- contacts.Companies.insert : name, email, type, id
+- contacts.Companies.insert : name, email, type
 - contacts.Companies.merge_row : merge_to, addresses_Address, reason
 - contacts.CompanyTypes.merge_row : merge_to, reason
 - contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, is_obsolete, created, modified

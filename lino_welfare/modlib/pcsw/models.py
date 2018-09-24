@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2018 Luc Saffre
+# Copyright 2008-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -396,13 +396,13 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         return cv.properties_list(self, *prop_ids)
 
     def get_active_contract(self):
-        """Return the one and only "active contract" of this client.  A
+        """
+        Return the one and only "active contract" of this client.  A
         contract is active if `applies_from` is <= `today` and
         `(date_ended or applies_until)` >= `today`.
 
         Returns `None` if there is either no contract or more than one
         active contract.
-
         """
 
         today = settings.SITE.today()

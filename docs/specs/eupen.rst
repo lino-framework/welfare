@@ -321,7 +321,7 @@ Database structure
 - cal.DailyPlannerRow : id, seqno, designation, start_time, end_time, designation_fr, designation_en
 - cal.Event : id, modified, created, project, start_date, start_time, end_date, end_time, build_time, build_method, user, assigned_to, owner_type, owner_id, summary, description, access_class, sequence, auto_type, event_type, transparent, room, priority, state
 - cal.EventPolicy : id, start_date, start_time, end_date, end_time, name, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_events, event_type, name_fr, name_en
-- cal.EventType : id, seqno, name, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, start_date, event_label, max_conflicting, max_days, transparent, planner_column, invite_client, name_fr, name_en, event_label_fr, event_label_en, esf_field
+- cal.EventType : id, seqno, name, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, force_guest_states, start_date, event_label, max_conflicting, max_days, transparent, planner_column, invite_client, name_fr, name_en, event_label_fr, event_label_en, esf_field
 - cal.Guest : id, event, partner, role, state, remark, waiting_since, busy_since, gone_since
 - cal.GuestRole : id, name, name_fr, name_en
 - cal.Priority : id, name, ref, name_fr, name_en
@@ -556,7 +556,7 @@ Each window layout defines a given set of fields.
 - coachings.Coachings.create_visit : user, summary
 - coachings.Coachings.merge_row : merge_to, reason
 - contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, payment_term, vatless_VouchersByPartner, ledger_MovementsByPartner, id, language, activity, is_obsolete, created, modified
-- contacts.Companies.insert : name, email, type, id
+- contacts.Companies.insert : name, email, type
 - contacts.Companies.merge_row : merge_to, addresses_Address, sepa_Account, reason
 - contacts.CompanyTypes.merge_row : merge_to, reason
 - contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, payment_term, vatless_VouchersByPartner, ledger_MovementsByPartner, is_obsolete, created, modified

@@ -2,8 +2,54 @@
 Kommende Version
 ================
 
+TALK
+====
 
-DONE (zur Zeit unter **testlino** einsehbar):
+- (caroline) Unsere Verträge sind wieder alle verschwunden (war
+  letztes mal glaub ich auch). D.h. es gibt den Reiter Verträge noch,
+  aber wenn ich darauf gehe fehlt die erste Kategorie wo die
+  effektiven IPSE-Verträge gemacht wurden.
+  --> Brauche genauere Beschreibung.
+
+- (melanie) Ansicht Verträge IPSE: Manche sehe ich, manche nicht.
+  --> Brauche genauere Beschreibung.
+  
+- (melanie) Inhalt der Bescheinigungen:
+  Adressfeld ist versetzt/verschwunden!
+  Layout nicht ok!
+  --> Brauche genauere Beschreibung.
+
+- (martina) Bei Einnahmen- und Ausgabentabelle ist die Formatierung
+  noch nicht korrekt.
+  --> Brauche genauere Beschreibung.
+
+TODO
+====
+
+- (melanie) AMK Französisch: Unverändert nicht korrekt.
+  Zum Beispiel 
+  :file:`/media/cache/appypdf/aids.RefundConfirmation-5341.pdf`
+
+- (caroline) In der Historie können wir keine neuen Einträge
+  hinzufügen bei Personen, die schon viele Einträge haben (war letztes
+  mal auch ein Problem) Bsp: Klient 21748.
+
+
+DONE
+====
+
+Die folgenden Punkte sind erledigt und zur Zeit unter **testlino**
+einsehbar:
+
+- (server) Export nach Excel ging nicht. Ein Benutzer hat versucht,
+  Bescheinigungen zu exportieren.
+
+- (server) Fehlermeldung beim Ausdrucken gewisser Verträge.
+
+- (melanie) Kann kein Komma in Zahlenfelder eingeben.
+
+- (martina) in Schuldnerberatung erscheint jetzt bei der 1000 Stelle
+  ein Komma anstatt ein Freizeichen.
 
 - Eine neue Tabelle **Tagesplaner** zeigt eine Tagesübersicht der
   Termine aller Benutzer an, wobei die Termine je nach Art in
@@ -90,6 +136,11 @@ DONE (zur Zeit unter **testlino** einsehbar):
 
 - Fehlermeldung bei Ausdruck einer Anwesenheitsbestätigung, wenn der
   Gast noch nicht ausgecheckt war (:ticket:`2443`).
+
+- :menuselection:`Explorer --> Büro --> Auszüge` zeigte "There was a
+  problem with the database connection. If the error persists, try
+  reloading your browser", und in der :xfile:`lino.log` stand dann
+  :message:`'datetime.time object' has no attribute 'date'`.
 
   
 

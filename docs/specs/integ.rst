@@ -1,20 +1,11 @@
+.. doctest docs/specs/integ.rst
 .. _welfare.specs.integ:
 
 ===================
 Integration Service
 ===================
 
-.. How to test only this document:
-
-    $ py.test -k test_integ
-
-   NOTE (see blog 20161202) that this test fails when called like
-   this::
-
-    $ python setup.py test -s tests.SpecsTests.test_integ
-    
-    
-    Doctest initialization:
+.. Doctest initialization:
 
     >>> import lino
     >>> lino.startup('lino_welfare.projects.std.settings.doctests')
@@ -23,7 +14,7 @@ Integration Service
     >>> ses = rt.login('robin')
     >>> translation.activate('en')
 
-A technical tour into the :mod:`lino_welfare.modlib.integ` module.
+This document describes the :mod:`lino_welfare.modlib.integ` plugin.
 See also :doc:`/tour/autoevents`.
 
 Table of contents:
@@ -328,3 +319,10 @@ and passed when it was fixed:
 {u'open_url': u'/media/cache/appypdf/127.0.0.1/integ.UsersWithClients.pdf', u'success': True}
 
 
+The following reproduces a bug we discovered on 20180921.
+
+>>> url = "/api/integ/Clients?_dc=1537533953315&start=0&limit=33&fmt=json&rp=ext-comp-1251"
+>>> url += "&pv=30&pv=200125&pv=&pv=21.09.2018&pv=21.09.2018&pv=&pv=&pv=&pv=&pv=&pv=false&pv=&pv=&pv=1&pv=false&pv=false&sort=applies_until&dir=DESC"
+>>> res = test_client.get(url, REMOTE_USER='rolf')  #doctest: -SKIP
+>>> print(res.status_code)  #doctest: -SKIP
+200
