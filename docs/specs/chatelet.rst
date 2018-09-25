@@ -58,8 +58,7 @@ The main menu
 Romain
 ------
 
->>> rt.login('romain').show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+>>> rt.login('romain').show_menu() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
 - Bureau : Mes Notifications, Mes Extraits, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Observations, Mes problèmes de données
 - Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Rendez-vous à confirmer, Mes tâches, Mes visiteurs, Mes présences, Mes rendez-vous dépassés
@@ -119,8 +118,7 @@ sociales, freins. Elle peut faire des requètes CBSS. Elle peut
 modifier les intervention d'autres utilisateurs.
 
 
->>> rt.login('theresia').show_menu()
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+>>> rt.login('theresia').show_menu() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
 - Bureau : Mes Extraits, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Observations
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis
@@ -145,8 +143,7 @@ Database structure
 This is the list of models used in the Châtelet varianat of Lino Welfare:
 
 >>> from lino.utils.diag import analyzer
->>> print(analyzer.show_db_overview())
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
+>>> print(analyzer.show_db_overview()) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 60 apps: lino, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, excerpts, uploads, outbox, extensible, cal, reception, badges, boards, clients, coachings, pcsw, welfare, sales, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, davlink, dashboard, export_excel, checkdata, tinymce, sessions.
 134 models:
 ============================== =============================== ========= =======
@@ -166,7 +163,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  badges.Badge                   badges.Badges                   5         0
  boards.Board                   boards.Boards                   7         3
  boards.Member                  boards.Members                  4         0
- cal.Calendar                   cal.Calendars                   7         12
+ cal.Calendar                   cal.Calendars                   7         ...
  cal.DailyPlannerRow            cal.DailyPlannerRows            8         3
  cal.Event                      cal.OneEvent                    24        538
  cal.EventPolicy                cal.EventPolicies               20        6
@@ -338,8 +335,7 @@ are *detail* layouts, *insert* layouts and *action parameter* layouts.
 Each window layout defines a given set of fields.
 
 
->>> print(analyzer.show_window_fields())
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+>>> print(analyzer.show_window_fields()) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : server_status
 - active_job_search.Proofs.detail : date, client, company, id, spontaneous, response, remarks
 - active_job_search.Proofs.merge_row : merge_to, reason
@@ -658,8 +654,7 @@ Windows and permissions
 
 Each window layout is **viewable** by a given set of user types.
 
->>> print(analyzer.show_window_permissions())
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+>>> print(analyzer.show_window_permissions()) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - about.About.show : visible for all
 - active_job_search.Proofs.detail : visible for 110 120 420 admin 910
 - active_job_search.Proofs.merge_row : visible for admin 910
@@ -976,8 +971,7 @@ Each window layout is **viewable** by a given set of user types.
 UsersWithClients
 ================
 
->>> rt.show(integ.UsersWithClients)
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+>>> rt.show(integ.UsersWithClients) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ====================== ============ =========== ======== ========= ========= =================== ====================== ========
  Intervenant            Évaluation   Formation   Search   Travail   Standby   Dossiers complèts   Bénéficiaires actifs   Total
 ---------------------- ------------ ----------- -------- --------- --------- ------------------- ---------------------- --------
@@ -1344,10 +1338,9 @@ Menu walk
 Here is the output of :func:`walk_menu_items
 <lino.api.doctests.walk_menu_items>` for this database:
 
->>> walk_menu_items('romain')
-... #doctest: -ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+>>> walk_menu_items('romain') #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts --> Personnes : 103
-- Contacts --> ▶ Bénéficiaires : 58
+- Contacts --> Bénéficiaires : 58
 - Contacts --> Organisations : 40
 - Contacts --> Partenaires (tous) : 163
 - Contacts --> Ménages : 15
@@ -1411,7 +1404,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Bureau --> Types d'observation : 14
 - Configuration --> Bureau --> Types d'événements : 11
 - Configuration --> Bureau --> Mes Text Field Templates : 1
-- Configuration --> Calendrier --> Calendriers : 13
+- Configuration --> Calendrier --> Calendriers : ...
 - Configuration --> Calendrier --> Locaux : 1
 - Configuration --> Calendrier --> Priorités : 5
 - Configuration --> Calendrier --> Évènements periodiques : 16
