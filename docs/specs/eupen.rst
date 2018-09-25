@@ -1645,7 +1645,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Vollmachten : 4
 - Explorer --> System --> Benutzerarten : 16
 - Explorer --> System --> Datenbankmodelle : 143
-- Explorer --> System --> Benachrichtigungen : 18
+- Explorer --> System --> Benachrichtigungen : 14
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> All dashboard widgets : 1
 - Explorer --> System --> Datentests : 16
