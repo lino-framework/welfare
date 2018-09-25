@@ -79,5 +79,6 @@ printing immersion trainings with some external partner.
 Rumma & Ko OÜ
 >>> bm = printing.BuildMethods.appyodt
 >>> ex = obj.printed_by
->>> ex.do_print.bound_action.action.get_print_templates(bm, ex) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+>>> ex.do_print.bound_action.action.get_print_templates(bm, ex)
+... #doctest: +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL +ELLIPSIS
 ['StageForem.odt']
