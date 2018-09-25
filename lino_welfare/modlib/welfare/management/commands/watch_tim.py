@@ -41,6 +41,7 @@ from django.db import connection
 from django.conf import settings
 
 from django.db import IntegrityError
+from django.utils import six
 
 from lino.core.utils import is_valid_email
 from lino.core.diff import ChangeWatcher
@@ -111,7 +112,7 @@ def store(kw, **d):
 def store_date(row, obj, rowattr, objattr):
     v = row[rowattr]
     if v:
-        if isinstance(v, basestring):
+        if isinstance(v, six.string_types):
             v = dateparser.parse(v)
         setattr(obj, objattr, v)
 
