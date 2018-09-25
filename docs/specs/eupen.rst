@@ -1519,7 +1519,7 @@ Here is the output of :func:`walk_menu_items
 >>> walk_menu_items('rolf', severe=False)
 ... #doctest: -ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte --> Personen : 103
-- Kontakte --> ▶ Klienten : 58
+- Kontakte --> Klienten : 58
 - Kontakte --> Organisationen : 52
 - Kontakte --> Partner (alle) : 175
 - Kontakte --> Haushalte : 15
