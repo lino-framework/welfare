@@ -79,7 +79,7 @@ The newcomers table
 ===================
 
 >>> rt.show('newcomers.NewClients')
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ==================================== =========== ============ ================================ =============== ===== ================================= =========== ================ =========
  Name                                 Zustand     Vermittler   Fachbereich                      NR-Nummer       GSM   Adresse                           Alter       E-Mail-Adresse   Telefon
 ------------------------------------ ----------- ------------ -------------------------------- --------------- ----- --------------------------------- ----------- ---------------- ---------
@@ -91,7 +91,7 @@ The newcomers table
  EMONTSPOOL Erwin (151)               Neuantrag                DSBE                             910602 001-49         4730 Raeren                       22 Jahre
  ERNST Berta (125)                    Neuantrag                Laufende Beihilfe                900627 002-53         Bergkapellstraße, 4700 Eupen      23 Jahre
  FRISCH Paul (240)                    Neuantrag                                                                                                         46 Jahre
- GERNEGROß Germaine (131)             Neuantrag                Laufende Beihilfe                880816 002-64         Buchenweg, 4700 Eupen             25 Jahre
+ GERNEGRO... Germaine (131)           Neuantrag                Laufende Beihilfe                880816 002-64         Buchenweg, 4700 Eupen             25 Jahre
  HILGERS Henri (134)                  Neuantrag                Ausländerbeihilfe                870911 001-07         Euregiostraße, 4700 Eupen         26 Jahre
  INGELS Irene (135)                   Neuantrag                Finanzielle Begleitung           861006 002-45         Feldstraße, 4700 Eupen            27 Jahre
  JANSEN Jérémy (136)                  Neuantrag                Laufende Beihilfe                851031 001-51         Gewerbestraße, 4700 Eupen         28 Jahre

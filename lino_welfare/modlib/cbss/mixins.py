@@ -266,7 +266,11 @@ The raw XML response received.
             else:
                 self.status = RequestStates.failed
             #~ self.response_xml = traceback.format_exc(e)
-            self.logmsg_debug(traceback.format_exc(e))
+            # self.logmsg_debug(traceback.format_exc(e))
+            if six.PY2:
+                self.logmsg_debug(traceback.format_exc(e))
+            else:
+                self.logmsg_debug(traceback.format_exc())
 
         self.save()
         return retval

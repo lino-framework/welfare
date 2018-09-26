@@ -110,8 +110,10 @@ Coaching types
 .. note: above table shows only Bezeichnung in German because the othe
    languages are hidden:
 
-   >>> [lng.name for lng in ses.user.user_type.hidden_languages]
-   ['fr', 'en']
+   >>> hidden_languages = [lng.name for lng in ses.user.user_type.hidden_languages]
+   >>> hidden_languages.sort()
+   >>> hidden_languages
+   ['en', 'fr']
 
 
 Creating a new client
@@ -123,8 +125,11 @@ Creating a new client
 >>> res.status_code
 200
 >>> d = AttrDict(json.loads(res.content))
->>> list(d.keys())
-[u'phantom', u'data', u'title']
+>>> keys = list(d.keys())
+>>> keys.sort()
+>>> keys
+... #doctest: +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL +ELLIPSIS
+['data', 'phantom', 'title']
 >>> d.phantom
 True
 >>> print(d.title)
