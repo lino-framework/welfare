@@ -9,7 +9,7 @@ class Site(Site):
     use_java = False
     # use_silk_icons = True  # temporarily
     webdav_protocol = 'webdav'
-    beid_protocol = 'beid'
+    # beid_protocol = 'beid'
 
 
 SITE = Site(globals())

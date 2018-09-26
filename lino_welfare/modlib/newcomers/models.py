@@ -54,9 +54,8 @@ from lino.modlib.users.mixins import My, UserAuthored
 from lino.core.diff import ChangeWatcher
 
 from lino_welfare.modlib.users.desktop import Users
-from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
-# from lino_welfare.modlib.integ.roles import IntegrationAgent
-from .roles import NewcomersAgent, NewcomersOperator
+from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialUser
+from .roles import NewcomersUser, NewcomersOperator
 
 # users = dd.resolve_app('users')
 pcsw = dd.resolve_app('pcsw', strict=True)
@@ -227,7 +226,7 @@ class NewClients(pcsw.CoachedClients):
     consultants.
 
     """
-    required_roles = dd.login_required(NewcomersAgent)
+    required_roles = dd.login_required(NewcomersUser)
     label = _("New Clients")
     use_as_default_table = False
 
@@ -283,7 +282,7 @@ class AvailableCoaches(Users):
     """List of users available for new coachings."""
     help_text = _("List of users available for new coachings")
     use_as_default_table = False
-    required_roles = dd.login_required(NewcomersAgent)
+    required_roles = dd.login_required(NewcomersUser)
     auto_fit_column_widths = True
     editable = False  # even root should not edit here
     label = _("Available Coaches")
@@ -307,7 +306,7 @@ class AvailableCoaches(Users):
     @classmethod
     def get_request_queryset(self, ar):
         user_types = [p for p in UserTypes.items()
-                    if isinstance(p.role, SocialAgent)]
+                    if isinstance(p.role, SocialUser)]
         return super(AvailableCoaches, self, ar).filter(
             models.Q(user_type__in=user_types))
 
@@ -424,8 +423,8 @@ class AssignCoach(NotifyingAction):
     :class:`AvailableCoachesByClient` table.
     """
     label = _("Assign")
-    required_roles = dd.login_required((NewcomersAgent, NewcomersOperator))
-    # required_roles = dd.login_required(NewcomersAgent)
+    required_roles = dd.login_required((NewcomersUser, NewcomersOperator))
+    # required_roles = dd.login_required(NewcomersUser)
     show_in_workflow = True
 
     def get_notify_subject(self, ar, obj, **kw):
@@ -490,7 +489,7 @@ class AvailableCoachesByClient(AvailableCoaches):
     """
     master = 'pcsw.Client'
     label = _("Available Coaches")
-    required_roles = dd.login_required((NewcomersOperator, NewcomersAgent))
+    required_roles = dd.login_required((NewcomersOperator, NewcomersUser))
 
     assign_coach = AssignCoach()
 

@@ -24,7 +24,6 @@ definitions for managing "newcomers".
 
    models
    fixtures
-   roles
 
 """
 

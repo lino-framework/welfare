@@ -150,7 +150,6 @@ Gonna copy .../lino_welfare/modlib/welfare/config/excerpts/Default.odt to .../co
 Yet another series of GET requests
 ==================================
 
->>> RetrieveTIGroupsRequest = rt.models.cbss.RetrieveTIGroupsRequest
 >>> ContentType = rt.models.contenttypes.ContentType
 
 >>> json_fields = 'count rows title success no_data_text param_values'
@@ -164,14 +163,6 @@ Yet another series of GET requests
 >>> json_fields = 'count rows title success no_data_text'
 >>> demo_get('rolf', 'api/countries/Countries', json_fields, 271, **kw)
 >>> demo_get('rolf', 'api/jobs/Jobs', json_fields, 9, **kw)
-
->>> mt = ContentType.objects.get_for_model(RetrieveTIGroupsRequest).pk
->>> demo_get('rolf', 'api/cbss/RetrieveTIGroupsResult', 
-...     json_fields, 0, mt=mt, mk=1, **kw)
->>> demo_get('hubert', 'api/cbss/RetrieveTIGroupsResult', 
-...     json_fields, 18, mt=mt, mk=1, **kw)
->>> demo_get('patrick', 'api/cbss/RetrieveTIGroupsResult', 
-...     json_fields, 18, mt=mt, mk=1, **kw)
 
 >>> json_fields = 'count rows title success no_data_text param_values'
 >>> demo_get('rolf', 'api/contacts/Persons', json_fields, 103, **kw)

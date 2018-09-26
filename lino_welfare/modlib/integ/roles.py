@@ -15,26 +15,13 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
-"""User roles for `lino_welfare.modlib.integ`.
-
-"""
-
-from lino_xl.lib.cv.roles import CareerUser, CareerStaff
-from lino_xl.lib.notes.roles import NotesUser
-from lino_welfare.modlib.pcsw.roles import SocialAgent, SocialStaff
-from lino_welfare.modlib.xcourses.roles import CoursesUser, CoursesStaff
-from lino_welfare.modlib.newcomers.roles import NewcomersOperator
-
-class IntegrationAgent(SocialAgent, CareerUser, CoursesUser, NotesUser):
-    """
-    An **integration agent** is a *social agent* who can see database
-    content specific to integration work: CV, language courses,
-    workshops, ...
-
-    See also :class:`lino_welfare.modlib.pcsw.choicelists.SocialAgent`.
-    """
 
 
-class IntegrationStaff(IntegrationAgent, SocialStaff, CareerStaff,
-                       CoursesStaff, NewcomersOperator):
+from lino.core.roles import UserRole
+
+class IntegUser(UserRole):
+    pass
+
+
+class IntegrationStaff(IntegUser):
     pass

@@ -44,7 +44,7 @@ from lino.core import constants
 
 from lino.modlib.users.choicelists import UserTypes
 
-from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino_welfare.modlib.integ.roles import IntegUser
 
 class TestCase(TestCase):
     """Miscellaneous tests on an empty database."""
@@ -64,7 +64,7 @@ class TestCase(TestCase):
         robin = create_row(
             User, username='robin', user_type=UserTypes.admin,
             language='en')
-        robin.user_type.has_required_roles([IntegrationAgent])
+        self.assertTrue(robin.user_type.has_required_roles([IntegUser]))
         self.client.force_login(robin)
         
         ObstacleType(name='Alcohol').save()

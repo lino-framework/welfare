@@ -36,7 +36,7 @@ from lino.mixins.printable import DirectPrintAction
 from lino.modlib.uploads.mixins import UploadController
 
 from .roles import CoursesUser, CoursesStaff
-from lino_welfare.modlib.pcsw.roles import SocialAgent
+from lino_welfare.modlib.pcsw.roles import SocialUser
 
 
 pcsw = dd.resolve_app('pcsw')
@@ -484,7 +484,7 @@ class CourseRequestsByPerson(CourseRequests):
     """
     Shows the course requests of a client.
     """
-    required_roles = dd.login_required((CoursesUser, SocialAgent))
+    required_roles = dd.login_required((CoursesUser, SocialUser))
     master_key = 'person'
     column_names = 'date_submitted:10 content:15 offer:15 course:20 urgent state date_ended remark:15 id'
     hidden_columns = 'id'

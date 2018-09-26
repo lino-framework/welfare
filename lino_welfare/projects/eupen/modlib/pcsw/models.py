@@ -26,8 +26,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd
 
-from lino_welfare.modlib.integ.roles import IntegrationAgent
-from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent
+from lino_welfare.modlib.integ.roles import IntegUser
+from lino_welfare.modlib.pcsw.roles import SocialStaff
+from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_xl.lib.contacts.roles import ContactsStaff
 
 from lino_welfare.modlib.pcsw.models import *
@@ -182,7 +183,7 @@ class ClientDetail(ClientDetail, PartnerDetailMixin):
     cv.StudiesByPerson
     cv.TrainingsByPerson
     cv.ExperiencesByPerson:40
-    """, label=_("Career"), required_roles=dd.login_required(IntegrationAgent))
+    """, label=_("Career"), required_roles=dd.login_required(IntegUser))
 
     languages = dd.Panel("""
     cv.LanguageKnowledgesByPerson
@@ -192,7 +193,7 @@ class ClientDetail(ClientDetail, PartnerDetailMixin):
     competences = dd.Panel("""
     cv.SkillsByPerson cv.SoftSkillsByPerson skills
     cv.ObstaclesByPerson obstacles badges.AwardsByHolder
-    """, label=_("Competences"), required_roles=dd.login_required(IntegrationAgent))
+    """, label=_("Competences"), required_roles=dd.login_required(IntegUser))
 
     contracts = dd.Panel("""
     isip.ContractsByClient
@@ -205,7 +206,7 @@ if settings.SITE.is_installed('cbss'):
     ClientDetail.cbss = dd.Panel("""
 cbss_identify_person cbss_manage_access cbss_retrieve_ti_groups
 cbss_summary
-    """, label=_("CBSS"), required_roles=dd.login_required(SocialAgent))
+    """, label=_("CBSS"), required_roles=dd.login_required(CBSSUser))
 
 
 Clients.detail_layout = ClientDetail()

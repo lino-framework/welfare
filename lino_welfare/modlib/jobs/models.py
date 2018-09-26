@@ -52,8 +52,8 @@ from lino_xl.lib.clients.choicelists import ClientEvents, ObservedEvent
 from lino_welfare.modlib.isip.mixins import (
     ContractTypeBase, ContractPartnerBase, ContractBase)
 
-from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialAgent, SocialCoordinator
-from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialUser, SocialCoordinator
+from lino_welfare.modlib.integ.roles import IntegUser
 
 from .mixins import JobSupplyment
 
@@ -144,7 +144,7 @@ class JobProviders(contacts.Companies, dd.Table):
     """The table of all job providers.
 
     """
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     #~ use_as_default_table = False
     model = 'jobs.JobProvider'
     app_label = 'jobs'
@@ -327,7 +327,7 @@ class ContractDetail(dd.DetailLayout):
 class Contracts(isip.ContractBaseTable):
     #~ debug_permissions = "20130222"
 
-    required_roles = dd.login_required(SocialAgent)
+    required_roles = dd.login_required(SocialUser)
     model = 'jobs.Contract'
     column_names = 'id client client__national_id ' \
                    'applies_from date_ended job user type *'
@@ -362,7 +362,7 @@ class Contracts(isip.ContractBaseTable):
 class ContractsByClient(Contracts):
     """Shows the *Art60§7 job supplyments* for this client.
     """
-    required_roles = dd.login_required((SocialAgent, SocialCoordinator))
+    required_roles = dd.login_required((SocialUser, SocialCoordinator))
     master_key = 'client'
     auto_fit_column_widths = True
     column_names = "applies_from applies_until date_ended duration type " \
@@ -414,7 +414,7 @@ class ContractsBySchedule(Contracts):
 
 class MyContracts(Contracts):
     
-    required_roles = dd.login_required(IntegrationAgent)    
+    required_roles = dd.login_required(IntegUser)    
     
     column_names = "applies_from client job type company applies_until date_ended ending *"
     #~ label = _("My contracts")
@@ -465,7 +465,7 @@ class Offer(SectorFunction):
 
 
 class Offers(dd.Table):
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     model = 'jobs.Offer'
     column_names = 'name provider sector function '\
                    'selection_from selection_until start_date *'
@@ -717,7 +717,7 @@ class CandidaturesByPerson(Candidatures):
     """
     ...
     """
-    required_roles = dd.login_required((SocialAgent, SocialCoordinator))
+    required_roles = dd.login_required((SocialUser, SocialCoordinator))
     master_key = 'person'
     column_names = 'date_submitted job:25 sector function ' \
                    'art60 art61 remark state *'
@@ -733,7 +733,7 @@ class CandidaturesByFunction(Candidatures):
 
 
 class CandidaturesByJob(Candidatures):
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     master_key = 'job'
     column_names = 'date_submitted person:25 state * id'
 
@@ -792,7 +792,7 @@ class Jobs(dd.Table):
     help_text = _("""
     Eine Stelle ist ein Arbeitsplatz bei einem Stellenabieter.
     """)
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     model = 'jobs.Job'
     #~ order_by = ['start_date']
     column_names = 'name provider * id'
@@ -888,7 +888,7 @@ if True:  # settings.SITE.user_model:
 class JobsOverviewByType(Jobs):
     """
     """
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     label = _("Contracts Situation")
     column_names = "job_desc:20 working:30 probation:30 candidates:30"
     master_key = 'type'
@@ -1010,7 +1010,7 @@ class JobsOverview(Report):
     applying for it.
 
     """
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     label = _("Contracts Situation")
 
     parameters = dict(

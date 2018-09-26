@@ -29,7 +29,7 @@ from lino.api.dd import babel_values
 
 from lino.api import dd, rt
 from lino.modlib.users.choicelists import UserTypes
-from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino_welfare.modlib.integ.roles import IntegUser
 from lino_xl.lib.clients.choicelists import ClientStates
 
 
@@ -74,7 +74,7 @@ def objects():
 
     user_types = [
         p for p in UserTypes.items()
-        if p.has_required_roles([IntegrationAgent])
+        if p.has_required_roles([IntegUser])
         and not p.has_required_roles([dd.SiteStaff])]
     qs = User.objects.filter(user_type__in=user_types)
     for u in qs:

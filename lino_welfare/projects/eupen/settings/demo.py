@@ -8,7 +8,7 @@ class Site(Site):
     # ignore_dates_after = datetime.date(2019, 05, 22)
     use_java = False
     webdav_protocol = 'webdav'
-    beid_protocol = 'beid'
+    # beid_protocol = 'beid'
     use_websockets = False
 
 SITE = Site(globals())

@@ -139,6 +139,7 @@ class ConfidentialResultsTable(dd.VirtualTable):
         u = ar.user  # the real user, not the subst_user
         if obj.user != u:
             if not u.user_type.has_required_roles([SecurityAdvisor]):
+                # print("20180926 {} {}".format(obj.user, u))
                 raise Warning(
                     _("Confidential data"))
         

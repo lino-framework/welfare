@@ -33,7 +33,7 @@ from lino.api import dd, rt
 
 from lino.modlib.users.models import *
 
-from lino_welfare.modlib.pcsw.roles import SocialAgent
+from lino_welfare.modlib.pcsw.roles import SocialUser
 from lino.modlib.office.roles import OfficeUser
 
 
@@ -89,12 +89,12 @@ class User(User):
 
     def check_all_subscriptions(self):
 
-        if not self.user_type.has_required_roles([SocialAgent]):
+        if not self.user_type.has_required_roles([SocialUser]):
             return
 
         coaching_profiles = set()
         for p in UserTypes.items():
-            if p.has_required_roles([SocialAgent]):
+            if p.has_required_roles([SocialUser]):
                 coaching_profiles.add(p)
         for u in User.objects.filter(
                 user_type__in=coaching_profiles).exclude(id=self.id):

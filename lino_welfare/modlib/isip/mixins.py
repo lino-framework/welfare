@@ -51,7 +51,7 @@ from lino.mixins.periods import rangefmt
 
 from lino_welfare.modlib.system.models import Signers
 from lino_welfare.modlib.pcsw.models import ClientChecker
-from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino_welfare.modlib.integ.roles import IntegUser
 
 from .choicelists import ContractEvents, OverlapGroups
 
@@ -265,7 +265,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
 
     """
 
-    manager_roles_required = dd.login_required(IntegrationAgent)
+    manager_roles_required = dd.login_required(IntegUser)
 
     TASKTYPE_CONTRACT_APPLIES_UNTIL = 1
 

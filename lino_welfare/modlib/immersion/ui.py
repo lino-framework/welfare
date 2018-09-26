@@ -29,7 +29,7 @@ from lino.api import dd
 
 from lino_welfare.modlib.isip.mixins import ContractBaseTable
 
-from lino_welfare.modlib.integ.roles import IntegrationAgent, IntegrationStaff
+from lino_welfare.modlib.integ.roles import IntegUser, IntegrationStaff
 from lino_welfare.modlib.pcsw.roles import SocialCoordinator
 
 
@@ -96,7 +96,7 @@ class ContractDetail(dd.DetailLayout):
 
 class Contracts(ContractBaseTable):
 
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     model = 'immersion.Contract'
     column_names = 'id client company applies_from applies_until user type *'
     order_by = ['id']
@@ -130,7 +130,7 @@ class Contracts(ContractBaseTable):
 class ContractsByClient(Contracts):
     """
     """
-    required_roles = dd.login_required((IntegrationAgent, SocialCoordinator))
+    required_roles = dd.login_required((IntegUser, SocialCoordinator))
     master_key = 'client'
     auto_fit_column_widths = True
     column_names = ('applies_from applies_until type '

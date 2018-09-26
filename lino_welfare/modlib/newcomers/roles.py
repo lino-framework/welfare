@@ -15,28 +15,14 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
-"""Choicelists for `lino_welfare.modlib.newcomers`.
 
 
+from lino.core.roles import UserRole
 
-
-"""
-
-from lino_xl.lib.beid.roles import BeIdUser
-from lino_xl.lib.contacts.roles import ContactsUser
-
-
-class NewcomersAgent(BeIdUser):
-    """
-    A **newcomers agent** manages new client applications.
-    """
+class NewcomersUser(UserRole):
     pass
 
 
-class NewcomersOperator(ContactsUser, BeIdUser):
-    """A **newcomers operator** is a user who is not *social agent* but
-    can e.g. register newcomers and assign them a coach.
-
-    """
+class NewcomersOperator(UserRole):
     pass
 

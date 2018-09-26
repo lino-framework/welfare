@@ -15,15 +15,11 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
-"""User roles for `lino_welfare.modlib.integ`.
 
-"""
-
-from lino_welfare.modlib.newcomers.roles import NewcomersAgent
-from lino_welfare.modlib.pcsw.roles import SocialAgent
+from lino.core.roles import UserRole
 
 
-class DebtsUser(SocialAgent, NewcomersAgent):
+class DebtsUser(UserRole):
     pass
 
 

@@ -30,7 +30,7 @@ from lino.api import dd, rt
 
 from lino_xl.lib.cv.models import *
 
-from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino_welfare.modlib.integ.roles import IntegUser
 from lino_welfare.modlib.pcsw.roles import SocialStaff
 
 from lino_xl.lib.properties import models as properties
@@ -77,7 +77,7 @@ class PropsByPerson(PersonProperties):
     """
     master_key = 'person'
     column_names = "property value remark *"
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     #~ hidden_columns = 'id'
     auto_fit_column_widths = True
 
