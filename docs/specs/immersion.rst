@@ -10,7 +10,7 @@ Immersion trainings
     
     doctest init:
 
-    >>> from __future__ import print_function
+    >>> from __future__ import print_function,unicode_literals
     >>> import os
     >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
     ...    'lino_welfare.projects.chatelet.settings.doctests'
@@ -79,6 +79,6 @@ printing immersion trainings with some external partner.
 Rumma & Ko OÜ
 >>> bm = printing.BuildMethods.appyodt
 >>> ex = obj.printed_by
->>> ex.do_print.bound_action.action.get_print_templates(bm, ex)
+>>> print(ex.do_print.bound_action.action.get_print_templates(bm, ex))
 ... #doctest: +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL +ELLIPSIS
-['StageForem.odt']
+[u'StageForem.odt']
