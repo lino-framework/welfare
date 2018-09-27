@@ -29,7 +29,7 @@ Or::
 
 """
 
-from __future__ import unicode_literals
+from __future__ import unicode_literals,print_function
 
 from builtins import str
 from django.conf import settings
@@ -236,12 +236,11 @@ class TestCase(TestCase):
                             state=EnrolmentStates.confirmed, pupil=pupil)
             self.fail("Expected ValidationError")
         except ValidationError as e:
-            if AFTER18:
+            if six.PY2:
                 expected = "{'__all__': [u'Un object Inscription avec ces " \
                            "champs Atelier et B\\xe9n\\xe9ficiaire existe " \
                            "d\\xe9j\\xe0.']}"
             else:
-                expected = "{'__all__': [u'Un(e) Inscription avec ce Atelier et " \
-                           "B\\xe9n\\xe9ficiaire existe d\\xe9j\\xe0.']}"
+                expected = "{'__all__': ['Un object Inscription avec ces champs Atelier et Bénéficiaire existe déjà.']}"
             self.assertEqual(str(e), expected)
 
