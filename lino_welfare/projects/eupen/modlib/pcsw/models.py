@@ -27,8 +27,8 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 
 from lino_welfare.modlib.integ.roles import IntegUser
-from lino_welfare.modlib.pcsw.roles import SocialStaff
-from lino_welfare.modlib.cbss.roles import CBSSUser
+from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialUser
+# from lino_welfare.modlib.cbss.roles import CBSSUser
 from lino_xl.lib.contacts.roles import ContactsStaff
 
 from lino_welfare.modlib.pcsw.models import *
@@ -206,7 +206,7 @@ if settings.SITE.is_installed('cbss'):
     ClientDetail.cbss = dd.Panel("""
 cbss_identify_person cbss_manage_access cbss_retrieve_ti_groups
 cbss_summary
-    """, label=_("CBSS"), required_roles=dd.login_required(CBSSUser))
+    """, label=_("CBSS"), required_roles=dd.login_required(SocialUser))
 
 # no longer needed because Clients.client_detail is specified as a string:
 # Clients.detail_layout = ClientDetail()
