@@ -155,8 +155,7 @@ Mélanie is a manager of the Integration service.
 >>> print(p)
 110 (Sozialarbeiter DSBE (Verwalter))
 >>> p.role  #doctest: +ELLIPSIS
-<lino_welfare.modlib.integ.roles.IntegrationStaff object at ...>
-
+<lino_welfare.modlib.welfare.user_types.IntegrationAgentManager object at ...>
 
 Because Mélanie has her :attr:`language
 <lino.modlib.users.models.User.language>` field set to French, we need
@@ -788,7 +787,7 @@ Each window layout defines a given set of fields.
 Windows and permissions
 =======================
 
-Each window layout is **viewable** by a given set of user user_types.
+Each window layout is **viewable** by a given set of user types.
 
 >>> print(analyzer.show_window_permissions())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF

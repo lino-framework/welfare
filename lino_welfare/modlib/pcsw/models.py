@@ -243,7 +243,8 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
 
     def disabled_fields(self, ar):
         rv = super(Client, self).disabled_fields(ar)
-        if not ar.get_user().user_type.has_required_roles([(NewcomersOperator, NewcomersUser)]):
+        if not ar.get_user().user_type.has_required_roles(
+                [NewcomersOperator]):
             rv = rv | set(['broker', 'faculty', 'refusal_reason'])
         #~ logger.info("20130808 pcsw %s", rv)
         return rv
@@ -567,7 +568,7 @@ class ClientDetail(dd.DetailLayout):
     broker:12
     faculty:12
     refusal_reason
-    """, required_roles=dd.login_required((NewcomersOperator, NewcomersUser)))
+    """, required_roles=dd.login_required(NewcomersOperator))
 
     suche = dd.Panel("""
     # job_office_contact job_agents

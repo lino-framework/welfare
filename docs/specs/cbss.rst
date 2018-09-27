@@ -108,7 +108,6 @@ Permissions
 hubert
 >>> demo_get('rolf', 'api/cbss/RetrieveTIGroupsResult', 
 ...     json_fields, 0, mt=mt, mk=1, **kw)
-20180926 Hubert Huppertz Rolf Rompen
 >>> demo_get('hubert', 'api/cbss/RetrieveTIGroupsResult', 
 ...     json_fields, 18, mt=mt, mk=1, **kw)
 >>> demo_get('patrick', 'api/cbss/RetrieveTIGroupsResult', 

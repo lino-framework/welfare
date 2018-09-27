@@ -37,7 +37,7 @@ The default set of user types for Lino Welfare lives in the
 ------- ----------- ------------------------------ -----------------------------------------------------------------
  000     anonymous   Anonymous                      lino.core.roles.Anonymous
  100                 Integration agent              lino_welfare.modlib.welfare.user_types.IntegrationAgent
- 110                 Integration agent (Manager)    lino_welfare.modlib.integ.roles.IntegrationStaff
+ 110                 Integration agent (Manager)    lino_welfare.modlib.welfare.user_types.IntegrationAgentManager
  120                 Integration agent (Flexible)   lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible
  200                 Newcomers consultant           lino_welfare.modlib.welfare.user_types.NewcomersConsultant
  210                 Reception clerk                lino_welfare.modlib.welfare.user_types.ReceptionClerk

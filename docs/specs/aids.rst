@@ -6,7 +6,7 @@ The Social Aids module
 ======================
 
 This document describes the functionality implemented by the
-:mod:`lino_welfare.modlib.aids` module.
+:mod:`lino_welfare.modlib.aids` plugin.
 
 ..  doctest initialization:
 
@@ -25,9 +25,9 @@ Confirmation types
 ==================
 
 
->>> from lino_welfare.modlib.pcsw.roles import SocialAgent
+>>> from lino_welfare.modlib.pcsw.roles import SocialUser
 >>> ses = rt.login('alicia')
->>> ses.user.user_type.has_required_roles([SocialAgent])
+>>> ses.user.user_type.has_required_roles([SocialUser])
 True
 
 :class:`ConfirmationTypes

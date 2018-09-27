@@ -5,12 +5,6 @@ Kommende Version
 TALK
 ====
 
-- (caroline) Unsere Verträge sind wieder alle verschwunden (war
-  letztes mal glaub ich auch). D.h. es gibt den Reiter Verträge noch,
-  aber wenn ich darauf gehe fehlt die erste Kategorie wo die
-  effektiven IPSE-Verträge gemacht wurden.
-  --> Brauche genauere Beschreibung.
-
 - (melanie) Ansicht Verträge IPSE: Manche sehe ich, manche nicht.
   --> Brauche genauere Beschreibung.
   
@@ -23,8 +17,15 @@ TALK
   noch nicht korrekt.
   --> Brauche genauere Beschreibung.
 
-TODO
+DONE
 ====
+
+Die folgenden Punkte sind erledigt und zur Zeit unter **testlino**
+einsehbar:
+
+- (caroline) Unsere Verträge sind wieder alle verschwunden. Im Reiter
+  Verträge fehlt das Panel wo die effektiven VSE-Verträge angezeigt
+  wurden.
 
 - (melanie) AMK Französisch: Unverändert nicht korrekt.
   Zum Beispiel 
@@ -34,12 +35,6 @@ TODO
   hinzufügen bei Personen, die schon viele Einträge haben (war letztes
   mal auch ein Problem) Bsp: Klient 21748.
 
-
-DONE
-====
-
-Die folgenden Punkte sind erledigt und zur Zeit unter **testlino**
-einsehbar:
 
 - (server) Export nach Excel ging nicht. Ein Benutzer hat versucht,
   Bescheinigungen zu exportieren.

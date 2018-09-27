@@ -20,10 +20,10 @@ This document helped us to understand and solve ticket :ticket:`340`
     
 The problem: A reception clerk in Eupen
 (:mod:`lino_welfare.projects.eupen`) should not see the career tab of
-a client, because the :attr:`required_roles
+a client because the :attr:`required_roles
 <lino.core.permissions.Permittable.required_roles>` of that panel
-include :class:`IntegrationAgent
-<lino_welfare.modlib.integ.roles.IntegrationAgent>`.  But they saw it
+include :class:`IntegUser
+<lino_welfare.modlib.integ.roles.IntegUser>`.  But they saw it
 nevertheless:
 
 .. image:: 20150715.png
@@ -31,7 +31,7 @@ nevertheless:
 A reception clerk is not an integration agent:
 
 >>> from lino_welfare.modlib.welfare.user_types import *
->>> isinstance(ReceptionClerk, IntegrationAgent)
+>>> isinstance(ReceptionClerk, IntegUser)
 False
 
 >>> ia_user_type = users.UserTypes.get_by_value('100')
@@ -67,7 +67,7 @@ Let's get the `career` panel. It is a :class:`lino.core.elems.Panel`:
 
 To see this panel, you need to be an integration agent:
 
->>> career_panel.required_roles == {IntegrationAgent}
+>>> career_panel.required_roles == {IntegUser}
 True
 
 Theresia is a reception clerk
@@ -119,10 +119,10 @@ I can even render the :file:`lino*.js` files (at least once):
 
 So until now everything looks okay. 
 
-The problem was that until :blogref:`20150716`, when
-:meth:`write_lino_js` had run once, then it left the requirements of
-our career panel modified (loosened).  So the following was `False`
-only after the first time and `True` all subsequent times:
+The problem was that until :blogref:`20150716`, :meth:`write_lino_js`
+left the requirements of our career panel modified (loosened) after
+having run.  So the following was `False` only after the first time
+and `True` all subsequent times:
 
 >>> theresia.user_type.has_required_roles(career_panel.required_roles)
 False

@@ -117,6 +117,8 @@ les données de parcours, compétences professionnelles, compétences
 sociales, freins. Elle peut faire des requètes CBSS. Elle peut
 modifier les intervention d'autres utilisateurs.
 
+>>> rt.login('theresia').user.user_type
+users.UserTypes:210
 
 >>> rt.login('theresia').show_menu() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
@@ -290,8 +292,8 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 user types
 =============
 
-We use the user types defined in
-:mod:`lino_welfare.modlib.welfare.user_types`:
+We use the user types described in :doc:`user_types`. Here are their
+French labels.
 
 >>> settings.SITE.user_types_module
 'lino_welfare.modlib.welfare.user_types'
@@ -300,15 +302,15 @@ We use the user types defined in
  value   name        text                                  User role
 ------- ----------- ------------------------------------- -----------------------------------------------------------------
  000     anonymous   Anonyme                               lino.core.roles.Anonymous
- 100                 Agent d'insertion                     lino_welfare.modlib.integ.roles.IntegrationAgent
- 110                 Agent d'insertion (chef de service)   lino_welfare.modlib.integ.roles.IntegrationStaff
+ 100                 Agent d'insertion                     lino_welfare.modlib.welfare.user_types.IntegrationAgent
+ 110                 Agent d'insertion (chef de service)   lino_welfare.modlib.welfare.user_types.IntegrationAgentManager
  120                 Integration agent (Flexible)          lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible
  200                 Consultant nouveaux bénéficiaires     lino_welfare.modlib.welfare.user_types.NewcomersConsultant
  210                 Agent d'accueil                       lino_welfare.modlib.welfare.user_types.ReceptionClerk
  220                 Reception clerk (Flexible)            lino_welfare.modlib.welfare.user_types.ReceptionClerkFlexible
- 300                 Médiateur de dettes                   lino_welfare.modlib.debts.roles.DebtsUser
- 400                 Agent social                          lino_welfare.modlib.pcsw.roles.SocialAgent
- 410                 Agent social (Chef de service)        lino_welfare.modlib.pcsw.roles.SocialStaff
+ 300                 Médiateur de dettes                   lino_welfare.modlib.welfare.user_types.DebtsConsultant
+ 400                 Agent social                          lino_welfare.modlib.welfare.user_types.SocialAgent
+ 410                 Agent social (Chef de service)        lino_welfare.modlib.welfare.user_types.SocialAgentManager
  420                 Social agent (Flexible)               lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible
  500                 Comptable                             lino_welfare.modlib.welfare.user_types.Accountant
  510                 Accountant (Manager)                  lino_welfare.modlib.welfare.user_types.AccountantManager

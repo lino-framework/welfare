@@ -423,7 +423,7 @@ class AssignCoach(NotifyingAction):
     :class:`AvailableCoachesByClient` table.
     """
     label = _("Assign")
-    required_roles = dd.login_required((NewcomersUser, NewcomersOperator))
+    required_roles = dd.login_required(NewcomersOperator)
     # required_roles = dd.login_required(NewcomersUser)
     show_in_workflow = True
 
@@ -489,7 +489,7 @@ class AvailableCoachesByClient(AvailableCoaches):
     """
     master = 'pcsw.Client'
     label = _("Available Coaches")
-    required_roles = dd.login_required((NewcomersOperator, NewcomersUser))
+    required_roles = dd.login_required(NewcomersOperator)
 
     assign_coach = AssignCoach()
 

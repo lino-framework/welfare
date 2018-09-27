@@ -368,8 +368,7 @@ class MyContracts(Contracts):
 
 
 class ContractsByClient(Contracts):
-    required_roles = dd.login_required((IntegUser, SocialUser,
-                                        SocialCoordinator))
+    required_roles = dd.login_required((IntegUser, SocialCoordinator))
     master_key = 'client'
     column_names = ('applies_from applies_until type '
                     'user study_type date_ended ending *')

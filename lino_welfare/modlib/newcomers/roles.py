@@ -19,10 +19,10 @@
 
 from lino.core.roles import UserRole
 
-class NewcomersUser(UserRole):
-    pass
-
 
 class NewcomersOperator(UserRole):
+    pass
+
+class NewcomersUser(NewcomersOperator):
     pass
 

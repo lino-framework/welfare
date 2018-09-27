@@ -127,7 +127,7 @@ Creating a new client
 >>> d = AttrDict(json.loads(res.content))
 >>> keys = list(d.keys())
 >>> keys.sort()
->>> keys
+>>> rmu(keys)
 ... #doctest: +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL +ELLIPSIS
 ['data', 'phantom', 'title']
 >>> d.phantom

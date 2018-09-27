@@ -39,6 +39,8 @@ from lino_welfare.modlib.pcsw.roles import SocialUser
 from lino_welfare.modlib.pcsw.roles import SocialStaff
 from lino_welfare.modlib.pcsw.roles import SocialCoordinator
 from lino_welfare.modlib.aids.roles import AidsStaff,  AidsUser
+from lino_welfare.modlib.xcourses.roles import CoursesUser as xCoursesUser
+from lino_welfare.modlib.xcourses.roles import CoursesStaff as xCoursesStaff
 from lino_welfare.modlib.integ.roles import IntegUser, IntegrationStaff
 from lino_welfare.modlib.debts.roles import DebtsUser, DebtsStaff
 
@@ -50,62 +52,81 @@ from lino.modlib.checkdata.roles import CheckdataUser
 from lino_xl.lib.sepa.roles import SepaUser, SepaStaff
 from lino_xl.lib.coachings.roles import CoachingsUser, CoachingsStaff
 
+# class CoursesUser(CoursesUser, xCoursesUser):
+#     pass
 
-class ReceptionClerk(SiteUser, AuthorshipTaker, OfficeOperator,
+
+# 210
+class ReceptionClerk(SiteUser, AuthorshipTaker,
+                     OfficeOperator,
                      GuestOperator, NotesUser,
                      ContactsStaff, AidsStaff, CBSSUser, BeIdUser,
-                     SepaUser, CoursesUser, ExcerptsUser,
+                     SepaUser, ExcerptsUser, CoursesUser,
                      SocialCoordinator, CoachingsStaff):
     pass
 
 
-class ReceptionClerkFlexible(SiteUser, AuthorshipTaker, SimpleContactsUser,
+class ReceptionClerkFlexible(SiteUser, AuthorshipTaker,
+                             SimpleContactsUser,
                              OfficeOperator, NotesUser,
-                             GuestOperator,
+                             GuestOperator, BeIdUser,
                              ExcerptsUser,
-                             AidsStaff, CBSSUser, BeIdUser,
+                             # AidsStaff,
                              # OfficeUser,
                              # SocialUser,
                              # CoursesUser,
                              NewcomersUser):
     pass
 
-class IntegrationAgent(IntegUser, SocialUser, CareerUser, CoursesUser,
-                       OfficeUser, CBSSUser, 
+class IntegrationAgent(SiteUser, IntegUser, SocialUser, CareerUser,
+                       CoursesUser, xCoursesUser, OfficeUser, CBSSUser,
                        CheckdataUser, AidsUser, PollsUser, SepaUser,
-                       ExcerptsUser, CoachingsUser,
-                       BeIdUser, ContactsUser,
-                       NotesUser):
+                       ExcerptsUser, CoachingsUser, BeIdUser,
+                       GuestOperator, ContactsUser, NotesUser):
     pass
 
 
-class IntegrationAgentManager(IntegrationAgent, IntegrationStaff,
-                              SocialStaff, CareerStaff, 
-                              NewcomersOperator):
+class IntegrationAgentManager(IntegrationAgent,
+                              IntegrationStaff,
+                              OfficeStaff, CoachingsStaff, AidsStaff,
+                              ContactsStaff, SocialStaff, CareerStaff,
+                              NewcomersOperator, 
+                              xCoursesStaff, SepaStaff, PollsStaff):
     pass
                               
-class IntegrationAgentFlexible(IntegrationAgentManager, DebtsUser):
+class IntegrationAgentFlexible(NewcomersUser, IntegrationAgentManager,
+                               BeIdUser, DebtsUser):
     pass
 
-class SocialAgent(SocialUser,
+class SocialAgent(SiteUser, SocialUser,
                   OfficeUser, ContactsUser, CBSSUser, BeIdUser,
                   CheckdataUser, AidsUser, PollsUser, SepaUser,
-                  CoursesUser, ExcerptsUser, CoachingsUser,
+                  CoursesUser,
+                  ExcerptsUser, CoachingsUser,
                   AuthorshipTaker, GuestOperator, NotesUser):
     pass
 
-class SocialAgentManager(SocialStaff, OfficeStaff, ContactsStaff,
-                         CBSSUser, BeIdUser, CheckdataUser, AidsStaff,
-                         PollsStaff, SepaStaff, CoursesUser,
-                         ExcerptsUser, CoachingsStaff,
-                         AuthorshipTaker, GuestOperator, NotesUser):
+class SocialAgentManager(SocialAgent, SocialStaff, OfficeStaff,
+                         ContactsStaff, AidsStaff, PollsStaff,
+                         SepaStaff, CoachingsStaff):
     pass
 
-class DebtsConsultant(DebtsUser, SocialAgent, NewcomersUser, BeIdUser):
+class DebtsConsultant(SiteUser, DebtsUser, SocialUser, OfficeUser,
+                      OfficeOperator, ContactsUser, CBSSUser,
+                      CoursesUser,
+                      PollsUser,
+                      BeIdUser, NotesUser, CheckdataUser, AidsUser,
+                      GuestOperator, CoachingsUser, SepaUser,
+                      NewcomersUser):
     pass
 
 
-class NewcomersConsultant(SocialAgent, NewcomersUser):
+class NewcomersConsultant(SiteUser, NewcomersUser, SocialUser,
+                          OfficeUser, OfficeOperator, ContactsUser,
+                          CBSSUser, BeIdUser, NotesUser, CoursesUser, 
+                          CheckdataUser, AidsUser, CoachingsUser,
+                          PollsUser,
+                          GuestOperator, SepaUser):
     pass
 
 class Accountant(SiteUser, LedgerUser, ContactsUser, OfficeUser,
@@ -126,16 +147,16 @@ class SiteAdmin(
         CBSSUser,
         CareerStaff,
         CheckdataUser,
-        CoachingsUser,
+        CoachingsStaff,
         ContactsStaff,
         CoursesUser,
+        xCoursesStaff,
         DebtsStaff,
         ExcerptsStaff,
         GuestOperator,
         IntegrationStaff,
         LedgerStaff,
         NewcomersUser,
-        NewcomersOperator,
         NotesUser,
         OfficeStaff,
         PollsStaff,
@@ -147,10 +168,11 @@ class SiteAdmin(
 class SecurityAdvisor(SiteAdmin, SecurityAdvisor):
     pass
 
-class Supervisor(SiteUser, Supervisor, AuthorshipTaker, OfficeOperator,
-                 GuestOperator, NotesUser,
+class Supervisor(SiteUser, Supervisor, AuthorshipTaker,
+                 OfficeOperator, BeIdUser,
+                 GuestOperator, NotesUser, CoursesUser,
                  ContactsStaff, AidsStaff, NewcomersOperator,
-                 ExcerptsUser, SepaUser, CoursesUser):
+                 ExcerptsUser, SepaUser):
     pass
 
 

@@ -28,8 +28,7 @@ from lino.api import dd
 
 from lino_xl.lib.contacts.roles import ContactsUser
 from lino_xl.lib.cv.roles import CareerUser
-from lino_welfare.modlib.newcomers.roles import (NewcomersUser,
-                                                 NewcomersOperator)
+from lino_welfare.modlib.newcomers.roles import NewcomersOperator
 from lino_welfare.modlib.pcsw.roles import SocialStaff
 
 from lino_welfare.modlib.pcsw.models import *
@@ -85,7 +84,7 @@ class ClientDetail(ClientDetail):
     workflow_buttons id_document
     faculty:12
     clients.ContactsByClient:20
-    """, required_roles=dd.login_required((NewcomersUser, NewcomersOperator)))
+    """, required_roles=dd.login_required(NewcomersOperator))
 
     suche = dd.Panel("""
     is_seeking unemployed_since seeking_since work_permit_suspended_until
