@@ -34,6 +34,7 @@ from __future__ import unicode_literals
 from builtins import str
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.utils import six
 
 from lino import AFTER18
 from lino.api import rt
@@ -80,8 +81,9 @@ class TestCase(TestCase):
 
         rh = rt.models.cv.ObstaclesByPerson.get_handle()
         colnames = [col.name for col in rh.get_columns()]
+        colnames.sort()
         self.assertEqual(
-            'type user detected_date remark id workflow_buttons mobile_item overview person',
+            'detected_date id mobile_item overview person remark type user workflow_buttons',
             ' '.join(colnames))
 
         url = "/api/cv/ObstaclesByPerson"
@@ -97,18 +99,32 @@ class TestCase(TestCase):
             REMOTE_USER='robin')
         result = self.check_json_result(response, 'rows success message navinfo')
         self.assertEqual(result['success'], True)
-        self.assertEqual(
-            # result['message'],
-            # """Freins "Obstacle object" a \xe9t\xe9 cr\xe9\xe9""")
-            result['message'],
-            """Obstacle "Obstacle object" has been created.""")
-        self.assertEqual(result['rows'], [
-            ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
-             '<span />',
-             '<div><em>Obstacle object</em></div>',
-             u'<div><em>Obstacle object</em></div>',
-             'First LAST', 100,
-             {'id': True}, False]])
+        if six.PY2:
+            self.assertEqual(
+                # result['message'],
+                # """Freins "Obstacle object" a \xe9t\xe9 cr\xe9\xe9""")
+                result['message'],
+                """Obstacle "Obstacle object" has been created.""")
+            self.assertEqual(result['rows'], [
+                ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
+                 '<span />',
+                 '<div><em>Obstacle object</em></div>',
+                 u'<div><em>Obstacle object</em></div>',
+                 'First LAST', 100,
+                 {'id': True}, False]])
+        else:
+            self.assertEqual(
+                # result['message'],
+                # """Freins "Obstacle object" a \xe9t\xe9 cr\xe9\xe9""")
+                result['message'],
+                """Obstacle "Obstacle object (1)" has been created.""")
+            self.assertEqual(result['rows'], [
+                ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
+                 '<span />',
+                 '<div><em>Obstacle object (1)</em></div>',
+                 u'<div><em>Obstacle object (1)</em></div>',
+                 'First LAST', 100,
+                 {'id': True}, False]])
 
         self.assertEqual(Obstacle.objects.get(pk=1).user.username, 'robin')
 
