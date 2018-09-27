@@ -14,4 +14,5 @@ class Site(Site):
 
 SITE = Site(globals())
 SITE.plugins.beid.urlhandler_prefix = 'beid'
+
 DEBUG = True
