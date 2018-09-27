@@ -208,6 +208,6 @@ cbss_identify_person cbss_manage_access cbss_retrieve_ti_groups
 cbss_summary
     """, label=_("CBSS"), required_roles=dd.login_required(CBSSUser))
 
-
-Clients.detail_layout = ClientDetail()
+# no longer needed because Clients.client_detail is specified as a string:
+# Clients.detail_layout = ClientDetail()
 

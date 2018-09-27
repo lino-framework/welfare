@@ -116,7 +116,7 @@ Lino Welfare à la Eupen.
       - (misc_5) [visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910]:
         - **Datenprobleme** (checkdata_ProblemsByOwner)
         - **Kontaktperson für** (contacts.RolesByPerson)
-    - **ZDSS** (cbss) [visible for 100 110 120 200 300 400 410 420 admin 910]:
+    - **ZDSS** (cbss) [visible for 100 110 120 200 210 300 400 410 420 admin 910]:
       - (cbss_1) [visible for all]: **IdentifyPerson-Anfragen** (cbss_identify_person), **ManageAccess-Anfragen** (cbss_manage_access), **Tx25-Anfragen** (cbss_retrieve_ti_groups)
       - **Zusammenfassung ZDSS** (cbss_summary) [visible for all]
     - **Schuldnerberatung** (debts) [visible for 120 300 420 admin 910]:

@@ -675,7 +675,7 @@ class Clients(contacts.Persons):
     column_names = "name_column:20 client_state national_id:10 \
     gsm:10 address_column age:10 email phone:10 id aid_type language:10"
 
-    detail_layout = ClientDetail()
+    detail_layout = 'pcsw.ClientDetail'
 
     parameters = mixins.ObservedDateRange(
         coached_by=dd.ForeignKey(

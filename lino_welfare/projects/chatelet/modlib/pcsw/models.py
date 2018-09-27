@@ -186,8 +186,8 @@ class ClientDetail(ClientDetail):
         CareerUser))
 
 
-
-Clients.detail_layout = ClientDetail()
+# no longer needed because Clients.client_detail is specified as a string:
+# Clients.detail_layout = ClientDetail()
 
 households = dd.resolve_app('households')
 households.SiblingsByPerson.display_mode = 'grid'
