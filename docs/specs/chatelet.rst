@@ -292,7 +292,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 user types
 =============
 
-We use the user types described in :doc:`user_types`. Here are their
+We use the user types described in :doc:`usertypes`. Here are their
 French labels.
 
 >>> settings.SITE.user_types_module
