@@ -315,9 +315,10 @@ and passed when it was fixed:
 >>> print(res.status_code)  #doctest: -SKIP
 200
 >>> result = json.loads(res.content.decode())  #doctest: -SKIP
->>> print(result) #doctest: +ELLIPSIS +REPORT_UDIFF +NORMALIZE_WHITESPACE
-{'open_url': '/media/cache/appypdf/127.0.0.1/integ.UsersWithClients.pdf', u'success': True}
-
+>>> print(result['open_url']) #doctest: +ELLIPSIS +REPORT_UDIFF +NORMALIZE_WHITESPACE
+/media/cache/appypdf/127.0.0.1/integ.UsersWithClients.pdf
+>>> print(result['success']) #doctest: +ELLIPSIS +REPORT_UDIFF +NORMALIZE_WHITESPACE
+True
 
 The following reproduces a bug we discovered on 20180921.
 
