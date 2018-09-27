@@ -37,7 +37,7 @@ from lino_xl.lib.cal.models import *
 
 from lino_xl.lib.cal.utils import format_date
 from lino.modlib.office.roles import OfficeUser
-from lino_welfare.modlib.pcsw.roles import SocialAgent
+from lino_welfare.modlib.pcsw.roles import SocialUser
 from lino_xl.lib.clients.choicelists import ClientStates
 
 
@@ -269,7 +269,7 @@ class EntriesByClient(Events):
 
 
 class TasksByClient(Tasks):
-    required_roles = dd.login_required(SocialAgent)
+    required_roles = dd.login_required(SocialUser)
     master_key = 'project'
     column_names = 'start_date due_date summary description notes'
 

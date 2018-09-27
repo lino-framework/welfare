@@ -31,7 +31,7 @@ from lino import mixins
 from etgen.html import E
 from lino.modlib.summaries.mixins import Summary
 
-from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino_welfare.modlib.integ.roles import IntegUser
 from lino_xl.lib.excerpts.mixins import Certifiable
 from .choicelists import ParticipationCertificates, StatisticalFields
 
@@ -153,7 +153,7 @@ class SummariesByClient(Summaries):
     """Lists the ESF summaries for a given client."""
     master_key = 'master'
     auto_fit_column_widths = True
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     # display_mode = 'html'
     # insert_layout = """
     # education_level result

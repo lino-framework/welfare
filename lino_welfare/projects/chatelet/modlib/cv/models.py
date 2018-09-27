@@ -38,7 +38,7 @@ from lino.core.signals import pre_ui_save
 
 from lino_xl.lib.clients.choicelists import ClientEvents, ObservedEvent
 
-from lino_welfare.modlib.integ.roles import IntegrationStaff, IntegrationAgent
+from lino_welfare.modlib.integ.roles import IntegrationStaff, IntegUser
 
 # from lino.core.utils import range_filter
 
@@ -137,7 +137,7 @@ class PersonProperty(dd.Model):
 class PropsByPerson(dd.Table):
     master_key = 'person'
     auto_fit_column_widths = True
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
 
 
 ##
@@ -163,7 +163,7 @@ class Skills(dd.Table):
 
 class SkillsByPerson(PropsByPerson, Skills):
     column_names = 'sector function remark proof *'
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
 
 
 ##
@@ -199,7 +199,7 @@ class SoftSkills(dd.Table):
 
 class SoftSkillsByPerson(PropsByPerson, SoftSkills):
     column_names = 'type remark'
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
 
 ##
 ## OBSTACLES
@@ -260,7 +260,7 @@ class Obstacles(dd.Table):
 
 
 class ObstaclesByPerson(PropsByPerson, Obstacles):
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     column_names = 'type user detected_date remark  *'
 
 

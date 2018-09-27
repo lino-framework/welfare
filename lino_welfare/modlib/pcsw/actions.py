@@ -32,7 +32,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd, rt
 
-from lino_welfare.modlib.newcomers.roles import NewcomersAgent
+from lino_welfare.modlib.newcomers.roles import NewcomersUser
 
 from lino_xl.lib.clients.choicelists import ClientStates
 from .choicelists import RefusalReasons
@@ -51,7 +51,7 @@ class RefuseClient(ChangeStateAction):
     """
     label = _("Refuse")
     required_states = 'newcomer'
-    required_roles = dd.login_required(NewcomersAgent)
+    required_roles = dd.login_required(NewcomersUser)
     target_state = ClientStates.refused
 
     parameters = dict(
@@ -110,7 +110,7 @@ class MarkClientFormer(ChangeStateAction):
     """
     label = _("Former")
     required_states = 'coached'
-    required_roles = dd.login_required(NewcomersAgent)
+    required_roles = dd.login_required(NewcomersUser)
     target_state = ClientStates.former
 
     def run_from_ui(self, ar, **kw):

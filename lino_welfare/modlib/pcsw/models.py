@@ -65,9 +65,9 @@ from lino.modlib.checkdata.choicelists import Checker
 from lino_xl.lib.contacts.roles import SimpleContactsUser
 # from lino.modlib.office.roles import OfficeOperator
 
-from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
+from lino_welfare.modlib.newcomers.roles import (NewcomersUser,
                                                  NewcomersOperator)
-from lino_welfare.modlib.integ.roles import IntegrationAgent
+from lino_welfare.modlib.integ.roles import IntegUser
 from lino_welfare.modlib.cbss.choicelists import OK_STATES
 
 from lino.utils import ssin
@@ -81,7 +81,7 @@ from lino_xl.lib.coachings.utils import add_coachings_filter
 from lino_xl.lib.coachings.mixins import Coachable
 from lino_xl.lib.cv.mixins import BiographyOwner
 
-from .roles import SocialAgent, SocialStaff
+from .roles import SocialUser, SocialStaff
 from .choicelists import RefusalReasons
 
 from .actions import RefuseClient, MarkClientFormer
@@ -243,7 +243,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
 
     def disabled_fields(self, ar):
         rv = super(Client, self).disabled_fields(ar)
-        if not ar.get_user().user_type.has_required_roles([(NewcomersOperator, NewcomersAgent)]):
+        if not ar.get_user().user_type.has_required_roles([(NewcomersOperator, NewcomersUser)]):
             rv = rv | set(['broker', 'faculty', 'refusal_reason'])
         #~ logger.info("20130808 pcsw %s", rv)
         return rv
@@ -567,7 +567,7 @@ class ClientDetail(dd.DetailLayout):
     broker:12
     faculty:12
     refusal_reason
-    """, required_roles=dd.login_required((NewcomersOperator, NewcomersAgent)))
+    """, required_roles=dd.login_required((NewcomersOperator, NewcomersUser)))
 
     suche = dd.Panel("""
     # job_office_contact job_agents
@@ -624,7 +624,7 @@ class ClientDetail(dd.DetailLayout):
     cv.StudiesByPerson
     # cv.TrainingsByPerson
     cv.ExperiencesByPerson:40
-    """, label=_("Career"), required_roles=dd.login_required(IntegrationAgent))
+    """, label=_("Career"), required_roles=dd.login_required(IntegUser))
 
     languages = dd.Panel("""
     cv.LanguageKnowledgesByPerson
@@ -634,7 +634,7 @@ class ClientDetail(dd.DetailLayout):
     competences = dd.Panel("""
     cv.SkillsByPerson cv.SoftSkillsByPerson skills
     cv.ObstaclesByPerson obstacles badges.AwardsByHolder
-    """, label=_("Competences"), required_roles=dd.login_required(IntegrationAgent))
+    """, label=_("Competences"), required_roles=dd.login_required(IntegUser))
 
     contracts = dd.Panel("""
     isip.ContractsByClient
@@ -661,7 +661,7 @@ class Clients(contacts.Persons):
     # debug_permissions = '20150129'
     # required = dd.login_required(user_groups='coaching')
     required_roles = dd.login_required(SimpleContactsUser)
-    # required_roles = dd.login_required((SocialAgent, OfficeOperator))
+    # required_roles = dd.login_required((SocialUser, OfficeOperator))
     model = 'pcsw.Client'
     params_panel_hidden = True
 
@@ -864,7 +864,7 @@ Nur Klienten, die eine effektive <b>primäre</b> Begleitung haben."""),
             #~ return 'red'
 
 class CoachedClients(Clients):
-    required_roles = dd.login_required(SocialAgent)
+    required_roles = dd.login_required(SocialUser)
 
     @classmethod
     def param_defaults(self, ar, **kw):
@@ -1023,7 +1023,7 @@ class DispensesByClient(Dispenses):
     column_names = 'start_date end_date reason remarks:10'
     hidden_columns = 'id'
     auto_fit_column_widths = True
-    required_roles = dd.login_required(SocialAgent)
+    required_roles = dd.login_required(SocialUser)
 
 
 @dd.python_2_unicode_compatible
@@ -1082,7 +1082,7 @@ class Exclusions(dd.Table):
 
 
 class ExclusionsByClient(Exclusions):
-    required_roles = dd.login_required(SocialAgent)
+    required_roles = dd.login_required(SocialUser)
     master_key = 'person'
     column_names = 'excluded_from excluded_until type remark:10'
     auto_fit_column_widths = True
@@ -1120,7 +1120,7 @@ class Convictions(dd.Table):
 
 
 class ConvictionsByClient(Convictions):
-    required_roles = dd.login_required(SocialAgent)
+    required_roles = dd.login_required(SocialUser)
     master_key = 'client'
     column_names = 'date designation prejudicial'
     auto_fit_column_widths = True
@@ -1154,7 +1154,7 @@ def setup_client_workflow(sender=None, **kw):
     # ClientStates.former.add_transition(MarkClientFormer)
     ClientStates.newcomer.add_transition(
         required_states='former',
-        required_roles=dd.login_required(NewcomersAgent))
+        required_roles=dd.login_required(NewcomersUser))
 
 
 

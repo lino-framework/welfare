@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2009-2017 Luc Saffre
+# Copyright 2009-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -18,11 +18,11 @@
 
 """Defines default user profiles and shortcuts for Lino Welfare.
 
-See :ref:`welfare.specs.users`
+See :doc:`/specs/usertypes`.
 
 """
 
-from lino.core.roles import Anonymous, SiteUser, SiteAdmin, Supervisor, login_required
+from lino.core.roles import Anonymous, SiteUser, SiteAdmin, Supervisor
 from lino.modlib.users.roles import AuthorshipTaker
 from lino.modlib.about.roles import SiteSearcher
 from lino.modlib.office.roles import OfficeOperator, OfficeStaff, OfficeUser
@@ -30,22 +30,25 @@ from lino_xl.lib.notes.roles import NotesUser
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsStaff, ContactsUser, SimpleContactsUser
 from lino_xl.lib.ledger.roles import LedgerStaff, LedgerUser
-from lino_xl.lib.sepa.roles import SepaStaff
 from lino_xl.lib.cal.roles import GuestOperator
-from lino_xl.lib.sepa.roles import SepaUser
 from lino_xl.lib.courses.roles import CoursesUser
-from lino_xl.lib.cv.roles import CareerUser
+from lino_xl.lib.cv.roles import CareerUser, CareerStaff
 from lino_xl.lib.beid.roles import BeIdUser
 from lino_welfare.modlib.cbss.roles import CBSSUser, SecurityAdvisor
-from lino_xl.lib.coachings.roles import CoachingsStaff
-from lino_welfare.modlib.pcsw.roles import SocialAgent
+from lino_welfare.modlib.pcsw.roles import SocialUser
 from lino_welfare.modlib.pcsw.roles import SocialStaff
 from lino_welfare.modlib.pcsw.roles import SocialCoordinator
-from lino_welfare.modlib.aids.roles import AidsStaff
-from lino_welfare.modlib.integ.roles import IntegrationAgent, IntegrationStaff
+from lino_welfare.modlib.aids.roles import AidsStaff,  AidsUser
+from lino_welfare.modlib.integ.roles import IntegUser, IntegrationStaff
 from lino_welfare.modlib.debts.roles import DebtsUser, DebtsStaff
-from lino_welfare.modlib.newcomers.roles import (NewcomersAgent,
+
+from lino_welfare.modlib.newcomers.roles import (NewcomersUser,
                                                  NewcomersOperator)
+
+from lino_xl.lib.polls.roles import PollsUser, PollsStaff
+from lino.modlib.checkdata.roles import CheckdataUser
+from lino_xl.lib.sepa.roles import SepaUser, SepaStaff
+from lino_xl.lib.coachings.roles import CoachingsUser, CoachingsStaff
 
 
 class ReceptionClerk(SiteUser, AuthorshipTaker, OfficeOperator,
@@ -53,13 +56,6 @@ class ReceptionClerk(SiteUser, AuthorshipTaker, OfficeOperator,
                      ContactsStaff, AidsStaff, CBSSUser, BeIdUser,
                      SepaUser, CoursesUser, ExcerptsUser,
                      SocialCoordinator, CoachingsStaff):
-    """
-    A **reception clerk** is a user who is not a *social agent* but
-    receives clients and does certain administrative tasks (in Eupen
-    they call them `back office
-    <https://en.wikipedia.org/wiki/Back_office>`__).
-
-    """
     pass
 
 
@@ -67,81 +63,94 @@ class ReceptionClerkFlexible(SiteUser, AuthorshipTaker, SimpleContactsUser,
                              OfficeOperator, NotesUser,
                              GuestOperator,
                              ExcerptsUser,
+                             AidsStaff, CBSSUser, BeIdUser,
                              # OfficeUser,
-                             # SocialAgent,
+                             # SocialUser,
                              # CoursesUser,
-                             NewcomersAgent,
-                             BeIdUser):
-    """
-    A **newcomers reception clerk** is a *reception clerk* who also
-    can assign coaches to clients.
+                             NewcomersUser):
+    pass
 
-    """
+class IntegrationAgent(IntegUser, SocialUser, CareerUser, CoursesUser,
+                       OfficeUser, CBSSUser, 
+                       CheckdataUser, AidsUser, PollsUser, SepaUser,
+                       ExcerptsUser, CoachingsUser,
+                       BeIdUser, ContactsUser,
+                       NotesUser):
     pass
 
 
-class IntegrationAgentFlexible(IntegrationStaff, DebtsUser):
-    """
-    A **flexible integration agent** is an *integration agent* who
-    also can assign coaches to clients and create budgets for debts
-    mediation.
-
-    """
+class IntegrationAgentManager(IntegrationAgent, IntegrationStaff,
+                              SocialStaff, CareerStaff, 
+                              NewcomersOperator):
+    pass
+                              
+class IntegrationAgentFlexible(IntegrationAgentManager, DebtsUser):
     pass
 
-# class SocialAgentFlexible(SocialAgent, SocialCoordinator, CareerUser):
-#     """
-#     A **flexible social agent** is an *social agent* who also can see
-#     PARCOURS – COMPÉTENCES – FREINS - STAGES D’IMMERSION - MÉDIATION
-#     DE DETTES.
-#     """
-#     pass
+class SocialAgent(SocialUser,
+                  OfficeUser, ContactsUser, CBSSUser, BeIdUser,
+                  CheckdataUser, AidsUser, PollsUser, SepaUser,
+                  CoursesUser, ExcerptsUser, CoachingsUser,
+                  AuthorshipTaker, GuestOperator, NotesUser):
+    pass
 
+class SocialAgentManager(SocialStaff, OfficeStaff, ContactsStaff,
+                         CBSSUser, BeIdUser, CheckdataUser, AidsStaff,
+                         PollsStaff, SepaStaff, CoursesUser,
+                         ExcerptsUser, CoachingsStaff,
+                         AuthorshipTaker, GuestOperator, NotesUser):
+    pass
+
+class DebtsConsultant(DebtsUser, SocialAgent, NewcomersUser, BeIdUser):
+    pass
+
+
+class NewcomersConsultant(SocialAgent, NewcomersUser):
+    pass
 
 class Accountant(SiteUser, LedgerUser, ContactsUser, OfficeUser,
                  NotesUser, ExcerptsUser, AidsStaff, SepaStaff):
-    """
-    An **accountant** is a user who enters invoices, bank statements,
-    payment orders and other ledger operations.
-
-    """
     pass
 
 
 class AccountantManager(SiteUser, LedgerStaff, ContactsUser, OfficeUser,
                         ExcerptsUser, AidsStaff, SepaStaff, NotesUser):
-    """Like an **accountant**, but also has access to configuration.
-
-    """
     pass
 
 
 class SiteAdmin(
         SiteAdmin,
-        SiteSearcher,
-        IntegrationStaff,
+        AidsStaff,
+        AuthorshipTaker,
+        BeIdUser,
+        CBSSUser,
+        CareerStaff,
+        CheckdataUser,
+        CoachingsUser,
+        ContactsStaff,
+        CoursesUser,
         DebtsStaff,
-        LedgerStaff,
-        # ContactsStaff,
-        OfficeStaff,
-        NewcomersAgent,
         ExcerptsStaff,
-        #SocialAgent,
-        AidsStaff, SepaStaff):
-    """The site adminstrator has permission for everything."""
-
-
-class SecurityAdvisor(SiteAdmin, SecurityAdvisor):
+        GuestOperator,
+        IntegrationStaff,
+        LedgerStaff,
+        NewcomersUser,
+        NewcomersOperator,
+        NotesUser,
+        OfficeStaff,
+        PollsStaff,
+        SepaStaff,
+        SiteSearcher,
+        SocialStaff):
     pass
 
-class NewcomersConsultant(NewcomersAgent, SocialAgent, NotesUser):
+class SecurityAdvisor(SiteAdmin, SecurityAdvisor):
     pass
 
 class Supervisor(SiteUser, Supervisor, AuthorshipTaker, OfficeOperator,
                  GuestOperator, NotesUser,
                  ContactsStaff, AidsStaff, NewcomersOperator,
                  ExcerptsUser, SepaUser, CoursesUser):
-    """A backoffice user who can act as others."""
     pass
 
 
@@ -156,14 +165,14 @@ add = UserTypes.add_item
 add('000', _("Anonymous"), Anonymous, name='anonymous',
     readonly=True, authenticated=False)
 add('100', _("Integration agent"),             IntegrationAgent)
-add('110', _("Integration agent (Manager)"),   IntegrationStaff)
+add('110', _("Integration agent (Manager)"),   IntegrationAgentManager)
 add('120', _("Integration agent (Flexible)"),  IntegrationAgentFlexible)
 add('200', _("Newcomers consultant"),          NewcomersConsultant)
 add('210', _("Reception clerk"),               ReceptionClerk)
 add('220', _("Reception clerk (Flexible)"),    ReceptionClerkFlexible)
-add('300', _("Debts consultant"),              DebtsUser)
+add('300', _("Debts consultant"),              DebtsConsultant)
 add('400', _("Social agent"),                  SocialAgent)
-add('410', _("Social agent (Manager)"),        SocialStaff)
+add('410', _("Social agent (Manager)"),        SocialAgentManager)
 add('420', _("Social agent (Flexible)"),       IntegrationAgentFlexible)
 add('500', _("Accountant"),                    Accountant)
 add('510', _("Accountant (Manager)"),          AccountantManager)
@@ -173,3 +182,4 @@ add('910', _("Security advisor"),              SecurityAdvisor)
 
 from lino.modlib.notify.choicelists import MessageTypes
 UserTypes.get_by_value('420').mask_notifications(MessageTypes.change)
+

@@ -1,3 +1,4 @@
+.. doctest docs/specs/cbss.rst
 .. _cbss:
 .. _welfare.specs.cbss:
 
@@ -5,11 +6,7 @@
 CBSS connection for Lino Welfare
 ================================
 
-.. to test only this document:
-
-    $ python setup.py test -s tests.SpecsTests.test_cbss
-
-    doctest init:
+.. doctest init:
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
@@ -95,3 +92,25 @@ has the following additional fields:
     +--------------------+-------------------------+----------------------------------------------------------------------------------------+
     | cbss_http_password | HTTP password           | Used in the http header of new-style requests.                                         |
     +--------------------+-------------------------+----------------------------------------------------------------------------------------+
+
+
+
+Permissions
+===========
+
+>>> ContentType = rt.models.contenttypes.ContentType
+>>> RetrieveTIGroupsRequest = rt.models.cbss.RetrieveTIGroupsRequest
+>>> kw = dict(fmt='json', limit=10, start=0)
+>>> json_fields = 'count rows title success no_data_text'
+
+>>> mt = ContentType.objects.get_for_model(RetrieveTIGroupsRequest).pk
+>>> print(RetrieveTIGroupsRequest.objects.get(pk=1).user.username)
+hubert
+>>> demo_get('rolf', 'api/cbss/RetrieveTIGroupsResult', 
+...     json_fields, 0, mt=mt, mk=1, **kw)
+20180926 Hubert Huppertz Rolf Rompen
+>>> demo_get('hubert', 'api/cbss/RetrieveTIGroupsResult', 
+...     json_fields, 18, mt=mt, mk=1, **kw)
+>>> demo_get('patrick', 'api/cbss/RetrieveTIGroupsResult', 
+...     json_fields, 18, mt=mt, mk=1, **kw)
+

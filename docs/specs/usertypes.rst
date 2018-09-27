@@ -28,23 +28,23 @@ common effort.  If you discover a problem with what's described
 hereafter, please contact the responsible author (currently Luc
 Saffre).
 
-The default set of user types for Lino Welfare is defined in the
-:mod:`lino_welfare.modlib.welfare.user_types` module:
+The default set of user types for Lino Welfare lives in the
+:class:`lino.modlib.users.UserTypes` choicelist:
 
 >>> rt.show(users.UserTypes, language="en")
 ======= =========== ============================== =================================================================
  value   name        text                           User role
 ------- ----------- ------------------------------ -----------------------------------------------------------------
  000     anonymous   Anonymous                      lino.core.roles.Anonymous
- 100                 Integration agent              lino_welfare.modlib.integ.roles.IntegrationAgent
+ 100                 Integration agent              lino_welfare.modlib.welfare.user_types.IntegrationAgent
  110                 Integration agent (Manager)    lino_welfare.modlib.integ.roles.IntegrationStaff
  120                 Integration agent (Flexible)   lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible
  200                 Newcomers consultant           lino_welfare.modlib.welfare.user_types.NewcomersConsultant
  210                 Reception clerk                lino_welfare.modlib.welfare.user_types.ReceptionClerk
  220                 Reception clerk (Flexible)     lino_welfare.modlib.welfare.user_types.ReceptionClerkFlexible
- 300                 Debts consultant               lino_welfare.modlib.debts.roles.DebtsUser
- 400                 Social agent                   lino_welfare.modlib.pcsw.roles.SocialAgent
- 410                 Social agent (Manager)         lino_welfare.modlib.pcsw.roles.SocialStaff
+ 300                 Debts consultant               lino_welfare.modlib.welfare.user_types.DebtsConsultant
+ 400                 Social agent                   lino_welfare.modlib.welfare.user_types.SocialAgent
+ 410                 Social agent (Manager)         lino_welfare.modlib.welfare.user_types.SocialAgentManager
  420                 Social agent (Flexible)        lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible
  500                 Accountant                     lino_welfare.modlib.welfare.user_types.Accountant
  510                 Accountant (Manager)           lino_welfare.modlib.welfare.user_types.AccountantManager
@@ -53,6 +53,44 @@ The default set of user types for Lino Welfare is defined in the
  910                 Security advisor               lino_welfare.modlib.welfare.user_types.SecurityAdvisor
 ======= =========== ============================== =================================================================
 <BLANKLINE>
+
+A **social agent** is a user who does individual coaching of
+clients.  Certain privacy-relevant client data is visible only
+to social agents.
+
+A **social staff member** is a social agent who has access to more
+technical information about welfare clients.  For example the
+`Miscellaneous` panel.
+
+
+An **integration agent** is a specialized social agent who works with
+immigrants who want to integrate into local society.  They can access
+database content specific to integration work: CV, language courses,
+workshops, ...
+
+A *flexible* integration agent can also assign coaches to clients and
+create budgets for debts mediation.
+
+
+A **newcomers consultant** manages new client applications.
+
+A **newcomers operator** is a user who is not *social agent* but
+can e.g. register newcomers and assign them a coach.
+
+A **reception clerk** is a user who is not a *social agent* but
+receives clients and does certain administrative tasks (in Eupen they
+call them `back office
+<https://en.wikipedia.org/wiki/Back_office>`__).  A flexible
+*reception clerk* can also  assign coaches to clients.
+
+
+An **accountant** is a user who enters invoices, bank statements,
+payment orders and other ledger operations.
+The *manager* variant also has access to configuration.
+
+A **site adminstrator** has permission for everything.
+
+A **supervisor** is a backoffice user who can act as others.
 
 
 The *Manager* variants of *Integration agent*, *Social agent* and
@@ -63,7 +101,7 @@ a :class:`SiteStaff <lino.core.roles.SiteStaff>`.
 The *Flexible* variants 120, 220 and 420 are designed to be used in
 centers where they don't use 100, 200 and 400.
 
-An integration agent (manager) has some staff permissions
+An *Integration agent (Manager)* has some staff permissions
 
 >>> from lino.core.roles import SiteStaff
 >>> from lino_xl.lib.contacts.roles import ContactsStaff
@@ -115,4 +153,6 @@ visualizes the genealogy of a reception clerk:
 .. inheritance-diagram:: lino_welfare.modlib.welfare.user_types.ReceptionClerk
 
 
+The :class:`lino_welfare.modlib.isip.ContractsByClient` table is
+visible for IntegrationAgent, SocialAgent and SocialCoordinator.
 

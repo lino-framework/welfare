@@ -27,7 +27,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from lino.api import dd
 
-from lino_welfare.modlib.integ.roles import IntegrationStaff, IntegrationAgent
+from lino_welfare.modlib.integ.roles import IntegrationStaff, IntegUser
 
 
 class Proof(dd.Model):
@@ -60,7 +60,7 @@ class Proofs(dd.Table):
 
 
 class ProofsByClient(Proofs):
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     master_key = 'client'
     column_names = "date company spontaneous response *"
     auto_fit_column_widths = True

@@ -25,7 +25,7 @@ from lino.modlib.users.choicelists import UserTypes
 from lino.modlib.system.choicelists import PeriodEvents
 
 from lino.api import dd, rt, gettext
-from .roles import IntegrationAgent
+from .roles import IntegUser
 
 config = dd.plugins.integ
 
@@ -65,7 +65,7 @@ class Clients(pcsw.CoachedClients):
     help_text = """Wie Kontakte --> Klienten, aber mit \
     DSBE-spezifischen Kolonnen und Filterparametern."""
     #~ detail_layout = IntegClientDetail()
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     params_panel_hidden = True
     title = _("Integration Clients")
     order_by = "last_name first_name id".split()
@@ -141,7 +141,7 @@ class UsersWithClients(dd.VirtualTable):
 
 
     """
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     label = _("Users with their Clients")
 
     display_mode = 'html'
@@ -162,12 +162,12 @@ class UsersWithClients(dd.VirtualTable):
         u = ar.get_user()
         if u is None or not u.user_type.has_required_roles([dd.SiteAdmin]):
             user_types = [p for p in UserTypes.items()
-                        if p.has_required_roles([IntegrationAgent])
+                        if p.has_required_roles([IntegUser])
                         and not p.has_required_roles([dd.SiteAdmin])]
         else:
             user_types = [
                 p for p in UserTypes.items()
-                if p.has_required_roles([IntegrationAgent])]
+                if p.has_required_roles([IntegUser])]
 
         qs = rt.models.users.User.objects.filter(user_type__in=user_types)
         for user in qs.order_by('username'):
@@ -393,7 +393,7 @@ class CoachingEndingsByUser(dd.VentilatingTable, CoachingEndings):
             return func
 
         user_types = [p for p in UserTypes.items()
-                    if p.has_required_roles([IntegrationAgent])]
+                    if p.has_required_roles([IntegUser])]
         for u in settings.SITE.user_model.objects.filter(user_type__in=user_types):
             yield dd.RequestField(w(u), verbose_name=str(u.username))
         yield dd.RequestField(w(None), verbose_name=_("Total"))
@@ -581,7 +581,7 @@ class ActivityReport(Report):
 
     """
 
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     label = _("Activity Report")
 
     parameters = ObservedDateRange(

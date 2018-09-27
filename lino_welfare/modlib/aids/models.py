@@ -44,7 +44,7 @@ from lino_xl.lib.addresses.choicelists import AddressTypes
 from lino_xl.lib.boards.mixins import BoardDecision
 from lino_xl.lib.excerpts.mixins import ExcerptTitle
 
-from lino_welfare.modlib.pcsw.roles import SocialAgent
+from lino_welfare.modlib.pcsw.roles import SocialUser
 from .roles import AidsUser, AidsStaff
 
 from .mixins import Confirmable, Confirmation
@@ -410,7 +410,7 @@ class AllGrantings(Grantings):
 
 
 class MyPendingGrantings(Grantings):
-    required_roles = dd.login_required(SocialAgent)
+    required_roles = dd.login_required(SocialUser)
     column_names = "client aid_type category start_date " \
                    "end_date user workflow_buttons *"
     label = _("Grantings to confirm")

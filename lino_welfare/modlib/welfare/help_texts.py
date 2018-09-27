@@ -244,9 +244,6 @@ columns (coachings per PersonGroup table."""),
     'lino_welfare.modlib.integ.JobProvidersAndContracts.model' : _("""alias of lino_welfare.modlib.contacts.models.Company"""),
     'lino_welfare.modlib.integ.ActivityReport' : _("""Gives an overview about the work of the Integration Service during
 a given period."""),
-    'lino_welfare.modlib.integ.roles.IntegrationAgent' : _("""An integration agent is a social agent who can see database
-content specific to integration work: CV, language courses,
-workshops, …"""),
     'lino_welfare.modlib.isip.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.isip.OverlapGroups' : _("""The list of all known overlap groups to be selected for the
 overlap_group
@@ -372,9 +369,6 @@ coach."""),
 Newcomers consultants."""),
     'lino_welfare.modlib.newcomers.AvailableCoachesByClient.master' : _("""alias of lino_welfare.modlib.pcsw.models.Client"""),
     'lino_welfare.modlib.newcomers.AvailableCoachesByClient.model' : _("""alias of lino_welfare.modlib.users.models.User"""),
-    'lino_welfare.modlib.newcomers.roles.NewcomersAgent' : _("""A newcomers agent manages new client applications."""),
-    'lino_welfare.modlib.newcomers.roles.NewcomersOperator' : _("""A newcomers operator is a user who is not social agent but
-can e.g. register newcomers and assign them a coach."""),
     'lino_welfare.modlib.notes.Note' : _("""Overrides the library model, setting an alternative verbose name,
 adding a real database field important and the
 person property."""),
@@ -411,12 +405,6 @@ the specified value."""),
     'lino_welfare.modlib.pcsw.Clients.model' : _("""alias of Client"""),
     'lino_welfare.modlib.pcsw.SSINChecker' : _("""Clients must have either valid eId data or an alternative
 identifying document."""),
-    'lino_welfare.modlib.pcsw.roles.SocialAgent' : _("""A social agent is a user who does individual coaching of
-clients.  Certain privacy-relevant client data is visible only
-to social agents."""),
-    'lino_welfare.modlib.pcsw.roles.SocialStaff' : _("""A social staff member is a social agent who has access to more
-technical information about welfare clients.  For example the
-Miscellaneous panel."""),
     'lino_welfare.modlib.pcsw.roles.SocialCoordinator' : _("""Reception clerks (210) can see contracts."""),
     'lino_welfare.modlib.reception.FindDateByClientTable' : _("""A ButtonsTable which shows
 all users who are candidates responsible of new client
@@ -448,19 +436,6 @@ statements."""),
     'lino_welfare.modlib.users.UserDetail' : _("""Layout of User Detail in Lino Welfare."""),
     'lino_welfare.modlib.users.User' : _("""The users.User model used in Lino Welfare.  We add a few fields
 to the standard models (lino.modlib.users.models.User)."""),
-    'lino_welfare.modlib.welfare.user_types.ReceptionClerk' : _("""A reception clerk is a user who is not a social agent but
-receives clients and does certain administrative tasks (in Eupen
-they call them back office)."""),
-    'lino_welfare.modlib.welfare.user_types.ReceptionClerkFlexible' : _("""A newcomers reception clerk is a reception clerk who also
-can assign coaches to clients."""),
-    'lino_welfare.modlib.welfare.user_types.IntegrationAgentFlexible' : _("""A flexible integration agent is an integration agent who
-also can assign coaches to clients and create budgets for debts
-mediation."""),
-    'lino_welfare.modlib.welfare.user_types.Accountant' : _("""An accountant is a user who enters invoices, bank statements,
-payment orders and other ledger operations."""),
-    'lino_welfare.modlib.welfare.user_types.AccountantManager' : _("""Like an accountant, but also has access to configuration."""),
-    'lino_welfare.modlib.welfare.user_types.SiteAdmin' : _("""The site adminstrator has permission for everything."""),
-    'lino_welfare.modlib.welfare.user_types.Supervisor' : _("""A backoffice user who can act as others."""),
     'lino_welfare.modlib.xcourses.CourseProvider' : _("""A CourseProvider is a Company that offers Courses."""),
     'lino_welfare.modlib.xcourses.CourseProviderDetail' : _("""Same as CompanyDetail, except that we add a tab
 Courses."""),

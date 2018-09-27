@@ -32,7 +32,7 @@ from django.utils.translation import ugettext_lazy as _
 from lino.api import dd
 from lino import mixins
 
-from lino_welfare.modlib.integ.roles import IntegrationAgent, IntegrationStaff
+from lino_welfare.modlib.integ.roles import IntegUser, IntegrationStaff
 
 from lino_welfare.modlib.isip.mixins import (ContractBaseTable,
                                              ContractTypeBase)
@@ -178,7 +178,7 @@ class ContractDetail(dd.DetailLayout):
 
 class Contracts(ContractBaseTable):
     #~ debug_permissions = "20130222"
-    required_roles = dd.login_required(IntegrationAgent)
+    required_roles = dd.login_required(IntegUser)
     model = 'art61.Contract'
     column_names = 'id client client__national_id ' \
                    'applies_from date_ended user type *'
@@ -213,7 +213,7 @@ class Contracts(ContractBaseTable):
 class ContractsByClient(Contracts):
     """Shows the *Art61 job supplyments* for this client.
     """
-    required_roles = dd.login_required((IntegrationAgent, SocialCoordinator))
+    required_roles = dd.login_required((IntegUser, SocialCoordinator))
     label = _("Art61 job supplyments and activations")
     master_key = 'client'
     auto_fit_column_widths = True
