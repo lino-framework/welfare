@@ -152,7 +152,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
  active_job_search.Proof        active_job_search.Proofs        7         10
- addresses.Address              addresses.Addresses             16        90
+ addresses.Address              addresses.Addresses             16        92
  aids.AidType                   aids.AidTypes                   23        11
  aids.Category                  aids.Categories                 5         3
  aids.Granting                  aids.Grantings                  12        55
@@ -1457,7 +1457,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Contacts --> Personnes de contact : 11
 - Explorateur --> Contacts --> Partenaires : 163
 - Explorateur --> Contacts --> Types d'adresses : 6
-- Explorateur --> Contacts --> Adresses : 91
+- Explorateur --> Contacts --> Adresses : 93
 - Explorateur --> Contacts --> Membres du conseil : 1
 - Explorateur --> Contacts --> Rôles de membres de ménage : 8
 - Explorateur --> Contacts --> Membres de ménage : 64

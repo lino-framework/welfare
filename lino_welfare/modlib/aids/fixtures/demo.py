@@ -41,6 +41,21 @@ def objects():
     ExcerptType = rt.models.excerpts.ExcerptType
     ConfirmationStates = rt.models.aids.ConfirmationStates
 
+
+    eupen = rt.models.countries.Place.objects.get(name="Eupen")
+    croix_rouge = rt.models.contacts.Company.objects.get(
+        name="Belgisches Rotes Kreuz")
+    croix_rouge.street = u"Hillstraße"
+    croix_rouge.street_no = '1'
+    croix_rouge.city = eupen
+    yield croix_rouge
+
+    if dd.is_installed('sepa'):
+        Account = rt.models.sepa.Account
+        yield Account(
+            partner=croix_rouge, iban="BE39 0882 1364 4919",
+            bic="GKCCBEBB", primary=True)
+
     Project = resolve_model('pcsw.Client')
     qs = Project.objects.filter(client_state=ClientStates.coached)
     # if qs.count() > 10:

@@ -139,8 +139,10 @@ def objects():
     kw.update(dd.str2kw('excerpt_title', _("Attestation")))
     yield aidType(**kw)
 
-    croix_rouge = rt.models.contacts.Company(name="Belgisches Rotes Kreuz")
-    yield croix_rouge
+    croix_rouge = rt.models.contacts.Company(
+        name="Belgisches Rotes Kreuz")
+    yield croix_rouge  # address will be set in demo.py because eupen
+                       # does not yet exist here.
 
     kw = dd.babelkw(
         'name',

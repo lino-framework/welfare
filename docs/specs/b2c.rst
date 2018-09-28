@@ -1,3 +1,4 @@
+.. doctest docs/specs/b2c.rst
 .. _welfare.specs.b2c:
 
 =============================================
@@ -7,11 +8,7 @@ Import bank statements (SEPA  BankToCustomer)
 This document describes the functionality implemented by the
 :mod:`lino_cosi.lib.b2c` module.
 
-..  To test only this document:
-
-    $ python setup.py test -s tests.SpecsTests.test_b2c
-
-    doctest initialization:
+..  doctest initialization:
 
     >>> from __future__ import print_function
     >>> import os
@@ -70,14 +67,15 @@ This document describes the functionality implemented by the
 
 >>> obj = rt.models.contacts.Partner.objects.get(name="Belgisches Rotes Kreuz")
 >>> rt.show(sepa.AccountsByClient, obj)
-========== ============================== ===== ======== =========== ==============
- Kontoart   IBAN                           BIC   Primär   Verwaltet   Kontoauszüge
----------- ------------------------------ ----- -------- ----------- --------------
- Giro       AL73552891583236787384690218         Nein     Nein        *07.09.15*
-========== ============================== ===== ======== =========== ==============
+========== ============================== ========== ======== =========== ==============
+ Kontoart   IBAN                           BIC        Primär   Verwaltet   Kontoauszüge
+---------- ------------------------------ ---------- -------- ----------- --------------
+ Giro       AL73552891583236787384690218              Nein     Nein        *07.09.15*
+ Giro       BE39088213644919               GKCCBEBB   Ja       Nein
+========== ============================== ========== ======== =========== ==============
 <BLANKLINE>
 
->>> pa = sepa.Account.objects.get(partner=obj)
+>>> pa = sepa.Account.objects.filter(partner=obj)[0]
 >>> ia = b2c.Account.objects.get(iban=pa.iban)
 >>> rt.show(b2c.StatementsByAccount, ia)
 ====================== ============== ============ ============== ========== =========

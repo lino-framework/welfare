@@ -152,3 +152,33 @@ fr
 >>> print(contacts.Partner.objects.get(id=118).language)
 de
 
+
+The default template for excerpts
+==================================
+
+.. xfile:: excerpts/Default.odt
+
+This template should be customized locally to contain the site owner's
+layout.
+
+          
+The template inserts the recipient address using this appy.pod code::
+
+    do text
+    from html(this.get_address_html(5, **{'class':"Recipient"})
+
+This code is inserted as a command in some paragraph whose content in
+the template can be anything since it will be replaced by the computed
+text.
+
+>>> obj = aids.SimpleConfirmation.objects.get(pk=19)
+>>> print(obj.get_address_html(5, **{'class':"Recipient"}))
+<p class="Recipient">Belgisches Rotes Kreuz<br/>Hillstraße 1<br/>4700 Eupen<br/><br/></p>
+
+That paragraph should also contain another comment::
+
+    do text if this.excerpt_type.print_recipient
+    
+There should of course be a paragraph style "Recipient" with proper
+margins and spacing set.
+

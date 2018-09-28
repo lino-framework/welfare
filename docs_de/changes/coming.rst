@@ -5,17 +5,12 @@ Kommende Version
 TALK
 ====
 
-- (melanie) Ansicht Verträge IPSE: Manche sehe ich, manche nicht.
-  --> Brauche genauere Beschreibung.
-  
-- (melanie) Inhalt der Bescheinigungen:
-  Adressfeld ist versetzt/verschwunden!
-  Layout nicht ok!
-  --> Brauche genauere Beschreibung.
-
-- (martina) Bei Einnahmen- und Ausgabentabelle ist die Formatierung
-  noch nicht korrekt.
-  --> Brauche genauere Beschreibung.
+- (Schuldnerberatung) Bei Einnahmen- und Ausgabentabelle ist die
+  Formatierung noch nicht korrekt.  --> Genauer gesagt kommt das
+  Problem nur, wenn es zwei Akteure gibt und diverse Arten von
+  Schulden, so dass in manchen Tabellen der Platz zu eng wird.
+  LibreOffice kriegt das dann nicht geregelt und macht Zeilenumbrüche
+  in Beträgen.
 
 DONE
 ====
@@ -23,6 +18,16 @@ DONE
 Die folgenden Punkte sind erledigt und zur Zeit unter **testlino**
 einsehbar:
 
+- (melanie) Inhalt der Bescheinigungen: Adressfeld ist
+  versetzt/verschwunden!  Layout nicht ok!  --> Uff, das war
+  subtil. Lag daran, dass Lino jetzt lxml-Elemente benutzt und
+  ``class_="Recipient"`` deshalb ersetzt werden muss durch die neue
+  Syntax ``**{'class':"Recipient"}``.  Das heißt auch, dass die
+  `*.odt`-Dateien jetzt nicht mehr gesynct werden dürfen.
+
+- (melanie) Ansicht Verträge IPSE: Manche sehe ich, manche nicht.
+  --> Scheinbar war das eine Fehlwarnung.
+  
 - (caroline) Unsere Verträge sind wieder alle verschwunden. Im Reiter
   Verträge fehlt das Panel wo die effektiven VSE-Verträge angezeigt
   wurden.

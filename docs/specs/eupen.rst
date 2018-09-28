@@ -1635,7 +1635,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Kontakte --> Kontaktpersonen : 11
 - Explorer --> Kontakte --> Partner : 175
 - Explorer --> Kontakte --> Adressenarten : 6
-- Explorer --> Kontakte --> Adressen : 180
+- Explorer --> Kontakte --> Adressen : 181
 - Explorer --> Kontakte --> Gremienmitglieder : 1
 - Explorer --> Kontakte --> Haushaltsmitgliedsrollen : 8
 - Explorer --> Kontakte --> Mitglieder : 64
@@ -1686,7 +1686,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Buchhaltung --> Handelsarten : 3
 - Explorer --> Buchhaltung --> Journalgruppen : 5
 - Explorer --> Buchhaltung --> Rechnungen : 31
-- Explorer --> SEPA --> Bankkonten : 80
+- Explorer --> SEPA --> Bankkonten : 81
 - Explorer --> SEPA --> Importierte  Bankkonten : 34
 - Explorer --> SEPA --> Kontoauszüge : 34
 - Explorer --> SEPA --> Transaktionen : 57

@@ -1,3 +1,4 @@
+.. doctest docs/specs/addresses.rst
 .. _welfare.specs.addresses:
 
 =========================
@@ -5,11 +6,7 @@ Multiple postal addresses
 =========================
 
 
-.. How to test only this document:
-
-    $ python setup.py test -s tests.SpecsTests.test_addresses
-    
-    doctest init:
+.. doctest init:
 
     >>> from lino import startup
     >>> startup('lino_welfare.projects.eupen.settings.doctests')
@@ -29,17 +26,17 @@ address:
 >>> len(lst)
 48
 >>> print(lst)  #doctest: +NORMALIZE_WHITESPACE
-[102, 103, 113, 114, 116, 117, 119, 120, 122, 123, 125, 126, 128, 129, 131, 132, 134, 135, 137, 138, 140, 141, 143, 144, 146, 147, 149, 182, 186, 188, 190, 191, 193, 194, 201, 202, 204, 205, 207, 208, 211, 214, 216, 217, 219, 228, 230, 231]
+[100, 102, 104, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 185, 186, 189, 190, 192, 193, 200, 201, 203, 204, 206, 207, 210, 211, 215, 216, 218, 219, 229, 230]
 
-Here are the addresses of one of these partners (123):
+Here are the addresses of one of these partners (119):
 
->>> obj = contacts.Partner.objects.get(id=123)
+>>> obj = contacts.Partner.objects.get(id=119)
 >>> rt.show(addresses.AddressesByPartner, obj)
-==================== =========== =========================== ========
- Adressenart          Bemerkung   Adresse                     Primär
--------------------- ----------- --------------------------- --------
- Offizielle Adresse               Bahnhofstraße, 4700 Eupen   Ja
- Referenzadresse                  August-Thonnar-Str. 14      Nein
-==================== =========== =========================== ========
+==================== =========== ====================== ========
+ Adressenart          Bemerkung   Adresse                Primär
+-------------------- ----------- ---------------------- --------
+ Offizielle Adresse               Auenweg, 4700 Eupen    Ja
+ Ungeprüfte Adresse               Auf dem Spitzberg 11   Nein
+==================== =========== ====================== ========
 <BLANKLINE>
 
