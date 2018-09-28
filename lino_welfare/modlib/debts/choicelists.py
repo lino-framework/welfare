@@ -169,7 +169,7 @@ add('11',
 
 add('20',  # used by PrintLiabilitiesByBudget
     _("Partner, remarks, monthly rate, actor amounts"),
-    "partner:20 remarks:20 monthly_rate dynamic_amounts")
+    "partner:20 remarks:20 monthly_rate:8 dynamic_amounts")
 
 add('30',  # used by PrintAssetsByBudget, PrintIncomesByBudget
     _("Full description, actor amounts"),
@@ -177,7 +177,7 @@ add('30',  # used by PrintAssetsByBudget, PrintIncomesByBudget
 
 add('40',  # used by Inkasso-Unternehmen and Gerichtsvollzieher
     _("Debt-collector, partner, remarks, monthly rate, amounts"),
-    "bailiff:20 partner:20 remarks:20 monthly_rate dynamic_amounts")
+    "bailiff:20 partner:20 remarks:20 monthly_rate:8 dynamic_amounts")
 
 # add('I', '10',  # used by PrintAssetsByBudget, PrintIncomesByBudget
 #     _("Full description, actor amounts"),

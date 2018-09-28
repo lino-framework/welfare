@@ -266,7 +266,7 @@ class IncomesByBudget(EntriesByBudget, EntriesByType):
 
 class LiabilitiesByBudget(EntriesByBudget, EntriesByType):
     _account_type = AccountTypes.liabilities
-    column_names = "account partner remark amount actor:10 bailiff distribute monthly_rate move_buttons:8 todo seqno id"
+    column_names = "account partner remark amount actor:10 bailiff distribute monthly_rate:8 move_buttons:8 todo seqno id"
 
 
 class AssetsByBudget(EntriesByBudget, EntriesByType):
@@ -536,7 +536,7 @@ TODO: more explanations....
 
 class SummaryTable(dd.VirtualTable):
     auto_fit_column_widths = True
-    column_names = "desc amount"
+    column_names = "desc:60 amount:12"
     display_mode = 'html'
 
     @classmethod
@@ -666,7 +666,7 @@ class AssetsByBudgetSummary(SummaryTable):
 
 class DistByBudget(EntriesByBudget):
 
-    column_names = "partner description amount dist_perc dist_amount"
+    column_names = "partner:30 description:30 amount:12 dist_perc:8 dist_amount:12"
     filter = models.Q(distribute=True)
     label = _("Debts distribution")
     known_values = dict(account_type=AccountTypes.liabilities)
