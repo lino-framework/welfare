@@ -32,7 +32,7 @@ from __future__ import print_function
 
 from builtins import str
 import json
-from urllib import urlencode
+from six.moves.urllib.parse import urlencode
 from django.conf import settings
 from django.utils import translation
 

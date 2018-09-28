@@ -314,10 +314,11 @@ and passed when it was fixed:
 >>> res = test_client.get(url, REMOTE_USER='rolf')  #doctest: -SKIP
 >>> print(res.status_code)  #doctest: -SKIP
 200
->>> result = json.loads(res.content)  #doctest: -SKIP
->>> print(result)  #doctest: -SKIP
-{u'open_url': u'/media/cache/appypdf/127.0.0.1/integ.UsersWithClients.pdf', u'success': True}
-
+>>> result = json.loads(res.content.decode())  #doctest: -SKIP
+>>> print(result['open_url']) #doctest: +ELLIPSIS +REPORT_UDIFF +NORMALIZE_WHITESPACE
+/media/cache/appypdf/127.0.0.1/integ.UsersWithClients.pdf
+>>> print(result['success']) #doctest: +ELLIPSIS +REPORT_UDIFF +NORMALIZE_WHITESPACE
+True
 
 The following reproduces a bug we discovered on 20180921.
 
