@@ -155,10 +155,13 @@ class TableLayouts(dd.ChoiceList):
     def columns_spec(cls, choice, ar):
         return choice.columns_spec
 
+AMOUNT_WIDTH = ":15"
+
 add = TableLayouts.add_item
 add('10',  # used by PrintExpensesByBudget
     _("Description, remarks, yearly amount, actor amounts"),
-    "description remarks yearly_amount:12 dynamic_amounts")
+    "description remarks yearly_amount{} dynamic_amounts".format(
+        AMOUNT_WIDTH))
 
 add('11',
     _("Description, remarks, actor amounts"),

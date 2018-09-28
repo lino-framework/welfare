@@ -41,7 +41,7 @@ from lino.modlib.users.mixins import My
 
 from lino_welfare.modlib.pcsw import models as pcsw
 
-from .choicelists import AccountTypes
+from .choicelists import AccountTypes, AMOUNT_WIDTH
 from .roles import DebtsUser, DebtsStaff
 
 
@@ -355,6 +355,7 @@ TODO: more explanations....
             hname += eg.group.entries_layout.value
             hname += "_" + str(len(eg.budget.get_actors()))
         return hname
+    
 
     @classmethod
     def get_column_names(self, ar):
@@ -370,12 +371,12 @@ TODO: more explanations....
             amounts = ''
             actors = eg.budget.get_actors()
             if len(actors) == 1:
-                amounts = 'amount0'
+                amounts = 'amount0' + AMOUNT_WIDTH
             else:
                 for i, a in enumerate(actors):
                     if i <= 4:  # amount4
-                        amounts += 'amount' + str(i) + ' '
-                amounts += 'total '
+                        amounts += 'amount' + str(i) + AMOUNT_WIDTH + ' '
+                amounts += 'total' + AMOUNT_WIDTH +' '
             column_names = column_names.replace('dynamic_amounts', amounts)
         return column_names
 
