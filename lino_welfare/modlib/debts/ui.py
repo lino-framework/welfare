@@ -266,7 +266,7 @@ class IncomesByBudget(EntriesByBudget, EntriesByType):
 
 class LiabilitiesByBudget(EntriesByBudget, EntriesByType):
     _account_type = AccountTypes.liabilities
-    column_names = "account partner remark amount actor:10 bailiff distribute monthly_rate:8 move_buttons:8 todo seqno id"
+    column_names = "account partner remark amount actor:10 bailiff distribute monthly_rate:10 move_buttons:8 todo seqno id"
 
 
 class AssetsByBudget(EntriesByBudget, EntriesByType):
