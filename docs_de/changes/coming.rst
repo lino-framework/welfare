@@ -2,44 +2,43 @@
 Kommende Version
 ================
 
-TALK
-====
-
-- (Schuldnerberatung) Bei Einnahmen- und Ausgabentabelle ist die
-  Formatierung noch nicht korrekt.  --> Genauer gesagt kommt das
-  Problem nur, wenn es zwei Akteure gibt und diverse Arten von
-  Schulden, so dass in manchen Tabellen der Platz zu eng wird.
-  LibreOffice kriegt das dann nicht geregelt und macht Zeilenumbrüche
-  in Beträgen.
-
 DONE
 ====
 
 Die folgenden Punkte sind erledigt und zur Zeit unter **testlino**
 einsehbar:
 
-- (melanie) Inhalt der Bescheinigungen: Adressfeld ist
-  versetzt/verschwunden!  Layout nicht ok!  --> Uff, das war
-  subtil. Lag daran, dass Lino jetzt lxml-Elemente benutzt und
-  ``class_="Recipient"`` deshalb ersetzt werden muss durch die neue
-  Syntax ``**{'class':"Recipient"}``.  Das heißt auch, dass die
-  `*.odt`-Dateien jetzt nicht mehr gesynct werden dürfen.
+- (caroline) In der Historie konnten wir keine neuen Einträge
+  hinzufügen bei Personen, die schon viele Einträge haben. Z.B.
+  Klient 21748.  Das Panel zeigt jetzt eine zusammenfassende Ansicht
+  (die fünf letzten Einträge) und einen Button (+), um einen neuen
+  Eintrag zu erstellen. Um alle Einträge zu sehen wie gewohnt auf den
+  Button oben rechts klicken.
 
-- (melanie) Ansicht Verträge IPSE: Manche sehe ich, manche nicht.
-  --> Scheinbar war das eine Fehlwarnung.
-  
-- (caroline) Unsere Verträge sind wieder alle verschwunden. Im Reiter
-  Verträge fehlt das Panel wo die effektiven VSE-Verträge angezeigt
-  wurden.
+- (Schuldnerberatung) Bei manchen Tabellen im Ausdruck eines Budgets
+  war die Formatierung noch nicht korrekt.  Genauer gesagt kam das
+  Problem vor allem in Budgets mit zwei Akteuren und diversen Arten
+  von Schulden, so dass in manchen Tabellen der Platz zu eng wurde.
+  Lino machte dann unsinnige Zeilenumbrüche in Beträgen.
 
-- (melanie) AMK Französisch: Unverändert nicht korrekt.
-  Zum Beispiel 
-  :file:`/media/cache/appypdf/aids.RefundConfirmation-5341.pdf`
+- (melanie) Inhalt der Bescheinigungen: Adressfeld ist versetzt!
+  Layout nicht ok!  --> Das lag daran, dass Lino jetzt lxml-Elemente
+  benutzt und ``class_="Recipient"`` deshalb ersetzt werden muss durch
+  die neue Syntax ``**{'class':"Recipient"}``.  NB Falls das Problem
+  wiederkommt bzw. nicht gelöst ist, habe ich wahrscheinlich lediglich
+  vergessen, nach der letzten Datenübername die Druckvorlage
+  `Default.odt` anzupassen.
 
-- (caroline) In der Historie können wir keine neuen Einträge
-  hinzufügen bei Personen, die schon viele Einträge haben (war letztes
-  mal auch ein Problem) Bsp: Klient 21748.
+- (caroline) Für Benutzerart X fehlt im Reiter "Verträge" das Panel wo
+  die VSE-Verträge angezeigt wurden.
 
+- (melanie) Übersetztung AMK Französisch war unverändert nicht
+  korrekt.  Zum Beispiel
+  :file:`/media/cache/appypdf/aids.RefundConfirmation-5341.pdf`.  NB
+  Falls das Problem wiederkommt bzw. nicht gelöst ist, habe ich
+  wahrscheinlich lediglich vergessen, nach der letzten Datenübername
+  die Textkörpervorlage :xfile:`aids/medical_refund.body.html` zu
+  löschen.
 
 - (server) Export nach Excel ging nicht. Ein Benutzer hat versucht,
   Bescheinigungen zu exportieren.
@@ -50,16 +49,6 @@ einsehbar:
 
 - (martina) in Schuldnerberatung erscheint jetzt bei der 1000 Stelle
   ein Komma anstatt ein Freizeichen.
-
-- Eine neue Tabelle **Tagesplaner** zeigt eine Tagesübersicht der
-  Termine aller Benutzer an, wobei die Termine je nach Art in
-  verschiedene Kolonnen ventiliert werden.  (:ticket:`2382`)
-
-- :ticket:`2441` : "Intelligentere" Übersicht der Termine pro Kurs.
-
-- **Überfällige Termine** zeigt jetzt nicht mehr die von heute an,
-  sondern endet schon gestern. Denn die von heute sind ja unter "Meine
-  Termine" zu sehen.
 
 .. In *slave panels* ist die Phantomzeile abgeschafft, deshalb kann
    man jetzt im Panel "NotesByClient" nicht mehr einfach
@@ -143,6 +132,19 @@ einsehbar:
   :message:`'datetime.time object' has no attribute 'date'`.
 
   
+Ungefragte Neuerungen
+=====================
+
+- Eine neue Tabelle **Tagesplaner** zeigt eine Tagesübersicht der
+  Termine aller Benutzer an, wobei die Termine je nach Art in
+  verschiedene Kolonnen ventiliert werden.  (:ticket:`2382`)
+
+- :ticket:`2441` : "Intelligentere" Übersicht der Termine pro Kurs.
+
+- **Überfällige Termine** zeigt jetzt nicht mehr die von heute an,
+  sondern endet schon gestern. Denn die von heute sind ja unter "Meine
+  Termine" zu sehen.
+
 
 
 
