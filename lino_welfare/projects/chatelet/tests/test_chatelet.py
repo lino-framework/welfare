@@ -29,7 +29,7 @@ Or::
 
 """
 
-from __future__ import unicode_literals,print_function
+from __future__ import unicode_literals, print_function
 
 from builtins import str
 from django.conf import settings
@@ -46,6 +46,7 @@ from lino.core import constants
 from lino.modlib.users.choicelists import UserTypes
 
 from lino_welfare.modlib.integ.roles import IntegUser
+
 
 class TestCase(TestCase):
     """Miscellaneous tests on an empty database."""
@@ -67,7 +68,7 @@ class TestCase(TestCase):
             language='en')
         self.assertTrue(robin.user_type.has_required_roles([IntegUser]))
         self.client.force_login(robin)
-        
+
         ObstacleType(name='Alcohol').save()
 
         obj = Client(first_name="First", last_name="Last")
@@ -118,12 +119,12 @@ class TestCase(TestCase):
                 # """Freins "Obstacle object" a \xe9t\xe9 cr\xe9\xe9""")
                 result['message'],
                 """Obstacle "Obstacle object (1)" has been created.""")
+            # print(result['rows'])
             self.assertEqual(result['rows'], [
                 ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
-                 '<span />',
                  '<div><em>Obstacle object (1)</em></div>',
-                 u'<div><em>Obstacle object (1)</em></div>',
-                 'First LAST', 100,
+                 '<div><em>Obstacle object (1)</em></div>',
+                 '<span />', 'First LAST', 100,
                  {'id': True}, False]])
 
         self.assertEqual(Obstacle.objects.get(pk=1).user.username, 'robin')
@@ -243,4 +244,3 @@ class TestCase(TestCase):
             else:
                 expected = "{'__all__': ['Un object Inscription avec ces champs Atelier et Bénéficiaire existe déjà.']}"
             self.assertEqual(str(e), expected)
-
