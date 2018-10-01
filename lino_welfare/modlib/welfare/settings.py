@@ -164,7 +164,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.esf'
 
         yield 'lino_xl.lib.beid'
-        yield 'lino.modlib.davlink'
+        # yield 'lino.modlib.davlink'
         yield 'lino.modlib.dashboard'
 
         yield 'lino.modlib.export_excel'

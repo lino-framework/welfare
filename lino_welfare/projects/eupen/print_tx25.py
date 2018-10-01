@@ -18,7 +18,7 @@ def main():
 
     # rt.startup()
 
-    settings.SITE.use_davlink = False
+    # settings.SITE.use_davlink = False
 
     Tx25 = rt.models.cbss.RetrieveTIGroupsRequests
     # ExcerptType = rt.models.excerpts.ExcerptType
