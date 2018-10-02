@@ -39,7 +39,7 @@ expire.
    changes, subsequent snippets need to get adapted:
 
     >>> contenttypes.ContentType.objects.get_for_model(pcsw.Client).id
-    54
+    57
 
 Configuring upload types
 ========================
@@ -208,7 +208,7 @@ The first button opens a detail window on the *last* uploaded filed:
 
 The second item is just the comma which separates the two buttons:
 
->>> div.contents[1]
+>>> div.contents[1] #doctest: +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL +ELLIPSIS
 u', '
 
 The second button opens the list of uploads:
@@ -232,14 +232,16 @@ They are a big "object" (in Python we call it a `dict`):
 
 It has 3 keys:
 
->>> print(json.dumps(d.keys()))
-["record_id", "param_values", "base_params"]
+>>> keys = list(d.keys())
+>>> keys.sort()
+>>> print(json.dumps(keys))
+["base_params", "param_values", "record_id"]
 
 >>> d.record_id
 8
->>> d.base_params == {'mt': 54, 'type': 4, 'mk': 121}
+>>> d.base_params == {'mt': 57, 'type': 4, 'mk': 121}
 True
->>> print(json.dumps(d.param_values))  #doctest: +NORMALIZE_WHITESPACE
+>>> print(json.dumps(d.param_values))  #doctest: +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL
 {"userHidden": null, "upload_typeHidden": null, "end_date": null,
 "observed_eventHidden": "20", "observed_event": "Est active",
 "coached_by": null, "upload_type": null, "coached_byHidden": null,
@@ -318,18 +320,23 @@ It has 3 keys:
 >>> len(d.param_values)
 10
 
->>> d.base_params == {'mt': 54, 'mk': 177, 'type_id': 1}
+>>> d.base_params == {'mt': 57, 'mk': 177, 'type_id': 1}
 True
 
->>> rmu(d.data_record.keys())
-['phantom', 'data', 'title']
+>>> data_record_keys = list(rmu(d.data_record.keys()))
+>>> data_record_keys.sort()
+>>> data_record_keys
+['data', 'phantom', 'title']
 >>> d.data_record['phantom']
 True
 >>> print(d.data_record['title'])
 Einfügen in Uploads von BRECHT Bernd (177) (Ist aktiv)
 
->>> rmu(d.data_record['data'].keys())
-['file', 'owner', 'id', 'userHidden', 'projectHidden', 'needed', 'disabled_fields', 'type', 'start_date', 'description', 'end_date', 'company', 'contact_role', 'disable_editing', 'companyHidden', 'contact_personHidden', 'user', 'contact_roleHidden', 'remark', 'typeHidden', 'project', 'contact_person']
+>>> data_record_data_keys = list(rmu(d.data_record['data'].keys()))
+>>> data_record_data_keys.sort()
+>>> data_record_data_keys
+['company', 'companyHidden', 'contact_person', 'contact_personHidden', 'contact_role', 'contact_roleHidden', 'description', 'disable_editing', 'disabled_fields', 'end_date', 'file', 'id', 'needed', 'owner', 'project', 'projectHidden', 'remark', 'start_date', 'type', 'typeHidden', 'user', 'userHidden']
 
->>> rmu(d.data_record['data'])
-{'file': '', 'owner': '&lt;a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &amp;quot;record_id&amp;quot;: 177 })"&gt;BRECHT Bernd (177)&lt;/a&gt;', 'id': None, 'userHidden': 1, 'projectHidden': 177, 'needed': True, 'disabled_fields': {'mimetype': True}, 'type': 'Aufenthaltserlaubnis', 'start_date': None, 'description': '', 'end_date': None, 'company': None, 'contact_role': None, 'disable_editing': False, 'companyHidden': None, 'contact_personHidden': None, 'user': 'Rolf Rompen', 'contact_roleHidden': None, 'remark': '', 'typeHidden': 1, 'project': 'BRECHT Bernd (177)', 'contact_person': None}
+>>> data_record_data = rmu(d.data_record['data'])
+>>> data_record_data
+{'company': None, 'companyHidden': None, 'contact_person': None, 'contact_personHidden': None, 'contact_role': None, 'contact_roleHidden': None, 'description': '', 'disable_editing': False, 'disabled_fields': {'mimetype': True}, 'end_date': None, 'file': '', 'id': None, 'needed': True, 'owner': '&lt;a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &amp;quot;record_id&amp;quot;: 177 })"&gt;BRECHT Bernd (177)&lt;/a&gt;', 'project': 'BRECHT Bernd (177)', 'projectHidden': 177, 'remark': '', 'start_date': None, 'type': 'Aufenthaltserlaubnis', 'typeHidden': 1, 'user': 'Rolf Rompen', 'userHidden': 1}

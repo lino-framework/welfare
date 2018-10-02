@@ -170,8 +170,8 @@ It has 4 keys:
 >>> d.record_id
 127
 >>> d.base_params['mt']
-54
->>> d.base_params == {'mt': 54, 'mk': 127}
+57
+>>> d.base_params == {'mt': 57, 'mk': 127}
 True
 
 >>> d.field_values == {'userHidden': 5, 'user': 'Hubert Huppertz', 'summary': ''}

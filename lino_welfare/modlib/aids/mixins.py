@@ -372,7 +372,7 @@ class Confirmation(
     def get_template_group(cls):
         # Used by excerpts and printable.  The individual confirmation
         # models use a common tree of templates.
-        return 'aids/Confirmation'
+        return u'aids/Confirmation'
 
     def get_body_template(self):
         """Overrides :meth:`lino.core.model.Model.get_body_template`."""
