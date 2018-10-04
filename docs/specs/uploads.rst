@@ -39,7 +39,7 @@ expire.
    changes, subsequent snippets need to get adapted:
 
     >>> contenttypes.ContentType.objects.get_for_model(pcsw.Client).id
-    57
+    54
 
 Configuring upload types
 ========================
@@ -239,7 +239,7 @@ It has 3 keys:
 
 >>> d.record_id
 8
->>> d.base_params == {'mt': 57, 'type': 4, 'mk': 121}
+>>> d.base_params == {'mt': 54, 'type': 4, 'mk': 121}
 True
 >>> print(json.dumps(d.param_values))  #doctest: +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL
 {"userHidden": null, "upload_typeHidden": null, "end_date": null,
@@ -320,7 +320,7 @@ It has 3 keys:
 >>> len(d.param_values)
 10
 
->>> d.base_params == {'mt': 57, 'mk': 177, 'type_id': 1}
+>>> d.base_params == {'mt': 54, 'mk': 177, 'type_id': 1}
 True
 
 >>> data_record_keys = list(rmu(d.data_record.keys()))
@@ -338,5 +338,26 @@ Einfügen in Uploads von BRECHT Bernd (177) (Ist aktiv)
 ['company', 'companyHidden', 'contact_person', 'contact_personHidden', 'contact_role', 'contact_roleHidden', 'description', 'disable_editing', 'disabled_fields', 'end_date', 'file', 'id', 'needed', 'owner', 'project', 'projectHidden', 'remark', 'start_date', 'type', 'typeHidden', 'user', 'userHidden']
 
 >>> data_record_data = rmu(d.data_record['data'])
->>> data_record_data
-{'company': None, 'companyHidden': None, 'contact_person': None, 'contact_personHidden': None, 'contact_role': None, 'contact_roleHidden': None, 'description': '', 'disable_editing': False, 'disabled_fields': {'mimetype': True}, 'end_date': None, 'file': '', 'id': None, 'needed': True, 'owner': '&lt;a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &amp;quot;record_id&amp;quot;: 177 })"&gt;BRECHT Bernd (177)&lt;/a&gt;', 'project': 'BRECHT Bernd (177)', 'projectHidden': 177, 'remark': '', 'start_date': None, 'type': 'Aufenthaltserlaubnis', 'typeHidden': 1, 'user': 'Rolf Rompen', 'userHidden': 1}
+>>> pprint(data_record_data)
+{'company': None,
+ 'companyHidden': None,
+ 'contact_person': None,
+ 'contact_personHidden': None,
+ 'contact_role': None,
+ 'contact_roleHidden': None,
+ 'description': '',
+ 'disable_editing': False,
+ 'disabled_fields': {'mimetype': True},
+ 'end_date': None,
+ 'file': '',
+ 'id': None,
+ 'needed': True,
+ 'owner': '&lt;a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &amp;quot;record_id&amp;quot;: 177 })"&gt;BRECHT Bernd (177)&lt;/a&gt;',
+ 'project': 'BRECHT Bernd (177)',
+ 'projectHidden': 177,
+ 'remark': '',
+ 'start_date': None,
+ 'type': 'Aufenthaltserlaubnis',
+ 'typeHidden': 1,
+ 'user': 'Rolf Rompen',
+ 'userHidden': 1}
