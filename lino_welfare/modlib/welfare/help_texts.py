@@ -15,7 +15,15 @@ have been issued before the rule was activated."""),
 confirmation type."""),
     'lino_welfare.modlib.aids.SignConfirmation' : _("""Sign this database object."""),
     'lino_welfare.modlib.aids.Confirmable' : _("""Base class for both Granting and Confirmation."""),
+    'lino_welfare.modlib.aids.Confirmable.get_row_permission' : _("""A signed confirmation cannot be modified, even not by a privileged
+user."""),
     'lino_welfare.modlib.aids.Confirmation' : _("""Base class for all aid confirmations."""),
+    'lino_welfare.modlib.aids.Confirmation.get_date_range_veto' : _("""Return an error message if this confirmation lies outside of
+granted period."""),
+    'lino_welfare.modlib.aids.Confirmation.get_urgent_granting' : _("""Return the one and only one urgent aid granting for the client and
+period defined for this confirmation.  Return None if there is
+no such granting, or if there is more than one such granting."""),
+    'lino_welfare.modlib.aids.Confirmation.get_body_template' : _("""Overrides lino.core.model.Model.get_body_template()."""),
     'lino_welfare.modlib.aids.AidType' : _("""The type of aid being granted to a client.  Every granting has a
 mandatory field Granting.aid_type which points to an
 AidType instance."""),
@@ -67,6 +75,8 @@ IncomeConfirmation as confirmation_type."""),
     'lino_welfare.modlib.aids.IncomeConfirmationsByGranting.model' : _("""alias of IncomeConfirmation"""),
     'lino_welfare.modlib.aids.RefundConfirmation' : _("""This is when a social agent confirms that a client benefits of a
 refund aid (Kostenrückerstattung) during a given period."""),
+    'lino_welfare.modlib.aids.RefundConfirmation.create_doctor_choice' : _("""The create_FOO_choice method which turns
+doctor into a learning combobox."""),
     'lino_welfare.modlib.aids.SubmitInsertAndPrint' : _("""A customized variant of the standard SubmitInsert which prints the Confirmation after
 successful creation (if AidType.print_directly is checked)."""),
     'lino_welfare.modlib.art61.Plugin' : _("""See lino.core.plugin.Plugin."""),
@@ -75,6 +85,8 @@ general documentation)."""),
     'lino_welfare.modlib.art61.ContractTypes.model' : _("""alias of ContractType"""),
     'lino_welfare.modlib.art61.Contract' : _("""An “Art61 job supplyment” is an agreement between the PCSW and a
 private company…"""),
+    'lino_welfare.modlib.art61.Contract.get_subsidizations' : _("""Yield a list of all subsidizations activated for this contract."""),
+    'lino_welfare.modlib.art61.Contract.get_excerpt_options' : _("""Implements lino.printing.Printable.get_excerpt_options()."""),
     'lino_welfare.modlib.art61.ContractsByClient' : _("""Shows the Art61 job supplyments for this client."""),
     'lino_welfare.modlib.art61.ContractsByClient.master' : _("""alias of lino_welfare.modlib.pcsw.models.Client"""),
     'lino_welfare.modlib.art61.ContractsByClient.model' : _("""alias of Contract"""),
@@ -83,6 +95,9 @@ private company…"""),
 your application.  Default value is 'contacts.Person'."""),
     'lino_welfare.modlib.cal.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.cal.EventType' : _("""Adds the following fields."""),
+    'lino_welfare.modlib.cal.Event.suggest_guests' : _("""Yields the guest suggested by super, but if Client field is
+filled and if event_type is marked invite_client, add the
+client as Guest."""),
     'lino_welfare.modlib.cal.EntriesByClient' : _("""Events where Event.project or one guest is this client."""),
     'lino_welfare.modlib.cal.EntriesByClient.master' : _("""alias of lino_welfare.modlib.pcsw.models.Client"""),
     'lino_welfare.modlib.cal.EntriesByClient.model' : _("""alias of Event"""),
@@ -119,10 +134,30 @@ lino_welfare.modlib.cbss.models.ManageAccessRequest."""),
     'lino_welfare.modlib.cbss.CBSSRequest' : _("""Common Abstract Base Class for SSDNRequest
 and NewStyleRequest"""),
     'lino_welfare.modlib.cbss.CBSSRequest.wsdl_parts' : _("""alias of exceptions.NotImplementedError"""),
+    'lino_welfare.modlib.cbss.CBSSRequest.on_duplicate' : _("""When duplicating a CBSS request, we want re-execute it.  So please
+duplicate only the parameters, not the execution data like
+ticket, sent and status.  Note that also the user will
+be set to the user who asked to duplicate (because this is a
+subclass of UserAuthored."""),
+    'lino_welfare.modlib.cbss.CBSSRequest.get_row_permission' : _("""CBSS requests that have a ticket may never be modified."""),
+    'lino_welfare.modlib.cbss.CBSSRequest.on_cbss_ok' : _("""Called when a successful reply has been received."""),
+    'lino_welfare.modlib.cbss.CBSSRequest.execute_request' : _("""This is the common part of a request for both classic and
+new-style."""),
+    'lino_welfare.modlib.cbss.CBSSRequest.get_excerpt_options' : _("""When we print a request, the resulting excerpt should go to the
+client’s history."""),
     'lino_welfare.modlib.cbss.SSDNRequest' : _("""Abstract Base Class for Models that represent SSDN (“classic”)
 requests."""),
+    'lino_welfare.modlib.cbss.SSDNRequest.validate_request' : _("""Validates the generated XML against the XSD files.
+Used by test suite.
+It is not necessary to validate each real request before actually sending it."""),
+    'lino_welfare.modlib.cbss.SSDNRequest.execute_request_' : _("""SSDN specific part of a request."""),
+    'lino_welfare.modlib.cbss.SSDNRequest.wrap_ssdn_request' : _("""Wrap the given service request into the SSDN envelope 
+by adding AuthorizedUser and other information common 
+the all SSDN requests)."""),
     'lino_welfare.modlib.cbss.NewStyleRequest' : _("""Abstract Base Class for Models that represent
 “new style” requests to the CBSS (and responses)."""),
+    'lino_welfare.modlib.cbss.NewStyleRequest.execute_request_' : _("""NewStyle specific part of a request."""),
+    'lino_welfare.modlib.cbss.NewStyleRequest.on_cbss_ok' : _("""Called when a successful reply has been received."""),
     'lino_welfare.modlib.cbss.SSIN' : _("""Abstract base for Requests that have a field national_id and a method 
 get_ssin()."""),
     'lino_welfare.modlib.cbss.WithPerson' : _("""Mixin for models that have certain fields"""),
@@ -132,6 +167,7 @@ lino_welfare.modlib.cbss.fixtures.sectors."""),
 This table is usually filled with the official codes
 by lino_welfare.modlib.cbss.fixtures.purposes."""),
     'lino_welfare.modlib.cbss.IdentifyPersonRequest' : _("""A request to the IdentifyPerson service."""),
+    'lino_welfare.modlib.cbss.IdentifyPersonRequest.build_request' : _("""Construct and return the root element of the (inner) service request."""),
     'lino_welfare.modlib.cbss.ManageAccessRequest' : _("""A request to the ManageAccess service."""),
     'lino_welfare.modlib.cbss.ManageAccessRequest.sector' : _("""Pointer to Sector."""),
     'lino_welfare.modlib.cbss.ManageAccessRequest.purpose' : _("""Pointer to Purpose."""),
@@ -140,7 +176,12 @@ lino_welfare.modlib.cbss.choicelists.ManageActions"""),
     'lino_welfare.modlib.cbss.ManageAccessRequest.query_register' : _("""The register to be query.
 This must be one of the values in
 lino_welfare.modlib.cbss.choicelists.QueryRegisters"""),
+    'lino_welfare.modlib.cbss.ManageAccessRequest.build_request' : _("""Construct and return the root element of the (inner) service request."""),
+    'lino_welfare.modlib.cbss.ManageAccessRequest.get_service_reply' : _("""Extract the “service reply” part from a full reply.
+Example of a full reply:"""),
     'lino_welfare.modlib.cbss.RetrieveTIGroupsRequest' : _("""A request to the RetrieveTIGroups service (aka Tx25)"""),
+    'lino_welfare.modlib.cbss.RetrieveTIGroupsRequest.fill_from_person' : _("""Fill default values for some fields of this request from the person
+(pcsw.Client)."""),
     'lino_welfare.modlib.cbss.tx25.RowFactory' : _("""The result of a Tx25 consist of data rows, each of which has a
 given type.  Consult the source code of this class to see how it
 works."""),
@@ -180,6 +221,20 @@ point to an item of
 lino_welfare.modlib.debts.AccountTypes."""),
     'lino_welfare.modlib.debts.Budget' : _("""A document which expresses the financial situation of a partner at
 a given date."""),
+    'lino_welfare.modlib.debts.Budget.get_actors' : _("""Return a list of the actors of this budget."""),
+    'lino_welfare.modlib.debts.Budget.entry_groups' : _("""Yield the entry groups for this budget, i.e. one item for each
+account group for which this budget has some data."""),
+    'lino_welfare.modlib.debts.Budget.unused_account_groups' : _("""Yield all AccountGroups which have at least one entry in this
+Budget."""),
+    'lino_welfare.modlib.debts.Budget.unused_entries_by_group' : _("""Return a TableRequest showing the entries of this budget for the
+given group, using the table layout depending on
+AccountType."""),
+    'lino_welfare.modlib.debts.Budget.sum' : _("""Compute and return the sum of fldname (either amount or
+monthly_rate"""),
+    'lino_welfare.modlib.debts.Budget.after_ui_save' : _("""Called after successful save()"""),
+    'lino_welfare.modlib.debts.Budget.fill_defaults' : _("""If the budget is empty, fill it with default entries
+by copying the master_budget."""),
+    'lino_welfare.modlib.debts.Budget.data_story' : _("""Yield a sequence of story items about the entered data."""),
     'lino_welfare.modlib.debts.Actor' : _("""An actor of a budget is a partner who is part of the household
 for which the budget has been established."""),
     'lino_welfare.modlib.debts.Entry' : _("""A detail row of a Budget."""),
@@ -187,6 +242,14 @@ for which the budget has been established."""),
 amount in that the latter will be printed while the former
 not."""),
     'lino_welfare.modlib.debts.Entry.account' : _("""The related Account."""),
+    'lino_welfare.modlib.debts.Entry.get_siblings' : _("""Like super(), but adds account_type. 
+E.g. the Up/Down methods should work only within a given account_type."""),
+    'lino_welfare.modlib.debts.Entry.on_duplicate' : _("""This is called when an entry has been duplicated.  It is needed
+when we are doing a “related” duplication (initiated by the
+duplication of a Budget).  In that case, master is not None
+but the new Budget that has been created.  We now need to
+adapt the actor of this Entry by making it an actor of the
+new Budget."""),
     'lino_welfare.modlib.debts.Groups' : _("""The global table of all account groups."""),
     'lino_welfare.modlib.debts.Groups.model' : _("""alias of lino_welfare.modlib.debts.models.Group"""),
     'lino_welfare.modlib.debts.ActorsByBudget' : _("""The table used to edit Actors in a Budget’s detail."""),
@@ -214,6 +277,9 @@ same as total, otherwise it is total * 12 / periods."""),
     'lino_welfare.modlib.dupable_clients.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.dupable_clients.DupableClient' : _("""Model mixin to add to the base classes of your application’s
 pcsw.Client model."""),
+    'lino_welfare.modlib.dupable_clients.DupableClient.find_similar_instances' : _("""Overrides
+lino.mixins.dupable.Dupable.find_similar_instances(),
+adding some additional rules."""),
     'lino_welfare.modlib.dupable_clients.Word' : _("""Phonetic word for pcsw.Client.
 See lino.mixins.dupable.PhoneticWordBase."""),
     'lino_welfare.modlib.dupable_clients.SimilarClients' : _("""Shows the other clients who are similar to this one."""),
@@ -278,6 +344,20 @@ ContractEnding"""),
 language."""),
     'lino_welfare.modlib.isip.ContractBase.type' : _("""The type of this contract. Pointer to a subclass of
 ContractTypeBase."""),
+    'lino_welfare.modlib.isip.ContractBase.get_excerpt_title' : _("""The printed title of a contract specifies just the contract type
+(not the number and name of client)."""),
+    'lino_welfare.modlib.isip.ContractBase.get_excerpt_templates' : _("""Overrides
+lino_xl.lib.excerpts.mixins.Certifiable.get_excerpt_templates()."""),
+    'lino_welfare.modlib.isip.ContractBase.client_changed' : _("""If the contract’s author is the client’s primary coach, then set
+user_asd to None, otherwise set user_asd to the primary coach.
+We no longer suppose that only integration agents write
+contracts."""),
+    'lino_welfare.modlib.isip.ContractBase.get_author' : _("""If user is empty, then user_asd can edit this contract."""),
+    'lino_welfare.modlib.isip.ContractBase.full_clean' : _("""Checks for the following error conditions:"""),
+    'lino_welfare.modlib.isip.ContractBase.get_aid_confirmation' : _("""Returns the last aid confirmation that has been issued for this
+contract. May be used in .odt template."""),
+    'lino_welfare.modlib.isip.ContractBase.suggest_cal_guests' : _("""Automatic evaluation events have the client as mandatory
+participant, plus possibly some other coach."""),
     'lino_welfare.modlib.isip.ContractBaseTable' : _("""Base for contract tables. Defines the following parameter fields:"""),
     'lino_welfare.modlib.isip.ContractBaseTable.ending' : _("""Show only contracts with the specified
 ContractEnding."""),
@@ -321,6 +401,7 @@ general documentation)."""),
     'lino_welfare.modlib.jobs.Contract.duration' : _("""If applies_from and duration are set, then the
 default value for applies_until is computed assuming 26
 workdays per month:"""),
+    'lino_welfare.modlib.jobs.Contract.disabled_fields' : _("""As super, but add also job provider’s company and type"""),
     'lino_welfare.modlib.jobs.ContractsByClient' : _("""Shows the Art60§7 job supplyments for this client."""),
     'lino_welfare.modlib.jobs.ContractsByClient.master' : _("""alias of lino_welfare.modlib.pcsw.models.Client"""),
     'lino_welfare.modlib.jobs.ContractsByClient.model' : _("""alias of Contract"""),
@@ -365,6 +446,7 @@ consultants."""),
     'lino_welfare.modlib.newcomers.AssignCoach' : _("""Assign this agent as coach for this client.  This will set the
 client’s state to Coached and send a notification to the new
 coach."""),
+    'lino_welfare.modlib.newcomers.AssignCoach.get_notify_recipients' : _("""Yield a list of (users, mailmode) tuples to be notified."""),
     'lino_welfare.modlib.newcomers.AvailableCoachesByClient' : _("""List of users available for coaching this client.  Visible only to
 Newcomers consultants."""),
     'lino_welfare.modlib.newcomers.AvailableCoachesByClient.master' : _("""alias of lino_welfare.modlib.pcsw.models.Client"""),
@@ -398,6 +480,19 @@ CivilState."""),
 regular work."""),
     'lino_welfare.modlib.pcsw.Client.seeking_since' : _("""The date when this client registered as unemployed and started
 to look for a new job."""),
+    'lino_welfare.modlib.pcsw.Client.get_first_meeting' : _("""Return the last note of type “First meeting” for this client.
+Usage example see welfare.specs.debts and
+welfare.specs.notes."""),
+    'lino_welfare.modlib.pcsw.Client.update_reminders' : _("""Creates or updates automatic tasks controlled directly by this Person."""),
+    'lino_welfare.modlib.pcsw.Client.properties_list' : _("""Yields a list of the PersonProperty properties of
+this person in the specified order.  If this person has no
+entry for a requested Property, it is simply skipped.
+Used in cv.odt.  `"""),
+    'lino_welfare.modlib.pcsw.Client.get_active_contract' : _("""Return the one and only “active contract” of this client.  A
+contract is active if applies_from is <= today and
+(date_ended or applies_until) >= today."""),
+    'lino_welfare.modlib.pcsw.Client.get_beid_diffs' : _("""Overrides
+lino_xl.lib.beid.mixins.BeIdCardHolder.get_beid_diffs()."""),
     'lino_welfare.modlib.pcsw.Client.dupable_word_model' : _("""alias of lino_welfare.modlib.dupable_clients.models.Word"""),
     'lino_welfare.modlib.pcsw.Clients' : _("""The list that opens by Contacts ‣ Clients."""),
     'lino_welfare.modlib.pcsw.Clients.client_state' : _("""If not empty, show only Clients whose client_state equals
@@ -436,6 +531,9 @@ statements."""),
     'lino_welfare.modlib.users.UserDetail' : _("""Layout of User Detail in Lino Welfare."""),
     'lino_welfare.modlib.users.User' : _("""The users.User model used in Lino Welfare.  We add a few fields
 to the standard models (lino.modlib.users.models.User)."""),
+    'lino_welfare.modlib.users.User.save' : _("""For a user with a office_level, create a default calendar.  If
+that user also has a coaching_level, create a default set of
+subscriptions."""),
     'lino_welfare.modlib.xcourses.CourseProvider' : _("""A CourseProvider is a Company that offers Courses."""),
     'lino_welfare.modlib.xcourses.CourseProviderDetail' : _("""Same as CompanyDetail, except that we add a tab
 Courses."""),
@@ -448,6 +546,11 @@ das u.A. den Kursinhalt
 und Kursanbieter 
 detailliert. Also selbst für einen einmalig stattfindenden 
 Kurs muss ein Angebot erstellt werden."""),
+    'lino_welfare.modlib.xcourses.Course.participants' : _("""Liste von CourseRequest-Instanzen, 
+die in diesem Kurs eingetragen sind."""),
+    'lino_welfare.modlib.xcourses.Course.candidates' : _("""Liste von CourseRequest-Instanzen, 
+die noch in keinem Kurs eingetragen sind, aber für diesen Kurs in Frage 
+kommen."""),
     'lino_welfare.modlib.xcourses.CourseRequest' : _("""A Course Request is created when a certain Person expresses her
 wish to participate in a Course with a certain CourseContent."""),
     'lino_welfare.modlib.xcourses.CourseRequestsByPerson' : _("""Shows the course requests of a client."""),
@@ -481,4 +584,9 @@ which might be reason to not get a given job."""),
     'lino_welfare.projects.chatelet.modlib.cv.Obstacle.user' : _("""The agent who observed this obstacle."""),
     'lino_welfare.projects.chatelet.modlib.cv.Obstacle.detected_date' : _("""The date when the agent observed this obstacle."""),
     'lino_welfare.projects.chatelet.tests.test_chatelet.TestCase' : _("""Miscellaneous tests on an empty database."""),
+    'lino_welfare.projects.chatelet.tests.test_chatelet.TestCase.test_cv_obstacle' : _("""Test whether cv.Obstacle.user is correctly set to the requesting
+user."""),
+    'lino_welfare.projects.chatelet.tests.test_chatelet.TestCase.test_dupable_hidden' : _("""Since dupable_clients is hidden, we can create duplicate partners
+without warning."""),
+    'lino_welfare.projects.chatelet.tests.test_chatelet.TestCase.test_suggest_cal_guests' : _("""Tests a bugfix in suggest_cal_guests."""),
 }
