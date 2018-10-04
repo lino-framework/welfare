@@ -6,7 +6,7 @@ Miscellaneous
 =============
 
 ..  doctest init:
-    
+    >>> from __future__ import unicode_literals
     >>> import os
     >>> from lino import startup
     >>> startup('lino_welfare.projects.chatelet.settings.doctests')
@@ -108,10 +108,10 @@ the second is just `"excerpts"`.
 For example the owner of Excerpt #2 is an immersion training, while
 the owner of Excerpt #4 is an aids confirmation:
 
->>> excerpts.Excerpt.objects.get(pk=2).get_template_groups()
-[u'immersion/Contract', u'excerpts']
->>> excerpts.Excerpt.objects.get(pk=4).get_template_groups()
-[u'aids/Confirmation', u'excerpts']
+>>> excerpts.Excerpt.objects.get(pk=2).get_template_groups() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL
+[...'immersion/Contract', ...'excerpts']
+>>> excerpts.Excerpt.objects.get(pk=4).get_template_groups() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL
+[...'aids/Confirmation', ...'excerpts']
 
 >>> obj = excerpts.Excerpt.objects.get(pk=2)
 >>> obj.owner

@@ -38,8 +38,8 @@ expire.
    contenttype id of `pcsw.Client` model. If the following line
    changes, subsequent snippets need to get adapted:
 
-    >>> contenttypes.ContentType.objects.get_for_model(pcsw.Client).id
-    54
+    >>> contenttypes.ContentType.objects.get_for_model(pcsw.Client).id #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF +SKIP
+    5...
 
 Configuring upload types
 ========================

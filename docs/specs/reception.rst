@@ -169,8 +169,8 @@ It has 4 keys:
 
 >>> d.record_id
 127
->>> d.base_params['mt']
-54
+>>> d.base_params['mt'] #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF +SKIP
+5...
 >>> d.base_params == {'mt': 54, 'mk': 127}
 True
 

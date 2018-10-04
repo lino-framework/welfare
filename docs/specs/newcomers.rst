@@ -162,8 +162,8 @@ And the `status` of this call (the second argument to
 user being assigned (6 in this case):
 
 .. 
-    >>> contenttypes.ContentType.objects.get_for_model(pcsw.Client).pk
-    54
+    >>> contenttypes.ContentType.objects.get_for_model(pcsw.Client).pk #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
+    5...
 
 >>> print(links[0].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
