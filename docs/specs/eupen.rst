@@ -1587,7 +1587,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Büro --> Notizarten : 14
 - Konfigurierung --> Büro --> Ereignisarten : 11
 - Konfigurierung --> Büro --> Meine Einfügetexte : 1
-- Konfigurierung --> Kalender --> Kalenderliste : 12
+- Konfigurierung --> Kalender --> Kalenderliste : 13
 - Konfigurierung --> Kalender --> Räume : 1
 - Konfigurierung --> Kalender --> Prioritäten : 5
 - Konfigurierung --> Kalender --> Regelmäßige Ereignisse : 16
