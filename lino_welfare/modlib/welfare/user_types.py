@@ -101,7 +101,7 @@ class IntegrationAgentFlexible(NewcomersUser, IntegrationAgentManager,
 class SocialAgent(SiteUser, SocialUser,
                   OfficeUser, ContactsUser, CBSSUser, BeIdUser,
                   CheckdataUser, AidsUser, PollsUser, SepaUser,
-                  CoursesUser,
+                  CoursesUser, SocialCoordinator,
                   ExcerptsUser, CoachingsUser,
                   AuthorshipTaker, GuestOperator, NotesUser):
     pass

@@ -74,12 +74,12 @@ Lino Welfare à la Chatelet.
     - **Antécédents judiciaires** (pcsw.ConvictionsByClient)
   - **Autres freins** (obstacles) [visible for all]
 - **PIIS** (isip_tab) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]:
-  - **PIISs** (isip.ContractsByClient) [visible for 100 110 120 210 420 admin 910]
+  - **PIISs** (isip.ContractsByClient) [visible for 100 110 120 210 400 410 420 admin 910]
   - **Octrois d'aide** (aids.GrantingsByClient)
 - **O.I.** (courses_tab) [visible for 100 110 120 200 210 300 400 410 420 800 admin 910]:
   - **Ateliers d'insertion sociale** (courses.BasicEnrolmentsByPupil)
   - **Ateliers d'Insertion socioprofessionnelle** (courses.JobEnrolmentsByPupil)
-- **Stages d'immersion** (immersion.ContractsByClient) [visible for 100 110 120 210 420 admin 910]
+- **Stages d'immersion** (immersion.ContractsByClient) [visible for 100 110 120 210 400 410 420 admin 910]
 - **RAE** (job_search_1) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]:
   - (suche):
     - (suche_1) [visible for all]: **cherche du travail** (is_seeking), **Inoccupé depuis** (unemployed_since), **Cherche du travail depuis** (seeking_since), **Suspendu jusque** (work_permit_suspended_until)
@@ -91,7 +91,7 @@ Lino Welfare à la Chatelet.
 - **Mise à l'emploi** (contracts) [visible for 100 110 120 200 210 300 400 410 420 admin 910]:
   - **Candidatures** (jobs.CandidaturesByPerson)
   - **Mises à l'emploi art60§7** (jobs.ContractsByClient)
-  - **Mises à l'emploi art.61 et activations** (art61.ContractsByClient) [visible for 100 110 120 210 420 admin 910]
+  - **Mises à l'emploi art.61 et activations** (art61.ContractsByClient) [visible for 100 110 120 210 400 410 420 admin 910]
 - **Historique** (history) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]:
   - **Observations** (notes_NotesByProject)
   - (history_right):
