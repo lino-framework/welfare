@@ -96,7 +96,7 @@ Romain
   - Questionnaires : Listes de choix
 - Explorateur :
   - Contacts : Personnes de contact, Partenaires, Types d'adresses, Adresses, Membres du conseil, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
-  - Système : Procurations, Types d'utilisateur, types de contenu, Notifications, Changes, All dashboard widgets, Tests de données, Problèmes de données
+  - Système : Procurations, Types d'utilisateur, User roles, types de contenu, Notifications, Changes, All dashboard widgets, Tests de données, Problèmes de données
   - Bureau : Extraits, Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Observations, Text Field Templates
   - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription, Course layouts
