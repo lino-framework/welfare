@@ -96,7 +96,7 @@ Romain
   - Questionnaires : Listes de choix
 - Explorateur :
   - Contacts : Personnes de contact, Partenaires, Types d'adresses, Adresses, Membres du conseil, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
-  - Système : Procurations, Types d'utilisateur, User roles, types de contenu, Notifications, Changes, All dashboard widgets, Tests de données, Problèmes de données
+  - Système : Procurations, Types d'utilisateur, Rôles d'utilisateur, types de contenu, Notifications, Changes, All dashboard widgets, Tests de données, Problèmes de données
   - Bureau : Extraits, Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Observations, Text Field Templates
   - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États d'inscription, Course layouts
@@ -299,7 +299,7 @@ French labels.
 'lino_welfare.modlib.welfare.user_types'
 >>> rt.show(users.UserTypes)
 ======= =========== ===================================== =================================================================
- value   name        text                                  User role
+ value   name        text                                  Rôle d'utilisateur
 ------- ----------- ------------------------------------- -----------------------------------------------------------------
  000     anonymous   Anonyme                               lino.core.roles.Anonymous
  100                 Agent d'insertion                     lino_welfare.modlib.welfare.user_types.IntegrationAgent
@@ -1465,6 +1465,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Contacts --> Types de parenté : 13
 - Explorateur --> Système --> Procurations : 4
 - Explorateur --> Système --> Types d'utilisateur : 16
+- Explorateur --> Système --> Rôles d'utilisateur : 55
 - Explorateur --> Système --> types de contenu : 135
 - Explorateur --> Système --> Notifications : 13
 - Explorateur --> Système --> Changes : 0
