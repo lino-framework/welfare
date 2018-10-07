@@ -277,7 +277,7 @@ For example the :class:`lino_welfare.modlib.isip.ContractsByClient`
 table is visible for users having the IntegUser or SocialCoordinator
 role:
 
->>> isip.ContractsByClient.required_roles
-set([(<class 'lino_welfare.modlib.integ.roles.IntegUser'>, <class 'lino_welfare.modlib.pcsw.roles.SocialCoordinator'>)])
+>>> list(isip.ContractsByClient.required_roles)
+[(<class 'lino_welfare.modlib.integ.roles.IntegUser'>, <class 'lino_welfare.modlib.pcsw.roles.SocialCoordinator'>)]
 >>> print(visible_for(isip.ContractsByClient))
 100 110 120 210 400 410 420 admin 910
