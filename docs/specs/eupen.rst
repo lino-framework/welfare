@@ -26,7 +26,7 @@ it was the first Lino that went into production. This was in 2010.
 >>> print(analyzer.show_complexity_factors())
 - 63 plugins
 - 142 models
-- 55 user roles
+- 41 user roles
 - 16 user types
 - 539 views
 - 152 dialog actions
@@ -515,7 +515,7 @@ Each window layout defines a given set of fields.
 - cal.GuestStates.wf1 : notify_subject, notify_body, notify_silent
 - cal.GuestStates.wf2 : notify_subject, notify_body, notify_silent
 - cal.Guests.checkin : notify_subject, notify_body, notify_silent
-- cal.Guests.detail : event, partner, role, state, remark, workflow_buttons, waiting_since, busy_since, gone_since
+- cal.Guests.detail : event, client, role, state, remark, workflow_buttons, waiting_since, busy_since, gone_since
 - cal.Guests.insert : event, partner, role
 - cal.Guests.merge_row : merge_to, reason
 - cal.OneEvent.merge_row : merge_to, cal_Guest, reason
@@ -734,10 +734,6 @@ Each window layout defines a given set of fields.
 - properties.PropTypes.merge_row : merge_to, reason
 - properties.Properties.detail : id, group, type, name, name_fr, name_en
 - properties.Properties.merge_row : merge_to, reason
-- reception.BusyVisitors.detail : event, client, role, state, remark, workflow_buttons
-- reception.GoneVisitors.detail : event, client, role, state, remark, workflow_buttons
-- reception.MyWaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
-- reception.WaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
 - sepa.Accounts.merge_row : merge_to, reason
 - sepa.AccountsByPartner.insert : iban, bic, remark
 - sessions.SessionTable.merge_row : merge_to, reason
@@ -1065,10 +1061,6 @@ Each window layout is **viewable** by a given set of user types.
 - properties.PropTypes.merge_row : visible for admin 910
 - properties.Properties.detail : visible for admin 910
 - properties.Properties.merge_row : visible for admin 910
-- reception.BusyVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
-- reception.GoneVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
-- reception.MyWaitingVisitors.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
-- reception.WaitingVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - sepa.Accounts.merge_row : visible for admin 910
 - sepa.AccountsByPartner.insert : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
 - sessions.SessionTable.merge_row : visible for admin 910
@@ -1644,7 +1636,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Kontakte --> Verwandschaftsarten : 13
 - Explorer --> System --> Vollmachten : 4
 - Explorer --> System --> Benutzerarten : 16
-- Explorer --> System --> Benutzerrollen : 55
+- Explorer --> System --> Benutzerrollen : 41
 - Explorer --> System --> Datenbankmodelle : 143
 - Explorer --> System --> Benachrichtigungen : 14
 - Explorer --> System --> Änderungen : 0

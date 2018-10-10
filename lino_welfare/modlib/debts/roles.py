@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Luc Saffre
+# Copyright 2015-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -20,10 +20,12 @@ from lino.core.roles import UserRole
 
 
 class DebtsUser(UserRole):
+    """Can act as a depts mediator."""
     pass
 
 
 class DebtsStaff(DebtsUser):
+    """Can configure debts mediation functionality."""
     pass
 
 

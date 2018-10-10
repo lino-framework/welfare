@@ -390,7 +390,7 @@ Each window layout defines a given set of fields.
 - cal.GuestStates.wf1 : notify_subject, notify_body, notify_silent
 - cal.GuestStates.wf2 : notify_subject, notify_body, notify_silent
 - cal.Guests.checkin : notify_subject, notify_body, notify_silent
-- cal.Guests.detail : event, partner, role, state, remark, workflow_buttons, waiting_since, busy_since, gone_since
+- cal.Guests.detail : event, client, role, state, remark, workflow_buttons, waiting_since, busy_since, gone_since
 - cal.Guests.insert : event, partner, role
 - cal.Guests.merge_row : merge_to, reason
 - cal.OneEvent.merge_row : merge_to, cal_Guest, reason
@@ -620,10 +620,6 @@ Each window layout defines a given set of fields.
 - polls.Responses.detail : poll, partner, date, workflow_buttons, polls_AnswersByResponse, user, state, remark
 - polls.Responses.insert : user, date, poll
 - polls.Responses.merge_row : merge_to, polls_AnswerChoice, polls_AnswerRemark, reason
-- reception.BusyVisitors.detail : event, client, role, state, remark, workflow_buttons
-- reception.GoneVisitors.detail : event, client, role, state, remark, workflow_buttons
-- reception.MyWaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
-- reception.WaitingVisitors.detail : event, client, role, state, remark, workflow_buttons
 - sessions.SessionTable.merge_row : merge_to, reason
 - system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, hide_events_before, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - system.SiteConfigs.merge_row : merge_to, reason
@@ -939,10 +935,6 @@ Each window layout is **viewable** by a given set of user types.
 - polls.Responses.detail : visible for 100 110 120 200 300 400 410 420 admin 910
 - polls.Responses.insert : visible for 100 110 120 200 300 400 410 420 admin 910
 - polls.Responses.merge_row : visible for admin 910
-- reception.BusyVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
-- reception.GoneVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
-- reception.MyWaitingVisitors.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
-- reception.WaitingVisitors.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - sessions.SessionTable.merge_row : visible for admin 910
 - system.SiteConfigs.detail : visible for admin 910
 - system.SiteConfigs.merge_row : visible for admin 910
@@ -1465,7 +1457,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Contacts --> Types de parenté : 13
 - Explorateur --> Système --> Procurations : 4
 - Explorateur --> Système --> Types d'utilisateur : 16
-- Explorateur --> Système --> Rôles d'utilisateur : 55
+- Explorateur --> Système --> Rôles d'utilisateur : 41
 - Explorateur --> Système --> types de contenu : 135
 - Explorateur --> Système --> Notifications : 13
 - Explorateur --> Système --> Changes : 0

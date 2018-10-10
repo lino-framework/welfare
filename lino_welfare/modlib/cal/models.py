@@ -304,6 +304,20 @@ class Guest(Guest):
         except Client.DoesNotExist:
             return None
 
+# Override library :mod:`WaitingVisitors
+# <lino_xl.lib.reception.WaitingVisitors>` table to change one
+# behaviour: when clicking in that table on the partner, :ref:`welfare`
+# should show the *Client's* and not the *Partner's* detail.
+
+class GuestDetail(GuestDetail):
+    main = """
+    event client role
+    state remark workflow_buttons
+    waiting_since busy_since gone_since
+    # outbox.MailsByController
+    """
+
+
 EventTypes.column_names = 'name invite_client esf_field *'
 MyEntries.column_names = 'when_text project event_type summary workflow_buttons *'
 
@@ -341,12 +355,12 @@ def customize_cal(sender, **kw):
     # invite_client
     # """, window_size=(60, 'auto'))
 
-    rt.models.cal.Guests.set_detail_layout("""
-    event partner role
-    state remark workflow_buttons
-    waiting_since busy_since gone_since
-    outbox.MailsByController
-    """)
+    # rt.models.cal.Guests.set_detail_layout("""
+    # event partner role
+    # state remark workflow_buttons
+    # waiting_since busy_since gone_since
+    # outbox.MailsByController
+    # """)
     site.modules.cal.Events.set_detail_layout("general more")
     site.modules.cal.Events.add_detail_panel("general", """
     event_type summary project

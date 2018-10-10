@@ -411,37 +411,12 @@ class CoachingsByClient(CoachingsByClient):
 
         return E.div(*elems)
 
-
 # Override library :mod:`WaitingVisitors
-# <lino_xl.lib.reception.models.WaitingVisitors>` table to change one
+# <lino_xl.lib.reception.WaitingVisitors>` table to change one
 # behaviour: when clicking in that table on the partner, :ref:`welfare`
 # should show the *Client's* and not the *Partner's* detail.
 
-if True:  # works, though is very hackerish
 
-    # uses virtual field "Guest.client" defined in
-    # lino_welfare.modlib.cal.models
-    for T in WaitingVisitors, MyWaitingVisitors, GoneVisitors, BusyVisitors:
-        T.column_names = T.column_names.replace('partner', 'client')
-        T.detail_layout = T.detail_layout.replace('partner', 'client')
-
-if False:  # works, but is very stupid
-
-    class WaitingVisitors(WaitingVisitors):
-        # labels are not automatically inherited. Must inherit manually
-        label = WaitingVisitors.label
-
-        @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
-        def partner(self, obj, ar):
-            return pcsw.Client.objects.get(pk=obj.partner.pk)
-
-    #~ The same for MyWaitingVisitors. See :blogref:`20130817`
-    class MyWaitingVisitors(MyWaitingVisitors):
-        # labels are not automatically inherited. Must inherit manually
-        label = MyWaitingVisitors.label
-
-    @dd.virtualfield(dd.ForeignKey('pcsw.Client'))
-    def partner(self, obj, ar):
-        return pcsw.Client.objects.get(pk=obj.partner.pk)
-
+for T in WaitingVisitors, MyWaitingVisitors, GoneVisitors, BusyVisitors:
+    T.column_names = T.column_names.replace('partner', 'client')
 

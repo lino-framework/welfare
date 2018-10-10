@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2018 Luc Saffre
+# Copyright 2015-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -17,31 +17,19 @@
 # <http://www.gnu.org/licenses/>.
 
 from lino.core.roles import UserRole
-# from lino.modlib.users.roles import AuthorshipTaker
-# from lino.modlib.office.roles import OfficeUser, OfficeStaff
-# from lino_xl.lib.cal.roles import GuestOperator
-# from lino_xl.lib.polls.roles import PollsUser, PollsStaff
-# from lino_xl.lib.beid.roles import BeIdUser
-# from lino_xl.lib.notes.roles import NotesUser
-# from lino.modlib.checkdata.roles import CheckdataUser
-# from lino_welfare.modlib.cbss.roles import CBSSUser
-# from lino_welfare.modlib.aids.roles import AidsStaff, AidsUser
-# from lino_xl.lib.sepa.roles import SepaUser, SepaStaff
-# from lino_xl.lib.courses.roles import CoursesUser
-# from lino_xl.lib.excerpts.roles import ExcerptsUser
-# from lino_xl.lib.coachings.roles import CoachingsUser, CoachingsStaff
-# from lino_xl.lib.contacts.roles import ContactsStaff, ContactsUser
 
 
 class SocialCoordinator(UserRole):
     """
-    Reception clerks (210) can see contracts.
+    Has limited access to data of social workers. Can see contracts.
     """
     pass
 
 class SocialUser(UserRole):
+    """Can access data managed by general social workers."""
     pass
 
 class SocialStaff(SocialUser):
+    """Can configure general social work functionality."""
     pass
 

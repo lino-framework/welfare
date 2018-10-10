@@ -20,8 +20,10 @@
 from lino.core.roles import UserRole
 
 class IntegUser(UserRole):
+    """Has access to data used by integration agents."""
     pass
 
 
 class IntegrationStaff(IntegUser):
+    """Can configure social integration functionality."""
     pass
