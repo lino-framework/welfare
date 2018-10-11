@@ -42,12 +42,12 @@ einsehbar:
   die neue Syntax ``**{'class':"Recipient"}``.  NB Falls das Problem
   wiederkommt bzw. nicht gelöst ist, habe ich wahrscheinlich lediglich
   vergessen, nach der letzten Datenübername die Druckvorlage
-  `Default.odt` anzupassen.
+  `excerpts/Default.odt` anzupassen.
 
 - (caroline) Für Benutzerart X fehlt im Reiter "Verträge" das Panel wo
   die VSE-Verträge angezeigt wurden.
 
-- (melanie) Übersetztung AMK Französisch war unverändert nicht
+- (melanie) Übersetzung AMK Französisch war unverändert nicht
   korrekt.  Zum Beispiel
   :file:`/media/cache/appypdf/aids.RefundConfirmation-5341.pdf`.  NB
   Falls das Problem wiederkommt bzw. nicht gelöst ist, habe ich

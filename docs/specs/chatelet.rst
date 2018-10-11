@@ -28,6 +28,17 @@ Lino Welfare *à la Châtelet* went online in 2013.
   of :mod:`lino_xl.lib.courses`) instead of **external courses**
   (:mod:`lino_welfare.modlib.xcourses`). And the "Courses" are labelled
   "Workshops" ("Ateliers").
+
+>>> print(analyzer.show_complexity_factors())
+- 59 plugins
+- 134 models
+- 41 user roles
+- 16 user types
+- 505 views
+- 151 dialog actions
+<BLANKLINE>
+
+  
     
 
 Hidden site languages
