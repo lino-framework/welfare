@@ -47,7 +47,6 @@ def album1(driver):
     alle Benutzer sowie deren Passwörter gezeigt, damit Sie die
     Unterschiede ausprobieren können.  Beachten Sie, dass *Sprache*
     und *Benutzerprofil* variieren.
-    Mehr dazu unter :doc:`/users`.
 
     """)
 

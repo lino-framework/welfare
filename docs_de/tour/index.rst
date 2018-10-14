@@ -38,7 +38,6 @@ Da es sich um eine Demo-Datenbank handelt, stehen hier
 alle Benutzer sowie deren Passwörter gezeigt, damit Sie die
 Unterschiede ausprobieren können.  Beachten Sie, dass *Sprache*
 und *Benutzerprofil* variieren.
-Mehr dazu unter :doc:`/users`.
 
 
 
