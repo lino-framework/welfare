@@ -34,7 +34,7 @@ Lino Welfare *à la Châtelet* went online in 2013.
 - 134 models
 - 41 user roles
 - 16 user types
-- 505 views
+- 506 views
 - 151 dialog actions
 <BLANKLINE>
 

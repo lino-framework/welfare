@@ -28,7 +28,7 @@ it was the first Lino that went into production. This was in 2010.
 - 142 models
 - 41 user roles
 - 16 user types
-- 539 views
+- 540 views
 - 152 dialog actions
 <BLANKLINE>
 
