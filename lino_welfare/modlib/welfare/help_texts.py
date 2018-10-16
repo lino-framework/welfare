@@ -310,6 +310,8 @@ columns (coachings per PersonGroup table."""),
     'lino_welfare.modlib.integ.JobProvidersAndContracts.model' : _("""alias of lino_welfare.modlib.contacts.models.Company"""),
     'lino_welfare.modlib.integ.ActivityReport' : _("""Gives an overview about the work of the Integration Service during
 a given period."""),
+    'lino_welfare.modlib.integ.roles.IntegUser' : _("""Has access to data used by integration agents."""),
+    'lino_welfare.modlib.integ.roles.IntegrationStaff' : _("""Can configure social integration functionality."""),
     'lino_welfare.modlib.isip.Plugin' : _("""See lino.core.plugin.Plugin."""),
     'lino_welfare.modlib.isip.OverlapGroups' : _("""The list of all known overlap groups to be selected for the
 overlap_group
@@ -500,7 +502,9 @@ the specified value."""),
     'lino_welfare.modlib.pcsw.Clients.model' : _("""alias of Client"""),
     'lino_welfare.modlib.pcsw.SSINChecker' : _("""Clients must have either valid eId data or an alternative
 identifying document."""),
-    'lino_welfare.modlib.pcsw.roles.SocialCoordinator' : _("""Reception clerks (210) can see contracts."""),
+    'lino_welfare.modlib.pcsw.roles.SocialCoordinator' : _("""Has limited access to data of social workers. Can see contracts."""),
+    'lino_welfare.modlib.pcsw.roles.SocialUser' : _("""Can access data managed by general social workers."""),
+    'lino_welfare.modlib.pcsw.roles.SocialStaff' : _("""Can configure general social work functionality."""),
     'lino_welfare.modlib.reception.FindDateByClientTable' : _("""A ButtonsTable which shows
 all users who are candidates responsible of new client
 appointment. Clicking on one of them will open the
@@ -568,6 +572,8 @@ which are not registiered."""),
     'lino_welfare.modlib.xcourses.CandidatesByCourse.model' : _("""alias of CourseRequest"""),
     'lino_welfare.modlib.xcourses.PendingCourseRequests' : _("""List of pending course requests."""),
     'lino_welfare.modlib.xcourses.PendingCourseRequests.model' : _("""alias of CourseRequest"""),
+    'lino_welfare.modlib.xcourses.roles.CoursesUser' : _("""Can manage external courses."""),
+    'lino_welfare.modlib.xcourses.roles.CoursesStaff' : _("""Can manage and configure external courses."""),
     'lino_welfare.projects.chatelet.modlib.courses.Enrolment' : _("""Adds two text fields motivation and problems."""),
     'lino_welfare.projects.chatelet.modlib.cv.ClientIsLearning' : _("""Select only clients who are “learning” during the given date.
 That is, who have an active Study, Training or
