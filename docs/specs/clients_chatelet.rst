@@ -31,7 +31,7 @@ Lino Welfare à la Chatelet.
 (main) [visible for all]:
 - **Personne** (general):
   - (general_1):
-    - **None** (overview)
+    - **Activity** (overview)
     - (general2):
       - (general2_1): **Sexe** (gender), **ID** (id), **Nationalité** (nationality)
       - **Nom de famille** (last_name)
