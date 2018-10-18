@@ -1509,7 +1509,7 @@ Here is the output of :func:`walk_menu_items
 <lino.api.doctests.walk_menu_items>` for this database:
 
 >>> walk_menu_items('rolf', severe=False)
-... #doctest: -ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte --> Personen : 103
 - Kontakte --> Klienten : 58
 - Kontakte --> Organisationen : 52
@@ -1580,7 +1580,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Büro --> Notizarten : 14
 - Konfigurierung --> Büro --> Ereignisarten : 11
 - Konfigurierung --> Büro --> Meine Einfügetexte : 1
-- Konfigurierung --> Kalender --> Kalenderliste : 13
+- Konfigurierung --> Kalender --> Kalenderliste : ...
 - Konfigurierung --> Kalender --> Räume : 1
 - Konfigurierung --> Kalender --> Prioritäten : 5
 - Konfigurierung --> Kalender --> Regelmäßige Ereignisse : 16
