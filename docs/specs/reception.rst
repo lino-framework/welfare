@@ -171,8 +171,8 @@ It has 4 keys:
 127
 >>> d.base_params['mt'] #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF +SKIP
 5...
->>> d.base_params == {'mt': 54, 'mk': 127}
-True
+>>> d.base_params['mk']
+127
 
 >>> d.field_values == {'userHidden': 5, 'user': 'Hubert Huppertz', 'summary': ''}
 True
