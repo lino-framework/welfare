@@ -75,7 +75,8 @@ from lino.utils import ssin
 from lino import mixins
 from lino.utils.dates import daterange_text
 
-from lino_xl.lib.beid.choicelists import CivilStates, ResidenceTypes
+from lino_xl.lib.contacts.choicelists import CivilStates
+from lino_xl.lib.beid.choicelists import ResidenceTypes
 from lino_xl.lib.clients.choicelists import ClientEvents, ClientStates
 from lino_xl.lib.coachings.utils import add_coachings_filter
 from lino_xl.lib.coachings.mixins import Coachable
@@ -137,7 +138,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
 
        The civil state of this client. Allowed choices are defined in
        :class:`CivilState
-       <lino_xl.lib.beid.choicelists.CivilStates>`.
+       <lino_xl.lib.contacts.CivilStates>`.
 
     .. attribute:: client_state
     
