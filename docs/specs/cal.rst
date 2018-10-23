@@ -211,7 +211,7 @@ Overdue appointments
 >>> rt.login('alicia').show(cal.MyOverdueAppointments, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ============================================================================= ============================================================ ===================== =============================
- overview                                                                      Controlled by                                                Calendar entry type   Workflow
+ Description                                                                   Controlled by                                                Calendar entry type   Workflow
 ----------------------------------------------------------------------------- ------------------------------------------------------------ --------------------- -----------------------------
  `Évaluation 15 (07.04.2014 09:00) with RADERMACHER Alfons (153) <Detail>`__   `ISIP#17 (Alfons RADERMACHER) <Detail>`__                    Evaluation            [▽] **Suggested** → [☑] [☒]
  `Évaluation 14 (07.04.2014 09:00) with DA VINCI David (165) <Detail>`__       `ISIP#22 (David DA VINCI) <Detail>`__                        Evaluation            [▽] **Suggested** → [☑] [☒]

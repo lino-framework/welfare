@@ -31,7 +31,7 @@ Lino Welfare à la Chatelet.
 (main) [visible for all]:
 - **Personne** (general):
   - (general_1):
-    - **Activity** (overview)
+    - **None** (overview)
     - (general2):
       - (general2_1): **Sexe** (gender), **ID** (id), **Nationalité** (nationality)
       - **Nom de famille** (last_name)
@@ -44,7 +44,7 @@ Lino Welfare à la Chatelet.
   - (general_4) [visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910]:
     - **Rendez-vous** (reception.AppointmentsByPartner)
     - **Créer rendez-vous avec** (AgentsByClient)
-    - **Inscriptions** (courses.EnrolmentsByPupil) [visible for 100 110 120 200 210 300 400 410 420 800 admin 910]
+    - **Ateliers** (courses.EnrolmentsByPupil) [visible for 100 110 120 200 210 300 400 410 420 800 admin 910]
 - **Intervenants** (coaching) [visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910]:
   - (coaching_1) [visible for 110 120 200 220 300 420 800 admin 910]:
     - (newcomers_left):

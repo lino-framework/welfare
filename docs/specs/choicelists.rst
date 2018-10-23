@@ -48,7 +48,6 @@ name to read the documentation):
     aids.ConfirmationTypes : Hilfebescheinigungsarten
     art61.Subsidizations : Subsidizations
     beid.BeIdCardTypes : eID-Kartenarten
-    beid.CivilStates : Zivilstände
     beid.ResidenceTypes : Einwohnerregister
     cal.AccessClasses : AccessClasses
     cal.DurationUnits : DurationUnits
@@ -68,6 +67,7 @@ name to read the documentation):
     clients.ClientEvents : Beobachtungskriterien
     clients.ClientStates : Bearbeitungszustände Klienten
     clients.KnownContactTypes : Standard-Klientenkontaktarten
+    contacts.CivilStates : Zivilstände
     contacts.PartnerEvents : Beobachtungskriterien
     countries.PlaceTypes : PlaceTypes
     cv.CefLevel : CEF-Kategorien

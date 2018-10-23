@@ -525,6 +525,8 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
             raise Exception("20140513 None in %r" % elems)
         return E.div(*elems)
 
+dd.update_field(Client, 'overview', verbose_name=None)
+
 
 class ClientDetail(dd.DetailLayout):
 

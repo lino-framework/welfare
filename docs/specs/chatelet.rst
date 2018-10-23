@@ -594,6 +594,7 @@ Each window layout defines a given set of fields.
 - notes.Notes.detail : date, time, event_type, type, project, subject, important, company, contact_person, user, language, build_time, id, body, uploads_UploadsByController
 - notes.Notes.insert : event_type, type, subject, project
 - notes.Notes.merge_row : merge_to, reason
+- notes.NotesByX.insert : event_type, type, subject, project
 - notify.Messages.merge_row : merge_to, reason
 - outbox.Attachments.merge_row : merge_to, reason
 - outbox.Mails.detail : subject, project, date, user, sent, id, owner, outbox_AttachmentsByMail, uploads_UploadsByController, body
@@ -909,6 +910,7 @@ Each window layout is **viewable** by a given set of user types.
 - notes.Notes.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - notes.Notes.merge_row : visible for admin 910
+- notes.NotesByX.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - notify.Messages.merge_row : visible for admin 910
 - outbox.Attachments.merge_row : visible for admin 910
 - outbox.Mails.detail : visible for 110 120 410 420 admin 910
