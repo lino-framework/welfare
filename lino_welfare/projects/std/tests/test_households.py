@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2017 Luc Saffre
+# Copyright 2015-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -108,6 +108,7 @@ class BeIdTests(RemoteAuthTestCase):
         result = self.check_json_result(
             response, 'navinfo data disable_delete id title')
 
+        # self.assertEqual(result['data'].keys(), None)
         fieldname = 'households_MembersByPerson'
         html = result['data'][fieldname]
         soup = BeautifulSoup(html, 'lxml')

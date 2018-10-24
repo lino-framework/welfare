@@ -48,9 +48,14 @@ His primary household consists of 2 adults and 3 children:
 ...     res = test_client.get(url, REMOTE_USER='rolf')
 ...     assert res.status_code == 200
 ...     d = json.loads(res.content)
+...     if not fieldname in d['data']:
+...         raise Exception("20181023 '{}' not in {}".format(
+...             fieldname, d['data'].keys()))
 ...     return d['data'][fieldname]
 
->>> soup = BeautifulSoup(check('contacts/Persons/240', 'humanlinks_LinksByHuman'), 'lxml')
+>>> uri = 'contacts/Persons/{}'.format(paul.id)
+>>> html = check(uri, 'humanlinks_LinksByHuman')
+>>> soup = BeautifulSoup(html, 'lxml')
 >>> links = soup.find_all('a')
 >>> len(links)
 23

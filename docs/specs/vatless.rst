@@ -5,21 +5,20 @@
 Incoming invoices
 =================
 
-.. doctest init:
 
-    >>> import lino ; lino.startup('lino_welfare.projects.eupen.settings.doctests')
-    >>> from etgen.html import E
-    >>> from lino.api.doctest import *
-    >>> from lino.api import rt
-
-This document is based on and extends the following specifications:
-
-- :ref:`welfare.specs.ledger`
+This document is based on and extends :ref:`welfare.specs.ledger`.
 
 .. contents::
    :depth: 1
    :local:
 
+Code snipptest in this document are tested on the
+:mod:`lino_welfare.projects.eupen` demo project.
+
+>>> from lino import startup
+>>> startup('lino_welfare.projects.eupen.settings.doctests')
+>>> from lino.api.doctest import *
+>>> from lino.api import rt
 
 
 Incoming invoices
