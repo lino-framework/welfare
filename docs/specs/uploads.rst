@@ -6,7 +6,7 @@ Uploads
 =============
 
 .. doctest init:
-    
+    >>> from __future__ import unicode_literals
     >>> import lino
     >>> lino.startup('lino_welfare.projects.eupen.settings.doctests')
     >>> from lino.api.doctest import *
@@ -208,7 +208,7 @@ The first button opens a detail window on the *last* uploaded filed:
 
 The second item is just the comma which separates the two buttons:
 
->>> div.contents[1] #doctest: +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL +ELLIPSIS
+>>> div.contents[1] #doctest: +ELLIPSIS
 u', '
 
 The second button opens the list of uploads:
@@ -239,8 +239,13 @@ It has 3 keys:
 
 >>> d.record_id
 8
->>> d.base_params == {'mt': 54, 'type': 4, 'mk': 121}
-True
+>>> d.base_params['mt'] #doctest: +ELLIPSIS
+5...
+>>> d.base_params['type']
+4
+>>> d.base_params['mk']
+121
+
 >>> print(json.dumps(d.param_values))  #doctest: +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL
 {"userHidden": null, "upload_typeHidden": null, "end_date": null,
 "observed_eventHidden": "20", "observed_event": "Est active",
@@ -320,8 +325,12 @@ It has 3 keys:
 >>> len(d.param_values)
 10
 
->>> d.base_params == {'mt': 54, 'mk': 177, 'type_id': 1}
-True
+>>> d.base_params['mt'] #doctest: +ELLIPSIS
+5...
+>>> d.base_params['mk'] #doctest: +ELLIPSIS
+177
+>>> d.base_params['type_id'] #doctest: +ELLIPSIS
+1
 
 >>> data_record_keys = list(rmu(d.data_record.keys()))
 >>> data_record_keys.sort()
