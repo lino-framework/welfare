@@ -33,6 +33,7 @@ from __future__ import print_function
 from builtins import str
 import json
 from six.moves.urllib.parse import urlencode
+import six
 from django.conf import settings
 from django.utils import translation
 
@@ -377,12 +378,22 @@ class TestCase(TestCase):
         res = self.client.get(url, **kwargs)
         self.assertEqual(res.status_code, 200)
         # self.check_notifications("")
-        self.check_notifications("""
+        if six.PY2:
+            self.check_notifications("""
 ========================================================= ====================== ==============
- Sujet                                                     Lié à                  Destinataire
+Sujet                                                     Lié à                  Destinataire
 --------------------------------------------------------- ---------------------- --------------
- Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   róger
- Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   caróline
+Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   róger
+Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   caróline
+========================================================= ====================== ==============
+""")
+        else:
+            self.check_notifications("""
+========================================================= ====================== ==============
+Sujet                                                     Lié à                  Destinataire
+--------------------------------------------------------- ---------------------- --------------
+Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   caróline
+Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   róger
 ========================================================= ====================== ==============
 """)
         # self.check_notes()
