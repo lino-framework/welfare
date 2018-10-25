@@ -13,9 +13,43 @@ Vorankündigungen übernächste Version:
   unbenutzt. Und in manchen Ansichten zeigte Lino nicht `Klient`
   sondern `Partner` an.  In Lino Welfare werden Anwesenheiten nur für
   Klienten erfasst, nicht für andere Leute.
+  
 - Optional auf Anfrage:
   - row-level edit locking für Klienten
   - intelligente Ansicht für cal.EntriesByClient
+
+Technische Checkliste
+=====================
+
+Start the last data migration::
+
+    $ go testlino
+    $ sudo service apache2 stop
+    $ sudo service supervisor stop
+    $ ./initdb_testing_from_prod.sh
+
+The data migration lasts about 1:30 hours.  When it is done::
+
+    $ swap testing and prod
+
+    $ sudo service apache2 start
+    $ sudo service supervisor start
+
+Open the `excerpts/Default.odt` document template and manually
+edit it:
+
+- (melanie) Inhalt der Bescheinigungen: Adressfeld ist versetzt!
+  Layout nicht ok!  --> Das lag daran, dass Lino jetzt lxml-Elemente
+  benutzt und ``class_="Recipient"`` deshalb ersetzt werden muss durch
+  die neue Syntax ``**{'class':"Recipient"}``.  NB Falls das Problem
+  wiederkommt bzw. nicht gelöst ist, habe ich wahrscheinlich lediglich
+  vergessen, nach der letzten Datenübername die Druckvorlage
+  `excerpts/Default.odt` anzupassen.
+
+Maybe also check the other local document templates?
+
+    $ find config/ -name Default.odt
+
 
 DONE
 ====
