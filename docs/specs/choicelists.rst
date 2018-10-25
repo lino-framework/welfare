@@ -56,6 +56,7 @@ name to read the documentation):
     cal.GuestStates : Gast-Zustände
     cal.PlannerColumns : PlannerColumns
     cal.Recurrencies : Recurrencies
+    cal.ReservationStates : Zustände
     cal.TaskStates : Aufgaben-Zustände
     cal.Weekdays : Weekdays
     cbss.ManageActions : ManageActions

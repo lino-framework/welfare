@@ -44,7 +44,7 @@ Lino Welfare à la Chatelet.
   - (general_4) [visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910]:
     - **Rendez-vous** (reception.AppointmentsByPartner)
     - **Créer rendez-vous avec** (AgentsByClient)
-    - **Ateliers** (courses.EnrolmentsByPupil) [visible for 100 110 120 200 210 300 400 410 420 800 admin 910]
+    - **Inscriptions dans Ateliers** (courses.EnrolmentsByPupil) [visible for 100 110 120 200 210 300 400 410 420 800 admin 910]
 - **Intervenants** (coaching) [visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910]:
   - (coaching_1) [visible for 110 120 200 220 300 420 800 admin 910]:
     - (newcomers_left):
@@ -77,8 +77,8 @@ Lino Welfare à la Chatelet.
   - **PIISs** (isip.ContractsByClient) [visible for 100 110 120 210 400 410 420 admin 910]
   - **Octrois d'aide** (aids.GrantingsByClient)
 - **O.I.** (courses_tab) [visible for 100 110 120 200 210 300 400 410 420 800 admin 910]:
-  - **Ateliers d'insertion sociale** (courses.BasicEnrolmentsByPupil)
-  - **Ateliers d'Insertion socioprofessionnelle** (courses.JobEnrolmentsByPupil)
+  - **Inscriptions dans Ateliers d'insertion sociale** (courses.BasicEnrolmentsByPupil)
+  - **Inscriptions dans Ateliers d'Insertion socioprofessionnelle** (courses.JobEnrolmentsByPupil)
 - **Stages d'immersion** (immersion.ContractsByClient) [visible for 100 110 120 210 400 410 420 admin 910]
 - **RAE** (job_search_1) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]:
   - (suche):

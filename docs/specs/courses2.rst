@@ -1,18 +1,14 @@
+.. doctest docs/specs/courses2.rst
 .. _welfare.specs.courses2:
 
 ================
 Workshops
 ================
 
-.. to test only this document:
 
-    $ doctest docs/specs/courses2.rst
-    
-    doctest init:
-    
-    >>> from lino import startup
-    >>> startup('lino_welfare.projects.chatelet.settings.doctests')
-    >>> from lino.api.doctest import *
+>>> from lino import startup
+>>> startup('lino_welfare.projects.chatelet.settings.doctests')
+>>> from lino.api.doctest import *
 
 
 .. contents:: 
@@ -52,7 +48,7 @@ Ateliers
 
 >>> print(rt.models.courses.Courses.params_layout.main)
 topic line user teacher state 
-    room can_enroll:10 start_date end_date show_active
+    room can_enroll:10 start_date end_date show_exposed
 
 >>> demo_get('robin', 'choices/courses/Courses/topic', 'count rows', 0)
 >>> demo_get('robin', 'choices/courses/Courses/teacher', 'count rows', 102)
