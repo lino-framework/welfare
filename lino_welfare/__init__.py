@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2002-2018 Luc Saffre
+# Copyright 2002-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -33,8 +33,8 @@ import os
 fn = os.path.join(os.path.dirname(__file__), 'setup_info.py')
 exec(compile(open(fn, "rb").read(), fn, 'exec'))
 
-doc_trees = ['docs', 'docs_de', 'docs_fr']
+doc_trees = ['docs', 'dedocs', 'frdocs']
 intersphinx_urls = dict(docs="http://welfare.lino-framework.org")
-intersphinx_urls.update(docs_de="http://de.welfare.lino-framework.org")
-intersphinx_urls.update(docs_fr="http://fr.welfare.lino-framework.org")
+intersphinx_urls.update(dedocs="http://de.welfare.lino-framework.org")
+intersphinx_urls.update(frdocs="http://fr.welfare.lino-framework.org")
 srcref_url = 'https://github.com/lino-framework/welfare/blob/master/%s'
