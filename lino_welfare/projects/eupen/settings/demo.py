@@ -14,4 +14,6 @@ class Site(Site):
 SITE = Site(globals())
 # SITE.appy_params.update(raiseOnError=False)
 SITE.plugins.beid.urlhandler_prefix = 'beid'
+SITE.plugins.extjs.configure(autorefresh_seconds=5)
+
 DEBUG = True
