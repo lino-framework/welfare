@@ -378,22 +378,13 @@ class TestCase(TestCase):
         res = self.client.get(url, **kwargs)
         self.assertEqual(res.status_code, 200)
         # self.check_notifications("")
-        if six.PY2:
-            self.check_notifications("""
+        #if six.PY2:
+        self.check_notifications("""
 ========================================================= ====================== ==============
 Sujet                                                     Lié à                  Destinataire
 --------------------------------------------------------- ---------------------- --------------
 Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   róger
 Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   caróline
-========================================================= ====================== ==============
-""")
-        else:
-            self.check_notifications("""
-========================================================= ====================== ==============
-Sujet                                                     Lié à                  Destinataire
---------------------------------------------------------- ---------------------- --------------
-Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   caróline
-Alicia a classé GÉRARD First (100) comme <b>Refusé</b>.   *GÉRARD First (100)*   róger
 ========================================================= ====================== ==============
 """)
         # self.check_notes()
