@@ -246,7 +246,7 @@ It has 3 keys:
 >>> d.base_params['mk']
 121
 
->>> sixprint(json.dumps(d.param_values))  #doctest: +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL
+>>> pprint(sixprint(json.dumps(d.param_values)))  #doctest: +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL
 ('{"coached_by": null, "coached_byHidden": null, "end_date": null, '
     '"observed_event": "Est active", "observed_eventHidden": "20", "start_date": '
     'null, "upload_type": null, "upload_typeHidden": null, "user": null, '
