@@ -61,6 +61,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Rechnungseingänge : Rechnungseingänge (REG), Sammelrechnungen (SREG)
   - Ausgabeanweisungen : Ausgabeanweisungen (AAW)
   - Zahlungsaufträge : KBC Zahlungsaufträge (ZKBC)
+  - SEPA-Import
 - DSBE :
   - Klienten
   - VSEs
@@ -1682,7 +1683,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Buchhaltung --> Handelsarten : 3
 - Explorer --> Buchhaltung --> Journalgruppen : 5
 - Explorer --> Buchhaltung --> Rechnungen : 31
-- Explorer --> SEPA --> Bankkonten : 81
+- Explorer --> SEPA --> Bankkonten : 53
 - Explorer --> SEPA --> Importierte  Bankkonten : 34
 - Explorer --> SEPA --> Kontoauszüge : 34
 - Explorer --> SEPA --> Transaktionen : 57

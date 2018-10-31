@@ -1,7 +1,7 @@
 from .demo import *
 SITE = Site(
     globals(),
-    use_java=True,
+    # use_java=True,
     #is_local_project_dir=True,
     ignore_model_errors=True,
     remote_user_header='REMOTE_USER')

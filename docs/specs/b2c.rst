@@ -8,20 +8,27 @@ Import bank statements (SEPA  BankToCustomer)
 This document describes the functionality implemented by the
 :mod:`lino_cosi.lib.b2c` module.
 
-..  doctest initialization:
-
-    >>> from __future__ import print_function
-    >>> import os
-    >>> os.environ['DJANGO_SETTINGS_MODULE'] = \
-    ...    'lino_welfare.projects.std.settings.doctests'
-    >>> from lino.api.doctest import *
-
-    >>> ses = rt.login('rolf')
-    >>> translation.activate('de')
-
 .. contents::
    :local:
    :depth: 2
+
+About this document
+===================
+
+Examples in this document use the :mod:`lino_welfare.projects.eupen`
+demo project:
+
+>>> from lino import startup
+>>> startup('lino_welfare.projects.eupen.settings.doctests')
+>>> from lino.api.doctest import *
+
+>>> ses = rt.login('rolf')
+>>> translation.activate('de')
+
+>>> ses.show_menu_path(system.SiteConfig.import_b2c)
+Buchhaltung --> SEPA-Import
+
+           
 
 
 >>> rt.show(b2c.Accounts)
@@ -102,5 +109,5 @@ Now let's look at the transactions in this statement:
 <BLANKLINE>
 
 Note that **Ordre permanent** is in French (not English) because we do
-not yet find the officeal German translations for the Beglian bank
+not yet find the officeal German translations for the Belgian bank
 transaction codes (see :mod:`lino_cosi.lib.b2c.febelfin`)
