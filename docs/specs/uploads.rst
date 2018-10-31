@@ -345,7 +345,7 @@ Einfügen in Uploads von BRECHT Bernd (177) (Ist aktiv)
 
 >>> data_record_data = rmu(d.data_record['data'])
 >>> sixprint(data_record_data)
-... #doctest: +NORMALIZE_WHITESPACE
+... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
 {'company': None
  'companyHidden': None
  'contact_person': None
