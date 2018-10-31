@@ -248,7 +248,7 @@ It has 3 keys:
 
 >>> pprint(sixprint(json.dumps(d.param_values)))  #doctest: +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL
 '{"userHidden": null, "upload_typeHidden": null, "end_date": null, "observed_eventHidden": "20", "observed_event": "Est active", "coached_by": null, "upload_type": null, "coached_byHidden": null, "start_date": null, "user": null}'
-
+    None
 
 
 Uploads by client
