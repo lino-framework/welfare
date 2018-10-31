@@ -346,27 +346,25 @@ Einfügen in Uploads von BRECHT Bernd (177) (Ist aktiv)
 >>> data_record_data = rmu(d.data_record['data'])
 >>> sixprint(data_record_data)
 ... #doctest: +NORMALIZE_WHITESPACE
-{'company': None,
- 'companyHidden': None,
- 'contact_person': None,
- 'contact_personHidden': None,
- 'contact_role': None,
- 'contact_roleHidden': None,
- 'description': '',
- 'disable_editing': False,
- 'disabled_fields': {'mimetype': True},
- 'end_date': None,
- 'file': '',
- 'id': None,
- 'needed': True,
- 'owner': '&lt;a href="javascript:Lino.pcsw.Clients.detail.run(null,{ '
-              '&amp;quot;record_id&amp;quot;: 177 })"&gt;BRECHT Bernd '
-              '(177)&lt;/a&gt;',
- 'project': 'BRECHT Bernd (177)',
- 'projectHidden': 177,
- 'remark': '',
- 'start_date': None,
- 'type': 'Aufenthaltserlaubnis',
- 'typeHidden': 1,
- 'user': 'Rolf Rompen',
+{'company': None
+ 'companyHidden': None
+ 'contact_person': None
+ 'contact_personHidden': None
+ 'contact_role': None
+ 'contact_roleHidden': None
+ 'description': ''
+ 'disable_editing': False
+ 'disabled_fields': {'mimetype': True}
+ 'end_date': None
+ 'file': ''
+ 'id': None
+ 'needed': True
+ 'owner': '&lt;a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &amp;quot;record_id&amp;quot;: 177 })"&gt;BRECHT Bernd (177)&lt;/a&gt;'
+ 'project': 'BRECHT Bernd (177)'
+ 'projectHidden': 177
+ 'remark': ''
+ 'start_date': None
+ 'type': 'Aufenthaltserlaubnis'
+ 'typeHidden': 1
+ 'user': 'Rolf Rompen'
  'userHidden': 1}
