@@ -68,6 +68,9 @@ application for Belgian
 
 - Online demo site at http://welfare-demo.lino-framework.org
 
+- Release notes are maintained separately in `German
+  <http://de.welfare.lino-framework.org/changes>`__ and `French
+  <http://de.welfare.lino-framework.org/changes>`__.
 
 """,
     author='Luc Saffre',
