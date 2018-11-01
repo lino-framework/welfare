@@ -7,7 +7,7 @@ extensions = []
 templates_path = []
 
 from lino.sphinxcontrib import configure
-configure(globals(), 'lino_welfare.projects.eupen.settings.doctests')
+configure(globals(), 'lino_book.projects.gerd.settings.doctests')
 
 extensions += ['atelier.sphinxconf.blog']
 extensions += ['lino.sphinxcontrib.logo']

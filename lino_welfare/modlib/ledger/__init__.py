@@ -21,7 +21,6 @@ Lino Welfare extension of :mod:`lino_xl.lib.ledger`
 .. autosummary::
    :toctree:
 
-    models
     fixtures.std
     fixtures.std_journals
     fixtures.demo

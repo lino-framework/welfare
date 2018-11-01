@@ -17,12 +17,7 @@
 # <http://www.gnu.org/licenses/>.
 
 """Lino-Welfare extension of :mod:`lino_xl.lib.reception`.
-Technical specs see :doc:`/specs/reception`.
-
-.. autosummary::
-   :toctree:
-
-   models
+See :doc:`/specs/welfare/reception/index`.
 
 """
 

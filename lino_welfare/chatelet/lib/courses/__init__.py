@@ -1,5 +1,4 @@
-# -*- coding: UTF-8 -*-
-# Copyright 2002-2018 Rumma & Ko Ltd
+# Copyright 2014-2016 Luc Saffre
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -16,27 +15,23 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-""":mod:`lino_welfare` is the main module of Lino Welfare.
+"""
+The Chatelet extension of :mod:`lino_xl.lib.courses`
 
 .. autosummary::
    :toctree:
 
-   eupen.lib
-   chatelet.lib
-   migrate
+   fixtures
 
 
 """
 
-import os
+from lino_xl.lib.courses import Plugin
+from django.utils.translation import ugettext_lazy as _
 
-fn = os.path.join(os.path.dirname(__file__), 'setup_info.py')
-exec(compile(open(fn, "rb").read(), fn, 'exec'))
 
-# doc_trees = ['docs', 'dedocs', 'frdocs']
-doc_trees = ['dedocs', 'frdocs']
-# intersphinx_urls = dict(docs="http://welfare.lino-framework.org")
-intersphinx_urls = dict()
-intersphinx_urls.update(dedocs="http://de.welfare.lino-framework.org")
-intersphinx_urls.update(frdocs="http://fr.welfare.lino-framework.org")
-srcref_url = 'https://github.com/lino-framework/welfare/blob/master/%s'
+class Plugin(Plugin):
+    extends_models = ['Course', 'Line', 'Enrolment']
+    verbose_name = _("Workshops")
+    pupil_model = 'pcsw.Client'
+    short_name = _("IO")  # "internal orientation"

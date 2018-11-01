@@ -27,7 +27,6 @@ for PCSW specific objects.
     roles
     actions
     choicelists
-    models
     fixtures
 
 

@@ -21,8 +21,6 @@ Lino-Welfare extension of :mod:`lino.modlib.users`.
 .. autosummary::
    :toctree:
 
-    models
-    desktop
     fixtures.demo
     fixtures.demo2
 

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2016 Luc Saffre
+# Copyright 2011-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -16,7 +16,6 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Database models for this plugin. """
 
 from builtins import str
 import os
@@ -52,10 +51,6 @@ CBSS_ERROR_MESSAGE = "CBSS error %s:\n"
 @dd.python_2_unicode_compatible
 class Sector(mixins.BabelNamed):
 
-    """Default values filled from
-    :mod:`lino_welfare.modlib.cbss.fixtures.sectors`.
-
-    """
     class Meta:
         app_label = 'cbss'
         verbose_name = _("Sector")
@@ -77,11 +72,6 @@ class Sector(mixins.BabelNamed):
 @dd.python_2_unicode_compatible
 class Purpose(mixins.BabelNamed):
 
-    u"""
-    Codes qualité (Hoedanigheidscodes).
-    This table is usually filled with the official codes
-    by :mod:`lino_welfare.modlib.cbss.fixtures.purposes`.
-    """
     class Meta:
         app_label = 'cbss'
         verbose_name = _("Purpose")
@@ -106,11 +96,6 @@ NSWSC = ('wsc', "http://ksz-bcss.fgov.be/connectors/WebServiceConnector")
 
 
 class IdentifyPersonRequest(SSDNRequest, WithPerson):
-
-    """
-    A request to the IdentifyPerson service.
-    
-    """
 
     ssdn_service_id = 'OCMWCPASIdentifyPerson'
     ssdn_service_version = '20050930'
@@ -269,36 +254,6 @@ Element '{http://www.ksz-bcss.fgov.be/XSD/SSDN/OCMW_CPAS/IdentifyPerson}BirthDat
 
 
 class ManageAccessRequest(SSDNRequest, WithPerson):
-
-    """A request to the ManageAccess service.
-    
-    Registering a person means that this PCSW is going to maintain a
-    dossier about this person.  Users commonly say "to integrate" a
-    person.
-    
-    Fields include:
-
-    
-    .. attribute:: sector
-
-        Pointer to :class:`Sector`.
-
-    .. attribute:: purpose
-
-        Pointer to :class:`Purpose`.
-
-    .. attribute:: action
-    
-        The action to perform.  This must be one of the values in
-        :class:`lino_welfare.modlib.cbss.choicelists.ManageActions`
-    
-    .. attribute:: query_register
-
-        The register to be query.
-        This must be one of the values in
-        :class:`lino_welfare.modlib.cbss.choicelists.QueryRegisters`
-
-    """
 
     ssdn_service_id = 'OCMWCPASManageAccess'
     ssdn_service_version = '20050930'
@@ -465,10 +420,6 @@ def reply_has_result(reply):
 
 
 class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
-
-    """
-    A request to the RetrieveTIGroups service (aka Tx25)
-    """
 
     class Meta:
         app_label = 'cbss'

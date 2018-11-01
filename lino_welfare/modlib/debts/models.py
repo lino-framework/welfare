@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2017 Luc Saffre
+# Copyright 2012-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -16,10 +16,6 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""
-Database models for `lino_welfare.modlib.debts`.
-
-"""
 
 from __future__ import unicode_literals
 
@@ -85,36 +81,6 @@ class Group(mixins.BabelNamed):
 
 @dd.python_2_unicode_compatible
 class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
-    """An **account** is an item of an account chart used to collect
-    ledger transactions or other accountable items.
-
-    .. attribute:: name
-
-        The multilingual designation of this account, as the users see
-        it.
-
-
-    .. attribute:: group
-
-        The *account group* to which this account belongs.  This must
-        point to an instance of :class:`Group`.
-    
-    .. attribute:: seqno
-
-        The sequence number of this account within its :attr:`group`.
-    
-    .. attribute:: ref
-
-        An optional unique name which can be used to reference a given
-        account.
-
-    .. attribute:: type
-
-        The *account type* of this account.  This must
-        point to an item of
-        :class:`lino_welfare.modlib.debts.AccountTypes`.
-    
-    """
     ref_max_length = settings.SITE.plugins.debts.ref_length
 
     class Meta:
@@ -149,10 +115,6 @@ class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
 
 @dd.python_2_unicode_compatible
 class Budget(UserAuthored, Certifiable, mixins.Duplicable):
-    """A document which expresses the financial situation of a partner at
-    a given date.
-
-    """
 
     class Meta:
         verbose_name = _("Budget")
@@ -457,10 +419,6 @@ Vielleicht mit Fußnoten?"""))
 
 
 class Actor(ActorBase, SequencedBudgetComponent):
-    """An **actor** of a budget is a partner who is part of the household
-    for which the budget has been established.
-
-    """
     class Meta:
         verbose_name = _("Budget Actor")
         verbose_name_plural = _("Budget Actors")
@@ -478,23 +436,6 @@ class Actor(ActorBase, SequencedBudgetComponent):
 
 
 class Entry(SequencedBudgetComponent):
-    """A detail row of a :class:`Budget`.
-
-    .. attribute:: budget
-
-    The :class:`Budget` who contains this entry.
-
-    .. attribute:: amount
-
-        The amount of money. An empty amount is different from a zero
-        amount in that the latter will be printed while the former
-        not.
-
-    .. attribute:: account
-
-        The related :class:`Account`.
-
-    """
     class Meta:
         verbose_name = _("Budget Entry")
         verbose_name_plural = _("Budget Entries")

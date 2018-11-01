@@ -44,7 +44,7 @@ msgstr "Preuves de recherche"
 #: lino_welfare/modlib/debts/models.py:164 lino_welfare/modlib/isip/models.py:414
 #: lino_welfare/modlib/jobs/models.py:897 lino_welfare/modlib/jobs/models.py:1018
 #: lino_welfare/modlib/pcsw/models.py:1104
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:249
+#: lino_welfare.chatelet.lib/cv/models.py:249
 msgid "Date"
 msgstr ""
 
@@ -180,7 +180,7 @@ msgstr "béneficie d'une aide %(what)s %(when)s."
 #: lino_welfare/modlib/projects/models.py:58
 #: lino_welfare/modlib/xcourses/models.py:200
 #: lino_welfare/modlib/xcourses/models.py:377
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:134
+#: lino_welfare.chatelet.lib/cv/models.py:134
 msgid "Remark"
 msgstr "Remarque"
 
@@ -419,8 +419,8 @@ msgstr ""
 #: lino_welfare/modlib/aids/config/aids/Confirmation/certificate.body.html:12
 #: lino_welfare/modlib/art61/config/art61/Contract/contract.body.html:15
 #: lino_welfare/modlib/immersion/config/immersion/Contract/immersion.body.html:16
-#: lino_welfare/projects/chatelet/modlib/courses/config/courses/Enrolment/enrolment.body.html:12
-#: lino_welfare/projects/chatelet/modlib/courses/config/courses/Enrolment/intervention.body.html:12
+#: lino_welfare.chatelet.lib/courses/config/courses/Enrolment/enrolment.body.html:12
+#: lino_welfare.chatelet.lib/courses/config/courses/Enrolment/intervention.body.html:12
 msgid "Translation"
 msgstr "Traduction"
 
@@ -440,7 +440,7 @@ msgstr ""
 #: lino_welfare/modlib/aids/fixtures/std.py:155
 #: lino_welfare/modlib/reception/models.py:205
 #: lino_welfare/modlib/welfare/config/excerpts/Excerpt/aus.body.html:5
-#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:45
+#: lino_welfare.chatelet.lib/cv/fixtures/std.py:45
 msgid "Attestation"
 msgstr "Attestation"
 
@@ -510,8 +510,8 @@ msgid "Art61 job supplyments"
 msgstr "Mises à l'emploi art61"
 
 #: lino_welfare/modlib/art61/models.py:109 lino_welfare/modlib/jobs/models.py:225
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:191
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:242
+#: lino_welfare.chatelet.lib/cv/models.py:191
+#: lino_welfare.chatelet.lib/cv/models.py:242
 #, fuzzy
 msgid "Type"
 msgstr "Type d'aide sociale"
@@ -628,7 +628,7 @@ msgstr ""
 #: lino_welfare/modlib/system/models.py:114
 #: lino_welfare/modlib/users/desktop.py:37
 #: lino_welfare/modlib/welfare/workflows.py:62
-#: lino_welfare/projects/chatelet/modlib/isip/models.py:33
+#: lino_welfare.chatelet.lib/isip/models.py:33
 msgid "General"
 msgstr "Général"
 
@@ -735,7 +735,7 @@ msgid "Dutch"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/choicelists.py:124
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:85
+#: lino_welfare.chatelet.lib/courses/fixtures/demo.py:85
 msgid "French"
 msgstr ""
 
@@ -744,7 +744,7 @@ msgid "German"
 msgstr ""
 
 #: lino_welfare/modlib/cbss/mixins.py:95 lino_welfare/modlib/pcsw/models.py:168
-#: lino_welfare/projects/chatelet/modlib/pcsw/config/pcsw/Coaching/coaching.body.html:17
+#: lino_welfare.chatelet.lib/pcsw/config/pcsw/Coaching/coaching.body.html:17
 msgid "Client"
 msgstr "Bénéficiaire"
 
@@ -865,7 +865,7 @@ msgid "Tx25 Requests"
 msgstr "Requêtes Tx25"
 
 #: lino_welfare/modlib/cbss/models.py:484 lino_welfare/modlib/pcsw/models.py:604
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:118
+#: lino_welfare.chatelet.lib/pcsw/models.py:118
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:157
 msgid "History"
 msgstr "Historique"
@@ -1428,7 +1428,7 @@ msgstr "Contact"
 #: lino_welfare/modlib/contacts/models.py:236
 #: lino_welfare/modlib/contacts/models.py:326
 #: lino_welfare/modlib/pcsw/models.py:624
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:144
+#: lino_welfare.chatelet.lib/pcsw/models.py:144
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:178
 msgid "Miscellaneous"
 msgstr "Divers"
@@ -1436,7 +1436,7 @@ msgstr "Divers"
 #: lino_welfare/modlib/contacts/models.py:173
 #: lino_welfare/modlib/households/models.py:96
 #: lino_welfare/modlib/pcsw/models.py:540
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:51
+#: lino_welfare.chatelet.lib/pcsw/models.py:51
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:94
 msgid "Person"
 msgstr "Personne"
@@ -2378,7 +2378,7 @@ msgid "Active"
 msgstr "Actif"
 
 #: lino_welfare/modlib/isip/choicelists.py:31
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:51
+#: lino_welfare.chatelet.lib/courses/models.py:51
 msgid "Started"
 msgstr "Commencé"
 
@@ -2989,8 +2989,8 @@ msgstr "Compétence"
 
 #: lino_welfare/modlib/newcomers/models.py:142
 #: lino_welfare/modlib/pcsw/models.py:641
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:156
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:179
+#: lino_welfare.chatelet.lib/cv/models.py:156
+#: lino_welfare.chatelet.lib/pcsw/models.py:179
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:196
 msgid "Competences"
 msgstr "Compétences"
@@ -3266,7 +3266,7 @@ msgid "Human Links"
 msgstr ""
 
 #: lino_welfare/modlib/pcsw/models.py:567
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:81
+#: lino_welfare.chatelet.lib/pcsw/models.py:81
 msgid "Coaches"
 msgstr "Intervenants"
 
@@ -3276,13 +3276,13 @@ msgid "Job search"
 msgstr "Recherche d'emploi"
 
 #: lino_welfare/modlib/pcsw/models.py:616
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:136
+#: lino_welfare.chatelet.lib/pcsw/models.py:136
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:169
 msgid "Calendar"
 msgstr "Calendrier"
 
 #: lino_welfare/modlib/pcsw/models.py:631
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:174
+#: lino_welfare.chatelet.lib/pcsw/models.py:174
 #: lino_welfare/projects/eupen/modlib/pcsw/models.py:186
 msgid "Career"
 msgstr "Parcours"
@@ -3486,7 +3486,7 @@ msgid "Handicap certificate"
 msgstr "Certificat d'handicap"
 
 #: lino_welfare/modlib/pcsw/fixtures/std.py:81
-#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:46
+#: lino_welfare.chatelet.lib/cv/fixtures/std.py:46
 msgid "Diploma"
 msgstr "Diplôme"
 
@@ -5589,13 +5589,13 @@ msgid "Normal"
 msgstr "Général"
 
 #: lino_welfare/modlib/welfare/fixtures/std.py:88
-#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:48
+#: lino_welfare.chatelet.lib/cv/fixtures/std.py:48
 #, fuzzy
 msgid "Alcohol"
 msgstr "Ecole"
 
 #: lino_welfare/modlib/welfare/fixtures/std.py:89
-#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:49
+#: lino_welfare.chatelet.lib/cv/fixtures/std.py:49
 msgid "Health"
 msgstr "Santé"
 
@@ -5779,206 +5779,206 @@ msgstr ""
 msgid "unknown age"
 msgstr "age inconnu"
 
-#: lino_welfare/projects/chatelet/modlib/courses/__init__.py:36
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:80
+#: lino_welfare.chatelet.lib/courses/__init__.py:36
+#: lino_welfare.chatelet.lib/courses/models.py:80
 msgid "Workshops"
 msgstr "Ateliers"
 
-#: lino_welfare/projects/chatelet/modlib/courses/__init__.py:38
+#: lino_welfare.chatelet.lib/courses/__init__.py:38
 msgid "IO"
 msgstr "O.I."
 
-#: lino_welfare/projects/chatelet/modlib/courses/desktop.py:64
+#: lino_welfare.chatelet.lib/courses/desktop.py:64
 msgid "Active workshops"
 msgstr "Ateliers actifs"
 
-#: lino_welfare/projects/chatelet/modlib/courses/desktop.py:70
+#: lino_welfare.chatelet.lib/courses/desktop.py:70
 msgid "Draft workshops"
 msgstr "Ateliers en préparation"
 
-#: lino_welfare/projects/chatelet/modlib/courses/desktop.py:75
+#: lino_welfare.chatelet.lib/courses/desktop.py:75
 msgid "Inactive workshops"
 msgstr "Ateliers inactifs"
 
-#: lino_welfare/projects/chatelet/modlib/courses/desktop.py:79
+#: lino_welfare.chatelet.lib/courses/desktop.py:79
 msgid "Closed workshops"
 msgstr "Ateliers terminés"
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:33
+#: lino_welfare.chatelet.lib/courses/models.py:33
 msgid "Integration workshops"
 msgstr "Ateliers d'insertion sociale"
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:34
+#: lino_welfare.chatelet.lib/courses/models.py:34
 msgid "Job search workshops"
 msgstr "Ateliers d'Insertion socioprofessionnelle"
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:49
+#: lino_welfare.chatelet.lib/courses/models.py:49
 msgid "Never came"
 msgstr "Jamais venu"
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:52
+#: lino_welfare.chatelet.lib/courses/models.py:52
 msgid "Finished"
 msgstr "Terminé"
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:42
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:79
+#: lino_welfare.chatelet.lib/courses/fixtures/demo.py:42
+#: lino_welfare.chatelet.lib/courses/models.py:79
 msgid "Workshop"
 msgstr "Atelier"
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:94
+#: lino_welfare.chatelet.lib/courses/models.py:94
 msgid "Motif de l'orientation"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:97
+#: lino_welfare.chatelet.lib/courses/models.py:97
 msgid "Difficultés à l'origine de la demande / Problématiques repérées"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:113
+#: lino_welfare.chatelet.lib/courses/models.py:113
 msgid "Workshop series"
 msgstr "Série d'ateliers"
 
-#: lino_welfare/projects/chatelet/modlib/courses/models.py:114
+#: lino_welfare.chatelet.lib/courses/models.py:114
 msgid "Workshop lines"
 msgstr "Séries d'ateliers"
 
-#: lino_welfare/projects/chatelet/modlib/courses/config/courses/Enrolment/intervention.body.html:24
+#: lino_welfare.chatelet.lib/courses/config/courses/Enrolment/intervention.body.html:24
 #, fuzzy
 msgid "Phone"
 msgstr "Réponse"
 
-#: lino_welfare/projects/chatelet/modlib/courses/config/courses/Enrolment/intervention.body.html:25
+#: lino_welfare.chatelet.lib/courses/config/courses/Enrolment/intervention.body.html:25
 msgid "GSM"
 msgstr ""
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:55
+#: lino_welfare.chatelet.lib/courses/fixtures/demo.py:55
 msgid "Introduction to basic kitchen technologies."
 msgstr "Introduction aux techniques de cuisine élémentaires."
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:58
+#: lino_welfare.chatelet.lib/courses/fixtures/demo.py:58
 msgid "Request for enrolment"
 msgstr "Demande d'inscription"
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:62
+#: lino_welfare.chatelet.lib/courses/fixtures/demo.py:62
 msgid "Kitchen"
 msgstr "Cuisine"
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:73
+#: lino_welfare.chatelet.lib/courses/fixtures/demo.py:73
 msgid "Creativity"
 msgstr "Créativité"
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:77
+#: lino_welfare.chatelet.lib/courses/fixtures/demo.py:77
 msgid "Our first baby"
 msgstr "Notre premier bébé"
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:81
+#: lino_welfare.chatelet.lib/courses/fixtures/demo.py:81
 msgid "Mathematics"
 msgstr "Mathématiques"
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:89
+#: lino_welfare.chatelet.lib/courses/fixtures/demo.py:89
 msgid "Get active!"
 msgstr "Activons-nous!"
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:95
+#: lino_welfare.chatelet.lib/courses/fixtures/demo.py:95
 msgid "Request for intervention"
 msgstr "Demande d'intervention"
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/demo.py:97
+#: lino_welfare.chatelet.lib/courses/fixtures/demo.py:97
 msgid "Psycho-social intervention"
 msgstr "Intervention psycho-sociale"
 
-#: lino_welfare/projects/chatelet/modlib/courses/fixtures/std.py:33
+#: lino_welfare.chatelet.lib/courses/fixtures/std.py:33
 msgid "Enrolment"
 msgstr "Inscription"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:65
+#: lino_welfare.chatelet.lib/cv/models.py:65
 #, fuzzy
 msgid "Learning"
 msgstr "Avertissements"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:113
+#: lino_welfare.chatelet.lib/cv/models.py:113
 msgid "Skill proof"
 msgstr "Preuve de qualification"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:114
+#: lino_welfare.chatelet.lib/cv/models.py:114
 msgid "Skill proofs"
 msgstr "Preuves de qualification"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:151
+#: lino_welfare.chatelet.lib/cv/models.py:151
 msgid "Skill"
 msgstr "Compétence professionnelle"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:152
+#: lino_welfare.chatelet.lib/cv/models.py:152
 msgid "Skills"
 msgstr "Compétences professionnelles"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:177
+#: lino_welfare.chatelet.lib/cv/models.py:177
 msgid "Soft skill type"
 msgstr "Type de compétence sociale"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:178
+#: lino_welfare.chatelet.lib/cv/models.py:178
 msgid "Soft skill types"
 msgstr "Types de compétence sociale"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:189
+#: lino_welfare.chatelet.lib/cv/models.py:189
 msgid "Soft skill"
 msgstr "Compétence sociale"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:190
+#: lino_welfare.chatelet.lib/cv/models.py:190
 msgid "Soft skills"
 msgstr "Compétences sociales"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:212
+#: lino_welfare.chatelet.lib/cv/models.py:212
 msgid "Obstacle type"
 msgstr "Type de frein"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:213
+#: lino_welfare.chatelet.lib/cv/models.py:213
 msgid "Obstacle types"
 msgstr "Types de freins"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:240
+#: lino_welfare.chatelet.lib/cv/models.py:240
 msgid "Obstacle"
 msgstr "Freins"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:241
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:185
+#: lino_welfare.chatelet.lib/cv/models.py:241
+#: lino_welfare.chatelet.lib/pcsw/models.py:185
 msgid "Obstacles"
 msgstr "Freins"
 
-#: lino_welfare/projects/chatelet/modlib/cv/models.py:246
+#: lino_welfare.chatelet.lib/cv/models.py:246
 msgid "Detected by"
 msgstr "Détecté par"
 
-#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:43
+#: lino_welfare.chatelet.lib/cv/fixtures/std.py:43
 #, fuzzy
 msgid "Declarative"
 msgstr "séparé"
 
-#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:44
+#: lino_welfare.chatelet.lib/cv/fixtures/std.py:44
 #, fuzzy
 msgid "Certificate"
 msgstr "Certificat médical"
 
-#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:50
+#: lino_welfare.chatelet.lib/cv/fixtures/std.py:50
 msgid "Debts"
 msgstr "Dettes"
 
-#: lino_welfare/projects/chatelet/modlib/cv/fixtures/std.py:51
+#: lino_welfare.chatelet.lib/cv/fixtures/std.py:51
 msgid "Family problems"
 msgstr "Problèmes familiers"
 
-#: lino_welfare/projects/chatelet/modlib/isip/models.py:41
+#: lino_welfare.chatelet.lib/isip/models.py:41
 msgid "Evaluations"
 msgstr "Évaluations"
 
-#: lino_welfare/projects/chatelet/modlib/isip/models.py:46
+#: lino_welfare.chatelet.lib/isip/models.py:46
 msgid "Duties"
 msgstr "Obligations"
 
-#: lino_welfare/projects/chatelet/modlib/pcsw/models.py:70
+#: lino_welfare.chatelet.lib/pcsw/models.py:70
 msgid "Family situation"
 msgstr "Situation familiale"
 
-#: lino_welfare/projects/chatelet/modlib/pcsw/config/pcsw/Coaching/coaching.body.html:27
+#: lino_welfare.chatelet.lib/pcsw/config/pcsw/Coaching/coaching.body.html:27
 msgid "Coach"
 msgstr "Intervenant"
 

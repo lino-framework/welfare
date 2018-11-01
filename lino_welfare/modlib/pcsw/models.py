@@ -16,9 +16,6 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Database models for `lino_welfare.modlib.pcsw`.
-
-"""
 
 from __future__ import unicode_literals
 from __future__ import print_function
@@ -55,7 +52,8 @@ from lino_xl.lib.notes.mixins import Notable
 from lino_welfare.modlib.dupable_clients.mixins import DupableClient
 
 cal = dd.resolve_app('cal')
-contacts = dd.resolve_app('contacts')
+# contacts = dd.resolve_app('contacts')
+from lino_welfare.modlib.contacts import models as contacts
 cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
 from lino_xl.lib.beid.mixins import BeIdCardHolder
@@ -92,77 +90,6 @@ from .actions import RefuseClient, MarkClientFormer
 class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
              DupableClient, Coachable, Notable, UploadController):
 
-    """Inherits from :class:`lino_welfare.modlib.contacts.models.Person` and
-    :class:`lino_xl.lib.beid.models.BeIdCardHolder`.
-
-    A :class:`Client` is a polymorphic specialization of :class:`Person`.
-
-    .. attribute:: has_esf
-
-        Whether Lino should make ESF summaries for this client.
-
-        This field exists only if :mod:`lino_welfasre.modlib.esf` is
-        installed.
-
-    .. attribute:: overview
-
-        A panel with general information about this client.
-
-    .. attribute:: cvs_emitted
-
-        A virtual field displaying a group of shortcut links for managing CVs
-        (Curriculum Vitaes).
-
-        This field is an excerpts shortcut
-        (:class:`lino_xl.lib.excerpts.models.Shortcuts`) and works only if
-        the database has an :class:`ExcerptType
-        <lino_xl.lib.excerpts.models.ExcerptType>` whose `shortcut` points
-        to it.
-
-    .. attribute:: id_document
-
-        A virtual field displaying a group of buttons for managing the
-        "identifying document", i.e. an uploaded document which has been
-        used as alternative to the eID card.
-
-    .. attribute:: group
-
-        Pointer to :class:`PersonGroup`.
-        The intergration phase of this client.
-
-        The :class:`UsersWithClients <welfare.integ.UsersWithClients>`
-        table groups clients using this field.
-
-
-    .. attribute:: civil_state
-
-       The civil state of this client. Allowed choices are defined in
-       :class:`CivilState
-       <lino_xl.lib.contacts.CivilStates>`.
-
-    .. attribute:: client_state
-    
-        Pointer to :class:`ClientStates`.
-
-    .. attribute:: group
-    
-        Pointer to :class:`PersonGroup`.
-
-    .. attribute:: needs_residence_permit
-
-    .. attribute:: unemployed_since
-
-       The date when this client got unemployed and stopped to have a
-       regular work.
-
-    .. attribute:: seeking_since
-
-       The date when this client registered as unemployed and started
-       to look for a new job.
-
-    .. attribute:: work_permit_suspended_until
-
-    """
     class Meta:
         app_label = 'pcsw'
         verbose_name = _("Client")
@@ -260,11 +187,6 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         return super(Client, self).get_excerpt_options(ar, **kw)
 
     def get_first_meeting(self, today=None):
-        """Return the last note of type "First meeting" for this client.
-        Usage example see :ref:`welfare.specs.debts` and
-        :ref:`welfare.specs.notes`.
-
-        """
         if today is None:
             today = dd.today()
         qs = SpecialTypes.first_meeting.get_notes(
@@ -654,14 +576,6 @@ class ClientDetail(dd.DetailLayout):
 
 
 class Clients(contacts.Persons):
-    """The list that opens by :menuselection:`Contacts --> Clients`.
-
-    .. attribute:: client_state
-
-        If not empty, show only Clients whose `client_state` equals
-        the specified value.
-
-    """
     # debug_permissions = '20150129'
     # required = dd.login_required(user_groups='coaching')
     required_roles = dd.login_required(SimpleContactsUser)

@@ -16,7 +16,7 @@
 # <http://www.gnu.org/licenses/>.
 
 """Adds functionality to produce "fiches de stages" for the European
-Social Fund. See :doc:`/specs/esf`.
+Social Fund. See :doc:`/specs/welfare/esf`.
 
 """
 

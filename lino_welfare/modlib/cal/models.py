@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2017 Luc Saffre
+# Copyright 2013-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -16,9 +16,6 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Database models for :mod:`lino_welfare.modlib.cal`.
-
-"""
 
 from __future__ import unicode_literals
 
@@ -82,13 +79,6 @@ dd.add_welcome_handler(you_are_busy_messages)
 
 
 class EventType(EventType):
-    """
-    Adds the following fields.
-
-    .. attribute:: invite_client
-    .. attribute:: esf_field
-
-    """
 
     #~ invite_team_members = models.BooleanField(
         #~ _("Invite team members"),default=False)
@@ -279,18 +269,6 @@ class TasksByClient(Tasks):
 
 
 class Guest(Guest):
-    """
-    Adds the following fields.
-
-    .. attribute:: client
-    
-        Virtual field which returns the `partner` if it is a client.
-
-        When clicking in :class:`WaitingVisitors
-        <lino_xl.lib.reception.models.WaitingVisitors>` on the partner
-        show the *Client's* and not the *Partner's* detail.
-
-    """
 
     def get_excerpt_options(self, ar, **kw):
         kw.update(project=self.event.project)

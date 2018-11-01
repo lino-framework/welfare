@@ -17,7 +17,6 @@ Lino-Welfare extension of :mod:`lino_xl.lib.sepa`
 .. autosummary::
    :toctree:
 
-    models
     fixtures.demo
 
 

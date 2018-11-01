@@ -22,7 +22,6 @@
 .. autosummary::
    :toctree:
 
-   models
    roles
    fixtures.demo
 

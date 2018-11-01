@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2016 Luc Saffre
+# Copyright 2011-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -16,37 +16,19 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""This implements 
 
-See also :ref:`welfare.specs.tx25`
+# This is a masterpiece of untransparent code, difficult to understand
+# and maintain.  But I didn't find a better solution.  Maybe an XSLT
+# expert might help us to rewrite this from scratch. The purpose is very
+# simple: transform the content of a Tx25 response into a printable
+# document.  A Tx25 response is a rather complex data structure with
+# lots and lots of elements.  It contains a handler for every element
+# type
 
-This module is being used in production since 2014 and handles all
-common information types.
-
-This is a masterpiece of untransparent code, difficult to understand
-and maintain.  But I didn't find a better solution.  Maybe an XSLT
-expert might help us to rewrite this from scratch. The purpose is very
-simple: transform the content of a Tx25 response into a printable
-document.  A Tx25 response is a rather complex data structure with
-lots and lots of elements.  It contains a handler for every element
-type
-
-In case you need to understand, consult the source code of
-:class:`RowFactory`.
-
-See also:
-
-- `Liste des types d'information (pdf)
-  <http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/fr/instructions/IT_FR_20111202.pdf>`__
-
-- `Lijst van de informatietypes (pdf)
-  <http://www.ibz.rrn.fgov.be/fileadmin/user_upload/Registre/nl/instructies/IT_NL_20111202.pdf>`__
+# In case you need to understand, consult the source code of
+# :class:`RowFactory`.
 
 
-- `DGIP > Registre national > Instructions
-  <http://www.ibz.rrn.fgov.be/index.php?id=2485&L=0>`__
-
-"""
 
 from __future__ import unicode_literals
 
@@ -1035,11 +1017,10 @@ register_it_handler('ParentalAuthorities',
 
 class RowFactory(object):
 
-    """The result of a Tx25 consist of data rows, each of which has a
-    given type.  Consult the source code of this class to see how it
-    works.
+    # The result of a Tx25 consist of data rows, each of which has a
+    # given type.  Consult the source code of this class to see how it
+    # works.
     
-    """
 
     def start_group(self, group):
         self.current_group = group
@@ -1303,10 +1284,6 @@ class RowFactory(object):
 
 class RetrieveTIGroupsResult(ConfidentialResultsTable):
 
-    """
-    Displays the response of an :class:`RetrieveTIGroupsRequest`
-    as a table.
-    """
     master = 'cbss.RetrieveTIGroupsRequest'
     master_key = None
     column_names = 'group:18 type:5 since:14 info:50'

@@ -60,6 +60,8 @@ application for Belgian
 
 - The central project homepage is http://welfare.lino-framework.org
 
+- Technical specifiction http://www.lino-framework.org/specs/welfare
+
 - There are separate *user guides* in `French
   <http://fr.welfare.lino-framework.org>`_ and `German
   <http://de.welfare.lino-framework.org>`_.
@@ -155,29 +157,19 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.welfare.fixtures',
     'lino_welfare.modlib.welfare.management',
     'lino_welfare.modlib.welfare.management.commands',
-    'lino_welfare.projects',
-    'lino_welfare.projects.chatelet',
-    'lino_welfare.projects.chatelet.modlib',
-    'lino_welfare.projects.chatelet.modlib.courses',
-    'lino_welfare.projects.chatelet.modlib.courses.fixtures',
-    'lino_welfare.projects.chatelet.modlib.cv',
-    'lino_welfare.projects.chatelet.modlib.cv.fixtures',
-    'lino_welfare.projects.chatelet.modlib.isip',
-    'lino_welfare.projects.chatelet.modlib.pcsw',
-    'lino_welfare.projects.chatelet.modlib.pcsw.fixtures',
-    'lino_welfare.projects.chatelet.settings',
-    'lino_welfare.projects.chatelet.tests',
-    'lino_welfare.projects.std',
-    'lino_welfare.projects.std.settings',
-    'lino_welfare.projects.std.tests',
-    'lino_welfare.projects.eupen',
-    'lino_welfare.projects.eupen.modlib',
-    'lino_welfare.projects.eupen.modlib.pcsw',
-    'lino_welfare.projects.eupen.modlib.pcsw.fixtures',
-    'lino_welfare.projects.eupen.settings',
-    'lino_welfare.projects.eupen.tests',
-    'lino_welfare.projects.y2k',
-    'lino_welfare.projects.y2k.settings',
+    'lino_welfare.chatelet',
+    'lino_welfare.chatelet.lib',
+    'lino_welfare.chatelet.lib.courses',
+    'lino_welfare.chatelet.lib.courses.fixtures',
+    'lino_welfare.chatelet.lib.cv',
+    'lino_welfare.chatelet.lib.cv.fixtures',
+    'lino_welfare.chatelet.lib.isip',
+    'lino_welfare.chatelet.lib.pcsw',
+    'lino_welfare.chatelet.lib.pcsw.fixtures',
+    'lino_welfare.eupen',
+    'lino_welfare.eupen.lib',
+    'lino_welfare.eupen.lib.pcsw',
+    'lino_welfare.eupen.lib.pcsw.fixtures',
     'lino_welfare.scripts',
 ])
 

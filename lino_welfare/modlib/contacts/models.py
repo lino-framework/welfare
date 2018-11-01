@@ -56,6 +56,9 @@ class Partner(
 
     """
 
+    class Meta(Partner.Meta):
+        abstract = dd.is_abstract_model(__name__, 'Partner')
+
     hidden_columns = 'created modified activity'
 
     quick_search_fields = "prefix name phone gsm street"
@@ -173,6 +176,7 @@ class Person(Partner, Person):
         verbose_name = _("Person")  # :doc:`/tickets/14`
         verbose_name_plural = _("Persons")  # :doc:`/tickets/14`
         #~ ordering = ['last_name','first_name']
+        abstract = dd.is_abstract_model(__name__, 'Person')
 
     def get_queryset(self, ar):
         return self.model.objects.select_related('country', 'city')
@@ -267,9 +271,10 @@ class Persons(Persons):
 
 class Company(Partner, Company):
 
-    class Meta:
-        verbose_name = _("Organisation")
-        verbose_name_plural = _("Organisations")
+    class Meta(Company.Meta):
+        # verbose_name = _("Organisation")
+        # verbose_name_plural = _("Organisations")
+        abstract = dd.is_abstract_model(__name__, 'Company')
 
     vat_id = models.CharField(_("VAT id"), max_length=200, blank=True)
 

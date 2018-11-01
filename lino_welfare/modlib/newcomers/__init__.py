@@ -22,7 +22,6 @@ definitions for managing "newcomers".
 .. autosummary::
    :toctree:
 
-   models
    fixtures
 
 """

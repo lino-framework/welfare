@@ -20,7 +20,7 @@
 :mod:`lino_welfare.projects.eupen`.  But it uses
 :mod:`lino_xl.lib.properties` which is deprecated.
 New installations should use
-:mod:`lino_welfare.projects.chatelet.modlib.cv` instead.
+:mod:`lino_welfare.chatelet.lib.cv` instead.
 
 """
 

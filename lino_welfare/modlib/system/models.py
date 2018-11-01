@@ -82,6 +82,10 @@ class SiteConfig(SiteConfig, Signers):
     
     """
 
+    class Meta(SiteConfig.Meta):
+        abstract = dd.is_abstract_model(__name__, 'SiteConfig')
+        
+
     signer1_function = dd.ForeignKey(
         "contacts.RoleType",
         blank=True, null=True,

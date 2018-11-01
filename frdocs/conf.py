@@ -7,7 +7,7 @@ extensions = []
 templates_path = []
 
 from lino.sphinxcontrib import configure
-configure(globals(), 'lino_welfare.projects.chatelet.settings.doctests')
+configure(globals(), 'lino_book.projects.mathieu.settings.doctests')
 
 # from atelier.sphinxconf import interproject
 # interproject.configure(globals())

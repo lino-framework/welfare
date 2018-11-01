@@ -142,7 +142,7 @@ JOBS_MODULE_NAME = settings.SITE.plugins.jobs.verbose_name
 class ContractEnding(dd.Model):
     """A possible reason for premature termination of a contract.
 
-    TODO: move this to :mod:`lino_welfare.modlib.integ.modules`.
+    TODO: move this to :mod:`lino_welfare.modlib.integ.models`.
 
     """
     class Meta:
@@ -150,7 +150,7 @@ class ContractEnding(dd.Model):
         verbose_name = _("Reason of termination")
         verbose_name_plural = _('Contract termination reasons')
 
-    name = models.CharField(_("designation"), max_length=200)
+    name = models.CharField(_("Designation"), max_length=200)
     use_in_isip = models.BooleanField(config.verbose_name, default=True)
     use_in_jobs = models.BooleanField(JOBS_MODULE_NAME, default=True)
     is_success = models.BooleanField(_("Success"), default=False)
@@ -201,6 +201,11 @@ class ContractPartners(dd.Table):
     detail_layout = """
     company contact_person contact_role
     duties_company
+    """
+    insert_layout = """
+    company 
+    contact_person
+    contact_role
     """
 
 

@@ -19,13 +19,11 @@
 """Provides functionality for managing "immersion trainings" (stages
 d'immersion).
 
-Technical specs and overview see :doc:`/specs/immersion`.
+Technical specs and overview see :doc:`/specs/welfare/immersion`.
 
 .. autosummary::
     :toctree:
 
-    models
-    ui
     fixtures.std
     fixtures.demo
 

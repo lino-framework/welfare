@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2017 Luc Saffre
+# Copyright 2015-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -17,10 +17,6 @@
 # <http://www.gnu.org/licenses/>.
 
 
-"""Database models for the `lino_welfare.modlib.art61`.
-
-
-"""
 from __future__ import unicode_literals
 
 import logging
@@ -59,18 +55,6 @@ ClientEvents.add_item_instance(ClientHasContract("art61"))
 
 class ContractType(ContractTypeBase, mixins.Referrable):
 
-    """This is the homologue of :class:`isip.ContractType
-    <lino_welfare.modlib.isip.models.ContractType>` (see there for
-    general documentation).
-    
-    The demo database comes with these contract types:
-
-    .. django2rst::
-
-        rt.show('art61.ContractTypes')
-
-    """
-
     preferred_foreignkey_width = 20
 
     templates_group = 'art61/Contract'
@@ -82,8 +66,6 @@ class ContractType(ContractTypeBase, mixins.Referrable):
 
 
 class ContractTypes(dd.Table):
-    """
-    """
     required_roles = dd.login_required(IntegrationStaff)
     model = ContractType
     column_names = 'name ref *'
@@ -94,11 +76,6 @@ class ContractTypes(dd.Table):
 
 
 class Contract(JobSupplyment):
-
-    """An "Art61 job supplyment" is an agreement between the PCSW and a
-    private company...
-
-    """
 
     class Meta:
         verbose_name = _("Art61 job supplyment")
@@ -131,18 +108,15 @@ class Contract(JobSupplyment):
             'date_decided date_issued ')
 
     def get_subsidizations(self):
-        """Yield a list of all subsidizations activated for this contract.
-        """
         for sub in Subsidizations.items():
             if getattr(self, sub.contract_field_name()):
                 yield sub
 
     def get_excerpt_options(self, ar, **kw):
-        """Implements :meth:`lino.printing.Printable.get_excerpt_options`.
+        # Implements :meth:`lino.printing.Printable.get_excerpt_options`.
 
-        When printing a contract, there is no recipient.
+        # When printing a contract, there is no recipient.
 
-        """
         kw = super(Contract, self).get_excerpt_options(ar, **kw)
         del kw['company']
         del kw['contact_person']
@@ -211,8 +185,6 @@ class Contracts(ContractBaseTable):
 
 
 class ContractsByClient(Contracts):
-    """Shows the *Art61 job supplyments* for this client.
-    """
     required_roles = dd.login_required((IntegUser, SocialCoordinator))
     label = _("Art61 job supplyments and activations")
     master_key = 'client'

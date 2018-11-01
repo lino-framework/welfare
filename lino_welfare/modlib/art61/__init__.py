@@ -17,13 +17,12 @@
 # <http://www.gnu.org/licenses/>.
 
 """Provides functionality for managing so-called "article 61 job
-supplyments".  Technical specs and overview see :doc:`/specs/art61`.
+supplyments".  Technical specs and overview see :doc:`/specs/welfare/art61`.
 
 
 .. autosummary::
    :toctree:
 
-   models
    fixtures.std
 
 """

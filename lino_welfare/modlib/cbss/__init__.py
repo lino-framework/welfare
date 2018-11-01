@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2016 Luc Saffre
+# Copyright 2012-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -25,10 +25,7 @@ See :ref:`welfare.specs.cbss`.
 
     mixins
     choicelists
-    models
-    ui
     utils
-    tx25
     fixtures.cbss_demo
     fixtures.cbss
     fixtures.purposes

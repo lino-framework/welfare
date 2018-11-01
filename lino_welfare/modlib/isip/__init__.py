@@ -26,8 +26,6 @@ This module is also used and extended by
 .. autosummary::
    :toctree:
 
-   models
-   mixins
    choicelists
 
 """

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2017 Luc Saffre
+# Copyright 2014-2018 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -15,11 +15,6 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
-"""
-Database models for `lino_welfare.modlib.aids`.
-
-
-"""
 
 from __future__ import unicode_literals
 
@@ -72,68 +67,6 @@ class Categories(dd.Table):
 
 
 class AidType(ContactRelated, ExcerptTitle):
-    """
-    The type of aid being granted to a client.  Every granting has a
-    mandatory field :attr:`Granting.aid_type` which points to an
-    :class:`AidType` instance.
-
-    .. attribute:: short_name
-
-        The short name for internal use, e.g. when a user must select
-        an aid type from a combobox.
-
-    .. attribute:: confirmation_type
-
-        The database model to use for issuing an aid confirmation of
-        this type. This is a mandatory pointer to
-        :class:`ConfirmationTypes`.
-    
-    .. attribute:: name
-
-        The designation of this aid type as seen by the user e.g. when
-        selecting an aid type.
-
-        One field for every :attr:`language <lino.core.site.Site.language>`.
-
-    .. attribute:: excerpt_title
-
-        The text to print as title in confirmations.
-        See also
-        :attr:`lino_xl.lib.excerpts.mixins.ExcerptTitle.excerpt_title`.
-
-    .. attribute:: body_template
-
-        The body template to use when printing a confirmation of this type.
-        If this field is empty, Lino uses the excerpt type's
-        :attr:`body_template
-        <lino_xl.lib.excerpts.models.ExcerptType.body_template>`.
-        See also :doc:`/admin/printing`.
-
-    .. attribute:: is_urgent
-
-        Whether aid grantings of this type are considered as urgent.
-        This is used by :meth:`Confirmation.get_urgent_granting`
-
-    .. attribute:: is_integ_duty
-
-    .. attribute:: board
-
-        Pointer to the default :class:`lino_xl.lib.boards.models.Board`
-        for aid projects of this type.
-
-    .. attribute:: confirmed_by_primary_coach
-    
-        Whether grantings for this aid type are to be signed by the
-        client's primary coach (see :meth:`Client.get_primary_coach
-        <lino_welfare.modlib.pcsw.models.Client.get_primary_coach>`).
-
-    .. attribute:: pharmacy_type
-
-        A pointer to the :class:`ClientContactType
-        <lino_xl.lib.clients.ClientContactType>` to be used when
-        selecting the pharmacy of a refund confirmation
-        (:attr:`RefundConfirmation.pharmacy`).
-    """
 
     # templates_group = 'aids/Aid'
 
@@ -229,37 +162,6 @@ class GrantingManager(models.Manager):
 
 @dd.python_2_unicode_compatible
 class Granting(Confirmable, BoardDecision):
-    """An **aid granting** is the principal promise that a given client
-    gets a given aid during a given period.
-
-    .. attribute:: client
-
-        Pointer to the :class:`lino_welfare.modlib.pcsw.models.Client`.
-
-    .. attribute:: aid_type
-
-        The type of aid being granted. Mandatory.
-        Pointer to the :class:`AidType`.
-
-    .. attribute:: signer
-
-        Pointer to the user who is expected to "sign" this granting
-        (i.e. to confirm that it is real).
-
-        The default value is the client's primary coach for grantings
-        whose :attr:`aid_type` has :attr:`confirmed_by_primary_coach
-        <AidType.confirmed_by_primary_coach>` checked.
-
-    .. attribute:: board
-
-        Pointer to the :class:`Board <lino_xl.lib.boards.models.Board>`
-        which decided to allocate this aid project.
-
-    .. attribute:: category
-
-        Currently only used for printing an `isip.Contract`.
-
-    """
     class Meta:
         abstract = dd.is_abstract_model(__name__, 'Granting')
         verbose_name = _("Aid granting")
@@ -327,7 +229,6 @@ dd.update_field(Granting, 'end_date', verbose_name=_('until'))
 
 
 class Grantings(dd.Table):
-    """The default table for :class:`Granting`."""
     model = 'aids.Granting'
     required_roles = dd.login_required(AidsUser)
     order_by = ['-start_date']

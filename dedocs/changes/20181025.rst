@@ -6,15 +6,23 @@
 .. contents::
   :local:
 
-TODO
-====
+Regressionen nach dem Einsatz
+=============================
 
-- Eine Nachwehe : :ticket:`2602` ([Automatisch aktualisieren] ist
-  weg. Wir brauchen desktop notifications).
+- :ticket:`2619` Vertragspartner einer VSE per Doppelklick eingeben.
+  --> Workaround : die Benutzer müssen im Feld Organisation der
+  Phantomzeile auf [F2] drücken und dann den Namen der Organisation
+  eintippen.  Für die nächste Version stellen wir den Doppelklick wieder
+  her.
+  
+- :ticket:`2602` [Automatisch aktualisieren] ist weg.
+  --> Wurde wiederhergestellt.
+
+  
 
 
-DONE
-====
+Änderungen
+==========
 
 Die folgenden Punkte sind erledigt seit dem 2018-10-25.
 

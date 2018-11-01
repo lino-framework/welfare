@@ -22,30 +22,6 @@ class BaseTestCase(TestCase):
     project_root = Path(__file__).parent.parent
 
 
-class DemoTests(BaseTestCase):
-    """
-    $ python setup.py test -s tests.DemoTests
-    """
-
-    def test_std(self):
-        # print("20180502 test_std()")
-        cwd = self.project_root.child(
-            'lino_welfare', 'projects', 'std').absolute()
-        self.run_django_manage_test(cwd)
-    
-    def test_eupen(self):
-        # print("20180502 test_eupen()")
-        cwd = self.project_root.child(
-            'lino_welfare', 'projects', 'eupen').absolute()
-        self.run_django_manage_test(cwd)
-
-    def test_chatelet(self):
-        # print("20180502 test_chatelet()")
-        cwd = self.project_root.child(
-            'lino_welfare', 'projects', 'chatelet').absolute()
-        self.run_django_manage_test(cwd)
-
-
 class PackagesTests(BaseTestCase):
 
     def test_packages(self):

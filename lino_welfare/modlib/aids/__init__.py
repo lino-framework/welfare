@@ -20,14 +20,12 @@ r"""Provides functionality for managing "social aids". An "aid" here
 means the decision that some client gets some kind of aid during a
 given period.
 
-See also :doc:`/specs/aids`.
+See also :doc:`/specs/welfare/aids/index`.
 
 .. autosummary::
    :toctree:
 
-    mixins
     choicelists
-    models
     fixtures.std
     fixtures.demo
 

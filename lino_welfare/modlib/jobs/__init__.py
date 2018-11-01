@@ -23,8 +23,6 @@ See functional specification in :ref:`welfare.specs.jobs`.
 .. autosummary::
    :toctree:
 
-   models
-   mixins
    fixtures.std
 
 """

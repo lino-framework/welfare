@@ -33,6 +33,7 @@ gibt es in der `englischen Version
    aids
    help/index
    changes/index
+   testlauf
    
 
 

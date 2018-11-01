@@ -7,7 +7,6 @@ Lino Welfare extension of :mod:`lino_xl.lib.notes`
 .. autosummary::
    :toctree:
 
-    models
     fixtures.std
     fixtures.demo
 

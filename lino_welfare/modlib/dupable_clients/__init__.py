@@ -28,7 +28,6 @@ and
 .. autosummary::
    :toctree:
 
-    models
     mixins
     fixtures.demo2
 

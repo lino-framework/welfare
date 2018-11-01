@@ -24,7 +24,6 @@
    models
    user_types
    workflows
-   management.commands.cpas2lino
    fixtures.std
    fixtures.demo
    fixtures.demo2

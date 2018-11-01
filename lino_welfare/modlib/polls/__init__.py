@@ -18,7 +18,7 @@
 """The Lino Welfare extension of :mod:`lino_xl.lib.polls`.  This just
 adds one fixture.
 
-Technical specs see :doc:`/specs/polls`.
+Technical specs see :doc:`/specs/welfare/polls`.
 
 
 .. autosummary::

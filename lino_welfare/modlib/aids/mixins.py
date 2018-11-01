@@ -15,13 +15,6 @@
 # You should have received a copy of the GNU Affero General Public
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
-"""
-Model mixins for `lino_welfare.modlib.aids`.
-
-.. autosummary::
-
-
-"""
 
 from __future__ import unicode_literals
 
@@ -61,22 +54,14 @@ def e2text(v):
 
 
 class SignConfirmation(dd.Action):
-    """Sign this database object.
-
-    This is available if signer is either empty or equals the
-    requesting user.  Except for system managers who can sign as
-    somebody else by manually setting the signer field before running
-    this action.
-
-    """
     label = pgettext("aids", "Sign")
     show_in_workflow = True
     show_in_bbar = False
 
     # icon_name = 'flag_green'
     required_states = "requested"
-    help_text = _("You sign this confirmation, making most "
-                  "fields read-only.")
+    # help_text = _("You sign this confirmation, making most "
+    #               "fields read-only.")
 
     def get_action_permission(self, ar, obj, state):
         user = ar.get_user()
@@ -132,18 +117,7 @@ class RevokeConfirmation(dd.Action):
 
 
 class Confirmable(mixins.DateRange):
-    """Base class for both :class:`Granting` and :class:`Confirmation`.
-
-    .. attribute:: signer
- 
-    The agent who has signed or is expected to sign this item.
-
-    .. attribute:: state
-
-    The confirmation state of this object. Pointer to
-    :class:`ConfirmationStates`.
-
-    """
+    
     class Meta:
         abstract = True
 
@@ -197,10 +171,6 @@ class Confirmable(mixins.DateRange):
             # raise ValidationError(_("Cannot confirm without signer!"))
 
     def get_row_permission(self, ar, state, ba):
-        """A signed confirmation cannot be modified, even not by a privileged
-        user.
-
-        """
         if not super(Confirmable, self).get_row_permission(ar, state, ba):
             return False
         if self.state == ConfirmationStates.confirmed \
@@ -248,16 +218,7 @@ class Confirmable(mixins.DateRange):
 class Confirmation(
         Confirmable, UserAuthored, ContactRelated,
         mixins.Created, Certifiable):
-    """Base class for all aid confirmations.
-
-    Subclassed by :class:`SimpleConfirmation
-    <lino_welfare.modlib.aids.models.SimpleConfirmation>`,
-    :class:`IncomeConfirmation
-    <lino_welfare.modlib.aids.models.IncomeConfirmation>` and
-    :class:`RefundConfirmation
-    <lino_welfare.modlib.aids.models.RefundConfirmation>`.
-
-    """
+    
     class Meta:
         abstract = True
 
@@ -291,10 +252,6 @@ class Confirmation(
         return '%s #%s' % (self._meta.verbose_name, self.pk)
 
     def get_date_range_veto(obj):
-        """
-        Return an error message if this confirmation lies outside of
-        granted period.
-        """
         pk = dd.plugins.aids.no_date_range_veto_until
         if pk and obj.pk and obj.pk <= pk:
             return
@@ -359,13 +316,6 @@ class Confirmation(
                 self.granting.client, self, **aidtype_filter)
 
     def get_urgent_granting(self):
-        """Return the one and only one urgent aid granting for the client and
-        period defined for this confirmation.  Return None if there is
-        no such granting, or if there is more than one such granting.
-
-        Used in :xfile:`medical_refund.body.html`.
-
-        """
         return self.get_granting(is_urgent=True)
 
     @classmethod
@@ -375,7 +325,7 @@ class Confirmation(
         return u'aids/Confirmation'
 
     def get_body_template(self):
-        """Overrides :meth:`lino.core.model.Model.get_body_template`."""
+        # Overrides :meth:`lino.core.model.Model.get_body_template`.
         at = self.get_aid_type()
         if at is not None:
             return at.body_template
