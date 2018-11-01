@@ -34,9 +34,9 @@ fn = os.path.join(os.path.dirname(__file__), 'setup_info.py')
 exec(compile(open(fn, "rb").read(), fn, 'exec'))
 
 # doc_trees = ['docs', 'dedocs', 'frdocs']
-doc_trees = ['dedocs', 'frdocs']
+# doc_trees = ['dedocs', 'frdocs']
 # intersphinx_urls = dict(docs="http://welfare.lino-framework.org")
-intersphinx_urls = dict()
-intersphinx_urls.update(dedocs="http://de.welfare.lino-framework.org")
-intersphinx_urls.update(frdocs="http://fr.welfare.lino-framework.org")
+# intersphinx_urls = dict()
+# intersphinx_urls.update(dedocs="http://de.welfare.lino-framework.org")
+# intersphinx_urls.update(frdocs="http://fr.welfare.lino-framework.org")
 srcref_url = 'https://github.com/lino-framework/welfare/blob/master/%s'
