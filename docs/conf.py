@@ -33,7 +33,7 @@ configure(globals())
 
 intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
-interproject.configure(globals(), 'atelier lino_cosi lino_book')
+interproject.configure(globals(), 'atelier lino_cosi')
 
 
 
