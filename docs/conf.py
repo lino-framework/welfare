@@ -31,12 +31,9 @@ configure(globals())
 # intersphinx_mapping['book'] = (
 #     'http://www.lino-framework.org', None)
 
-intersphinx_mapping = {}
-from atelier.sphinxconf import interproject
-interproject.configure(globals(), 'atelier lino_cosi')
-
-
-
+# intersphinx_mapping = {}
+# from atelier.sphinxconf import interproject
+# interproject.configure(globals(), 'atelier lino_cosi')
 
 # from django.conf import settings
 # settings.SITE.title = "Lino Welfare Reference Manual"
