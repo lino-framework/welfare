@@ -56,14 +56,6 @@ autosummary_generate = True
 autodoc_default_options = {'members': None}
 # 20180821
 
-extensions += ['lino.sphinxcontrib.help_texts_extractor']
-help_texts_builder_targets = {
-    'lino_welfare.': 'lino_welfare.modlib.welfare'
-}
-
-
-
-
 primary_domain = 'py'
 
 # Add any paths that contain templates here, relative to this directory.
@@ -268,8 +260,8 @@ extlinks.update(lino=('http://www.lino-framework.org%s.html', ''))
 # extlinks.update(
 #     lino=('http://www.lino-framework.org%s.html', ''))
 
-import lino_welfare
-extlinks.update(srcref=(lino_welfare.srcref_url, ''))
+# import lino_welfare
+# extlinks.update(srcref=(lino_welfare.srcref_url, ''))
 
 #~ nitpicky = True # use -n in Makefile instead
 
@@ -280,7 +272,7 @@ extlinks.update(srcref=(lino_welfare.srcref_url, ''))
 # html_theme_options = dict(collapsiblesidebar=True, externalrefs=True)
 
 
-inheritance_graph_attrs = dict(rankdir="TB")
-inheritance_graph_attrs.update(size='"12.0, 16.0"')
-inheritance_graph_attrs.update(fontsize=14, ratio='compress')
+# inheritance_graph_attrs = dict(rankdir="TB")
+# inheritance_graph_attrs.update(size='"12.0, 16.0"')
+# inheritance_graph_attrs.update(fontsize=14, ratio='compress')
 
