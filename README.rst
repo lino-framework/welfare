@@ -25,6 +25,6 @@ application for Belgian
 
 - Release notes are maintained separately in `German
   <http://de.welfare.lino-framework.org/changes>`__ and `French
-  <http://de.welfare.lino-framework.org/changes>`__.
+  <http://fr.welfare.lino-framework.org/changes>`__.
 
 
