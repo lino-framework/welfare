@@ -41,7 +41,7 @@ else:
     
 SETUP_INFO = dict(
     name='lino-welfare',
-    version='18.10.0',
+    version='18.11.0',
     install_requires=requires,
     test_suite='tests',
     tests_require=['pytest'],
@@ -70,7 +70,7 @@ application for Belgian
 
 - Release notes are maintained separately in `German
   <http://de.welfare.lino-framework.org/changes>`__ and `French
-  <http://de.welfare.lino-framework.org/changes>`__.
+  <http://fr.welfare.lino-framework.org/changes>`__.
 
 """,
     author='Luc Saffre',
