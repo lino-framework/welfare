@@ -175,7 +175,7 @@ class CreateClientVisit(dd.Action):
         recipients = [ (pv.user, pv.user.mail_mode) ]
         mt = rt.models.notify.MessageTypes.reception
         rt.models.notify.Message.emit_notification(
-            ar, client, mt, msg, recipients)
+            ar, None, mt, msg, recipients)
         ar.success(refresh=True)
         
     def run_from_ui(self, ar, **kw):
@@ -184,9 +184,9 @@ class CreateClientVisit(dd.Action):
 
 
 class CreateCoachingVisit(CreateClientVisit):
-    """Call a prompt event from a :class:`Coaching`.  See also
-:func:`lino_xl.lib.reception.models.create_prompt_event`.
-
+    """
+    Call a prompt event from a :class:`Coaching`.  See also
+    :func:`lino_xl.lib.reception.models.create_prompt_event`.
     """
     help_text = _("Create a prompt event for this client with this coach.")
 
