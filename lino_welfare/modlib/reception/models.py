@@ -174,6 +174,9 @@ class CreateClientVisit(dd.Action):
             return (subject, '')
         recipients = [ (pv.user, pv.user.mail_mode) ]
         mt = rt.models.notify.MessageTypes.reception
+        # don't specify the client as owner because we don't want to
+        # filter out this notification if the user has other unseen
+        # messages for this client.
         rt.models.notify.Message.emit_notification(
             ar, None, mt, msg, recipients)
         ar.success(refresh=True)
