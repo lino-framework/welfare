@@ -31,9 +31,9 @@ class CreateInvoice(dd.Dummy):
     pass
 
 
-class Invoiceable(dd.Dummy):
+class InvoiceGenerator(dd.Dummy):
     pass
 
 
-class InvoicingsByInvoiceable(dd.Dummy):
+class InvoicingsByGenerator(dd.Dummy):
     pass
