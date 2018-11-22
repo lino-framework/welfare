@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011,2013 Luc Saffre
+# Copyright 2011,2013 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify

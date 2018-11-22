@@ -1,4 +1,4 @@
-# Copyright 2016-2017 Luc Saffre
+# Copyright 2016-2017 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify

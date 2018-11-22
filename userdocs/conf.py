@@ -69,7 +69,7 @@ master_doc = 'index'
 # General information about the project.
 #~ project = u"Lino-Welfare"
 project = settings.SITE.title
-copyright = '2012-2018 Luc Saffre'
+copyright = '2012-2018 Rumma & Ko Ltd'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016 by Luc Saffre.
+# Copyright 2016 by Rumma & Ko Ltd.
 """
 
 Defines the :manage:`cpas2lino` management command:
