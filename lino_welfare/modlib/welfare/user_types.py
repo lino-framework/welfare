@@ -26,7 +26,7 @@ from lino.core.roles import Anonymous, SiteUser, SiteAdmin, Supervisor
 from lino.modlib.users.roles import AuthorshipTaker
 from lino.modlib.about.roles import SiteSearcher
 from lino.modlib.office.roles import OfficeOperator, OfficeStaff, OfficeUser
-from lino_xl.lib.notes.roles import NotesUser
+from lino_xl.lib.notes.roles import NotesUser, NotesStaff
 from lino_xl.lib.excerpts.roles import ExcerptsUser, ExcerptsStaff
 from lino_xl.lib.contacts.roles import ContactsStaff, ContactsUser, SimpleContactsUser
 from lino_xl.lib.ledger.roles import LedgerStaff, LedgerUser
@@ -58,8 +58,8 @@ from lino_xl.lib.coachings.roles import CoachingsUser, CoachingsStaff
 
 # 210
 class ReceptionClerk(SiteUser, AuthorshipTaker,
-                     OfficeOperator,
-                     GuestOperator, NotesUser,
+                     OfficeOperator, NotesUser,
+                     GuestOperator,
                      ContactsStaff, AidsStaff, CBSSUser, BeIdUser,
                      SepaUser, ExcerptsUser, CoursesUser,
                      SocialCoordinator, CoachingsStaff):
@@ -88,7 +88,7 @@ class IntegrationAgent(SiteUser, IntegUser, SocialUser, CareerUser,
 
 class IntegrationAgentManager(IntegrationAgent,
                               IntegrationStaff,
-                              OfficeStaff, CoachingsStaff, AidsStaff,
+                              OfficeStaff, NotesStaff, CoachingsStaff, AidsStaff,
                               ContactsStaff, SocialStaff, CareerStaff,
                               NewcomersOperator, 
                               xCoursesStaff, SepaStaff, PollsStaff):
@@ -157,7 +157,7 @@ class SiteAdmin(
         IntegrationStaff,
         LedgerStaff,
         NewcomersUser,
-        NotesUser,
+        NotesStaff,
         OfficeStaff,
         PollsStaff,
         SepaStaff,
@@ -170,7 +170,7 @@ class SecurityAdvisor(SiteAdmin, SecurityAdvisor):
 
 class Supervisor(SiteUser, Supervisor, AuthorshipTaker,
                  OfficeOperator, BeIdUser,
-                 GuestOperator, NotesUser, CoursesUser,
+                 GuestOperator, CoursesUser, NotesUser,
                  ContactsStaff, AidsStaff, NewcomersOperator,
                  ExcerptsUser, SepaUser):
     pass
