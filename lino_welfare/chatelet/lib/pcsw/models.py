@@ -1,20 +1,6 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Rumma & Ko Ltd
-# This file is part of Lino Welfare.
-#
-# Lino Welfare is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# Lino Welfare is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public
-# License along with Lino Welfare.  If not, see
-# <http://www.gnu.org/licenses/>.
+# Copyright 2015-2018 Rumma & Ko Ltd
+# License: BSD (see file COPYING for details)
 
 from __future__ import unicode_literals
 from __future__ import print_function
@@ -86,13 +72,6 @@ class ClientDetail(ClientDetail):
     clients.ContactsByClient:20
     """, required_roles=dd.login_required(NewcomersOperator))
 
-    suche = dd.Panel("""
-    is_seeking unemployed_since seeking_since work_permit_suspended_until
-    pcsw.DispensesByClient
-    pcsw.ExclusionsByClient
-    # pcsw.ConvictionsByClient
-    """, required_roles=dd.login_required(ContactsUser))
-
     papers = dd.Panel("""
     active_job_search.ProofsByClient
     polls.ResponsesByPartner
@@ -101,6 +80,11 @@ class ClientDetail(ClientDetail):
     job_search = dd.Panel("""
     suche:40 papers:40
     """, label=dd.plugins.active_job_search.short_name)
+
+    suche = dd.Panel("""
+    pcsw.DispensesByClient
+    # pcsw.ConvictionsByClient
+    """, required_roles=dd.login_required(ContactsUser))
 
     # projects_tab = dd.Panel("""
     # projects.ProjectsByClient
@@ -118,13 +102,15 @@ class ClientDetail(ClientDetail):
     history = dd.Panel("history_left history_right", label=_("History"))
 
     history_left = """
+    is_seeking unemployed_since seeking_since #work_permit_suspended_until
     # reception.CreateNoteActionsByClient:20
     notes.NotesByProject
     # lino.ChangesByMaster
     """
     history_right = """
     uploads.UploadsByClient
-    excerpts.ExcerptsByProject
+    pcsw.ExclusionsByClient
+    # excerpts.ExcerptsByProject
     esf.SummariesByClient
     """
 
@@ -157,7 +143,7 @@ class ClientDetail(ClientDetail):
 
     isip_tab = dd.Panel("""
     isip.ContractsByClient
-    aids.GrantingsByClient
+    # aids.GrantingsByClient
     """, label=dd.plugins.isip.short_name)
 
     courses_tab = dd.Panel("""
@@ -174,13 +160,13 @@ class ClientDetail(ClientDetail):
     """, label=_("Career"))
 
     competences = dd.Panel("""
-    cv.SkillsByPerson badges.AwardsByHolder cv.SoftSkillsByPerson
-    cv.LanguageKnowledgesByPerson skills
+    #cv.SkillsByPerson badges.AwardsByHolder #cv.SoftSkillsByPerson
+    #cv.LanguageKnowledgesByPerson skills
     """, label=_("Competences"), required_roles=dd.login_required(
         CareerUser))
 
     obstacles_tab = dd.Panel("""
-    cv.ObstaclesByPerson pcsw.ConvictionsByClient
+    cv.ObstaclesByPerson #pcsw.ConvictionsByClient
     obstacles
     """, label=_("Obstacles"), required_roles=dd.login_required(
         CareerUser))
@@ -188,31 +174,6 @@ class ClientDetail(ClientDetail):
 
 # no longer needed because Clients.client_detail is specified as a string:
 # Clients.detail_layout = ClientDetail()
-
-households = dd.resolve_app('households')
-households.SiblingsByPerson.display_mode = 'grid'
-
-# humanlinks = dd.resolve_app('humanlinks')
-# humanlinks.LinksByHuman.display_mode = 'grid'
-
-# cv = dd.resolve_app('cv')
-# cv.ExperiencesByPerson.column_names = "company start_date end_date \
-# function regime status is_training country remarks *"
-
-# cv.StudiesByPerson.column_names = "type content start_date end_date \
-# school country success language remarks *"
-
-# ContactsByClient.column_names = 'company contact_person remark'
-# dd.update_field(ClientContact, 'remark', verbose_name=_("Contact details"))
-
-
-aids = dd.resolve_app('aids')
-aids.GrantingsByClient.column_names = "detail_pointer request_date "\
-                                      "aid_type category start_date"
-
-notes = dd.resolve_app('notes')
-notes.Note.hidden_elements = dd.fields_list(
-    notes.Note, 'company contact_person contact_role')
 
 
 # @dd.receiver(dd.on_ui_updated, sender=notes.Note)
@@ -235,7 +196,4 @@ notes.Note.hidden_elements = dd.fields_list(
 #     # dd.logger.info("20150505 %s", recipients)
 #     rt.send_email(subject, sender, body, recipients)
 
-
-uploads = dd.resolve_app('uploads')
-uploads.UploadsByClient.display_mode = 'grid'
 

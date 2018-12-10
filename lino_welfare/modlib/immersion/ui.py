@@ -63,7 +63,7 @@ class ContractTypes(dd.Table):
     """
 
 
-class ContractDetail(dd.DetailLayout):
+class unused_ContractDetail(dd.DetailLayout):
     box1 = """
     id:8 client:25 user:15 language:8
     type goal company contact_person contact_role
@@ -100,7 +100,7 @@ class Contracts(ContractBaseTable):
     model = 'immersion.Contract'
     column_names = 'id client company applies_from applies_until user type *'
     order_by = ['id']
-    detail_layout = ContractDetail()
+    # detail_layout = ContractDetail()
     insert_layout = """
     client
     company
@@ -133,8 +133,9 @@ class ContractsByClient(Contracts):
     required_roles = dd.login_required((IntegUser, SocialCoordinator))
     master_key = 'client'
     auto_fit_column_widths = True
-    column_names = ('applies_from applies_until type '
-                    'company contact_person user remark:20 *')
+    column_names = ('applies_from '
+                    'date_ended type goal company sector function '
+                    'remark:20 *')
 
 
 class ContractsByProvider(Contracts):

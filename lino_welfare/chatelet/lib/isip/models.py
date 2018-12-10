@@ -24,7 +24,9 @@ from lino.api import dd, rt, _
 from lino_welfare.modlib.isip.models import *
 
 
-class ContractDetail(dd.DetailLayout):
+class unused_ContractDetail(dd.DetailLayout):
+    main = "general duties evaluations PartnersByContract"
+
     general = dd.Panel("""
     id:8 client:25 type user:15 user_asd:15
     study_type applies_from applies_until exam_policy language:8
@@ -45,13 +47,13 @@ class ContractDetail(dd.DetailLayout):
     duties_asd  duties_dsbe  duties_person
     """, label=_("Duties"))
 
-    main = "general duties evaluations PartnersByContract"
-
     #~ def setup_handle(self,dh):
         #~ dh.general.label = _("General")
         #~ dh.isip.label = _("ISIP")
 
 
-Contracts.detail_layout = ContractDetail()
+# Contracts.detail_layout = ContractDetail()
+Contracts.detail_layout = None
+ContractsByClient.column_names = "applies_from applies_until type user study_type date_ended ending uploads.UploadsByController *"
 
 

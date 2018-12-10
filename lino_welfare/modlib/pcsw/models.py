@@ -31,7 +31,6 @@ from django.db import models
 from django.db.models import Q
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
 from django.utils.text import format_lazy
 from django.utils import translation
 from django.contrib.humanize.templatetags.humanize import naturaltime
@@ -39,7 +38,7 @@ from django.contrib.humanize.templatetags.humanize import naturaltime
 from lino.utils import join_elems
 from etgen.html import E
 
-from lino.api import dd, rt
+from lino.api import dd, rt, _
 from lino.core.utils import get_field
 
 from lino_xl.lib.cal.utils import update_reminder
@@ -949,8 +948,8 @@ class ExclusionType(dd.Model):
 
     class Meta:
         app_label = 'pcsw'
-        verbose_name = _("Exclusion Type")
-        verbose_name_plural = _('Exclusion Types')
+        verbose_name = _("Unemployment exclusion type")
+        verbose_name_plural = _('Unemployment exclusion types')
 
     name = models.CharField(max_length=200)
 
@@ -970,8 +969,8 @@ class Exclusion(dd.Model):
 
     class Meta:
         app_label = 'pcsw'
-        verbose_name = _("Penalty")
-        verbose_name_plural = _('Penalties')
+        verbose_name = _("Exclusion from unemployment")
+        verbose_name_plural = _('Exclusions from unemployment')
 
     person = dd.ForeignKey('pcsw.Client')
     type = dd.ForeignKey("pcsw.ExclusionType",
@@ -1000,6 +999,7 @@ class Exclusions(dd.Table):
 
 
 class ExclusionsByClient(Exclusions):
+    label = _("Unemployment situation")  # Situation chomage
     required_roles = dd.login_required(SocialUser)
     master_key = 'person'
     column_names = 'excluded_from excluded_until type remark:10'

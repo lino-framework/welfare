@@ -413,7 +413,7 @@ assigned_to event_type room workflow_buttons *'
 
 class EntriesByController(EntriesByController):
     column_names = 'when_html summary user \
-    assigned_to workflow_buttons *'
+    auto_type #assigned_to workflow_buttons *'
     display_mode = 'grid'
 
 # EntriesByController.column_names = 'when_html summary user \

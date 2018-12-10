@@ -268,4 +268,10 @@ dd.inject_field('system.SiteConfig', 'propgroup_skills', dd.DummyField())
 dd.inject_field('system.SiteConfig', 'propgroup_softskills', dd.DummyField())
 dd.inject_field('system.SiteConfig', 'propgroup_obstacles', dd.DummyField())
 
+# print(StudiesByPerson.column_names)
+# print(TrainingsByPerson.column_names)
+# print(ExperiencesByPerson.column_names)
 
+StudiesByPerson.column_names = "type content start_date end_date duration_text school country state education_level remarks *"
+TrainingsByPerson.column_names = "type sector function start_date end_date duration_text school country state certificates remarks *"
+ExperiencesByPerson.column_names = "company country start_date end_date duration_text function status duration termination_reason remarks *"
