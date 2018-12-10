@@ -29,7 +29,7 @@ import six
 
 requires = ['lino-cosi',
             'pytidylib', 'channels<2',
-            'django-iban', 'metafone', 'weasyprint',
+            'django-iban', 'metafone',
             'cairocffi']
 if six.PY2:
     requires.append('suds')
