@@ -62,13 +62,13 @@ class JobEnrolmentsByPupil(EnrolmentsByPupil):
 
 class ActiveCourses(ActiveCourses):
     label = _("Active workshops")
-    column_names = 'clickable_description enrolments free_places room description *'
+    column_names = 'detail_link enrolments free_places room description *'
     hide_sums = True
 
 
 class DraftCourses(DraftCourses):
     label = _("Draft workshops")
-    column_names = 'clickable_description room description *'
+    column_names = 'detail_link room description *'
 
 
 class InactiveCourses(InactiveCourses):
