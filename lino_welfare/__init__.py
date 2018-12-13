@@ -23,6 +23,7 @@
 
    eupen.lib
    chatelet.lib
+   modlib
    migrate
 
 
