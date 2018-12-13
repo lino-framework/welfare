@@ -29,14 +29,14 @@ from django.conf import settings
 from lino.api import rt, dd, _
 from lino import mixins
 from etgen.html import E
-from lino.modlib.summaries.mixins import Summary
+from lino.modlib.summaries.mixins import MonthlySlaveSummary
 
 from lino_welfare.modlib.integ.roles import IntegUser
 from lino_xl.lib.excerpts.mixins import Certifiable
 from .choicelists import ParticipationCertificates, StatisticalFields
 
 
-class ClientSummary(Certifiable, Summary):
+class ClientSummary(Certifiable, MonthlySlaveSummary):
     """An **ESF summary** is a database object which represents one "fiche
     stagiaire".
 
@@ -47,6 +47,7 @@ class ClientSummary(Certifiable, Summary):
         verbose_name_plural = _("ESF Summaries")
 
     summary_period = 'yearly'
+    delete_them_all = True
 
     master = dd.ForeignKey('pcsw.Client')
     education_level = dd.ForeignKey('cv.EducationLevel', blank=True, null=True)
