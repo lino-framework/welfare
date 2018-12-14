@@ -19,6 +19,117 @@ which might be reason to not get a given job."""),
     'lino_welfare.chatelet.lib.cv.Obstacle.user' : _("""The agent who observed this obstacle."""),
     'lino_welfare.chatelet.lib.cv.Obstacle.detected_date' : _("""The date when the agent observed this obstacle."""),
     'lino_welfare.migrate.Migrator' : _("""The standard migrator for welfare."""),
+    'lino_welfare.modlib.aids.Plugin' : _("""The plugin."""),
+    'lino_welfare.modlib.aids.Plugin.no_date_range_veto_until' : _("""Optionally specify the primary key (an integer) of the last
+granting for whose confirmations you want to suppress checking of
+date range.  This is useful for keeping legacy confirmations that
+have been issued before the rule was activated."""),
+    'lino_welfare.modlib.aids.ConfirmationTypes' : _("""A list of the models that may be used as confirmation."""),
+    'lino_welfare.modlib.aids.ConfirmationTypes.et_template' : _("""The template defined for the ExcerptType defined for this
+confirmation type."""),
+    'lino_welfare.modlib.art61.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.badges.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.badges.Plugin.holder_model' : _("""A string referring to the model which represents the badge holder in
+your application.  Default value is 'contacts.Person'."""),
+    'lino_welfare.modlib.cal.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.cbss.Plugin' : _("""The descriptor for this plugin. See
+lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.cbss.Plugin.cbss_live_requests' : _("""Whether executing requests should try to really connect to the
+CBSS.  Real requests would fail with a timeout if run from behind
+an IP address that is not registered at the CBSS."""),
+    'lino_welfare.modlib.cbss.Plugin.cbss_environment' : _("""Either None or one of 'test', 'acpt' or 'prod'."""),
+    'lino_welfare.modlib.cbss.RequestStates' : _("""The status of a CBSSRequest."""),
+    'lino_welfare.modlib.cbss.ManageActions' : _("""Possible values for the action field of a
+lino_welfare.modlib.cbss.models.ManageAccessRequest."""),
+    'lino_welfare.modlib.cbss.ManageActions.REGISTER' : _("""Ce service est sollicité au moment du démarrage de l’enquête
+sociale.  Le CPAS déclare au réseau de la sécurité sociale qu’il
+possède un dossier pour lequel il a l’autorisation (dispositions
+légales et réglementaires) d’obtenir des informations des autres
+institutions en vue de compléter son enquête dans le cadre de
+l’octroi du revenu d’intégration.  Cette déclaration concerne le
+répertoire sectoriel des CPAS à la SmalS-MvM et peut concerner
+plusieurs catégories de personnes : le demandeur, les
+cohabitants et les tiers concernés et ce, pour des finalités
+différentes."""),
+    'lino_welfare.modlib.cbss.ManageActions.UNREGISTER' : _("""L’opération contraire est aussi mise à disposition."""),
+    'lino_welfare.modlib.cbss.ManageActions.LIST' : _("""Il est en plus possible d’obtenir une liste des enregistrements
+dans le répertoire sectoriel des CPAS à la SmalS-MvM ainsi qu’au
+sein du réseau BCSS."""),
+    'lino_welfare.modlib.cbss.QueryRegisters' : _("""Possible values for the query_register field of a
+lino_welfare.modlib.cbss.models.ManageAccessRequest."""),
+    'lino_welfare.modlib.cbss.QueryRegisters.PRIMARY' : _("""Query only the primary register."""),
+    'lino_welfare.modlib.cbss.QueryRegisters.SECONDARY' : _("""Query only the secondary register."""),
+    'lino_welfare.modlib.cbss.QueryRegisters.ALL' : _("""Query both registers."""),
+    'lino_welfare.modlib.cbss.CBSSRequest' : _("""Common Abstract Base Class for SSDNRequest
+and NewStyleRequest"""),
+    'lino_welfare.modlib.cbss.CBSSRequest.wsdl_parts' : _("""alias of exceptions.NotImplementedError"""),
+    'lino_welfare.modlib.cbss.CBSSRequest.on_duplicate' : _("""When duplicating a CBSS request, we want re-execute it.  So please
+duplicate only the parameters, not the execution data like
+ticket, sent and status.  Note that also the user will
+be set to the user who asked to duplicate (because this is a
+subclass of UserAuthored."""),
+    'lino_welfare.modlib.cbss.CBSSRequest.get_row_permission' : _("""CBSS requests that have a ticket may never be modified."""),
+    'lino_welfare.modlib.cbss.CBSSRequest.on_cbss_ok' : _("""Called when a successful reply has been received."""),
+    'lino_welfare.modlib.cbss.CBSSRequest.execute_request' : _("""This is the common part of a request for both classic and
+new-style."""),
+    'lino_welfare.modlib.cbss.CBSSRequest.get_excerpt_options' : _("""When we print a request, the resulting excerpt should go to the
+client's history."""),
+    'lino_welfare.modlib.cbss.SSDNRequest' : _("""Abstract Base Class for Models that represent SSDN ("classic")
+requests."""),
+    'lino_welfare.modlib.cbss.SSDNRequest.validate_request' : _("""Validates the generated XML against the XSD files.
+Used by test suite.
+It is not necessary to validate each real request before actually sending it."""),
+    'lino_welfare.modlib.cbss.SSDNRequest.execute_request_' : _("""SSDN specific part of a request."""),
+    'lino_welfare.modlib.cbss.SSDNRequest.wrap_ssdn_request' : _("""Wrap the given service request into the SSDN envelope 
+by adding AuthorizedUser and other information common 
+the all SSDN requests)."""),
+    'lino_welfare.modlib.cbss.NewStyleRequest' : _("""Abstract Base Class for Models that represent
+"new style" requests to the CBSS (and responses)."""),
+    'lino_welfare.modlib.cbss.NewStyleRequest.execute_request_' : _("""NewStyle specific part of a request."""),
+    'lino_welfare.modlib.cbss.NewStyleRequest.on_cbss_ok' : _("""Called when a successful reply has been received."""),
+    'lino_welfare.modlib.cbss.SSIN' : _("""Abstract base for Requests that have a field national_id and a method 
+get_ssin()."""),
+    'lino_welfare.modlib.cbss.WithPerson' : _("""Mixin for models that have certain fields"""),
+    'lino_welfare.modlib.client_vouchers.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.client_vouchers.VoucherItem' : _("""An item of an ClientVoucher."""),
+    'lino_welfare.modlib.client_vouchers.ClientVouchersByJournal' : _("""Shows all simple invoices of a given journal (whose
+Journal.voucher_type must be
+lino_xl.lib.sales.models.ClientVoucher)."""),
+    'lino_welfare.modlib.debts.fields.PeriodsField' : _("""Used for Entry.periods and Account.periods
+(the latter holds simply the default value for the former).
+It means: for how many months the entered amount counts.
+Default value is 1. For yearly amounts set it to 12."""),
+    'lino_welfare.modlib.debts.ActorBase' : _("""Base class for both the volatile MainActor and the
+Actor model."""),
+    'lino_welfare.modlib.debts.MainActor' : _("""A volatile object that represents the budget partner as actor"""),
+    'lino_welfare.modlib.dupable_clients.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.dupable_clients.DupableClient' : _("""Model mixin to add to the base classes of your application's
+pcsw.Client model."""),
+    'lino_welfare.modlib.dupable_clients.DupableClient.find_similar_instances' : _("""Overrides
+lino.mixins.dupable.Dupable.find_similar_instances(),
+adding some additional rules."""),
+    'lino_welfare.modlib.esf.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.immersion.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.integ.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.integ.Plugin.only_primary' : _("""Whether to show only primary coachings in the dynamic ventilation
+columns (coachings per PersonGroup table."""),
+    'lino_welfare.modlib.integ.roles.IntegUser' : _("""Has access to data used by integration agents."""),
+    'lino_welfare.modlib.integ.roles.IntegrationStaff' : _("""Can configure social integration functionality."""),
+    'lino_welfare.modlib.isip.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.isip.OverlapGroups' : _("""The list of all known overlap groups to be selected for the
+overlap_group
+of a contract type."""),
+    'lino_welfare.modlib.jobs.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.ledger.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.pcsw.Plugin' : _("""See lino.core.plugin.Plugin."""),
+    'lino_welfare.modlib.pcsw.RefuseClient' : _("""Refuse this newcomer request."""),
+    'lino_welfare.modlib.pcsw.MarkClientFormer' : _("""Change client's state to 'former'. This will also end any active
+coachings."""),
+    'lino_welfare.modlib.pcsw.roles.SocialCoordinator' : _("""Has limited access to data of social workers. Can see contracts."""),
+    'lino_welfare.modlib.pcsw.roles.SocialUser' : _("""Can access data managed by general social workers."""),
+    'lino_welfare.modlib.pcsw.roles.SocialStaff' : _("""Can configure general social work functionality."""),
+    'lino_welfare.modlib.xcourses.roles.CoursesUser' : _("""Can manage external courses."""),
+    'lino_welfare.modlib.xcourses.roles.CoursesStaff' : _("""Can manage and configure external courses."""),
     'lino_welfare.modlib.aids.AidType' : _("""The Django model representing an aid type."""),
     'lino_welfare.modlib.aids.AidType.short_name' : _("""The short name for internal use, e.g. when a user must select
 an aid type from a combobox."""),
