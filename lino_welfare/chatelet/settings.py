@@ -29,6 +29,7 @@ class Site(Site):
     user_types_module = 'lino_welfare.modlib.welfare.user_types'
     # workflows_module = 'lino_xl.lib.reception.workflows'
     workflows_module = 'lino_welfare.chatelet.workflows'
+    use_silk_icons = False
 
     # verbose_name = "Lino pour CPAS"
     languages = "fr nl de en"
