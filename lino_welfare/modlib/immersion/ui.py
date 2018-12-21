@@ -63,7 +63,7 @@ class ContractTypes(dd.Table):
     """
 
 
-class unused_ContractDetail(dd.DetailLayout):
+class ContractDetail(dd.DetailLayout):
     box1 = """
     id:8 client:25 user:15 language:8
     type goal company contact_person contact_role
@@ -100,7 +100,7 @@ class Contracts(ContractBaseTable):
     model = 'immersion.Contract'
     column_names = 'id client company applies_from applies_until user type *'
     order_by = ['id']
-    # detail_layout = ContractDetail()
+    detail_layout = 'immersion.ContractDetail'
     insert_layout = """
     client
     company

@@ -1,20 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2013-2018 Rumma & Ko Ltd
-# This file is part of Lino Welfare.
-#
-# Lino Welfare is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# Lino Welfare is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public
-# License along with Lino Welfare.  If not, see
-# <http://www.gnu.org/licenses/>.
+# License: BSD (see file COPYING for details)
 
 
 from __future__ import unicode_literals
@@ -258,10 +244,10 @@ class EntriesByClient(Events):
         return kw
 
 
-class TasksByClient(Tasks):
+class TasksByClient(Tasks):  # used in TasksByClient.body.html
     required_roles = dd.login_required(SocialUser)
     master_key = 'project'
-    column_names = 'start_date due_date summary description notes'
+    column_names = 'priority start_date due_date summary description notes'
 
     @dd.displayfield(_("Notes"))
     def notes(self, obj, ar):

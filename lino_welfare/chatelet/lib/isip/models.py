@@ -1,20 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2014-2018 Rumma & Ko Ltd
-# This file is part of Lino Welfare.
-#
-# Lino Welfare is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# Lino Welfare is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public
-# License along with Lino Welfare.  If not, see
-# <http://www.gnu.org/licenses/>.
+# License: BSD (see file COPYING for details)
 
 from __future__ import unicode_literals
 from __future__ import print_function
@@ -51,9 +37,32 @@ class unused_ContractDetail(dd.DetailLayout):
         #~ dh.general.label = _("General")
         #~ dh.isip.label = _("ISIP")
 
+class ContractDetail(dd.DetailLayout):
+    main = "general #duties evaluations PartnersByContract"
 
-# Contracts.detail_layout = ContractDetail()
-Contracts.detail_layout = None
+    general = dd.Panel("""
+    id:8 client:25 type user:15 user_asd:15
+    study_type applies_from applies_until exam_policy language:8
+    date_decided date_issued printed date_ended ending:20
+    uploads.UploadsByController cal.TasksByController
+    """, label=_("General"))
+
+    # partners = dd.Panel("""
+    # PartnersByContract
+    # """, label=_("Contract partners"))
+
+    evaluations = dd.Panel("""
+    cal.EntriesByController
+    """, label=_("Evaluations"))
+
+    # duties = dd.Panel("""
+    # stages  goals
+    # duties_asd  duties_dsbe  duties_person
+    # """, label=_("Duties"))
+
+
+Contracts.detail_layout = ContractDetail()
+# Contracts.detail_layout = None
 ContractsByClient.column_names = "applies_from applies_until type user study_type date_ended ending uploads.UploadsByController *"
 
 
