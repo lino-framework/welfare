@@ -60,7 +60,7 @@ application for Belgian
 
 - The central project homepage is http://welfare.lino-framework.org
 
-- Technical specifiction http://www.lino-framework.org/specs/welfare
+- Technical specifiction http://docs.lino-framework.org/specs/welfare
 
 - There are separate *user guides* in `French
   <http://fr.welfare.lino-framework.org>`_ and `German
