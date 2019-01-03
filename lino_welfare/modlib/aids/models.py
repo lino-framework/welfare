@@ -329,7 +329,7 @@ class MyPendingGrantings(Grantings):
 class GrantingsByClient(Grantings):
 
     master_key = 'client'
-    column_names = "detail_pointer start_date end_date " \
+    column_names = "detail_link start_date end_date " \
                    "signer workflow_buttons " \
                    "board custom_actions *"
     auto_fit_column_widths = True
@@ -349,7 +349,7 @@ class GrantingsByClient(Grantings):
 class GrantingsByType(Grantings):
     auto_fit_column_widths = True
     master_key = 'aid_type'
-    column_names = "detail_pointer client start_date end_date id *"
+    column_names = "detail_link client start_date end_date id *"
 
 
 ##
@@ -366,7 +366,7 @@ class Confirmations(dd.Table):
     # model = 'aids.Confirmation'
     required_roles = dd.login_required(AidsStaff)
     order_by = ["-created"]
-    column_names = "detail_pointer created user printed " \
+    column_names = "detail_link created user printed " \
                    "start_date end_date *"
 
     parameters = dict(
@@ -480,7 +480,7 @@ class ConfirmationsByGranting(dd.VirtualTable):
     # add column with `master_key`":
     # master_key = 'granting'
 
-    column_names = "detail_pointer created user signer printed " \
+    column_names = "detail_link created user signer printed " \
                    "start_date end_date *"
     do_print = PrintConfirmation()
 
@@ -541,7 +541,8 @@ class ConfirmationsByGranting(dd.VirtualTable):
         # timestamp to be clickable.
         return obj._meta.get_field('printed').value_from_object(obj, ar)
 
-
+dd.update_field(ConfirmationsByGranting, 'detail_link', verbose_name=_("Confirmation"))
+# ConfirmationsByGranting.detail_link.verbose_name = _("Confirmation")
 #
 # SimpleConfirmation
 #

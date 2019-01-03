@@ -43,17 +43,12 @@ from lino_xl.lib.properties import models as properties
 
 class PersonProperty(properties.PropertyOccurence):
 
-    """
-    The occurence of a given 
-    :mod:`Property <lino_xl.lib.properties.models.Property>` 
-    on a given 
-    :class:`Client <lino_welfare.modlib.pcsw.models.Client>`.
-    """
+    """The occurrence of a given property on a given client. """
 
     allow_cascaded_delete = ['person']
 
     class Meta:
-        app_label = 'properties'
+        app_label = 'cv'
         verbose_name = _("Property")
         verbose_name_plural = _("Properties")
 
@@ -64,7 +59,7 @@ class PersonProperty(properties.PropertyOccurence):
 
 
 class PersonProperties(dd.Table):
-    model = 'properties.PersonProperty'
+    model = 'cv.PersonProperty'
     hidden_columns = 'group id'
     required_roles = dd.login_required(SocialStaff)
 

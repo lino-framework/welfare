@@ -1,6 +1,6 @@
 from lino.api import rt, dd, _
 
-rt.models.aids.GrantingsByClient.column_names = "detail_pointer request_date "\
+rt.models.aids.GrantingsByClient.column_names = "detail_link request_date "\
                                       "aid_type category start_date"
 
 notes = rt.models.notes
