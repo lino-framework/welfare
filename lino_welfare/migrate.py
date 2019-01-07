@@ -1,20 +1,6 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011-2018 Rumma & Ko Ltd
-# This file is part of Lino Welfare.
-#
-# Lino Welfare is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# Lino Welfare is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public
-# License along with Lino Welfare.  If not, see
-# <http://www.gnu.org/licenses/>.
+# Copyright 2011-2019 Rumma & Ko Ltd
+# License: BSD (see file COPYING for details)
 
 """
 This is a real-world example of how the application developer
@@ -372,3 +358,22 @@ class Migrator(Migrator):
                 courses_CourseRequest = resolve_model("xcourses.CourseRequest"))
                 
         return "2017.1.0"
+
+    def migrate_from_18_11_0(self, globals_dict):
+        if dd.is_installed('properties'):
+            # bv2kw = globals_dict['bv2kw']
+            properties_PersonProperty = rt.models.cv.PersonProperty
+
+            @override(globals_dict)
+            def create_properties_personproperty(id, group_id, property_id, value,
+                                                 person_id, remark):
+                kw = dict()
+                kw.update(id=id)
+                kw.update(group_id=group_id)
+                kw.update(property_id=property_id)
+                kw.update(value=value)
+                kw.update(person_id=person_id)
+                kw.update(remark=remark)
+                return properties_PersonProperty(**kw)
+
+        return "19.1.0"
