@@ -630,7 +630,7 @@ dd.inject_field(
 
 
 def site_setup(site):
-    for T in (site.modules.contacts.Partners,
+    for T in (#site.modules.contacts.Partners,
               site.modules.contacts.Persons,
               site.modules.pcsw.Clients,
               site.modules.households.Households):

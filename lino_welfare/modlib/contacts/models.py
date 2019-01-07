@@ -331,12 +331,12 @@ class CompanyDetail(CompanyDetail, PartnerDetailMixin):
     """, label=_("Miscellaneous"))
 
 
-class Companies(Companies):
-    detail_layout = CompanyDetail()
+# class Companies(Companies):
+#     detail_layout = CompanyDetail()
 
 
-Partners.set_detail_layout(PartnerDetail())
-Companies.set_detail_layout(CompanyDetail())
+# Partners.set_detail_layout(PartnerDetail())
+# Companies.set_detail_layout(CompanyDetail())
 
 # @dd.receiver(dd.post_analyze)
 # def my_details(sender, **kw):

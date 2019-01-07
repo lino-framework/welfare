@@ -74,6 +74,10 @@ class HouseholdDetail(dd.DetailLayout):
 
 class Households(Households):
     detail_layout = 'households.HouseholdDetail'
+    insert_layout = """
+    name
+    type
+    """
 
 
 #MembersByHousehold.column_names = SiblingsByPerson.column_names
