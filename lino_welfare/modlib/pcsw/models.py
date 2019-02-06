@@ -810,7 +810,7 @@ class ClientChecker(Checker):
         return obj.get_primary_coach()
 
 
-class SSINChecker(ClientChecker):
+class IdentityChecker(ClientChecker):
     """Clients must have either valid eId data or an alternative
     identifying document.
 
@@ -829,7 +829,7 @@ class SSINChecker(ClientChecker):
                     "nor alternative identifying document.")
                 yield (False, msg)
 
-SSINChecker.activate()
+IdentityChecker.activate()
 
 
 

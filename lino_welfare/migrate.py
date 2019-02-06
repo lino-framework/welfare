@@ -360,6 +360,8 @@ class Migrator(Migrator):
         return "2017.1.0"
 
     def migrate_from_18_11_0(self, globals_dict):
+        from lino.modlib.checkdata.choicelists import Checkers
+        Checkers.items_dict['pcsw.SSINChecker'] = Checkers.get_by_value('pcsw.IdentityChecker')
         if dd.is_installed('properties'):
             # bv2kw = globals_dict['bv2kw']
             properties_PersonProperty = rt.models.cv.PersonProperty
