@@ -16,6 +16,7 @@ Content
 .. toctree::
    :maxdepth: 1
 
+   install/index
    changes/index
 
 
