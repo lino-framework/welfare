@@ -17,11 +17,12 @@
 # <http://www.gnu.org/licenses/>.
 
 
-from __future__ import unicode_literals
 from __future__ import print_function
+from __future__ import unicode_literals
 
-from builtins import str
 import logging
+from builtins import str
+
 logger = logging.getLogger(__name__)
 
 import cgi
@@ -155,6 +156,11 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         'outbox.MailsByProject',
         sort_index=100,
         icon_name="transmit")
+
+    @dd.chooser()
+    def group_choices(self):
+        return rt.models.pcsw.PersonGroup.objects.filter(
+            active=True)
 
     @classmethod
     def on_analyze(cls, site):

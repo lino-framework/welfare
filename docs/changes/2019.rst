@@ -21,3 +21,4 @@ Changes 2019 in Lino Welfare
 - For Chatelet, #2851, I removed study_type from column_names of ContractsByClient, removed job_search from the main of
   pcsw.ClientDetail, I moved 'is_seeking unemployed_since seeking_since' from history_left to history_right of the main
   of pcsw.ClientDetail.
+- Fixed #2851, add a filter on pcsw.PersonGroup so the choicelists show only the activated groups.
