@@ -14,3 +14,7 @@ Changes 2019 in Lino Welfare
 2019-02-27
 ==========
 
+- Fixed #2853 Missing dependency in 'six' in welfare. The
+  :xfile:`setup_info.py` may of course not import any module which is installed
+  only during :xfile:`setup.py`.
+

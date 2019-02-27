@@ -7,13 +7,15 @@
 #
 #   $ python setup.py test -s tests.PackagesTests
 
-import six
+import sys
+PY2 = sys.version_info[0] == 2
+
 
 requires = ['lino-cosi',
             'pytidylib', 'channels<2',
             'django-iban', 'metafone',
             'cairocffi']
-if six.PY2:
+if PY2:
     requires.append('suds')
 else:
     requires.append('suds-py3')
