@@ -2,10 +2,10 @@
 # Copyright 2014-2018 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
-from __future__ import unicode_literals
 from __future__ import print_function
+from __future__ import unicode_literals
 
-from lino.api import dd, rt, _
+from lino.api import dd, _
 
 from lino_welfare.modlib.isip.models import *
 
@@ -63,6 +63,6 @@ class ContractDetail(dd.DetailLayout):
 
 Contracts.detail_layout = ContractDetail()
 # Contracts.detail_layout = None
-ContractsByClient.column_names = "applies_from applies_until type user study_type date_ended ending uploads.UploadsByController *"
+ContractsByClient.column_names = "applies_from applies_until type user #study_type date_ended ending uploads.UploadsByController *"
 
 

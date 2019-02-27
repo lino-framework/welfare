@@ -2,10 +2,11 @@
 # Copyright 2015-2018 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
-from __future__ import unicode_literals
 from __future__ import print_function
+from __future__ import unicode_literals
 
 import logging
+
 logger = logging.getLogger(__name__)
 
 from django.utils.translation import ugettext_lazy as _
@@ -14,8 +15,6 @@ from lino.api import dd
 
 from lino_xl.lib.contacts.roles import ContactsUser
 from lino_xl.lib.cv.roles import CareerUser
-from lino_welfare.modlib.newcomers.roles import NewcomersOperator
-from lino_welfare.modlib.pcsw.roles import SocialStaff
 
 from lino_welfare.modlib.pcsw.models import *
 
@@ -25,7 +24,7 @@ class ClientDetail(ClientDetail):
     main = "general coaching family \
     career competences obstacles_tab isip_tab \
     courses_tab immersion_tab \
-    job_search contracts history calendar misc"
+    #job_search contracts history calendar misc"
 
     general = dd.Panel("""
     overview:30 general2:40 general3:20 image:15
@@ -102,13 +101,13 @@ class ClientDetail(ClientDetail):
     history = dd.Panel("history_left history_right", label=_("History"))
 
     history_left = """
-    is_seeking unemployed_since seeking_since #work_permit_suspended_until
     # reception.CreateNoteActionsByClient:20
     notes.NotesByProject
     # lino.ChangesByMaster
     """
     history_right = """
     uploads.UploadsByClient
+    is_seeking unemployed_since seeking_since #work_permit_suspended_until
     pcsw.ExclusionsByClient
     # excerpts.ExcerptsByProject
     esf.SummariesByClient
