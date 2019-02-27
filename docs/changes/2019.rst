@@ -1,0 +1,16 @@
+.. _welfare.changes.2019:
+
+============================
+Changes 2019 in Lino Welfare
+============================
+
+.. Note: Changes are grouped by date. Every new day gives a new
+   heading. If a release deserves separate release notes, we create a separate
+   document and this file will have a link to it.
+
+.. contents::
+  :local:
+
+2019-02-27
+==========
+

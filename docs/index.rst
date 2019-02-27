@@ -9,3 +9,13 @@ Welcome to the central **Lino Welfare** project homepage.
   from lino_welfare import SETUP_INFO
   print(SETUP_INFO['long_description'])
 
+
+Content
+========
+
+.. toctree::
+   :maxdepth: 1
+
+   changes/index
+
+
