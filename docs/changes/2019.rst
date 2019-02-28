@@ -1,8 +1,8 @@
 .. _welfare.changes.2019:
 
-============================
-Changes 2019 in Lino Welfare
-============================
+====
+2019
+====
 
 .. Note: Changes are grouped by date. Every new day gives a new
    heading. If a release deserves separate release notes, we create a separate
@@ -11,14 +11,20 @@ Changes 2019 in Lino Welfare
 .. contents::
   :local:
 
+2019-02-28
+==========
+
+Moved the chatelet part from the :mod:`lino_welfare` package into a new package
+:mod:`lino_welcht`.  Code (in book and on production sites) must replace
+``lino_welfare.chatelet`` by ``lino_welcht``.
+
+
 2019-02-27
 ==========
 
-- Fixed #2853 Missing dependency in 'six' in welfare. The
+- (:ticket:`2853`) Missing dependency in 'six' in welfare. The
   :xfile:`setup_info.py` may of course not import any module which is installed
   only during :xfile:`setup.py`.
 
-- For Chatelet, #2851, I removed study_type from column_names of ContractsByClient, removed job_search from the main of
-  pcsw.ClientDetail, I moved 'is_seeking unemployed_since seeking_since' from history_left to history_right of the main
-  of pcsw.ClientDetail.
-- Fixed #2851, add a filter on pcsw.PersonGroup so the choicelists show only the activated groups.
+- (:ticket:`2851`) Added a filter on pcsw.PersonGroup so the choicelists show
+  only the activated groups

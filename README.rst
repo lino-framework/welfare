@@ -4,9 +4,10 @@ The ``lino-welfare`` package
 
 
 
-Lino Welfare is a modular
+Lino Welfare is a 
 `Lino <http://www.lino-framework.org>`__
-application for Belgian
+plugin library 
+for Belgian
 *Public Centres for Social Welfare*.
 
 - For *introductions* and *commercial information* about Lino Welfare
@@ -17,7 +18,11 @@ application for Belgian
 
 - Technical specifiction http://docs.lino-framework.org/specs/welfare
 
-- There are separate *user guides* in `French
+- There are two applications using this library: 
+  `welcht <http://welcht.lino-framework.org>`__
+  and `weleup <http://weleup.lino-framework.org>`__
+
+- There are *user guides* in `French
   <http://fr.welfare.lino-framework.org>`_ and `German
   <http://de.welfare.lino-framework.org>`_.
 

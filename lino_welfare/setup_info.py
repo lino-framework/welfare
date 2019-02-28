@@ -31,11 +31,12 @@ SETUP_INFO = dict(
     tests_require=['pytest'],
     include_package_data=True,
     zip_safe=False,    
-    description=u"A Lino application for Belgian Centres for Public Welfare",
+    description=u"A Lino plugin library for Belgian PCSWs",
     long_description="""\
-Lino Welfare is a modular
+Lino Welfare is a 
 `Lino <http://www.lino-framework.org>`__
-application for Belgian
+plugin library 
+for Belgian
 *Public Centres for Social Welfare*.
 
 - For *introductions* and *commercial information* about Lino Welfare
@@ -46,7 +47,11 @@ application for Belgian
 
 - Technical specifiction http://docs.lino-framework.org/specs/welfare
 
-- There are separate *user guides* in `French
+- There are two applications using this library: 
+  `welcht <http://welcht.lino-framework.org>`__
+  and `weleup <http://weleup.lino-framework.org>`__
+
+- There are *user guides* in `French
   <http://fr.welfare.lino-framework.org>`_ and `German
   <http://de.welfare.lino-framework.org>`_.
 
@@ -144,15 +149,6 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.welfare.fixtures',
     'lino_welfare.modlib.welfare.management',
     'lino_welfare.modlib.welfare.management.commands',
-    'lino_welfare.chatelet',
-    'lino_welfare.chatelet.lib',
-    'lino_welfare.chatelet.lib.courses',
-    'lino_welfare.chatelet.lib.courses.fixtures',
-    'lino_welfare.chatelet.lib.cv',
-    'lino_welfare.chatelet.lib.cv.fixtures',
-    'lino_welfare.chatelet.lib.isip',
-    'lino_welfare.chatelet.lib.pcsw',
-    'lino_welfare.chatelet.lib.pcsw.fixtures',
     'lino_welfare.eupen',
     'lino_welfare.eupen.lib',
     'lino_welfare.eupen.lib.pcsw',

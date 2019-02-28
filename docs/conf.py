@@ -24,6 +24,10 @@ from lino.sphinxcontrib import configure
 #configure(globals(), 'lino_welfare.projects.std.settings.doctests')
 configure(globals())
 
+intersphinx_mapping = {}
+from atelier.sphinxconf import interproject
+interproject.configure(globals(), 'atelier lino_book')
+
 
 # intersphinx_mapping = {}
 # from atelier.sphinxconf import interproject

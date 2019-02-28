@@ -1,8 +1,8 @@
 .. _welfare.changes:
 
-=======================
-Changes in Lino Welfare
-=======================
+=======
+Changes
+=======
 
 .. toctree::
    :maxdepth: 1

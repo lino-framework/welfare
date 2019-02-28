@@ -9,7 +9,6 @@ This package defines functionality specific to :ref:`welfare`.
    :toctree:
 
    eupen.lib
-   chatelet.lib
    modlib
    migrate
 
