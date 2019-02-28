@@ -15,10 +15,12 @@
 ==========
 
 Moved the chatelet part from the :mod:`lino_welfare` package into a new package
-:mod:`lino_welcht`.  Code (in book and on production sites) must replace
+:mod:`lino_welcht`.  User code on production sites must replace
 ``lino_welfare.chatelet`` by ``lino_welcht``.
-
 We plan to do the same operation for weleup soon.
+
+Released version 19.2.0
+
 
 
 2019-02-27
