@@ -21,6 +21,8 @@ We plan to do the same operation for weleup soon.
 
 Released version 19.2.0
 
+- (:ticket:`2851`) Remove the filter added 2019-02-27 on pcsw.PersonGroup so the choicelists show
+  only the activated groups. This filter was asked by Chatelet.
 
 
 2019-02-27

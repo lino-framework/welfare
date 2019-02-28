@@ -157,11 +157,6 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         sort_index=100,
         icon_name="transmit")
 
-    @dd.chooser()
-    def group_choices(self):
-        return rt.models.pcsw.PersonGroup.objects.filter(
-            active=True)
-
     @classmethod
     def on_analyze(cls, site):
         super(Client, cls).on_analyze(site)
