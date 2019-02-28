@@ -4,20 +4,6 @@ from __future__ import unicode_literals
 from django.utils.translation import ugettext_lazy as _
 
 help_texts = {
-    'lino_welfare.chatelet.lib.cv.ClientIsLearning' : _("""Select only clients who are "learning" during the given date.
-That is, who have an active Study, Training or
-Experience.
-Only the start_date is used, end_date has no effect when
-this criteria."""),
-    'lino_welfare.chatelet.lib.cv.Proof' : _("""A proof is some document which certifies that a given person
-has a given skill."""),
-    'lino_welfare.chatelet.lib.cv.PersonProperty' : _("""Abstract base for Skill, SoftSkill and
-Obstacle."""),
-    'lino_welfare.chatelet.lib.cv.Obstacle' : _("""An obstacle is an observed fact or characteristic of a client
-which might be reason to not get a given job."""),
-    'lino_welfare.chatelet.lib.cv.Obstacle.type' : _("""A pointer to ObstacleType."""),
-    'lino_welfare.chatelet.lib.cv.Obstacle.user' : _("""The agent who observed this obstacle."""),
-    'lino_welfare.chatelet.lib.cv.Obstacle.detected_date' : _("""The date when the agent observed this obstacle."""),
     'lino_welfare.migrate.Migrator' : _("""The standard migrator for welfare."""),
     'lino_welfare.modlib.aids.Plugin' : _("""The plugin."""),
     'lino_welfare.modlib.aids.Plugin.no_date_range_veto_until' : _("""Optionally specify the primary key (an integer) of the last
