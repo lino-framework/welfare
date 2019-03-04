@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: lino.apps.dsbe\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-10 09:56+0200\n"
-"PO-Revision-Date: 2018-12-10 10:02+0200\n"
+"PO-Revision-Date: 2019-03-04 20:02+0100\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: fr\n"
 "Language-Team: fr <lino-users@gmail.com>\n"
@@ -3685,7 +3685,7 @@ msgstr "Exclusions du chômage"
 
 #: lino_welfare/modlib/pcsw/models.py:980
 msgid "Excluded from"
-msgstr "Exclus depuis"
+msgstr "Du"
 
 #: lino_welfare/modlib/pcsw/models.py:996
 #, fuzzy
