@@ -11,6 +11,11 @@
 .. contents::
   :local:
 
+2019-03-04
+==========
+
+- French translation of "Excluded from" is now  "Du" (no longer "Exclus depuis")
+
 2019-02-28
 ==========
 
