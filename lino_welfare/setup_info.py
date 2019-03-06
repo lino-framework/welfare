@@ -12,17 +12,14 @@ PY2 = sys.version_info[0] == 2
 
 
 requires = ['lino-cosi',
-            'pytidylib', 'channels<2',
+            'pytidylib',
             'django-iban', 'metafone',
             'cairocffi']
 if PY2:
     requires.append('suds')
 else:
     requires.append('suds-py3')
-    # requires.append('suds-jurko')
 
-    
-    
 SETUP_INFO = dict(
     name='lino-welfare',
     version='19.2.0',
