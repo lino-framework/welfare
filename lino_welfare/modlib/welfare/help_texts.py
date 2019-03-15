@@ -48,7 +48,7 @@ lino_welfare.modlib.cbss.models.ManageAccessRequest."""),
     'lino_welfare.modlib.cbss.QueryRegisters.ALL' : _("""Query both registers."""),
     'lino_welfare.modlib.cbss.CBSSRequest' : _("""Common Abstract Base Class for SSDNRequest
 and NewStyleRequest"""),
-    'lino_welfare.modlib.cbss.CBSSRequest.wsdl_parts' : _("""alias of exceptions.NotImplementedError"""),
+    'lino_welfare.modlib.cbss.CBSSRequest.wsdl_parts' : _("""alias of builtins.NotImplementedError"""),
     'lino_welfare.modlib.cbss.CBSSRequest.on_duplicate' : _("""When duplicating a CBSS request, we want re-execute it.  So please
 duplicate only the parameters, not the execution data like
 ticket, sent and status.  Note that also the user will
