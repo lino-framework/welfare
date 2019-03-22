@@ -21,20 +21,17 @@
 """
 
 from builtins import str
-from django.db import models
+
 from django.conf import settings
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from lino.api import dd
 from lino import mixins
-
 from lino_xl.lib.cal.mixins import RecurrenceSet
-
-from .mixins import (ContractEvents, ContractTypeBase,
+from .choicelists import *
+from .mixins import (ContractTypeBase,
                      ContractPartnerBase, ContractBase,
                      ContractBaseTable)
-
-from .choicelists import *
 
 config = dd.plugins.isip
 
@@ -90,7 +87,7 @@ class ContractTypes(dd.Table):
     model = 'isip.ContractType'
     column_names = 'name ref exam_policy needs_study_type *'
     detail_layout = """
-    id ref exam_policy needs_study_type
+    id ref exam_policy overlap_group needs_study_type
     name
     full_name
     ContractsByType

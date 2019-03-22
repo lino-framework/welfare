@@ -11,6 +11,12 @@
 .. contents::
   :local:
 
+2019-03-22
+==========
+
+- overlap_group is added to following tables : isip.ContractTypes, jobs.ContractTypes,art61.ContractTypes.
+- The overlap test of two contacts will ignore type of contacts with overlap_group is not set.
+
 2019-03-04
 ==========
 

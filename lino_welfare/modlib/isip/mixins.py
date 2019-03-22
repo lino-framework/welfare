@@ -23,37 +23,34 @@
 from __future__ import unicode_literals
 
 from builtins import str
-from django.db import models
-from django.db.models import Q
-from django.conf import settings
-from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
 
 from atelier.utils import AttrDict
+from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
-from lino.api import dd, rt
 from lino import mixins
-from lino.utils import mti
-
-from lino.modlib.users.mixins import UserAuthored
-from lino.modlib.uploads.mixins import UploadController
+from lino.api import dd, rt
+from lino.mixins.periods import rangefmt
 from lino.modlib.uploads.choicelists import UploadAreas
-from lino_xl.lib.excerpts.mixins import Certifiable
-from lino_xl.lib.cal.mixins import EventGenerator
-from lino_xl.lib.contacts.mixins import ContactRelated
-from lino_xl.lib.cal.utils import update_auto_task
-from lino_xl.lib.cal.choicelists import DurationUnits
-# from lino.modlib.system.mixins import PeriodEvents
-
+from lino.modlib.uploads.mixins import UploadController
+from lino.modlib.users.mixins import UserAuthored
+from lino.utils import mti
 from lino.utils.ranges import isrange
 from lino.utils.ranges import overlap2, encompass
-from lino.mixins.periods import rangefmt
-
-from lino_welfare.modlib.system.models import Signers
-from lino_welfare.modlib.pcsw.models import ClientChecker
 from lino_welfare.modlib.integ.roles import IntegUser
-
+from lino_welfare.modlib.pcsw.models import ClientChecker
+from lino_welfare.modlib.system.models import Signers
+from lino_xl.lib.cal.choicelists import DurationUnits
+from lino_xl.lib.cal.mixins import EventGenerator
+from lino_xl.lib.cal.utils import update_auto_task
+from lino_xl.lib.contacts.mixins import ContactRelated
+from lino_xl.lib.excerpts.mixins import Certifiable
 from .choicelists import ContractEvents, OverlapGroups
+
+
+# from lino.modlib.system.mixins import PeriodEvents
 
 
 def default_signer1():
@@ -181,7 +178,7 @@ class OverlappingContractsTest:
                     % dict(p2=rangefmt(cp), p1=rangefmt(ap))
         for (p2, con2) in self.actives:
             if con1 != con2 and overlap2(ap, p2):
-                if con1.type.overlap_group == con2.type.overlap_group:
+                if con1.type.overlap_group and con1.type.overlap_group == con2.type.overlap_group:
                     msg = _("Date range overlaps with {ctype} #{id}.")
                     msg = msg.format(
                         ctype=con2.__class__._meta.verbose_name,

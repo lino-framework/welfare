@@ -20,6 +20,7 @@
 from __future__ import unicode_literals
 
 import logging
+
 logger = logging.getLogger(__name__)
 
 from django.db import models
@@ -70,7 +71,7 @@ class ContractTypes(dd.Table):
     model = ContractType
     column_names = 'name ref *'
     detail_layout = """
-    id name ref
+    id name ref overlap_group
     ContractsByType
     """
 

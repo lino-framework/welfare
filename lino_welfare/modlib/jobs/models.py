@@ -25,20 +25,18 @@ See also :ref:`welfare.specs.jobs`.
 """
 from __future__ import unicode_literals
 
-from builtins import str
 import logging
-logger = logging.getLogger(__name__)
+from builtins import str
 
-import cgi
+logger = logging.getLogger(__name__)
 
 from django.db import models
 from django.conf import settings
-from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
 from django.utils.encoding import force_text
 
-from lino.api import dd, rt ,gettext
+from lino.api import dd, rt
 from lino import mixins
 
 from etgen.html import E
@@ -50,7 +48,7 @@ from lino_xl.lib.coachings.utils import only_coached_on, has_contracts_filter
 from lino_xl.lib.clients.choicelists import ClientEvents, ObservedEvent
 
 from lino_welfare.modlib.isip.mixins import (
-    ContractTypeBase, ContractPartnerBase, ContractBase)
+    ContractTypeBase)
 
 from lino_welfare.modlib.pcsw.roles import SocialStaff, SocialUser, SocialCoordinator
 from lino_welfare.modlib.integ.roles import IntegUser
@@ -192,7 +190,7 @@ class ContractTypes(dd.Table):
     model = 'jobs.ContractType'
     column_names = 'name ref *'
     detail_layout = """
-    id name ref
+    id name ref overlap_group:30
     ContractsByType
     """
 
@@ -861,7 +859,6 @@ class JobsByType(Jobs):
 
 if True:  # settings.SITE.user_model:
 
-    from lino.core.utils import resolve_model, UnresolvedModel
     #~ USER_MODEL = resolve_model(settings.SITE.user_model)
 
     class ContractsSearch(Contracts):
