@@ -67,6 +67,9 @@ def default_signer2():
 class ContractTypeBase(mixins.BabelNamed):
     """Base class for all `ContractType` models.
 
+    Used by :mod:`lino_welfare.modlib.isip`, :mod:`lino_welfare.modlib.jobs`,
+    :mod:`lino_welfare.modlib.art61` and :mod:`lino_welfare.modlib.immersion`,
+
     .. attribute:: full_name
 
         The full description of this contract type as used in printed
@@ -84,9 +87,10 @@ class ContractTypeBase(mixins.BabelNamed):
     .. attribute:: overlap_group
 
         The overlap group to use when checking whether two contracts
-        are overlapping or not. See :class:`OverlappingContractsTest`.
+        are overlapping or not.
         If this field is empty, Lino does not check at all for
         overlapping contracts.
+        See :class:`OverlappingContractsTest`.
 
     .. attribute:: template
 
