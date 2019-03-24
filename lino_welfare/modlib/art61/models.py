@@ -71,7 +71,7 @@ class ContractTypes(dd.Table):
     model = ContractType
     column_names = 'name ref *'
     detail_layout = """
-    id name ref overlap_group
+    id name ref overlap_group:20
     ContractsByType
     """
 
