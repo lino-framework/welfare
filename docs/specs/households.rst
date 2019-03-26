@@ -34,15 +34,27 @@ Added features
     This is a special form of :class:`lino_xl.lib.households.SiblingsByPerson`,
     used e.g. in :xfile:`aids/Confirmation/clothes_bank.body.html`.
 
+    It has two configurable attributes:
+
     .. attribute:: child_tariff
 
-        The amount to show for children (household members less than
+        The amount to refund for children (household members less than
         :attr:`lino_xl.lib.households.Plugin.adult_age` years old).
 
     .. attribute:: adult_tariff
 
-        The amount to show for children (household members who are
+        The amount to refund for children (household members who are
         :attr:`lino_xl.lib.households.Plugin.adult_age` years or older).
+
+    The values of these attributes are hard-coded and defaul to 10 and 20:
+
+    >>> rt.models.households.RefundsByPerson.child_tariff
+    Decimal('10')
+    >>> rt.models.households.RefundsByPerson.adult_tariff
+    Decimal('20')
+
+    You might change them locally e.g. in the
+    :attr:`lino.core.site.Site.custom_layouts` module.
 
 
     .. attribute:: person_info
@@ -265,6 +277,9 @@ In 2019 Melba is 17, still a child:
  **Total (4 rows)**                             **60,00**
 ==================== ======== ================ ===========
 <BLANKLINE>
+
+But in 2020 she is 18, now her refunded amount is that of an adult:
+
 
 >>> settings.SITE.the_demo_date = datetime.date(2020, 5, 22)
 >>> ses.show(households.RefundsByPerson, master_instance=obj)
