@@ -1,0 +1,16 @@
+# -*- coding: UTF-8 -*-
+logger.info("Loading 11 objects to table aids_aidtype...")
+# fields: id, name, company, contact_person, contact_role, excerpt_title, aid_regime, confirmation_type, short_name, board, print_directly, is_integ_duty, is_urgent, confirmed_by_primary_coach, pharmacy_type, address_type, body_template
+loader.save(create_aids_aidtype(1,['Eingliederungseinkommen', "Revenu d'int\xe9gration", 'Eingliederungseinkommen'],None,None,None,['Bescheinigung', 'Attestation', 'Attestation'],u'10',u'aids.IncomeConfirmation',u'EiEi',None,True,True,False,True,None,None,u'integ_income.body.html'))
+loader.save(create_aids_aidtype(2,['Ausl\xe4nderbeihilfe', 'Aide aux immigrants', 'Ausl\xe4nderbeihilfe'],None,None,None,['Bescheinigung', 'Attestation', 'Attestation'],u'10',u'aids.IncomeConfirmation',u'',None,True,True,False,True,None,None,u'foreigner_income.body.html'))
+loader.save(create_aids_aidtype(3,['Feste Beihilfe', 'Revenu fixe', 'Feste Beihilfe'],None,None,None,['Bescheinigung', 'Attestation', 'Attestation'],u'10',u'aids.IncomeConfirmation',u'',None,True,False,False,True,None,None,u'fixed_income.body.html'))
+loader.save(create_aids_aidtype(4,['Erstattung', 'Remboursement', 'Erstattung'],None,None,None,['Bescheinigung', 'Attestation', 'Attestation'],u'10',u'aids.SimpleConfirmation',u'',None,True,False,False,True,None,None,u'certificate.body.html'))
+loader.save(create_aids_aidtype(5,['\xdcbernahmeschein', '\xdcbernahmeschein', '\xdcbernahmeschein'],None,None,None,['Bescheinigung', 'Attestation', 'Attestation'],u'10',u'aids.SimpleConfirmation',u'',None,True,False,False,True,None,None,u'certificate.body.html'))
+loader.save(create_aids_aidtype(6,['\xdcbernahme von Arzt- und/oder Medikamentenkosten', 'Remboursement de frais m\xe9dicaux', 'Medical costs'],None,None,None,['Bescheinigung', 'Attestation', 'Attestation'],u'10',u'aids.RefundConfirmation',u'AMK',None,True,False,False,True,1,None,u'medical_refund.body.html'))
+loader.save(create_aids_aidtype(7,['Dringende Medizinische Hilfe', 'Aide M\xe9dicale Urgente', 'Urgent Medical Care'],None,None,None,['Bescheinigung', 'Attestation', 'Attestation'],u'10',u'aids.RefundConfirmation',u'DMH',None,True,False,True,True,None,None,u'urgent_medical_care.body.html'))
+loader.save(create_aids_aidtype(8,['M\xf6bellager', 'Mobilier', 'Furniture'],None,None,None,['Bescheinigung', 'Attestation', 'Attestation'],u'10',u'aids.SimpleConfirmation',u'',None,True,False,False,True,None,None,u'furniture.body.html'))
+loader.save(create_aids_aidtype(9,['Heizkosten', 'Frais de chauffage', 'Heating costs'],None,None,None,['Bescheinigung', 'Attestation', 'Attestation'],u'10',u'aids.SimpleConfirmation',u'',None,True,False,False,True,None,None,u'heating_refund.body.html'))
+loader.save(create_aids_aidtype(10,['Lebensmittelbank', 'Banque alimentaire', 'Food bank'],100,None,None,['Bescheinigung', 'Attestation', 'Attestation'],u'10',u'aids.SimpleConfirmation',u'',None,True,False,False,False,None,None,u'food_bank.body.html'))
+loader.save(create_aids_aidtype(11,['Kleiderkammer', 'Banque aux v\xeatements', 'Clothes bank'],100,None,None,['Kosten\xfcbernahme Kleidung', 'Kosten\xfcbernahme Kleidung', 'Clothing costs transfer'],u'10',u'aids.SimpleConfirmation',u'',None,True,False,False,True,None,None,u'clothing_bank.body.html'))
+
+loader.flush_deferred_objects()

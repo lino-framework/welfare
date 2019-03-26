@@ -4,7 +4,7 @@
 
 """Defines default user profiles and shortcuts for Lino Welfare.
 
-See :doc:`/specs/welfare/usertypes`.
+See :doc:`/specs/usertypes`.
 
 """
 

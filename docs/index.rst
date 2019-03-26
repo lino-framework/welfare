@@ -20,6 +20,7 @@ Content
 
    install/index
    changes/index
+   specs/index
    api/index
 
 

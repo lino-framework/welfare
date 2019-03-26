@@ -17,12 +17,11 @@ tmp
 SciTE.session
 default.db
 media
-docs/api/lino_welfare.*
+docs/api/lino*.*
 
 lino_welfare.egg-info
 .build
 htmlcov
-userdocs/gen
 .DS_Store
 .idea
 .coverage

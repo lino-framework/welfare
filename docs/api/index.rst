@@ -12,3 +12,7 @@ This section has been automatically generated from the source code.
 .. automodule:: lino_welfare
 
 
+.. automodule:: lino_weleup
+
+
+.. automodule:: lino_welcht
