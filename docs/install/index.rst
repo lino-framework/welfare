@@ -4,7 +4,7 @@
 Installing Lino Welfare
 =======================
 
-See also http://www.lino-framework.org/user/install.html
+See also http://www.lino-framework.org/dev/quick/install.html
 
 Quick instructions
 ==================
