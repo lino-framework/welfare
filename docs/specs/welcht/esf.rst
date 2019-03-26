@@ -1,5 +1,5 @@
 .. doctest docs/specs/esf.rst
-.. _welcht.specs.esf:
+.. _welfare.specs.esf:
 
 ==============================
 ``esf`` : European Social Fund

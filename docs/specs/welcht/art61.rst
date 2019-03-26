@@ -1,5 +1,5 @@
 .. doctest docs/specs/art61.rst
-.. _welcht.specs.art61:
+.. _welfare.specs.art61:
 
 ======================================
 ``art61`` : Article 61 job supplyments

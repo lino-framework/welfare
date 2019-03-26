@@ -1,4 +1,5 @@
 .. _welfare.specs.isip_chatelet:
+.. _welcht.specs.isip:
 
 =========================
 ISIP contracts (Chatelet)
