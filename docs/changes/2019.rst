@@ -11,8 +11,8 @@
 .. contents::
   :local:
 
-2019-03-26
-==========
+2019-03-26 (v19.3.0)
+====================
 
 Moved :ref:`welfare` out of :ref:`book`.
 Created a new repository :ref:`weleup`
@@ -30,6 +30,8 @@ Fixed a bug (:ticket:`2917`) in
 This table considered children as adult only one year after the age
 specified in :attr:`lino_xl.lib.households.Plugin.adult_age`.
 Added a test case to cover this: :ref:`welfare.specs.households.20190326`.
+
+Released version 19.3.0
 
 2019-03-22
 ==========
