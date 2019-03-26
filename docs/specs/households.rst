@@ -1,23 +1,68 @@
 .. doctest docs/specs/households.rst 
 .. _welfare.specs.households:
+.. include:: /../../book/docs/shared/include/defs.rst
 
 ==========
 Households
 ==========
 
-.. doctest init:
+.. currentmodule:: lino_welfare.modlib.households
 
-    >>> from lino import startup
-    >>> startup('lino_welfare.projects.gerd.settings.doctests')
-    >>> from lino.api.doctest import *
-
-The :mod:`lino_welfare.modlib.households` plugin is an extension of 
-:mod:`lino.modlib.households` which adds some PCSW-specific features.
+The :mod:`lino_welfare.modlib.households` plugin extends
+:mod:`lino.modlib.households` by adding some PCSW-specific features.
 
 
 .. contents::
    :local:
 
+.. include:: /shared/include/tested.rst
+
+>>> from lino import startup
+>>> startup('lino_welfare.projects.gerd.settings.doctests')
+>>> from lino.api.doctest import *
+>>> import datetime
+
+
+Added features
+==============
+
+.. class:: RefundsByPerson
+
+    Shows the members of the primary household of this person together with an
+    amount which depends on whether that member is adult or not.
+
+    This is a special form of :class:`lino_xl.lib.households.SiblingsByPerson`,
+    used e.g. in :xfile:`aids/Confirmation/clothes_bank.body.html`.
+
+    .. attribute:: child_tariff
+
+        The amount to show for children (household members less than
+        :attr:`lino_xl.lib.households.Plugin.adult_age` years old).
+
+    .. attribute:: adult_tariff
+
+        The amount to show for children (household members who are
+        :attr:`lino_xl.lib.households.Plugin.adult_age` years or older).
+
+
+    .. attribute:: person_info
+
+        The full name of the household member.
+
+    .. attribute:: amount
+
+        The amount to pay. This is either :attr:`child_tariff` or
+        :attr:`adult_tarif` depending on the age of the household member.
+
+    See the examples below.
+
+
+.. function:: get_household_summary(person, today=None, adult_age=None)
+
+    Return a string which expresses the household composition in a few
+    words. See :ref:`welfare.specs.households` for some examples.
+
+    Note that members without `birth_date` are considered children.
 
 
 .. _paulfrisch:
@@ -114,8 +159,6 @@ Mr Paul FRISCH
 ========== =================== ================ ==================== ============ =========== ============ ========
 <BLANKLINE>
 
-Here is their :class:`RefundsByPerson
-<lino_welfare.modlib.households.models.RefundsByPerson>`:
 
 >>> ses.show(households.RefundsByPerson, master_instance=obj)
 ==================== ======== ================= ===========
@@ -149,20 +192,6 @@ Mr Ludwig FRISCH
 <BLANKLINE>
 
 
-Here is their :class:`welfare.households.RefundsByPerson`:
-
->>> ses.show(households.RefundsByPerson, master_instance=obj)
-==================== ======== ================ ===========
- Age                  Gender   Person           Amount
--------------------- -------- ---------------- -----------
- 46 years             Female   Laura LOSLEVER   20,00
- 46 years             Male     Ludwig FRISCH    20,00
- 12 years             Female   Melba FRISCH     10,00
- 6 years              Female   Irma FRISCH      10,00
- **Total (4 rows)**                             **60,00**
-==================== ======== ================ ===========
-<BLANKLINE>
-
 Here is what Ludwig's LinksByHuman panel shows:
 
 >>> ses.show(humanlinks.LinksByHuman, master_instance=obj)
@@ -176,10 +205,88 @@ Son of `Hubert <Detail>`__ (80 years)
 Create relationship as **Father**/**Son** **Adoptive father**/**Adopted son** **Foster father**/**Foster son** **Husband** **Partner** **Stepfather**/**Stepson** **Brother** **Cousin** **Uncle**/**Nephew** **Relative** **Other**
 
 
-.. The following edge case failed before 20170206:
+Here is his :class:`RefundsByPerson` table:
+
+>>> ses.show(households.RefundsByPerson, master_instance=obj)
+==================== ======== ================ ===========
+ Age                  Gender   Person           Amount
+-------------------- -------- ---------------- -----------
+ 46 years             Female   Laura LOSLEVER   20,00
+ 46 years             Male     Ludwig FRISCH    20,00
+ 12 years             Female   Melba FRISCH     10,00
+ 6 years              Female   Irma FRISCH      10,00
+ **Total (4 rows)**                             **60,00**
+==================== ======== ================ ===========
+<BLANKLINE>
+
+An edge case
+============
+
+The following edge case failed before 20170206:
    
-    >>> ses.show(humanlinks.LinksByHuman)
-    <BLANKLINE>
+>>> ses.show(humanlinks.LinksByHuman)
+<BLANKLINE>
+
+
+.. _welfare.specs.households.20190326:
+
+Melba getting adult
+===================
+
+The :class:`RefundsByPerson` table depends on the current date, which is
+2014-05-22 for this demo:
+
+>>> dd.today()
+datetime.date(2014, 5, 22)
+
+The demo date is stored in a site attribute :attr:`the_demo_date
+<lino.core.site.Site.the_demo_date>`:
+
+>>> settings.SITE.the_demo_date
+datetime.date(2014, 5, 22)
+
+Let's have a look at Ludwig's :class:`RefundsByPerson` table when Melba gets
+adult.  The default configuration says that you get adult at 18:
+
+>>> dd.plugins.households.adult_age
+18
+
+In 2019 Melba is 17, still a child:
+
+>>> settings.SITE.the_demo_date = datetime.date(2019, 5, 22)
+>>> ses.show(households.RefundsByPerson, master_instance=obj)
+==================== ======== ================ ===========
+ Age                  Gender   Person           Amount
+-------------------- -------- ---------------- -----------
+ 51 years             Female   Laura LOSLEVER   20,00
+ 51 years             Male     Ludwig FRISCH    20,00
+ 17 years             Female   Melba FRISCH     10,00
+ 11 years             Female   Irma FRISCH      10,00
+ **Total (4 rows)**                             **60,00**
+==================== ======== ================ ===========
+<BLANKLINE>
+
+>>> settings.SITE.the_demo_date = datetime.date(2020, 5, 22)
+>>> ses.show(households.RefundsByPerson, master_instance=obj)
+==================== ======== ================ ===========
+ Age                  Gender   Person           Amount
+-------------------- -------- ---------------- -----------
+ 52 years             Female   Laura LOSLEVER   20,00
+ 52 years             Male     Ludwig FRISCH    20,00
+ 18 years             Female   Melba FRISCH     20,00
+ 12 years             Female   Irma FRISCH      10,00
+ **Total (4 rows)**                             **70,00**
+==================== ======== ================ ===========
+<BLANKLINE>
+
+Note: Before 20190326 above table gave an amount of 10,00 for Melba because of
+a bug (you got adult only one year after the age specified in
+:attr:`lino_xl.lib.households.Plugin.adult_age`).
+
+For the following tests we set :attr:`the_demo_date
+<lino.core.site.Site.the_demo_date>` back to its original value:
+
+>>> settings.SITE.the_demo_date = datetime.date(2014, 5, 22)
 
 
 

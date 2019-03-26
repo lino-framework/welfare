@@ -1,24 +1,7 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2017 Rumma & Ko Ltd
-# This file is part of Lino Welfare.
-#
-# Lino Welfare is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# Lino Welfare is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public
-# License along with Lino Welfare.  If not, see
-# <http://www.gnu.org/licenses/>.
+# Copyright 2013-2019 Rumma & Ko Ltd
+# License: BSD (see file COPYING for details)
 
-"""
-This module extends :mod:`lino_xl.lib.households.models`
-"""
 
 from __future__ import unicode_literals
 
@@ -93,7 +76,7 @@ class RefundsByPerson(SiblingsByPerson):
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount(self, obj, ar):
         age = obj.get_age(dd.today())
-        if age is None or age <= dd.plugins.households.adult_age:
+        if age is None or age < dd.plugins.households.adult_age:
             return self.child_tariff
         return self.adult_tariff
 
@@ -118,7 +101,7 @@ class RefundsByPerson(SiblingsByPerson):
         children = adults = 0
         for obj in cls.request(master_instance=person):
             age = obj.get_age(today)
-            if age is None or age <= dd.plugins.households.adult_age:
+            if age is None or age < dd.plugins.households.adult_age:
                 children += 1
             else:
                 adults += 1
@@ -132,12 +115,6 @@ class RefundsByPerson(SiblingsByPerson):
 
 
 def get_household_summary(person, today=None, adult_age=None):
-    """Return a string which expresses the household composition in a few
-    words. See :ref:`welfare.specs.households` for some examples.
-
-    Note that members without `birth_date` are considered as children.
-
-    """
     if adult_age is None:
         adult_age = dd.plugins.households.adult_age
     ar = SiblingsByPerson.request(master_instance=person)

@@ -11,6 +11,26 @@
 .. contents::
   :local:
 
+2019-03-26
+==========
+
+Moved :ref:`welfare` out of :ref:`book`.
+Created a new repository :ref:`weleup`
+and moved :file:`man/welfare_de` to :file:`weleup/dedocs`.
+The welfare repo is now a library repo, similar to xl.
+It contains demo projects, specs and api for both weleup
+and welcht (it makes no sense to explain welfare without also explaining weleup
+and welcht, and it makes no sense to write technical docs about weleup without
+also explaining general welfare plugins).
+The doctrees of welcht or weleup just contain a short description, installation
+instructions and links to the real docs.
+
+Fixed a bug (:ticket:`2917`) in
+:class:`lino_welfare.modlib.households.RefundsByPerson`.
+This table considered children as adult only one year after the age
+specified in :attr:`lino_xl.lib.households.Plugin.adult_age`.
+Added a test case to cover this: :ref:`welfare.specs.households.20190326`.
+
 2019-03-22
 ==========
 
