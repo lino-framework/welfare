@@ -1,8 +1,11 @@
-# Copyright 2016-2018 Rumma & Ko Ltd
+# Copyright 2016-2019 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """Adds functionality to produce "fiches de stages" for the European
-Social Fund. See :doc:`/specs/welfare/esf`.
+Social Fund.
+
+Technical specs see :ref:`welcht`.
+
 
 """
 

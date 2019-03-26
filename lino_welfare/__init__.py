@@ -8,7 +8,6 @@ This package defines functionality specific to :ref:`welfare`.
 .. autosummary::
    :toctree:
 
-   eupen.lib
    modlib
    migrate
 

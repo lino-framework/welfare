@@ -26,7 +26,7 @@ Then create a local project::
 Add the following content to your :xfile:`settings.py` file::
 
     from lino_welfare.chatelet.settings import *
-    # from lino_welfare.eupen.settings import *
+    # from lino_weleup.settings import *
     SITE = Site(globals())
     DEBUG = True
 

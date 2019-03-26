@@ -146,10 +146,6 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.welfare.fixtures',
     'lino_welfare.modlib.welfare.management',
     'lino_welfare.modlib.welfare.management.commands',
-    'lino_welfare.eupen',
-    'lino_welfare.eupen.lib',
-    'lino_welfare.eupen.lib.pcsw',
-    'lino_welfare.eupen.lib.pcsw.fixtures',
     'lino_welfare.scripts',
 ])
 

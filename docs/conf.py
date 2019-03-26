@@ -22,7 +22,9 @@ from lino.sphinxcontrib import configure
 #configure(globals(), 'lino_welfare.projects.eupen.settings.demo')
 #configure(globals(), 'lino_welfare.projects.eupen.settings.doctests')
 #configure(globals(), 'lino_welfare.projects.std.settings.doctests')
-configure(globals())
+configure(globals(), 'lino_book.projects.min1.settings.doctests')
+#configure(globals(), 'lino.projects.std.settings')
+# configure(globals())
 
 intersphinx_mapping = {}
 from atelier.sphinxconf import interproject

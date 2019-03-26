@@ -1,8 +1,10 @@
+.. _welfare:
+
 ============
 Lino Welfare
 ============
 
-Welcome to the central **Lino Welfare** project homepage.
+Welcome to the **Lino Welfare** project homepage.
 
 .. py2rst::
 
@@ -18,5 +20,6 @@ Content
 
    install/index
    changes/index
+   api/index
 
 

@@ -6,7 +6,7 @@ ns = setup_from_tasks(
     blogref_url='http://luc.lino-framework.org',
     revision_control_system='git',
     locale_dir='lino_welfare/modlib/welfare/locale',
-    # cleanable_files=['docs/api/lino_welfare.*'],
+    cleanable_files=['docs/api/lino_welfare.*'],
     # demo_projects=[
     #     'lino_welfare/projects/std',
     #     'lino_welfare/projects/eupen',
