@@ -16,9 +16,6 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Choicelists for `lino_welfare.modlib.isip`.
-
-"""
 
 from lino.api import dd, _
 
@@ -35,13 +32,6 @@ add('50', _("Issued"), 'issued')
 
 
 class OverlapGroups(dd.ChoiceList):
-    """The list of all known overlap groups to be selected for the
-    :attr:`overlap_group
-    <lino_welfare.modlib.isip.mixins.ContractTypeBase.overlap_group>`
-    of a contract type.
-
-    """
-
     verbose_name = _("Overlap group")
     verbose_name_plural = _("Overlap groups")
 add = OverlapGroups.add_item

@@ -16,17 +16,7 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""The :mod:`lino_welfare.modlib.isip` package provides data definitions
-for Individual Social Integration Projects (ISIPs)
-
-This module is also used and extended by
-:mod:`lino_welfare.modlib.jobs` and
-:mod:`lino_welfare.modlib.immersion`.
-
-.. autosummary::
-   :toctree:
-
-   choicelists
+"""See :doc:`/specs/isip`.
 
 """
 

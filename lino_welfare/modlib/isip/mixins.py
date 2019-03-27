@@ -16,9 +16,6 @@
 # License along with Lino Welfare.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-"""Model mixins for `lino_welfare.modlib.isip`.
-
-"""
 
 from __future__ import unicode_literals
 
@@ -62,42 +59,6 @@ def default_signer2():
 
 
 class ContractTypeBase(mixins.BabelNamed):
-    """Base class for all `ContractType` models.
-
-    Used by :mod:`lino_welfare.modlib.isip`, :mod:`lino_welfare.modlib.jobs`,
-    :mod:`lino_welfare.modlib.art61` and :mod:`lino_welfare.modlib.immersion`,
-
-    .. attribute:: full_name
-
-        The full description of this contract type as used in printed
-        documents.
-
-    .. attribute:: exam_policy
-
-        The default examination policy to be used for contracts of
-        this type.
-
-        This is a pointer to :class:`ExamPolicy
-        <lino_welfare.modlib.isip.models.ExamPolicy>`. All contract
-        types share the same set of examination policies.
-
-    .. attribute:: overlap_group
-
-        The overlap group to use when checking whether two contracts
-        are overlapping or not.
-        If this field is empty, Lino does not check at all for
-        overlapping contracts.
-        See :class:`OverlappingContractsTest`.
-
-    .. attribute:: template
-
-        The main template to use instead of the default template
-        defined on the excerpt type.
-    
-        See
-        :meth:`lino_xl.lib.excerpts.mixins.Certifiable.get_excerpt_templates`.
-
-    """
 
     class Meta:
         abstract = True
@@ -145,16 +106,6 @@ class ContractPartnerBase(ContactRelated):
 
 
 class OverlappingContractsTest:
-    """Volatile object used to test for overlapping contracts.  It is
-    responsible for issuing the following error messages:
-
-    - :message:`Date range overlaps with X #Y` means that the date
-      periods of two contracts of the same client and the same overlap
-      group (see :class:`OverlapGroups`) overlap.
-
-    - (Currently deactivated) Date range X lies outside of coached period (Y)
-
-    """
 
     def __init__(self, client):
         self.client = client
@@ -200,9 +151,6 @@ class OverlappingContractsTest:
 
 
 class OverlappingContractsChecker(ClientChecker):
-    """A given client cannot have two active contracts at the same time.
-
-    """
     verbose_name = _("Check for overlapping contracts")
 
     def get_checkdata_problems(self, obj, fix=False):
@@ -216,55 +164,6 @@ OverlappingContractsChecker.activate()
 @dd.python_2_unicode_compatible
 class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
                    UploadController):
-    """Abstract base class for all *integration contracts* (an unofficial
-    term), i.e.  :class:`isip.Contract
-    <lino_welfare.modlib.isip.models.Contract>` :class:`jobs.Contract
-    <lino_welfare.modlib.jobs.models.Contract>` and
-    :class:`immersions.Contract
-    <lino_welfare.modlib.immersions.models.Contract>`
-
-    .. attribute:: client
-
-        The client for whom this contract is done.
-
-    .. attribute:: applies_from
-
-        The start date of the contract.
-    
-    .. attribute:: applies_until
-
-        The *planned* end date of this contract.
-    
-    .. attribute:: date_ended
-
-        The date when this contract was *effectively* ended.
-        This field is set to the same value as :attr:`applies_until`.
-
-    .. attribute:: ending
-
-        The reason of prematured ending.  Pointer to
-        :class:`ContractEnding
-        <lino_welfare.modlib.isip.choicelists.ContractEnding>`
-
-    .. attribute:: date_issued
-
-        When the contract was issued to the client and signed by them.
-
-    .. attribute:: date_decided
-    
-        When the contract was ratified by the responsible board.
-
-    .. attribute:: language
-
-        The language of this contract. Default value is the client's
-        :attr:`language<lino_welfare.modlib.pcw.models.Client.language>`.
-
-    .. attribute:: type
-
-        The type of this contract. Pointer to a subclass of
-        :class:`ContractTypeBase`.
-
-    """
 
     manager_roles_required = dd.login_required(IntegUser)
 
@@ -323,18 +222,10 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
         return UploadAreas.contract
     
     def get_excerpt_title(self):
-        """The printed title of a contract specifies just the contract type
-        (not the number and name of client).
-
-        """
         return str(self.type)
         # return unicode(self._meta.verbose_name)
 
     def get_excerpt_templates(self, bm):
-        """Overrides
-        :meth:`lino_xl.lib.excerpts.mixins.Certifiable.get_excerpt_templates`.
-
-        """
         if self.type_id:
             if self.type.template:
                 # assert self.type.template.endswith(bm.template_ext)
@@ -356,13 +247,6 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
         self.date_ended = self.applies_until
 
     def client_changed(self, ar):
-
-        """If the contract's author is the client's primary coach, then set
-        user_asd to None, otherwise set user_asd to the primary coach.
-        We no longer suppose that only integration agents write
-        contracts.
-
-        """
 
         if self.client_id is not None:
             #~ pc = self.person.get_primary_coach()
@@ -395,13 +279,6 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
         self.update_reminders(ar)
 
     def full_clean(self, *args, **kw):
-        """Checks for the following error conditions:
-
-- You must specify a contract type.
-- :message:`Contract ends before it started.`
-- Any error message returned by :class:`OverlappingContractsTest`
-
-"""
         if not self.date_ended:
             self.date_ended = self.applies_until
         r = self.active_period()
@@ -486,13 +363,6 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
             return g.aid_type
 
     def get_aid_confirmation(self):
-        """Returns the last aid confirmation that has been issued for this
-        contract. May be used in `.odt` template.
-
-        Update 20170530: not the last *confirmation* but the last
-        *granting*.
-
-        """
         g = self.get_granting(is_integ_duty=True)
         if g and g.aid_type and g.aid_type.confirmation_type:
             return g
@@ -502,10 +372,6 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
             #     return qs[qs.count()-1]
 
     def suggest_cal_guests(self, event):
-        """Automatic evaluation events have the client as mandatory
-        participant, plus possibly some other coach.
-
-        """
         client = event.project
         if client is None:
             return
@@ -532,11 +398,6 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
 
     @classmethod
     def get_printable_demo_objects(cls):
-        """All contracts of a demo project (not only one) are being printed.
-        Overrides
-        :meth:`lino.modlib.printing.Printable.get_printable_demo_objects`.
-
-        """
         return cls.objects.all()
     
 dd.update_field(ContractBase, 'signer1', default=default_signer1)
@@ -544,27 +405,7 @@ dd.update_field(ContractBase, 'signer2', default=default_signer2)
 
 
 class ContractBaseTable(dd.Table):
-    """Base for contract tables. Defines the following parameter fields:
 
-    .. attribute:: user
-    .. attribute:: observed_event
-
-    .. attribute:: ending
-
-        Show only contracts with the specified
-        :class:`ContractEnding
-        <lino_welfare.modlib.isip.models.ContractEnding>`.
-
-    .. attribute:: ending_success
-
-        Select "Yes" to show only contracts whose ending
-        :class:`ContractEnding
-        <lino_welfare.modlib.isip.models.ContractEnding>` has
-        :attr:`is_success
-        <lino_welfare.modlib.isip.models.ContractEnding.is_success>`
-        checked.
-
-    """
     parameters = mixins.ObservedDateRange(
         user=dd.ForeignKey(settings.SITE.user_model, blank=True),
 

@@ -36,8 +36,15 @@ Released version 19.3.0
 2019-03-22
 ==========
 
-- overlap_group is added to following tables : isip.ContractTypes, jobs.ContractTypes,art61.ContractTypes.
-- The overlap test of two contacts will ignore type of contacts with overlap_group is not set.
+.. currentmodule:: lino_welfare.modlib.isip
+
+- :attr:`ContractTypeBase.overlap_group` was not yet
+  visible in the following tables : :class:`ContractTypes`,
+  :class:`lino_welfare.modlib.jobs.ContractTypes`,
+  :class:`lino_welfare.modlib.art61.ContractTypes`.
+
+- :class:`OverlappingContractsTest` now ignores contracts
+  whose types have an empty :attr:`ContractBase.overlap_group`..
 
 2019-03-04
 ==========

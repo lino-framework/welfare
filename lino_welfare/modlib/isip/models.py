@@ -60,14 +60,6 @@ COACHINGTYPE_DSBE = 2
 
 
 class ContractType(ContractTypeBase):
-    """The type of an :class:`isip.Contract <Class>`.
-
-    .. attribute:: needs_study_type
-
-        Whether contracts of this type need their :attr:`study_type`
-        field filled in.
-
-    """
     preferred_foreignkey_width = 20
 
     templates_group = 'isip/Contract'
@@ -98,14 +90,6 @@ class ContractTypes(dd.Table):
 # EXAMINATION POLICIES
 #
 class ExamPolicy(mixins.BabelNamed, RecurrenceSet):
-    """An **examination policy** is mostly a :class:`RecurrenceSet
-    <lino_xl.lib.cal.mixins.RecurrenceSet>` used for generating
-    "evaluation meetings".  That is, Lino automatically suggests dates
-    where the agent invites the client.
-
-    TODO: replace this by :class:`lino_xl.lib.cal.EventPolicy`.
-
-    """
     class Meta:
         app_label = 'isip'
         verbose_name = _("Examination Policy")
@@ -137,11 +121,6 @@ JOBS_MODULE_NAME = settings.SITE.plugins.jobs.verbose_name
 
 @dd.python_2_unicode_compatible
 class ContractEnding(dd.Model):
-    """A possible reason for premature termination of a contract.
-
-    TODO: move this to :mod:`lino_welfare.modlib.integ.models`.
-
-    """
     class Meta:
         app_label = 'isip'
         verbose_name = _("Reason of termination")
@@ -172,11 +151,7 @@ class ContractEndings(dd.Table):
 
 
 class ContractPartner(ContractPartnerBase):
-    """Represents a third-party external partner who participates in this
-    contract. For every partner there is a rich text field describing
-    their duties.
 
-    """
     class Meta:
         app_label = 'isip'
         verbose_name = _("Contract partner")
@@ -213,24 +188,6 @@ class PartnersByContract(ContractPartners):
 
 
 class Contract(ContractBase):
-    """An **ISIP** (called "PIIS" in French and "VSE" in German) is a
-    convention or contract between the PCSW and a young client that
-    leads to an individual coaching of the person, mostly concerning
-    the client's scholar education.
-
-    .. attribute:: type
-
-        The type of this contract.
-        Pointer to :class:`ContractType`.
-
-    .. attribute:: study_type
-
-        The type of study that is going to be followed during this
-        contract.
-
-        Pointer to :class:`lino_xl.lib.cv.models.StudyType`.
-
-    """
     class Meta:
         app_label = 'isip'
         verbose_name = _("ISIP")

@@ -1,24 +1,246 @@
 .. doctest docs/specs/isip.rst
 .. _welfare.specs.isip:
 
-==============
-ISIP contracts
-==============
+=================================================
+``isip`` : Individual Social Integration Projects
+=================================================
 
-.. Doctest initialization:
+.. currentmodule:: lino_welfare.modlib.isip
 
-    >>> import lino
-    >>> lino.startup('lino_welfare.projects.gerd.settings.doctests')
-    >>> from lino.api.doctest import *
-
-    >>> ses = rt.login('robin')
-    >>> translation.activate('en')
-
-This describes  the :mod:`lino_welfare.modlib.isip` plugin.
-See also :doc:`autoevents`.
+The :mod:`lino_welfare.modlib.isip` package provides data definitions for
+Individual Social Integration Projects (ISIPs).
 
 .. contents::
    :local:
+
+.. include:: /shared/include/tested.rst
+
+>>> import lino
+>>> lino.startup('lino_welfare.projects.gerd.settings.doctests')
+>>> from lino.api.doctest import *
+>>> ses = rt.login('robin')
+>>> translation.activate('en')
+
+
+Overview
+========
+
+This module is also used and extended by
+:mod:`lino_welfare.modlib.jobs` and
+:mod:`lino_welfare.modlib.immersion`,
+:mod:`lino_welfare.modlib.art61`.
+See also :doc:`autoevents`.
+
+An **ISIP** (called "PIIS" in French and "VSE" in German) is a
+convention or contract between the PCSW and a young client that
+leads to an individual coaching of the person, mostly concerning
+the client's scholar education.
+
+
+
+Contracts
+=========
+
+.. class:: ContractBase
+
+    Abstract base class for all *integration contracts*, i.e.
+    :class:`isip.Contract <lino_welfare.modlib.isip.Contract>`
+    :class:`jobs.Contract <lino_welfare.modlib.jobs.Contract>` and
+    :class:`immersions.Contract <lino_welfare.modlib.immersions.Contract>`
+
+    Inherits from :class:`lino_welfare.modlib.system.Signers`,
+    :class:`Certifiable`, :class:`EventGenerator`, :class:`UserAuthored`.
+
+    .. attribute:: client
+
+        The client for whom this contract is done.
+
+    .. attribute:: applies_from
+
+        The start date of the contract.
+
+    .. attribute:: applies_until
+
+        The *planned* end date of this contract.
+
+    .. attribute:: date_ended
+
+        The date when this contract was *effectively* ended.
+        This field is set to the same value as :attr:`applies_until`.
+
+    .. attribute:: ending
+
+        The reason of prematured ending.  Pointer to
+        :class:`ContractEnding
+        <lino_welfare.modlib.isip.choicelists.ContractEnding>`
+
+    .. attribute:: date_issued
+
+        When the contract was issued to the client and signed by them.
+
+    .. attribute:: date_decided
+
+        When the contract was ratified by the responsible board.
+
+    .. attribute:: language
+
+        The language of this contract. Default value is the client's
+        :attr:`language<lino_welfare.modlib.pcw.models.Client.language>`.
+
+    .. attribute:: type
+
+        The type of this contract. Pointer to a subclass of
+        :class:`ContractTypeBase`.
+
+    .. method:: get_excerpt_title(self)
+
+        The printed title of a contract specifies just the contract type
+        (not the number and name of client).
+
+    .. method:: get_excerpt_templates(self, bm)
+
+        Overrides
+        :meth:`lino_xl.lib.excerpts.Certifiable.get_excerpt_templates`.
+
+    .. method:: client_changed(self, ar)
+
+        If the contract's author is the client's primary coach, then set
+        user_asd to None, otherwise set user_asd to the primary coach.
+        We no longer suppose that only integration agents write
+        contracts.
+
+    .. method:: full_clean(self, *args, **kw)
+
+        Checks for the following error conditions:
+
+        - You must specify a contract type.
+        - :message:`Contract ends before it started.`
+        - Any error message returned by :class:`OverlappingContractsTest`
+
+    .. method:: get_aid_confirmation(self)
+
+        Returns the last aid confirmation that has been issued for this
+        contract. May be used in `.odt` template.
+
+        Update 20170530: not the last *confirmation* but the last
+        *granting*.
+
+    .. method:: suggest_cal_guests(self, event)
+
+        Automatic evaluation events have the client as mandatory
+        participant, plus possibly some other coach.
+
+    .. method:: get_printable_demo_objects(cls)
+
+        All contracts of a demo project (not only one) are being printed.
+        Overrides
+        :meth:`lino.modlib.printing.Printable.get_printable_demo_objects`.
+
+
+.. class:: ContractBaseTable
+
+    Base for contract tables. Defines the following parameter fields:
+
+    .. attribute:: user
+
+    .. attribute:: observed_event
+
+        See :class:`ContractEvents`.
+
+    .. attribute:: ending
+
+        Show only contracts with the specified
+        :class:`ContractEnding
+        <lino_welfare.modlib.isip.models.ContractEnding>`.
+
+    .. attribute:: ending_success
+
+        Select "Yes" to show only contracts whose ending
+        :class:`ContractEnding
+        <lino_welfare.modlib.isip.models.ContractEnding>` has
+        :attr:`is_success
+        <lino_welfare.modlib.isip.models.ContractEnding.is_success>`
+        checked.
+
+
+.. class:: Contract
+
+    The Django model representing an *ISIP*.
+
+    .. attribute:: type
+
+        The type of this contract.
+        Pointer to :class:`ContractType`.
+
+    .. attribute:: study_type
+
+        The type of study that is going to be followed during this
+        contract.
+
+        Pointer to :class:`lino_xl.lib.cv.models.StudyType`.
+
+
+
+
+Related models
+==============
+
+
+.. class:: ContractTypes
+
+   The table of all ISIP contract types.
+
+.. class:: ContractType(ContractTypeBase)
+
+    The type of a :class:`Contract`.
+
+    .. attribute:: needs_study_type
+
+        Whether contracts of this type need their :attr:`study_type`
+        field filled in.
+
+.. class:: ExamPolicy
+
+    An **examination policy** is mostly a :class:`RecurrenceSet
+    <lino_xl.lib.cal.RecurrenceSet>` used for generating
+    "evaluation meetings".  That is, Lino automatically suggests dates
+    where the agent invites the client.
+
+    TODO: replace this by :class:`lino_xl.lib.cal.EventPolicy` (?).
+
+
+.. class:: ContractEnding
+
+    A possible reason for premature termination of a contract.
+
+    TODO: move this to :mod:`lino_welfare.modlib.integ`.
+
+.. class:: ContractPartner
+
+    Represents a third-party external partner who participates in this
+    contract. For every partner there is a rich text field describing
+    their duties.
+
+
+Miscellaneous models
+====================
+
+.. class:: ContractEvents
+
+    A list of observable events for filtering contracts
+    (:attr:`ContractBaseTable.observed_event`).
+
+    >>> rt.show(isip.ContractEvents)
+    ======= ========= =========
+     value   name      text
+    ------- --------- ---------
+     10      active    Active
+     20      started   Started
+     30      ended     Ended
+     40      decided   Decided
+     50      issued    Issued
+    ======= ========= =========
+    <BLANKLINE>
 
 .. class:: ClientHasContract
 
@@ -33,6 +255,98 @@ See also :doc:`autoevents`.
 
     To see this table you need either IntegrationAgent or
     SocialCoordinator.
+
+
+
+.. class:: ContractTypeBase
+
+    Base class for all `ContractType` models.
+
+    Used by :mod:`lino_welfare.modlib.isip`, :mod:`lino_welfare.modlib.jobs`,
+    :mod:`lino_welfare.modlib.art61` and :mod:`lino_welfare.modlib.immersion`,
+
+    .. attribute:: full_name
+
+        The full description of this contract type as used in printed
+        documents.
+
+    .. attribute:: exam_policy
+
+        The default examination policy to be used for contracts of
+        this type.
+
+        This is a pointer to :class:`ExamPolicy
+        <lino_welfare.modlib.isip.models.ExamPolicy>`. All contract
+        types share the same set of examination policies.
+
+    .. attribute:: overlap_group
+
+        The overlap group to use when checking whether two contracts are
+        overlapping or not. If this field is empty, Lino does not check at all
+        for overlapping contracts.
+
+        See :class:`OverlappingContractsTest`.
+
+    .. attribute:: template
+
+        The main template to use instead of the default template
+        defined on the excerpt type.
+
+        See
+        :meth:`lino_xl.lib.excerpts.mixins.Certifiable.get_excerpt_templates`.
+
+Overlapping contracts
+=====================
+
+Lino Welfare helps social agents to avoid problems resulting from wrong dates
+concerning the beginning and ending of contracts.
+
+When entering several contracts for a client, Lino can check whether they
+overlap.  This check is not done for alle contracts. For example, a client can
+have an active job contract (these usually run for 18 months) and still have
+additional training contractrs in parallel.
+
+
+.. class:: OverlapGroups
+
+    The list of all known overlap groups to be selected for the
+    :attr:`overlap_group <ContractTypeBase.overlap_group>`
+    of a contract type.
+
+    >>> rt.show(isip.OverlapGroups)
+    ======= =========== =============
+     value   name        text
+    ------- ----------- -------------
+     10      contracts   Conventions
+     20      trainings   Trainings
+    ======= =========== =============
+    <BLANKLINE>
+
+
+.. class:: OverlappingContractsTest
+
+    Volatile object used to test for overlapping contracts.  It is
+    responsible for issuing the following error messages:
+
+    - :message:`Date range overlaps with X #Y` means that the date
+      periods of two contracts of a same client overlap in time.
+
+      This message is issued only when the two contracts are in the same
+      overlap group (see :class:`OverlapGroups`).
+
+      The overlap group of a contract is defined by its contract type.
+
+      No warning is issued if the contract type has no overlap group.
+
+    - (Currently deactivated) Date range X lies outside of coached period (Y)
+
+.. class:: OverlappingContractsChecker
+
+    A given client cannot have two active contracts at the same time.
+
+
+
+
 
 
 Visibility
