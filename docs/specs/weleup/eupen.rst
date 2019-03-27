@@ -1,4 +1,4 @@
-.. doctest docs/specs/eupen.rst
+.. doctest docs/specs/weleup/eupen.rst
 .. _welfare.specs.eupen:
 
 ================================
