@@ -36,7 +36,7 @@ plugin library
 for Belgian
 *Public Centres for Social Welfare*.
 
-- The central project homepage is published at
+- The central project homepage is 
   http://welfare.lino-framework.org
 
 - There are two applications using this library: 

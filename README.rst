@@ -10,7 +10,8 @@ plugin library
 for Belgian
 *Public Centres for Social Welfare*.
 
-- The central project homepage is http://welfare.lino-framework.org
+- The central project homepage is 
+  http://welfare.lino-framework.org
 
 - There are two applications using this library: 
   `welcht <http://welcht.lino-framework.org>`__
@@ -26,7 +27,7 @@ for Belgian
   http://welfare-demo-fr.lino-framework.org
 
 - For *introductions* and *commercial information* about Lino Welfare
-  please see `www.saffre-rumma.net
+  see `www.saffre-rumma.net
   <http://www.saffre-rumma.net/welfare/>`__.
 
 
