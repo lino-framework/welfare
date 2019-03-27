@@ -11,3 +11,6 @@
 
 # -e git+https://github.com/eliben/pycparser@release_v2.14#egg=pycparser
 
+
+-e git+https://github.com/lino-framework/weleup.git#egg=lino_weleup
+-e git+https://github.com/lino-framework/welcht.git#egg=lino_welcht
