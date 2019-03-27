@@ -1,20 +1,18 @@
-.. doctest docs/specs/welfare/clients_chatelet.rst
+.. doctest docs/specs/welcht/clients_chatelet.rst
 .. _welfare.specs.clients.chatelet:
 
 ==================
 Clients (Chatelet)
 ==================
 
-.. doctest init:
-
-    >>> import lino
-    >>> lino.startup('lino_welfare.projects.mathieu.settings.doctests')
-    >>> from lino.api.doctest import *
-
 .. contents::
-   :depth: 2
    :local:
 
+.. include:: /shared/include/tested.rst
+
+>>> import lino
+>>> lino.startup('lino_welfare.projects.mathieu.settings.doctests')
+>>> from lino.api.doctest import *
 
 
 The detail layout of a client
@@ -73,21 +71,15 @@ Lino Welfare à la Chatelet.
   - **Inscriptions dans Ateliers d'insertion sociale** (courses.BasicEnrolmentsByPupil)
   - **Inscriptions dans Ateliers d'Insertion socioprofessionnelle** (courses.JobEnrolmentsByPupil)
 - **Stages d'immersion** (immersion.ContractsByClient) [visible for 100 110 120 210 400 410 420 admin 910]
-- **RAE** (job_search_1) [visible for 100 110 120 200 300 400 410 420 admin 910]:
-  - **Dispenses** (pcsw.DispensesByClient)
-  - (papers):
-    - **Preuves de recherche** (active_job_search.ProofsByClient) [visible for 100 110 120 420 admin 910]
-    - **Interviews** (polls_ResponsesByPartner)
 - **Mise à l'emploi** (contracts) [visible for 100 110 120 200 210 300 400 410 420 admin 910]:
   - **Candidatures** (jobs.CandidaturesByPerson)
   - **Mises à l'emploi art60§7** (jobs.ContractsByClient)
   - **Mises à l'emploi art.61 et activations** (art61.ContractsByClient) [visible for 100 110 120 210 400 410 420 admin 910]
 - **Historique** (history):
-  - (history_left):
-    - (history_left_1): **cherche du travail** (is_seeking), **Inoccupé depuis** (unemployed_since), **Cherche du travail depuis** (seeking_since)
-    - **Observations** (notes.NotesByProject) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]
-  - (history_right) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]:
-    - **Fichiers téléchargés** (uploads.UploadsByClient)
+  - **Observations** (notes.NotesByProject) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]
+  - (history_right):
+    - **Fichiers téléchargés** (uploads.UploadsByClient) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]
+    - (history_right_2): **cherche du travail** (is_seeking), **Inoccupé depuis** (unemployed_since), **Cherche du travail depuis** (seeking_since)
     - **Situation chômage** (pcsw.ExclusionsByClient) [visible for 100 110 120 200 300 400 410 420 admin 910]
     - **Fiches FSE** (esf.SummariesByClient) [visible for 100 110 120 420 admin 910]
 - **Calendrier** (calendar) [visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910]:
