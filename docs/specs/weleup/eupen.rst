@@ -488,7 +488,7 @@ Each window layout defines a given set of fields.
 - aids.RefundConfirmationsByGranting.insert : start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
 - aids.SimpleConfirmations.detail : id, client, user, signer, workflow_buttons, granting, start_date, end_date, company, contact_person, language, printed, remark
 - aids.SimpleConfirmationsByGranting.insert : start_date, end_date, company, contact_person, language, remark
-- art61.ContractTypes.detail : id, name, name_fr, name_en, ref
+- art61.ContractTypes.detail : id, name, name_fr, name_en, ref, overlap_group
 - art61.ContractTypes.merge_row : merge_to, reason
 - art61.Contracts.detail : id, client, user, language, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, job_title, status, cv_duration, regime, reference_person, remark, printed, date_decided, date_issued, date_ended, ending, subsidize_10, subsidize_20, subsidize_30, subsidize_40, subsidize_50, responsibilities
 - art61.Contracts.insert : client, company, type
@@ -591,11 +591,11 @@ Each window layout defines a given set of fields.
 - isip.ContractEndings.detail : name, use_in_isip, use_in_jobs, is_success, needs_date_ended
 - isip.ContractPartners.detail : company, contact_person, contact_role, duties_company
 - isip.ContractPartners.insert : company, contact_person, contact_role
-- isip.ContractTypes.detail : id, ref, exam_policy, needs_study_type, name, name_fr, name_en, full_name
+- isip.ContractTypes.detail : id, ref, exam_policy, overlap_group, needs_study_type, name, name_fr, name_en, full_name
 - isip.Contracts.detail : id, client, type, user, user_dsbe, user_asd, study_type, applies_from, applies_until, exam_policy, language, date_decided, date_issued, printed, date_ended, ending, stages, goals, duties_person, duties_asd, duties_dsbe, duties_pcsw
 - isip.Contracts.insert : client, type
 - isip.ExamPolicies.detail : id, name, name_fr, name_en, max_events, every, every_unit, event_type, monday, tuesday, wednesday, thursday, friday, saturday, sunday
-- jobs.ContractTypes.detail : id, name, name_fr, name_en, ref
+- jobs.ContractTypes.detail : id, name, name_fr, name_en, ref, overlap_group
 - jobs.ContractTypes.merge_row : merge_to, reason
 - jobs.Contracts.detail : id, client, user, user_asd, language, job, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, regime, schedule, hourly_rate, refund_rate, reference_person, remark, printed, date_decided, date_issued, date_ended, ending, responsibilities
 - jobs.Contracts.insert : client, job
