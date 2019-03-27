@@ -1,8 +1,10 @@
 .. _welfare.specs:
 
 ========================
-Lino Welfare Eupen specs
+Specs
 ========================
+
+These are the specs for :ref:`welfare`.
 
 .. toctree::
     :maxdepth: 1
