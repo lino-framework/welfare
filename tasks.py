@@ -11,7 +11,7 @@ ns = setup_from_tasks(
         'docs/api/lino_weleup.*',
         'docs/api/lino_welcht.*'],
     demo_projects=[
-        'lino_welfare/projects/gerd',
-        'lino_welfare/projects/mathieu']
+        'lino_welfare.projects.gerd',
+        'lino_welfare.projects.mathieu']
 )
 
