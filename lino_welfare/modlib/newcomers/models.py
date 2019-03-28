@@ -450,7 +450,7 @@ class AssignCoach(NotifyingAction):
         # obj is a User instance
         client = ar.master_instance
         if client:
-            return client.get_change_observers()
+            return client.get_change_observers(ar)
 
     # def get_change_owner(self, ar, obj):
     #     return ar.master_instance

@@ -68,7 +68,7 @@ class RefuseClient(ChangeStateAction):
 
         obj = ar.selected_rows[0]
         # run the query before we end the coachings:
-        recipients = list(obj.get_change_observers())
+        recipients = list(obj.get_change_observers(ar))
 
         # obj is a Client instance
         obj.refusal_reason = ar.action_param_values.reason
@@ -118,7 +118,7 @@ class MarkClientFormer(ChangeStateAction):
         # obj is a Client instance
 
         # run the query before we end the coachings:
-        recipients = list(obj.get_change_observers())
+        recipients = list(obj.get_change_observers(ar))
 
         mt = rt.models.notify.MessageTypes.coachings
         def doit(ar):
