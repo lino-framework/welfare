@@ -135,7 +135,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         blank=True, null=True, verbose_name=_("Unavailable until"))
     unavailable_why = models.CharField(max_length=100,
                                        blank=True,  # null=True,
-                                       verbose_name=_("reason"))
+                                       verbose_name=_("Reason"))
 
     obstacles = models.TextField(_("Other obstacles"), blank=True, null=True)
     skills = models.TextField(_("Other skills"), blank=True, null=True)
