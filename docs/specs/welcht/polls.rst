@@ -5,7 +5,7 @@
 Polls in Lino Welfare
 =====================
 
-.. currentmodul:: lino_welfare.modlib.polls
+.. currentmodule:: lino_welfare.modlib.polls
 
 The :mod:`lino_welfare.modlib.polls` plugin extends :mod:`lino_xl.lib.polls`.
 
