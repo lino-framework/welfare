@@ -1,4 +1,4 @@
-.. doctest docs/specs/welfare/integ.rst
+.. doctest docs/specs/welcht/integ.rst
 .. _welfare.specs.integ:
 
 ===================
@@ -36,12 +36,13 @@ as well.
 Configuration
 =============
 
+
 >>> ses.show(isip.ContractEndings)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 =============== ====== =============== ========= ====================
  Designation     ISIP   Job supplying   Success   Require date ended
 --------------- ------ --------------- --------- --------------------
- Ecole           Yes    Yes             No        Yes
+ Alcohol         Yes    Yes             No        Yes
  Force majeure   Yes    Yes             No        Yes
  Normal          Yes    Yes             No        No
  Santé           Yes    Yes             No        Yes
@@ -236,7 +237,7 @@ Contract endings by type
 =============== ================ ================== =========== ===================== ================ =======
  Description     VSE Ausbildung   VSE Arbeitssuche   VSE Lehre   VSE Vollzeitstudium   VSE Sprachkurs   Total
 --------------- ---------------- ------------------ ----------- --------------------- ---------------- -------
- Ecole
+ Alcohol
  Force majeure
  Normal
  Santé
@@ -306,7 +307,7 @@ Contract endings by type
 =============== ==================== ========================== =============== ================== =========================== =======
  Description     avec remboursement   avec remboursement école   ville d'Eupen   économie sociale   économie sociale - majoré   Total
 --------------- -------------------- -------------------------- --------------- ------------------ --------------------------- -------
- Ecole
+ Alcohol
  Force majeure
  Normal
  Santé

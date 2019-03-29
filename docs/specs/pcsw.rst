@@ -40,7 +40,7 @@ Client events
  active      active      Begleitung            Intervention              Coaching
  isip        isip        VSE                   PIIS                      ISIP
  jobs        jobs        Art.60§7-Konvention   Mise à l'emploi art60§7   Art60§7 job supplyment
- available   available   Verfügbar             Verfügbar                 Available
+ available   available   Verfügbar             Disponible                Available
  art61       art61       Art.61-Konvention     Mise à l'emploi art.61    Art61 job supplyment
 =========== =========== ===================== ========================= ========================
 <BLANKLINE>

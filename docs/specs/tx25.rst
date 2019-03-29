@@ -201,7 +201,7 @@ This section is mostly for testing purposes.
                                       08.06.98   **Geschieden** (41), in Tribunal **Entscheid des erstinstanzlichen Gerichtes** (01), Date 08.05.98, Place **Eupen** (63023), Akte Nr. **0063**
                                       30.12.95   **Verheiratet** (20), mit **Keutgens**, Claudia (70042500230), in Place1 **Eupen** (63023), Akte Nr. **0159**
                                       07.03.68   **Unverheiratet** (10)
- Legale Kohabitationen          123   06.06.06   Beendigung: Grund: **Eheschliessung** (01), in **Eupen** (63023)
+ Legale Kohabitationen          123   06.06.06   Beendigung: Begründung: **Eheschliessung** (01), in **Eupen** (63023)
                                       20.11.03   Deklaration: 21.11.03, mit **75081900208** **Mergelsberg**, Mélanie Anna, in **Eupen** (63023)
  Familienmitglieder             140   02.12.97   **Alleinstehend** (01) (bis 18.11.03)
                                       30.12.95   **Gemahlin** (02), in Familie mit Vorstand **Keutgens**, Claudia (**70042500230**) (bis 02.12.97)

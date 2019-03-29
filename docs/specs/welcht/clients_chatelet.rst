@@ -86,7 +86,7 @@ Lino Welfare à la Chatelet.
   - **Entrées calendrier** (cal.EntriesByClient)
   - **Tâches** (cal.TasksByProject)
 - **Divers** (misc) [visible for 110 120 410 420 admin 910]:
-  - (misc_1) [visible for all]: **Activité** (activity), **État** (client_state), **Titre de noblesse** (noble_condition), **Indisponible jusque** (unavailable_until), **raison** (unavailable_why)
+  - (misc_1) [visible for all]: **Activité** (activity), **État** (client_state), **Titre de noblesse** (noble_condition), **Indisponible jusque** (unavailable_until), **Raison** (unavailable_why)
   - (misc_2) [visible for all]: **obsolete** (is_obsolete), **ESF data** (has_esf), **Créé** (created), **Modifié** (modified)
   - **Remarques** (remarks) [visible for all]
   - (misc_4) [visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910]:

@@ -1,20 +1,25 @@
-.. doctest docs/specs/polls.rst
+.. doctest docs/specs/welcht/polls.rst
 .. _welfare.specs.polls:
 
 =====================
 Polls in Lino Welfare
 =====================
 
-A tested tour into the :mod:`lino_welfare.modlib.polls` plugin.
+.. currentmodul:: lino_welfare.modlib.polls
 
-.. doctest init:
-    
-    >>> from lino import startup
-    >>> startup('lino_welfare.projects.mathieu.settings.doctests')
-    >>> from lino.api.doctest import *
+The :mod:`lino_welfare.modlib.polls` plugin extends :mod:`lino_xl.lib.polls`.
+
 
 .. contents::
-   :depth: 2
+   :local:
+   :depth: 1
+
+
+.. include:: /include/tested.rst
+
+>>> from lino import startup
+>>> startup('lino_welfare.projects.mathieu.settings.doctests')
+>>> from lino.api.doctest import *
 
 
 >>> dd.today()

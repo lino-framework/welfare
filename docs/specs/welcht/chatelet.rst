@@ -87,7 +87,7 @@ Romain
   - Bureau : Types d'extrait, Libraries de fichiers, Types de fichiers téléchargés, Types d'observation, Types d'événements, Mes Text Field Templates
   - Calendrier : Calendriers, Locaux, Évènements periodiques, Rôles de participants, Types d'entrée calendrier, Règles de récurrence, Calendriers externes, Lignes de planificateur
   - Ateliers : Savoirs de base, Topics, Timetable Slots
-  - CPAS : Types de contact client, Services, Raisons d’arrêt d'intervention, Phases d'intégration, Activités, Types d'exclusion du chômage, Motifs de dispense, Types d'aide sociale, Catégories
+  - CPAS : Types de contact client, Services, Raisons d’arrêt d'intervention, Droits chômage, Types d'aide sociale, Catégories
   - Parcours : Langues, Types d'éducation, Niveaux académiques, Secteurs, Fonctions, Régimes de travail, Statuts, Types de contrat, Types de compétence sociale, Types de freins, Preuves de qualification
   - Intégration : Types de PIIS, Motifs d’arrêt de contrat, Régimes d'évaluation, Types de mise à l'emploi art60§7, Types de poste, Horaires, Types de mise à l'emploi art.61, Types de stage d'immersion, Objectifs
   - Nouvelles demandes : Intermédiaires, Spécificités
@@ -147,7 +147,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview()) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 60 apps: lino, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, excerpts, uploads, outbox, extensible, cal, reception, badges, boards, clients, coachings, pcsw, welfare, sales, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, dashboard, export_excel, checkdata, tinymce, lino_welcht, sessions.
-134 models:
+135 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
@@ -195,7 +195,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  contacts.Person                contacts.Persons                32        109
  contacts.Role                  contacts.Roles                  4         10
  contacts.RoleType              contacts.RoleTypes              6         5
- contenttypes.ContentType       gfks.ContentTypes               3         134
+ contenttypes.ContentType       gfks.ContentTypes               3         135
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                11        78
  courses.Course                 courses.Activities              30        7
@@ -267,9 +267,10 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  pcsw.Conviction                pcsw.Convictions                5         0
  pcsw.Dispense                  pcsw.Dispenses                  6         0
  pcsw.DispenseReason            pcsw.DispenseReasons            6         4
- pcsw.Exclusion                 pcsw.Exclusions                 6         0
+ pcsw.Exclusion                 pcsw.Exclusions                 9         0
  pcsw.ExclusionType             pcsw.ExclusionTypes             2         2
  pcsw.PersonGroup               pcsw.PersonGroups               4         5
+ pcsw.UnemploymentRight         pcsw.UnemploymentRights         4         0
  polls.AnswerChoice             polls.AnswerChoices             4         88
  polls.AnswerRemark             polls.AnswerRemarks             4         0
  polls.Choice                   polls.Choices                   7         39
@@ -351,7 +352,7 @@ Each window layout defines a given set of fields.
 - aids.RefundConfirmationsByGranting.insert : start_date, end_date, doctor_type, doctor, pharmacy, company, contact_person, language, printed, remark
 - aids.SimpleConfirmations.detail : id, client, user, signer, workflow_buttons, granting, start_date, end_date, company, contact_person, language, printed, remark
 - aids.SimpleConfirmationsByGranting.insert : start_date, end_date, company, contact_person, language, remark
-- art61.ContractTypes.detail : id, name, name_nl, name_de, name_en, ref
+- art61.ContractTypes.detail : id, name, name_nl, name_de, name_en, ref, overlap_group
 - art61.ContractTypes.merge_row : merge_to, reason
 - art61.Contracts.detail : id, client, user, language, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, job_title, status, cv_duration, regime, reference_person, remark, printed, date_decided, date_issued, date_ended, ending, subsidize_10, subsidize_20, subsidize_30, subsidize_40, subsidize_50, responsibilities
 - art61.Contracts.insert : client, company, type
@@ -463,11 +464,11 @@ Each window layout defines a given set of fields.
 - isip.ContractEndings.detail : name, use_in_isip, use_in_jobs, is_success, needs_date_ended
 - isip.ContractPartners.detail : company, contact_person, contact_role, duties_company
 - isip.ContractPartners.insert : company, contact_person, contact_role
-- isip.ContractTypes.detail : id, ref, exam_policy, needs_study_type, name, name_nl, name_de, name_en, full_name
+- isip.ContractTypes.detail : id, ref, exam_policy, overlap_group, needs_study_type, name, name_nl, name_de, name_en, full_name
 - isip.Contracts.detail : id, client, type, user, user_asd, study_type, applies_from, applies_until, exam_policy, language, date_decided, date_issued, printed, date_ended, ending, uploads_UploadsByController
 - isip.Contracts.insert : client, type
 - isip.ExamPolicies.detail : id, name, name_nl, name_de, name_en, max_events, every, every_unit, event_type, monday, tuesday, wednesday, thursday, friday, saturday, sunday
-- jobs.ContractTypes.detail : id, name, name_nl, name_de, name_en, ref
+- jobs.ContractTypes.detail : id, name, name_nl, name_de, name_en, ref, overlap_group
 - jobs.ContractTypes.merge_row : merge_to, reason
 - jobs.Contracts.detail : id, client, user, user_asd, language, job, type, company, contact_person, contact_role, applies_from, duration, applies_until, exam_policy, regime, schedule, hourly_rate, refund_rate, reference_person, remark, printed, date_decided, date_issued, date_ended, ending, responsibilities
 - jobs.Contracts.insert : client, job
@@ -492,7 +493,7 @@ Each window layout defines a given set of fields.
 - outbox.Mails.detail : subject, project, date, user, sent, id, owner, outbox_AttachmentsByMail, uploads_UploadsByController, body
 - outbox.Mails.insert : project, subject, body
 - pcsw.Clients.create_visit : user, summary
-- pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, households_MembersByPerson, child_custody, humanlinks_LinksByHuman, skills, obstacles, polls_ResponsesByPartner, is_seeking, unemployed_since, seeking_since, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, has_esf, created, modified, remarks, checkdata_ProblemsByOwner
+- pcsw.Clients.detail : overview, gender, id, nationality, last_name, first_name, middle_name, birth_date, age, language, email, phone, fax, gsm, image, national_id, civil_state, birth_country, birth_place, declared_name, needs_residence_permit, needs_work_permit, in_belgium_since, residence_type, residence_until, group, aid_type, AgentsByClient, workflow_buttons, id_document, faculty, households_MembersByPerson, child_custody, humanlinks_LinksByHuman, skills, obstacles, is_seeking, unemployed_since, seeking_since, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_obsolete, has_esf, created, modified, remarks, checkdata_ProblemsByOwner
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, esf_ClientSummary, pcsw_Dispense, cv_LanguageKnowledge, cv_Obstacle, cv_Skill, cv_SoftSkill, addresses_Address, reason
 - pcsw.Clients.refuse_client : reason, remark
@@ -939,10 +940,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> CPAS --> Types de contact client : 11
 - Configuration --> CPAS --> Services : 4
 - Configuration --> CPAS --> Raisons d’arrêt d'intervention : 5
-- Configuration --> CPAS --> Phases d'intégration : 6
-- Configuration --> CPAS --> Activités : 1
-- Configuration --> CPAS --> Types d'exclusion du chômage : 3
-- Configuration --> CPAS --> Motifs de dispense : 5
+- Configuration --> CPAS --> Droits chômage : 1
 - Configuration --> CPAS --> Types d'aide sociale : 12
 - Configuration --> CPAS --> Catégories : 4
 - Configuration --> Parcours --> Langues : 6
@@ -984,7 +982,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> Procurations : 4
 - Explorateur --> Système --> Types d'utilisateur : 16
 - Explorateur --> Système --> Rôles d'utilisateur : 42
-- Explorateur --> Système --> Types de contenu : 135
+- Explorateur --> Système --> Types de contenu : 136
 - Explorateur --> Système --> Notifications : 13
 - Explorateur --> Système --> Changes : 0
 - Explorateur --> Système --> All dashboard widgets : 1

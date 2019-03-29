@@ -145,13 +145,14 @@ SETUP_INFO.update(packages=[
     'lino_welfare.modlib.welfare.fixtures',
     'lino_welfare.modlib.welfare.management',
     'lino_welfare.modlib.welfare.management.commands',
+    'lino_welfare.scripts',
+    'lino_welfare.projects',
     'lino_welfare.projects.gerd',
     'lino_welfare.projects.gerd.settings',
     'lino_welfare.projects.gerd.tests',
     'lino_welfare.projects.mathieu',
     'lino_welfare.projects.mathieu.settings',
     'lino_welfare.projects.mathieu.tests',
-    'lino_welfare.scripts',
 ])
 
 SETUP_INFO.update(message_extractors={
