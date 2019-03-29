@@ -1,19 +1,19 @@
-.. doctest docs/specs/clients_eupen.rst
+.. doctest docs/specs/weleup/clients_eupen.rst
 .. _welfare.specs.clients.eupen:
 
 ===============
 Clients (Eupen)
 ===============
 
-..  doctest init:
-    >>> import lino
-    >>> lino.startup('lino_welfare.projects.gerd.settings.doctests')
-    >>> from lino.api.doctest import *
-
 .. contents::
    :depth: 2
    :local:
 
+.. include:: /include/tested.rst
+
+>>> import lino
+>>> lino.startup('lino_welfare.projects.gerd.settings.doctests')
+>>> from lino.api.doctest import *
 
 
 The detail layout of a client
@@ -102,7 +102,7 @@ Lino Welfare à la Eupen.
   - **Aufgaben** (cal.TasksByProject)
 - **Bewegungen** (MovementsByProject) [visible for 500 510 admin 910]
 - **Sonstiges** (misc) [visible for 110 120 210 410 420 800 admin 910]:
-  - (misc_1) [visible for all]: **Beruf** (activity), **Zustand** (client_state), **Adelstitel** (noble_condition), **Nicht verfügbar bis** (unavailable_until), **Grund** (unavailable_why)
+  - (misc_1) [visible for all]: **Beruf** (activity), **Zustand** (client_state), **Adelstitel** (noble_condition), **Nicht verfügbar bis** (unavailable_until), **Begründung** (unavailable_why)
   - (misc_2) [visible for all]: **Sozialhilfeempfänger** (is_cpas), **Altenheim** (is_senior), **veraltet** (is_obsolete)
   - (misc_3) [visible for all]: **Erstellt** (created), **Bearbeitet** (modified)
   - (misc_4) [visible for all]: **Bemerkungen** (remarks), **Bemerkungen (Sozialsekretariat)** (remarks2)
