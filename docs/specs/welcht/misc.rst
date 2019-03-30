@@ -9,7 +9,7 @@ Miscellaneous
    :local:
    :depth: 2
 
-.. include:: /include/tested.rst
+.. include:: /../docs/shared/include/tested.rst
              
 >>> import os
 >>> from lino import startup

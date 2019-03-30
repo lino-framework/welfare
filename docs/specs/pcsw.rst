@@ -11,7 +11,7 @@ This page describes the :mod:`lino_welfare.modlib.pcsw` plugin.
    :local:
    :depth: 2
 
-.. include:: /include/tested.rst
+.. include:: /../docs/shared/include/tested.rst
   
 >>> from lino import startup
 >>> startup('lino_welfare.projects.gerd.settings.doctests')

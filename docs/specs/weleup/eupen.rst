@@ -11,7 +11,7 @@ The Lino Welfare "Eupen" variant
    :depth: 2
 
 
-.. include:: /include/tested.rst
+.. include:: /../docs/shared/include/tested.rst
 
 
 >>> from lino import startup

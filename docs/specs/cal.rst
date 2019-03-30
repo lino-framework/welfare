@@ -15,7 +15,7 @@ See also :ref:`book.specs.cal`.
 .. contents::
    :local:
 
-.. include:: /include/tested.rst
+.. include:: /../docs/shared/include/tested.rst
 
 >>> from lino import startup
 >>> startup('lino_welfare.projects.gerd.settings.doctests')

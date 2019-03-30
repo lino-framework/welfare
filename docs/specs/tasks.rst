@@ -10,7 +10,7 @@ A technical tour into the :mod:`lino_welfare.modlib.cal` module.
 .. contents::
    :local:
 
-.. include:: /include/tested.rst
+.. include:: /../docs/shared/include/tested.rst
 
 >>> from lino import startup
 >>> startup('lino_welfare.projects.mathieu.settings.doctests')

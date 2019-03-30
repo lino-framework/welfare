@@ -9,7 +9,7 @@ Clients (Eupen)
    :depth: 2
    :local:
 
-.. include:: /include/tested.rst
+.. include:: /../docs/shared/include/tested.rst
 
 >>> import lino
 >>> lino.startup('lino_welfare.projects.gerd.settings.doctests')

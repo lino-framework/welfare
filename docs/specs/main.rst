@@ -10,7 +10,7 @@ This describes the main page of :ref:`welfare`.
 .. contents::
    :depth: 1
 
-.. include:: /include/tested.rst
+.. include:: /../docs/shared/include/tested.rst
   
 >>> from lino import startup
 >>> startup('lino_welfare.projects.gerd.settings.doctests')

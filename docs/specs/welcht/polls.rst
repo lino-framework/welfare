@@ -15,7 +15,7 @@ The :mod:`lino_welfare.modlib.polls` plugin extends :mod:`lino_xl.lib.polls`.
    :depth: 1
 
 
-.. include:: /include/tested.rst
+.. include:: /../docs/shared/include/tested.rst
 
 >>> from lino import startup
 >>> startup('lino_welfare.projects.mathieu.settings.doctests')

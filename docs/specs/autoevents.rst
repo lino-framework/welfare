@@ -14,7 +14,7 @@ calendar events for evaluation meetings.
    :depth: 1
 
 
-.. include:: /include/tested.rst
+.. include:: /../docs/shared/include/tested.rst
 
 >>> from lino import startup
 >>> startup('lino_welfare.projects.gerd.settings.doctests')

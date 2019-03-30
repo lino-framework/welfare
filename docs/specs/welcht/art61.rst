@@ -1,24 +1,21 @@
-.. doctest docs/specs/art61.rst
+.. doctest docs/specs/welcht/art61.rst
 .. _welfare.specs.art61:
 
 ======================================
 ``art61`` : Article 61 job supplyments
 ======================================
 
-This document is an overview of the functionality provided by
-:mod:`lino_welfare.modlib.art61`.
+The :mod:`lino_welfare.modlib.art61` plugin adds support for managing Article
+61 job supplyments.
 
 .. currentmodule:: lino_welfare.modlib.art61
-
 
 .. contents::
    :depth: 2
    :local:
 
+.. include:: /../docs/shared/include/tested.rst
 
-..  include:: /include/tested.rst
-
->>> from __future__ import print_function
 >>> from lino import startup
 >>> startup('lino_welfare.projects.mathieu.settings.doctests')
 >>> from lino.api.doctest import *

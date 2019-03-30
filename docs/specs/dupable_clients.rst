@@ -13,7 +13,7 @@ Lino Welfare offers some functionality for avoiding duplicate
    :depth: 2
 
 
-.. include:: /include/tested.rst
+.. include:: /../docs/shared/include/tested.rst
              
 >>> from __future__ import print_function, unicode_literals
 >>> import lino

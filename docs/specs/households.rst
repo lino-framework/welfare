@@ -1,6 +1,6 @@
 .. doctest docs/specs/households.rst 
 .. _welfare.specs.households:
-.. include:: /../../book/docs/shared/include/defs.rst
+.. include:: /../docs/shared/include/defs.rst
 
 ==========
 Households

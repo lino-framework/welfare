@@ -104,11 +104,7 @@ copyright = '2012-2019 Rumma & Ko Ltd'
 # List of documents that shouldn't be included in the build.
 unused_docs = []
 
-exclude_patterns = [
-    '.build/*',
-    'include/*',
-    'shared/*',
-]
+exclude_patterns = ['.build/*', 'shared/include/*']
 
 # The reST default role (used for this markup: `text`) to use for all documents.
 #default_role = None

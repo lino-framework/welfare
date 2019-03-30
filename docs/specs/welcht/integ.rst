@@ -16,7 +16,7 @@ Table of contents:
 .. contents::
    :local:
 
-.. include:: /include/tested.rst
+.. include:: /../docs/shared/include/tested.rst
 
 >>> import lino
 >>> lino.startup('lino_welfare.projects.mathieu.settings.doctests')
