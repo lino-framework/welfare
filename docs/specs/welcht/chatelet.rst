@@ -1,4 +1,4 @@
-.. doctest docs/specs/welfare/chatelet.rst
+.. doctest docs/specs/welcht/chatelet.rst
 .. _welfare.specs.chatelet:
 
 
@@ -169,7 +169,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cal.DailyPlannerRow            cal.DailyPlannerRows            8         3
  cal.Event                      cal.OneEvent                    24        538
  cal.EventPolicy                cal.EventPolicies               20        6
- cal.EventType                  cal.EventTypes                  25        12
+ cal.EventType                  cal.EventTypes                  26        12
  cal.Guest                      cal.Guests                      9         578
  cal.GuestRole                  cal.GuestRoles                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15
