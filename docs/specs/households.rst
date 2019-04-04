@@ -72,7 +72,7 @@ Added features
 .. function:: get_household_summary(person, today=None, adult_age=None)
 
     Return a string which expresses the household composition in a few
-    words. See :ref:`welfare.specs.households` for some examples.
+    words. See `The household summary`_.
 
     Note that members without `birth_date` are considered children.
 
