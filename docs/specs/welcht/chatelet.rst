@@ -87,8 +87,8 @@ Romain
   - Bureau : Types d'extrait, Libraries de fichiers, Types de fichiers téléchargés, Types d'observation, Types d'événements, Mes Text Field Templates
   - Calendrier : Calendriers, Locaux, Évènements periodiques, Rôles de participants, Types d'entrée calendrier, Règles de récurrence, Calendriers externes, Lignes de planificateur
   - Ateliers : Savoirs de base, Topics, Timetable Slots
-  - CPAS : Types de contact client, Services, Raisons d’arrêt d'intervention, Droits chômage, Types d'aide sociale, Catégories
-  - Parcours : Langues, Types d'éducation, Niveaux académiques, Secteurs, Fonctions, Régimes de travail, Statuts, Types de contrat, Types de compétence sociale, Types de freins, Preuves de qualification
+  - CPAS : Droits chômage, Types d'aide sociale, Catégories , Types de contact client, Services, Raisons d’arrêt d'intervention
+  - Parcours : Types d'éducation, Niveaux académiques, Secteurs, Fonctions, Régimes de travail, Statuts, Types de contrat, Types de compétence sociale, Types de freins, Preuves de qualification, Langues
   - Intégration : Types de PIIS, Motifs d’arrêt de contrat, Régimes d'évaluation, Types de mise à l'emploi art60§7, Types de poste, Horaires, Types de mise à l'emploi art.61, Types de stage d'immersion, Objectifs
   - Nouvelles demandes : Intermédiaires, Spécificités
   - BCSS : Secteurs, Codes fonction
@@ -96,11 +96,11 @@ Romain
   - Questionnaires : Listes de choix
 - Explorateur :
   - Contacts : Personnes de contact, Partenaires, Types d'adresses, Adresses, Membres du conseil, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
-  - Système : Procurations, Types d'utilisateur, Rôles d'utilisateur, Types de contenu, Notifications, Changes, All dashboard widgets, Tests de données, Problèmes de données
+  - Système : Procurations, Types d'utilisateur, Rôles d'utilisateur, Notifications, Changes, All dashboard widgets, Types de contenu, Tests de données, Problèmes de données
   - Bureau : Extraits, Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Observations, Text Field Templates
   - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États Inscription, Course layouts, États Atelier
-  - CPAS : Contacts client, Types de contact connus, Interventions, Exclusions du chômage, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
+  - CPAS : Exclusions du chômage, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple, Contacts client, Types de contact connus, Interventions
   - Parcours : Connaissances de langue, Formations, Études, Expériences professionnelles, Connaissances de langue, Compétences professionnelles, Compétences sociales, Freins
   - Intégration : PIISs, Mises à l'emploi art60§7, Candidatures, Services utilisateurs, Mises à l'emploi art61, Stages d'immersion, Preuves de recherche, Fiches FSE, Champs FSE
   - Nouvelles demandes : Compétences
@@ -131,10 +131,10 @@ users.UserTypes:210
 - Configuration :
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Types de ménage
-  - CPAS : Types de contact client, Services, Raisons d’arrêt d'intervention, Types d'aide sociale, Catégories
+  - CPAS : Types d'aide sociale, Catégories , Types de contact client, Services, Raisons d’arrêt d'intervention
 - Explorateur :
   - Contacts : Personnes de contact, Partenaires, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
-  - CPAS : Contacts client, Types de contact connus, Interventions, Etats bénéficiaires, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple
+  - CPAS : Etats bénéficiaires, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple, Contacts client, Types de contact connus, Interventions
 - Site : à propos
 
 
@@ -146,7 +146,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
 
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview()) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-60 apps: lino, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, addresses, excerpts, uploads, outbox, extensible, cal, reception, badges, boards, clients, coachings, pcsw, welfare, sales, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, dashboard, export_excel, checkdata, tinymce, lino_welcht, sessions.
+60 apps: lino, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, notify, changes, checkdata, addresses, excerpts, uploads, outbox, extensible, cal, reception, badges, boards, clients, coachings, pcsw, welfare, sales, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, dashboard, export_excel, tinymce, lino_welcht, sessions.
 135 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -937,13 +937,12 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Ateliers --> Savoirs de base : 1
 - Configuration --> Ateliers --> Topics : 1
 - Configuration --> Ateliers --> Timetable Slots : 1
-- Configuration --> CPAS --> Types de contact client : 11
-- Configuration --> CPAS --> Services : 4
-- Configuration --> CPAS --> Raisons d’arrêt d'intervention : 5
 - Configuration --> CPAS --> Droits chômage : 1
 - Configuration --> CPAS --> Types d'aide sociale : 12
 - Configuration --> CPAS --> Catégories : 4
-- Configuration --> Parcours --> Langues : 6
+- Configuration --> CPAS --> Types de contact client : 11
+- Configuration --> CPAS --> Services : 4
+- Configuration --> CPAS --> Raisons d’arrêt d'intervention : 5
 - Configuration --> Parcours --> Types d'éducation : 12
 - Configuration --> Parcours --> Niveaux académiques : 6
 - Configuration --> Parcours --> Secteurs : 15
@@ -954,6 +953,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Parcours --> Types de compétence sociale : 1
 - Configuration --> Parcours --> Types de freins : 5
 - Configuration --> Parcours --> Preuves de qualification : 5
+- Configuration --> Parcours --> Langues : 6
 - Configuration --> Intégration --> Types de PIIS : 6
 - Configuration --> Intégration --> Motifs d’arrêt de contrat : 5
 - Configuration --> Intégration --> Régimes d'évaluation : 7
@@ -982,10 +982,10 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> Procurations : 4
 - Explorateur --> Système --> Types d'utilisateur : 16
 - Explorateur --> Système --> Rôles d'utilisateur : 42
-- Explorateur --> Système --> Types de contenu : 136
 - Explorateur --> Système --> Notifications : 13
 - Explorateur --> Système --> Changes : 0
 - Explorateur --> Système --> All dashboard widgets : 1
+- Explorateur --> Système --> Types de contenu : 136
 - Explorateur --> Système --> Tests de données : 13
 - Explorateur --> Système --> Problèmes de données : 0
 - Explorateur --> Bureau --> Extraits : 71
@@ -1008,9 +1008,6 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Ateliers --> États Inscription : 6
 - Explorateur --> Ateliers --> Course layouts : 2
 - Explorateur --> Ateliers --> États Atelier : 4
-- Explorateur --> CPAS --> Contacts client : 15
-- Explorateur --> CPAS --> Types de contact connus : 2
-- Explorateur --> CPAS --> Interventions : 91
 - Explorateur --> CPAS --> Exclusions du chômage : 1
 - Explorateur --> CPAS --> Antécédents judiciaires : 1
 - Explorateur --> CPAS --> Bénéficiaires : 58
@@ -1021,6 +1018,9 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> CPAS --> Certificats de revenu : 55
 - Explorateur --> CPAS --> Refund confirmations : 13
 - Explorateur --> CPAS --> Confirmations simple : 20
+- Explorateur --> CPAS --> Contacts client : 15
+- Explorateur --> CPAS --> Types de contact connus : 2
+- Explorateur --> CPAS --> Interventions : 91
 - Explorateur --> Parcours --> Connaissances de langue : 115
 - Explorateur --> Parcours --> Formations : 21
 - Explorateur --> Parcours --> Études : 23

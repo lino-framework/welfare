@@ -16,6 +16,7 @@ of aid during a given period.
    :local:
    :depth: 2
 
+.. include:: /../docs/shared/include/tested.rst
 
 >>> from lino import startup
 >>> startup('lino_welfare.projects.gerd.settings.doctests')
@@ -212,8 +213,8 @@ Willkommensmeldung unter die Nase gerieben:
 ...     print(tostring(msg))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 <span>Du bist beschäftigt in <a href="Detail">Beschwerde (22.05.2014) mit COLLARD Charlotte (118)</a> (<b>☑</b>). </span>
-<span>Du hast <b>6 Einträge in Zu bestätigende Hilfebeschlüsse</b>.</span>
 <b>Du hast 3 offene Datenprobleme.</b>
+<span>Du hast <b>6 Einträge in Zu bestätigende Hilfebeschlüsse</b>.</span>
 
 When she clicks the link "Zu bestätigende Hilfebeschlüsse", then they show up:
 

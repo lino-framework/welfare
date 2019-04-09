@@ -95,9 +95,9 @@ Rolf is the local system administrator, he has a complete menu:
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Büro : Auszugsarten, Dateibibliotheken, Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender, Tagesplanerzeilen
-  - ÖSHZ : Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
+  - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien, Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe
   - Buchhaltung : Haushaltsartikel, Journale, Geschäftsjahre, Buchungsperioden, Zahlungsbedingungen
-  - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
+  - Lebenslauf : Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
   - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche
@@ -105,11 +105,11 @@ Rolf is the local system administrator, he has a complete menu:
   - Schuldnerberatung : Kontengruppen, Konten, Budget-Kopiervorlage
 - Explorer :
   - Kontakte : Kontaktpersonen, Partner, Adressenarten, Adressen, Gremienmitglieder, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
-  - System : Vollmachten, Benutzerarten, Benutzerrollen, Datenbankmodelle, Benachrichtigungen, Änderungen, All dashboard widgets, Datentests, Datenprobleme
+  - System : Vollmachten, Benutzerarten, Benutzerrollen, Benachrichtigungen, Änderungen, All dashboard widgets, Datenbankmodelle, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
   - Büro : Auszüge, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Kalendereinträge, Aufgaben, Anwesenheiten, Abonnements, Termin-Zustände, Gast-Zustände, Aufgaben-Zustände
-  - ÖSHZ : Klientenkontakte, Standard-Klientenkontaktarten, Begleitungen, AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter
+  - ÖSHZ : AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter, Klientenkontakte, Standard-Klientenkontaktarten, Begleitungen
   - Buchhaltung : Gemeinkonten, Begleichungsregeln, Belege, Belegarten, Bewegungen, Handelsarten, Journalgruppen, Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Finanzjournale : Kontoauszüge, Diverse Buchungen, Zahlungsaufträge
@@ -199,8 +199,8 @@ to explicitly override the language of :meth:`show_menu
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
   - Büro : Dateibibliotheken, Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Regelmäßige Ereignisse, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender, Tagesplanerzeilen
-  - ÖSHZ : Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe, Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien
-  - Lebenslauf : Sprachen, Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern
+  - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien, Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe
+  - Lebenslauf : Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
   - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche
@@ -208,7 +208,7 @@ to explicitly override the language of :meth:`show_menu
   - Kontakte : Kontaktpersonen, Partner, Adressenarten, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - Kalender : Aufgaben, Abonnements
-  - ÖSHZ : Klientenkontakte, Standard-Klientenkontaktarten, Begleitungen, AG-Sperren, Vorstrafen, Klienten, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - ÖSHZ : AG-Sperren, Vorstrafen, Klienten, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Klientenkontakte, Standard-Klientenkontaktarten, Begleitungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
   - Lebenslauf : Sprachkenntnisse, Ausbildungen, Studien, Berufserfahrungen
   - DSBE : VSEs, Art.60§7-Konventionen, Stellenanfragen, Vertragspartner, Art.61-Konventionen
@@ -300,10 +300,10 @@ Theresia is a reception clerk.
 - Konfigurierung :
   - Orte : Länder, Orte
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
-  - ÖSHZ : Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe, Hilfearten, Kategorien
+  - ÖSHZ : Hilfearten, Kategorien, Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe
 - Explorer :
   - Kontakte : Kontaktpersonen, Partner, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
-  - ÖSHZ : Klientenkontakte, Standard-Klientenkontaktarten, Begleitungen, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen
+  - ÖSHZ : Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Klientenkontakte, Standard-Klientenkontaktarten, Begleitungen
   - SEPA : Importierte  Bankkonten, Kontoauszüge, Transaktionen
 - Site : Info
 
@@ -1105,21 +1105,20 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Kalender --> Wiederholungsregeln : 7
 - Konfigurierung --> Kalender --> Externe Kalender : 1
 - Konfigurierung --> Kalender --> Tagesplanerzeilen : 4
-- Konfigurierung --> ÖSHZ --> Klientenkontaktarten : 11
-- Konfigurierung --> ÖSHZ --> Dienste : 4
-- Konfigurierung --> ÖSHZ --> Begleitungsbeendigungsgründe : 5
 - Konfigurierung --> ÖSHZ --> Integrationsphasen : 6
 - Konfigurierung --> ÖSHZ --> Berufe : 1
 - Konfigurierung --> ÖSHZ --> AG-Sperrgründe : 3
 - Konfigurierung --> ÖSHZ --> Dispenzgründe : 5
 - Konfigurierung --> ÖSHZ --> Hilfearten : 12
 - Konfigurierung --> ÖSHZ --> Kategorien : 4
+- Konfigurierung --> ÖSHZ --> Klientenkontaktarten : 11
+- Konfigurierung --> ÖSHZ --> Dienste : 4
+- Konfigurierung --> ÖSHZ --> Begleitungsbeendigungsgründe : 5
 - Konfigurierung --> Buchhaltung --> Haushaltsartikel : 48
 - Konfigurierung --> Buchhaltung --> Journale : 5
 - Konfigurierung --> Buchhaltung --> Geschäftsjahre : 9
 - Konfigurierung --> Buchhaltung --> Buchungsperioden : 30
 - Konfigurierung --> Buchhaltung --> Zahlungsbedingungen : 9
-- Konfigurierung --> Lebenslauf --> Sprachen : 6
 - Konfigurierung --> Lebenslauf --> Bildungsarten : 12
 - Konfigurierung --> Lebenslauf --> Akademische Grade : 6
 - Konfigurierung --> Lebenslauf --> Sektoren : 15
@@ -1127,6 +1126,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Lebenslauf --> Arbeitsregimes : 4
 - Konfigurierung --> Lebenslauf --> Statuus : 8
 - Konfigurierung --> Lebenslauf --> Vertragsdauern : 6
+- Konfigurierung --> Lebenslauf --> Sprachen : 6
 - Konfigurierung --> DSBE --> VSE-Arten : 6
 - Konfigurierung --> DSBE --> Vertragsbeendigungsgründe : 5
 - Konfigurierung --> DSBE --> Auswertungsstrategien : 7
@@ -1153,10 +1153,10 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Vollmachten : 4
 - Explorer --> System --> Benutzerarten : 16
 - Explorer --> System --> Benutzerrollen : 42
-- Explorer --> System --> Datenbankmodelle : 143
 - Explorer --> System --> Benachrichtigungen : 14
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> All dashboard widgets : 1
+- Explorer --> System --> Datenbankmodelle : 143
 - Explorer --> System --> Datentests : 17
 - Explorer --> System --> Datenprobleme : 64
 - Explorer --> Eigenschaften --> Eigenschaften : 24
@@ -1174,9 +1174,6 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Kalender --> Termin-Zustände : 5
 - Explorer --> Kalender --> Gast-Zustände : 9
 - Explorer --> Kalender --> Aufgaben-Zustände : 5
-- Explorer --> ÖSHZ --> Klientenkontakte : 15
-- Explorer --> ÖSHZ --> Standard-Klientenkontaktarten : 2
-- Explorer --> ÖSHZ --> Begleitungen : 91
 - Explorer --> ÖSHZ --> AG-Sperren : 1
 - Explorer --> ÖSHZ --> Vorstrafen : 1
 - Explorer --> ÖSHZ --> Klienten : 58
@@ -1188,6 +1185,9 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> ÖSHZ --> Kostenübernahmescheine : 13
 - Explorer --> ÖSHZ --> Einfache Bescheinigungen : 20
 - Explorer --> ÖSHZ --> Phonetische Wörter : 131
+- Explorer --> ÖSHZ --> Klientenkontakte : 15
+- Explorer --> ÖSHZ --> Standard-Klientenkontaktarten : 2
+- Explorer --> ÖSHZ --> Begleitungen : 91
 - Explorer --> Buchhaltung --> Gemeinkonten : 22
 - Explorer --> Buchhaltung --> Begleichungsregeln : 3
 - Explorer --> Buchhaltung --> Belege : 56

@@ -5,17 +5,20 @@
 Newcomers (tested tour)
 =======================
 
-.. doctest init:
-
-    >>> from lino import startup
-    >>> startup('lino_welfare.projects.gerd.settings.doctests')
-    >>> from lino.api.doctest import *
-
 This is a tested tour about the :mod:`lino_welfare.modlib.newcomers`
 module.
 
 .. contents::
    :local:
+
+
+.. include:: /../docs/shared/include/tested.rst
+
+>>> from lino import startup
+>>> startup('lino_welfare.projects.gerd.settings.doctests')
+>>> from lino.api.doctest import *
+
+
 
 
 Newcomers configuration
@@ -87,7 +90,7 @@ The newcomers table
  BRAUN Bruno (259)                    Neuantrag                                                                                                         40 Jahre
  DEMEULENAERE Dorothée (122)          Neuantrag                Ausländerbeihilfe                                      Auf'm Rain, 4700 Eupen            unbekannt
  DERICUM Daniel (121)                 Neuantrag                DSBE                             950221 001-20         August-Thonnar-Str., 4700 Eupen   19 Jahre
- EIERSCHAL Emil (175)                 Neuantrag                Laufende Beihilfe                930412 001-68         Deutschland                       21 Jahre
+ EIERSCHAL Emil (175)                 Neuantrag                Laufende Beihilfe                930412 001-68         Aachen, Deutschland               21 Jahre
  EMONTSPOOL Erwin (151)               Neuantrag                DSBE                             910602 001-49         4730 Raeren                       22 Jahre
  ERNST Berta (125)                    Neuantrag                Laufende Beihilfe                900627 002-53         Bergkapellstraße, 4700 Eupen      23 Jahre
  FRISCH Paul (240)                    Neuantrag                                                                                                         46 Jahre
@@ -96,7 +99,7 @@ The newcomers table
  INGELS Irene (135)                   Neuantrag                Finanzielle Begleitung           861006 002-45         Feldstraße, 4700 Eupen            27 Jahre
  JANSEN Jérémy (136)                  Neuantrag                Laufende Beihilfe                851031 001-51         Gewerbestraße, 4700 Eupen         28 Jahre
  KASENNOVA Tatjana (213)              Neuantrag                DSBE                             830115 002-37         4701 Kettenis                     31 Jahre
- LAHM Lisa (176)                      Neuantrag                Eingliederungseinkommen (EiEi)   820209 002-09         Deutschland                       32 Jahre
+ LAHM Lisa (176)                      Neuantrag                Eingliederungseinkommen (EiEi)   820209 002-09         Aachen, Deutschland               32 Jahre
  LASCHET Laura (143)                  Neuantrag                Eingliederungseinkommen (EiEi)   810306 002-85         Habsburgerweg, 4700 Eupen         33 Jahre
  MARTELAER Mark (172)                 Neuantrag                DSBE                             790426 001-33         Amsterdam, Niederlande            35 Jahre
  MEIER Marie-Louise (149)             Neuantrag                Laufende Beihilfe                780521 002-71         Hisselsgasse, 4700 Eupen          36 Jahre
