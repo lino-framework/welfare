@@ -197,7 +197,7 @@ Mr Ludwig FRISCH
  Age        Role                Dependency       Person               First name   Last name   Birth date   Gender
 ---------- ------------------- ---------------- -------------------- ------------ ----------- ------------ --------
  46 years   Partner             Not at charge    Mrs Laura LOSLEVER   Laura        Loslever    1968-04-27   Female
- 46 years   Head of household   Not at charge    Mr Ludwig FRISCH     Ludwig       Frisch      1968-06-01   Male
+ 45 years   Head of household   Not at charge    Mr Ludwig FRISCH     Ludwig       Frisch      1968-06-01   Male
  12 years   Child               At full charge   Mrs Melba FRISCH     Melba        Frisch      2002-04-05   Female
  6 years    Child               At full charge   Mrs Irma FRISCH      Irma         Frisch      2008-03-24   Female
 ========== =================== ================ ==================== ============ =========== ============ ========
@@ -224,7 +224,7 @@ Here is his :class:`RefundsByPerson` table:
  Age                  Gender   Person           Amount
 -------------------- -------- ---------------- -----------
  46 years             Female   Laura LOSLEVER   20,00
- 46 years             Male     Ludwig FRISCH    20,00
+ 45 years             Male     Ludwig FRISCH    20,00
  12 years             Female   Melba FRISCH     10,00
  6 years              Female   Irma FRISCH      10,00
  **Total (4 rows)**                             **60,00**
@@ -271,7 +271,7 @@ In 2019 Melba is 17, still a child:
  Age                  Gender   Person           Amount
 -------------------- -------- ---------------- -----------
  51 years             Female   Laura LOSLEVER   20,00
- 51 years             Male     Ludwig FRISCH    20,00
+ 50 years             Male     Ludwig FRISCH    20,00
  17 years             Female   Melba FRISCH     10,00
  11 years             Female   Irma FRISCH      10,00
  **Total (4 rows)**                             **60,00**
@@ -287,7 +287,7 @@ But in 2020 she is 18, now her refunded amount is that of an adult:
  Age                  Gender   Person           Amount
 -------------------- -------- ---------------- -----------
  52 years             Female   Laura LOSLEVER   20,00
- 52 years             Male     Ludwig FRISCH    20,00
+ 51 years             Male     Ludwig FRISCH    20,00
  18 years             Female   Melba FRISCH     20,00
  12 years             Female   Irma FRISCH      10,00
  **Total (4 rows)**                             **70,00**
