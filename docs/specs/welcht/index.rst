@@ -1,11 +1,10 @@
 .. _welcht.specs:
 
-=====
-Specs
-=====
+===========================
+Lino Welfare Chatelet Specs
+===========================
 
-This section is an exhaustive description of what you can do with
-:ref:`welcht`.
+This section describes of what you can do with :ref:`welcht`.
 
 
 .. toctree::
@@ -17,7 +16,6 @@ This section is an exhaustive description of what you can do with
     immersion
     cv2
     courses
-    esf
     polls
     misc
     integ

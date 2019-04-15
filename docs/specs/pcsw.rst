@@ -5,6 +5,9 @@
 The :mod:`lino_welfare.modlib.pcsw` plugin
 ==========================================
 
+.. currentmodule:: lino_welfare.modlib.pcsw
+
+
 This page describes the :mod:`lino_welfare.modlib.pcsw` plugin.
 
 .. contents:: Contents
@@ -21,8 +24,6 @@ This page describes the :mod:`lino_welfare.modlib.pcsw` plugin.
 
 .. >>> len(settings.SITE.languages)
    3
-
-.. currentmodule:: lino_welfare.modlib.pcsw
 
 
 Client events
@@ -292,3 +293,5 @@ runtime errors.
         the specified value.
 
            
+
+

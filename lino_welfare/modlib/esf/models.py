@@ -1,8 +1,6 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016-2018 Rumma & Ko Ltd
-
-"""Defines database models for this plugin.
-"""
+# Copyright 2016-2019 Rumma & Ko Ltd
+# License: BSD (see file COPYING for details)
 
 from __future__ import unicode_literals
 from __future__ import print_function
@@ -22,10 +20,6 @@ from .choicelists import ParticipationCertificates, StatisticalFields
 
 
 class ClientSummary(Certifiable, MonthlySlaveSummary):
-    """An **ESF summary** is a database object which represents one "fiche
-    stagiaire".
-
-    """
 
     class Meta:
         verbose_name = _("ESF Summary")
@@ -112,8 +106,6 @@ class ClientSummary(Certifiable, MonthlySlaveSummary):
 
 
 class Summaries(dd.Table):
-    """Base class for all tables on :class:`Summary`.
-    """
     model = 'esf.ClientSummary'
     detail_layout = """
     master year month
@@ -131,12 +123,10 @@ class Summaries(dd.Table):
 
 
 class AllSummaries(Summaries):
-    """Lists all ESF summaries for all clients."""
     required_roles = dd.login_required(dd.SiteStaff)
 
 
 class SummariesByClient(Summaries):
-    """Lists the ESF summaries for a given client."""
     master_key = 'master'
     auto_fit_column_widths = True
     required_roles = dd.login_required(IntegUser)

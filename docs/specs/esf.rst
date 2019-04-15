@@ -33,24 +33,37 @@ This plugin needs :mod:`lino.modlib.summaries` and
 >>> dd.plugins.esf.needs_plugins
 ['lino.modlib.summaries', 'lino.modlib.weasyprint']
 
+This plugin injects
+a field :attr:`has_esf
+<lino_welfare.modlib.pcsw.Client.has_esf>` to every *client*
+and a field :attr:`esf_field
+<lino_welfare.modlib.cal.Entry.esf_field>` to every *calendar entry type*.
 
-Dossier
-=======
+Client summaries
+================
 
-The plugin adds the concept of **client summaries**.  A *client summary*
-(:class:`ClientSummary`) is a database entry holding statistical information
-for a given year about a given client.  Client summaries are temporary
-generated database content. Every client summary* can be printed as a document
-called "Fiche stagiaire".
+A **client summary** is a database entry holding statistical information for a
+given year about a given client.  Client summaries are temporary generated
+database content. Every client summary can be printed as a document called
+"Fiche stagiaire".
+
+.. class:: ClientSummary
+
+    The Django model which represents a *client summary*.
+
+    It is a :class:`lino.modlib.summaries.MonthlySlaveSummary` and
+    :class:`lino_xl.lib.excerpts.Certifiable`.
 
 
-List of the data fields per *dossier*:
+List of the data fields per *client summary*:
 
 - `client` : a pointer to the :class:`Client
   <lino_welfare.modlib.pcsw.models.Client>`
 
 - The observed period (`start_date` and `end_date`, usually one
   calendar year)
+
+The remaining fields are configured in the :class:`SummaryFields` choicelist.
 
 - Situation professionnelle à l’entrée: Bénéficiaire CPAS (ce sera
   uniquement cette appellation)
@@ -84,6 +97,19 @@ List of the data fields per *dossier*:
   des compétences - Certificat de valorisation de l’acquis de
   l’expérience - Diplôme ou certificat délivré par un établissement
   scolaire - Pas d’acquis)
+
+.. class:: Summaries
+
+    Base class for all tables on :class:`ClientSummary`.
+
+.. class:: AllSummaries
+
+    Lists all ESF summaries for all clients.
+
+.. class:: SummariesByClient
+
+    Lists the ESF summaries for a given client.
+
 
 
 HoursByDossier
@@ -189,6 +215,7 @@ lequel seront totalisés les heures.
 ======================================== ======================================== =============================== ======================== ==============================
 <BLANKLINE>
   
+.. class:: StatisticalFields
 
 >>> rt.show(esf.StatisticalFields, language="fr")
 ======= ====== =================================== =================
@@ -287,3 +314,51 @@ BRECHT Bernd (177)
  2014   0:00    0:00    0:00    1:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00   0:00
 ====== ======= ======= ======= ====== ====== ====== ====== ====== ====== ====== ====== ========
 <BLANKLINE>
+
+
+Choicelists
+===========
+
+.. class:: ParticipationCertificates
+
+.. class:: StatisticalField
+
+    Base class for all statistical fields.
+
+    .. attribute:: short_name
+
+        Used as the verbose_name of :attr:`field`.
+
+    .. attribute:: field_name
+
+        The internal field name.
+
+    .. attribute:: field
+
+        The field descriptor (an instance of a Django Field)
+
+
+.. class:: GuestCount
+
+    Not used in reality.
+
+
+.. class:: GuestHours
+
+    Count the real hours of presence.
+
+.. class:: GuestHoursEvent
+
+    Count the event's duration for each presence.
+
+
+.. class:: GuestHoursFixed
+
+    Count a fixed time for each presence.
+
+
+.. class:: ImmersionHours
+
+.. class:: Art60Hours
+
+

@@ -1,28 +1,13 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016-2017 Rumma & Ko Ltd
-# This file is part of Lino Welfare.
-#
-# Lino Welfare is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# Lino Welfare is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public
-# License along with Lino Welfare.  If not, see
-# <http://www.gnu.org/licenses/>.
+# Copyright 2016-2019 Rumma & Ko Ltd
+# License: BSD (see file COPYING for details)
 
-"""Choicelists for `lino_welfare.modlib.esf`.
-
-"""
 from __future__ import unicode_literals
 import datetime
 
 from django.db import models
+
+from atelier.utils import last_day_of_month
 
 from lino.api import dd, _
 from lino.utils.dates import weekdays
@@ -40,22 +25,6 @@ add('10', _("Epreuve d’évaluation réussie sans titre spécifique"))
 
 
 class StatisticalField(dd.Choice):
-    """Base class for all statistical fields.
-
-    .. attribute:: short_name
-
-        Used as the verbose_name of :attr:`field`.
-
-    .. attribute:: field_name
-
-        The internal field name.
-
-    .. attribute:: field
-
-        The field descriptor (an instance of a Django Field)
-
-
-    """
     field_name = None
     field = None
     short_name = None
@@ -78,7 +47,7 @@ class StatisticalField(dd.Choice):
 
 
 class GuestCount(StatisticalField):
-    """Not used in reality."""
+
     def create_field(self):
         return models.IntegerField(
             self.short_name, default=0, help_text=self.text)
@@ -91,7 +60,6 @@ class GuestCount(StatisticalField):
             return 1
         return 0
 
-from atelier.utils import last_day_of_month
 class HoursField(StatisticalField):
     def create_field(self):
         return dd.DurationField(
@@ -114,7 +82,6 @@ class HoursField(StatisticalField):
 
 
 class GuestHours(HoursField):
-    """Count the real hours of presence."""
     def collect_from_guest(self, obj, summary):
         # obj is a `cal.Guest` instance
         if obj.event.event_type is None:
@@ -128,7 +95,6 @@ class GuestHours(HoursField):
 
 
 class GuestHoursEvent(HoursField):
-    """Count the event's duration for each presence."""
 
     def collect_from_guest(self, obj, summary):
         if obj.event.event_type is None:
@@ -142,8 +108,7 @@ class GuestHoursEvent(HoursField):
 
 
 class GuestHoursFixed(HoursField):
-    """Count a fixed time for each presence."""
-    
+
     hours_per_guest = Duration('1:00')
     
     def collect_from_guest(self, obj, summary):

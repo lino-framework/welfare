@@ -4,8 +4,7 @@
 """Adds functionality to produce "fiches de stages" for the European
 Social Fund.
 
-Technical specs see :ref:`welcht`.
-
+See :doc:`/specs/esf`.
 
 """
 

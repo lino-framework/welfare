@@ -46,6 +46,7 @@ These are the specs for :ref:`welfare`.
     ledger
     vatless
     finan
+    esf
 
 .. toctree::
     :maxdepth: 1
