@@ -11,6 +11,11 @@
 .. contents::
   :local:
 
+2019-04-16
+==========
+
+Fixed :ticket:`2946` Wrong age display (leap year bug)
+
 2019-03-26 (v19.3.0)
 ====================
 
