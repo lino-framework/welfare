@@ -233,15 +233,14 @@ Lino Welfare uses the following **voucher types**:
 =================================== ====== =================================================
  Wert                                name   Text
 ----------------------------------- ------ -------------------------------------------------
- vatless.InvoicesByJournal                  Rechnungen
- vatless.ProjectInvoicesByJournal           Project invoices
- finan.JournalEntriesByJournal              Diverse Buchung (finan.JournalEntriesByJournal)
- finan.PaymentOrdersByJournal               Zahlungsauftrag (finan.PaymentOrdersByJournal)
  finan.BankStatementsByJournal              Kontoauszug (finan.BankStatementsByJournal)
  finan.DisbursementOrdersByJournal          Ausgabeanweisungen
+ finan.JournalEntriesByJournal              Diverse Buchung (finan.JournalEntriesByJournal)
+ finan.PaymentOrdersByJournal               Zahlungsauftrag (finan.PaymentOrdersByJournal)
+ vatless.InvoicesByJournal                  Rechnungen
+ vatless.ProjectInvoicesByJournal           Project invoices
 =================================== ====== =================================================
 <BLANKLINE>
-
 
 Invoices are partner-related vouchers (often we simply say **partner
 voucher**). That is, you select one partner per voucher. Every
