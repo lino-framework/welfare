@@ -114,7 +114,7 @@ Thu 22/05/2014 (22.05.2014)
  Start time   Client                   Short description   Managed by       Assigned to   Calendar entry type   Room   Workflow
 ------------ ------------------------ ------------------- ---------------- ------------- --------------------- ------ -----------------------------------
  08:30:00     FAYMONVILLE Luc (130*)   Rencontre           Mélanie Mélard                 Evaluation                   [⚑] **? Suggested** → [☼] [☑] [☒]
- 13:30:00     ENGELS Edgar (129)       Frühstück           Judith Jousten                 Appointment                  [⚑] **☼ Published** → [☑] [☒] [☐]
+ 13:30:00     ENGELS Edgar (129)       Frühstück           Judith Jousten                 Appointment                  [⚑] **☒ Cancelled**
 ============ ======================== =================== ================ ============= ===================== ====== ===================================
 <BLANKLINE>
 
@@ -138,7 +138,7 @@ Here is what it says for Alicia.
 -------------------------------------- ------------------------- --------------------- ------------------- -------------------------------
  `Mon 26/05/2014 at 09:40 <Detail>`__                             Meeting               Diner               **☐ Draft** → [☼] [☒]
  `Sun 01/06/2014 at 08:30 <Detail>`__                             Meeting               Diner               **? Suggested** → [☼] [☒]
- `Sat 07/06/2014 at 13:30 <Detail>`__                             Meeting               Diner               **☼ Published** → [☒] [☐]
+ `Sat 07/06/2014 at 13:30 <Detail>`__                             Meeting               Diner               **☒ Cancelled**
  `Mon 23/06/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 1        [▽] **? Suggested** → [☼] [☒]
  `Mon 14/07/2014 <Detail>`__            RADERMACHER Fritz (158)   Evaluation            Évaluation 6        [▽] **? Suggested** → [☼] [☒]
  `Wed 23/07/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 2        [▽] **? Suggested** → [☼] [☒]
@@ -162,10 +162,11 @@ These are for Hubert:
 ====================================== ======================== ===================== =================== ===============================
  When                                   Client                   Calendar entry type   Short description   Workflow
 -------------------------------------- ------------------------ --------------------- ------------------- -------------------------------
- `Tue 27/05/2014 at 10:20 <Detail>`__                            Internal              Abendessen          **☑ Took place** → [☐]
+ `Tue 27/05/2014 at 10:20 <Detail>`__                            Internal              Abendessen          **☼ Published** → [☒] [☐]
  `Wed 28/05/2014 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Évaluation 15       [▽] **? Suggested** → [☼] [☒]
  `Mon 02/06/2014 at 09:40 <Detail>`__                            Internal              Abendessen          **☐ Draft** → [☼] [☒]
  `Tue 03/06/2014 <Detail>`__            DENON Denis (180*)       Evaluation            Auswertung 1        [▽] **? Suggested** → [☼] [☒]
+ `Wed 04/06/2014 <Detail>`__            LAMBERTZ Guido (142)     Evaluation            Évaluation 6        [▽] **? Suggested** → [☼] [☒]
  ...
  `Tue 03/03/2015 <Detail>`__            DENON Denis (180*)       Evaluation            Auswertung 4        [▽] **? Suggested** → [☼] [☒]
  `Mon 09/03/2015 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)   Evaluation            Auswertung 8        [▽] **? Suggested** → [☼] [☒]
@@ -174,7 +175,6 @@ These are for Hubert:
  `Mon 20/04/2015 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Auswertung 10       [▽] **? Suggested** → [☼] [☒]
 ====================================== ======================== ===================== =================== ===============================
 <BLANKLINE>
-
 
 And these for Mélanie:
 
@@ -185,9 +185,8 @@ And these for Mélanie:
 -------------------------------------- ----------------------------- --------------------- ------------------- -------------------------------
  `Thu 22/05/2014 at 08:30 <Detail>`__   FAYMONVILLE Luc (130*)        Evaluation            Rencontre           **? Suggested** → [☼] [☑] [☒]
  `Mon 26/05/2014 at 09:00 <Detail>`__   ENGELS Edgar (129)            Evaluation            Évaluation 3        [▽] **? Suggested** → [☼] [☒]
- `Wed 28/05/2014 at 13:30 <Detail>`__   HILGERS Henri (134)           Evaluation            Rencontre           **☼ Published** → [☒] [☐]
- `Tue 03/06/2014 at 11:10 <Detail>`__   JOHNEN Johann (138)           Evaluation            Rencontre           **☒ Cancelled**
- `Thu 05/06/2014 at 09:00 <Detail>`__   LAZARUS Line (144)            Evaluation            Évaluation 2        [▽] **? Suggested** → [☼] [☒]
+ `Wed 28/05/2014 at 13:30 <Detail>`__   HILGERS Henri (134)           Evaluation            Rencontre           **☒ Cancelled**
+ `Tue 03/06/2014 at 11:10 <Detail>`__   JOHNEN Johann (138)           Evaluation            Rencontre           **☑ Took place** → [☐]
  ...
  `Thu 09/04/2015 at 09:00 <Detail>`__   ÖSTGES Otto (168)             Evaluation            Évaluation 9        [▽] **? Suggested** → [☼] [☒]
  `Mon 20/04/2015 at 09:00 <Detail>`__   RADERMACHER Guido (159)       Evaluation            Évaluation 10       [▽] **? Suggested** → [☼] [☒]
@@ -206,10 +205,10 @@ These are Alicia's calendar appointments of the last two months:
  When                                   Client                    Calendar entry type   Short description   Workflow
 -------------------------------------- ------------------------- --------------------- ------------------- -----------------------------------
  `Wed 07/05/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 15       [▽] **? Suggested** → [☼] [☑] [☒]
- `Thu 08/05/2014 at 13:30 <Detail>`__                             Meeting               Diner               **☼ Published** → [☑] [☒] [☐]
+ `Thu 08/05/2014 at 13:30 <Detail>`__                             Meeting               Diner               **☒ Cancelled**
  `Wed 14/05/2014 <Detail>`__            HILGERS Hildegard (133)   Evaluation            Évaluation 6        [▽] **? Suggested** → [☼] [☑] [☒]
- `Wed 14/05/2014 at 11:10 <Detail>`__                             Meeting               Diner               **☒ Cancelled**
- `Tue 20/05/2014 at 10:20 <Detail>`__                             Meeting               Diner               **☑ Took place** → [☐]
+ `Wed 14/05/2014 at 11:10 <Detail>`__                             Meeting               Diner               **☑ Took place** → [☐]
+ `Tue 20/05/2014 at 10:20 <Detail>`__                             Meeting               Diner               **☼ Published** → [☑] [☒] [☐]
 ====================================== ========================= ===================== =================== ===================================
 <BLANKLINE>
 
