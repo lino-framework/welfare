@@ -74,21 +74,22 @@ This client has the following appointments.
 >>> rt.login('romain').show(reception.AppointmentsByPartner, obj,
 ...     column_names="event__start_date event__start_time event__user event__summary event__state workflow_buttons",
 ...     language="en")  #doctest: -REPORT_UDIFF
-============ ============ ================== =================== ============ =======================================================
- Start date   Start time   Managed by         Short description   State        Workflow
------------- ------------ ------------------ ------------------- ------------ -------------------------------------------------------
- 15/05/2014   09:00:00     Caroline Carnol    Auswertung 2        Suggested    [Checkin] **Accepted** → [Absent] [Excused]
- 17/05/2014   10:20:00     Patrick Paraneau   Beratung            Took place   [Checkin] **Accepted** → [Present] [Absent] [Excused]
- 22/05/2014                Mélanie Mélard     Urgent problem      Published    [Receive] [Checkout] **Waiting** → [Absent] [Excused]
- 16/06/2014   09:00:00     Caroline Carnol    Auswertung 3        Suggested    [Checkin] **Accepted** → [Absent] [Excused]
- 16/07/2014   09:00:00     Caroline Carnol    Auswertung 4        Suggested    [Checkin] **Accepted** → [Absent] [Excused]
- 18/08/2014   09:00:00     Caroline Carnol    Auswertung 5        Suggested    [Checkin] **Accepted** → [Absent] [Excused]
- 18/09/2014   09:00:00     Caroline Carnol    Auswertung 6        Suggested    [Checkin] **Accepted** → [Absent] [Excused]
- 20/10/2014   09:00:00     Caroline Carnol    Auswertung 7        Suggested    [Checkin] **Accepted** → [Absent] [Excused]
- 20/11/2014   09:00:00     Caroline Carnol    Auswertung 8        Suggested    [Checkin] **Accepted** → [Absent] [Excused]
- 22/12/2014   09:00:00     Caroline Carnol    Auswertung 9        Suggested    [Checkin] **Accepted** → [Absent] [Excused]
-============ ============ ================== =================== ============ =======================================================
+============ ============ ================== =================== =========== =======================================================
+ Start date   Start time   Managed by         Short description   State       Workflow
+------------ ------------ ------------------ ------------------- ----------- -------------------------------------------------------
+ 15/05/2014   09:00:00     Caroline Carnol    Auswertung 2        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 17/05/2014   10:20:00     Patrick Paraneau   Beratung            Published   [Checkin] **Accepted** → [Reject] [Absent] [Excused]
+ 22/05/2014                Mélanie Mélard     Urgent problem      Published   [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ 16/06/2014   09:00:00     Caroline Carnol    Auswertung 3        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 16/07/2014   09:00:00     Caroline Carnol    Auswertung 4        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 18/08/2014   09:00:00     Caroline Carnol    Auswertung 5        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 18/09/2014   09:00:00     Caroline Carnol    Auswertung 6        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 20/10/2014   09:00:00     Caroline Carnol    Auswertung 7        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 20/11/2014   09:00:00     Caroline Carnol    Auswertung 8        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 22/12/2014   09:00:00     Caroline Carnol    Auswertung 9        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+============ ============ ================== =================== =========== =======================================================
 <BLANKLINE>
+
 
 Note that even Theresia who is a reception clerk and has no calendar
 functionality can click on the dates to see their detail:
@@ -99,7 +100,7 @@ functionality can click on the dates to see their detail:
  When                                   Managed by         Workflow
 -------------------------------------- ------------------ -------------------------------------------------------
  `Thu 15/05/2014 at 09:00 <Detail>`__   Caroline Carnol    [Checkin] **Accepted** → [Absent] [Excused]
- `Sat 17/05/2014 at 10:20 <Detail>`__   Patrick Paraneau   [Checkin] **Accepted** → [Present] [Absent] [Excused]
+ `Sat 17/05/2014 at 10:20 <Detail>`__   Patrick Paraneau   [Checkin] **Accepted** → [Reject] [Absent] [Excused]
  `Thu 22/05/2014 <Detail>`__            Mélanie Mélard     [Receive] [Checkout] **Waiting** → [Absent] [Excused]
  `Mon 16/06/2014 at 09:00 <Detail>`__   Caroline Carnol    [Checkin] **Accepted** → [Absent] [Excused]
  `Wed 16/07/2014 at 09:00 <Detail>`__   Caroline Carnol    [Checkin] **Accepted** → [Absent] [Excused]
@@ -110,7 +111,6 @@ functionality can click on the dates to see their detail:
  `Mon 22/12/2014 at 09:00 <Detail>`__   Caroline Carnol    [Checkin] **Accepted** → [Absent] [Excused]
 ====================================== ================== =======================================================
 <BLANKLINE>
-
 
 
 
@@ -522,7 +522,7 @@ during :func:`lino.utils.jsgen.py2js`:
 ...     print(py2js(lh.main.elements))
 >>> with_user_profile(theresia.user_type, f)
 ... #doctest: +NORMALIZE_WHITESPACE
-[ general_panel1061, contact_panel1088, coaching_panel1317, aids_tab_panel1432, work_tab_1_panel1460, contracts_panel2207, history_panel2210, calendar_panel2290, misc_panel2331 ]
+[ general_panel1108, contact_panel1135, coaching_panel1364, aids_tab_panel1479, work_tab_1_panel1507, contracts_panel2254, history_panel2257, calendar_panel2337, misc_panel2378 ]
 
 I can even render the :file:`lino*.js` files (at least once):
 
