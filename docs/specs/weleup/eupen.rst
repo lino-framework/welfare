@@ -31,7 +31,7 @@ it was the first Lino that went into production in 2010.
 - 142 models
 - 42 user roles
 - 16 user types
-- 539 views
+- 543 views
 - 29 dialog actions
 <BLANKLINE>
 
@@ -499,6 +499,7 @@ Each window layout defines a given set of fields.
 - boards.Boards.insert : name, name_fr, name_en
 - cal.Calendars.detail : name, name_fr, name_en, color, id, description
 - cal.Calendars.insert : name, name_fr, name_en, color
+- cal.DailyView.detail : navigation
 - cal.EntriesByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
 - cal.EntriesByProject.insert : start_date, start_time, end_time, summary, event_type
 - cal.EventTypes.detail : name, name_fr, name_en, event_label, event_label_fr, event_label_en, planner_column, max_conflicting, max_days, esf_field, email_template, id, all_rooms, locks_user, invite_client, is_appointment, attach_to_email
@@ -513,7 +514,7 @@ Each window layout defines a given set of fields.
 - cal.Guests.checkin : notify_subject, notify_body, notify_silent
 - cal.Guests.detail : event, client, role, state, remark, workflow_buttons, waiting_since, busy_since, gone_since
 - cal.Guests.insert : event, partner, role
-- cal.LastWeek.detail : PlannerByDay
+- cal.MonthlyView.detail : monthlyNavigation
 - cal.RecurrentEvents.detail : name, name_fr, name_en, id, user, event_type, start_date, start_time, end_date, end_time, every_unit, every, max_events, monday, tuesday, wednesday, thursday, friday, saturday, sunday, description
 - cal.RecurrentEvents.insert : name, name_fr, name_en, start_date, end_date, every_unit, event_type
 - cal.Rooms.detail : id, name, name_fr, name_en, company, contact_person, description
@@ -521,6 +522,7 @@ Each window layout defines a given set of fields.
 - cal.Tasks.detail : start_date, due_date, id, workflow_buttons, summary, project, user, delegated, owner, created, modified, description
 - cal.Tasks.insert : summary, user, project
 - cal.TasksByController.insert : summary, start_date, due_date, user, delegated
+- cal.WeeklyView.detail : weeklyNavigation
 - cbss.IdentifyPersonRequests.detail : id, person, user, sent, status, printed, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender, environment, ticket, info_messages, debug_messages
 - cbss.IdentifyPersonRequests.insert : person, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender
 - cbss.ManageAccessRequests.detail : id, person, user, sent, status, printed, action, start_date, end_date, purpose, query_register, national_id, sis_card_no, id_card_no, first_name, last_name, birth_date, result, environment, ticket, info_messages, debug_messages
@@ -714,6 +716,7 @@ Each window layout is **viewable** by a given set of user types.
 - boards.Boards.insert : visible for admin 910
 - cal.Calendars.detail : visible for 110 120 410 420 admin 910
 - cal.Calendars.insert : visible for 110 120 410 420 admin 910
+- cal.DailyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cal.EntriesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByProject.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EventTypes.detail : visible for 110 120 410 420 admin 910
@@ -728,7 +731,7 @@ Each window layout is **viewable** by a given set of user types.
 - cal.Guests.checkin : visible for 100 110 120 200 210 220 300 400 410 420 800 admin 910
 - cal.Guests.detail : visible for 100 110 120 200 210 220 300 400 410 420 800 admin 910
 - cal.Guests.insert : visible for 100 110 120 200 210 220 300 400 410 420 800 admin 910
-- cal.LastWeek.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
+- cal.MonthlyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cal.RecurrentEvents.detail : visible for 110 120 410 420 admin 910
 - cal.RecurrentEvents.insert : visible for 110 120 410 420 admin 910
 - cal.Rooms.detail : visible for 110 120 410 420 admin 910
@@ -736,6 +739,7 @@ Each window layout is **viewable** by a given set of user types.
 - cal.Tasks.detail : visible for 110 120 410 420 admin 910
 - cal.Tasks.insert : visible for 110 120 410 420 admin 910
 - cal.TasksByController.insert : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
+- cal.WeeklyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cbss.IdentifyPersonRequests.detail : visible for 100 110 120 200 210 300 400 410 420 admin 910
 - cbss.IdentifyPersonRequests.insert : visible for 100 110 120 200 210 300 400 410 420 admin 910
 - cbss.ManageAccessRequests.detail : visible for 100 110 120 200 210 300 400 410 420 admin 910
@@ -1039,7 +1043,7 @@ Here is the output of :func:`walk_menu_items
 - Büro --> Meine Ereignisse/Notizen : 9
 - Büro --> Meine Datenkontrollliste : 0
 - Kalender --> Meine Termine : 4
-- Kalender --> Überfällige Termine : 37
+- Kalender --> Überfällige Termine : 81
 - Kalender --> Meine unbestätigten Termine : 3
 - Kalender --> Meine Aufgaben : 1
 - Kalender --> Meine Gäste : 1
@@ -1167,7 +1171,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Büro --> Anhänge : 1
 - Explorer --> Büro --> Ereignisse/Notizen : 112
 - Explorer --> Büro --> Einfügetexte : 3
-- Explorer --> Kalender --> Kalendereinträge : 301
+- Explorer --> Kalender --> Kalendereinträge : 348
 - Explorer --> Kalender --> Aufgaben : 36
 - Explorer --> Kalender --> Anwesenheiten : 620
 - Explorer --> Kalender --> Abonnements : 10

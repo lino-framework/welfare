@@ -14,6 +14,7 @@ Accounting for Lino Welfare
     >>> from lino.api.doctest import *
     >>> from lino.api import rt
 
+
 This document describes the functionalities for registering and
 keeping track of social aid expenses, including client-related
 refunding of certain costs, disbursements of regular monthly social

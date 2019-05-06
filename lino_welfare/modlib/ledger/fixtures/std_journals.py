@@ -17,7 +17,7 @@ def objects():
     Account = rt.models.ledger.Account
     JournalGroups = rt.models.ledger.JournalGroups
     BankStatement = rt.models.finan.BankStatement
-    PaymentOrder = rt.models.finan.PaymentOrder
+    PaymentOrdersByJournal = rt.models.finan.PaymentOrdersByJournal
     DisbursementOrdersByJournal = rt.models.finan.DisbursementOrdersByJournal
     InvoicesByJournal = rt.models.vatless.InvoicesByJournal
     ProjectInvoicesByJournal = rt.models.vatless.ProjectInvoicesByJournal
@@ -67,7 +67,7 @@ def objects():
     kw.update(dd.str2kw('name', _("KBC Payment Orders")))
     kw.update(account=a5800, ref="ZKBC")
     kw.update(dc=DEBIT)
-    jnl = PaymentOrder.create_journal(**kw)
+    jnl = PaymentOrdersByJournal.create_journal(**kw)
     yield jnl
     yield MatchRule(journal=jnl, account=a4450)
 
