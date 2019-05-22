@@ -39,7 +39,7 @@ it is much work to maintain.
 
 >>> links = soup.find_all('a')
 >>> len(links)
-120
+122
 
 >>> print(links[0].text)
 Suchen
@@ -76,7 +76,7 @@ Here is a text variant of Hubert's dashboard.
 Not tested because some details are changing in the demo database.
 
 >>> rt.login('hubert').show_dashboard()
-... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF +SKIP
+... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF +ELLIPSIS -SKIP
 ---------------------------------------------------------
 Users with their Clients `⏏ <Users with their Clients>`__
 ---------------------------------------------------------
@@ -94,30 +94,30 @@ Users with their Clients `⏏ <Users with their Clients>`__
 Visitors waiting for me `⏏ <Visitors waiting for me>`__
 -------------------------------------------------------
 <BLANKLINE>
-==================================== ===================== ========== =================== =======================================================
- Since                                Client                Position   Short description   Workflow
------------------------------------- --------------------- ---------- ------------------- -------------------------------------------------------
- `... <Detail>`__   EMONTS Daniel (128)   1                              [Receive] [Checkout] **Waiting** → [Absent] [Excused]
- `... <Detail>`__   JONAS Josef (139)     2                              [Receive] [Checkout] **Waiting** → [Absent] [Excused]
- `... <Detail>`__   LAZARUS Line (144)    3                              [Receive] [Checkout] **Waiting** → [Absent] [Excused]
-==================================== ===================== ========== =================== =======================================================
+========================== ===================== ========== =================== =======================================================
+ Since                      Client                Position   Short description   Workflow
+-------------------------- --------------------- ---------- ------------------- -------------------------------------------------------
+ `5 years ago <Detail>`__   EMONTS Daniel (128)   1                              [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ `5 years ago <Detail>`__   JONAS Josef (139)     2                              [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ `5 years ago <Detail>`__   LAZARUS Line (144)    3                              [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+========================== ===================== ========== =================== =======================================================
 <BLANKLINE>
 -----------------------------------------
 Waiting visitors `⏏ <Waiting visitors>`__
 -----------------------------------------
 <BLANKLINE>
-==================================== ========================= ================= ========== =================== =======================================================
- Since                                Client                    Managed by        Position   Short description   Workflow
------------------------------------- ------------------------- ----------------- ---------- ------------------- -------------------------------------------------------
- `... <Detail>`__   EMONTS Daniel (128)       Hubert Huppertz   1                              [Receive] [Checkout] **Waiting** → [Absent] [Excused]
- `... <Detail>`__   EVERS Eberhart (127)      Mélanie Mélard    1          Urgent problem      **Waiting** → [Absent] [Excused]
- `... <Detail>`__   HILGERS Hildegard (133)   Alicia Allmanns   1          Beschwerde          **Waiting** → [Absent] [Excused]
- `... <Detail>`__   JACOBS Jacqueline (137)   Judith Jousten    1          Information         **Waiting** → [Absent] [Excused]
- `... <Detail>`__   JONAS Josef (139)         Hubert Huppertz   2                              [Receive] [Checkout] **Waiting** → [Absent] [Excused]
- `... <Detail>`__   KAIVERS Karl (141)        Alicia Allmanns   2          Beschwerde          **Waiting** → [Absent] [Excused]
- `... <Detail>`__   LAMBERTZ Guido (142)      Mélanie Mélard    2          Urgent problem      **Waiting** → [Absent] [Excused]
- `... <Detail>`__   LAZARUS Line (144)        Hubert Huppertz   3                              [Receive] [Checkout] **Waiting** → [Absent] [Excused]
-==================================== ========================= ================= ========== =================== =======================================================
+========================== ========================= ================= ========== =================== =======================================================
+ Since                      Client                    Managed by        Position   Short description   Workflow
+-------------------------- ------------------------- ----------------- ---------- ------------------- -------------------------------------------------------
+ `5 years ago <Detail>`__   EMONTS Daniel (128)       Hubert Huppertz   1                              [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ `5 years ago <Detail>`__   EVERS Eberhart (127)      Mélanie Mélard    1          Urgent problem      **Waiting** → [Absent] [Excused]
+ `5 years ago <Detail>`__   HILGERS Hildegard (133)   Alicia Allmanns   1          Beschwerde          **Waiting** → [Absent] [Excused]
+ `5 years ago <Detail>`__   JACOBS Jacqueline (137)   Judith Jousten    1          Information         **Waiting** → [Absent] [Excused]
+ `5 years ago <Detail>`__   JONAS Josef (139)         Hubert Huppertz   2                              [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ `5 years ago <Detail>`__   KAIVERS Karl (141)        Alicia Allmanns   2          Beschwerde          **Waiting** → [Absent] [Excused]
+ `5 years ago <Detail>`__   LAMBERTZ Guido (142)      Mélanie Mélard    2          Urgent problem      **Waiting** → [Absent] [Excused]
+ `5 years ago <Detail>`__   LAZARUS Line (144)        Hubert Huppertz   3                              [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+========================== ========================= ================= ========== =================== =======================================================
 <BLANKLINE>
 -----------------------------------------------
 My appointments **New** `⏏ <My appointments>`__
@@ -126,39 +126,49 @@ My appointments **New** `⏏ <My appointments>`__
 ====================================== ======================== ===================== =================== ===============================
  When                                   Client                   Calendar entry type   Short description   Workflow
 -------------------------------------- ------------------------ --------------------- ------------------- -------------------------------
- `Mon 20/04/2015 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Auswertung 10       [▽] **? Suggested** → [☼] [☒]
- `Thu 09/04/2015 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)   Evaluation            Auswertung 9        [▽] **? Suggested** → [☼] [☒]
- `Thu 19/03/2015 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Auswertung 9        [▽] **? Suggested** → [☼] [☒]
- `Mon 09/03/2015 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)   Evaluation            Auswertung 8        [▽] **? Suggested** → [☼] [☒]
- `Tue 03/03/2015 <Detail>`__            DENON Denis (180*)       Evaluation            Auswertung 4        [▽] **? Suggested** → [☼] [☒]
- `Thu 19/02/2015 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Auswertung 8        [▽] **? Suggested** → [☼] [☒]
- `Mon 09/02/2015 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)   Evaluation            Auswertung 7        [▽] **? Suggested** → [☼] [☒]
- `Mon 19/01/2015 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Auswertung 7        [▽] **? Suggested** → [☼] [☒]
- `Thu 08/01/2015 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)   Evaluation            Auswertung 6        [▽] **? Suggested** → [☼] [☒]
- `Wed 17/12/2014 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Auswertung 6        [▽] **? Suggested** → [☼] [☒]
- `Mon 08/12/2014 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)   Evaluation            Auswertung 5        [▽] **? Suggested** → [☼] [☒]
- `Wed 03/12/2014 <Detail>`__            DENON Denis (180*)       Evaluation            Auswertung 3        [▽] **? Suggested** → [☼] [☒]
- `Mon 17/11/2014 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Auswertung 5        [▽] **? Suggested** → [☼] [☒]
- `Wed 12/11/2014 <Detail>`__            RADERMECKER Rik (173)    Evaluation            Auswertung 3        [▽] **? Suggested** → [☼] [☒]
- `Thu 06/11/2014 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)   Evaluation            Auswertung 4        [▽] **? Suggested** → [☼] [☒]
+ `Tue 27/05/2014 at 10:20 <Detail>`__                            Internal              Abendessen          **☼ Published** → [☒] [☐]
+ `Wed 28/05/2014 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Évaluation 15       [▽] **? Suggested** → [☼] [☒]
+ `Mon 02/06/2014 at 09:40 <Detail>`__                            Internal              Abendessen          **☐ Draft** → [☼] [☒]
+ `Tue 03/06/2014 <Detail>`__            DENON Denis (180*)       Evaluation            Auswertung 1        [▽] **? Suggested** → [☼] [☒]
+ `Wed 04/06/2014 <Detail>`__            LAMBERTZ Guido (142)     Evaluation            Évaluation 6        [▽] **? Suggested** → [☼] [☒]
+ `Sun 08/06/2014 at 08:30 <Detail>`__                            Internal              Abendessen          **? Suggested** → [☼] [☒]
+ `Thu 19/06/2014 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)   Evaluation            Évaluation 15       [▽] **? Suggested** → [☼] [☒]
+ `Mon 14/07/2014 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Auswertung 1        [▽] **? Suggested** → [☼] [☒]
+ `Mon 04/08/2014 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)   Evaluation            Auswertung 1        [▽] **? Suggested** → [☼] [☒]
+ `Tue 05/08/2014 <Detail>`__            FAYMONVILLE Luc (130*)   Evaluation            Auswertung 3        [▽] **? Suggested** → [☼] [☒]
+ `Tue 12/08/2014 <Detail>`__            RADERMECKER Rik (173)    Evaluation            Auswertung 2        [▽] **? Suggested** → [☼] [☒]
+ `Thu 14/08/2014 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Auswertung 2        [▽] **? Suggested** → [☼] [☒]
+ `Wed 03/09/2014 <Detail>`__            DENON Denis (180*)       Evaluation            Auswertung 2        [▽] **? Suggested** → [☼] [☒]
+ `Thu 04/09/2014 <Detail>`__            LAMBERTZ Guido (142)     Evaluation            Évaluation 7        [▽] **? Suggested** → [☼] [☒]
+ `Thu 04/09/2014 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)   Evaluation            Auswertung 2        [▽] **? Suggested** → [☼] [☒]
 ====================================== ======================== ===================== =================== ===============================
 <BLANKLINE>
 ---------------------------------------------------------------
 My overdue appointments **New** `⏏ <My overdue appointments>`__
 ---------------------------------------------------------------
 <BLANKLINE>
-=========================================================================== ========================================================== ===================== ===============================
- Description                                                                 Controlled by                                              Calendar entry type   Workflow
---------------------------------------------------------------------------- ---------------------------------------------------------- --------------------- -------------------------------
- `Évaluation 14 (19.05.2014 09:00) with JEANÉMART Jérôme (181) <Detail>`__   `ISIP#32 (Jérôme JEANÉMART) <Detail>`__                    Evaluation            [▽] **? Suggested** → [☑] [☒]
- `Auswertung 1 (12.05.2014) with RADERMECKER Rik (173) <Detail>`__           `Art60§7 job supplyment#14 (Rik RADERMECKER) <Detail>`__   Evaluation            [▽] **? Suggested** → [☑] [☒]
-... 
- `Évaluation 10 (16.01.2014 09:00) with JEANÉMART Jérôme (181) <Detail>`__   `ISIP#32 (Jérôme JEANÉMART) <Detail>`__                    Evaluation            [▽] **? Suggested** → [☑] [☒]
-=========================================================================== ========================================================== ===================== ===============================
+=========================================================================== ========================================================== ===================== ===================================
+ Calendar entry                                                              Controlled by                                              Calendar entry type   Workflow
+--------------------------------------------------------------------------- ---------------------------------------------------------- --------------------- -----------------------------------
+ `Évaluation 10 (16.01.2014 09:00) with JEANÉMART Jérôme (181) <Detail>`__   `ISIP#32 (Jérôme JEANÉMART) <Detail>`__                    Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
+ `Évaluation 11 (27.01.2014 09:00) with BRECHT Bernd (177) <Detail>`__       `ISIP#27 (Bernd BRECHT) <Detail>`__                        Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
+ `Auswertung 1 (03.02.2014) with FAYMONVILLE Luc (130*) <Detail>`__          `Art60§7 job supplyment#4 (Luc FAYMONVILLE) <Detail>`__    Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
+ `Évaluation 11 (17.02.2014 09:00) with JEANÉMART Jérôme (181) <Detail>`__   `ISIP#32 (Jérôme JEANÉMART) <Detail>`__                    Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
+ `Évaluation 12 (27.02.2014 09:00) with BRECHT Bernd (177) <Detail>`__       `ISIP#27 (Bernd BRECHT) <Detail>`__                        Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
+ `Évaluation 12 (17.03.2014 09:00) with JEANÉMART Jérôme (181) <Detail>`__   `ISIP#32 (Jérôme JEANÉMART) <Detail>`__                    Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
+ `Évaluation 13 (27.03.2014 09:00) with BRECHT Bernd (177) <Detail>`__       `ISIP#27 (Bernd BRECHT) <Detail>`__                        Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
+ `Évaluation 13 (17.04.2014 09:00) with JEANÉMART Jérôme (181) <Detail>`__   `ISIP#32 (Jérôme JEANÉMART) <Detail>`__                    Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
+ `Évaluation 14 (28.04.2014 09:00) with BRECHT Bernd (177) <Detail>`__       `ISIP#27 (Bernd BRECHT) <Detail>`__                        Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
+ `Abendessen (03.05.2014 09:40) <Detail>`__                                                                                             Internal              **☐ Draft** → [☼] [☑] [☒]
+ `Auswertung 2 (05.05.2014) with FAYMONVILLE Luc (130*) <Detail>`__          `Art60§7 job supplyment#4 (Luc FAYMONVILLE) <Detail>`__    Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
+ `Abendessen (09.05.2014 08:30) <Detail>`__                                                                                             Internal              **? Suggested** → [☼] [☑] [☒]
+ `Auswertung 1 (12.05.2014) with RADERMECKER Rik (173) <Detail>`__           `Art60§7 job supplyment#14 (Rik RADERMECKER) <Detail>`__   Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
+ `Évaluation 14 (19.05.2014 09:00) with JEANÉMART Jérôme (181) <Detail>`__   `ISIP#32 (Jérôme JEANÉMART) <Detail>`__                    Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
+=========================================================================== ========================================================== ===================== ===================================
 <BLANKLINE>
----------------------------------------------------------
-My Notification messages `⏏ <My Notification messages>`__
----------------------------------------------------------
+---------------------------------------------------------------
+My Notification messages **✓** `⏏ <My Notification messages>`__
+---------------------------------------------------------------
 <BLANKLINE>
 ===================== ==================================== ============== ==========
  Created               Subject                              Message Type   Workflow
@@ -166,3 +176,4 @@ My Notification messages `⏏ <My Notification messages>`__
  2014-05-22 05:48:00   Die Datenbank wurde initialisiert.   System event   [✓]
 ===================== ==================================== ============== ==========
 <BLANKLINE>
+
