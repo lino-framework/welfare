@@ -39,23 +39,23 @@ checkers.
 ======================================= ===================================================
  value                                   text
 --------------------------------------- ---------------------------------------------------
- printing.CachedPrintableChecker         Check for missing target files
- countries.PlaceChecker                  Check data of geographical places.
  addresses.AddressOwnerChecker           Check for missing or non-primary address records
- cal.EventGuestChecker                   Entries without participants
- cal.ConflictingEventsChecker            Check for conflicting calendar entries
- cal.ObsoleteEventTypeChecker            Obsolete generated calendar entries
- cal.LongEntryChecker                    Too long-lasting calendar entries
- mixins.DupableChecker                   Check for missing phonetic words
+ aids.ConfirmationChecker                Check for confirmations outside of granted period
  beid.SSINChecker                        Check for invalid SSINs
- pcsw.IdentityChecker                    Check for valid identification
+ cal.ConflictingEventsChecker            Check for conflicting calendar entries
+ cal.EventGuestChecker                   Entries without participants
+ cal.LongEntryChecker                    Too long-lasting calendar entries
+ cal.ObsoleteEventTypeChecker            Obsolete generated calendar entries
  coachings.ClientCoachingsChecker        Check coachings
+ countries.PlaceChecker                  Check data of geographical places.
+ dupable_clients.SimilarClientsChecker   Check for similar clients
+ finan.FinancialVoucherItemChecker       Check for invalid account/partner combination
  isip.OverlappingContractsChecker        Check for overlapping contracts
  ledger.VoucherChecker                   Check integrity of ledger vouchers
- finan.FinancialVoucherItemChecker       Check for invalid account/partner combination
+ mixins.DupableChecker                   Check for missing phonetic words
+ pcsw.IdentityChecker                    Check for valid identification
+ printing.CachedPrintableChecker         Check for missing target files
  sepa.BankAccountChecker                 Check for partner mismatches in bank accounts
- aids.ConfirmationChecker                Check for confirmations outside of granted period
- dupable_clients.SimilarClientsChecker   Check for similar clients
 ======================================= ===================================================
 <BLANKLINE>
 

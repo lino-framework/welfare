@@ -292,7 +292,7 @@ discovered :blogref:`20130527`:
 200
 >>> result = json.loads(res.content)
 >>> print(' '.join(sorted(result.keys())))
-data disable_delete id navinfo title
+data disable_delete id navinfo param_values title
 
 
 Editability of tables

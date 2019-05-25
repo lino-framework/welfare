@@ -44,6 +44,7 @@ art61.Subsidizations : Subsidizations
 beid.BeIdCardTypes : eID-Kartenarten
 beid.ResidenceTypes : Einwohnerregister
 cal.AccessClasses : AccessClasses
+cal.DisplayColors : DisplayColors
 cal.DurationUnits : DurationUnits
 cal.EntryStates : Termin-Zustände
 cal.EventEvents : Beobachtungskriterien
@@ -53,6 +54,7 @@ cal.Recurrencies : Recurrencies
 cal.ReservationStates : Zustände
 cal.TaskStates : Aufgaben-Zustände
 cal.Weekdays : Weekdays
+cal.YearMonths : YearMonths
 cbss.ManageActions : ManageActions
 cbss.QueryRegisters : QueryRegisters
 cbss.RequestLanguages : RequestLanguages

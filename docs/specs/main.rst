@@ -76,7 +76,7 @@ Here is a text variant of Hubert's dashboard.
 Not tested because some details are changing in the demo database.
 
 >>> rt.login('hubert').show_dashboard()
-... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF +ELLIPSIS -SKIP
+... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF +ELLIPSIS +SKIP
 ---------------------------------------------------------
 Users with their Clients `⏏ <Users with their Clients>`__
 ---------------------------------------------------------
