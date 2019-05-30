@@ -50,7 +50,7 @@ class Account(Account):
 
         This attribute may be deprecated since managed accounts
         usually also have imported :attr:`statements
-        <lino_cosi.lib.b2c.models.Account.statements>`.
+        <lino_xl.lib.b2c.models.Account.statements>`.
 
     """
 
@@ -65,7 +65,7 @@ class AccountsByClient(AccountsByPartner):
     """Shows the accounts for a given client. This includes additional
     information :attr:`managed <Account.managed>`,
     :attr:`account_type <Account.account_type>` and
-    :attr:`statements <lino_cosi.lib.b2c.models.Account.statements>`.
+    :attr:`statements <lino_xl.lib.b2c.models.Account.statements>`.
 
     """
     column_names = 'account_type iban bic primary managed statements'

@@ -6,7 +6,7 @@ Import bank statements (SEPA  BankToCustomer)
 =============================================
 
 This document describes the functionality implemented by the
-:mod:`lino_cosi.lib.b2c` module.
+:mod:`lino_xl.lib.b2c` module.
 
 .. contents::
    :local:
@@ -110,4 +110,4 @@ Now let's look at the transactions in this statement:
 
 Note that **Ordre permanent** is in French (not English) because we do
 not yet find the officeal German translations for the Belgian bank
-transaction codes (see :mod:`lino_cosi.lib.b2c.febelfin`)
+transaction codes (see :mod:`lino_xl.lib.b2c.febelfin`)
