@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2013-2018 Rumma & Ko Ltd
+# License: BSD (see file COPYING for details)
 
 """
 The :xfile:`models` module for the :mod:`lino_welfare.modlib.integ` app.

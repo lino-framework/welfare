@@ -274,6 +274,7 @@ see it.
 - cal.PlannerByDay.duplicate : visible for admin 910
 - cal.PublicEntries.duplicate : visible for nobody
 - cal.RemoteCalendars.duplicate : visible for admin 910
+- cal.WeeklyPlanner.duplicate : visible for admin 910
 - cbss.AllIdentifyPersonRequests.duplicate : visible for admin 910
 - cbss.AllManageAccessRequests.duplicate : visible for admin 910
 - cbss.AllRetrieveTIGroupsRequests.duplicate : visible for admin 910
