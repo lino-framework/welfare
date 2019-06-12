@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RetrieveTIGroupsService" targetNamespace="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v2">
+	<wsdl:types>
+		<xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" xmlns:common="http://kszbcss.fgov.be/types/common/v3" xmlns:rtg="http://kszbcss.fgov.be/types/RetrieveTIGroups/v2" targetNamespace="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v2" version="2017-06-28">
+			<xsd:import namespace="http://kszbcss.fgov.be/types/RetrieveTIGroups/v2" schemaLocation="../../types/RetrieveTIGroups/RetrieveTIGroupsV2.xsd"/>
+				<xsd:import namespace="http://kszbcss.fgov.be/types/common/v3" schemaLocation="../../types/common/CommonV3.xsd"/>
+			<xsd:element name="retrieveTIGroupsRequest" type="rtg:RetrieveTIGroupsRequestType"/>
+			<xsd:element name="retrieveTIGroupsResponse" type="rtg:RetrieveTIGroupsResponseType"/>
+			<xsd:element name="retrieveTIGroupsFault" type="common:CBSSFaultType"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="retrieveTIGroupsRequestMsg">
+		<wsdl:part element="tns:retrieveTIGroupsRequest" name="retrieveTIGroupsRequestParameters"/>
+	</wsdl:message>
+	<wsdl:message name="retrieveTIGroupsResponseMsg">
+		<wsdl:part element="tns:retrieveTIGroupsResponse" name="retrieveTIGroupsResponseParameters"/>
+	</wsdl:message>
+	<wsdl:message name="retrieveTIGroupsFaultMsg">
+		<wsdl:part element="tns:retrieveTIGroupsFault" name="retrieveTIGroupsFaultParameters"/>
+	</wsdl:message>
+	<wsdl:portType name="RetrieveTIGroupsPortType">
+		<wsdl:operation name="retrieveTI">
+			<wsdl:input message="tns:retrieveTIGroupsRequestMsg" name="retrieveTIGroupsRequest"/>
+			<wsdl:output message="tns:retrieveTIGroupsResponseMsg" name="retrieveTIGroupsResponse"/>
+			<wsdl:fault message="tns:retrieveTIGroupsFaultMsg" name="retrieveTIGroupsFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="RetrieveTIGroupsServiceHTTPBinding" type="tns:RetrieveTIGroupsPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="retrieveTI">
+			<soap:operation soapAction="http://kszbcss.fgov.be/RetrieveTIGroupsService/retrieveTI"/>
+			<wsdl:input name="retrieveTIGroupsRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="retrieveTIGroupsResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="retrieveTIGroupsFault">
+				<soap:fault name="retrieveTIGroupsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="RetrieveTIGroupsService">
+		<wsdl:port binding="tns:RetrieveTIGroupsServiceHTTPBinding" name="RetrieveTIGroupsService">
+			<!-- soap:address location -->
+			<!-- pour les CPAS -->
+			<!-- dvlp : https://bcssksz-services-test.smals.be:443/SOA4520/RetrieveTIGroupsService/v2/retrieveTI -->
+			<!-- acpt: https://bcssksz-services-acpt.smals.be:443/SOA4520/RetrieveTIGroupsService/v2/retrieveTI  -->
+			<!-- prod:https://bcssksz-services-prod.smals.be:443/SOA4520/RetrieveTIGroupsService/v2/retrieveTI -->
+			<soap:address location="https://b2b-%(cbss_environment)s.ksz-bcss.fgov.be:4520/RetrieveTIGroupsService/v2/retrieveTI"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

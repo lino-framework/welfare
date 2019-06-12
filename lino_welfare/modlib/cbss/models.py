@@ -679,8 +679,9 @@ def setup_site_cache(self, force):
         open(fn, 'wt').write(s)
         logger.debug("Generated %s for environment %r.", fn, environment)
 
-    # make_wsdl('RetrieveTIGroupsV3.wsdl', RetrieveTIGroupsRequest.wsdl_parts)
-    make_wsdl('RetrieveTIGroups.wsdl', RetrieveTIGroupsRequest.wsdl_parts)
+    # v1 was stopped in March 2019
+    # make_wsdl('RetrieveTIGroups-v1.wsdl', RetrieveTIGroupsRequest.wsdl_parts)
+    make_wsdl('RetrieveTIGroups-v2.wsdl', RetrieveTIGroupsRequest.wsdl_parts)
     make_wsdl('WebServiceConnector.wsdl', SSDNRequest.wsdl_parts)
     # make_wsdl('TestConnectionService.wsdl',TestConnectionRequest.wsdl_parts)
 
