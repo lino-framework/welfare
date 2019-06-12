@@ -2,8 +2,8 @@
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RetrieveTIGroupsService" targetNamespace="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v2">
 	<wsdl:types>
 		<xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" xmlns:common="http://kszbcss.fgov.be/types/common/v3" xmlns:rtg="http://kszbcss.fgov.be/types/RetrieveTIGroups/v2" targetNamespace="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v2" version="2017-06-28">
-			<xsd:import namespace="http://kszbcss.fgov.be/types/RetrieveTIGroups/v2" schemaLocation="be/fgov/kszbcss/types/RetrieveTIGroups/RetrieveTIGroupsV2.xsd"/>
-				<xsd:import namespace="http://kszbcss.fgov.be/types/common/v3" schemaLocation="be/fgov/kszbcss/types/common/CommonV3.xsd"/>
+			<xsd:import namespace="http://kszbcss.fgov.be/types/RetrieveTIGroups/v2" schemaLocation="../../types/RetrieveTIGroups/RetrieveTIGroupsV2.xsd"/>
+				<xsd:import namespace="http://kszbcss.fgov.be/types/common/v3" schemaLocation="../../types/common/CommonV3.xsd"/>
 			<xsd:element name="retrieveTIGroupsRequest" type="rtg:RetrieveTIGroupsRequestType"/>
 			<xsd:element name="retrieveTIGroupsResponse" type="rtg:RetrieveTIGroupsResponseType"/>
 			<xsd:element name="retrieveTIGroupsFault" type="common:CBSSFaultType"/>
@@ -47,7 +47,7 @@
 			<!-- dvlp : https://bcssksz-services-test.smals.be:443/SOA4520/RetrieveTIGroupsService/v2/retrieveTI -->
 			<!-- acpt: https://bcssksz-services-acpt.smals.be:443/SOA4520/RetrieveTIGroupsService/v2/retrieveTI  -->
 			<!-- prod:https://bcssksz-services-prod.smals.be:443/SOA4520/RetrieveTIGroupsService/v2/retrieveTI -->
-			<soap:address location="https://b2b-%(cbss_environment)s.ksz-bcss.fgov.be:4520/RetrieveTIGroupsService/v2/retrieveTI"/>
+			<soap:address location="https://b2b-test.ksz-bcss.fgov.be:4520/RetrieveTIGroupsService/v2/retrieveTI"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

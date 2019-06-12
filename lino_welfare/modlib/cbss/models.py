@@ -687,11 +687,13 @@ def setup_site_cache(self, force):
 
     # The following xsd files are needed, unmodified but in the same directory
     # for fn in 'RetrieveTIGroupsV3.xsd', 'rn25_Release201104.xsd', 'TestConnectionServiceV1.xsd':
-    for fn in 'RetrieveTIGroupsV5.xsd', 'rn25_Release201411.xsd':
+    # for fn in 'RetrieveTIGroupsV5.xsd', 'rn25_Release201411.xsd':
+    for fn in ['be']:
         src = os.path.join(os.path.dirname(__file__), 'XSD', fn)
         target = os.path.join(settings.MEDIA_ROOT, 'cache', 'wsdl', fn)
         if not os.path.exists(target):
-            shutil.copy(src, target)
+            # shutil.copy(src, target)
+            shutil.copytree(src, target)
 
 
 from .ui import *

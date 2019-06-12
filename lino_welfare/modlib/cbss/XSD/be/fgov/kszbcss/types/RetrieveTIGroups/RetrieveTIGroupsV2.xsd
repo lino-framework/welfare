@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://kszbcss.fgov.be/types/RetrieveTIGroups/v2" xmlns:common="http://kszbcss.fgov.be/types/common/v3" xmlns:rn="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema" targetNamespace="http://kszbcss.fgov.be/types/RetrieveTIGroups/v2" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="2017-06-28">
+	<xsd:import namespace="http://www.ibz.rrn.fgov.be/XSD/xm25/rn25Schema" schemaLocation="../../../rrn/ibz/xsd/xm25/xm25.xsd"/>
+	<xsd:import namespace="http://kszbcss.fgov.be/types/common/v3" schemaLocation="../common/CommonV3.xsd"/>
+	<xsd:complexType name="RetrieveTIGroupsRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="common:BaseRequestType">
+				<xsd:sequence>
+					<xsd:element name="searchInformation" type="SearchInformationType">
+						<xsd:annotation>
+							<xsd:documentation>Search parameters.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="RetrieveTIGroupsResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="common:BaseRequestType">
+				<xsd:sequence>
+					<xsd:element name="searchInformation" type="SearchInformationType">
+						<xsd:annotation>
+							<xsd:documentation>Search parameters used for the request.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="status" type="common:StatusType">
+						<xsd:annotation>
+							<xsd:documentation>Status of the treatment.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="rrn_it_implicit" type="rn:FileInfoType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>A listing of IT's for the given SSIN.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:simpleType name="LanguageType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="nl"/>
+			<xsd:enumeration value="fr"/>
+			<xsd:enumeration value="de"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="SearchInformationType">
+		<xsd:sequence>
+			<xsd:element name="ssin" type="common:SsinType">
+				<xsd:annotation>
+					<xsd:documentation>SSIN for the search.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="language" type="LanguageType" default="fr" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Language to use.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="history" type="xsd:boolean" default="false" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Whether or not to return history.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
