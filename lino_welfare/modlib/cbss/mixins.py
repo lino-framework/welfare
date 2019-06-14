@@ -539,13 +539,13 @@ class NewStyleRequest(CBSSRequest):
 
         #~ sc = settings.SITE.site_config
         # ci = client.factory.create('ns0:CustomerIdentificationType')
-        ci = client.factory.create('tns:OrganizationIdentificationType')
+        ci = client.factory.create('common:OrganizationIdentificationType')
         #~ cbeNumber = client.factory.create('ns0:CbeNumberType')
         #~ ci.cbeNumber = settings.SITE.cbss_cbe_number
         #~ ci.cbeNumber = settings.SITE.site_config.site_company.vat_id
         ci.cbeNumber = settings.SITE.site_config.cbss_org_unit
         # info = client.factory.create('ns0:InformationCustomerType')
-        info = client.factory.create('tns:InformationCustomerType')
+        info = client.factory.create('common:InformationCustomerType')
         info.ticket = str(self.id)
         info.timestampSent = now
         info.customerIdentification = ci
