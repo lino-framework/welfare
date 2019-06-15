@@ -452,7 +452,8 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
         return client.succeeded(client.method.binding.input, s)
 
     def execute_newstyle(self, client, infoCustomer, simulate_response):
-        si = client.factory.create('ns0:SearchInformationType')
+        client.add_prefix("rtg", "http://kszbcss.fgov.be/types/RetrieveTIGroups/v2")
+        si = client.factory.create('rtg:SearchInformationType')
         si.ssin = self.get_ssin()
         if self.language:
             si.language = self.language.value
@@ -477,9 +478,10 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
                 
                 # The optional "legalContext" argument had been added
                 # by CBSS in V5.
-                
+                # 20190615 legalContext is mandatory since v2
+                legalContext = "PCSA:SOCIAL_INQUIRY"  # LegalContextType is str
                 # reply = client.service.retrieveTI(infoCustomer, None, si)
-                reply = client.service.retrieveTI(infoCustomer, None, None, si)
+                reply = client.service.retrieveTI(infoCustomer, None, legalContext, si)
                 # reply = client.service.retrieveTI(
                 #     informationCustomer=infoCustomer,
                 #     searchInfdormation=si)

@@ -3,7 +3,6 @@
 				  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
 				  xmlns:tns="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v2"
 				  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-  			      xmlns:common="http://kszbcss.fgov.be/types/common/v3"
 				  name="RetrieveTIGroupsService"
 				  targetNamespace="http://kszbcss.fgov.be/intf/RetrieveTIGroupsService/v2">
 	<wsdl:types>

@@ -534,20 +534,21 @@ class NewStyleRequest(CBSSRequest):
         """
         NewStyle specific part of a request.
         """
-
         client = get_client(self)
+        client.add_prefix("common", "http://kszbcss.fgov.be/types/common/v3")
 
-        #~ sc = settings.SITE.site_config
+        # info = client.factory.create('ns0:InformationCustomerType')
+        info = client.factory.create('common:InformationCustomerType')
+        info.ticket = str(self.id)
+        info.timestampSent = now
+
         # ci = client.factory.create('ns0:CustomerIdentificationType')
         ci = client.factory.create('common:OrganizationIdentificationType')
         #~ cbeNumber = client.factory.create('ns0:CbeNumberType')
         #~ ci.cbeNumber = settings.SITE.cbss_cbe_number
         #~ ci.cbeNumber = settings.SITE.site_config.site_company.vat_id
         ci.cbeNumber = settings.SITE.site_config.cbss_org_unit
-        # info = client.factory.create('ns0:InformationCustomerType')
-        info = client.factory.create('common:InformationCustomerType')
-        info.ticket = str(self.id)
-        info.timestampSent = now
+
         info.customerIdentification = ci
 
         return self.execute_newstyle(client, info, simulate_response)
