@@ -353,7 +353,7 @@ class SSDNRequest(CBSSRequest):
         url = self.get_wsdl_uri()
         #~ logger.info("Instantiate Client at %s", url)
         t = HttpTransport()
-        client = Client(url, transport=t)
+        client = Client(url, transport=t, timeout=10)
         #~ print 20120507, client
         return client
 

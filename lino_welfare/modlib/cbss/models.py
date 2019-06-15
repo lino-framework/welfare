@@ -470,7 +470,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
                 # (1) informationCustomer
                 # (2) informationCBSS (minOccurs=0)
                 # (3) legalContext (minOccurs=0)
-                # (4) searchInfdormation
+                # (4) searchInformation
                 
                 # This sequence is important because suds uses it when
                 # adding positional arguments as children to the XML
