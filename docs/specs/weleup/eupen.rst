@@ -333,7 +333,7 @@ Database structure
 - cal.DailyPlannerRow : id, seqno, designation, start_time, end_time, designation_fr, designation_en
 - cal.Event : id, modified, created, project, start_date, start_time, end_date, end_time, build_time, build_method, user, assigned_to, owner_type, owner_id, summary, description, access_class, sequence, auto_type, priority, event_type, transparent, room, state
 - cal.EventPolicy : id, start_date, start_time, end_date, end_time, name, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_events, event_type, name_fr, name_en
-- cal.EventType : id, ref, seqno, name, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, force_guest_states, start_date, event_label, max_conflicting, max_days, transparent, planner_column, default_duration, invite_client, name_fr, name_en, event_label_fr, event_label_en, esf_field
+- cal.EventType : id, ref, seqno, name, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, force_guest_states, fill_presences, start_date, event_label, max_conflicting, max_days, transparent, planner_column, default_duration, invite_client, name_fr, name_en, event_label_fr, event_label_en, esf_field
 - cal.Guest : id, event, partner, role, state, remark, waiting_since, busy_since, gone_since
 - cal.GuestRole : id, ref, name, name_fr, name_en
 - cal.RecurrentEvent : id, start_date, start_time, end_date, end_time, name, user, every_unit, every, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_events, event_type, description, name_fr, name_en
@@ -1042,7 +1042,7 @@ Here is the output of :func:`walk_menu_items
 - Büro --> Mein E-Mail-Ausgang : 1
 - Büro --> Meine Ereignisse/Notizen : 9
 - Büro --> Meine Datenkontrollliste : 0
-- Kalender --> Meine Termine : 4
+- Kalender --> Meine Termine : 6
 - Kalender --> Überfällige Termine : 37
 - Kalender --> Meine unbestätigten Termine : 3
 - Kalender --> Meine Aufgaben : 1
@@ -1050,7 +1050,7 @@ Here is the output of :func:`walk_menu_items
 - Kalender --> Meine Anwesenheiten : 1
 - Kalender --> Meine überfälligen Termine : 3
 - Empfang --> Klienten : 30
-- Empfang --> Termine heute : 3
+- Empfang --> Termine heute : 4
 - Empfang --> Wartende Besucher : 8
 - Empfang --> Beschäftigte Besucher : 4
 - Empfang --> Gegangene Besucher : 7
@@ -1105,7 +1105,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Kalender --> Räume : 1
 - Konfigurierung --> Kalender --> Regelmäßige Ereignisse : 16
 - Konfigurierung --> Kalender --> Gastrollen : 5
-- Konfigurierung --> Kalender --> Kalendereintragsarten : 12
+- Konfigurierung --> Kalender --> Kalendereintragsarten : 13
 - Konfigurierung --> Kalender --> Wiederholungsregeln : 7
 - Konfigurierung --> Kalender --> Externe Kalender : 1
 - Konfigurierung --> Kalender --> Tagesplanerzeilen : 4
@@ -1162,7 +1162,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> All dashboard widgets : 1
 - Explorer --> System --> Datenbankmodelle : 143
 - Explorer --> System --> Datentests : 17
-- Explorer --> System --> Datenprobleme : 64
+- Explorer --> System --> Datenprobleme : 65
 - Explorer --> Eigenschaften --> Eigenschaften : 24
 - Explorer --> Büro --> Auszüge : 69
 - Explorer --> Büro --> Uploads : 12
@@ -1171,7 +1171,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Büro --> Anhänge : 1
 - Explorer --> Büro --> Ereignisse/Notizen : 112
 - Explorer --> Büro --> Einfügetexte : 3
-- Explorer --> Kalender --> Kalendereinträge : 301
+- Explorer --> Kalender --> Kalendereinträge : 311
 - Explorer --> Kalender --> Aufgaben : 36
 - Explorer --> Kalender --> Anwesenheiten : 620
 - Explorer --> Kalender --> Abonnements : 10

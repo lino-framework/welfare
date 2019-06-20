@@ -200,6 +200,7 @@ lequel seront totalisés les heures.
 ======================================== ======================================== =============================== ======================== ==============================
  Désignation                              Désignation (de)                         Désignation (en)                Inviter le bénéficiare   Champ FSE
 ---------------------------------------- ---------------------------------------- ------------------------------- ------------------------ ------------------------------
+ Absences                                 Absences                                 Absences                        Non
  Atelier                                  Atelier                                  Workshop                        Non
  Consultations avec le bénéficiaire       Beratungen mit Klient                    Consultations with client       Non
  Informational meetings                   Informational meetings                   Informational meetings          Oui                      S.I.S. agréé

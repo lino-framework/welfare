@@ -167,9 +167,9 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         ...
  cal.DailyPlannerRow            cal.DailyPlannerRows            8         3
- cal.Event                      cal.OneEvent                    24        538
+ cal.Event                      cal.OneEvent                    24        548
  cal.EventPolicy                cal.EventPolicies               20        6
- cal.EventType                  cal.EventTypes                  26        12
+ cal.EventType                  cal.EventTypes                  27        13
  cal.Guest                      cal.Guests                      9         578
  cal.GuestRole                  cal.GuestRoles                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15
@@ -876,7 +876,7 @@ Here is the output of :func:`walk_menu_items
 - Bureau --> Mon courrier sortant : 1
 - Bureau --> Mes Observations : 10
 - Bureau --> Mes problèmes de données : 0
-- Calendrier --> Mes rendez-vous : 5
+- Calendrier --> Mes rendez-vous : 6
 - Calendrier --> Rendez-vous dépassés : 74
 - Calendrier --> Mes rendez-vous à confirmer : 3
 - Calendrier --> Mes tâches : 1
@@ -884,7 +884,7 @@ Here is the output of :func:`walk_menu_items
 - Calendrier --> Mes présences : 1
 - Calendrier --> Mes rendez-vous dépassés : 2
 - Réception --> Bénéficiaires : 30
-- Réception --> Rendez-vous aujourd'hui : 3
+- Réception --> Rendez-vous aujourd'hui : 4
 - Réception --> Salle d'attente : 8
 - Réception --> Visiteurs occupés : 4
 - Réception --> Visiteurs repartis : 7
@@ -934,7 +934,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Calendrier --> Locaux : 1
 - Configuration --> Calendrier --> Évènements periodiques : 16
 - Configuration --> Calendrier --> Rôles de participants : 5
-- Configuration --> Calendrier --> Types d'entrée calendrier : 13
+- Configuration --> Calendrier --> Types d'entrée calendrier : 14
 - Configuration --> Calendrier --> Règles de récurrence : 7
 - Configuration --> Calendrier --> Calendriers externes : 1
 - Configuration --> Calendrier --> Lignes de planificateur : 4
@@ -999,7 +999,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Bureau --> Pièces jointes : 1
 - Explorateur --> Bureau --> Observations : 112
 - Explorateur --> Bureau --> Text Field Templates : 3
-- Explorateur --> Calendrier --> Entrées calendrier : 333
+- Explorateur --> Calendrier --> Entrées calendrier : 343
 - Explorateur --> Calendrier --> Tâches : 35
 - Explorateur --> Calendrier --> Présences : 579
 - Explorateur --> Calendrier --> Abonnements : 10
