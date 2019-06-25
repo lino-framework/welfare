@@ -1163,7 +1163,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> All dashboard widgets : 1
 - Explorer --> System --> Datenbankmodelle : 143
-- Explorer --> System --> Datentests : 17
+- Explorer --> System --> Datentests : 18
 - Explorer --> System --> Datenprobleme : 65
 - Explorer --> Eigenschaften --> Eigenschaften : 24
 - Explorer --> Büro --> Auszüge : 69

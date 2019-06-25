@@ -992,7 +992,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> Changes : 0
 - Explorateur --> Système --> All dashboard widgets : 1
 - Explorateur --> Système --> Types de contenu : 136
-- Explorateur --> Système --> Tests de données : 13
+- Explorateur --> Système --> Tests de données : 14
 - Explorateur --> Système --> Problèmes de données : 0
 - Explorateur --> Bureau --> Extraits : 71
 - Explorateur --> Bureau --> Fichiers téléchargés : 12

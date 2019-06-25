@@ -56,6 +56,7 @@ checkers.
  pcsw.IdentityChecker                    Check for valid identification
  printing.CachedPrintableChecker         Check for missing target files
  sepa.BankAccountChecker                 Check for partner mismatches in bank accounts
+ system.BleachChecker                    Find unbleached html content
 ======================================= ===================================================
 <BLANKLINE>
 
