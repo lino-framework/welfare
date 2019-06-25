@@ -259,6 +259,7 @@ see it.
 - cal.EntriesByClient.duplicate : visible for admin 910
 - cal.EntriesByController.duplicate : visible for admin 910
 - cal.EntriesByDay.duplicate : visible for admin 910
+- cal.EntriesByGuest.duplicate : visible for admin 910
 - cal.EntriesByProject.duplicate : visible for admin 910
 - cal.EntriesByRoom.duplicate : visible for admin 910
 - cal.EntriesByType.duplicate : visible for admin 910

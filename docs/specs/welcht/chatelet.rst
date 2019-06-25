@@ -362,6 +362,7 @@ Each window layout defines a given set of fields.
 - cal.Calendars.insert : name, name_nl, name_de, name_en, color
 - cal.DailyView.detail : navigation, PlannerByDay
 - cal.EntriesByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
+- cal.EntriesByGuest.insert : start_date, start_time, end_time, summary, event_type
 - cal.EntriesByProject.insert : start_date, start_time, end_time, summary, event_type
 - cal.EventTypes.detail : name, name_nl, name_de, name_en, event_label, event_label_nl, event_label_de, event_label_en, planner_column, max_conflicting, max_days, esf_field, email_template, id, all_rooms, locks_user, invite_client, is_appointment, attach_to_email
 - cal.EventTypes.insert : name, name_nl, name_de, name_en, invite_client
@@ -567,6 +568,7 @@ Each window layout is **viewable** by a given set of user types.
 - cal.Calendars.insert : visible for 110 120 410 420 admin 910
 - cal.DailyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cal.EntriesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- cal.EntriesByGuest.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByProject.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EventTypes.detail : visible for 110 120 410 420 admin 910
 - cal.EventTypes.insert : visible for 110 120 410 420 admin 910
