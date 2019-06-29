@@ -31,7 +31,7 @@ it was the first Lino that went into production in 2010.
 - 142 models
 - 42 user roles
 - 16 user types
-- 545 views
+- 546 views
 - 29 dialog actions
 <BLANKLINE>
 
@@ -497,9 +497,9 @@ Each window layout defines a given set of fields.
 - b2c.Transactions.detail : statement, seqno, booking_date, value_date, amount, remote_account, remote_bic, eref, txcd_text, remote_owner, remote_owner_address, remote_owner_city, remote_owner_postalcode, remote_owner_country_code, message
 - boards.Boards.detail : id, name, name_fr, name_en
 - boards.Boards.insert : name, name_fr, name_en
+- cal.CalendarView.detail : navigation_panel
 - cal.Calendars.detail : name, name_fr, name_en, color, id, description
 - cal.Calendars.insert : name, name_fr, name_en, color
-- cal.DailyView.detail : navigation, PlannerByDay
 - cal.EntriesByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
 - cal.EntriesByGuest.insert : start_date, start_time, end_time, summary, event_type
 - cal.EntriesByProject.insert : start_date, start_time, end_time, summary, event_type
@@ -515,7 +515,7 @@ Each window layout defines a given set of fields.
 - cal.Guests.checkin : notify_subject, notify_body, notify_silent
 - cal.Guests.detail : event, client, role, state, remark, workflow_buttons, waiting_since, busy_since, gone_since
 - cal.Guests.insert : event, partner, role
-- cal.MonthlyView.detail : monthlyNavigation, MonthlyPlanner
+- cal.MonthlyView.detail : navigation_panel
 - cal.RecurrentEvents.detail : name, name_fr, name_en, id, user, event_type, start_date, start_time, end_date, end_time, every_unit, every, max_events, monday, tuesday, wednesday, thursday, friday, saturday, sunday, description
 - cal.RecurrentEvents.insert : name, name_fr, name_en, start_date, end_date, every_unit, event_type
 - cal.Rooms.detail : id, name, name_fr, name_en, company, contact_person, display_color, description
@@ -523,7 +523,7 @@ Each window layout defines a given set of fields.
 - cal.Tasks.detail : start_date, due_date, id, workflow_buttons, summary, project, user, delegated, owner, created, modified, description
 - cal.Tasks.insert : summary, user, project
 - cal.TasksByController.insert : summary, start_date, due_date, user, delegated
-- cal.WeeklyView.detail : weeklyNavigation, WeeklyPlanner
+- cal.WeeklyView.detail : navigation_panel
 - cbss.IdentifyPersonRequests.detail : id, person, user, sent, status, printed, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender, environment, ticket, info_messages, debug_messages
 - cbss.IdentifyPersonRequests.insert : person, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender
 - cbss.ManageAccessRequests.detail : id, person, user, sent, status, printed, action, start_date, end_date, purpose, query_register, national_id, sis_card_no, id_card_no, first_name, last_name, birth_date, result, environment, ticket, info_messages, debug_messages
@@ -715,9 +715,9 @@ Each window layout is **viewable** by a given set of user types.
 - b2c.Transactions.detail : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
 - boards.Boards.detail : visible for admin 910
 - boards.Boards.insert : visible for admin 910
+- cal.CalendarView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cal.Calendars.detail : visible for 110 120 410 420 admin 910
 - cal.Calendars.insert : visible for 110 120 410 420 admin 910
-- cal.DailyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cal.EntriesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByGuest.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByProject.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
