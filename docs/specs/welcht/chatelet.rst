@@ -358,9 +358,9 @@ Each window layout defines a given set of fields.
 - art61.Contracts.insert : client, company, type
 - boards.Boards.detail : id, name, name_nl, name_de, name_en
 - boards.Boards.insert : name, name_nl, name_de, name_en
-- cal.CalendarView.detail : navigation_panel
 - cal.Calendars.detail : name, name_nl, name_de, name_en, color, id, description
 - cal.Calendars.insert : name, name_nl, name_de, name_en, color
+- cal.DailyView.detail : navigation_panel
 - cal.EntriesByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
 - cal.EntriesByGuest.insert : start_date, start_time, end_time, summary, event_type
 - cal.EntriesByProject.insert : start_date, start_time, end_time, summary, event_type
@@ -564,9 +564,9 @@ Each window layout is **viewable** by a given set of user types.
 - art61.Contracts.insert : visible for 100 110 120 420 admin 910
 - boards.Boards.detail : visible for admin 910
 - boards.Boards.insert : visible for admin 910
-- cal.CalendarView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cal.Calendars.detail : visible for 110 120 410 420 admin 910
 - cal.Calendars.insert : visible for 110 120 410 420 admin 910
+- cal.DailyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cal.EntriesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByGuest.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByProject.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910

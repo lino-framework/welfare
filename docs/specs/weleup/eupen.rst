@@ -31,7 +31,7 @@ it was the first Lino that went into production in 2010.
 - 142 models
 - 42 user roles
 - 16 user types
-- 546 views
+- 545 views
 - 29 dialog actions
 <BLANKLINE>
 
@@ -497,9 +497,9 @@ Each window layout defines a given set of fields.
 - b2c.Transactions.detail : statement, seqno, booking_date, value_date, amount, remote_account, remote_bic, eref, txcd_text, remote_owner, remote_owner_address, remote_owner_city, remote_owner_postalcode, remote_owner_country_code, message
 - boards.Boards.detail : id, name, name_fr, name_en
 - boards.Boards.insert : name, name_fr, name_en
-- cal.CalendarView.detail : navigation_panel
 - cal.Calendars.detail : name, name_fr, name_en, color, id, description
 - cal.Calendars.insert : name, name_fr, name_en, color
+- cal.DailyView.detail : navigation_panel
 - cal.EntriesByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
 - cal.EntriesByGuest.insert : start_date, start_time, end_time, summary, event_type
 - cal.EntriesByProject.insert : start_date, start_time, end_time, summary, event_type
@@ -715,9 +715,9 @@ Each window layout is **viewable** by a given set of user types.
 - b2c.Transactions.detail : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
 - boards.Boards.detail : visible for admin 910
 - boards.Boards.insert : visible for admin 910
-- cal.CalendarView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cal.Calendars.detail : visible for 110 120 410 420 admin 910
 - cal.Calendars.insert : visible for 110 120 410 420 admin 910
+- cal.DailyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cal.EntriesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByGuest.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByProject.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
