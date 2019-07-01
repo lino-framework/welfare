@@ -61,7 +61,7 @@ for Belgian
     author='Luc Saffre',
     author_email='luc.saffre@gmail.com',
     url="http://welfare.lino-framework.org",
-    license='GNU Affero General Public License v3',
+    license='BSD-2-Clause',
     classifiers="""\
 Programming Language :: Python
 Programming Language :: Python :: 2
@@ -70,7 +70,7 @@ Environment :: Web Environment
 Framework :: Django
 Intended Audience :: Developers
 Intended Audience :: System Administrators
-License :: OSI Approved :: GNU Affero General Public License v3
+License :: OSI Approved :: BSD License
 Natural Language :: English
 Natural Language :: French
 Natural Language :: German
