@@ -157,6 +157,7 @@ fr
  Mélanie Mélard   `MEESSEN Melissa (147) <Detail>`__                                    Sans données eID ou document identifiant alternatif.       Check for valid identification
  Mélanie Mélard   `RADERMACHER Alfons (153) <Detail>`__                                 Sans données eID ou document identifiant alternatif.       Check for valid identification
  Mélanie Mélard   `RADERMACHER Guido (159) <Detail>`__                                  Sans données eID ou document identifiant alternatif.       Check for valid identification
+ Mélanie Mélard   `BRECHT Bernd (177) <Detail>`__                                       Sans données eID ou document identifiant alternatif.       Check for valid identification
  Mélanie Mélard   `KELLER Karl (178) <Detail>`__                                        Sans données eID ou document identifiant alternatif.       Check for valid identification
 ================ ===================================================================== ========================================================== ========================================
 <BLANKLINE>

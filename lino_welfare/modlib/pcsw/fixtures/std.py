@@ -30,9 +30,9 @@ from lino.api.dd import babelkw
 from lino.api import dd, rt
 from lino.modlib.uploads.choicelists import Shortcuts
 
-UPLOADTYPE_RESIDENCE_PERMIT = 1
-UPLOADTYPE_WORK_PERMIT = 2
-UPLOADTYPE_DRIVING_LICENSE = 3
+UPLOADTYPE_RESIDENCE_PERMIT = 2
+UPLOADTYPE_WORK_PERMIT = 3
+UPLOADTYPE_DRIVING_LICENSE = 4
 
 
 def uploads_objects():

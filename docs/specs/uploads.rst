@@ -50,16 +50,17 @@ This is the list of upload types:
 ==== ============================ ======== ================ ============= ========================= ====================== ============================
  ID   Bezeichnung                  Wanted   Upload-Bereich   Max. number   Ablaufwarnung (Einheit)   Ablaufwarnung (Wert)   Upload shortcut
 ---- ---------------------------- -------- ---------------- ------------- ------------------------- ---------------------- ----------------------------
- 2    Arbeitserlaubnis             Ja       Allgemein        1             monatlich                 2
- 1    Aufenthaltserlaubnis         Ja       Allgemein        1             monatlich                 2
- 7    Behindertenausweis           Nein     Allgemein        -1                                      1
- 8    Diplom                       Ja       Allgemein        -1                                      1
- 3    Führerschein                 Ja       Allgemein        1             monatlich                 1
- 4    Identifizierendes Dokument   Ja       Allgemein        1             monatlich                 1                      Identifizierendes Dokument
- 9    Personalausweis              Nein     Allgemein        -1                                      1
- 5    Vertrag                      Nein     Allgemein        -1                                      1
- 6    Ärztliche Bescheinigung      Nein     Allgemein        -1                                      1
-                                                             **-1**                                  **11**
+ 3    Arbeitserlaubnis             Ja       Allgemein        1             monatlich                 2
+ 2    Aufenthaltserlaubnis         Ja       Allgemein        1             monatlich                 2
+ 8    Behindertenausweis           Nein     Allgemein        -1                                      1
+ 9    Diplom                       Ja       Allgemein        -1                                      1
+ 4    Führerschein                 Ja       Allgemein        1             monatlich                 1
+ 5    Identifizierendes Dokument   Ja       Allgemein        1             monatlich                 1                      Identifizierendes Dokument
+ 10   Personalausweis              Nein     Allgemein        -1                                      1
+ 1    Source document              Ja       Allgemein        1             monatlich                 2
+ 6    Vertrag                      Nein     Allgemein        -1                                      1
+ 7    Ärztliche Bescheinigung      Nein     Allgemein        -1                                      1
+                                                             **0**                                   **13**
 ==== ============================ ======== ================ ============= ========================= ====================== ============================
 <BLANKLINE>
 
@@ -154,8 +155,8 @@ This is the MyExpiringUploads table for :ref:`hubert`:
 ========================= ====================== ====================== =================== ============ ============ =======
  Klient                    Upload-Art             Beschreibung           Hochgeladen durch   Gültig von   Gültig bis   Nötig
 ------------------------- ---------------------- ---------------------- ------------------- ------------ ------------ -------
+ AUSDEMWALD Alfons (116)   Source document        Source document        Hubert Huppertz                  17.05.15     Ja
  AUSDEMWALD Alfons (116)   Aufenthaltserlaubnis   Aufenthaltserlaubnis   Hubert Huppertz                  17.05.15     Ja
- AUSDEMWALD Alfons (116)   Arbeitserlaubnis       Arbeitserlaubnis       Hubert Huppertz                  17.05.15     Ja
 ========================= ====================== ====================== =================== ============ ============ =======
 <BLANKLINE>
 
@@ -173,15 +174,14 @@ Shortcut fields
 
 >>> id_document = uploads.UploadType.objects.get(shortcut=uploads.Shortcuts.id_document)
 >>> rt.show(uploads.UploadsByType, id_document)
-=================== ====================== ============================ ======= ============ ============ ============================
- Hochgeladen durch   Klient                 Upload-Art                   Datei   Gültig von   Gültig bis   Beschreibung
-------------------- ---------------------- ---------------------------- ------- ------------ ------------ ----------------------------
- Theresia Thelen     DERICUM Daniel (121)   Identifizierendes Dokument                        25.05.14     Identifizierendes Dokument
- Theresia Thelen     DERICUM Daniel (121)   Identifizierendes Dokument                        22.04.14     Identifizierendes Dokument
- Hubert Huppertz     BRECHT Bernd (177)     Identifizierendes Dokument                        27.05.15     Identifizierendes Dokument
-=================== ====================== ============================ ======= ============ ============ ============================
+=================== ========================= ============================ ======= ============ ============ ============================
+ Hochgeladen durch   Klient                    Upload-Art                   Datei   Gültig von   Gültig bis   Beschreibung
+------------------- ------------------------- ---------------------------- ------- ------------ ------------ ----------------------------
+ Theresia Thelen     DERICUM Daniel (121)      Identifizierendes Dokument                        25.05.14     Identifizierendes Dokument
+ Theresia Thelen     DERICUM Daniel (121)      Identifizierendes Dokument                        22.04.14     Identifizierendes Dokument
+ Hubert Huppertz     COLLARD Charlotte (118)   Identifizierendes Dokument                        06.06.15     Identifizierendes Dokument
+=================== ========================= ============================ ======= ============ ============ ============================
 <BLANKLINE>
-
 
 
 Let's have a closer look at the `id_document` shortcut field for
@@ -242,7 +242,7 @@ It has 3 keys:
 >>> d.base_params['mt'] #doctest: +ELLIPSIS
 5...
 >>> d.base_params['type']
-4
+5
 >>> d.base_params['mk']
 121
 
@@ -280,13 +280,14 @@ summary view of `UploadsByClient` returns for this client.
 >>> soup = get_json_soup('rolf', 'pcsw/Clients/177', 'uploads_UploadsByClient')
 >>> print(soup.get_text())
 ... #doctest: +NORMALIZE_WHITESPACE
-Aufenthaltserlaubnis: Arbeitserlaubnis: Führerschein: 3Identifizierendes Dokument: 4Diplom:
+Source document: Aufenthaltserlaubnis: Arbeitserlaubnis: 3Führerschein: 4Identifizierendes Dokument: Diplom:
 
 The HTML fragment contains five links:
 
 >>> links = soup.find_all('a')
 >>> len(links)
-5
+6
+
 
 The first link would run the insert action on `UploadsByClient`, with
 the owner set to this client
@@ -355,9 +356,6 @@ Einfügen in Uploads von BRECHT Bernd (177) (Ist aktiv)
 >>> data_record_data = rmu(d.data_record['data'])
 >>> pprint(data_record_data, width=200)
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
-{'description': '',
-'disabled_fields': {'mimetype': True},
-'end_date': None,
-'file': '',
-'type': 'Aufenthaltserlaubnis',
+{'description': '', 'disabled_fields': {'mimetype': True},
+'end_date': None, 'file': '', 'type': 'Source document',
 'typeHidden': 1}

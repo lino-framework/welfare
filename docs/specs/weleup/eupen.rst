@@ -574,7 +574,7 @@ Each window layout defines a given set of fields.
 - excerpts.ExcerptTypes.detail : id, name, name_fr, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_fr, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
-- finan.BankStatements.detail : entry_date, number, balance1, balance2, workflow_buttons, ItemsByBankStatement, journal, accounting_period, user, id, item_account, item_remark, MovementsByVoucher
+- finan.BankStatements.detail : entry_date, number, balance1, balance2, narration, workflow_buttons, uploads_UploadsByController, ItemsByBankStatement, journal, accounting_period, user, id, item_account, item_remark, MovementsByVoucher
 - finan.BankStatements.insert : entry_date, balance1
 - finan.DisbursementOrders.detail : journal, number, voucher_date, entry_date, accounting_period, item_account, total, workflow_buttons, narration, item_remark, ItemsByDisbursementOrder, state, user, id, MovementsByVoucher
 - finan.DisbursementOrdersByJournal.insert : item_account, voucher_date
@@ -1099,7 +1099,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Eigenschaften --> Hindernisse : 0
 - Konfigurierung --> Büro --> Auszugsarten : 22
 - Konfigurierung --> Büro --> Dateibibliotheken : 1
-- Konfigurierung --> Büro --> Upload-Arten : 10
+- Konfigurierung --> Büro --> Upload-Arten : 11
 - Konfigurierung --> Büro --> Notizarten : 14
 - Konfigurierung --> Büro --> Ereignisarten : 11
 - Konfigurierung --> Büro --> Meine Einfügetexte : 1
@@ -1164,7 +1164,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> All dashboard widgets : 1
 - Explorer --> System --> Datenbankmodelle : 143
 - Explorer --> System --> Datentests : 18
-- Explorer --> System --> Datenprobleme : 65
+- Explorer --> System --> Datenprobleme : 66
 - Explorer --> Eigenschaften --> Eigenschaften : 24
 - Explorer --> Büro --> Auszüge : 69
 - Explorer --> Büro --> Uploads : 12
@@ -1174,7 +1174,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Büro --> Ereignisse/Notizen : 112
 - Explorer --> Büro --> Einfügetexte : 3
 - Explorer --> Kalender --> Kalendereinträge : 311
-- Explorer --> Kalender --> Aufgaben : 36
+- Explorer --> Kalender --> Aufgaben : 37
 - Explorer --> Kalender --> Anwesenheiten : 620
 - Explorer --> Kalender --> Abonnements : 10
 - Explorer --> Kalender --> Termin-Zustände : 5
