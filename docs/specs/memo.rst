@@ -5,23 +5,20 @@
 Lino Welfare memo commands
 ==========================
 
-.. doctest init:
-
-    >>> from lino import startup
-    >>> startup('lino_welfare.projects.gerd.settings.demo')
-    >>> from lino.api.doctest import *
 
 
+.. contents::
+   :depth: 1
+   :local:
+
+.. include:: /../docs/shared/include/tested.rst
 
 
-are rich HTML text
-fields which can contain simple HTML formatting like links, tables,
-headers, enumerations.
+>>> from lino import startup
+>>> startup('lino_welfare.projects.gerd.settings.demo')
+>>> from lino.api.doctest import *
 
-And additionally they can contain :mod:`memo <lino.utils.memo>` markup
-commands, i.e. text of the form ``[foo bar baz]``. These memo commands
-are going to be "rendered" when this text is being displayed at
-certain places.
+
 
 Examples:
 
@@ -63,14 +60,12 @@ Usage examples:
 note
 ======
 
-Refer to a ticket. Usage example: 
+Refer to a note. Usage example:
 
   See ``[note 1]``.
 
-Note that the current renderer decides how to render the link. For
-example, the default front end :mod:`lino.modlib.extjs` (or
-:mod:`lino_extjs6.extjs6`, depending on our :attr:`default_ui
-<lino.core.site.Site.default_ui>` setting) will render it like this:
+Note that the current renderer decides how to render the link. For example, the
+default front end :mod:`lino.modlib.extjs` will render it like this:
 
 >>> ses = rt.login('robin',
 ...     renderer=settings.SITE.kernel.default_ui.renderer)

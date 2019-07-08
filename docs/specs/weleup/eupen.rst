@@ -27,7 +27,7 @@ it was the first Lino that went into production in 2010.
 
 >>> print(analyzer.show_complexity_factors())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- 63 plugins
+- 64 plugins
 - 142 models
 - 42 user roles
 - 16 user types
