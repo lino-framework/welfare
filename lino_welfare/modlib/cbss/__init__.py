@@ -21,6 +21,7 @@ Technical specs see :ref:`weleup`.
 
 """
 
+import six
 from lino import ad
 from django.utils.translation import ugettext_lazy as _
 
@@ -50,6 +51,12 @@ class Plugin(ad.Plugin):
     if installed.
 
     """
+
+    def get_requirements(self, site):
+        if six.PY2:
+            yield 'suds'
+        else:
+            yield 'suds-py3'
 
     def get_used_libs(self, html=None):
         try:
