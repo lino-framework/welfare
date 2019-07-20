@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2018 Rumma & Ko Ltd
+# Copyright 2008-2019 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -270,39 +270,40 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
                     3, self, user, self.work_permit_suspended_until,
                     _("work permit suspension ends in 1 month"), 1, M)
 
-    @classmethod
-    def get_reminders(model, ui, user, today, back_until):
-        q = Q(coach1__exact=user) | Q(coach2__exact=user)
-
-        def find_them(fieldname, today, delta, msg, **linkkw):
-            filterkw = {fieldname + '__lte': today + delta}
-            if back_until is not None:
-                filterkw.update({
-                    fieldname + '__gte': back_until
-                })
-            for obj in model.objects.filter(q, **filterkw).order_by(fieldname):
-                linkkw.update(fmt='detail')
-                ba = obj.get_detail_action()
-                url = ui.get_detail_url(ba.actor, obj.pk, **linkkw)
-                html = '<a href="%s">%s</a>&nbsp;: %s' % (
-                    url, str(obj), cgi.escape(msg))
-                yield ReminderEntry(getattr(obj, fieldname), html)
-
-        for o in find_them(
-            'card_valid_until', today, datetime.timedelta(days=30),
-                _("eID card expires"), tab=0):
-            yield o
-        for o in find_them(
-            'unavailable_until', today, datetime.timedelta(days=30),
-                _("becomes available again"), tab=1):
-            yield o
-        for o in find_them(
-            'work_permit_suspended_until', today, datetime.timedelta(days=30),
-                _("work permit suspension ends"), tab=1):
-            yield o
-        for o in find_them('coached_until', today, datetime.timedelta(days=30),
-                           _("coaching ends"), tab=1):
-            yield o
+    # removed 20190720 as it was dead code
+    # @classmethod
+    # def get_reminders(model, ui, user, today, back_until):
+    #     q = Q(coach1__exact=user) | Q(coach2__exact=user)
+    #
+    #     def find_them(fieldname, today, delta, msg, **linkkw):
+    #         filterkw = {fieldname + '__lte': today + delta}
+    #         if back_until is not None:
+    #             filterkw.update({
+    #                 fieldname + '__gte': back_until
+    #             })
+    #         for obj in model.objects.filter(q, **filterkw).order_by(fieldname):
+    #             linkkw.update(fmt='detail')
+    #             ba = obj.get_detail_action()
+    #             url = ui.get_detail_url(ba.actor, obj.pk, **linkkw)
+    #             html = '<a href="%s">%s</a>&nbsp;: %s' % (
+    #                 url, str(obj), cgi.escape(msg))
+    #             yield ReminderEntry(getattr(obj, fieldname), html)
+    #
+    #     for o in find_them(
+    #         'card_valid_until', today, datetime.timedelta(days=30),
+    #             _("eID card expires"), tab=0):
+    #         yield o
+    #     for o in find_them(
+    #         'unavailable_until', today, datetime.timedelta(days=30),
+    #             _("becomes available again"), tab=1):
+    #         yield o
+    #     for o in find_them(
+    #         'work_permit_suspended_until', today, datetime.timedelta(days=30),
+    #             _("work permit suspension ends"), tab=1):
+    #         yield o
+    #     for o in find_them('coached_until', today, datetime.timedelta(days=30),
+    #                        _("coaching ends"), tab=1):
+    #         yield o
 
     def get_skills_set(self):
         return self.personproperty_set.filter(

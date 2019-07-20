@@ -172,17 +172,16 @@ removed at the same time:
 >>> ar = contacts.Partners.request_from(ses)
 >>> ar.renderer = settings.SITE.kernel.extjs_renderer
 >>> print(tostring(ar.obj2html(p)))
-<a href="javascript:Lino.contacts.Persons.detail.run(null,{ &quot;record_id&quot;: 178 })">Herr Karl KELLER</a>
+<a href="/api/contacts/Persons/178">Herr Karl KELLER</a>
 
 >>> print(tostring(ar.obj2html(cli)))
-<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 178 })">KELLER Karl (178)</a>
+<a href="/api/pcsw/Clients/178">KELLER Karl (178)</a>
 >>> print(settings.SITE.kernel.extjs_renderer.instance_handler(ar, cli, None))
 Lino.pcsw.Clients.detail.run(null,{ "record_id": 178 })
 >>> print(tostring(p.get_mti_buttons(ar)))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 <b>Person</b>, <a
-href="javascript:Lino.pcsw.Clients.detail.run(null,{
-&quot;record_id&quot;: 178 })">Klient</a> [<a
+href="/api/pcsw/Clients/178">Klient</a> [<a
 ...javascript:Lino.contacts.Partners.del_client(null,true,178,{ })...">❌</a>]
 
 

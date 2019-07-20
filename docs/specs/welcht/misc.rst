@@ -396,11 +396,11 @@ Test whether everybody can display the detail of a client:
 >>> for u in 'robin', 'alicia', 'theresia', 'caroline', 'kerstin':
 ...     print(tostring(rt.login(u, renderer=r).obj2html(o)))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
-<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
-<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
-<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
-<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 177 })">BRECHT Bernd (177)</a>
+<a href="/api/pcsw/Clients/177">BRECHT Bernd (177)</a>
+<a href="/api/pcsw/Clients/177">BRECHT Bernd (177)</a>
+<a href="/api/pcsw/Clients/177">BRECHT Bernd (177)</a>
+<a href="/api/pcsw/Clients/177">BRECHT Bernd (177)</a>
+<a href="/api/pcsw/Clients/177">BRECHT Bernd (177)</a>
 
 Miscellaneous tests
 ===================

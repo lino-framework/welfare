@@ -70,7 +70,7 @@ default front end :mod:`lino.modlib.extjs` will render it like this:
 >>> ses = rt.login('robin',
 ...     renderer=settings.SITE.kernel.default_ui.renderer)
 >>> print(ses.parse_memo("See [note 1]."))
-See <a href="javascript:Lino.notes.Notes.detail.run(null,{ &quot;record_id&quot;: 1 })">#1</a>.
+See <a href="/api/notes/Notes/1">#1</a>.
 
 While the plain text renderer will render:
 
