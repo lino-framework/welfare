@@ -5,8 +5,8 @@
 The Lino Welfare "Eupen" variant
 ================================
 
-    
-.. contents:: 
+
+.. contents::
    :local:
    :depth: 2
 
@@ -619,7 +619,7 @@ Each window layout defines a given set of fields.
 - ledger.Journals.detail : name, name_fr, name_en, ref, journal_group, voucher_type, trade_type, seqno, id, account, partner, build_method, template, uploads_volume, dc, force_sequence, yearly_numbering, auto_fill_suggestions, auto_check_clearings, must_declare, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, journal_group, voucher_type
 - ledger.Journals.merge_row : merge_to, ledger_MatchRule, reason
-- ledger.PaymentTerms.detail : ref, months, days, end_of_month, name, name_fr, name_en, printed_text, printed_text_fr, printed_text_en
+- ledger.PaymentTerms.detail : ref, months, days, end_of_month, worker, name, name_fr, name_en, printed_text, printed_text_fr, printed_text_en
 - ledger.PaymentTerms.merge_row : merge_to, reason
 - newcomers.AvailableCoachesByClient.assign_coach : notify_subject, notify_body, notify_silent
 - newcomers.Faculties.detail : id, name, name_fr, name_en, weight
@@ -1254,5 +1254,3 @@ Some choices lists:
 >>> fields = 'count rows'
 >>> demo_get('rolf', 'choices/cv/SkillsByPerson/property', fields, 6, **kw)
 >>> demo_get('rolf', 'choices/cv/ObstaclesByPerson/property', fields, 15, **kw)
-
-

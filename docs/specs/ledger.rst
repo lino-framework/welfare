@@ -1,5 +1,5 @@
 .. doctest docs/specs/ledger.rst
-   
+
 .. _welfare.specs.ledger:
 
 ===========================
@@ -36,7 +36,7 @@ This document extends the following specifications:
 
 This document is base for the following specifications:
 
-- :doc:`vatless` 
+- :doc:`vatless`
 - :doc:`finan`.
 
 
@@ -49,7 +49,7 @@ Implementation notes
 ====================
 
 This project integrates several plugins into Lino Welfare which are
-also used by :ref:`cosi`: 
+also used by :ref:`cosi`:
 
 - :mod:`lino_welfare.modlib.ledger` is a thin extension of
   :mod:`lino_xl.lib.ledger`,
@@ -181,6 +181,7 @@ accounting reports (:mod:`lino_xl.lib.sheets`).
  **   4511 Rückzahlbare Mehrwertsteuer**                  Nein              Nein            4511
  **   4512 Abziehbare Mehrwertsteuer**                    Nein              Nein            4512
  **   4513 Deklarierte Mehrwertsteuer**                   Nein              Nein            4513
+ **   4550 Internal clearings**                           Ja                Ja              4550
  **   4600 Steuerämter**                                  Ja                Ja              4600
  **   4800 Granted aids**                                 Ja                Ja              4800
  **   4900 Wartekonto**                                   Ja                Ja              4900
@@ -260,7 +261,7 @@ Lino Welfare uses the following **voucher types**:
 
 Invoices are partner-related vouchers (often we simply say **partner
 voucher**). That is, you select one partner per voucher. Every
-partner-related voucher points to to one and only one partner. 
+partner-related voucher points to to one and only one partner.
 
 The other voucher types (Bank statements etc) are called **financial
 vouchers**. Financial vouchers have their individual *entries*
@@ -338,7 +339,7 @@ The state of a voucher
     >>> ar = rt.login("robin").spawn(vatless.Invoices)
     >>> print(tostring(ar.get_data_value(obj, 'workflow_buttons')))
     <span><b>Registriert</b> → [Entwurf]</span>
-    
+
 
 Movements
 =========
@@ -362,5 +363,3 @@ Users can consult the movements of a given general account.
                             **Saldo 332.78 (6 Bewegungen)**                                  **332,78**
 ========== =============== ================================================================ ============ ======== =======
 <BLANKLINE>
-
-
