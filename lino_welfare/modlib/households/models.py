@@ -69,9 +69,10 @@ class Households(Households):
 
 
 class RefundsByPerson(SiblingsByPerson):
-    column_names = "age:10 gender person_info amount"
+    column_names = "age:10 gender:10 person_info amount"
     child_tariff = Decimal(10)
     adult_tariff = Decimal(20)
+    sum_text_column = 2
 
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount(self, obj, ar):
@@ -141,6 +142,3 @@ def get_household_summary(person, today=None, adult_age=None):
                 "%(count)d child", "%(count)d children", children) % dict(
                 count=children))
     return _(" and ").join(l)
-
-
-

@@ -4,7 +4,7 @@
 <p>
 {% if language == 'de' %}
 Wir bescheinigen hiermit, für folgende Personen die Kosten für den Ankauf von
-Kleidung bis in Höhe von 20 EUR zu übernehmen:
+Kleidung bis in Höhe von 20 € zu übernehmen:
 {% else %}
 Par la présente nous confirmons la prise en charge des achats de
 vêtements jusqu'à un montant de 20 € pour les personnes suivantes:
@@ -16,6 +16,13 @@ vêtements jusqu'à un montant de 20 € pour les personnes suivantes:
 {%- endblock %}
 
 {% block what -%}
+<p>
+{% if language == 'de' %}
+Alle Beträge verstehen sich zzgl. gesetzlicher Mehrwertsteuer.
+{% else %}
+Tous les montants sont mentionnés hors T.V.A.
+{% endif %}
+</p>
 <p>
 {% if language == 'de' %}
 Die Kostenübernahme ist gültig für ein Jahr ab dem {{fdm(obj.start_date)}}.
