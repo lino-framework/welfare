@@ -1120,7 +1120,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> ÖSHZ --> Klientenkontaktarten : 11
 - Konfigurierung --> ÖSHZ --> Dienste : 4
 - Konfigurierung --> ÖSHZ --> Begleitungsbeendigungsgründe : 5
-- Konfigurierung --> Buchhaltung --> Haushaltsartikel : 48
+- Konfigurierung --> Buchhaltung --> Haushaltsartikel : 49
 - Konfigurierung --> Buchhaltung --> Journale : 5
 - Konfigurierung --> Buchhaltung --> Geschäftsjahre : 9
 - Konfigurierung --> Buchhaltung --> Buchungsperioden : 30

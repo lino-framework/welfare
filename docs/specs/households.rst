@@ -1,4 +1,4 @@
-.. doctest docs/specs/households.rst 
+.. doctest docs/specs/households.rst
 .. _welfare.specs.households:
 .. include:: /../docs/shared/include/defs.rst
 
@@ -173,16 +173,16 @@ Mr Paul FRISCH
 
 
 >>> ses.show(households.RefundsByPerson, master_instance=obj)
-==================== ======== ================= ===========
- Age                  Gender   Person            Amount
--------------------- -------- ----------------- -----------
- 46 years             Male     Paul FRISCH       20,00
- 45 years             Female   Petra ZWEITH      20,00
- 16 years             Male     Philippe FRISCH   10,00
- 14 years             Female   Clara FRISCH      10,00
- 12 years             Male     Dennis FRISCH     10,00
- **Total (5 rows)**                              **70,00**
-==================== ======== ================= ===========
+========== ======== ==================== ===========
+ Age        Gender   Person               Amount
+---------- -------- -------------------- -----------
+ 46 years   Male     Paul FRISCH          20,00
+ 45 years   Female   Petra ZWEITH         20,00
+ 16 years   Male     Philippe FRISCH      10,00
+ 14 years   Female   Clara FRISCH         10,00
+ 12 years   Male     Dennis FRISCH        10,00
+                     **Total (5 rows)**   **70,00**
+========== ======== ==================== ===========
 <BLANKLINE>
 
 
@@ -220,22 +220,22 @@ Create relationship as **Father**/**Son** **Adoptive father**/**Adopted son** **
 Here is his :class:`RefundsByPerson` table:
 
 >>> ses.show(households.RefundsByPerson, master_instance=obj)
-==================== ======== ================ ===========
- Age                  Gender   Person           Amount
--------------------- -------- ---------------- -----------
- 46 years             Female   Laura LOSLEVER   20,00
- 45 years             Male     Ludwig FRISCH    20,00
- 12 years             Female   Melba FRISCH     10,00
- 6 years              Female   Irma FRISCH      10,00
- **Total (4 rows)**                             **60,00**
-==================== ======== ================ ===========
+========== ======== ==================== ===========
+ Age        Gender   Person               Amount
+---------- -------- -------------------- -----------
+ 46 years   Female   Laura LOSLEVER       20,00
+ 45 years   Male     Ludwig FRISCH        20,00
+ 12 years   Female   Melba FRISCH         10,00
+ 6 years    Female   Irma FRISCH          10,00
+                     **Total (4 rows)**   **60,00**
+========== ======== ==================== ===========
 <BLANKLINE>
 
 An edge case
 ============
 
 The following edge case failed before 20170206:
-   
+
 >>> ses.show(humanlinks.LinksByHuman)
 <BLANKLINE>
 
@@ -267,31 +267,30 @@ In 2019 Melba is 17, still a child:
 
 >>> settings.SITE.the_demo_date = datetime.date(2019, 5, 22)
 >>> ses.show(households.RefundsByPerson, master_instance=obj)
-==================== ======== ================ ===========
- Age                  Gender   Person           Amount
--------------------- -------- ---------------- -----------
- 51 years             Female   Laura LOSLEVER   20,00
- 50 years             Male     Ludwig FRISCH    20,00
- 17 years             Female   Melba FRISCH     10,00
- 11 years             Female   Irma FRISCH      10,00
- **Total (4 rows)**                             **60,00**
-==================== ======== ================ ===========
+========== ======== ==================== ===========
+ Age        Gender   Person               Amount
+---------- -------- -------------------- -----------
+ 51 years   Female   Laura LOSLEVER       20,00
+ 50 years   Male     Ludwig FRISCH        20,00
+ 17 years   Female   Melba FRISCH         10,00
+ 11 years   Female   Irma FRISCH          10,00
+                     **Total (4 rows)**   **60,00**
+========== ======== ==================== ===========
 <BLANKLINE>
 
 But in 2020 she is 18, now her refunded amount is that of an adult:
 
-
 >>> settings.SITE.the_demo_date = datetime.date(2020, 5, 22)
 >>> ses.show(households.RefundsByPerson, master_instance=obj)
-==================== ======== ================ ===========
- Age                  Gender   Person           Amount
--------------------- -------- ---------------- -----------
- 52 years             Female   Laura LOSLEVER   20,00
- 51 years             Male     Ludwig FRISCH    20,00
- 18 years             Female   Melba FRISCH     20,00
- 12 years             Female   Irma FRISCH      10,00
- **Total (4 rows)**                             **70,00**
-==================== ======== ================ ===========
+========== ======== ==================== ===========
+ Age        Gender   Person               Amount
+---------- -------- -------------------- -----------
+ 52 years   Female   Laura LOSLEVER       20,00
+ 51 years   Male     Ludwig FRISCH        20,00
+ 18 years   Female   Melba FRISCH         20,00
+ 12 years   Female   Irma FRISCH          10,00
+                     **Total (4 rows)**   **70,00**
+========== ======== ==================== ===========
 <BLANKLINE>
 
 Note: Before 20190326 above table gave an amount of 10,00 for Melba because of
@@ -425,4 +424,3 @@ Mr Bruno BRAUN (Child)
 
 >>> print(Member(person=person, role=households.MemberRoles.head))
 Mr Bruno BRAUN (Head of household)
-
