@@ -1045,7 +1045,7 @@ Here is the output of :func:`walk_menu_items
 - Büro --> Meine Ereignisse/Notizen : 9
 - Büro --> Meine Datenkontrollliste : 0
 - Kalender --> Meine Termine : 6
-- Kalender --> Überfällige Termine : 37
+- Kalender --> Überfällige Termine : 81
 - Kalender --> Meine unbestätigten Termine : 3
 - Kalender --> Meine Aufgaben : 1
 - Kalender --> Meine Gäste : 1
@@ -1173,7 +1173,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Büro --> Anhänge : 1
 - Explorer --> Büro --> Ereignisse/Notizen : 112
 - Explorer --> Büro --> Einfügetexte : 3
-- Explorer --> Kalender --> Kalendereinträge : 311
+- Explorer --> Kalender --> Kalendereinträge : 358
 - Explorer --> Kalender --> Aufgaben : 37
 - Explorer --> Kalender --> Anwesenheiten : 620
 - Explorer --> Kalender --> Abonnements : 10
@@ -1194,7 +1194,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> ÖSHZ --> Klientenkontakte : 15
 - Explorer --> ÖSHZ --> Standard-Klientenkontaktarten : 2
 - Explorer --> ÖSHZ --> Begleitungen : 91
-- Explorer --> Buchhaltung --> Gemeinkonten : 22
+- Explorer --> Buchhaltung --> Gemeinkonten : 23
 - Explorer --> Buchhaltung --> Begleichungsregeln : 3
 - Explorer --> Buchhaltung --> Belege : 56
 - Explorer --> Buchhaltung --> Belegarten : 6
