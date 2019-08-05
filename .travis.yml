@@ -29,7 +29,7 @@ script:
   - cd lino_welfare/projects/gerd/
   - python manage.py makemigrations
   - python manage.py migrate
-#  - inv cov --no-html
+  - inv cov --no-html
 #  - inv prep test
 #  - python setup.py test
 
