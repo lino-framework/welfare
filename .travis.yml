@@ -26,7 +26,10 @@ install:
 script:
   - export LINO_CACHE_ROOT=$TRAVIS_BUILD_DIR/lino_cache
   - mkdir $LINO_CACHE_ROOT
-  - inv cov --no-html
+  - cd lino_welfare/projects/gerd/
+  - python manage.py makemigrations
+  - python manage.py migrate
+#  - inv cov --no-html
 #  - inv prep test
 #  - python setup.py test
 
