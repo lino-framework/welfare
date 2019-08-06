@@ -54,7 +54,7 @@ class ClientVouchers(PartnerVouchers):
     """
 
 
-class ClientVouchersByJournal(ClientVouchers, ByJournal):
+class ClientVouchersByJournal(ByJournal, ClientVouchers):
     """Shows all simple invoices of a given journal (whose
     :attr:`Journal.voucher_type` must be
     :class:`lino_xl.lib.sales.models.ClientVoucher`).
@@ -66,8 +66,7 @@ class ClientVouchersByJournal(ClientVouchers, ByJournal):
     project
     date amount
     """
-    order_by = ["-number"]
+    # order_by = ["-number"]
 
 
 VoucherTypes.add_item_lazy(ClientVouchersByJournal)
-
