@@ -6,6 +6,8 @@ python:
   - 3.7
 # env:
 #   - DJANGO=1.11.13
+os: linux
+sudo: required
 
 before_install:
   - sudo apt-get update -y
