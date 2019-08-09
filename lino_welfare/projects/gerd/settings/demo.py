@@ -9,6 +9,7 @@ class Site(Site):
     webdav_protocol = 'webdav'
     #beid_protocol = 'beid'
     use_websockets = False
+    # migrations_package = "lino_welfare.projects.gerd.migrations"
 
 SITE = Site(globals())
 # SITE.appy_params.update(raiseOnError=False)
