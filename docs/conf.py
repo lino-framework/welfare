@@ -28,7 +28,7 @@ configure(globals(), 'lino_book.projects.min1.settings.doctests')
 
 intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
-interproject.configure(globals(), 'atelier lino_book')
+interproject.configure(globals(), 'atelier lino_book lino_weleup lino_welcht')
 
 
 # intersphinx_mapping = {}
@@ -241,7 +241,7 @@ latex_documents = [
 #~ show_source = True
 
 #~ srcref_base_uri="http://code.google.com/lino"
-#~ srcref_base_uri="http://code.google.com/p/lino/source/browse/#hg" 
+#~ srcref_base_uri="http://code.google.com/p/lino/source/browse/#hg"
 
 extlinks.update(ticket=('http://bugs.saffre-rumma.net/tickets/Ticket/%s', '#'))
 extlinks.update(lino=('http://www.lino-framework.org%s.html', ''))
@@ -275,4 +275,3 @@ extlinks.update(lino=('http://www.lino-framework.org%s.html', ''))
 # inheritance_graph_attrs = dict(rankdir="TB")
 # inheritance_graph_attrs.update(size='"12.0, 16.0"')
 # inheritance_graph_attrs.update(fontsize=14, ratio='compress')
-
