@@ -65,6 +65,9 @@ from lino_xl.lib.ledger.models import Account
 Account._meta.verbose_name = _("Budgetary article")
 Account._meta.verbose_name_plural = _("Budgetary articles")
 
+from lino_xl.lib.ledger.models import Voucher
+fld = Voucher._meta.get_field('entry_date')
+fld.verbose_name = _("Booking date")
 
 def set_partner_verbose_name(m):
     fld = m._meta.get_field('partner')

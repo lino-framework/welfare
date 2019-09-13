@@ -13,7 +13,7 @@ Financial vouchers in Lino Welfare
 
 This document describes specific aspecs of *financial vouchers* in
 :ref:`welfare`, as implemented by the :mod:`lino_welfare.lib.finan`
-plugin.  
+plugin.
 
 It is based on the following other specifications:
 
@@ -125,4 +125,3 @@ list.  See :ticket:`1985`.
 >>> demo_get(
 ...    'wilfried', 'choices/finan/ItemsByPaymentOrder/match',
 ...    fields, 94, mk=obj.pk, **kw)  #doctest: -SKIP
-
