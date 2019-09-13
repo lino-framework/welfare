@@ -11,6 +11,12 @@
 .. contents::
   :local:
 
+2019-09-13
+==========
+
+New field :attr:`lino_xl.lib.cv.LanguageKnowledge.has_certificate` is a side
+effect of a change in Avanti which might be useful for Welfare as well.
+
 2019-04-16
 ==========
 

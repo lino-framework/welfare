@@ -7,7 +7,7 @@ The Lino Welfare "Châtelet" variant
 ===================================
 
 
-.. contents:: 
+.. contents::
    :local:
    :depth: 2
 
@@ -207,7 +207,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cv.EducationLevel              cv.EducationLevels              8         5
  cv.Experience                  cv.Experiences                  18        30
  cv.Function                    cv.Functions                    7         4
- cv.LanguageKnowledge           cv.LanguageKnowledges           9         114
+ cv.LanguageKnowledge           cv.LanguageKnowledges           10        114
  cv.Obstacle                    cv.Obstacles                    6         20
  cv.ObstacleType                cv.ObstacleTypes                5         4
  cv.Proof                       cv.Proofs                       5         4
@@ -329,7 +329,7 @@ The following table lists information about all *data entry form
 definitions* (called **window layouts**) used by Lino Welfare.  There
 are *detail* layouts, *insert* layouts and *action parameter* layouts.
 
-.. 
+..
    >>> #settings.SITE.catch_layout_exceptions = False
 
 Each window layout defines a given set of fields.
@@ -427,8 +427,8 @@ Each window layout defines a given set of fields.
 - cv.Experiences.detail : person, company, country, city, sector, function, title, status, duration, regime, is_training, start_date, end_date, duration_text, termination_reason, remarks
 - cv.ExperiencesByPerson.insert : start_date, end_date, company, function
 - cv.Functions.detail : id, name, name_nl, name_de, name_en, sector, remark
-- cv.LanguageKnowledgesByPerson.detail : language, native, cef_level, spoken_passively, spoken, written
-- cv.LanguageKnowledgesByPerson.insert : language, native, cef_level, spoken_passively, spoken, written
+- cv.LanguageKnowledgesByPerson.detail : language, native, has_certificate, cef_level, spoken_passively, spoken, written, entry_date
+- cv.LanguageKnowledgesByPerson.insert : language, native, has_certificate, cef_level, spoken_passively, spoken, written, entry_date
 - cv.Regimes.detail : id, name, name_nl, name_de, name_en
 - cv.Sectors.detail : id, name, name_nl, name_de, name_en, remark
 - cv.Statuses.detail : id, name, name_nl, name_de, name_en
@@ -1063,7 +1063,7 @@ The first meeting of a budget
 =============================
 
 >>> translation.activate('en')
-    
+
 The following shows how we use the
 :meth:`lino_welfare.modlib.debts.Actor.get_first_meeting` method for
 printing the date and user of the first meeting.
@@ -1090,4 +1090,3 @@ the following snippet:
 None
 First meeting on 22 July 2013 with nicolas
 None
-

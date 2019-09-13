@@ -366,7 +366,7 @@ Database structure
 - cv.EducationLevel : id, seqno, name, is_study, is_training, name_fr, name_en
 - cv.Experience : id, start_date, end_date, country, city, zip_code, sector, function, person, duration_text, company, title, status, duration, regime, is_training, remarks, termination_reason
 - cv.Function : id, name, remark, sector, name_fr, name_en
-- cv.LanguageKnowledge : id, person, language, spoken, written, spoken_passively, written_passively, native, cef_level
+- cv.LanguageKnowledge : id, person, language, spoken, written, spoken_passively, written_passively, native, cef_level, has_certificate
 - cv.PersonProperty : id, group, property, value, person, remark
 - cv.Regime : id, name, name_fr, name_en
 - cv.Sector : id, name, remark, name_fr, name_en
