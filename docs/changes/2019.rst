@@ -11,6 +11,11 @@
 .. contents::
   :local:
 
+2019-09-18
+==========
+
+Released Welfare 19.9.0 and weleup 19.9.0.
+
 2019-09-13
 ==========
 

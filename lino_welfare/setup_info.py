@@ -22,24 +22,24 @@ else:
 
 SETUP_INFO = dict(
     name='lino-welfare',
-    version='19.3.0',
+    version='19.9.0',
     install_requires=requires,
     test_suite='tests',
     tests_require=['pytest'],
     include_package_data=True,
-    zip_safe=False,    
+    zip_safe=False,
     description=u"A Lino plugin library for Belgian PCSWs",
     long_description="""\
-Lino Welfare is a 
+Lino Welfare is a
 `Lino <http://www.lino-framework.org>`__
-plugin library 
+plugin library
 for Belgian
 *Public Centres for Social Welfare*.
 
-- The central project homepage is 
+- The central project homepage is
   http://welfare.lino-framework.org
 
-- There are two applications using this library: 
+- There are two applications using this library:
   `welcht <http://welcht.lino-framework.org>`__
   and `weleup <http://weleup.lino-framework.org>`__
 
@@ -47,7 +47,7 @@ for Belgian
   <http://fr.welfare.lino-framework.org>`_ and `German
   <http://de.welfare.lino-framework.org>`_.
 
-- Online demo sites at 
+- Online demo sites at
   http://welfare-demo.lino-framework.org
   and
   http://welfare-demo-fr.lino-framework.org
