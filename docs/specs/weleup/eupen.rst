@@ -552,8 +552,8 @@ Each window layout defines a given set of fields.
 - cv.Experiences.detail : person, company, country, city, sector, function, title, status, duration, regime, is_training, start_date, end_date, duration_text, termination_reason, remarks
 - cv.ExperiencesByPerson.insert : start_date, end_date, company, function
 - cv.Functions.detail : id, name, name_fr, name_en, sector, remark
-- cv.LanguageKnowledgesByPerson.detail : language, native, cef_level, spoken_passively, spoken, written
-- cv.LanguageKnowledgesByPerson.insert : language, native, cef_level, spoken_passively, spoken, written
+- cv.LanguageKnowledgesByPerson.detail : language, native, has_certificate, cef_level, spoken_passively, spoken, written
+- cv.LanguageKnowledgesByPerson.insert : language, native, has_certificate, cef_level, spoken_passively, spoken, written
 - cv.Regimes.detail : id, name, name_fr, name_en
 - cv.Sectors.detail : id, name, name_fr, name_en, remark
 - cv.Statuses.detail : id, name, name_fr, name_en
@@ -612,14 +612,14 @@ Each window layout defines a given set of fields.
 - jobs.Schedules.detail : id, name, name_fr, name_en
 - languages.Languages.detail : id, iso2, name, name_fr, name_en
 - ledger.AccountingPeriods.merge_row : merge_to, reason
-- ledger.Accounts.detail : ref, common_account, sheet_item, id, name, name_fr, name_en, needs_partner, clearable, default_amount, MovementsByAccount
-- ledger.Accounts.insert : ref, sheet_item, name, name_fr, name_en
+- ledger.Accounts.detail : ref, common_account, id, name, name_fr, name_en, needs_partner, clearable, default_amount, MovementsByAccount
+- ledger.Accounts.insert : ref, name, name_fr, name_en
 - ledger.Accounts.merge_row : merge_to, reason
 - ledger.FiscalYears.merge_row : merge_to, reason
 - ledger.Journals.detail : name, name_fr, name_en, ref, journal_group, voucher_type, trade_type, seqno, id, account, partner, build_method, template, uploads_volume, dc, force_sequence, yearly_numbering, auto_fill_suggestions, auto_check_clearings, must_declare, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, journal_group, voucher_type
 - ledger.Journals.merge_row : merge_to, ledger_MatchRule, reason
-- ledger.PaymentTerms.detail : ref, months, days, end_of_month, worker, name, name_fr, name_en, printed_text, printed_text_fr, printed_text_en
+- ledger.PaymentTerms.detail : ref, months, days, end_of_month, name, name_fr, name_en, printed_text, printed_text_fr, printed_text_en
 - ledger.PaymentTerms.merge_row : merge_to, reason
 - newcomers.AvailableCoachesByClient.assign_coach : notify_subject, notify_body, notify_silent
 - newcomers.Faculties.detail : id, name, name_fr, name_en, weight

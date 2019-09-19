@@ -415,8 +415,8 @@ Each window layout defines a given set of fields.
 - courses.Enrolments.detail : request_date, user, course, pupil, remark, workflow_buttons, printed, motivation, problems
 - courses.Enrolments.insert : request_date, user, course, pupil, remark
 - courses.EnrolmentsByCourse.insert : pupil, remark, request_date, user
-- courses.EnrolmentsByPupil.insert : course_area, course, places, option, remark, request_date, user
-- courses.Lines.detail : id, name, name_nl, name_de, name_en, ref, company, contact_person, course_area, topic, fees_cat, fee, options_cat, body_template, event_type, guest_role, every_unit, every, excerpt_title, excerpt_title_nl, excerpt_title_de, excerpt_title_en, description, description_nl, description_de, description_en
+- courses.EnrolmentsByPupil.insert : course_area, course, places, remark, request_date, user
+- courses.Lines.detail : id, name, name_nl, name_de, name_en, ref, company, contact_person, course_area, topic, body_template, event_type, guest_role, every_unit, every, excerpt_title, excerpt_title_nl, excerpt_title_de, excerpt_title_en, description, description_nl, description_de, description_en
 - courses.Lines.insert : name, name_nl, name_de, name_en, ref, topic, every_unit, every, event_type, description, description_nl, description_de, description_en
 - courses.Lines.merge_row : merge_to, reason
 - courses.Slots.detail : name, start_time, end_time
@@ -427,8 +427,8 @@ Each window layout defines a given set of fields.
 - cv.Experiences.detail : person, company, country, city, sector, function, title, status, duration, regime, is_training, start_date, end_date, duration_text, termination_reason, remarks
 - cv.ExperiencesByPerson.insert : start_date, end_date, company, function
 - cv.Functions.detail : id, name, name_nl, name_de, name_en, sector, remark
-- cv.LanguageKnowledgesByPerson.detail : language, native, has_certificate, cef_level, spoken_passively, spoken, written, entry_date
-- cv.LanguageKnowledgesByPerson.insert : language, native, has_certificate, cef_level, spoken_passively, spoken, written, entry_date
+- cv.LanguageKnowledgesByPerson.detail : language, native, has_certificate, cef_level, spoken_passively, spoken, written
+- cv.LanguageKnowledgesByPerson.insert : language, native, has_certificate, cef_level, spoken_passively, spoken, written
 - cv.Regimes.detail : id, name, name_nl, name_de, name_en
 - cv.Sectors.detail : id, name, name_nl, name_de, name_en, remark
 - cv.Statuses.detail : id, name, name_nl, name_de, name_en
@@ -509,7 +509,7 @@ Each window layout defines a given set of fields.
 - polls.Questions.detail : poll, number, is_heading, choiceset, multiple_choices, title, details
 - polls.Responses.detail : poll, partner, date, workflow_buttons, polls_AnswersByResponse, user, state, remark
 - polls.Responses.insert : user, date, poll
-- system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, propgroup_skills, propgroup_softskills, propgroup_obstacles, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, hide_events_before, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
+- system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, hide_events_before, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail : id, name, user, description, text
 - tinymce.TextFieldTemplates.insert : name, user
 - uploads.AllUploads.detail : file, user, volume, library_file, upload_area, type, description, owner
