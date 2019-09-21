@@ -1,5 +1,5 @@
 .. doctest docs/specs/choicelists.rst
-   
+
 ===========================
 Choicelists in Lino Welfare
 ===========================
@@ -12,7 +12,7 @@ database but in the source code or the local configuration.
 .. contents::
    :depth: 2
    :local:
-      
+
 
 About this document
 ===================
@@ -20,8 +20,8 @@ About this document
 >>> from lino import startup
 >>> startup('lino_welfare.projects.gerd.settings.doctests')
 >>> from lino.api.doctest import *
-    
-      
+
+
 
 
 Overview
@@ -46,9 +46,9 @@ beid.ResidenceTypes : Einwohnerregister
 cal.AccessClasses : AccessClasses
 cal.DisplayColors : DisplayColors
 cal.DurationUnits : DurationUnits
-cal.EntryStates : Termin-Zustände
+cal.EntryStates : Kalendereintrag-Zustände
 cal.EventEvents : Beobachtungskriterien
-cal.GuestStates : Gast-Zustände
+cal.GuestStates : Anwesenheits-Zustände
 cal.PlannerColumns : PlannerColumns
 cal.Recurrencies : Recurrencies
 cal.ReservationStates : Zustände
@@ -104,5 +104,3 @@ uploads.UploadAreas : Upload-Bereiche
 users.UserTypes : Benutzerarten
 xcourses.CourseRequestStates : Zustände Kursanfragen
 xl.Priorities : Prioritäten
-
-

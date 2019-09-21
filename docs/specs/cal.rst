@@ -8,7 +8,7 @@
 The :mod:`lino_welfare.modlib.cal` plugin extends
 :mod:`lino_xl.modlib.cal` for :ref:`welfare`.
 
-.. currentmodule:: lino_welfare.modlib.cal     
+.. currentmodule:: lino_welfare.modlib.cal
 
 See also :ref:`book.specs.cal`.
 
@@ -24,16 +24,19 @@ See also :ref:`book.specs.cal`.
 Repair database after uncomplete test run:
 >>> settings.SITE.site_config.update(hide_events_before=i2d(20140401))
 
-      
-Event types
-===========
+
+Calendar entry types
+====================
 
 .. class::  EventType
 
     Adds two fields.
 
     .. attribute:: invite_client
+
     .. attribute:: esf_field
+
+      How to summarize entries of this type in the ESF summary.
 
 Guests
 ======
@@ -43,14 +46,14 @@ Guests
     Adds a virtual field :attr:`client`.
 
     .. attribute:: client
-    
+
         Virtual field which returns the `partner` if it is a client.
 
         When clicking in :class:`WaitingVisitors
-        <lino_xl.lib.reception.models.WaitingVisitors>` on the partner
+        <lino_xl.lib.reception.WaitingVisitors>` on the partner
         show the *Client's* and not the *Partner's* detail.
 
-            
+
 
 
 Lifecycle of a calendar entry
@@ -58,15 +61,15 @@ Lifecycle of a calendar entry
 
 >>> rt.show(cal.EntryStates)
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
-====== ============ ================ ============= ======================= ======== =================== =========
- Wert   name         Text             Button text   Teilnehmer bearbeiten   Stabil   nicht blockierend   No auto
------- ------------ ---------------- ------------- ----------------------- -------- ------------------- ---------
- 10     suggested    Vorschlag        ?             Ja                      Nein     Nein                Nein
- 20     draft        Entwurf          ☐             Ja                      Nein     Nein                Nein
- 40     published    Veröffentlicht   ☼             Ja                      Ja       Nein                Nein
- 50     took_place   Stattgefunden    ☑             Ja                      Ja       Nein                Nein
- 70     cancelled    Storniert        ☒             Nein                    Ja       Ja                  Ja
-====== ============ ================ ============= ======================= ======== =================== =========
+====== ============ ================ ============= ================= ======== =================== =========
+ Wert   name         Text             Button text   Gäste ausfüllen   Stabil   nicht blockierend   No auto
+------ ------------ ---------------- ------------- ----------------- -------- ------------------- ---------
+ 10     suggested    Vorschlag        ?             Ja                Nein     Nein                Nein
+ 20     draft        Entwurf          ☐             Ja                Nein     Nein                Nein
+ 40     published    Veröffentlicht   ☼             Ja                Ja       Nein                Nein
+ 50     took_place   Stattgefunden    ☑             Nein              Ja       Nein                Nein
+ 70     cancelled    Storniert        ☒             Nein              Ja       Ja                  Ja
+====== ============ ================ ============= ================= ======== =================== =========
 <BLANKLINE>
 
 
@@ -110,48 +113,43 @@ Here is what the :class:`lino_xl.lib.cal.EntriesByDay` table gives:
 ===========================
 Thu 22/05/2014 (22.05.2014)
 ===========================
-============ ======================== ============================ ================ ============= =============================== ====== ===================================
- Start time   Client                   Short description            Managed by       Assigned to   Calendar entry type             Room   Workflow
------------- ------------------------ ---------------------------- ---------------- ------------- ------------------------------- ------ -----------------------------------
-                                       Absent for private reasons   Rolf Rompen                    Absences                               [⚑] **? Suggested** → [☼] [☑] [☒]
- 08:30:00     FAYMONVILLE Luc (130*)   Rencontre                    Mélanie Mélard                 Evaluation                             [⚑] **? Suggested** → [☼] [☑] [☒]
- 13:30:00     ENGELS Edgar (129)       Frühstück                    Judith Jousten                 Internal meetings with client          [⚑] **☒ Cancelled**
-============ ======================== ============================ ================ ============= =============================== ====== ===================================
+============ ======== ============================ ================ ============= ===================== ====== ===================================
+ Start time   Client   Short description            Managed by       Assigned to   Calendar entry type   Room   Workflow
+------------ -------- ---------------------------- ---------------- ------------- --------------------- ------ -----------------------------------
+                       Absent for private reasons   Rolf Rompen                    Absences                     [⚑] **? Suggested** → [☼] [☑] [☒]
+ 08:30:00              Rencontre                    Mélanie Mélard                 External meetings            [⚑] **? Suggested** → [☼] [☑] [☒]
+ 13:30:00              Frühstück                    Judith Jousten                 Internal meetings            [⚑] **☒ Cancelled**
+============ ======== ============================ ================ ============= ===================== ====== ===================================
 <BLANKLINE>
 
 
-Users looking at their events
-=============================
+My calendar entries
+===================
 
-The **My events** table shows shows today's and all future
-appointments of the user who requests it.
-
-The list starts today and is sorted increasingly.
-
-Here is what it says for Alicia.
+Here is the :term:`My calendar entries` view for Alicia.
 
 >>> rt.login('alicia').show(cal.MyEntries, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-====================================== ========================= ===================== ============================ ===============================
- When                                   Client                    Calendar entry type   Short description            Workflow
--------------------------------------- ------------------------- --------------------- ---------------------------- -------------------------------
- `Sat 24/05/2014 <Detail>`__                                      Absences              Absent for private reasons   **☑ Took place** → [☐]
- `Mon 26/05/2014 at 09:40 <Detail>`__                             Meeting               Diner                        **☐ Draft** → [☼] [☒]
- `Sun 01/06/2014 at 08:30 <Detail>`__                             Meeting               Diner                        **? Suggested** → [☼] [☒]
- `Sat 07/06/2014 at 13:30 <Detail>`__                             Meeting               Diner                        **☒ Cancelled**
- `Mon 23/06/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 1                 [▽] **? Suggested** → [☼] [☒]
- `Mon 14/07/2014 <Detail>`__            RADERMACHER Fritz (158)   Evaluation            Évaluation 6                 [▽] **? Suggested** → [☼] [☒]
- `Wed 23/07/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 2                 [▽] **? Suggested** → [☼] [☒]
- `Thu 14/08/2014 <Detail>`__            HILGERS Hildegard (133)   Evaluation            Évaluation 7                 [▽] **? Suggested** → [☼] [☒]
- `Mon 25/08/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 3                 [▽] **? Suggested** → [☼] [☒]
- `Thu 25/09/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 4                 [▽] **? Suggested** → [☼] [☒]
- `Tue 14/10/2014 <Detail>`__            RADERMACHER Fritz (158)   Evaluation            Évaluation 7                 [▽] **? Suggested** → [☼] [☒]
- `Mon 27/10/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 5                 [▽] **? Suggested** → [☼] [☒]
- `Thu 27/11/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 6                 [▽] **? Suggested** → [☼] [☒]
- `Mon 29/12/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 7                 [▽] **? Suggested** → [☼] [☒]
- `Thu 29/01/2015 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 8                 [▽] **? Suggested** → [☼] [☒]
- `Mon 02/03/2015 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 9                 [▽] **? Suggested** → [☼] [☒]
-====================================== ========================= ===================== ============================ ===============================
+====================================== ========================= ======================== ============================ ===============================
+ When                                   Client                    Calendar entry type      Short description            Workflow
+-------------------------------------- ------------------------- ------------------------ ---------------------------- -------------------------------
+ `Sat 24/05/2014 <Detail>`__                                      Absences                 Absent for private reasons   **☑ Took place** → [☐]
+ `Mon 26/05/2014 at 09:40 <Detail>`__   JANSEN Jérémy (136)       Informational meetings   Diner                        **☐ Draft** → [☼] [☒]
+ `Sun 01/06/2014 at 08:30 <Detail>`__                             Internal meetings        Diner                        **? Suggested** → [☼] [☒]
+ `Sat 07/06/2014 at 13:30 <Detail>`__                             External meetings        Diner                        **☒ Cancelled**
+ `Mon 23/06/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 1                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 14/07/2014 <Detail>`__            RADERMACHER Fritz (158)   Evaluation               Évaluation 6                 [▽] **? Suggested** → [☼] [☒]
+ `Wed 23/07/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 2                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 14/08/2014 <Detail>`__            HILGERS Hildegard (133)   Evaluation               Évaluation 7                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 25/08/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 3                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 25/09/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 4                 [▽] **? Suggested** → [☼] [☒]
+ `Tue 14/10/2014 <Detail>`__            RADERMACHER Fritz (158)   Evaluation               Évaluation 7                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 27/10/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 5                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 27/11/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 6                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 29/12/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 7                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 29/01/2015 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 8                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 02/03/2015 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 9                 [▽] **? Suggested** → [☼] [☒]
+====================================== ========================= ======================== ============================ ===============================
 <BLANKLINE>
 
 
@@ -163,13 +161,12 @@ These are for Hubert:
  When                                   Client                   Calendar entry type   Short description            Workflow
 -------------------------------------- ------------------------ --------------------- ---------------------------- -------------------------------
  `Sun 25/05/2014 <Detail>`__                                     Absences              Absent for private reasons   **☒ Cancelled**
- `Tue 27/05/2014 at 10:20 <Detail>`__                            Internal              Abendessen                   **☼ Published** → [☒] [☐]
+ `Tue 27/05/2014 at 10:20 <Detail>`__                            Internal meetings     Abendessen                   **☼ Published** → [☒] [☐]
  `Wed 28/05/2014 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Évaluation 15                [▽] **? Suggested** → [☼] [☒]
- `Mon 02/06/2014 at 09:40 <Detail>`__                            Internal              Abendessen                   **☐ Draft** → [☼] [☒]
+ `Mon 02/06/2014 at 09:40 <Detail>`__                            External meetings     Abendessen                   **☐ Draft** → [☼] [☒]
  `Tue 03/06/2014 <Detail>`__            DENON Denis (180*)       Evaluation            Auswertung 1                 [▽] **? Suggested** → [☼] [☒]
- `Wed 04/06/2014 <Detail>`__            LAMBERTZ Guido (142)     Evaluation            Évaluation 6                 [▽] **? Suggested** → [☼] [☒]
- `Sun 08/06/2014 at 08:30 <Detail>`__                            Internal              Abendessen                   **? Suggested** → [☼] [☒]
  ...
+ `Thu 19/02/2015 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Auswertung 8                 [▽] **? Suggested** → [☼] [☒]
  `Tue 03/03/2015 <Detail>`__            DENON Denis (180*)       Evaluation            Auswertung 4                 [▽] **? Suggested** → [☼] [☒]
  `Mon 09/03/2015 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)   Evaluation            Auswertung 8                 [▽] **? Suggested** → [☼] [☒]
  `Thu 19/03/2015 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Auswertung 9                 [▽] **? Suggested** → [☼] [☒]
@@ -179,42 +176,52 @@ These are for Hubert:
 <BLANKLINE>
 
 
+
 And these for Mélanie:
 
 >>> rt.login('melanie').show(cal.MyEntries, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-====================================== ============================= ===================== ============================ ===============================
- When                                   Client                        Calendar entry type   Short description            Workflow
--------------------------------------- ----------------------------- --------------------- ---------------------------- -------------------------------
- `Thu 22/05/2014 at 08:30 <Detail>`__   FAYMONVILLE Luc (130*)        Evaluation            Rencontre                    **? Suggested** → [☼] [☑] [☒]
- `Mon 26/05/2014 at 09:00 <Detail>`__   ENGELS Edgar (129)            Evaluation            Évaluation 3                 [▽] **? Suggested** → [☼] [☒]
- `Tue 27/05/2014 <Detail>`__                                          Absences              Absent for private reasons   **☐ Draft** → [☼] [☒]
- `Wed 28/05/2014 at 13:30 <Detail>`__   HILGERS Henri (134)           Evaluation            Rencontre                    **☒ Cancelled**
+====================================== ============================= =============================== ============================ ===============================
+ When                                   Client                        Calendar entry type             Short description            Workflow
+-------------------------------------- ----------------------------- ------------------------------- ---------------------------- -------------------------------
+ `Thu 22/05/2014 at 08:30 <Detail>`__                                 External meetings               Rencontre                    **? Suggested** → [☼] [☑] [☒]
+ `Mon 26/05/2014 at 09:00 <Detail>`__   ENGELS Edgar (129)            Evaluation                      Évaluation 3                 [▽] **? Suggested** → [☼] [☒]
+ `Tue 27/05/2014 <Detail>`__                                          Absences                        Absent for private reasons   **☐ Draft** → [☼] [☒]
+ `Wed 28/05/2014 at 13:30 <Detail>`__                                 Private                         Rencontre                    **☒ Cancelled**
+ `Tue 03/06/2014 at 11:10 <Detail>`__                                 Meeting                         Rencontre                    **☑ Took place** → [☐]
+ `Thu 05/06/2014 at 09:00 <Detail>`__   LAZARUS Line (144)            Evaluation                      Évaluation 2                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 05/06/2014 at 09:00 <Detail>`__   DUBOIS Robin (179)            Evaluation                      Évaluation 15                [▽] **? Suggested** → [☼] [☒]
+ `Mon 09/06/2014 at 10:20 <Detail>`__   LEFFIN Josefine (145)         Internal meetings with client   Rencontre                    **☼ Published** → [☒] [☐]
+ `Fri 13/06/2014 <Detail>`__            MALMENDIER Marc (146)         Evaluation                      Évaluation 2                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 16/06/2014 at 09:00 <Detail>`__   MEESSEN Melissa (147)         Evaluation                      Évaluation 1                 [▽] **? Suggested** → [☼] [☒]
  ...
- `Thu 09/04/2015 at 09:00 <Detail>`__   ÖSTGES Otto (168)             Evaluation            Évaluation 9                 [▽] **? Suggested** → [☼] [☒]
- `Mon 20/04/2015 at 09:00 <Detail>`__   RADERMACHER Guido (159)       Evaluation            Évaluation 10                [▽] **? Suggested** → [☼] [☒]
- `Mon 04/05/2015 at 09:00 <Detail>`__   DUBOIS Robin (179)            Evaluation            Évaluation 9                 [▽] **? Suggested** → [☼] [☒]
- `Mon 11/05/2015 at 09:00 <Detail>`__   ÖSTGES Otto (168)             Evaluation            Évaluation 10                [▽] **? Suggested** → [☼] [☒]
-====================================== ============================= ===================== ============================ ===============================
+ `Mon 09/03/2015 at 09:00 <Detail>`__   ÖSTGES Otto (168)             Evaluation                      Évaluation 8                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 19/03/2015 at 09:00 <Detail>`__   RADERMACHER Guido (159)       Evaluation                      Évaluation 9                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 02/04/2015 at 09:00 <Detail>`__   DUBOIS Robin (179)            Evaluation                      Évaluation 8                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 09/04/2015 at 09:00 <Detail>`__   ÖSTGES Otto (168)             Evaluation                      Évaluation 9                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 20/04/2015 at 09:00 <Detail>`__   RADERMACHER Guido (159)       Evaluation                      Évaluation 10                [▽] **? Suggested** → [☼] [☒]
+ `Mon 04/05/2015 at 09:00 <Detail>`__   DUBOIS Robin (179)            Evaluation                      Évaluation 9                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 11/05/2015 at 09:00 <Detail>`__   ÖSTGES Otto (168)             Evaluation                      Évaluation 10                [▽] **? Suggested** → [☼] [☒]
+====================================== ============================= =============================== ============================ ===============================
 <BLANKLINE>
 
 
-
-These are Alicia's calendar appointments of the last two months:
+These are Alicia's appointments of the last two months:
 
 >>> pv = dict(start_date=dd.today(-15), end_date=dd.today(-1))
 >>> rt.login('alicia').show(cal.MyEntries, language='en',
 ...     param_values=pv)
-====================================== ========================= ===================== =================== ===================================
- When                                   Client                    Calendar entry type   Short description   Workflow
--------------------------------------- ------------------------- --------------------- ------------------- -----------------------------------
- `Wed 07/05/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 15       [▽] **? Suggested** → [☼] [☑] [☒]
- `Thu 08/05/2014 at 13:30 <Detail>`__                             Meeting               Diner               **☒ Cancelled**
- `Wed 14/05/2014 <Detail>`__            HILGERS Hildegard (133)   Evaluation            Évaluation 6        [▽] **? Suggested** → [☼] [☑] [☒]
- `Wed 14/05/2014 at 11:10 <Detail>`__                             Meeting               Diner               **☑ Took place** → [☐]
- `Tue 20/05/2014 at 10:20 <Detail>`__                             Meeting               Diner               **☼ Published** → [☑] [☒] [☐]
-====================================== ========================= ===================== =================== ===================================
+====================================== =========================== =============================== =================== ===================================
+ When                                   Client                      Calendar entry type             Short description   Workflow
+-------------------------------------- --------------------------- ------------------------------- ------------------- -----------------------------------
+ `Wed 07/05/2014 at 09:00 <Detail>`__   DA VINCI David (165)        Evaluation                      Évaluation 15       [▽] **? Suggested** → [☼] [☑] [☒]
+ `Thu 08/05/2014 at 13:30 <Detail>`__   DERICUM Daniel (121)        Internal meetings with client   Diner               **☒ Cancelled**
+ `Wed 14/05/2014 <Detail>`__            HILGERS Hildegard (133)     Evaluation                      Évaluation 6        [▽] **? Suggested** → [☼] [☑] [☒]
+ `Wed 14/05/2014 at 11:10 <Detail>`__   EVERTZ Bernd (126)          Evaluation                      Diner               **☑ Took place** → [☐]
+ `Tue 20/05/2014 at 10:20 <Detail>`__   GERNEGROSS Germaine (131)   External meetings with client   Diner               **☼ Published** → [☑] [☒] [☐]
+====================================== =========================== =============================== =================== ===================================
 <BLANKLINE>
+
 
 
 Overdue appointments
@@ -242,7 +249,7 @@ A Calendar is a set of events that can be shown or hidden in the
 Calendar Panel.
 
 In Lino Welfare, we have one Calendar per User.  Or to be more
-precise: 
+precise:
 
 - The :class:`User` model has a :attr:`calendar` field.
 
@@ -321,7 +328,7 @@ This database has :attr:`hide_events_before
 
 >>> settings.SITE.site_config.hide_events_before
 datetime.date(2014, 4, 1)
-      
+
 
 
 Events generated by a contract

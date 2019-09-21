@@ -2,7 +2,7 @@
 .. _welfare.specs.reception:
 
 ===============================================
-The :mod:`lino_welfare.modlib.reception` plugin 
+The :mod:`lino_welfare.modlib.reception` plugin
 ===============================================
 
 The :mod:`lino_welfare.modlib.reception` plugin adds functionality for
@@ -20,7 +20,7 @@ receiving guests by an independent reception clerk.
 >>> from lino.api.doctest import *
 >>> translation.activate('fr')
 
->>> dd.plugins.reception           
+>>> dd.plugins.reception
 lino_welfare.modlib.reception
 
 .. _welfare.tour.reception:
@@ -38,13 +38,13 @@ A visitor enters.
 
 - Visitor: My name is xxx and I'd like to get social help.
 
-    - Clerk: Can I have your id card please? 
+    - Clerk: Can I have your id card please?
     - Search manually by name. Create manually a client record.
     - Read the id card.  If the person has a client record in our
       database, then Lino opens the the detail of this record. Otherwise
       it asks whether to create the client.
 
- 
+
 - Visitor: "My name is xxx, I have an appointment with Roger."
   (You know that Roger is one of the social agents.)
 
@@ -69,25 +69,25 @@ AppointmentsByPartner
 >>> print(obj)
 EVERS Eberhart (127)
 
-This client has the following appointments. 
+This client has the following appointments.
 
 >>> rt.login('romain').show(reception.AppointmentsByPartner, obj,
 ...     column_names="event__start_date event__start_time event__user event__summary event__state workflow_buttons",
 ...     language="en")  #doctest: -REPORT_UDIFF
-============ ============ ================== =================== =========== =======================================================
- Start date   Start time   Managed by         Short description   State       Workflow
------------- ------------ ------------------ ------------------- ----------- -------------------------------------------------------
- 15/05/2014   09:00:00     Caroline Carnol    Auswertung 2        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
- 17/05/2014   10:20:00     Patrick Paraneau   Beratung            Published   [Checkin] **Accepted** → [Reject] [Absent] [Excused]
- 22/05/2014                Mélanie Mélard     Urgent problem      Published   [Receive] [Checkout] **Waiting** → [Absent] [Excused]
- 16/06/2014   09:00:00     Caroline Carnol    Auswertung 3        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
- 16/07/2014   09:00:00     Caroline Carnol    Auswertung 4        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
- 18/08/2014   09:00:00     Caroline Carnol    Auswertung 5        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
- 18/09/2014   09:00:00     Caroline Carnol    Auswertung 6        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
- 20/10/2014   09:00:00     Caroline Carnol    Auswertung 7        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
- 20/11/2014   09:00:00     Caroline Carnol    Auswertung 8        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
- 22/12/2014   09:00:00     Caroline Carnol    Auswertung 9        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
-============ ============ ================== =================== =========== =======================================================
+============ ============ ================= =================== =========== =======================================================
+ Start date   Start time   Managed by        Short description   State       Workflow
+------------ ------------ ----------------- ------------------- ----------- -------------------------------------------------------
+ 15/05/2014   09:00:00     Caroline Carnol   Auswertung 2        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 15/05/2014   13:30:00     Hubert Huppertz   Abendessen          Cancelled   [Checkin] **Accepted** → [Absent] [Excused]
+ 22/05/2014                Mélanie Mélard    Urgent problem      Published   [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ 16/06/2014   09:00:00     Caroline Carnol   Auswertung 3        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 16/07/2014   09:00:00     Caroline Carnol   Auswertung 4        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 18/08/2014   09:00:00     Caroline Carnol   Auswertung 5        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 18/09/2014   09:00:00     Caroline Carnol   Auswertung 6        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 20/10/2014   09:00:00     Caroline Carnol   Auswertung 7        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 20/11/2014   09:00:00     Caroline Carnol   Auswertung 8        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+ 22/12/2014   09:00:00     Caroline Carnol   Auswertung 9        Suggested   [Checkin] **Accepted** → [Absent] [Excused]
+============ ============ ================= =================== =========== =======================================================
 <BLANKLINE>
 
 
@@ -96,22 +96,21 @@ functionality can click on the dates to see their detail:
 
 >>> rt.login('theresia').show(reception.AppointmentsByPartner, obj,
 ...     language="en")  #doctest: +REPORT_UDIFF
-====================================== ================== =======================================================
- When                                   Managed by         Workflow
--------------------------------------- ------------------ -------------------------------------------------------
- `Thu 15/05/2014 at 09:00 <Detail>`__   Caroline Carnol    [Checkin] **Accepted** → [Absent] [Excused]
- `Sat 17/05/2014 at 10:20 <Detail>`__   Patrick Paraneau   [Checkin] **Accepted** → [Reject] [Absent] [Excused]
- `Thu 22/05/2014 <Detail>`__            Mélanie Mélard     [Receive] [Checkout] **Waiting** → [Absent] [Excused]
- `Mon 16/06/2014 at 09:00 <Detail>`__   Caroline Carnol    [Checkin] **Accepted** → [Absent] [Excused]
- `Wed 16/07/2014 at 09:00 <Detail>`__   Caroline Carnol    [Checkin] **Accepted** → [Absent] [Excused]
- `Mon 18/08/2014 at 09:00 <Detail>`__   Caroline Carnol    [Checkin] **Accepted** → [Absent] [Excused]
- `Thu 18/09/2014 at 09:00 <Detail>`__   Caroline Carnol    [Checkin] **Accepted** → [Absent] [Excused]
- `Mon 20/10/2014 at 09:00 <Detail>`__   Caroline Carnol    [Checkin] **Accepted** → [Absent] [Excused]
- `Thu 20/11/2014 at 09:00 <Detail>`__   Caroline Carnol    [Checkin] **Accepted** → [Absent] [Excused]
- `Mon 22/12/2014 at 09:00 <Detail>`__   Caroline Carnol    [Checkin] **Accepted** → [Absent] [Excused]
-====================================== ================== =======================================================
+====================================== ================= =======================================================
+ When                                   Managed by        Workflow
+-------------------------------------- ----------------- -------------------------------------------------------
+ `Thu 15/05/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Thu 15/05/2014 at 13:30 <Detail>`__   Hubert Huppertz   [Checkin] **Accepted** → [Absent] [Excused]
+ `Thu 22/05/2014 <Detail>`__            Mélanie Mélard    [Receive] [Checkout] **Waiting** → [Absent] [Excused]
+ `Mon 16/06/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Wed 16/07/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Mon 18/08/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Thu 18/09/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Mon 20/10/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Thu 20/11/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+ `Mon 22/12/2014 at 09:00 <Detail>`__   Caroline Carnol   [Checkin] **Accepted** → [Absent] [Excused]
+====================================== ================= =======================================================
 <BLANKLINE>
-
 
 
 .. _welfare.specs.reception.AgentsByClient:
@@ -194,10 +193,10 @@ And yes, the `href` attribute is a javascript snippet:
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 javascript:Lino.pcsw.Clients.create_visit.run(null,...)
 
-Now let's inspect the three dots (`...`). 
+Now let's inspect the three dots (`...`).
 
 >>> dots = btn['href'][51:-1]
->>> print(dots)  #doctest: +ELLIPSIS 
+>>> print(dots)  #doctest: +ELLIPSIS
 { ... }
 
 They are a big "object" (in Python we call it a `dict`):
@@ -373,7 +372,7 @@ When the primary key is a OneToOneField
 Before :ticket:`2436`, a OneToOneField resulted in a StoreField giving
 a single atomic value (the database object).
 
-           
+
 The primary key of a client is `id`:
 
 >>> pk = pcsw.Client._meta.get_field('id')
@@ -435,7 +434,7 @@ The following helped us to understand and solve ticket :ticket:`340`
 (discovered :blogref:`20150714`).
 
 >>> translation.activate('en')
-    
+
 The problem: A reception clerk in Eupen
 (:mod:`lino_welfare.projects.gerd`) should not see the career tab of
 a client because the :attr:`required_roles
@@ -510,7 +509,7 @@ Note that the Panel objects which are not visible continue to be in
 
 >>> print(' '.join([e.name for e in lh.main.elements]))
 ... #doctest: +NORMALIZE_WHITESPACE
-general contact coaching aids_tab work_tab_1 career languages 
+general contact coaching aids_tab work_tab_1 career languages
 competences contracts history calendar MovementsByProject misc cbss debts
 
 Lino filters removes them only when generating the js files, IOW
@@ -540,7 +539,7 @@ I can even render the :file:`lino*.js` files (at least once):
 >>> with_user_profile(theresia.user_type, f)
 ... #doctest: +NORMALIZE_WHITESPACE
 
-So until now everything looks okay. 
+So until now everything looks okay.
 
 The problem was that until :blogref:`20150716`, :meth:`write_lino_js`
 left the requirements of our career panel modified (loosened) after
@@ -551,4 +550,3 @@ and `True` all subsequent times:
 False
 >>> theresia.user_type.has_required_roles(career_panel.required_roles)
 False
-

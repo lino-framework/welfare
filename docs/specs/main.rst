@@ -11,14 +11,14 @@ This describes the main page of :ref:`welfare`.
    :depth: 1
 
 .. include:: /../docs/shared/include/tested.rst
-  
+
 >>> from lino import startup
 >>> startup('lino_welfare.projects.gerd.settings.doctests')
 >>> from lino.api.doctest import *
 
 Some tests
 ==========
-           
+
 Test the content of the admin main page.
 
 >>> test_client.force_login(rt.login('rolf').user)
@@ -39,7 +39,7 @@ it is much work to maintain.
 
 >>> links = soup.find_all('a')
 >>> len(links)
-129
+132
 
 >>> print(links[0].text)
 Suchen
@@ -176,4 +176,3 @@ My Notification messages **✓** `⏏ <My Notification messages>`__
  2014-05-22 05:48:00   Die Datenbank wurde initialisiert.   System event   [✓]
 ===================== ==================================== ============== ==========
 <BLANKLINE>
-

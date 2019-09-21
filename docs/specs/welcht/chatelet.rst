@@ -98,7 +98,7 @@ Romain
   - Contacts : Personnes de contact, Partenaires, Types d'adresses, Adresses, Membres du conseil, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
   - Système : Procurations, Types d'utilisateur, Rôles d'utilisateur, Notifications, Changes, All dashboard widgets, Types de contenu, Tests de données, Problèmes de données
   - Bureau : Extraits, Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Observations, Text Field Templates
-  - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Event states, Guest states, Task states
+  - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Entry states, Presence states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États Inscription, Course layouts, États Atelier
   - CPAS : Exclusions du chômage, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple, Contacts client, Types de contact connus, Interventions
   - Parcours : Connaissances de langue, Formations, Études, Expériences professionnelles, Connaissances de langue, Compétences professionnelles, Compétences sociales, Freins
@@ -170,7 +170,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cal.Event                      cal.OneEvent                    24        548
  cal.EventPolicy                cal.EventPolicies               20        6
  cal.EventType                  cal.EventTypes                  27        13
- cal.Guest                      cal.Guests                      9         578
+ cal.Guest                      cal.Guests                      9         588
  cal.GuestRole                  cal.GuestRoles                  6         4
  cal.RecurrentEvent             cal.RecurrentEvents             22        15
  cal.RemoteCalendar             cal.RemoteCalendars             7         0
@@ -1003,10 +1003,10 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Bureau --> Text Field Templates : 3
 - Explorateur --> Calendrier --> Entrées calendrier : 343
 - Explorateur --> Calendrier --> Tâches : 35
-- Explorateur --> Calendrier --> Présences : 579
+- Explorateur --> Calendrier --> Présences : 589
 - Explorateur --> Calendrier --> Abonnements : 10
-- Explorateur --> Calendrier --> Event states : 5
-- Explorateur --> Calendrier --> Guest states : 9
+- Explorateur --> Calendrier --> Entry states : 5
+- Explorateur --> Calendrier --> Presence states : 9
 - Explorateur --> Calendrier --> Task states : 5
 - Explorateur --> Ateliers --> Tests de niveau : 1
 - Explorateur --> Ateliers --> Ateliers : 8

@@ -6,7 +6,7 @@ Checking for data problems in Lino Welfare
 ==========================================
 
 ..  doctest init:
-   
+
     >>> from lino import startup
     >>> startup('lino_welfare.projects.gerd.settings.doctests')
     >>> from lino.api.doctest import *
@@ -18,7 +18,7 @@ See also :ref:`book.specs.checkdata`.
 
 
 ..  preliminary:
-   
+
     >>> cal.Event.get_default_table()
     lino_xl.lib.cal.ui.OneEvent
 
@@ -30,10 +30,10 @@ In the web interface you can select :menuselection:`Explorer -->
 System --> Data checkers` to see a table of all available
 checkers.
 
-.. 
+..
     >>> show_menu_path(checkdata.Checkers, language="en")
     Explorer --> System --> Data checkers
-    
+
 >>> rt.show(checkdata.Checkers, language="en")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ======================================= ===================================================
@@ -77,32 +77,35 @@ the responsible user.
 
 >>> rt.show(checkdata.AllProblems, language="en")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-================== ========================================================== ========================================================== ========================================
- Responsible        Database object                                            Message                                                    Checker
------------------- ---------------------------------------------------------- ---------------------------------------------------------- ----------------------------------------
- Robin Rood         *Christi Himmelfahrt (29.05.2014)*                         Event conflicts with 4 other events.                       Check for conflicting calendar entries
- Robin Rood         *Pfingsten (09.06.2014)*                                   Event conflicts with 2 other events.                       Check for conflicting calendar entries
- Patrick Paraneau   *Beratung (29.05.2014 08:30) with INGELS Irene (135)*      Event conflicts with Christi Himmelfahrt (29.05.2014).     Check for conflicting calendar entries
- Judith Jousten     *Frühstück (09.06.2014 09:40) with KAIVERS Karl (141)*     Event conflicts with Pfingsten (09.06.2014).               Check for conflicting calendar entries
- Mélanie Mélard     *Rencontre (09.06.2014 10:20) with LAMBERTZ Guido (142)*   Event conflicts with Pfingsten (09.06.2014).               Check for conflicting calendar entries
- Romain Raffault    *Absent for private reasons (29.05.2014)*                  Event conflicts with Christi Himmelfahrt (29.05.2014).     Check for conflicting calendar entries
- Caroline Carnol    *AUSDEMWALD Alfons (116)*                                  Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
-                    *BASTIAENSEN Laurent (117)*                                Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
-                    *CHANTRAINE Marc (120*)*                                   Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
-                    *DEMEULENAERE Dorothée (122)*                              Similar clients: DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Check for similar clients
-                    *DEMEULENAERE Dorothée (122)*                              Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
- Hubert Huppertz    *DOBBELSTEIN-DEMEULENAERE Dorothée (123)*                  Similar clients: DEMEULENAERE Dorothée (122)               Check for similar clients
- Mélanie Mélard     *DOBBELSTEIN Dorothée (124)*                               Similar clients: DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Check for similar clients
+================== =========================================================== ========================================================== ========================================
+ Responsible        Database object                                             Message                                                    Checker
+------------------ ----------------------------------------------------------- ---------------------------------------------------------- ----------------------------------------
+ Robin Rood         *Christi Himmelfahrt (29.05.2014)*                          Event conflicts with 4 other events.                       Check for conflicting calendar entries
+ Robin Rood         *Pfingsten (09.06.2014)*                                    Event conflicts with 2 other events.                       Check for conflicting calendar entries
+ Patrick Paraneau   *Beratung (29.05.2014 08:30)*                               Event conflicts with Christi Himmelfahrt (29.05.2014).     Check for conflicting calendar entries
+ Judith Jousten     *Frühstück (09.06.2014 09:40)*                              Event conflicts with Pfingsten (09.06.2014).               Check for conflicting calendar entries
+ Mélanie Mélard     *Rencontre (09.06.2014 10:20) with LEFFIN Josefine (145)*   Event conflicts with Pfingsten (09.06.2014).               Check for conflicting calendar entries
+ Romain Raffault    *Absent for private reasons (29.05.2014)*                   Event conflicts with Christi Himmelfahrt (29.05.2014).     Check for conflicting calendar entries
+ Caroline Carnol    *AUSDEMWALD Alfons (116)*                                   Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
+                    *BASTIAENSEN Laurent (117)*                                 Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
+                    *CHANTRAINE Marc (120*)*                                    Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
+                    *DEMEULENAERE Dorothée (122)*                               Similar clients: DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Check for similar clients
+                    *DEMEULENAERE Dorothée (122)*                               Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
+ Hubert Huppertz    *DOBBELSTEIN-DEMEULENAERE Dorothée (123)*                   Similar clients: DEMEULENAERE Dorothée (122)               Check for similar clients
  ...
- Caroline Carnol    *DENON Denis (180*)*                                       Begleitet und veraltet zugleich.                           Check coachings
- Caroline Carnol    *DENON Denis (180*)*                                       Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
- Hubert Huppertz    *JEANÉMART Jérôme (181)*                                   Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
-                    *KASENNOVA Tatjana (213)*                                  Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
-                    *FRISCH Paul (240)*                                        Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
-                    *BRAUN Bruno (259)*                                        Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
-================== ========================================================== ========================================================== ========================================
+                    *EIERSCHAL Emil (175)*                                      Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
+                    *LAHM Lisa (176)*                                           Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
+ Mélanie Mélard     *BRECHT Bernd (177)*                                        Sans données eID ou document identifiant alternatif.       Check for valid identification
+ Mélanie Mélard     *KELLER Karl (178)*                                         Sans données eID ou document identifiant alternatif.       Check for valid identification
+ Alicia Allmanns    *DUBOIS Robin (179)*                                        Sans données eID ou document identifiant alternatif.       Check for valid identification
+ Caroline Carnol    *DENON Denis (180*)*                                        Begleitet und veraltet zugleich.                           Check coachings
+ Caroline Carnol    *DENON Denis (180*)*                                        Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
+ Hubert Huppertz    *JEANÉMART Jérôme (181)*                                    Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
+                    *KASENNOVA Tatjana (213)*                                   Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
+                    *FRISCH Paul (240)*                                         Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
+                    *BRAUN Bruno (259)*                                         Weder gültige eID-Daten noch identifizierendes Dokument.   Check for valid identification
+================== =========================================================== ========================================================== ========================================
 <BLANKLINE>
-
 
 
 
@@ -144,21 +147,20 @@ assigned to you.
 fr
 >>> rt.login('melanie').show(checkdata.MyProblems, language="en")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-================ ===================================================================== ========================================================== ========================================
- Responsible      Database object                                                       Message                                                    Checker
----------------- --------------------------------------------------------------------- ---------------------------------------------------------- ----------------------------------------
- Mélanie Mélard   `Rencontre (09.06.2014 10:20) with LAMBERTZ Guido (142) <Detail>`__   Event conflicts with Pfingsten (09.06.2014).               Check for conflicting calendar entries
- Mélanie Mélard   `DOBBELSTEIN Dorothée (124) <Detail>`__                               Similar clients: DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Check for similar clients
- Mélanie Mélard   `DOBBELSTEIN Dorothée (124) <Detail>`__                               Sans données eID ou document identifiant alternatif.       Check for valid identification
- Mélanie Mélard   `ENGELS Edgar (129) <Detail>`__                                       Sans données eID ou document identifiant alternatif.       Check for valid identification
- Mélanie Mélard   `GROTECLAES Gregory (132) <Detail>`__                                 Sans données eID ou document identifiant alternatif.       Check for valid identification
- Mélanie Mélard   `KAIVERS Karl (141) <Detail>`__                                       Sans données eID ou document identifiant alternatif.       Check for valid identification
- Mélanie Mélard   `LAZARUS Line (144) <Detail>`__                                       Sans données eID ou document identifiant alternatif.       Check for valid identification
- Mélanie Mélard   `MEESSEN Melissa (147) <Detail>`__                                    Sans données eID ou document identifiant alternatif.       Check for valid identification
- Mélanie Mélard   `RADERMACHER Alfons (153) <Detail>`__                                 Sans données eID ou document identifiant alternatif.       Check for valid identification
- Mélanie Mélard   `RADERMACHER Guido (159) <Detail>`__                                  Sans données eID ou document identifiant alternatif.       Check for valid identification
- Mélanie Mélard   `BRECHT Bernd (177) <Detail>`__                                       Sans données eID ou document identifiant alternatif.       Check for valid identification
- Mélanie Mélard   `KELLER Karl (178) <Detail>`__                                        Sans données eID ou document identifiant alternatif.       Check for valid identification
-================ ===================================================================== ========================================================== ========================================
+================ ====================================================================== ========================================================== ========================================
+ Responsible      Database object                                                        Message                                                    Checker
+---------------- ---------------------------------------------------------------------- ---------------------------------------------------------- ----------------------------------------
+ Mélanie Mélard   `Rencontre (09.06.2014 10:20) with LEFFIN Josefine (145) <Detail>`__   Event conflicts with Pfingsten (09.06.2014).               Check for conflicting calendar entries
+ Mélanie Mélard   `DOBBELSTEIN Dorothée (124) <Detail>`__                                Similar clients: DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Check for similar clients
+ Mélanie Mélard   `DOBBELSTEIN Dorothée (124) <Detail>`__                                Sans données eID ou document identifiant alternatif.       Check for valid identification
+ Mélanie Mélard   `ENGELS Edgar (129) <Detail>`__                                        Sans données eID ou document identifiant alternatif.       Check for valid identification
+ Mélanie Mélard   `GROTECLAES Gregory (132) <Detail>`__                                  Sans données eID ou document identifiant alternatif.       Check for valid identification
+ Mélanie Mélard   `KAIVERS Karl (141) <Detail>`__                                        Sans données eID ou document identifiant alternatif.       Check for valid identification
+ Mélanie Mélard   `LAZARUS Line (144) <Detail>`__                                        Sans données eID ou document identifiant alternatif.       Check for valid identification
+ Mélanie Mélard   `MEESSEN Melissa (147) <Detail>`__                                     Sans données eID ou document identifiant alternatif.       Check for valid identification
+ Mélanie Mélard   `RADERMACHER Alfons (153) <Detail>`__                                  Sans données eID ou document identifiant alternatif.       Check for valid identification
+ Mélanie Mélard   `RADERMACHER Guido (159) <Detail>`__                                   Sans données eID ou document identifiant alternatif.       Check for valid identification
+ Mélanie Mélard   `BRECHT Bernd (177) <Detail>`__                                        Sans données eID ou document identifiant alternatif.       Check for valid identification
+ Mélanie Mélard   `KELLER Karl (178) <Detail>`__                                         Sans données eID ou document identifiant alternatif.       Check for valid identification
+================ ====================================================================== ========================================================== ========================================
 <BLANKLINE>
-
