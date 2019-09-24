@@ -507,7 +507,7 @@ Each window layout defines a given set of fields.
 - polls.Polls.insert : ref, title, default_choiceset, default_multiple_choices, questions_to_add
 - polls.Polls.merge_row : merge_to, polls_Question, reason
 - polls.Questions.detail : poll, number, is_heading, choiceset, multiple_choices, title, details
-- polls.Responses.detail : poll, partner, date, workflow_buttons, polls_AnswersByResponse, user, state, remark
+- polls.Responses.detail : poll, partner, date, workflow_buttons, polls_AnswersByResponseEditor, user, state, remark, polls_AnswersByResponsePrint
 - polls.Responses.insert : user, date, poll
 - system.SiteConfigs.detail : site_company, next_partner_id, job_office, master_budget, signer1, signer2, signer1_function, signer2_function, system_note_type, default_build_method, residence_permit_upload_type, work_permit_upload_type, driving_licence_upload_type, default_event_type, prompt_calendar, hide_events_before, client_guestrole, team_guestrole, cbss_org_unit, sector, ssdn_user_id, ssdn_email, cbss_http_username, cbss_http_password
 - tinymce.TextFieldTemplates.detail : id, name, user, description, text

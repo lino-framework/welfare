@@ -39,12 +39,12 @@ For example if they have worked through a poll already two times (a
 first time in March and another time in April) and now they are doing
 it a third time, they want to see:
 
-=========================== =====  ===== =====================   
+=========================== =====  ===== =====================
 Question                    01/03  05/04 03/05
-=========================== =====  ===== =====================   
+=========================== =====  ===== =====================
 1) Do you bla bla bla?      Yes    Yes   (Yes) (No) (Maybe)
 2) And do you bla bla bla?  No     Maybe (Yes) (No) (Maybe)
-=========================== =====  ===== =====================   
+=========================== =====  ===== =====================
 
 
 Configuration
@@ -155,9 +155,9 @@ Here is how Alicia enters the results of her interview on 2014-05-02
 with client Alfons about poll RAE:
 
 >>> obj = polls.Response.objects.get(id=3)
->>> rt.login('alicia').show(polls.AnswersByResponse, obj)
+>>> rt.login('alicia').show(polls.AnswersByResponseEditor, obj)
 ... #doctest: -ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-Question `03/03/2014 <Detail>`__ 02/04/2014 `02/05/2014 <Detail>`__ 
+Question `03/03/2014 <Detail>`__ 02/04/2014 `02/05/2014 <Detail>`__
 <BLANKLINE>
 1) Cherchez-vous du travail actuellement? Oui
  ****[Oui]**** **Peut-être** **Non** (**Remarque**)
@@ -194,7 +194,7 @@ Temps de travail acceptés 3/4
 Here is the same data when opened it its own window (i.e. not using
 the summary):
 
->>> rt.login('alicia').show(polls.AnswersByResponse, obj, nosummary=True)
+>>> rt.login('alicia').show(polls.AnswersByResponseEditor, obj, nosummary=True)
 =========================================================== ======================================================================= =============
  Question                                                    Ma réponse                                                              Ma remarque
 ----------------------------------------------------------- ----------------------------------------------------------------------- -------------
@@ -212,7 +212,7 @@ the summary):
 Hubert can see the same response, but he cannot edit it because he is
 not the author:
 
->>> rt.login('hubert').show(polls.AnswersByResponse, obj)
+>>> rt.login('hubert').show(polls.AnswersByResponseEditor, obj)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 Question `03/03/2014 <Detail>`__ 02/04/2014 `02/05/2014 <Detail>`__
 <BLANKLINE>
@@ -249,7 +249,7 @@ Temps de travail acceptés 3/4
  3/4
 
 
->>> rt.login('hubert').show(polls.AnswersByResponse, obj, nosummary=True)
+>>> rt.login('hubert').show(polls.AnswersByResponseEditor, obj, nosummary=True)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 =========================================================== ============ =============
  Question                                                    Ma réponse   Ma remarque
@@ -319,5 +319,3 @@ The results of a poll is the set of all responses.
  **Total (30 lignes)**                                                                                                         **56**       **20**
 ============================================================================================================ ================ ============ ========
 <BLANKLINE>
-
-
