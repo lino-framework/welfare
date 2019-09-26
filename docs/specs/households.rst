@@ -314,7 +314,12 @@ for ParamsLayout on pcsw.Clients expects a list of 12 values but got
 >>> print(pcsw.Client.objects.get(pk=179))
 DUBOIS Robin (179)
 
->>> url = '/api/integ/Clients/179?pv=30&pv=5&pv=&pv=29.04.2014&pv=29.04.2014&pv=&pv=&pv=&pv=&pv=&pv=false&pv=&pv=&pv=1&pv=false&pv=false&an=detail&rp=ext-comp-1351&fmt=json'
+>>> print(len(integ.Clients.params_layout.get_layout_handle()._store_fields))
+16
+
+>>> url = '/api/integ/Clients/179?'
+>>> url += 'pv=30&pv=5&pv=&pv=29.04.2014&pv=29.04.2014&pv=&pv=&pv=&pv=&pv=&pv=false&pv=&pv=&pv=1&pv=false&pv=false'
+>>> url += '&an=detail&rp=ext-comp-1351&fmt=json'
 >>> res = test_client.get(url, REMOTE_USER='rolf')
 >>> print(res.status_code)
 200
