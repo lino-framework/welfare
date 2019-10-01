@@ -86,7 +86,7 @@ class CBSSRequest(UserAuthored, mixins.Duplicable, Certifiable):
         blank=True, null=True,
         editable=False,
         help_text="""\
-The date and time when this request has been executed. 
+The date and time when this request has been executed.
 This is empty for requests than haven't been sent.
 Read-only.""")
 
@@ -106,7 +106,7 @@ Read-only.""")
         verbose_name=_("Response"),
         editable=False, blank=True,
         help_text="""\
-The raw XML response received. 
+The raw XML response received.
 """)
 
     #~ logged_messages = models.TextField(
@@ -237,16 +237,16 @@ The raw XML response received.
         retval = None
         try:
             retval = self.execute_request_(now, simulate_response)
-        except (IOError, Warning) as e:
-            if self.ticket:
-                self.status = RequestStates.errors
-            else:
-                self.status = RequestStates.failed
-            # self.logmsg_debug(unicode(e))
-            if six.PY2:
-                self.logmsg_debug(traceback.format_exc(e))
-            else:
-                self.logmsg_debug(traceback.format_exc())
+        # except (IOError, Warning) as e:
+        #     if self.ticket:
+        #         self.status = RequestStates.errors
+        #     else:
+        #         self.status = RequestStates.failed
+        #     # self.logmsg_debug(unicode(e))
+        #     if six.PY2:
+        #         self.logmsg_debug(traceback.format_exc(e))
+        #     else:
+        #         self.logmsg_debug(traceback.format_exc())
         except Exception as e:
             if self.ticket:
                 self.status = RequestStates.errors
@@ -451,8 +451,8 @@ class SSDNRequest(CBSSRequest):
 
     def wrap_ssdn_request(self, srvreq, dt):
         """
-        Wrap the given service request into the SSDN envelope 
-        by adding AuthorizedUser and other information common 
+        Wrap the given service request into the SSDN envelope
+        by adding AuthorizedUser and other information common
         the all SSDN requests).
         """
         #~ up  = settings.SITE.ssdn_user_params
@@ -614,7 +614,7 @@ class NewStyleRequest(CBSSRequest):
 class SSIN(dd.Model):
 
     """
-    Abstract base for Requests that have a field `national_id` and a method 
+    Abstract base for Requests that have a field `national_id` and a method
     :meth:`get_ssin`.
     """
     class Meta:
@@ -691,5 +691,3 @@ The number of the ID card used to authenticate the person.""")
         self.first_name = person.first_name
         self.birth_date = person.birth_date
         #~ print '20120603 fill_from_person', self.national_id
-
-
