@@ -46,7 +46,7 @@ class Plugin(ad.Plugin):
     cbss_environment = 'test'
     """
     Either `None` or one of 'test', 'acpt' or 'prod'.
-    
+
     Setting this to `None` means that the cbss app is "inactive" even
     if installed.
 
@@ -56,7 +56,10 @@ class Plugin(ad.Plugin):
         if six.PY2:
             yield 'suds'
         else:
-            yield 'suds-py3'
+            # yield 'suds-py3'
+            # as long as https://github.com/cackharot/suds-py3/pull/40 is not
+            # released, we must use the development version:
+            yield 'git+https://github.com/karimabdelhakim/suds-py3#egg=suds-py3'
 
     def get_used_libs(self, html=None):
         try:
@@ -84,4 +87,3 @@ class Plugin(ad.Plugin):
         m.add_action('cbss.AllIdentifyPersonRequests')
         m.add_action('cbss.AllManageAccessRequests')
         m.add_action('cbss.AllRetrieveTIGroupsRequests')
-
