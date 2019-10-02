@@ -11,6 +11,13 @@
 .. contents::
   :local:
 
+2019-10-02
+==========
+
+More changes in :mod:`lino_welfare.modlib.cbss`. The RetrieveTIGroups now works
+for the first time after their passing from v1 to v2! (The long delay is mostly
+due to administrative obstacles.)
+
 2019-09-24
 ==========
 
