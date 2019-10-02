@@ -58,7 +58,8 @@
 			<!-- dvlp : https://bcssksz-services-test.smals.be:443/SOA4520/RetrieveTIGroupsService/v2/retrieveTI -->
 			<!-- acpt: https://bcssksz-services-acpt.smals.be:443/SOA4520/RetrieveTIGroupsService/v2/retrieveTI  -->
 			<!-- prod:https://bcssksz-services-prod.smals.be:443/SOA4520/RetrieveTIGroupsService/v2/retrieveTI -->
-			<soap:address location="https://b2b-%(cbss_environment)s.ksz-bcss.fgov.be:4520/RetrieveTIGroupsService/v2/retrieveTI"/>
+			<!--soap:address location="https://b2b-%(cbss_environment)s.ksz-bcss.fgov.be:4520/RetrieveTIGroupsService/v2/retrieveTI"/-->
+			<soap:address location="https://bcssksz-services-%(cbss_environment)s.smals.be:443/SOA4520/RetrieveTIGroupsService/v2/retrieveTI"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
