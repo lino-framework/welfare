@@ -266,8 +266,8 @@ class ManageAccessRequest(SSDNRequest, WithPerson):
     sector = dd.ForeignKey(
         'cbss.Sector', # on_delete=models.PROTECT,
         editable=False, help_text="""\
-For register and unregister this element is ignored. 
-It can be used for list, 
+For register and unregister this element is ignored.
+It can be used for list,
 when information about sectors is required.""")
 
     purpose = dd.ForeignKey(
@@ -348,7 +348,7 @@ for register/unregister it is mandatory.""")
         """
         Extract the "service reply" part from a full reply.
         Example of a full reply::
-        
+
          <ServiceReply>
             <ns2:ResultSummary xmlns:ns2="http://www.ksz-bcss.fgov.be/XSD/SSDN/Common" ok="YES">
                <ns2:ReturnCode>0</ns2:ReturnCode>
@@ -375,7 +375,7 @@ for register/unregister it is mandatory.""")
                   <ns3:Register>SECONDARY</ns3:Register>
                </ns3:Registrations>
             </ns3:ManageAccessReply>
-         </ServiceReply>        
+         </ServiceReply>
         """
         if full_reply is not None:
             return full_reply.childAtPath('/ServiceReply/ManageAccessReply')
@@ -398,8 +398,9 @@ def reply_has_result(reply):
         msg += '\n'.join([
             k + ' : ' + getattr(reply.status, k)
             for k in keys])
-        for i in reply.status.information:
-            msg += "\n- %s = %s" % (i.fieldName, i.fieldValue)
+        if hasattr(reply.status, 'information'):
+            for i in reply.status.information:
+                msg += "\n- %s = %s" % (i.fieldName, i.fieldValue)
         raise Warning(msg)
 
 
@@ -426,7 +427,7 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
 
     def fill_from_person(self, person):
         """Fill default values for some fields of this request from the person
-        (pcsw.Client).  
+        (pcsw.Client).
 
         - The `national_id` is always taken
 
@@ -471,11 +472,11 @@ class RetrieveTIGroupsRequest(NewStyleRequest, SSIN):
                 # (2) informationCBSS (minOccurs=0)
                 # (3) legalContext (minOccurs=0)
                 # (4) searchInformation
-                
+
                 # This sequence is important because suds uses it when
                 # adding positional arguments as children to the XML
                 # request.
-                
+
                 # The optional "legalContext" argument had been added
                 # by CBSS in V5.
                 # 20190615 legalContext is mandatory since v2
@@ -548,12 +549,12 @@ def customize_system(sender, **kw):
                     dd.ForeignKey(Sector,
                                       blank=True, null=True,
             help_text="""\
-    The CBSS sector/subsector of the requesting organization.        
+    The CBSS sector/subsector of the requesting organization.
     For PCSWs this is always 17.1.
-    Used in SSDN requests as text of the `MatrixID` and `MatrixSubID` 
-    elements of `AuthorizedUser`. 
-    Used in ManageAccess requests as default value 
-    for the non-editable field `sector` 
+    Used in SSDN requests as text of the `MatrixID` and `MatrixSubID`
+    elements of `AuthorizedUser`.
+    Used in ManageAccess requests as default value
+    for the non-editable field `sector`
     (which defines the choices of the `purpose` field).
     """))
 
@@ -564,11 +565,11 @@ def customize_system(sender, **kw):
                                      blank=True,
           help_text="""\
     In CBSS requests, identifies the requesting organization.
-    For PCSWs this is the enterprise number 
+    For PCSWs this is the enterprise number
     (CBE, KBO) and should have 10 digits and no formatting characters.
 
-    Used in SSDN requests as text of the `AuthorizedUser\OrgUnit` element . 
-    Used in new style requests as text of the `CustomerIdentification\cbeNumber` element . 
+    Used in SSDN requests as text of the `AuthorizedUser\OrgUnit` element .
+    Used in new style requests as text of the `CustomerIdentification\cbeNumber` element .
     """))
     dd.inject_field(
         'system.SiteConfig', 'ssdn_user_id', models.CharField(

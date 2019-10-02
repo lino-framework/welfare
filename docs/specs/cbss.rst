@@ -16,7 +16,6 @@ CBSS connection for Lino Welfare
 The :mod:`lino_welfare.modlib.cbss` plugin adds functionality for
 communicating with the *CBSS*.
 
-
 .. currentmodule:: lino_welfare.modlib.cbss
 
 
@@ -27,8 +26,6 @@ website <http://www.ksz-bcss.fgov.be>`__
 
 Lino currently knows the following CBSS services:
 
-.. currentmodule:: lino_welfare.modlib.cbss.models
-
 - :class:`IdentifyPersonRequest` : Identifier la personne par son NISS
   ou ses données phonétiques et vérifier son identité par le numéro de
   carte SIS, de carte d'identité ou par ses données phonétiques.
@@ -37,11 +34,12 @@ Lino currently knows the following CBSS services:
   consulter un dossier dans le registre du réseau de la sécurité
   sociale (registre BCSS) et dans le répertoire sectoriel des CPAS
   géré par la SmalS-MvM.
-  
+
 - :class:`RetrieveTIGroupsRequest`: Obtenir des informations à propos
   d’une personne dans le cadre de l’enquête sociale.
   See :ref:`tx25`.
-  
+
+Only the last one is being used on a regular base.
 
 
 Configuration
@@ -50,9 +48,8 @@ Configuration
 When this plugin is installed, the local system administrator must
 configure certain settings.
 
-The following *plugin attributes* can be set in your
-:meth:`setup_plugins <lino.core.site.Site.setup_plugins>` (see
-:class:`lino_welfare.modlib.cbss.Plugin` for documentation):
+The following *plugin attributes* can be set in your :meth:`get_plugin_configs
+<lino.core.site.Site.get_plugin_configs>`:
 
 >>> dd.plugins.cbss.cbss_live_requests
 False
@@ -60,11 +57,10 @@ False
 >>> dd.plugins.cbss.cbss_environment
 'test'
 
+And your :class:`SiteConfig <lino.modlib.system.SiteConfig>` has the following
+additional fields:
 
-And your :class:`SiteConfig <lino.modlib.system.models.SiteConfig>`
-has the following additional fields:
-
->>> show_fields(rt.models.system.SiteConfig, 
+>>> show_fields(rt.models.system.SiteConfig,
 ... "sector cbss_org_unit ssdn_user_id cbss_http_password")
 +--------------------+-------------------------+----------------------------------------------------------------------------------------+
 | Internal name      | Verbose name            | Help text                                                                              |
@@ -101,11 +97,11 @@ Permissions
 >>> mt = ContentType.objects.get_for_model(RetrieveTIGroupsRequest).pk
 >>> print(RetrieveTIGroupsRequest.objects.get(pk=1).user.username)
 hubert
->>> demo_get('rolf', 'api/cbss/RetrieveTIGroupsResult', 
+>>> demo_get('rolf', 'api/cbss/RetrieveTIGroupsResult',
 ...     json_fields, 0, mt=mt, mk=1, **kw)
->>> demo_get('hubert', 'api/cbss/RetrieveTIGroupsResult', 
+>>> demo_get('hubert', 'api/cbss/RetrieveTIGroupsResult',
 ...     json_fields, 18, mt=mt, mk=1, **kw)
->>> demo_get('patrick', 'api/cbss/RetrieveTIGroupsResult', 
+>>> demo_get('patrick', 'api/cbss/RetrieveTIGroupsResult',
 ...     json_fields, 18, mt=mt, mk=1, **kw)
 
 
@@ -114,7 +110,7 @@ Models
 ======
 
 .. class:: Sector
-           
+
     Default values filled from
     :mod:`lino_welfare.modlib.cbss.fixtures.sectors`.
 
@@ -123,23 +119,23 @@ Models
     Codes qualité (Hoedanigheidscodes).
     This table is usually filled with the official codes
     by :mod:`lino_welfare.modlib.cbss.fixtures.purposes`.
-           
-           
+
+
 .. class:: IdentifyPersonRequest
 
     A request to the IdentifyPerson service.
-           
+
 .. class:: ManageAccessRequest
 
     A request to the ManageAccess service.
-    
+
     Registering a person means that this PCSW is going to maintain a
     dossier about this person.  Users commonly say "to integrate" a
     person.
-    
+
     Fields include:
 
-    
+
     .. attribute:: sector
 
         Pointer to :class:`Sector`.
@@ -149,18 +145,17 @@ Models
         Pointer to :class:`Purpose`.
 
     .. attribute:: action
-    
+
         The action to perform.  This must be one of the values in
         :class:`lino_welfare.modlib.cbss.choicelists.ManageActions`
-    
+
     .. attribute:: query_register
 
         The register to be query.
         This must be one of the values in
         :class:`lino_welfare.modlib.cbss.choicelists.QueryRegisters`
 
-           
+
 .. class:: RetrieveTIGroupsRequest
-           
+
     A request to the RetrieveTIGroups service (aka Tx25)
-           
