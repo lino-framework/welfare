@@ -103,7 +103,7 @@ Incoming invoices, partners and clients
 =======================================
 
 Let's have a closer look at an incoming invoice:
-    
+
 >>> obj = SREG.voucher_type.model.objects.get(number=3, journal=SREG)
 
 The partner of this invoice is Ethias:
@@ -206,31 +206,32 @@ Our partner has 11 movements which are not yet *cleared*.
 Let's look at the detail of these movements:
 
 >>> rt.show(rt.models.ledger.MovementsByPartner, obj.partner, nosummary=True)
-========== =============== ==================================================================== =========== ============ ================= ===========
- Valuta     Beleg           Beschreibung                                                         Debit       Kredit       Match             Beglichen
----------- --------------- -------------------------------------------------------------------- ----------- ------------ ----------------- -----------
- 21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *EMONTS Daniel (128)*                         5,33         **REG 12/2014**   Nein
- 21.04.14   *ZKBC 4/2014*   *(4450) Auszuführende Ausgabeanweisungen* / *EMONTS Daniel (128)*    5,33                     **REG 12/2014**   Ja
- 17.04.14   *SREG 3/2014*   *(4400) Lieferanten* / *AUSDEMWALD Alfons (116)*                                 10,00        **SREG 3/2014**   Nein
- 17.04.14   *SREG 3/2014*   *(4400) Lieferanten* / *COLLARD Charlotte (118)*                                 12,50        **SREG 3/2014**   Nein
- 17.04.14   *SREG 3/2014*   *(4400) Lieferanten* / *DOBBELSTEIN Dorothée (124)*                              25,00        **SREG 3/2014**   Nein
- 17.04.14   *SREG 3/2014*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                                    29,95        **SREG 3/2014**   Nein
- 17.04.14   *SREG 3/2014*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                                     5,33         **SREG 3/2014**   Nein
- 21.03.14   *ZKBC 3/2014*   *(4300) Offene Zahlungsaufträge* / *EMONTS Daniel (128)*                         5,33         **REG 12/2014**   Nein
- 21.03.14   *ZKBC 3/2014*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                         5,33                     **REG 12/2014**   Nein
- 13.03.14   *AAW 21/2014*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                         5,33                     **REG 12/2014**   Nein
- 13.03.14   *AAW 21/2014*   *(4450) Auszuführende Ausgabeanweisungen* / *EMONTS Daniel (128)*                5,33         **REG 12/2014**   Ja
- 26.02.14   *REG 12/2014*   *(4400) Lieferanten* / *EMONTS Daniel (128)*                                     5,33         **REG 12/2014**   Nein
- 21.02.14   *ZKBC 2/2014*   *(4300) Offene Zahlungsaufträge* / *EVERS Eberhart (127)*                        5,33         **REG 19/2014**   Nein
- 21.02.14   *ZKBC 2/2014*   *(4450) Auszuführende Ausgabeanweisungen* / *EVERS Eberhart (127)*   5,33                     **REG 19/2014**   Ja
- 21.01.14   *ZKBC 1/2014*   *(4300) Offene Zahlungsaufträge* / *EVERS Eberhart (127)*                        5,33         **REG 19/2014**   Nein
- 21.01.14   *ZKBC 1/2014*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                        5,33                     **REG 19/2014**   Nein
- 13.01.14   *AAW 19/2014*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                        5,33                     **REG 19/2014**   Nein
- 13.01.14   *AAW 19/2014*   *(4450) Auszuführende Ausgabeanweisungen* / *EVERS Eberhart (127)*               5,33         **REG 19/2014**   Ja
- 07.01.14   *REG 19/2014*   *(4400) Lieferanten* / *EVERS Eberhart (127)*                                    5,33         **REG 19/2014**   Nein
-                            **Saldo -93.44 (19 Bewegungen)**                                     **31,98**   **125,42**
-========== =============== ==================================================================== =========== ============ ================= ===========
+========== =============== ==================================================================================== =========== ============ ================= ===========
+ Valuta     Beleg           Beschreibung                                                                         Debit       Kredit       Match             Beglichen
+---------- --------------- ------------------------------------------------------------------------------------ ----------- ------------ ----------------- -----------
+ 21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* | *Ethias s.a.* | *EMONTS Daniel (128)*                         5,33         **REG 12/2014**   Nein
+ 21.04.14   *ZKBC 4/2014*   *(4450) Auszuführende Ausgabeanweisungen* | *Ethias s.a.* | *EMONTS Daniel (128)*    5,33                     **REG 12/2014**   Ja
+ 17.04.14   *SREG 3/2014*   *(4400) Lieferanten* | *AUSDEMWALD Alfons (116)*                                                 10,00        **SREG 3/2014**   Nein
+ 17.04.14   *SREG 3/2014*   *(4400) Lieferanten* | *COLLARD Charlotte (118)*                                                 12,50        **SREG 3/2014**   Nein
+ 17.04.14   *SREG 3/2014*   *(4400) Lieferanten* | *DOBBELSTEIN Dorothée (124)*                                              25,00        **SREG 3/2014**   Nein
+ 17.04.14   *SREG 3/2014*   *(4400) Lieferanten* | *EVERS Eberhart (127)*                                                    29,95        **SREG 3/2014**   Nein
+ 17.04.14   *SREG 3/2014*   *(4400) Lieferanten* | *EMONTS Daniel (128)*                                                     5,33         **SREG 3/2014**   Nein
+ 21.03.14   *ZKBC 3/2014*   *(4300) Offene Zahlungsaufträge* | *Ethias s.a.* | *EMONTS Daniel (128)*                         5,33         **REG 12/2014**   Nein
+ 21.03.14   *ZKBC 3/2014*   *(4400) Lieferanten* | *Ethias s.a.* | *EMONTS Daniel (128)*                         5,33                     **REG 12/2014**   Nein
+ 13.03.14   *AAW 21/2014*   *(4400) Lieferanten* | *Ethias s.a.* | *EMONTS Daniel (128)*                         5,33                     **REG 12/2014**   Nein
+ 13.03.14   *AAW 21/2014*   *(4450) Auszuführende Ausgabeanweisungen* | *Ethias s.a.* | *EMONTS Daniel (128)*                5,33         **REG 12/2014**   Ja
+ 26.02.14   *REG 12/2014*   *(4400) Lieferanten* | *EMONTS Daniel (128)*                                                     5,33         **REG 12/2014**   Nein
+ 21.02.14   *ZKBC 2/2014*   *(4300) Offene Zahlungsaufträge* | *Ethias s.a.* | *EVERS Eberhart (127)*                        5,33         **REG 19/2014**   Nein
+ 21.02.14   *ZKBC 2/2014*   *(4450) Auszuführende Ausgabeanweisungen* | *Ethias s.a.* | *EVERS Eberhart (127)*   5,33                     **REG 19/2014**   Ja
+ 21.01.14   *ZKBC 1/2014*   *(4300) Offene Zahlungsaufträge* | *Ethias s.a.* | *EVERS Eberhart (127)*                        5,33         **REG 19/2014**   Nein
+ 21.01.14   *ZKBC 1/2014*   *(4400) Lieferanten* | *Ethias s.a.* | *EVERS Eberhart (127)*                        5,33                     **REG 19/2014**   Nein
+ 13.01.14   *AAW 19/2014*   *(4400) Lieferanten* | *Ethias s.a.* | *EVERS Eberhart (127)*                        5,33                     **REG 19/2014**   Nein
+ 13.01.14   *AAW 19/2014*   *(4450) Auszuführende Ausgabeanweisungen* | *Ethias s.a.* | *EVERS Eberhart (127)*               5,33         **REG 19/2014**   Ja
+ 07.01.14   *REG 19/2014*   *(4400) Lieferanten* | *EVERS Eberhart (127)*                                                    5,33         **REG 19/2014**   Nein
+                            **Saldo -93.44 (19 Bewegungen)**                                                     **31,98**   **125,42**
+========== =============== ==================================================================================== =========== ============ ================= ===========
 <BLANKLINE>
+
 
 The first two movements are invoices which have been admitted for
 payment (i.e. a disbursement instruction (AAW) has been registered),
@@ -257,6 +258,14 @@ Our client has lots of other open transactions:
  22.05.14   *AAW 3/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*           544,91                          **AAW 3:5**        Nein
  22.05.14   *AAW 4/2014*    *(832/3331/01) Eingliederungseinkommen* / Eingliederungseinkommen / *Emonts Daniel*                                800,08          **AAW 4:5**        Nein
  22.05.14   *AAW 4/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*              800,08                          **AAW 4:5**        Nein
+ 22.05.14   *AAW 5/2014*    *(832/334/27) Sozialhilfe* / Sozialhilfe / *Emonts Daniel*                                                         648,91          **AAW 5:5**        Nein
+ 22.05.14   *AAW 5/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                          648,91                          **AAW 5:5**        Nein
+ 22.05.14   *AAW 6/2014*    *(832/3343/21) Beihilfe für Ausländer* / Beihilfe für Ausländer / *Emonts Daniel*                                  817,36          **AAW 6:5**        Nein
+ 22.05.14   *AAW 6/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*               817,36                          **AAW 6:5**        Nein
+ 17.05.14   *SREG 1/2014*   *(4400) Lieferanten* / *AS Matsalu Veevärk*                                                                        29,95           **SREG 1/2014**    Nein
+ 02.05.14   *SREG 2/2014*   *(4400) Lieferanten* / *Maksu- ja tolliamet*                                                                       120,00          **SREG 2/2014**    Nein
+ 22.04.14   *AAW 7/2014*    *(832/330/01) Allgemeine Beihilfen* / Allgemeine Beihilfen / *Emonts Daniel*                                       544,91          **AAW 7:5**        Nein
+ 22.04.14   *AAW 7/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*                 544,91                          **AAW 7:5**        Nein
  ...
  08.03.14   *REG 11/2014*   *(4400) Lieferanten* / *Ragn-Sells AS*                                                                             29,95           **REG 11/2014**    Nein
  26.02.14   *REG 12/2014*   *(4400) Lieferanten* / *Ethias s.a.*                                                                               5,33            **REG 12/2014**    Nein
@@ -273,7 +282,6 @@ Our client has lots of other open transactions:
 
 
 
-
 .. _welfare.specs.r20160105:
 
 
@@ -286,4 +294,3 @@ Some choices requests
 >>> demo_get(
 ...    'wilfried', 'choices/vatless/ItemsByProjectInvoice/account',
 ...    fields, 22, mt=mt, mk=1, **kw)
-
