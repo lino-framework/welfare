@@ -142,7 +142,7 @@ users.UserTypes:210
 Database structure
 ==================
 
-This is the list of models used in the Châtelet varianat of Lino Welfare:
+This is the list of models used in the Châtelet variant of Lino Welfare:
 
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview()) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
@@ -168,11 +168,11 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  cal.Calendar                   cal.Calendars                   7         ...
  cal.DailyPlannerRow            cal.DailyPlannerRows            8         3
  cal.Event                      cal.OneEvent                    24        548
- cal.EventPolicy                cal.EventPolicies               20        6
+ cal.EventPolicy                cal.EventPolicies               21        6
  cal.EventType                  cal.EventTypes                  27        13
  cal.Guest                      cal.Guests                      9         588
  cal.GuestRole                  cal.GuestRoles                  6         4
- cal.RecurrentEvent             cal.RecurrentEvents             22        15
+ cal.RecurrentEvent             cal.RecurrentEvents             23        15
  cal.RemoteCalendar             cal.RemoteCalendars             7         0
  cal.Room                       cal.Rooms                       10        0
  cal.Subscription               cal.Subscriptions               4         9
@@ -198,7 +198,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  contenttypes.ContentType       gfks.ContentTypes               3         135
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                11        78
- courses.Course                 courses.Activities              30        7
+ courses.Course                 courses.Activities              31        7
  courses.Enrolment              courses.Enrolments              15        100
  courses.Line                   courses.Lines                   24        7
  courses.Slot                   courses.Slots                   5         0
@@ -241,7 +241,7 @@ This is the list of models used in the Châtelet varianat of Lino Welfare:
  isip.ContractEnding            isip.ContractEndings            6         4
  isip.ContractPartner           isip.ContractPartners           6         35
  isip.ContractType              isip.ContractTypes              11        5
- isip.ExamPolicy                isip.ExamPolicies               20        6
+ isip.ExamPolicy                isip.ExamPolicies               21        6
  jobs.Candidature               jobs.Candidatures               10        74
  jobs.Contract                  jobs.Contracts                  28        13
  jobs.ContractType              jobs.ContractTypes              10        5
