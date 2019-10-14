@@ -5,7 +5,7 @@
 Notifications in Lino Welfare
 =============================
 
-.. contents:: 
+.. contents::
    :local:
    :depth: 2
 
@@ -119,7 +119,7 @@ EndCoaching
 - :class:`EndCoaching <lino_welfare.modlib.pcsw.coaching.EndCoaching>`
   seems no longer used
 
-- :class:`CreateClientVisit <lino_welfare.modlib.reception.CreateClientVisit>` 
+- :class:`CreateClientVisit <lino_welfare.modlib.reception.CreateClientVisit>`
 - :class:`CreateCoachingVisit
   <lino_welfare.modlib.reception.CreateCoachingVisit>`
 
@@ -161,10 +161,12 @@ I was not possible until now to override the `verbose_name` of the
 <BLANKLINE>
 
 >>> ses.show(rt.models.notify.MyMessages)
+[✓]22/05/2014 05:48 The database has been initialized.
+
+>>> ses.show(rt.models.notify.MyMessages, display_mode="grid")
 ===================== ==================================== ============== ==========
  Created               Subject                              Message Type   Workflow
 --------------------- ------------------------------------ -------------- ----------
  2014-05-22 05:48:00   The database has been initialized.   System event   [✓]
 ===================== ==================================== ============== ==========
 <BLANKLINE>
-
