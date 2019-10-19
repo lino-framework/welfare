@@ -378,7 +378,7 @@ The third link is:
 Bestehendem Haushalt beitreten
 >>> print(links[2].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.households.MembersByPerson.insert.run("ext-comp-1351",{ "base_params": { "person": 179 }, "data_record": { "data": { "disabled_fields": { "birth_date": true, "first_name": true, "gender": true, "last_name": true }, "household": null, "householdHidden": null, "person": "DUBOIS Robin (179)", "personHidden": 179, "primary": false, "role": "Kind", "roleHidden": "05" }, "phantom": true, "title": "Einf\u00fcgen in Mitgliedschaft in Haushalten" }, "param_values": { "aged_from": null, "aged_to": null, "end_date": null, "gender": null, "genderHidden": null, "start_date": null } })
+javascript:Lino.households.MembersByPerson.insert.run("ext-comp-1351",{ "base_params": { "person": 179 }, "data_record": { "data": { "disabled_fields": { "birth_date": true, "first_name": true, "gender": true, "last_name": true }, "household": null, "householdHidden": null, "person": "DUBOIS Robin (179)", "personHidden": 179, "primary": false, "role": "Kind", "roleHidden": "05" }, "phantom": true, "title": "Einf\u00fcgen in Mitgliedschaft in Haushalten" }, "param_values": { "aged_from": null, "aged_to": null, "end_date": null, "gender": null, "genderHidden": null, "start_date": null }, "record_id": null })
 
 
 The :func:`lino.api.doctest.get_json_soup` automates this trick:

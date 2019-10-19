@@ -22,7 +22,7 @@ about their clients. For example, integration agents want to get a
 reminder when the driving license of one of their client is going to
 expire.
 
-    
+
 .. A few things that should pass, otherwise don't expect the remaining
    tests to pass:
 
@@ -185,7 +185,7 @@ Shortcut fields
 
 
 Let's have a closer look at the `id_document` shortcut field for
-some customers. 
+some customers.
 
 The response to this AJAX request is in JSON, and we want to inspect
 the `id_document` field using `BeautifulSoup
@@ -223,7 +223,7 @@ Now let's inspect these three dots (`...`) of this second button.
 
 >>> btn = div.contents[2]
 >>> dots = btn['href'][54:-1]
->>> print(dots)  #doctest: +ELLIPSIS 
+>>> print(dots)  #doctest: +ELLIPSIS
 { ... }
 
 They are a big "object" (in Python we call it a `dict`):
@@ -300,9 +300,9 @@ None
 
 >>> print(btn)
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-<a href='javascript:Lino.uploads.UploadsByClient.insert.run(null,{ ... })' 
-style="vertical-align:-30%;" 
-title="Neuen Datensatz erstellen"><img alt="add" 
+<a href='javascript:Lino.uploads.UploadsByClient.insert.run(null,{ ... })'
+style="vertical-align:-30%;"
+title="Neuen Datensatz erstellen"><img alt="add"
 src="/static/images/mjames/add.png"/></a>
 
 >>> print(links[2].get('href'))
@@ -317,17 +317,17 @@ javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 4 })
 Now let's inspect the javascript of the first button
 
 >>> dots = btn['href'][56:-1]
->>> print(dots)  #doctest: +ELLIPSIS 
+>>> print(dots)  #doctest: +ELLIPSIS
 { ... }
 
 They are a big "object" (in Python we call it a `dict`):
 
 >>> d = AttrDict(json.loads(dots))
 
-It has 3 keys:
+It has 4 keys:
 
->>> len(d)
-3
+>>> sorted(d.keys())
+['base_params', 'data_record', 'param_values', 'record_id']
 
 >>> len(d.param_values)
 10
