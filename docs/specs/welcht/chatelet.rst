@@ -336,7 +336,7 @@ Each window layout defines a given set of fields.
 
 
 >>> print(analyzer.show_window_fields()) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-- about.About.show : server_status
+- about.About.show :
 - active_job_search.Proofs.detail : date, client, company, id, spontaneous, response, remarks
 - addresses.Addresses.detail : country, city, zip_code, addr1, street, street_no, street_box, addr2, address_type, remark, data_source, partner
 - addresses.Addresses.insert : country, city, street, street_no, street_box, address_type, remark

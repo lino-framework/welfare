@@ -1,4 +1,4 @@
-.. doctest docs/specs/misc.rst
+.. doctest docs/specs/welcht/misc.rst
 .. _welfare.specs.misc:
 
 =============
@@ -138,10 +138,6 @@ Another thing is the location of the factory template.
 >>> print(rv['info_message'])
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
 Gonna copy .../lino_welfare/modlib/welfare/config/excerpts/Default.odt to .../config/immersion/Contract/Default.odt
-
-.. until 20170122:
-   Gonna copy ...lino_welfare/modlib/immersion/config/immersion/Contract/StageForem.odt to $(PRJ)/config/immersion/Contract/StageForem.odt
-
 
 
 
