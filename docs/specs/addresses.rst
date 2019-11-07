@@ -5,6 +5,7 @@
 Multiple postal addresses
 =========================
 
+How :ref:`welfare` uses :mod:`lino_xl.lib.addresses`.
 
 .. doctest init:
 
@@ -39,4 +40,3 @@ Here are the addresses of one of these partners (119):
  Ungeprüfte Adresse               Auf dem Spitzberg 11   Nein
 ==================== =========== ====================== ========
 <BLANKLINE>
-
