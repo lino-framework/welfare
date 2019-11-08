@@ -11,6 +11,15 @@
 .. contents::
   :local:
 
+2019-11-07
+==========
+
+Fixed two bugs that caused server tracebacks in rare cases:
+
+- :meth:`lino_xl.lib.addresses.AddressOwner.get_primary_address` now returns None if
+  MultipleObjectsReturned (instead of raising a server error).
+- aids.ConfirmationsByGranting.get_data_rows() when confirmation_type of the aids type was empty.
+
 2019-10-02
 ==========
 

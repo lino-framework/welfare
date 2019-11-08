@@ -339,22 +339,17 @@ It has 4 keys:
 >>> d.base_params['type_id'] #doctest: +ELLIPSIS
 1
 
->>> data_record_keys = list(rmu(d.data_record.keys()))
->>> data_record_keys.sort()
->>> data_record_keys
+>>> sorted(d.data_record.keys())
 ['data', 'phantom', 'title']
 >>> d.data_record['phantom']
 True
 >>> print(d.data_record['title'])
-Einfügen in Uploads von BRECHT Bernd (177) (Ist aktiv)
+Upload erstellen
 
->>> data_record_data_keys = list(rmu(d.data_record['data'].keys()))
->>> data_record_data_keys.sort()
->>> data_record_data_keys
+>>> sorted(d.data_record['data'].keys())
 ['description', 'disabled_fields', 'end_date', 'file', 'type', 'typeHidden']
 
->>> data_record_data = rmu(d.data_record['data'])
->>> pprint(data_record_data, width=200)
+>>> pprint(d.data_record['data'], width=200)
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
 {'description': '', 'disabled_fields': {'mimetype': True},
 'end_date': None, 'file': '', 'type': 'Source document',

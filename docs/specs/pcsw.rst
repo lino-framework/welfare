@@ -15,7 +15,7 @@ This page describes the :mod:`lino_welfare.modlib.pcsw` plugin.
    :depth: 2
 
 .. include:: /../docs/shared/include/tested.rst
-  
+
 >>> from lino import startup
 >>> startup('lino_welfare.projects.gerd.settings.doctests')
 >>> from lino.api.doctest import *
@@ -66,14 +66,14 @@ Refusal reasons
 eID card summary
 ================
 
-Here a test case (fixed :blogref:`20130827`) 
+Here a test case (fixed :blogref:`20130827`)
 to test the new `eid_info` field:
 
 >>> soup = get_json_soup('rolf', 'pcsw/Clients/116', 'overview')
 >>> print(soup.get_text("\n"))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 Ansicht als Person , Klient
-Herr 
+Herr
 Alfons Ausdemwald
 Am Bahndamm
 4700 Eupen
@@ -86,7 +86,7 @@ Keinen Kaffee anbieten
 >>> print(soup.get_text("\n"))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 Ansicht als Person ,  Klient
-Frau 
+Frau
 Charlotte Collard
 Auf dem Spitzberg
 4700 Eupen
@@ -135,7 +135,8 @@ Creating a new client
 >>> d.phantom
 True
 >>> print(d.title)
-Einfügen in Klienten (Begleitet)
+Klient erstellen
+
 
 There are a lot of data fields:
 
@@ -253,11 +254,11 @@ runtime errors.
        <lino_xl.lib.contacts.CivilStates>`.
 
     .. attribute:: client_state
-    
+
         Pointer to :class:`ClientStates`.
 
     .. attribute:: group
-    
+
         Pointer to :class:`PersonGroup`.
 
     .. attribute:: needs_residence_permit
@@ -274,23 +275,19 @@ runtime errors.
 
     .. attribute:: work_permit_suspended_until
 
-           
+
     .. method:: get_first_meeting(self, today=None)
-                
+
         Return the last note of type "First meeting" for this client.
         Usage example see :doc:`debts` and
         :doc:`notes`.
 
-                
+
 .. class:: Clients
-           
+
     The list that opens by :menuselection:`Contacts --> Clients`.
 
     .. attribute:: client_state
 
         If not empty, show only Clients whose `client_state` equals
         the specified value.
-
-           
-
-

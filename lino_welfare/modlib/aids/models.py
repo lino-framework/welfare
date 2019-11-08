@@ -83,7 +83,7 @@ class AidType(ContactRelated, ExcerptTitle):
                     "as urgent."))
 
     confirmed_by_primary_coach = models.BooleanField(
-        _("Confirmed by primary coach"), default=True, 
+        _("Confirmed by primary coach"), default=True,
         help_text=_("Whether grantings for this aid type are to be signed by the client's primary coach."))
 
     pharmacy_type = dd.ForeignKey(
@@ -173,7 +173,7 @@ class Granting(Confirmable, BoardDecision):
            and self.aid_type_id \
            and self.aid_type.confirmed_by_primary_coach:
             self.signer = self.client.get_primary_coach()
-        
+
     def __str__(self):
         if self.aid_type_id is not None:
             t1 = self.aid_type.short_name or str(self.aid_type)
@@ -232,7 +232,7 @@ class Grantings(dd.Table):
     board decision_date
     start_date end_date
     """
-    
+
     parameters = dict(
         observed_event=dd.PeriodEvents.field(
             blank=True, default=dd.PeriodEvents.as_callable('active')),
@@ -426,7 +426,7 @@ class Confirmations(dd.Table):
         ac = rt.models.households.RefundsByPerson.get_adults_and_children(
             obj.client, obj.start_date or obj.end_date or dd.today())
         return ac[1]
-            
+
 
 # class ConfirmationsToSign(Confirmations):
 #     label = _("Aid confirmations to sign")
@@ -476,8 +476,8 @@ class ConfirmationsByGranting(dd.VirtualTable):
         if mi is None:
             return []
         ct = mi.aid_type.confirmation_type
-        if not ct:
-            return ct.model.objects.none()
+        if ct is None:
+            return []
         return ct.model.objects.filter(granting=mi).order_by('-created')
 
     @classmethod
@@ -495,7 +495,7 @@ class ConfirmationsByGranting(dd.VirtualTable):
         if mi is None:
             return None
         ct = mi.aid_type.confirmation_type
-        if not ct:
+        if ct is None:
             return None
         return ct.model.objects.get(pk=pk)
 
@@ -730,7 +730,7 @@ class RefundConfirmation(Confirmation):
                 clients_clientcontact_set_by_company__client=self.client)
             if len(qs) == 1:
                 self.pharmacy = qs[0]
-            
+
     @dd.chooser()
     def pharmacy_choices(cls, granting):
         if granting:
@@ -746,7 +746,7 @@ class RefundConfirmation(Confirmation):
             qs = rt.models.clients.ClientContactType.objects.filter(
                 can_refund=True)
             fkw.update(client_contact_type__in=qs)
-            
+
         return rt.models.contacts.Person.objects.filter(**fkw)
 
     def create_doctor_choice(self, text):
@@ -859,4 +859,3 @@ with our custom action :class:`SubmitInsertAndPrint`.
 
 """
 dd.update_model(Confirmation, submit_insert=SubmitInsertAndPrint())
-
