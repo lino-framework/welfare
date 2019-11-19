@@ -164,8 +164,10 @@ class Person(Partner, Person):
         #~ ordering = ['last_name','first_name']
         abstract = dd.is_abstract_model(__name__, 'Person')
 
-    def get_queryset(self, ar):
-        return self.model.objects.select_related('country', 'city')
+    @classmethod
+    def get_queryset(cls, user):
+        qs = super(Person, cls).get_queryset(user)
+        return qs.select_related('country', 'city')
 
     def get_print_language(self):
         "Used by DirectPrintAction"

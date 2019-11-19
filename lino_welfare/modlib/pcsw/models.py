@@ -177,8 +177,9 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         #~ logger.info("20130808 pcsw %s", rv)
         return rv
 
-    def get_queryset(self, ar):
-        return self.model.objects.select_related(
+    @classmethod
+    def get_queryset(cls, user):
+        return cls.objects.select_related(
             'country', 'city', 'nationality')
 
     def get_excerpt_options(self, ar, **kw):
