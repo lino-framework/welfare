@@ -31,7 +31,7 @@ it was the first Lino that went into production in 2010.
 - 142 models
 - 42 user roles
 - 16 user types
-- 546 views
+- 545 views
 - 29 dialog actions
 <BLANKLINE>
 
@@ -655,10 +655,10 @@ Each window layout defines a given set of fields.
 - uploads.Volumes.detail : ref, description, root_dir, base_url, overview
 - uploads.Volumes.insert : ref, description, root_dir, base_url
 - uploads.Volumes.merge_row : merge_to, reason
+- users.AllUsers.change_password : current, new1, new2
+- users.AllUsers.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
+- users.AllUsers.insert : username, email, first_name, last_name, partner, language, user_type
 - users.AllUsers.send_welcome_email : email, subject
-- users.Users.change_password : current, new1, new2
-- users.Users.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
-- users.Users.insert : username, email, first_name, last_name, partner, language, user_type
 - users.UsersOverview.sign_in : username, password
 - vatless.Invoices.detail : journal, number, entry_date, voucher_date, accounting_period, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, ItemsByInvoice, match, state, user, id, MovementsByVoucher
 - vatless.Invoices.insert : journal, partner, entry_date
@@ -873,10 +873,10 @@ Each window layout is **viewable** by a given set of user types.
 - uploads.Volumes.detail : visible for 110 120 410 420 admin 910
 - uploads.Volumes.insert : visible for 110 120 410 420 admin 910
 - uploads.Volumes.merge_row : visible for admin 910
+- users.AllUsers.change_password : visible for admin 910
+- users.AllUsers.detail : visible for admin 910
+- users.AllUsers.insert : visible for admin 910
 - users.AllUsers.send_welcome_email : visible for admin 910
-- users.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
-- users.Users.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
-- users.Users.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - users.UsersOverview.sign_in : visible for all
 - vatless.Invoices.detail : visible for 500 510 admin 910
 - vatless.Invoices.insert : visible for 500 510 admin 910
@@ -1009,10 +1009,10 @@ Global list of all actions that have a parameter dialog.
   (main) [visible for all]: **Ablehnungsgrund** (reason), **Bemerkung** (remark)
 - uploads.Volumes.merge_row : Fusionieren
   (main) [visible for all]: **nach...** (merge_to), **Begründung** (reason)
+- users.AllUsers.change_password : Passwort ändern
+  (main) [visible for all]: **Aktuelles Passwort** (current), **Neues Passwort** (new1), **Neues Passwort nochmal** (new2)
 - users.AllUsers.send_welcome_email : Welcome mail
   (main) [visible for all]: **E-Mail-Adresse** (email), **Betreff** (subject)
-- users.Users.change_password : Passwort ändern
-  (main) [visible for all]: **Aktuelles Passwort** (current), **Neues Passwort** (new1), **Neues Passwort nochmal** (new2)
 - users.UsersOverview.sign_in : Anmelden
   (main) [visible for all]: **Benutzername** (username), **Passwort** (password)
 - xcourses.CourseProviders.merge_row : Fusionieren

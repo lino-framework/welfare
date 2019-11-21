@@ -285,7 +285,7 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
  uploads.UploadType             uploads.UploadTypes             11        9
  uploads.Volume                 uploads.Volumes                 5         0
  users.Authority                users.Authorities               3         3
- users.User                     users.Users                     26        12
+ users.User                     users.AllUsers                  26        12
 ============================== =============================== ========= =======
 <BLANKLINE>
 
@@ -523,10 +523,10 @@ Each window layout defines a given set of fields.
 - uploads.Volumes.detail : ref, description, root_dir, base_url, overview
 - uploads.Volumes.insert : ref, description, root_dir, base_url
 - uploads.Volumes.merge_row : merge_to, reason
+- users.AllUsers.change_password : current, new1, new2
+- users.AllUsers.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
+- users.AllUsers.insert : username, email, first_name, last_name, partner, language, user_type
 - users.AllUsers.send_welcome_email : email, subject
-- users.Users.change_password : current, new1, new2
-- users.Users.detail : username, user_type, partner, first_name, last_name, initials, email, language, mail_mode, id, created, modified, remarks, event_type, access_class, calendar, newcomer_quota, coaching_type, coaching_supervisor, newcomer_consultations, newcomer_appointments
-- users.Users.insert : username, email, first_name, last_name, partner, language, user_type
 - users.UsersOverview.sign_in : username, password
 <BLANKLINE>
 
@@ -729,10 +729,10 @@ Each window layout is **viewable** by a given set of user types.
 - uploads.Volumes.detail : visible for 110 120 410 420 admin 910
 - uploads.Volumes.insert : visible for 110 120 410 420 admin 910
 - uploads.Volumes.merge_row : visible for admin 910
+- users.AllUsers.change_password : visible for admin 910
+- users.AllUsers.detail : visible for admin 910
+- users.AllUsers.insert : visible for admin 910
 - users.AllUsers.send_welcome_email : visible for admin 910
-- users.Users.change_password : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
-- users.Users.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
-- users.Users.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - users.UsersOverview.sign_in : visible for all
 <BLANKLINE>
 
@@ -848,10 +848,10 @@ options.
   (main) [visible for all]: **vers...** (merge_to), **Questions** (polls_Question), **Raison** (reason)
 - uploads.Volumes.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
+- users.AllUsers.change_password : Changer mot de passe
+  (main) [visible for all]: **Mot de passe actuel** (current), **Nouveau mot de passe** (new1), **Encore une fois** (new2)
 - users.AllUsers.send_welcome_email : Welcome mail
   (main) [visible for all]: **adresse e-mail** (email), **Sujet** (subject)
-- users.Users.change_password : Changer mot de passe
-  (main) [visible for all]: **Mot de passe actuel** (current), **Nouveau mot de passe** (new1), **Encore une fois** (new2)
 - users.UsersOverview.sign_in : Sign in
   (main) [visible for all]: **Nom d'utilisateur** (username), **Mot de passe** (password)
 <BLANKLINE>
