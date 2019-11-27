@@ -206,7 +206,7 @@ It is not allowed to delete a person who is being used as the
 :attr:`partner <lino.modlib.users.models.User.partner>` of a user
 (although that field is nullable).
 
->>> rt.show('users.Users', column_names="id username partner partner__id",
+>>> rt.show('users.AllUsers', column_names="id username partner partner__id",
 ...     language="en")
 ==== ========== ================= =====
  ID   Username   Partner           ID
@@ -246,4 +246,3 @@ You can delete a partner when a person or some other MTI child exists:
 >>> with translation.override('en'):
 ...     print(obj.disable_delete())
 Cannot delete Partner Die neue Alternative V.o.G. because 2 Budget Entries refer to it.
-

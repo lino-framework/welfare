@@ -25,7 +25,7 @@ See :doc:`usertypes`.
 Demo users
 ==========
 
->>> rt.show('users.Users', language="en")
+>>> rt.show('users.AllUsers', language="en")
 ========== =================================== ============ ===========
  Username   User type                           First name   Last name
 ---------- ----------------------------------- ------------ -----------
@@ -62,5 +62,3 @@ work when they are absent.
  3    Mélanie Mélard    Theresia Thelen
 ==== ================= =================
 <BLANKLINE>
-
-
