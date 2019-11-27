@@ -165,8 +165,8 @@ class Person(Partner, Person):
         abstract = dd.is_abstract_model(__name__, 'Person')
 
     @classmethod
-    def get_queryset(cls, user):
-        qs = super(Person, cls).get_queryset(user)
+    def get_user_queryset(cls, user):
+        qs = super(Person, cls).get_user_queryset(user)
         return qs.select_related('country', 'city')
 
     def get_print_language(self):

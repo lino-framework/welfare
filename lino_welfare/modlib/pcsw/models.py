@@ -178,7 +178,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         return rv
 
     @classmethod
-    def get_queryset(cls, user):
+    def get_user_queryset(cls, user):
         return cls.objects.select_related(
             'country', 'city', 'nationality')
 

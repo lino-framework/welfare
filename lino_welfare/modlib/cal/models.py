@@ -216,7 +216,7 @@ class EntriesByClient(Events):
     """
 
     @classmethod
-    def get_queryset(self, ar):
+    def get_user_queryset(self, ar):
         mi = ar.master_instance
         if mi is None:
             return None
