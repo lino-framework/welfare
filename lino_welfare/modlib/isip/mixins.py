@@ -147,7 +147,7 @@ class OverlappingContractsChecker(ClientChecker):
 OverlappingContractsChecker.activate()
 
 
-@dd.python_2_unicode_compatible
+
 class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
                    UploadController):
 

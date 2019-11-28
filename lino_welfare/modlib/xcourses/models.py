@@ -62,7 +62,7 @@ class CourseProviders(contacts.Companies):
     detail_layout = CourseProviderDetail()
 
 
-@dd.python_2_unicode_compatible
+
 class CourseContent(dd.Model):
 
     u"""
@@ -95,7 +95,7 @@ class CourseContents(dd.Table):
     """
 
 
-@dd.python_2_unicode_compatible
+
 class CourseOffer(dd.Model):
 
     """
@@ -156,7 +156,7 @@ class CourseOffersByContent(CourseOffers):
     master_key = 'content'
 
 
-@dd.python_2_unicode_compatible
+
 class Course(dd.Model):
 
     u"""

@@ -107,7 +107,7 @@ dd.inject_field(
         blank=True, null=True))
 
 
-@dd.python_2_unicode_compatible
+
 class Event(Event):
 
     # course = dd.ForeignKey(

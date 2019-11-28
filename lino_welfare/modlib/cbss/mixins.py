@@ -10,7 +10,7 @@ import traceback
 import datetime
 import logging
 
-from django.utils import six
+import six
 
 logger = logging.getLogger(__name__)
 
@@ -61,7 +61,7 @@ def get_client(obj):
 
 
 
-@dd.python_2_unicode_compatible
+
 # class CBSSRequest(UserAuthored, mixins.Printable, mixins.Duplicable):
 class CBSSRequest(UserAuthored, mixins.Duplicable, Certifiable):
 

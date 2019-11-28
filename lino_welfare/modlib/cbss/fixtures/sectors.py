@@ -9,7 +9,7 @@ http://www.bcss.fgov.be/binaries/documentation/fr/documentation/general/lijst_va
 """
 from builtins import next
 
-from django.utils import six
+import six
 from lino.api import dd
 from django.conf import settings
 from lino.utils import ucsv

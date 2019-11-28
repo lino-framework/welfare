@@ -146,7 +146,7 @@ class GrantingManager(models.Manager):
         return None
 
 
-@dd.python_2_unicode_compatible
+
 class Granting(Confirmable, BoardDecision):
     class Meta:
         abstract = dd.is_abstract_model(__name__, 'Granting')

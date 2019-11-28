@@ -79,7 +79,7 @@ class Group(mixins.BabelNamed):
     entries_layout = TableLayouts.field(_("Budget entries layout"), blank=True)
 
 
-@dd.python_2_unicode_compatible
+
 class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
     ref_max_length = settings.SITE.plugins.debts.ref_length
 
@@ -113,7 +113,7 @@ class Account(mixins.BabelNamed, mixins.Sequenced, mixins.Referrable):
             title=settings.SITE.babelattr(self, 'name'))
 
 
-@dd.python_2_unicode_compatible
+
 class Budget(UserAuthored, Certifiable, mixins.Duplicable):
 
     class Meta:

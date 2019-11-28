@@ -22,7 +22,7 @@ from lino_xl.lib.contacts.models import *
 from lino_xl.lib.vatless.mixins import PartnerDetailMixin
 
 
-@dd.python_2_unicode_compatible
+
 class Partner(
         Partner, mixins.CreatedModified,
         dd.ImportedFields):

@@ -34,73 +34,73 @@ name to read the documentation):
 >>> for value, text in choicelist_choices():
 ...     print(u"{} : {}".format(value, text))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-about.TimeZones : Zeitzonen
-addresses.AddressTypes : Adressenarten
-addresses.DataSources : Datenquellen
-aids.AidRegimes : AidRegimes
-aids.ConfirmationStates : Hilfebestätigungszustände
-aids.ConfirmationTypes : Hilfebescheinigungsarten
-art61.Subsidizations : Subsidizations
-beid.BeIdCardTypes : eID-Kartenarten
-beid.ResidenceTypes : Einwohnerregister
-cal.AccessClasses : AccessClasses
-cal.DisplayColors : DisplayColors
-cal.DurationUnits : DurationUnits
-cal.EntryStates : Kalendereintrag-Zustände
-cal.EventEvents : Beobachtungskriterien
-cal.GuestStates : Anwesenheits-Zustände
-cal.PlannerColumns : PlannerColumns
-cal.Recurrencies : Recurrencies
-cal.ReservationStates : Zustände
-cal.TaskStates : Aufgaben-Zustände
-cal.Weekdays : Weekdays
-cal.YearMonths : YearMonths
-cbss.ManageActions : ManageActions
-cbss.QueryRegisters : QueryRegisters
-cbss.RequestLanguages : RequestLanguages
-cbss.RequestStates : Zustände cbss request
-changes.ChangeTypes : Änderungsarten
-checkdata.Checkers : Datentests
-clients.ClientEvents : Beobachtungskriterien
-clients.ClientStates : Bearbeitungszustände Klienten
-clients.KnownContactTypes : Standard-Klientenkontaktarten
-contacts.CivilStates : Zivilstände
-contacts.PartnerEvents : Beobachtungskriterien
-countries.PlaceTypes : PlaceTypes
-cv.CefLevel : CEF-Kategorien
-cv.EducationEntryStates : EducationEntryStates
-cv.HowWell : HowWell
-debts.AccountTypes : Kontoarten
-debts.TableLayouts : Table layouts
-esf.ParticipationCertificates : Participation Certificates
-esf.StatisticalFields : ESF fields
-excerpts.Shortcuts : Excerpt shortcuts
-households.MemberDependencies : Haushaltsmitgliedsabhängigkeiten
-households.MemberRoles : Haushaltsmitgliedsrollen
-humanlinks.LinkTypes : Verwandschaftsarten
-isip.ContractEvents : Beobachtungskriterien
-isip.OverlapGroups : Überlappungsgruppen
-jobs.CandidatureStates : Kandidatur-Zustände
-ledger.CommonAccounts : Gemeinkonten
-ledger.JournalGroups : Journalgruppen
-ledger.PeriodStates : Zustände
-ledger.TradeTypes : Handelsarten
-ledger.VoucherStates : Zustände Beleg
-ledger.VoucherTypes : Belegarten
-notes.SpecialTypes : Sondernotizarten
-notify.MailModes : Benachrichtigungsmodi
-notify.MessageTypes : Message Types
-outbox.RecipientTypes : RecipientTypes
-pcsw.RefusalReasons : Ablehnungsgründe
-printing.BuildMethods : BuildMethods
-properties.DoYouLike : DoYouLike
-properties.HowWell : HowWell
-sepa.AccountTypes : Kontoarten
-system.Genders : Genders
-system.PeriodEvents : Beobachtungskriterien
-system.YesNo : Ja oder Nein
-uploads.Shortcuts : Upload shortcuts
-uploads.UploadAreas : Upload-Bereiche
-users.UserTypes : Benutzerarten
-xcourses.CourseRequestStates : Zustände Kursanfragen
-xl.Priorities : Prioritäten
+about.TimeZones : about.TimeZones (Zeitzonen)
+addresses.AddressTypes : addresses.AddressTypes (Adressenarten)
+addresses.DataSources : addresses.DataSources (Datenquellen)
+aids.AidRegimes : aids.AidRegimes
+aids.ConfirmationStates : aids.ConfirmationStates (Hilfebestätigungszustände)
+aids.ConfirmationTypes : aids.ConfirmationTypes (Hilfebescheinigungsarten)
+art61.Subsidizations : art61.Subsidizations (Subsidizations)
+beid.BeIdCardTypes : beid.BeIdCardTypes (eID-Kartenarten)
+beid.ResidenceTypes : beid.ResidenceTypes (Einwohnerregister)
+cal.AccessClasses : cal.AccessClasses
+cal.DisplayColors : cal.DisplayColors
+cal.DurationUnits : cal.DurationUnits
+cal.EntryStates : cal.EntryStates (Kalendereintrag-Zustände)
+cal.EventEvents : cal.EventEvents (Beobachtungskriterien)
+cal.GuestStates : cal.GuestStates (Anwesenheits-Zustände)
+cal.PlannerColumns : cal.PlannerColumns
+cal.Recurrencies : cal.Recurrencies
+cal.ReservationStates : cal.ReservationStates (Zustände)
+cal.TaskStates : cal.TaskStates (Aufgaben-Zustände)
+cal.Weekdays : cal.Weekdays
+cal.YearMonths : cal.YearMonths
+cbss.ManageActions : cbss.ManageActions
+cbss.QueryRegisters : cbss.QueryRegisters
+cbss.RequestLanguages : cbss.RequestLanguages
+cbss.RequestStates : cbss.RequestStates (Zustände cbss request)
+changes.ChangeTypes : changes.ChangeTypes (Änderungsarten)
+checkdata.Checkers : checkdata.Checkers (Datentests)
+clients.ClientEvents : clients.ClientEvents (Beobachtungskriterien)
+clients.ClientStates : clients.ClientStates (Bearbeitungszustände Klienten)
+clients.KnownContactTypes : clients.KnownContactTypes (Standard-Klientenkontaktarten)
+contacts.CivilStates : contacts.CivilStates (Zivilstände)
+contacts.PartnerEvents : contacts.PartnerEvents (Beobachtungskriterien)
+countries.PlaceTypes : countries.PlaceTypes
+cv.CefLevel : cv.CefLevel (CEF-Kategorien)
+cv.EducationEntryStates : cv.EducationEntryStates
+cv.HowWell : cv.HowWell
+debts.AccountTypes : debts.AccountTypes (Kontoarten)
+debts.TableLayouts : debts.TableLayouts (Table layouts)
+esf.ParticipationCertificates : esf.ParticipationCertificates (Participation Certificates)
+esf.StatisticalFields : esf.StatisticalFields (ESF fields)
+excerpts.Shortcuts : excerpts.Shortcuts (Excerpt shortcuts)
+households.MemberDependencies : households.MemberDependencies (Haushaltsmitgliedsabhängigkeiten)
+households.MemberRoles : households.MemberRoles (Haushaltsmitgliedsrollen)
+humanlinks.LinkTypes : humanlinks.LinkTypes (Verwandschaftsarten)
+isip.ContractEvents : isip.ContractEvents (Beobachtungskriterien)
+isip.OverlapGroups : isip.OverlapGroups (Überlappungsgruppen)
+jobs.CandidatureStates : jobs.CandidatureStates (Kandidatur-Zustände)
+ledger.CommonAccounts : ledger.CommonAccounts (Gemeinkonten)
+ledger.JournalGroups : ledger.JournalGroups (Journalgruppen)
+ledger.PeriodStates : ledger.PeriodStates (Zustände)
+ledger.TradeTypes : ledger.TradeTypes (Handelsarten)
+ledger.VoucherStates : ledger.VoucherStates (Zustände Beleg)
+ledger.VoucherTypes : ledger.VoucherTypes (Belegarten)
+notes.SpecialTypes : notes.SpecialTypes (Sondernotizarten)
+notify.MailModes : notify.MailModes (Benachrichtigungsmodi)
+notify.MessageTypes : notify.MessageTypes (Message Types)
+outbox.RecipientTypes : outbox.RecipientTypes
+pcsw.RefusalReasons : pcsw.RefusalReasons (Ablehnungsgründe)
+printing.BuildMethods : printing.BuildMethods
+properties.DoYouLike : properties.DoYouLike
+properties.HowWell : properties.HowWell
+sepa.AccountTypes : sepa.AccountTypes (Kontoarten)
+system.Genders : system.Genders
+system.PeriodEvents : system.PeriodEvents (Beobachtungskriterien)
+system.YesNo : system.YesNo (Ja oder Nein)
+uploads.Shortcuts : uploads.Shortcuts (Upload shortcuts)
+uploads.UploadAreas : uploads.UploadAreas (Upload-Bereiche)
+users.UserTypes : users.UserTypes (Benutzerarten)
+xcourses.CourseRequestStates : xcourses.CourseRequestStates (Zustände Kursanfragen)
+xl.Priorities : xl.Priorities (Prioritäten)

@@ -105,7 +105,7 @@ class ExamPolicies(dd.Table):
 JOBS_MODULE_NAME = settings.SITE.plugins.jobs.verbose_name
 
 
-@dd.python_2_unicode_compatible
+
 class ContractEnding(dd.Model):
     class Meta:
         app_label = 'isip'

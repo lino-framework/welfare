@@ -17,7 +17,7 @@ from builtins import str
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.utils import six
+import six
 
 from lino.api import rt
 from lino.core import constants

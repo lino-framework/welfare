@@ -20,7 +20,7 @@ in order to avoid live requests to the CBSS.
 
 import os
 from django.conf import settings
-from django.utils import six
+import six
 from lino.utils import IncompleteDate
 from lino.api import rt
 from io import open

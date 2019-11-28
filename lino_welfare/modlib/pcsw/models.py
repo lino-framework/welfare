@@ -86,7 +86,7 @@ from .choicelists import RefusalReasons
 from .actions import RefuseClient, MarkClientFormer
 
 
-@dd.python_2_unicode_compatible
+
 class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
              DupableClient, Coachable, Notable, UploadController):
 
@@ -839,7 +839,7 @@ IdentityChecker.activate()
 #
 # PERSON GROUP
 #
-@dd.python_2_unicode_compatible
+
 class PersonGroup(dd.Model):
     name = models.CharField(_("Designation"), max_length=200)
     ref_name = models.CharField(_("Reference name"), max_length=20, blank=True)
@@ -866,7 +866,7 @@ class PersonGroups(dd.Table):
 #
 # ACTIVITIY (Berufscode)
 #
-@dd.python_2_unicode_compatible
+
 class Activity(dd.Model):
 
     class Meta:
@@ -946,7 +946,7 @@ class DispensesByClient(Dispenses):
     required_roles = dd.login_required(SocialUser)
 
 
-@dd.python_2_unicode_compatible
+
 class ExclusionType(dd.Model):
 
     class Meta:
@@ -967,7 +967,7 @@ class ExclusionTypes(dd.Table):
     model = 'pcsw.ExclusionType'
 
 
-@dd.python_2_unicode_compatible
+
 class Exclusion(dd.Model):
 
     class Meta:
@@ -1009,7 +1009,7 @@ class ExclusionsByClient(Exclusions):
     auto_fit_column_widths = True
 
 
-@dd.python_2_unicode_compatible
+
 class Conviction(dd.Model):
 
     class Meta:

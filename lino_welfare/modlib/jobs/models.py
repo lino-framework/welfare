@@ -414,7 +414,7 @@ class MyContracts(Contracts):
         return kw
 
 
-@dd.python_2_unicode_compatible
+
 class Offer(SectorFunction):
 
     "A Job Offer"
@@ -461,7 +461,7 @@ class Offers(dd.Table):
     """
 
 
-@dd.python_2_unicode_compatible
+
 class Job(SectorFunction):
     """
     A **job** is a place where a Client can work. The Job Provider
@@ -606,7 +606,7 @@ add('27', pgettext("jobs", "Working"), 'working')
 add('30', pgettext("jobs", "Inactive"), 'inactive')
 
 
-@dd.python_2_unicode_compatible
+
 class Candidature(SectorFunction):
     """A candidature is when a client applies for a known :class:`Job`.
 
@@ -795,7 +795,7 @@ class Jobs(dd.Table):
     """
 
 
-@dd.python_2_unicode_compatible
+
 class JobType(mixins.Sequenced):
 
     """

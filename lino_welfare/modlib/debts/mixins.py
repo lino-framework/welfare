@@ -50,7 +50,7 @@ class SequencedBudgetComponent(mixins.Sequenced):
             SequencedBudgetComponent, self).get_row_permission(user, state, ba)
 
 
-@dd.python_2_unicode_compatible
+
 class ActorBase:
     """Base class for both the volatile :class:`MainActor` and the
     :class:`Actor <lino_welfare.modlib.debts.models.Actor>` model.

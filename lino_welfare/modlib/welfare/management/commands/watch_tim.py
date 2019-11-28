@@ -27,7 +27,7 @@ from django.db import connection
 from django.conf import settings
 
 from django.db import IntegrityError
-from django.utils import six
+import six
 
 from lino.core.utils import is_valid_email
 from lino.core.diff import ChangeWatcher

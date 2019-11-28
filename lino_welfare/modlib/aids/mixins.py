@@ -200,7 +200,7 @@ class Confirmable(mixins.DateRange):
         return str(self)
 
 
-@dd.python_2_unicode_compatible
+
 class Confirmation(
         Confirmable, UserAuthored, ContactRelated,
         mixins.Created, Certifiable):

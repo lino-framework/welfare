@@ -52,7 +52,7 @@ MAX_WEIGHT = decimal.Decimal('10')
 HUNDRED = decimal.Decimal('100.0')
 
 
-@dd.python_2_unicode_compatible
+
 class Broker(dd.Model):
     """A Broker (Vermittler) is an external institution who suggests
     newcomers.
@@ -116,7 +116,7 @@ class Faculties(dd.Table):
     """
 
 
-@dd.python_2_unicode_compatible
+
 class Competence(UserAuthored, mixins.Sequenced):
     """
     A competence is when a given user is declared to be competent

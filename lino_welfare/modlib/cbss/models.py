@@ -32,7 +32,7 @@ from .choicelists import (RequestStates, ManageActions,
 CBSS_ERROR_MESSAGE = "CBSS error %s:\n"
 
 
-@dd.python_2_unicode_compatible
+
 class Sector(mixins.BabelNamed):
 
     class Meta:
@@ -53,7 +53,7 @@ class Sector(mixins.BabelNamed):
         return str(self.code) + ' - ' + dd.babelattr(self, 'name')
 
 
-@dd.python_2_unicode_compatible
+
 class Purpose(mixins.BabelNamed):
 
     class Meta:
