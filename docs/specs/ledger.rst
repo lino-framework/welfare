@@ -198,7 +198,6 @@ accounting reports (:mod:`lino_xl.lib.sheets`).
  **   6900 Net income**                                    Nein              Nein            6900
  **7 Einnahmen**                                           Nein              Nein            7
  **   7000 Verkauf**                                       Nein              Nein            7000
- **   7900 Net loss**                                      Nein              Nein            7900
  **         820/333/01 Vorschuss auf Vergütungen o.ä.**    Nein              Nein            820/333/01
  **         821/333/01 Vorschuss auf Pensionen**           Nein              Nein            821/333/01
  **         822/333/01 Vorsch. Entsch. Arbeitsunfälle**    Nein              Nein            822/333/01
