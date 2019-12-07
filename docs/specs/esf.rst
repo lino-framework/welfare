@@ -73,20 +73,20 @@ The remaining fields are configured in the :class:`SummaryFields` choicelist.
 
 - Ménage: combo box ("ménage sans emploi", "ménage dont au moins 1
   personne occupe un emploi")
-  
+
 - Enfant(s) à charge: checkbox
 
 - Niveau diplôme: combobox (Sans diplôme - CEB - CE1D - CESI -
-  CESS-CQ6-CE6P-7P - Bachelier-graduat - Master-licence - 
+  CESS-CQ6-CE6P-7P - Bachelier-graduat - Master-licence -
   Enseignement secondaire complémentaire - Non reconnu – inconnu)
 
 - Handicap reconnu: checkbox
 
 - Autre difficulté rencontrée:	checkbox
 
-- Date d’entrée: reprendre date de l’atelier « Séance d’information » 
+- Date d’entrée: reprendre date de l’atelier « Séance d’information »
 - Contrat de travail sous art. 60 depuis le: date field filled from `jobs.Contract`
-- Date de sortie: Onglet intervenant – module intervention date « au »  
+- Date de sortie: Onglet intervenant – module intervention date « au »
 - Type de sortie: Onglet intervenants – Module intervention - « Cause d’abandon »
 
 - Acquis en fin de formation : filled from Onglet Compétence – Module
@@ -135,7 +135,7 @@ For most fields this is the total duration of presences (:class:`Guest
 - Apprentissage de base
 
   - Test de niveau (math, français, informatique) (3h FSE)
-  - Initiation informatique (3h FSE) 
+  - Initiation informatique (3h FSE)
   - Mobilité (3h FSE)
   - Remédiation mathématique et français (3h FSE)
 
@@ -148,12 +148,12 @@ For most fields this is the total duration of presences (:class:`Guest
 - Mise à l’emploi sous contrat art.60§7 (Sélection des années – case Heure)
 
 This distribution will probably require a choicelist with one choice
-for each field. 
+for each field.
 
 These fields will probably not be columns of a slave table but
 (dynamicaly generated) database fields in the Dossier model.
 
-There will also be a pointer to 
+There will also be a pointer to
 (one entry per `courses.Line` as it seems), but some columns are
 special and require a hard-coded method.
 
@@ -182,7 +182,7 @@ Notes de discussion
   "Cyber-emploi", mais pour ces ateliers on note les heures d'arrivée
   et de départ par participation.
 
-- Colonne "Mise à l'emploi sous contrat a60" : comme pour 
+- Colonne "Mise à l'emploi sous contrat a60" : comme pour
   "Mise en situation professionnelle"
 
 - Tous les "champs statistiques" représentent des heures de présences.
@@ -215,7 +215,7 @@ lequel seront totalisés les heures.
  Évaluation                               Auswertung                               Evaluation                      Oui                      Entretien individuel
 ======================================== ======================================== =============================== ======================== ==============================
 <BLANKLINE>
-  
+
 .. class:: StatisticalFields
 
 >>> rt.show(esf.StatisticalFields, language="fr")
@@ -270,7 +270,7 @@ True
  has_esf         ESF data       Whether Lino should make ESF summaries for this client.
 =============== ============== =========================================================
 
->>> rt.show(esf.SummariesByClient, obj)
+>>> rt.show(esf.SummariesByClient, obj, language="en")
 ====== ======= ======= ======= ====== ====== ====== ====== ====== ====== ====== ====== ======
  Year   S.Inf   E.Ind   E.For   SIS    Tst    Info   Mob    Rem    AN!    MSP    CyE    60§7
 ------ ------- ------- ------- ------ ------ ------ ------ ------ ------ ------ ------ ------
@@ -288,7 +288,7 @@ checked as part of :manage:`prep`:
 
 The data has not changed:
 
->>> rt.show(esf.SummariesByClient, obj)
+>>> rt.show(esf.SummariesByClient, obj, language="en")
 ====== ======= ======= ======= ====== ====== ====== ====== ====== ====== ====== ====== ======
  Year   S.Inf   E.Ind   E.For   SIS    Tst    Info   Mob    Rem    AN!    MSP    CyE    60§7
 ------ ------- ------- ------- ------ ------ ------ ------ ------ ------ ------ ------ ------
@@ -306,7 +306,7 @@ supplyments:
 >>> print(obj)
 BRECHT Bernd (177)
 
->>> rt.show(esf.SummariesByClient, obj)
+>>> rt.show(esf.SummariesByClient, obj, language="en")
 ====== ======= ======= ======= ====== ====== ====== ====== ====== ====== ====== ====== ========
  Year   S.Inf   E.Ind   E.For   SIS    Tst    Info   Mob    Rem    AN!    MSP    CyE    60§7
 ------ ------- ------- ------- ------ ------ ------ ------ ------ ------ ------ ------ --------
@@ -361,5 +361,3 @@ Choicelists
 .. class:: ImmersionHours
 
 .. class:: Art60Hours
-
-
