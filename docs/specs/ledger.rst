@@ -151,19 +151,17 @@ Here is the main menu for accountants:
 General accounts ("budgetary articles")
 =======================================
 
-Belgian public instances use so-called budgetary articles (`Articles
-budgétaires
+Belgian public instances use so-called budgetary articles (`Articles budgétaires
 <http://www.pouvoirslocaux.irisnet.be/fr/theme/finances/docfin/la-structure-dun-article-budgetaire>`_
-in French, "Haushaltsartikel" in German) for classifying their
-monetary transactions.  These budgetary articles are in public sector
-accounting exactly what general accounts are in private sector
-accounting.  It seems BTW that the usage of the term "budgetary
-articles" is being replaced by the term "accounts".
+in French, "Haushaltsartikel" in German) for classifying their monetary
+transactions.  These budgetary articles are in public sector accounting exactly
+what general accounts are in private sector accounting.  It seems BTW that the
+usage of the term "budgetary articles" is being replaced by the term "accounts".
 
-The main difference is that they are structured differently.  The demo
-database currently has a mixture of "PCMN style" and "public sector
-style" references because Lino Welfare doesn't need full
-accounting reports (:mod:`lino_xl.lib.sheets`).
+The main difference is that they are structured differently.  The demo database
+currently has a mixture of "PCMN style" and "public sector style" references
+because Lino Welfare doesn't use full accounting reports
+(:mod:`lino_xl.lib.sheets`).
 
 >>> rt.show(ledger.Accounts)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
@@ -173,17 +171,17 @@ accounting reports (:mod:`lino_xl.lib.sheets`).
  **   1000 Net income (loss)**                             Ja                Ja              1000
  **4 Kommerzielle Vermögenswerte und Verbindlichkeiten**   Nein              Nein            4
  **   4000 Kunden**                                        Ja                Ja              4000
+ **   4100 Lieferanten**                                   Ja                Ja              4100
+ **   4200 Angestellte**                                   Ja                Ja              4200
  **   4300 Offene Zahlungsaufträge**                       Ja                Ja              4300
- **   4400 Lieferanten**                                   Ja                Ja              4400
  **   4450 Auszuführende Ausgabeanweisungen**              Ja                Ja              4450
- **   4500 Angestellte**                                   Ja                Ja              4500
+ **   4500 Steuerämter**                                   Ja                Ja              4500
  **   4510 Geschuldete Mehrwertsteuer**                    Nein              Nein            4510
- **   4511 Rückzahlbare Mehrwertsteuer**                   Nein              Nein            4511
- **   4512 Abziehbare Mehrwertsteuer**                     Nein              Nein            4512
  **   4513 Deklarierte Mehrwertsteuer**                    Nein              Nein            4513
- **   4550 Internal clearings**                            Ja                Ja              4550
- **   4600 Steuerämter**                                   Ja                Ja              4600
- **   4800 Granted aids**                                  Ja                Ja              4800
+ **   4520 Abziehbare Mehrwertsteuer**                     Nein              Nein            4520
+ **   4530 Rückzahlbare Mehrwertsteuer**                   Nein              Nein            4530
+ **   4800 Internal clearings**                            Ja                Ja              4800
+ **   4810 Granted aids**                                  Ja                Ja              4810
  **   4900 Wartekonto**                                    Ja                Ja              4900
  **5 Finanzielle Vermögenswerte und Verbindlichkeiten**    Nein              Nein            5
  **   5500 BestBank**                                      Nein              Nein            5500
@@ -219,7 +217,6 @@ accounting reports (:mod:`lino_xl.lib.sheets`).
  **         P87/000/00 Abhebung von pers. Guthaben**       Nein              Nein            P87/000/00
 ========================================================= ================= =============== =============
 <BLANKLINE>
-
 
 
 Vouchers
