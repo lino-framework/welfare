@@ -1259,8 +1259,8 @@ Some choices lists:
 No unrequested new features
 ===========================
 
-:ticket:`3419` is disabled in weleup because the :term:`operator` doesn't like
-unrequested changes.
+:ticket:`3419` is disabled in weleup because the :term:`site operator` doesn't
+like unrequested changes.
 
 >>> obj = contacts.Role.objects.get(pk=1)
 >>> pprint(obj.create_person_choice("Joe Smith"))
