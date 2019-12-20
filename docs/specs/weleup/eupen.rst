@@ -1254,3 +1254,17 @@ Some choices lists:
 >>> fields = 'count rows'
 >>> demo_get('rolf', 'choices/cv/SkillsByPerson/property', fields, 6, **kw)
 >>> demo_get('rolf', 'choices/cv/ObstaclesByPerson/property', fields, 15, **kw)
+
+
+No unrequested new features
+===========================
+
+:ticket:`3419` is disabled in weleup because the :term:`operator` doesn't like
+unrequested changes.
+
+>>> obj = contacts.Role.objects.get(pk=1)
+>>> pprint(obj.create_person_choice("Joe Smith"))
+None
+
+>>> contacts.Person.disable_create_choice
+True
