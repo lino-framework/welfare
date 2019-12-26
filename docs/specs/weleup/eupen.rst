@@ -516,7 +516,7 @@ Each window layout defines a given set of fields.
 - cal.Guests.detail : event, client, role, state, remark, workflow_buttons, waiting_since, busy_since, gone_since
 - cal.Guests.insert : event, partner, role
 - cal.MonthlyView.detail : navigation_panel
-- cal.RecurrentEvents.detail : name, name_fr, name_en, id, user, event_type, start_date, start_time, end_date, end_time, every_unit, every, max_events, monday, tuesday, wednesday, thursday, friday, saturday, sunday, description
+- cal.RecurrentEvents.detail : name, name_fr, name_en, id, user, event_type, start_date, start_time, end_date, end_time, every_unit, every, positions, max_events, monday, tuesday, wednesday, thursday, friday, saturday, sunday, description
 - cal.RecurrentEvents.insert : name, name_fr, name_en, start_date, end_date, every_unit, event_type
 - cal.Rooms.detail : id, name, name_fr, name_en, company, contact_person, display_color, description
 - cal.Rooms.insert : id, name, name_fr, name_en, display_color, company, contact_person
