@@ -19,8 +19,7 @@ Content
    :maxdepth: 1
 
    install/index
+   eutests/index
    changes/index
    specs/index
    api/index
-
-

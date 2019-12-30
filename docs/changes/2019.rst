@@ -11,6 +11,11 @@
 .. contents::
   :local:
 
+2019-12-30
+==========
+
+Released welfare and weleup 19.12.0 to PyPI.
+
 2019-11-07
 ==========
 

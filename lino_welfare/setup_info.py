@@ -7,22 +7,15 @@
 #
 #   $ python setup.py test -s tests.PackagesTests
 
-import sys
-PY2 = sys.version_info[0] == 2
-
-
 requires = ['lino-cosi',
             'pytidylib',
             'django-iban', 'metafone',
             'cairocffi']
-if PY2:
-    requires.append('suds')
-else:
-    requires.append('suds-py3')
+requires.append('suds-py3')
 
 SETUP_INFO = dict(
     name='lino-welfare',
-    version='19.9.1',
+    version='19.12.0',
     install_requires=requires,
     test_suite='tests',
     tests_require=['pytest'],
