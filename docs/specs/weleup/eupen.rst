@@ -412,7 +412,7 @@ Database structure
 - ledger.Account : id, ref, seqno, name, common_account, needs_partner, clearable, default_amount, name_fr, name_en, sales_allowed, purchases_allowed, wages_allowed, taxes_allowed, clearings_allowed, bank_po_allowed
 - ledger.AccountingPeriod : id, ref, start_date, end_date, state, year, remark
 - ledger.FiscalYear : id, ref, start_date, end_date, state
-- ledger.Journal : id, ref, seqno, name, build_method, template, trade_type, voucher_type, journal_group, auto_check_clearings, auto_fill_suggestions, force_sequence, account, partner, printed_name, dc, yearly_numbering, must_declare, uploads_volume, printed_name_fr, printed_name_en, name_fr, name_en, sepa_account
+- ledger.Journal : id, ref, seqno, name, build_method, template, trade_type, voucher_type, journal_group, auto_check_clearings, auto_fill_suggestions, force_sequence, preliminary, account, partner, printed_name, dc, yearly_numbering, must_declare, uploads_volume, printed_name_fr, printed_name_en, name_fr, name_en, sepa_account
 - ledger.LedgerInfo : user, entry_date
 - ledger.MatchRule : id, account, journal
 - ledger.Movement : id, project, voucher, partner, seqno, account, amount, dc, match, cleared, value_date
