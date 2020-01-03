@@ -616,7 +616,7 @@ Each window layout defines a given set of fields.
 - ledger.Accounts.insert : ref, name, name_fr, name_en
 - ledger.Accounts.merge_row : merge_to, reason
 - ledger.FiscalYears.merge_row : merge_to, reason
-- ledger.Journals.detail : name, name_fr, name_en, ref, journal_group, voucher_type, trade_type, seqno, id, account, partner, build_method, template, uploads_volume, dc, force_sequence, yearly_numbering, auto_fill_suggestions, auto_check_clearings, must_declare, printed_name, printed_name_fr, printed_name_en
+- ledger.Journals.detail : name, name_fr, name_en, ref, journal_group, voucher_type, trade_type, seqno, id, account, partner, build_method, template, uploads_volume, dc, force_sequence, yearly_numbering, auto_fill_suggestions, auto_check_clearings, must_declare, preliminary, printed_name, printed_name_fr, printed_name_en
 - ledger.Journals.insert : ref, name, name_fr, name_en, journal_group, voucher_type
 - ledger.Journals.merge_row : merge_to, ledger_MatchRule, reason
 - ledger.PaymentTerms.detail : ref, months, days, end_of_month, name, name_fr, name_en, printed_text, printed_text_fr, printed_text_en
