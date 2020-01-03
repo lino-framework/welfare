@@ -1,0 +1,18 @@
+.. _welfare.changes.2020:
+
+====
+2020
+====
+
+This is the :term:`change log` 2020 for :ref:`welfare`.
+You should also consult also the :term:`change log` for :ref:`book`.
+General information about how to read and maintain this document in :ref:`dev.changes`.
+
+
+.. contents::
+  :local:
+
+2020-01-03
+==========
+
+Started this document.

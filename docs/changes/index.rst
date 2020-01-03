@@ -4,11 +4,14 @@
 Changes
 =======
 
-Changes in the :mod:`lino_welfare` package.
+Changes in :mod:`lino_welfare` package.
+
+See also :ref:`book.changes.2020`.
+
 
 
 .. toctree::
    :maxdepth: 1
 
+   2020
    2019
-
