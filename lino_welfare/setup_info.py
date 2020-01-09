@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2002-2019 Rumma & Ko Ltd
+# Copyright 2002-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 # This module is part of the Lino Welfare test suite.
@@ -15,13 +15,13 @@ requires.append('suds-py3')
 
 SETUP_INFO = dict(
     name='lino-welfare',
-    version='19.12.0',
+    version='20.1.0',
     install_requires=requires,
     test_suite='tests',
     tests_require=['pytest'],
     include_package_data=True,
     zip_safe=False,
-    description=u"A Lino plugin library for Belgian PCSWs",
+    description="A Lino plugin library for Belgian PCSWs",
     long_description="""\
 Lino Welfare is a
 `Lino <http://www.lino-framework.org>`__
@@ -57,7 +57,7 @@ for Belgian
     license='BSD-2-Clause',
     classifiers="""\
 Programming Language :: Python
-Programming Language :: Python :: 2
+Programming Language :: Python :: 3
 Development Status :: 5 - Production/Stable
 Environment :: Web Environment
 Framework :: Django
