@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2016 Rumma & Ko Ltd
+# Copyright 2013-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """
@@ -10,9 +10,6 @@ doesn't need :mod:`lino_xl.lib.vat`
 
 """
 
-from __future__ import unicode_literals
-
-from builtins import str
 from lino.api import dd, rt, _
 
 from lino_xl.lib.contacts.models import *
@@ -48,7 +45,7 @@ class Partner(
     hidden_columns = 'created modified activity'
 
     quick_search_fields = "prefix name phone gsm street"
-    
+
     is_obsolete = models.BooleanField(
         verbose_name=_("obsolete"), default=False, help_text=u"""\
 Altfälle sind Partner, deren Stammdaten nicht mehr gepflegt werden und
@@ -109,7 +106,7 @@ für neue Operationen nicht benutzt werden können.""")
 
 # Lino Welfare uses the `overview` field only in detail forms, and we
 # don't want it to have a label "Description":
-dd.update_field(Partner, 'overview', verbose_name=None)    
+dd.update_field(Partner, 'overview', verbose_name=None)
 
 
 class PartnerDetail(PartnerDetailMixin, PartnerDetail):
@@ -333,3 +330,4 @@ class CompanyDetail(CompanyDetail, PartnerDetailMixin):
 #     contacts.Companies.set_detail_layout(contacts.CompanyDetail())
 
 
+Partners.detail_layout = "contacts.PartnerDetail"
