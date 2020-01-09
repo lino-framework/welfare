@@ -21,7 +21,6 @@ This page describes the :mod:`lino_welfare.modlib.pcsw` plugin.
 >>> from lino.api.doctest import *
 
 
-
 .. >>> len(settings.SITE.languages)
    3
 
@@ -72,7 +71,7 @@ to test the new `eid_info` field:
 >>> soup = get_json_soup('rolf', 'pcsw/Clients/116', 'overview')
 >>> print(soup.get_text("\n"))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-Ansicht als Person , Klient
+Ansicht als Partner , Person , Klient
 Herr
 Alfons Ausdemwald
 Am Bahndamm
@@ -85,7 +84,7 @@ Keinen Kaffee anbieten
 >>> soup = get_json_soup('rolf', 'pcsw/Clients/118', 'overview')
 >>> print(soup.get_text("\n"))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-Ansicht als Person ,  Klient
+Ansicht als Partner , Person ,  Klient
 Frau
 Charlotte Collard
 Auf dem Spitzberg
@@ -181,6 +180,7 @@ removed at the same time:
 Lino.pcsw.Clients.detail.run(null,{ "record_id": 178 })
 >>> print(tostring(p.get_mti_buttons(ar)))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+<a href="/api/contacts/Partners/178">Partner</a>,
 <b>Person</b>, <a
 href="/api/pcsw/Clients/178">Klient</a> [<a
 ...javascript:Lino.contacts.Partners.del_client(null,true,178,{ })...">❌</a>]

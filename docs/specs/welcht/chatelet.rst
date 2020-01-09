@@ -400,6 +400,7 @@ Each window layout defines a given set of fields.
 - contacts.Companies.detail : overview, prefix, name, type, vat_id, client_contact_type, url, email, phone, gsm, fax, remarks, notes_NotesByCompany, id, language, activity, is_obsolete, created, modified
 - contacts.Companies.insert : name, email, type
 - contacts.Companies.merge_row : merge_to, addresses_Address, reason
+- contacts.Partners.detail : overview, id, language, activity, client_contact_type, url, email, phone, gsm, fax, country, region, city, zip_code, addr1, street_prefix, street, street_no, street_box, addr2, remarks, is_obsolete, created, modified
 - contacts.Partners.merge_row : merge_to, addresses_Address, reason
 - contacts.Persons.create_household : head, type, partner
 - contacts.Persons.detail : overview, title, first_name, middle_name, last_name, gender, birth_date, age, id, language, email, phone, gsm, fax, households_MembersByPerson, humanlinks_LinksByHuman, remarks, activity, url, client_contact_type, is_obsolete, created, modified
@@ -606,6 +607,7 @@ Each window layout is **viewable** by a given set of user types.
 - contacts.Companies.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - contacts.Companies.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - contacts.Companies.merge_row : visible for admin 910
+- contacts.Partners.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - contacts.Partners.merge_row : visible for admin 910
 - contacts.Persons.create_household : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - contacts.Persons.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910

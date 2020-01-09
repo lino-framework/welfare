@@ -302,7 +302,7 @@ None
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
 <a href='javascript:Lino.uploads.UploadsByClient.insert.run(null,{ ... })'
 style="vertical-align:-30%;"
-title="Neuen Datensatz erstellen"><img alt="add"
+title="Öffnet ein Dialogfenster, um einen neuen Datensatz (Upload) zu erstellen."><img alt="add"
 src="/static/images/mjames/add.png"/></a>
 
 >>> print(links[2].get('href'))
