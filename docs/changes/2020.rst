@@ -12,8 +12,11 @@ General information about how to read and maintain this document in :ref:`dev.ch
 .. contents::
   :local:
 
+
 2020-01-09
 ==========
+
+Set the contacts.Partners.detail_layout to "contacts.PartnerDetail".
 
 Released to PyPI : welfare and weleup 20.1.0
 
