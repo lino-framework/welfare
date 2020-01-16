@@ -128,8 +128,8 @@ Here is the main menu for accountants:
 >>> rt.login('wilfried').show_menu(language="de")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen
-- Kalender : Kalender, Meine Termine, Meine unbestätigten Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine, Kalenderansicht
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Meine ablaufenden Upload-Dateien, Meine Upload-Dateien, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen
+- Kalender : Kalender, Meine Termine, Meine unbestätigten Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - Buchhaltung :
   - Rechnungseingänge : Rechnungseingänge (REG), Sammelrechnungen (SREG)

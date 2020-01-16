@@ -28,10 +28,10 @@ it was the first Lino that went into production in 2010.
 >>> print(analyzer.show_complexity_factors())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - 64 plugins
-- 142 models
+- 141 models
 - 42 user roles
 - 16 user types
-- 545 views
+- 537 views
 - 29 dialog actions
 <BLANKLINE>
 
@@ -64,8 +64,8 @@ Rolf is the local system administrator, he has a complete menu:
 >>> rt.login('rolf').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Überfällige Termine, Meine unbestätigten Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine, Kalenderansicht
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Meine ablaufenden Upload-Dateien, Meine Upload-Dateien, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Kalender : Kalender, Meine Termine, Überfällige Termine, Meine unbestätigten Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - Buchhaltung :
@@ -94,7 +94,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kontakte : Organisationsarten, Funktionen, Gremien, Haushaltsarten
   - Eigenschaften : Eigenschaftsgruppen, Eigenschafts-Datentypen, Fachkompetenzen, Sozialkompetenzen, Hindernisse
   - Büro : Auszugsarten, Dateibibliotheken, Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
-  - Kalender : Kalenderliste, Räume, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender, Tagesplanerzeilen
+  - Kalender : Kalenderliste, Räume, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien, Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe
   - Buchhaltung : Haushaltsartikel, Journale, Geschäftsjahre, Buchungsperioden, Zahlungsbedingungen
   - Lebenslauf : Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
@@ -107,7 +107,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kontakte : Kontaktpersonen, Partner, Adressenarten, Adressen, Gremienmitglieder, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
   - System : Vollmachten, Benutzerarten, Benutzerrollen, Benachrichtigungen, Änderungen, All dashboard widgets, Datenbankmodelle, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
-  - Büro : Auszüge, Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen, Einfügetexte
+  - Büro : Auszüge, Upload-Dateien, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen, Einfügetexte
   - Kalender : Kalendereinträge, Aufgaben, Anwesenheiten, Abonnements, Kalendereintrag-Zustände, Anwesenheits-Zustände, Aufgaben-Zustände
   - ÖSHZ : AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter, Klientenkontakte, Standard-Klientenkontaktarten, Begleitungen
   - Buchhaltung : Gemeinkonten, Begleichungsregeln, Belege, Belegarten, Bewegungen, Handelsarten, Journalgruppen, Rechnungen
@@ -132,8 +132,8 @@ Hubert is an Integration agent.
 ...     rt.login('hubert').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Meine unbestätigten Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine, Kalenderansicht
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Meine ablaufenden Upload-Dateien, Meine Upload-Dateien, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Kalender : Kalender, Meine Termine, Meine unbestätigten Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE :
@@ -178,8 +178,8 @@ to explicitly override the language of :meth:`show_menu
 >>> rt.login('melanie').show_menu(language="de")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Überfällige Termine, Meine unbestätigten Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine, Kalenderansicht
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Meine ablaufenden Upload-Dateien, Meine Upload-Dateien, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Kalender : Kalender, Meine Termine, Überfällige Termine, Meine unbestätigten Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE :
@@ -198,7 +198,7 @@ to explicitly override the language of :meth:`show_menu
   - Orte : Länder, Orte
   - Kontakte : Organisationsarten, Funktionen, Haushaltsarten
   - Büro : Dateibibliotheken, Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
-  - Kalender : Kalenderliste, Räume, Regelmäßige Ereignisse, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender, Tagesplanerzeilen
+  - Kalender : Kalenderliste, Räume, Regelmäßige Ereignisse, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien, Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe
   - Lebenslauf : Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
@@ -206,7 +206,7 @@ to explicitly override the language of :meth:`show_menu
   - Erstempfang : Vermittler, Fachbereiche
 - Explorer :
   - Kontakte : Kontaktpersonen, Partner, Adressenarten, Haushaltsmitgliedsrollen, Mitglieder, Verwandtschaftsbeziehungen, Verwandschaftsarten
-  - Büro : Uploads, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
+  - Büro : Upload-Dateien, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen
   - Kalender : Aufgaben, Abonnements
   - ÖSHZ : AG-Sperren, Vorstrafen, Klienten, Bearbeitungszustände Klienten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Klientenkontakte, Standard-Klientenkontaktarten, Begleitungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
@@ -230,8 +230,8 @@ Kerstin is a debts consultant.
 ...     rt.login('kerstin').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Meine unbestätigten Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine, Kalenderansicht
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Meine ablaufenden Upload-Dateien, Meine Upload-Dateien, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Kalender : Kalender, Meine Termine, Meine unbestätigten Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE :
@@ -262,8 +262,8 @@ Caroline is a newcomers consultant.
 ...     rt.login('caroline').show_menu()
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Benachrichtigungen, Meine Auszüge, Ablaufende Uploads, Meine Uploads, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
-- Kalender : Kalender, Meine Termine, Meine unbestätigten Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine, Kalenderansicht
+- Büro : Meine Benachrichtigungen, Meine Auszüge, Meine ablaufenden Upload-Dateien, Meine Upload-Dateien, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
+- Kalender : Kalender, Meine Termine, Meine unbestätigten Termine, Meine Aufgaben, Meine Gäste, Meine Anwesenheiten, Meine überfälligen Termine
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher, Meine Warteschlange
 - ÖSHZ : Klienten, Meine Begleitungen, Zu bestätigende Hilfebeschlüsse
 - DSBE :
@@ -292,7 +292,7 @@ Theresia is a reception clerk.
 >>> rt.login('theresia').show_menu(language="de")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
-- Büro : Meine Auszüge, Ablaufende Uploads, Meine Uploads, Meine Ereignisse/Notizen
+- Büro : Meine Auszüge, Meine ablaufenden Upload-Dateien, Meine Upload-Dateien, Meine Ereignisse/Notizen
 - Empfang : Klienten, Termine heute, Wartende Besucher, Beschäftigte Besucher, Gegangene Besucher
 - ÖSHZ : Meine Begleitungen
 - DSBE :
@@ -330,7 +330,6 @@ Database structure
 - boards.Board : id, start_date, end_date, name, name_fr, name_en
 - boards.Member : id, board, person, role
 - cal.Calendar : id, name, description, color, name_fr, name_en
-- cal.DailyPlannerRow : id, seqno, designation, start_time, end_time, designation_fr, designation_en
 - cal.Event : id, modified, created, project, start_date, start_time, end_date, end_time, build_time, build_method, user, assigned_to, owner_type, owner_id, summary, description, access_class, sequence, auto_type, priority, event_type, transparent, room, state
 - cal.EventPolicy : id, start_date, start_time, end_date, end_time, name, every_unit, every, positions, monday, tuesday, wednesday, thursday, friday, saturday, sunday, max_events, event_type, name_fr, name_en
 - cal.EventType : id, ref, seqno, name, attach_to_email, email_template, description, is_appointment, all_rooms, locks_user, force_guest_states, fill_presences, start_date, event_label, max_conflicting, max_days, transparent, planner_column, default_duration, invite_client, name_fr, name_en, event_label_fr, event_label_en, esf_field
@@ -499,7 +498,6 @@ Each window layout defines a given set of fields.
 - boards.Boards.insert : name, name_fr, name_en
 - cal.Calendars.detail : name, name_fr, name_en, color, id, description
 - cal.Calendars.insert : name, name_fr, name_en, color
-- cal.DailyView.detail : navigation_panel
 - cal.EntriesByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
 - cal.EntriesByGuest.insert : start_date, start_time, end_time, summary, event_type
 - cal.EntriesByProject.insert : start_date, start_time, end_time, summary, event_type
@@ -515,7 +513,6 @@ Each window layout defines a given set of fields.
 - cal.Guests.checkin : notify_subject, notify_body, notify_silent
 - cal.Guests.detail : event, client, role, state, remark, workflow_buttons, waiting_since, busy_since, gone_since
 - cal.Guests.insert : event, partner, role
-- cal.MonthlyView.detail : navigation_panel
 - cal.RecurrentEvents.detail : name, name_fr, name_en, id, user, event_type, start_date, start_time, end_date, end_time, every_unit, every, positions, max_events, monday, tuesday, wednesday, thursday, friday, saturday, sunday, description
 - cal.RecurrentEvents.insert : name, name_fr, name_en, start_date, end_date, every_unit, event_type
 - cal.Rooms.detail : id, name, name_fr, name_en, company, contact_person, display_color, description
@@ -523,7 +520,6 @@ Each window layout defines a given set of fields.
 - cal.Tasks.detail : start_date, due_date, id, workflow_buttons, summary, project, user, delegated, owner, created, modified, description
 - cal.Tasks.insert : summary, user, project
 - cal.TasksByController.insert : summary, start_date, due_date, user, delegated
-- cal.WeeklyView.detail : navigation_panel
 - cbss.IdentifyPersonRequests.detail : id, person, user, sent, status, printed, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender, environment, ticket, info_messages, debug_messages
 - cbss.IdentifyPersonRequests.insert : person, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender
 - cbss.ManageAccessRequests.detail : id, person, user, sent, status, printed, action, start_date, end_date, purpose, query_register, national_id, sis_card_no, id_card_no, first_name, last_name, birth_date, result, environment, ticket, info_messages, debug_messages
@@ -718,7 +714,6 @@ Each window layout is **viewable** by a given set of user types.
 - boards.Boards.insert : visible for admin 910
 - cal.Calendars.detail : visible for 110 120 410 420 admin 910
 - cal.Calendars.insert : visible for 110 120 410 420 admin 910
-- cal.DailyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cal.EntriesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByGuest.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByProject.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
@@ -734,7 +729,6 @@ Each window layout is **viewable** by a given set of user types.
 - cal.Guests.checkin : visible for 100 110 120 200 210 220 300 400 410 420 800 admin 910
 - cal.Guests.detail : visible for 100 110 120 200 210 220 300 400 410 420 800 admin 910
 - cal.Guests.insert : visible for 100 110 120 200 210 220 300 400 410 420 800 admin 910
-- cal.MonthlyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cal.RecurrentEvents.detail : visible for 110 120 410 420 admin 910
 - cal.RecurrentEvents.insert : visible for 110 120 410 420 admin 910
 - cal.Rooms.detail : visible for 110 120 410 420 admin 910
@@ -742,7 +736,6 @@ Each window layout is **viewable** by a given set of user types.
 - cal.Tasks.detail : visible for 110 120 410 420 admin 910
 - cal.Tasks.insert : visible for 110 120 410 420 admin 910
 - cal.TasksByController.insert : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
-- cal.WeeklyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cbss.IdentifyPersonRequests.detail : visible for 100 110 120 200 210 300 400 410 420 admin 910
 - cbss.IdentifyPersonRequests.insert : visible for 100 110 120 200 210 300 400 410 420 admin 910
 - cbss.ManageAccessRequests.detail : visible for 100 110 120 200 210 300 400 410 420 admin 910
@@ -1041,8 +1034,8 @@ Here is the output of :func:`walk_menu_items
 - Kontakte --> Haushalte : 15
 - Büro --> Meine Benachrichtigungen : 2
 - Büro --> Meine Auszüge : 0
-- Büro --> Ablaufende Uploads : 1
-- Büro --> Meine Uploads : 1
+- Büro --> Meine ablaufenden Upload-Dateien : 1
+- Büro --> Meine Upload-Dateien : 1
 - Büro --> Mein E-Mail-Ausgang : 1
 - Büro --> Meine Ereignisse/Notizen : 9
 - Büro --> Meine Datenkontrollliste : 0
@@ -1112,7 +1105,6 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Kalender --> Kalendereintragsarten : 13
 - Konfigurierung --> Kalender --> Wiederholungsregeln : 7
 - Konfigurierung --> Kalender --> Externe Kalender : 1
-- Konfigurierung --> Kalender --> Tagesplanerzeilen : 4
 - Konfigurierung --> ÖSHZ --> Integrationsphasen : 6
 - Konfigurierung --> ÖSHZ --> Berufe : 1
 - Konfigurierung --> ÖSHZ --> AG-Sperrgründe : 3
@@ -1164,12 +1156,12 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Benachrichtigungen : 14
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> All dashboard widgets : 1
-- Explorer --> System --> Datenbankmodelle : 143
+- Explorer --> System --> Datenbankmodelle : 142
 - Explorer --> System --> Datentests : 18
 - Explorer --> System --> Datenprobleme : 66
 - Explorer --> Eigenschaften --> Eigenschaften : 24
 - Explorer --> Büro --> Auszüge : 69
-- Explorer --> Büro --> Uploads : 12
+- Explorer --> Büro --> Upload-Dateien : 12
 - Explorer --> Büro --> Upload-Bereiche : 2
 - Explorer --> Büro --> E-Mail-Ausgänge : 1
 - Explorer --> Büro --> Anhänge : 1

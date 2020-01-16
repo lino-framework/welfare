@@ -120,10 +120,11 @@ My uploads
 Most users can open two tables which show "their" uploads.
 
 >>> print(str(uploads.MyUploads.label))
-Meine Uploads
+Meine Upload-Dateien
 
 >>> print(str(uploads.MyExpiringUploads.label))
-Ablaufende Uploads
+Meine ablaufenden Upload-Dateien
+
 
 This is the MyUploads table for Theresia:
 
@@ -204,7 +205,7 @@ row. Which means that it has two buttons.
 The first button opens a detail window on the *last* uploaded filed:
 
 >>> div.contents[0]
-<a href='javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 8 })'>Last</a>
+<a href='javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 8 })'>Letzte</a>
 
 The second item is just the comma which separates the two buttons:
 
@@ -214,7 +215,7 @@ The second item is just the comma which separates the two buttons:
 The second button opens the list of uploads:
 
 >>> div.contents[2]  #doctest: +ELLIPSIS
-<a href='javascript:Lino.uploads.UploadsByClient.grid.run(null,...)'...>All 2 files</a>
+<a href='javascript:Lino.uploads.UploadsByClient.grid.run(null,...)'...>Alle 2 Dateien</a>
 
 And as you can see, it does not use the default table
 (UploadsByController) but the welfare specific table UploadsByClient.
@@ -302,7 +303,7 @@ None
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
 <a href='javascript:Lino.uploads.UploadsByClient.insert.run(null,{ ... })'
 style="vertical-align:-30%;"
-title="Öffnet ein Dialogfenster, um einen neuen Datensatz (Upload) zu erstellen."><img alt="add"
+title="Öffnet ein Dialogfenster, um einen neuen Datensatz (Upload-Datei) zu erstellen."><img alt="add"
 src="/static/images/mjames/add.png"/></a>
 
 >>> print(links[2].get('href'))
@@ -344,7 +345,7 @@ It has 4 keys:
 >>> d.data_record['phantom']
 True
 >>> print(d.data_record['title'])
-Upload erstellen
+Upload-Datei erstellen
 
 >>> sorted(d.data_record['data'].keys())
 ['description', 'disabled_fields', 'end_date', 'file', 'type', 'typeHidden']

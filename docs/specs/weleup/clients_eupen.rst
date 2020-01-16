@@ -75,7 +75,7 @@ Lino Welfare à la Eupen.
   - (papers):
     - (papers_1): **Sucht Arbeit seit** (seeking_since), **Arbeitslos seit** (unemployed_since), **Wartezeit bis** (work_permit_suspended_until)
     - (papers_2): **Braucht Aufenthaltserlaubnis** (needs_residence_permit), **Braucht Arb.Erl.** (needs_work_permit)
-    - **Uploads** (uploads_UploadsByClient) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]
+    - **Upload-Dateien** (uploads_UploadsByClient) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]
 - **Lebenslauf** (career) [visible for 100 110 120 420 admin 910]:
   - **Erstellte Lebensläufe** (cvs_emitted) [visible for all]
   - **Studien** (cv.StudiesByPerson)
@@ -143,6 +143,3 @@ role:
 <Panel misc in lino_weleup.lib.pcsw.models.ClientDetail on lino_welfare.modlib.pcsw.models.Clients>
 >>> list(misc.required_roles)
 [(<class 'lino_welfare.modlib.pcsw.roles.SocialStaff'>, <class 'lino_xl.lib.contacts.roles.ContactsStaff'>)]
-
-
-

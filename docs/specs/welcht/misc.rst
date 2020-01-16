@@ -250,8 +250,6 @@ see it.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - cal.AllEntries.duplicate : visible for admin 910
 - cal.ConflictingEvents.duplicate : visible for admin 910
-- cal.DailyPlanner.duplicate : visible for admin 910
-- cal.DailyPlannerRows.duplicate : visible for admin 910
 - cal.EntriesByClient.duplicate : visible for admin 910
 - cal.EntriesByController.duplicate : visible for admin 910
 - cal.EntriesByDay.duplicate : visible for admin 910
@@ -268,10 +266,12 @@ see it.
 - cal.MyUnconfirmedAppointments.duplicate : visible for admin 910
 - cal.OneEvent.duplicate : visible for admin 910
 - cal.OverdueAppointments.duplicate : visible for admin 910
-- cal.PlannerByDay.duplicate : visible for admin 910
 - cal.PublicEntries.duplicate : visible for nobody
 - cal.RemoteCalendars.duplicate : visible for admin 910
-- cal.WeeklyPlanner.duplicate : visible for admin 910
+- calview.DailyPlanner.duplicate : visible for admin 910
+- calview.DailyPlannerRows.duplicate : visible for admin 910
+- calview.PlannerByDay.duplicate : visible for admin 910
+- calview.WeeklyPlanner.duplicate : visible for admin 910
 - cbss.AllIdentifyPersonRequests.duplicate : visible for admin 910
 - cbss.AllManageAccessRequests.duplicate : visible for admin 910
 - cbss.AllRetrieveTIGroupsRequests.duplicate : visible for admin 910

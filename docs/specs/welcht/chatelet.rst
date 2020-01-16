@@ -60,7 +60,7 @@ Romain
 
 >>> rt.login('romain').show_menu() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Bureau : Mes Notifications, Mes Extraits, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Observations, Mes problèmes de données
+- Bureau : Mes Notifications, Mes Extraits, Mes fichiers téléchargés à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Observations, Mes problèmes de données
 - Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Mes rendez-vous à confirmer, Mes tâches, Mes visiteurs, Mes présences, Mes rendez-vous dépassés, Calendrier
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis, Visiteurs qui m'attendent
 - CPAS : Bénéficiaires, Mes Interventions, Octrois à confirmer
@@ -84,7 +84,7 @@ Romain
   - Système : Paramètres du Site, Utilisateurs, Textes d'aide
   - Endroits : Pays, Endroits
   - Contacts : Types d'organisation, Fonctions, Conseils, Types de ménage
-  - Bureau : Types d'extrait, Libraries de fichiers, Types de fichiers téléchargés, Types d'observation, Types d'événements, Mes Text Field Templates
+  - Bureau : Types d'extrait, Libraries de fichiers, Types de téléchargement, Types d'observation, Types d'événements, Mes Text Field Templates
   - Calendrier : Calendriers, Locaux, Évènements periodiques, Rôles de participants, Types d'entrée calendrier, Règles de récurrence, Calendriers externes, Lignes de planificateur
   - Ateliers : Savoirs de base, Topics, Timetable Slots
   - CPAS : Droits chômage, Types d'aide sociale, Catégories , Types de contact client, Services, Raisons d’arrêt d'intervention
@@ -97,7 +97,7 @@ Romain
 - Explorateur :
   - Contacts : Personnes de contact, Partenaires, Types d'adresses, Adresses, Membres du conseil, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
   - Système : Procurations, Types d'utilisateur, Rôles d'utilisateur, Notifications, Changes, All dashboard widgets, Types de contenu, Tests de données, Problèmes de données
-  - Bureau : Extraits, Fichiers téléchargés, Upload Areas, Mails envoyés, Pièces jointes, Observations, Text Field Templates
+  - Bureau : Extraits, Fichiers téléchargés, Domaines de téléchargement, Mails envoyés, Pièces jointes, Observations, Text Field Templates
   - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Entry states, Presence states, Task states
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États Inscription, Course layouts, États Atelier
   - CPAS : Exclusions du chômage, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple, Contacts client, Types de contact connus, Interventions
@@ -122,7 +122,7 @@ users.UserTypes:210
 
 >>> rt.login('theresia').show_menu() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
-- Bureau : Mes Extraits, Mes téléchargements à renouveler, Mes Fichiers téléchargés, Mes Observations
+- Bureau : Mes Extraits, Mes fichiers téléchargés à renouveler, Mes Fichiers téléchargés, Mes Observations
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis
 - CPAS : Mes Interventions
 - Intégration :
@@ -146,7 +146,7 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
 
 >>> from lino.utils.diag import analyzer
 >>> print(analyzer.show_db_overview()) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-61 apps: lino, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, memo, notify, changes, checkdata, addresses, excerpts, uploads, outbox, extensible, cal, reception, badges, boards, clients, coachings, pcsw, welfare, sales, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, dashboard, export_excel, tinymce, lino_welcht, sessions.
+62 apps: lino, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, memo, notify, changes, checkdata, addresses, excerpts, uploads, outbox, extensible, cal, reception, calview, badges, boards, clients, coachings, pcsw, welfare, sales, languages, cv, integ, isip, jobs, art61, immersion, active_job_search, courses, newcomers, cbss, households, humanlinks, debts, notes, aids, polls, summaries, weasyprint, esf, beid, dashboard, export_excel, tinymce, lino_welcht, sessions.
 135 models:
 ============================== =============================== ========= =======
  Name                           Default table                   #fields   #rows
@@ -166,7 +166,6 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
  boards.Board                   boards.Boards                   7         3
  boards.Member                  boards.Members                  4         0
  cal.Calendar                   cal.Calendars                   7         ...
- cal.DailyPlannerRow            cal.DailyPlannerRows            8         3
  cal.Event                      cal.OneEvent                    24        548
  cal.EventPolicy                cal.EventPolicies               21        6
  cal.EventType                  cal.EventTypes                  27        13
@@ -177,6 +176,7 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
  cal.Room                       cal.Rooms                       10        0
  cal.Subscription               cal.Subscriptions               4         9
  cal.Task                       cal.Tasks                       20        34
+ calview.DailyPlannerRow        calview.DailyPlannerRows        8         3
  cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     21        5
  cbss.ManageAccessRequest       cbss.ManageAccessRequests       24        1
  cbss.Purpose                   cbss.Purposes                   7         106
@@ -360,7 +360,6 @@ Each window layout defines a given set of fields.
 - boards.Boards.insert : name, name_nl, name_de, name_en
 - cal.Calendars.detail : name, name_nl, name_de, name_en, color, id, description
 - cal.Calendars.insert : name, name_nl, name_de, name_en, color
-- cal.DailyView.detail : navigation_panel
 - cal.EntriesByClient.insert : event_type, summary, start_date, start_time, end_date, end_time
 - cal.EntriesByGuest.insert : start_date, start_time, end_time, summary, event_type
 - cal.EntriesByProject.insert : start_date, start_time, end_time, summary, event_type
@@ -376,7 +375,6 @@ Each window layout defines a given set of fields.
 - cal.Guests.checkin : notify_subject, notify_body, notify_silent
 - cal.Guests.detail : event, client, role, state, remark, workflow_buttons, waiting_since, busy_since, gone_since
 - cal.Guests.insert : event, partner, role
-- cal.MonthlyView.detail : navigation_panel
 - cal.RecurrentEvents.detail : name, name_nl, name_de, name_en, id, user, event_type, start_date, start_time, end_date, end_time, every_unit, every, positions, max_events, monday, tuesday, wednesday, thursday, friday, saturday, sunday, description
 - cal.RecurrentEvents.insert : name, name_nl, name_de, name_en, start_date, end_date, every_unit, event_type
 - cal.Rooms.detail : id, name, name_nl, name_de, name_en, company, contact_person, display_color, description
@@ -384,7 +382,9 @@ Each window layout defines a given set of fields.
 - cal.Tasks.detail : start_date, due_date, id, workflow_buttons, summary, project, user, delegated, owner, created, modified, description
 - cal.Tasks.insert : summary, user, project
 - cal.TasksByController.insert : summary, start_date, due_date, user, delegated
-- cal.WeeklyView.detail : navigation_panel
+- calview.DailyView.detail : navigation_panel
+- calview.MonthlyView.detail : navigation_panel
+- calview.WeeklyView.detail : navigation_panel
 - cbss.IdentifyPersonRequests.detail : id, person, user, sent, status, printed, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender, environment, ticket, info_messages, debug_messages
 - cbss.IdentifyPersonRequests.insert : person, national_id, first_name, middle_name, last_name, birth_date, tolerance, gender
 - cbss.ManageAccessRequests.detail : id, person, user, sent, status, printed, action, start_date, end_date, purpose, query_register, national_id, sis_card_no, id_card_no, first_name, last_name, birth_date, result, environment, ticket, info_messages, debug_messages
@@ -567,7 +567,6 @@ Each window layout is **viewable** by a given set of user types.
 - boards.Boards.insert : visible for admin 910
 - cal.Calendars.detail : visible for 110 120 410 420 admin 910
 - cal.Calendars.insert : visible for 110 120 410 420 admin 910
-- cal.DailyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cal.EntriesByClient.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByGuest.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - cal.EntriesByProject.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
@@ -583,7 +582,6 @@ Each window layout is **viewable** by a given set of user types.
 - cal.Guests.checkin : visible for 100 110 120 200 210 220 300 400 410 420 800 admin 910
 - cal.Guests.detail : visible for 100 110 120 200 210 220 300 400 410 420 800 admin 910
 - cal.Guests.insert : visible for 100 110 120 200 210 220 300 400 410 420 800 admin 910
-- cal.MonthlyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cal.RecurrentEvents.detail : visible for 110 120 410 420 admin 910
 - cal.RecurrentEvents.insert : visible for 110 120 410 420 admin 910
 - cal.Rooms.detail : visible for 110 120 410 420 admin 910
@@ -591,7 +589,9 @@ Each window layout is **viewable** by a given set of user types.
 - cal.Tasks.detail : visible for 110 120 410 420 admin 910
 - cal.Tasks.insert : visible for 110 120 410 420 admin 910
 - cal.TasksByController.insert : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
-- cal.WeeklyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
+- calview.DailyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
+- calview.MonthlyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
+- calview.WeeklyView.detail : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
 - cbss.IdentifyPersonRequests.detail : visible for 100 110 120 200 210 300 400 410 420 admin 910
 - cbss.IdentifyPersonRequests.insert : visible for 100 110 120 200 210 300 400 410 420 admin 910
 - cbss.ManageAccessRequests.detail : visible for 100 110 120 200 210 300 400 410 420 admin 910
@@ -875,7 +875,7 @@ Here is the output of :func:`walk_menu_items
 - Contacts --> Ménages : 15
 - Bureau --> Mes Notifications : 2
 - Bureau --> Mes Extraits : 0
-- Bureau --> Mes téléchargements à renouveler : 1
+- Bureau --> Mes fichiers téléchargés à renouveler : 1
 - Bureau --> Mes Fichiers téléchargés : 1
 - Bureau --> Mon courrier sortant : 1
 - Bureau --> Mes Observations : 10
@@ -930,7 +930,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Contacts --> Types de ménage : 7
 - Configuration --> Bureau --> Types d'extrait : 20
 - Configuration --> Bureau --> Libraries de fichiers : 1
-- Configuration --> Bureau --> Types de fichiers téléchargés : 10
+- Configuration --> Bureau --> Types de téléchargement : 10
 - Configuration --> Bureau --> Types d'observation : 14
 - Configuration --> Bureau --> Types d'événements : 11
 - Configuration --> Bureau --> Mes Text Field Templates : 1
@@ -998,7 +998,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> Problèmes de données : 0
 - Explorateur --> Bureau --> Extraits : 71
 - Explorateur --> Bureau --> Fichiers téléchargés : 12
-- Explorateur --> Bureau --> Upload Areas : 2
+- Explorateur --> Bureau --> Domaines de téléchargement : 2
 - Explorateur --> Bureau --> Mails envoyés : 1
 - Explorateur --> Bureau --> Pièces jointes : 1
 - Explorateur --> Bureau --> Observations : 112
