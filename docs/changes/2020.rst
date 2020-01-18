@@ -13,6 +13,13 @@ General information about how to read and maintain this document in :ref:`dev.ch
   :local:
 
 
+2020-01-18
+==========
+
+Changed the designation "Uploads" to "Upload files".
+
+Released to PyPI : welfare weleup 20.1.1
+
 2020-01-09
 ==========
 
