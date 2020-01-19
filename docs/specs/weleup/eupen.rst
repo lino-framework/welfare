@@ -571,13 +571,13 @@ Each window layout defines a given set of fields.
 - excerpts.ExcerptTypes.detail : id, name, name_fr, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_fr, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
-- finan.BankStatements.detail : entry_date, number, balance1, balance2, narration, workflow_buttons, uploads_UploadsByController, ItemsByBankStatement, journal, accounting_period, user, id, item_account, item_remark, MovementsByVoucher
+- finan.BankStatements.detail : entry_date, number, balance1, balance2, narration, workflow_buttons, uploads_UploadsByController, journal, accounting_period, user, id, item_account, item_remark, MovementsByVoucher
 - finan.BankStatements.insert : entry_date, balance1
-- finan.DisbursementOrders.detail : journal, number, voucher_date, entry_date, accounting_period, item_account, total, workflow_buttons, narration, item_remark, ItemsByDisbursementOrder, state, user, id, MovementsByVoucher
+- finan.DisbursementOrders.detail : journal, number, voucher_date, entry_date, accounting_period, item_account, total, workflow_buttons, narration, item_remark, state, user, id, MovementsByVoucher
 - finan.DisbursementOrdersByJournal.insert : item_account, voucher_date
-- finan.FinancialVouchers.detail : entry_date, number, workflow_buttons, narration, ItemsByJournalEntry, journal, accounting_period, user, id, item_account, item_remark, MovementsByVoucher
+- finan.FinancialVouchers.detail : entry_date, number, workflow_buttons, narration, journal, accounting_period, user, id, item_account, item_remark, MovementsByVoucher
 - finan.FinancialVouchers.insert : entry_date, narration
-- finan.PaymentOrders.detail : entry_date, number, total, execution_date, workflow_buttons, narration, ItemsByPaymentOrder, journal, accounting_period, user, id, item_account, item_remark, MovementsByVoucher
+- finan.PaymentOrders.detail : entry_date, number, total, execution_date, workflow_buttons, narration, journal, accounting_period, user, id, item_account, item_remark, MovementsByVoucher
 - gfks.ContentTypes.detail : id, app_label, model, base_classes
 - households.Households.detail : type, prefix, name, id
 - households.Households.insert : name, type
@@ -657,10 +657,10 @@ Each window layout defines a given set of fields.
 - users.AllUsers.insert : username, email, first_name, last_name, partner, language, user_type
 - users.AllUsers.send_welcome_email : email, subject
 - users.UsersOverview.sign_in : username, password
-- vatless.Invoices.detail : journal, number, entry_date, voucher_date, accounting_period, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, ItemsByInvoice, match, state, user, id, MovementsByVoucher
+- vatless.Invoices.detail : journal, number, entry_date, voucher_date, accounting_period, workflow_buttons, partner, payment_term, due_date, bank_account, your_ref, narration, amount, match, state, user, id, MovementsByVoucher
 - vatless.Invoices.insert : journal, partner, entry_date
 - vatless.InvoicesByJournal.insert : partner, entry_date
-- vatless.ProjectInvoicesByJournal.detail : journal, number, entry_date, voucher_date, accounting_period, workflow_buttons, project, narration, partner, your_ref, payment_term, due_date, bank_account, amount, ItemsByProjectInvoice, match, state, user, id, MovementsByVoucher
+- vatless.ProjectInvoicesByJournal.detail : journal, number, entry_date, voucher_date, accounting_period, workflow_buttons, project, narration, partner, your_ref, payment_term, due_date, bank_account, amount, match, state, user, id, MovementsByVoucher
 - vatless.ProjectInvoicesByJournal.insert : project, partner, entry_date
 - xcourses.CourseContents.detail : id, name
 - xcourses.CourseOffers.detail : id, title, content, provider, guest_role, description
