@@ -22,85 +22,84 @@ About this document
 >>> from lino.api.doctest import *
 
 
-
-
 Overview
 ========
 
-Here are the choicelists used in Lino Welfare (click on their internal
-name to read the documentation):
+Here are the choicelists used in Lino Welfare:
 
->>> from lino.core.kernel import choicelist_choices
->>> for value, text in choicelist_choices():
-...     print(u"{} : {}".format(value, text))
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-about.TimeZones : about.TimeZones (Zeitzonen)
-addresses.AddressTypes : addresses.AddressTypes (Adressenarten)
-addresses.DataSources : addresses.DataSources (Datenquellen)
-aids.AidRegimes : aids.AidRegimes
-aids.ConfirmationStates : aids.ConfirmationStates (Hilfebestätigungszustände)
-aids.ConfirmationTypes : aids.ConfirmationTypes (Hilfebescheinigungsarten)
-art61.Subsidizations : art61.Subsidizations (Subsidizations)
-beid.BeIdCardTypes : beid.BeIdCardTypes (eID-Kartenarten)
-beid.ResidenceTypes : beid.ResidenceTypes (Einwohnerregister)
-cal.AccessClasses : cal.AccessClasses
-cal.DisplayColors : cal.DisplayColors
-cal.DurationUnits : cal.DurationUnits
-cal.EntryStates : cal.EntryStates (Kalendereintrag-Zustände)
-cal.EventEvents : cal.EventEvents (Beobachtungskriterien)
-cal.GuestStates : cal.GuestStates (Anwesenheits-Zustände)
-cal.PlannerColumns : cal.PlannerColumns
-cal.Recurrencies : cal.Recurrencies
-cal.ReservationStates : cal.ReservationStates (Zustände)
-cal.TaskStates : cal.TaskStates (Aufgaben-Zustände)
-cal.Weekdays : cal.Weekdays
-cal.YearMonths : cal.YearMonths
-cbss.ManageActions : cbss.ManageActions
-cbss.QueryRegisters : cbss.QueryRegisters
-cbss.RequestLanguages : cbss.RequestLanguages
-cbss.RequestStates : cbss.RequestStates (Zustände cbss request)
-changes.ChangeTypes : changes.ChangeTypes (Änderungsarten)
-checkdata.Checkers : checkdata.Checkers (Datentests)
-clients.ClientEvents : clients.ClientEvents (Beobachtungskriterien)
-clients.ClientStates : clients.ClientStates (Bearbeitungszustände Klienten)
-clients.KnownContactTypes : clients.KnownContactTypes (Standard-Klientenkontaktarten)
-contacts.CivilStates : contacts.CivilStates (Zivilstände)
-contacts.PartnerEvents : contacts.PartnerEvents (Beobachtungskriterien)
-countries.PlaceTypes : countries.PlaceTypes
-cv.CefLevel : cv.CefLevel (CEF-Kategorien)
-cv.EducationEntryStates : cv.EducationEntryStates
-cv.HowWell : cv.HowWell
-debts.AccountTypes : debts.AccountTypes (Kontoarten)
-debts.TableLayouts : debts.TableLayouts (Table layouts)
-esf.ParticipationCertificates : esf.ParticipationCertificates (Participation Certificates)
-esf.StatisticalFields : esf.StatisticalFields (ESF fields)
-excerpts.Shortcuts : excerpts.Shortcuts (Excerpt shortcuts)
-households.MemberDependencies : households.MemberDependencies (Haushaltsmitgliedsabhängigkeiten)
-households.MemberRoles : households.MemberRoles (Haushaltsmitgliedsrollen)
-humanlinks.LinkTypes : humanlinks.LinkTypes (Verwandschaftsarten)
-isip.ContractEvents : isip.ContractEvents (Beobachtungskriterien)
-isip.OverlapGroups : isip.OverlapGroups (Überlappungsgruppen)
-jobs.CandidatureStates : jobs.CandidatureStates (Kandidatur-Zustände)
-ledger.CommonAccounts : ledger.CommonAccounts (Gemeinkonten)
-ledger.JournalGroups : ledger.JournalGroups (Journalgruppen)
-ledger.PeriodStates : ledger.PeriodStates (Zustände)
-ledger.TradeTypes : ledger.TradeTypes (Handelsarten)
-ledger.VoucherStates : ledger.VoucherStates (Zustände Beleg)
-ledger.VoucherTypes : ledger.VoucherTypes (Belegarten)
-notes.SpecialTypes : notes.SpecialTypes (Sondernotizarten)
-notify.MailModes : notify.MailModes (Benachrichtigungsmodi)
-notify.MessageTypes : notify.MessageTypes (Message Types)
-outbox.RecipientTypes : outbox.RecipientTypes
-pcsw.RefusalReasons : pcsw.RefusalReasons (Ablehnungsgründe)
-printing.BuildMethods : printing.BuildMethods
-properties.DoYouLike : properties.DoYouLike
-properties.HowWell : properties.HowWell
-sepa.AccountTypes : sepa.AccountTypes (Kontoarten)
-system.Genders : system.Genders
-system.PeriodEvents : system.PeriodEvents (Beobachtungskriterien)
-system.YesNo : system.YesNo (Ja oder Nein)
-uploads.Shortcuts : uploads.Shortcuts (Upload shortcuts)
-uploads.UploadAreas : uploads.UploadAreas (Upload-Bereiche)
-users.UserTypes : users.UserTypes (Benutzerarten)
-xcourses.CourseRequestStates : xcourses.CourseRequestStates (Zustände Kursanfragen)
-xl.Priorities : xl.Priorities (Prioritäten)
+>>> show_choicelists()
+=============================== ================= ================================== ================================== ===============================
+ name                            preferred_width   de                                 fr                                 en
+------------------------------- ----------------- ---------------------------------- ---------------------------------- -------------------------------
+ about.TimeZones                 4                 Zeitzonen                          Zeitzonen                          Time zones
+ addresses.AddressTypes          20                Adressenarten                      Types d'adresses                   Address types
+ addresses.DataSources           24                Datenquellen                       Sources de données                 Data sources
+ aids.AidRegimes                 18                None                               None                               None
+ aids.ConfirmationStates         11                Hilfebestätigungszustände          Hilfebestätigungszustände          Aid confirmation states
+ aids.ConfirmationTypes          49                Hilfebescheinigungsarten           Types de confirmation d'aide       Aid confirmation types
+ art61.Subsidizations            14                Subsidizations                     Subsidiations                      Subsidizations
+ beid.BeIdCardTypes              82                eID-Kartenarten                    Types de carte eID                 eID card types
+ beid.ResidenceTypes             20                Einwohnerregister                  Titres de séjour                   Resident registers
+ cal.AccessClasses               31                None                               None                               None
+ cal.DisplayColors               7                 None                               None                               None
+ cal.DurationUnits               8                 None                               None                               None
+ cal.EntryStates                 14                Kalendereintrag-Zustände           Kalendereintrag-Zustände           Entry states
+ cal.EventEvents                 8                 Beobachtungskriterien              Évènements observés                Observed events
+ cal.GuestStates                 12                Anwesenheits-Zustände              Anwesenheits-Zustände              Presence states
+ cal.PlannerColumns              6                 None                               None                               None
+ cal.Recurrencies                20                None                               None                               None
+ cal.ReservationStates           4                 Zustände                           États                              States
+ cal.TaskStates                  9                 Aufgaben-Zustände                  Aufgaben-Zustände                  Task states
+ cal.Weekdays                    10                None                               None                               None
+ cal.YearMonths                  9                 None                               None                               None
+ cbss.ManageActions              12                None                               None                               None
+ cbss.QueryRegisters             8                 None                               None                               None
+ cbss.RequestLanguages           14                None                               None                               None
+ cbss.RequestStates              15                Zustände cbss request              États cbss request                 cbss request states
+ changes.ChangeTypes             14                Änderungsarten                     Änderungsarten                     Change Types
+ checkdata.Checkers              49                Datentests                         Tests de données                   Data checkers
+ clients.ClientEvents            19                Beobachtungskriterien              Évènements observés                Observed events
+ clients.ClientStates            9                 Bearbeitungszustände Klienten      Etats bénéficiaires                Client states
+ clients.KnownContactTypes       9                 Standard-Klientenkontaktarten      Types de contact connus            Known contact types
+ contacts.CivilStates            27                Zivilstände                        Etats civils                       Civil states
+ contacts.PartnerEvents          18                Beobachtungskriterien              Évènements observés                Observed events
+ countries.PlaceTypes            16                None                               None                               None
+ cv.CefLevel                     4                 CEF-Kategorien                     Niveaux CEF                        CEF levels
+ cv.EducationEntryStates         25                None                               None                               None
+ cv.HowWell                      12                None                               None                               None
+ debts.AccountTypes              15                Kontoarten                         Kontoarten                         Account types
+ debts.TableLayouts              55                Table layouts                      Table layouts                      Table layouts
+ esf.ParticipationCertificates   50                Participation Certificates         Participation Certificates         Participation Certificates
+ esf.StatisticalFields           32                ESF fields                         Champs FSE                         ESF fields
+ excerpts.Shortcuts              21                Excerpt shortcuts                  Excerpt shortcuts                  Excerpt shortcuts
+ households.MemberDependencies   15                Haushaltsmitgliedsabhängigkeiten   Dépendances de membres de ménage   Household Member Dependencies
+ households.MemberRoles          11                Haushaltsmitgliedsrollen           Rôles de membres de ménage         Household member roles
+ humanlinks.LinkTypes            27                Verwandschaftsarten                Types de parenté                   Parency types
+ isip.ContractEvents             11                Beobachtungskriterien              Évènements observés                Observed events
+ isip.OverlapGroups              12                Überlappungsgruppen                Groupes de chevauchement           Overlap groups
+ jobs.CandidatureStates          21                Kandidatur-Zustände                États de candidatures              Candidature states
+ ledger.CommonAccounts           32                Gemeinkonten                       Comptes communs                    Common accounts
+ ledger.JournalGroups            20                Journalgruppen                     Groupes de journaux                Journal groups
+ ledger.PeriodStates             14                Zustände                           États                              States
+ ledger.TradeTypes               13                Handelsarten                       Types de commerce                  Trade types
+ ledger.VoucherStates            14                Zustände Beleg                     États Beleg                        Voucher states
+ ledger.VoucherTypes             47                Belegarten                         Types de pièce                     Voucher types
+ notes.SpecialTypes              12                Sondernotizarten                   Sondernotizarten                   Special note types
+ notify.MailModes                24                Benachrichtigungsmodi              Benachrichtigungsmodi              Notification modes
+ notify.MessageTypes             14                Message Types                      Message Types                      Message Types
+ outbox.RecipientTypes           13                None                               None                               None
+ pcsw.RefusalReasons             43                Ablehnungsgründe                   Raisons de refus                   Refusal reasons
+ printing.BuildMethods           20                None                               None                               None
+ properties.DoYouLike            10                None                               None                               None
+ properties.HowWell              12                None                               None                               None
+ sepa.AccountTypes               9                 Kontoarten                         Kontoarten                         Account types
+ system.Genders                  8                 None                               None                               None
+ system.PeriodEvents             9                 Beobachtungskriterien              Évènements observés                Observed events
+ system.YesNo                    12                Ja oder Nein                       Oui ou non                         Yes or no
+ uploads.Shortcuts               26                Upload shortcuts                   Upload shortcuts                   Upload shortcuts
+ uploads.UploadAreas             9                 Upload-Bereiche                    Domaines de téléchargement         Upload areas
+ users.UserTypes                 43                Benutzerarten                      Types d'utilisateur                User types
+ xcourses.CourseRequestStates    15                Zustände Kursanfragen              États Demande de cours             Course Requests states
+ xl.Priorities                   8                 Prioritäten                        Priorités                          Priorities
+=============================== ================= ================================== ================================== ===============================
+<BLANKLINE>

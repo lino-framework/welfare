@@ -1,29 +1,6 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2019 Rumma & Ko Ltd
-# This file is part of Lino Welfare.
-#
-# Lino Welfare is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# Lino Welfare is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public
-# License along with Lino Welfare.  If not, see
-# <http://www.gnu.org/licenses/>.
-
-
-from __future__ import print_function
-from __future__ import unicode_literals
-
-import logging
-from builtins import str
-
-logger = logging.getLogger(__name__)
+# Copyright 2008-2020 Rumma & Ko Ltd
+# License: BSD (see file COPYING for details)
 
 import cgi
 import datetime
@@ -98,7 +75,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         #~ ordering = ['last_name','first_name']
 
     quick_search_fields = "prefix name phone gsm street national_id"
-    
+
     group = dd.ForeignKey("pcsw.PersonGroup", blank=True, null=True,
                           verbose_name=_("Integration phase"))
 
@@ -440,7 +417,7 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
                     items.append(E.li(*chunks))
             if len(items) > 0:
                 elems.append(E.ul(*items))
-                    
+
             text = "%s %s" % (obj._meta.verbose_name, naturaltime(obj.sent))
             elems.append(ar.obj2html(obj, text))
         if btn is not None:
@@ -820,7 +797,7 @@ class IdentityChecker(ClientChecker):
     """
     verbose_name = _("Check for valid identification")
     need_valid_card_data = (ClientStates.coached, ClientStates.newcomer)
-    
+
     def get_checkdata_problems(self, obj, fix=False):
 
         if obj.client_state in self.need_valid_card_data \
@@ -961,7 +938,7 @@ class ExclusionType(dd.Model):
 
 
 class ExclusionTypes(dd.Table):
-    help_text = _("""Liste des raisons possibles d'arrêter temporairement 
+    help_text = _("""Liste des raisons possibles d'arrêter temporairement
     le paiement d'une aide financière prévue.""")
     required_roles = dd.login_required(SocialStaff)
     model = 'pcsw.ExclusionType'
@@ -1076,6 +1053,3 @@ def setup_client_workflow(sender=None, **kw):
     ClientStates.newcomer.add_transition(
         required_states='former',
         required_roles=dd.login_required(NewcomersUser))
-
-
-

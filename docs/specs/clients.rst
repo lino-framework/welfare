@@ -1,5 +1,5 @@
 .. doctest docs/specs/clients.rst
-   
+
 .. _welfare.clients.parameters:
 .. _welfare.specs.clients:
 
@@ -17,7 +17,7 @@ Most code is in :mod:`lino_welfare.modlib.pcsw` plugin.
    :local:
 
 .. include:: /../docs/shared/include/tested.rst
-  
+
 >>> from lino import startup
 >>> startup('lino_welfare.projects.gerd.settings.doctests')
 >>> from lino.api.doctest import *
@@ -26,7 +26,7 @@ Most code is in :mod:`lino_welfare.modlib.pcsw` plugin.
 >>> ses = rt.login("hubert")
 
 
-      
+
 
 Default lists of coached clients
 ================================
@@ -213,7 +213,7 @@ Robin is there, but Alfons and Vincent aren't.
 Here is a list of Mélanies clients on 2013-10-01.  Mélanie can get
 this by manually filling that date into the
 :attr:`lino_welfare.modlib.pcsw.Clients.end_date` parameter field.
-      
+
 >>> pv = dict(end_date=i2d(20131001))
 >>> ses.show(integ.Clients, column_names="name_column", param_values=pv, header_level=4)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
@@ -314,3 +314,12 @@ All clients who have at least one note dated 2013-07-25 or later:
 <BLANKLINE>
 
 
+
+Don't read
+==========
+
+Bugfix 20200122 : preferred_width wasn't correctly set, it was 4 for all
+choicelists.
+
+>>> rt.models.pcsw.CivilStates.preferred_width
+27
