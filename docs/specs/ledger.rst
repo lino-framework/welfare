@@ -325,11 +325,13 @@ The state of a voucher
     field and one parameter field.
 
     >>> len(ledger.VoucherStates._fields)
-    2
+    4
     >>> for f in ledger.VoucherStates._fields:
     ...     print(f)
     <lino.core.choicelists.ChoiceListField: state>
-    ledger.Voucher.state
+    ledger.Declaration.state
+    finan.FinancialVoucher.state
+    vatless.AccountInvoice.state
 
     >>> obj = vatless.AccountInvoice.objects.get(id=1)
     >>> ar = rt.login("robin").spawn(vatless.Invoices)

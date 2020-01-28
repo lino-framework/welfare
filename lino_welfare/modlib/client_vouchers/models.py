@@ -21,7 +21,7 @@ from lino.api import dd
 
 from lino_xl.lib.ledger.mixins import (
     PartnerRelated, ProjectRelated, AccountVoucherItem, Matching)
-from lino_xl.lib.ledger.models import Voucher
+from lino_xl.lib.ledger.models import Voucher, VoucherStates
 
 from lino_xl.lib.ledger.roles import LedgerUser
 
@@ -33,6 +33,7 @@ class ClientVoucher(Voucher, ProjectRelated):
         verbose_name = _("Client voucher")
         verbose_name_plural = _("Client vouchers")
 
+    state = VoucherStates.field(default='draft')
     amount = dd.PriceField(_("Amount"), blank=True, null=True)
 
     def compute_totals(self):
@@ -111,4 +112,3 @@ class VoucherItem(Matching, PartnerRelated, AccountVoucherItem):
 
 
 from .ui import *
-

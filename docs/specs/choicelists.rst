@@ -28,6 +28,7 @@ Overview
 Here are the choicelists used in Lino Welfare:
 
 >>> show_choicelists()
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 =============================== ================= ================================== ================================== ===============================
  name                            preferred_width   de                                 fr                                 en
 ------------------------------- ----------------- ---------------------------------- ---------------------------------- -------------------------------
@@ -82,7 +83,7 @@ Here are the choicelists used in Lino Welfare:
  ledger.JournalGroups            20                Journalgruppen                     Groupes de journaux                Journal groups
  ledger.PeriodStates             14                Zustände                           États                              States
  ledger.TradeTypes               13                Handelsarten                       Types de commerce                  Trade types
- ledger.VoucherStates            14                Zustände Beleg                     États Beleg                        Voucher states
+ ledger.VoucherStates            14                Belegzustände                      Belegzustände                      Voucher states
  ledger.VoucherTypes             47                Belegarten                         Types de pièce                     Voucher types
  notes.SpecialTypes              12                Sondernotizarten                   Sondernotizarten                   Special note types
  notify.MailModes                24                Benachrichtigungsmodi              Benachrichtigungsmodi              Notification modes

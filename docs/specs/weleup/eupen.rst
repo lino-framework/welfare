@@ -31,7 +31,7 @@ it was the first Lino that went into production in 2010.
 - 141 models
 - 42 user roles
 - 16 user types
-- 537 views
+- 535 views
 - 29 dialog actions
 <BLANKLINE>
 
@@ -383,11 +383,11 @@ Database structure
 - esf.ClientSummary : id, printed_by, year, month, esf10, esf20, esf21, esf30, esf40, esf41, esf42, esf43, esf44, esf50, esf60, esf70, master, education_level, children_at_charge, certified_handicap, other_difficulty, result, remark
 - excerpts.Excerpt : id, project, build_time, build_method, user, owner_type, owner_id, company, contact_person, contact_role, excerpt_type, language
 - excerpts.ExcerptType : id, name, build_method, template, attach_to_email, email_template, certifying, remark, body_template, content_type, primary, backward_compat, print_recipient, print_directly, shortcut, name_fr, name_en
-- finan.BankStatement : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, last_item_date, balance1, balance2
+- finan.BankStatement : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, voucher_ptr, printed_by, state, item_account, item_remark, last_item_date, balance1, balance2
 - finan.BankStatementItem : id, seqno, project, match, amount, dc, remark, account, partner, date, voucher
-- finan.JournalEntry : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, state, voucher_ptr, printed_by, project, item_account, item_remark, last_item_date
+- finan.JournalEntry : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, voucher_ptr, printed_by, project, state, item_account, item_remark, last_item_date
 - finan.JournalEntryItem : id, seqno, project, match, amount, dc, remark, account, partner, date, voucher
-- finan.PaymentOrder : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, state, voucher_ptr, printed_by, item_account, item_remark, total, execution_date
+- finan.PaymentOrder : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, voucher_ptr, printed_by, state, item_account, item_remark, total, execution_date
 - finan.PaymentOrderItem : id, seqno, project, match, amount, dc, remark, account, partner, bank_account, voucher
 - gfks.HelpText : id, content_type, field, help_text
 - households.Household : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, type
@@ -416,7 +416,7 @@ Database structure
 - ledger.MatchRule : id, account, journal
 - ledger.Movement : id, project, voucher, partner, seqno, account, amount, dc, match, cleared, value_date
 - ledger.PaymentTerm : id, ref, name, days, months, end_of_month, printed_text, printed_text_fr, printed_text_en, name_fr, name_en
-- ledger.Voucher : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, state
+- ledger.Voucher : id, user, journal, entry_date, voucher_date, accounting_period, number, narration
 - newcomers.Broker : id, name
 - newcomers.Competence : id, seqno, user, faculty, weight
 - newcomers.Faculty : id, name, weight, name_fr, name_en
@@ -449,7 +449,7 @@ Database structure
 - uploads.Volume : id, ref, root_dir, base_url, description
 - users.Authority : id, user, authorized
 - users.User : id, email, language, modified, created, start_date, end_date, password, last_login, username, user_type, initials, first_name, last_name, remarks, newcomer_consultations, newcomer_appointments, notify_myself, mail_mode, access_class, event_type, calendar, coaching_type, coaching_supervisor, newcomer_quota, partner
-- vatless.AccountInvoice : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, state, voucher_ptr, project, partner, payment_term, your_ref, due_date, match, bank_account, amount
+- vatless.AccountInvoice : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, voucher_ptr, project, partner, payment_term, your_ref, due_date, match, bank_account, state, amount
 - vatless.InvoiceItem : id, seqno, project, account, voucher, title, amount
 - xcourses.Course : id, offer, title, start_date, remark
 - xcourses.CourseContent : id, name
