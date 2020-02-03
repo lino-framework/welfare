@@ -229,16 +229,16 @@ proof for a transaction. A transaction is a set of accounting
 Lino Welfare uses the following **voucher types**:
 
 >>> rt.show(ledger.VoucherTypes)
-=================================== ====== =================================================
- Wert                                name   Text
------------------------------------ ------ -------------------------------------------------
- finan.BankStatementsByJournal              Kontoauszug (finan.BankStatementsByJournal)
- finan.DisbursementOrdersByJournal          Ausgabeanweisungen
- finan.JournalEntriesByJournal              Diverse Buchung (finan.JournalEntriesByJournal)
- finan.PaymentOrdersByJournal               Zahlungsauftrag (finan.PaymentOrdersByJournal)
- vatless.InvoicesByJournal                  Rechnungen
- vatless.ProjectInvoicesByJournal           Project invoices
-=================================== ====== =================================================
+=================================== ====== ================================================= =====================================================
+ Wert                                name   Text                                              Modell
+----------------------------------- ------ ------------------------------------------------- -----------------------------------------------------
+ finan.BankStatementsByJournal              Kontoauszug (finan.BankStatementsByJournal)       <class 'lino_xl.lib.finan.models.BankStatement'>
+ finan.DisbursementOrdersByJournal          Ausgabeanweisungen                                <class 'lino_xl.lib.finan.models.PaymentOrder'>
+ finan.JournalEntriesByJournal              Diverse Buchung (finan.JournalEntriesByJournal)   <class 'lino_xl.lib.finan.models.JournalEntry'>
+ finan.PaymentOrdersByJournal               Zahlungsauftrag (finan.PaymentOrdersByJournal)    <class 'lino_xl.lib.finan.models.PaymentOrder'>
+ vatless.InvoicesByJournal                  Rechnungen                                        <class 'lino_xl.lib.vatless.models.AccountInvoice'>
+ vatless.ProjectInvoicesByJournal           Project invoices                                  <class 'lino_xl.lib.vatless.models.AccountInvoice'>
+=================================== ====== ================================================= =====================================================
 <BLANKLINE>
 
 .. before sorting them:
@@ -309,14 +309,14 @@ The state of a voucher
 
 
 >>> rt.show(ledger.VoucherStates)
-====== ============ ================ =============
- Wert   name         Text             Button text
------- ------------ ---------------- -------------
- 10     draft        Entwurf
- 20     registered   Registriert
- 30     signed       Unterschrieben
- 40     cancelled    Storniert
-====== ============ ================ =============
+====== ============ ================ ==========
+ Wert   name         Text             Editable
+------ ------------ ---------------- ----------
+ 10     draft        Entwurf          Ja
+ 20     registered   Registriert      Nein
+ 30     signed       Unterschrieben   Nein
+ 40     cancelled    Storniert        Nein
+====== ============ ================ ==========
 <BLANKLINE>
 
 .. technical:

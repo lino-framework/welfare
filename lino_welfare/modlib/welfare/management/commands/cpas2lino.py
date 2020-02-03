@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016 by Rumma & Ko Ltd.
+# Copyright 2016-2020 Rumma & Ko Ltd.
 """
 
 Defines the :manage:`cpas2lino` management command:
@@ -13,8 +13,6 @@ Defines the :manage:`cpas2lino` management command:
   print(Command.help)
 
 """
-
-from __future__ import unicode_literals, print_function
 
 # from optparse import make_option
 
@@ -53,47 +51,47 @@ def get_user_or_none(m, pk):
         return None
 
 WANTED_ACCOUNTS = """
-820/333/01        	Vorschüsse Vergütungen u.ä.             
-821/333/01        	Vorschüsse Pensionen                    
+820/333/01        	Vorschüsse Vergütungen u.ä.
+821/333/01        	Vorschüsse Pensionen
 822/333/01        	Vorschüsse Unfallentschäd./Berufskrankh.
-823/333/01        	Vorschüsse Kranken- und Invalidengeld   
-825/333/01        	Vorschüsse Familienzulagen/Geburtspräm. 
-826/333/01        	Vorschüsse auf Arbeitslosengeld         
-827/333/01        	Vorschüsse auf Behindertenzulagen       
-832/330/01        	Allgemeine Beihilfen                    
-832/330/02        	Beihilfen im Gesundheitsbereich         
-832/330/03        	Heizkosten- und Energiebeihilfen        
-832/330/03B       	Heizölzulage (durch Staat bezuschusst)  
-832/330/03F       	Fonds Gas und Elektrizität              
-832/330/04        	Mietkautionen                           
+823/333/01        	Vorschüsse Kranken- und Invalidengeld
+825/333/01        	Vorschüsse Familienzulagen/Geburtspräm.
+826/333/01        	Vorschüsse auf Arbeitslosengeld
+827/333/01        	Vorschüsse auf Behindertenzulagen
+832/330/01        	Allgemeine Beihilfen
+832/330/02        	Beihilfen im Gesundheitsbereich
+832/330/03        	Heizkosten- und Energiebeihilfen
+832/330/03B       	Heizölzulage (durch Staat bezuschusst)
+832/330/03F       	Fonds Gas und Elektrizität
+832/330/04        	Mietkautionen
 832/330/05        	Sozio-kulturelle Beteiligung (Allgemein)
-832/330/06        	Sozio-kulturelle Beteiligung (Kinder)   
-832/333/22        	Mietbeihilfen                           
-832/3331/01       	EM/Eingliederungseinkommen              
-832/334/04        	Beihilfen zur Krankenhausunterbringung  
-832/334/07        	Unterbr. Kinder in eigenen Einricht.    
+832/330/06        	Sozio-kulturelle Beteiligung (Kinder)
+832/333/22        	Mietbeihilfen
+832/3331/01       	EM/Eingliederungseinkommen
+832/334/04        	Beihilfen zur Krankenhausunterbringung
+832/334/07        	Unterbr. Kinder in eigenen Einricht.
 832/334/08        	Unterbr. Kinder in auswärtigen Einricht.
-832/334/09        	Unterbringung von Behinderten           
-832/334/10        	Unterbringung Senioren St. Josef        
+832/334/09        	Unterbringung von Behinderten
+832/334/10        	Unterbringung Senioren St. Josef
 832/334/11        	Unterbringung Senioren in ausw.Einricht.
-832/334/13        	Unterbring.in Aufnahmehäusern           
+832/334/13        	Unterbring.in Aufnahmehäusern
 832/334/16        	Unterbringung Krippen/Tagesmütterdienste
 832/334/18        	Interv.zu Leistungen Familienhilfsdienst
-832/334/26        	Beihilfen Beerdigungskosten             
-832/334/27        	LBA-Schecks                             
-832/334/28        	Förderung sozialer Zusammenhalt         
-832/334/29        	Neuansiedlung Flüchtlinge               
+832/334/26        	Beihilfen Beerdigungskosten
+832/334/27        	LBA-Schecks
+832/334/28        	Förderung sozialer Zusammenhalt
+832/334/29        	Neuansiedlung Flüchtlinge
 832/3341/21       	Hospital.von Belgiern mit Unterstütz.ws.
-832/3342/03       	Transportbeihilfen                      
+832/3342/03       	Transportbeihilfen
 832/3342/21       	Hospit.Ausl./Belgier ohne Unterstütz.ws.
-832/3343/21       	Ausländerbeihilfen (f. Rechnung Staat)  
-832/3344/21       	Rückführung belg. Bedürftiger aus Ausl. 
+832/3343/21       	Ausländerbeihilfen (f. Rechnung Staat)
+832/3344/21       	Rückführung belg. Bedürftiger aus Ausl.
 832/3345/21       	Sozialh. f.Kinder <18 J.ohne Unterst.ws.
-832-380/04        	Erst. Interv. Energieversorgungssektor  
-832/435/02        	Zahl.an hilfeleist.Zentr.f.gel.Sozialh. 
+832-380/04        	Erst. Interv. Energieversorgungssektor
+832/435/02        	Zahl.an hilfeleist.Zentr.f.gel.Sozialh.
 832-465/01        	Erst. Staatsinterv. EM/Einglied.einkomm.
-832-465/08        	Erst. Heizölzulagen Föderalstaat        
-832-465/11        	Erst. soziokultur. Beteilig.Staat       
+832-465/08        	Erst. Heizölzulagen Föderalstaat
+832-465/11        	Erst. soziokultur. Beteilig.Staat
 832-4652/03       	Erstatt. an Staat von Einn. 832/-3342/21
 832-4653/03       	Erstatt. an Staat von Einn. 832/-3343/21
 """
@@ -336,7 +334,7 @@ class TimLoader(TimLoader):
             imp = voucher_model(journal=jnl, number=number)
             imp.full_clean()
             imp.save()
-            
+
         if acc is None:
             return
         kw.update(voucher=imp)
@@ -528,4 +526,3 @@ def expand(obj):
                 yield so
     else:
         yield obj
-

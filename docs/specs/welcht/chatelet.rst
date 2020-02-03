@@ -176,7 +176,7 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
  cal.Room                       cal.Rooms                       10        0
  cal.Subscription               cal.Subscriptions               4         9
  cal.Task                       cal.Tasks                       20        34
- calview.DailyPlannerRow        calview.DailyPlannerRows        8         3
+ calview.DailyPlannerRow        calview.DailyPlannerRows        8         2
  cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     21        5
  cbss.ManageAccessRequest       cbss.ManageAccessRequests       24        1
  cbss.Purpose                   cbss.Purposes                   7         106
@@ -941,7 +941,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Calendrier --> Types d'entrée calendrier : 14
 - Configuration --> Calendrier --> Règles de récurrence : 7
 - Configuration --> Calendrier --> Calendriers externes : 1
-- Configuration --> Calendrier --> Lignes de planificateur : 4
+- Configuration --> Calendrier --> Lignes de planificateur : 3
 - Configuration --> Ateliers --> Savoirs de base : 1
 - Configuration --> Ateliers --> Topics : 1
 - Configuration --> Ateliers --> Timetable Slots : 1
