@@ -270,7 +270,6 @@ see it.
 - cal.RemoteCalendars.duplicate : visible for admin 910
 - calview.DailyPlanner.duplicate : visible for admin 910
 - calview.DailyPlannerRows.duplicate : visible for admin 910
-- calview.PlannerByDay.duplicate : visible for admin 910
 - calview.WeeklyPlanner.duplicate : visible for admin 910
 - cbss.AllIdentifyPersonRequests.duplicate : visible for admin 910
 - cbss.AllManageAccessRequests.duplicate : visible for admin 910

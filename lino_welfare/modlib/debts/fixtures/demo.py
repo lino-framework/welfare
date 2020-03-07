@@ -18,8 +18,7 @@
 
 from builtins import range
 import decimal
-from dateutil.relativedelta import relativedelta
-ONE_DAY = relativedelta(days=1)
+from lino.utils import ONE_DAY
 
 from django.conf import settings
 from django.utils.translation import ugettext as _
@@ -64,7 +63,7 @@ def objects():
     DEBT_AMOUNTS = Cycler([(i + 1) * 300 for i in range(5)])
     DEBT_ENTRIES = Cycler([4, 8, 5, 3, 12, 5])
     PARTNERS = Cycler(Company.objects.all())
-    
+
     LIABILITIES = Cycler(Account.objects.filter(
         type=AccountTypes.liabilities))
     EXPENSE_REMARKS = Cycler(_("Shopping"), _("Cinema"), _("Seminar"))
