@@ -268,9 +268,9 @@ see it.
 - cal.OverdueAppointments.duplicate : visible for admin 910
 - cal.PublicEntries.duplicate : visible for nobody
 - cal.RemoteCalendars.duplicate : visible for admin 910
-- calview.DailyPlanner.duplicate : visible for admin 910
 - calview.DailyPlannerRows.duplicate : visible for admin 910
-- calview.WeeklyPlanner.duplicate : visible for admin 910
+- calview.DailySlave.duplicate : visible for admin 910
+- calview.WeeklySlave.duplicate : visible for admin 910
 - cbss.AllIdentifyPersonRequests.duplicate : visible for admin 910
 - cbss.AllManageAccessRequests.duplicate : visible for admin 910
 - cbss.AllRetrieveTIGroupsRequests.duplicate : visible for admin 910
