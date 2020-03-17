@@ -388,15 +388,16 @@ Permissions
 Test whether everybody can display the detail of a client:
 
 >>> o = pcsw.Client.objects.get(id=177)
->>> r = dd.plugins.extjs.renderer
->>> for u in 'robin', 'alicia', 'theresia', 'caroline', 'kerstin':
-...     print(tostring(rt.login(u, renderer=r).obj2html(o)))
+>>> for u in ('robin', 'alicia', 'theresia', 'caroline', 'kerstin', None):
+...     print(tostring(rt.login(u).obj2html(o)))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-<a href="/api/pcsw/Clients/177">BRECHT Bernd (177)</a>
-<a href="/api/pcsw/Clients/177">BRECHT Bernd (177)</a>
-<a href="/api/pcsw/Clients/177">BRECHT Bernd (177)</a>
-<a href="/api/pcsw/Clients/177">BRECHT Bernd (177)</a>
-<a href="/api/pcsw/Clients/177">BRECHT Bernd (177)</a>
+<a href="Detail">BRECHT Bernd (177)</a>
+<a href="Detail">BRECHT Bernd (177)</a>
+<a href="Detail">BRECHT Bernd (177)</a>
+<a href="Detail">BRECHT Bernd (177)</a>
+<a href="Detail">BRECHT Bernd (177)</a>
+<em>BRECHT Bernd (177)</em>
+
 
 Miscellaneous tests
 ===================

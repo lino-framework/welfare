@@ -44,16 +44,16 @@ Usage examples:
     See <a href="http://www.example.com" target="_blank">http://www.example.com</a>.
     >>> print(ses.parse_memo("See [url http://www.example.com example]."))
     See <a href="http://www.example.com" target="_blank">example</a>.
-    
+
     >>> print(ses.parse_memo("""See [url https://www.example.com
     ... another example]."""))
     See <a href="https://www.example.com" target="_blank">another example</a>.
 
     A possible situation is that you forgot the space:
-    
+
     >>> print(ses.parse_memo("See [urlhttp://www.example.com]."))
     See [urlhttp://www.example.com].
-   
+
 
 .. _memo.note:
 
@@ -64,23 +64,27 @@ Refer to a note. Usage example:
 
   See ``[note 1]``.
 
-Note that the current renderer decides how to render the link. For example, the
-default front end :mod:`lino.modlib.extjs` will render it like this:
+Note that the URI of the link depends on the front end renderer and on the user
+permissions. For example, the default front end :mod:`lino.modlib.extjs` will
+render it like this:
 
 >>> ses = rt.login('robin',
-...     renderer=settings.SITE.kernel.default_ui.renderer)
+...     renderer=settings.SITE.kernel.default_renderer)
 >>> print(ses.parse_memo("See [note 1]."))
-See <a href="/api/notes/Notes/1">#1</a>.
+See <a href="javascript:Lino.notes.Notes.detail.run(null,{ &quot;record_id&quot;: 1 })">#1</a>.
 
 While the plain text renderer will render:
 
->>> ses = rt.login()
->>> print(ses.parse_memo("See [note 1]."))
+>>> print(rt.login('robin').parse_memo("See [note 1]."))
+See <a href="Detail">#1</a>.
+
+Or when the user has no permission to open the detail window:
+
+>>> print(rt.login().parse_memo("See [note 1]."))
 See <em>#1</em>.
+
 
 Referring to a non-existing note:
 
 >>> print(rt.login().parse_memo("See [note 1234]."))
 See [ERROR Note matching query does not exist. in '[note 1234]' at position 4-15].
-
-

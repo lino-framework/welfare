@@ -1,12 +1,9 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2018 Rumma & Ko Ltd
+# Copyright 2013-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 
-from __future__ import unicode_literals
-
 # from django.utils.translation import ugettext_lazy as _
-from builtins import str
 from django.utils.translation import pgettext_lazy as pgettext
 # from django.contrib.humanize.templatetags.humanize import naturalday
 
@@ -59,7 +56,7 @@ def you_are_busy_messages(ar):
             sep = ', '
         chunks.append('. ')
         yield E.span(*chunks)
-            
+
 
 dd.add_welcome_handler(you_are_busy_messages)
 
@@ -231,7 +228,7 @@ class EntriesByClient(Events):
         if mi is not None:
             kw.update(project=mi)
         return super(EntriesByClient, cls).create_instance(ar, **kw)
-    
+
     @classmethod
     def unused_get_filter_kw(self, ar, **kw):
         # disabled 20170420 because it also adds a filter condition
@@ -359,7 +356,7 @@ if False:
             user=dd.ForeignKey(settings.SITE.user_model),
             summary=models.CharField(verbose_name=_("Summary"), blank=True))
         params_layout = """
-    date user 
+    date user
     summary
     """
 
@@ -432,6 +429,8 @@ class TasksByController(TasksByController):
     start_date due_date
     user delegated
     """
+    display_mode = 'grid'  # remain conservative after 20200317
+
 
 
 # add = TaskStates.add_item
@@ -440,5 +439,5 @@ class TasksByController(TasksByController):
 # @dd.receiver(dd.pre_analyze)
 # def setup_task_workflows(sender=None, **kw):
 
-#     TaskStates.client.add_transition(_("Delegated to client"), 
+#     TaskStates.client.add_transition(_("Delegated to client"),
 #                                      states='done started cancelled')

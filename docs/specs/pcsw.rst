@@ -168,21 +168,21 @@ to not work (bug has been fixed :blogref:`20150227`) :
 And this tests a potential source of problems in `E.tostring` which I
 removed at the same time:
 
->>> ses = rt.login('robin', renderer=settings.SITE.kernel.extjs_renderer)
+>>> ses = rt.login('robin', renderer=settings.SITE.kernel.default_renderer)
 >>> ar = contacts.Partners.request_from(ses)
 >>> ar.renderer = settings.SITE.kernel.extjs_renderer
 >>> print(tostring(ar.obj2html(p)))
-<a href="/api/contacts/Persons/178">Herr Karl KELLER</a>
+<a href="javascript:Lino.contacts.Persons.detail.run(null,{ &quot;record_id&quot;: 178 })">Herr Karl KELLER</a>
 
 >>> print(tostring(ar.obj2html(cli)))
-<a href="/api/pcsw/Clients/178">KELLER Karl (178)</a>
+<a href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 178 })">KELLER Karl (178)</a>
 >>> print(settings.SITE.kernel.extjs_renderer.instance_handler(ar, cli, None))
 Lino.pcsw.Clients.detail.run(null,{ "record_id": 178 })
 >>> print(tostring(p.get_mti_buttons(ar)))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-<a href="/api/contacts/Partners/178">Partner</a>,
+<a href="javascript:Lino.contacts.Partners.detail.run(null,{ &quot;record_id&quot;: 178 })">Partner</a>,
 <b>Person</b>, <a
-href="/api/pcsw/Clients/178">Klient</a> [<a
+href="javascript:Lino.pcsw.Clients.detail.run(null,{ &quot;record_id&quot;: 178 })">Klient</a> [<a
 ...javascript:Lino.contacts.Partners.del_client(null,true,178,{ })...">❌</a>]
 
 
