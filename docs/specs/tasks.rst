@@ -23,7 +23,7 @@ My tasks
 The `My tasks` table (:class:`lino_xl.lib.cal.MyTasks`) is visible
 in the dashboard.
 
-This table shows tasks which are due in the next **30** days.  This
+This table shows tasks that are due in the next **30** days.  This
 value is currently as a class attribute :attr:`default_end_date_offset
 <lino.modlib.cal.MyTasks.default_end_date_offset>` on that table:
 
@@ -73,4 +73,3 @@ the future.  If she manually sets :attr:`end_date
  Normale    21/05/2014   Projet termine dans un mois   **☐ à faire** → [☑] [☒] [⚠]   DA VINCI David (165)
 ========== ============ ============================= ============================= ============================
 <BLANKLINE>
-
