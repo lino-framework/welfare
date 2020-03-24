@@ -257,10 +257,6 @@ runtime errors.
 
         Pointer to :class:`ClientStates`.
 
-    .. attribute:: group
-
-        Pointer to :class:`PersonGroup`.
-
     .. attribute:: needs_residence_permit
 
     .. attribute:: unemployed_since
