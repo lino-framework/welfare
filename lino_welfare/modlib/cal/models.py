@@ -111,6 +111,8 @@ class Event(Event):
     #     "courses.Course", blank=True, null=True,
     #     help_text=_("Fill in only if this event is a session of a course."))
 
+    summary_project_template = _("with {project}")
+
     def __str__(self):
         if self.summary:
             s = self.summary
@@ -429,9 +431,9 @@ class TasksByController(TasksByController):
     start_date due_date
     user delegated
     """
-    display_mode = 'grid'  # remain conservative after 20200317
-
-
+# remain conservative after 20200317:
+TasksByController.display_mode = 'grid'
+TasksByProject.display_mode = 'grid'
 
 # add = TaskStates.add_item
 # add('40', _("Client"), 'client')

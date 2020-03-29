@@ -5,12 +5,6 @@
 The Lino Welfare Standard User Types
 ====================================
 
-..  doctest init:
-
-    >>> from lino import startup
-    >>> startup('lino_welfare.projects.gerd.settings.doctests')
-    >>> from lino.api.doctest import *
-
 
 Defining user types and their respective permissions is a complex area
 where it is difficult to get an overview and where it is easy to
@@ -28,6 +22,10 @@ But we recommend to use the standard set of user types and to join our
 common effort.  If you discover a problem with what's described
 hereafter, please contact the responsible author (currently Luc
 Saffre).
+
+>>> from lino import startup
+>>> startup('lino_welfare.projects.gerd.settings.doctests')
+>>> from lino.api.doctest import *
 
 The default set of user types for Lino Welfare lives in the
 :class:`lino.modlib.users.UserTypes` choicelist:
@@ -204,7 +202,7 @@ User *types* versus user *roles*
 =================================
 
 A user type is an arbitrary choice of user roles made available for a
-given application. 
+given application.
 
 
 For example the :class:`lino_welfare.modlib.isip.ContractsByClient`

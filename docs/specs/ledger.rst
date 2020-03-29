@@ -309,14 +309,14 @@ The state of a voucher
 
 
 >>> rt.show(ledger.VoucherStates)
-====== ============ ================ ==========
- Wert   name         Text             Editable
------- ------------ ---------------- ----------
+====== ============ ================ ============
+ Wert   name         Text             Editierbar
+------ ------------ ---------------- ------------
  10     draft        Entwurf          Ja
  20     registered   Registriert      Nein
  30     signed       Unterschrieben   Nein
  40     cancelled    Storniert        Nein
-====== ============ ================ ==========
+====== ============ ================ ============
 <BLANKLINE>
 
 .. technical:
