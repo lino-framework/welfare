@@ -1,17 +1,13 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2017 Rumma & Ko Ltd
+# Copyright 2008-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """
 Adds PCSW-specific demo data.
 """
 
-from __future__ import unicode_literals
-
 from builtins import range
 from builtins import next
-from builtins import str
-import six
 import datetime
 ONE_DAY = datetime.timedelta(days=1)
 
@@ -118,7 +114,7 @@ Textile | Textile | Textil
 Cultural | Culture | Kultur
 Information Technology | Informatique | Informatik
 Esthetical | Cosmétique | Kosmetik
-Sales | Vente | Verkauf 
+Sales | Vente | Verkauf
 Administration & Finance | Administration & Finance | Verwaltung & Finanzwesen
 """
 
@@ -766,7 +762,7 @@ def objects():
     LanguageKnowledge = rt.models.cv.LanguageKnowledge
     Language = rt.models.languages.Language
     # langk = Instantiator('cv.LanguageKnowledge').build
-    
+
     def langk(person=None, language=None, **kwargs):
         language = Language.objects.get(pk=language)
         try:
@@ -889,7 +885,7 @@ def objects():
         yield jobs.Job(provider=PROVIDERS.pop(),
                        type=JTYPES.pop(),
                        contract_type=JOBS_CONTRACT_TYPES.pop(),
-                       name=six.text_type(f),
+                       name=str(f),
                        remark=REMARKS.pop(),
                        sector=SECTORS.pop(), function=f)
 
@@ -908,9 +904,9 @@ def objects():
     obj = jobs.Offer(
         name="Übersetzer DE-FR (m/w)",
         remark="""\
-Wir sind auf der Suche nach einem Deutsch-Französich Übersetzer 
-(M/F) um einen Selbständigenr zu Geschäftsessen und kommerziellen 
-Termine zu begleiten. Sie übernehmen die Übersetzung von Gespräche 
+Wir sind auf der Suche nach einem Deutsch-Französich Übersetzer
+(M/F) um einen Selbständigenr zu Geschäftsessen und kommerziellen
+Termine zu begleiten. Sie übernehmen die Übersetzung von Gespräche
 während kommerziellen Kontakte mit deutschen Kunden.
 Es ist spontane und pünktliche Aufträge, den ganzen Tag, in
 Eupen und/oder Deutschland.

@@ -357,7 +357,7 @@ Database structure
 - contacts.Partner : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term
 - contacts.Person : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, title, first_name, middle_name, last_name, gender, birth_date
 - contacts.Role : id, type, person, company
-- contacts.RoleType : id, name, name_fr, name_en, use_in_contracts
+- contacts.RoleType : id, name, can_sign, name_fr, name_en, use_in_contracts
 - contenttypes.ContentType : id, app_label, model
 - countries.Country : name, isocode, short_code, iso3, inscode, actual_country, name_fr, name_en
 - countries.Place : id, parent, name, country, zip_code, type, show_type, inscode, name_fr, name_en
@@ -1141,7 +1141,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> ZDSS --> Eigenschafts-Codes : 107
 - Konfigurierung --> Schuldnerberatung --> Kontengruppen : 9
 - Konfigurierung --> Schuldnerberatung --> Konten : 52
-- Explorer --> Kontakte --> Kontaktpersonen : 11
+- Explorer --> Kontakte --> Kontaktpersonen : 14
 - Explorer --> Kontakte --> Partner : 175
 - Explorer --> Kontakte --> Adressenarten : 6
 - Explorer --> Kontakte --> Adressen : 181

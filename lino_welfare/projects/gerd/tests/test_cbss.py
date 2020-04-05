@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2012-2013 Rumma & Ko Ltd
+# Copyright 2012-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """
@@ -9,25 +9,18 @@ without any fixture. You can run only these tests by issuing::
   $ python manage.py test cbss.QuickTest
   $ django-admin.py test --settings=lino_welfare.projects.eupen.settings.demo cbss.QuickTest
 
-  
-"""
-from builtins import str
-import datetime
-import logging
-logger = logging.getLogger(__name__)
 
-#~ from django.utils import unittest
-#~ from django.test.client import Client
+"""
+import datetime
+
 from django.conf import settings
 from django.core.exceptions import ValidationError
 
 from lino.utils.djangotest import TestCase
-
-from lino_welfare.modlib.cbss import models as cbss
-
 from lino.utils import IncompleteDate
 from lino.utils.instantiator import create_and_get
 from lino.api import rt
+from lino_welfare.modlib.cbss import models as cbss
 
 NOW = datetime.datetime(2015, 5, 11, 18, 31, 1)
 
@@ -109,7 +102,7 @@ class QuickTest(TestCase):
 </ssdn:SSDNRequest>"""
         self.assertEquivalent(expected, req.request_xml)
 
-        ## 
+        ##
 
         req = cbss.IdentifyPersonRequest(
             last_name="MUSTERMANN",
@@ -238,4 +231,3 @@ class QuickTest(TestCase):
 </ssdn:SSDNRequest>
 """
         self.assertEquivalent(expected, req.request_xml)
-

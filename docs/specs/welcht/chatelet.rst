@@ -193,8 +193,8 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
  contacts.CompanyType           contacts.CompanyTypes           9         16
  contacts.Partner               contacts.Partners               25        162
  contacts.Person                contacts.Persons                32        109
- contacts.Role                  contacts.Roles                  4         10
- contacts.RoleType              contacts.RoleTypes              6         5
+ contacts.Role                  contacts.Roles                  4         13
+ contacts.RoleType              contacts.RoleTypes              7         5
  contenttypes.ContentType       gfks.ContentTypes               3         135
  countries.Country              countries.Countries             9         270
  countries.Place                countries.Places                11        78
@@ -978,7 +978,7 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> Médiation de dettes --> Groupes de comptes : 9
 - Configuration --> Médiation de dettes --> Comptes : 52
 - Configuration --> Questionnaires --> Listes de choix : 10
-- Explorateur --> Contacts --> Personnes de contact : 11
+- Explorateur --> Contacts --> Personnes de contact : 14
 - Explorateur --> Contacts --> Partenaires : 163
 - Explorateur --> Contacts --> Types d'adresses : 6
 - Explorateur --> Contacts --> Adresses : 93

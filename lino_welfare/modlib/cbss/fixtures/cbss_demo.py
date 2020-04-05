@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2016 Rumma & Ko Ltd
+# Copyright 2012-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """Fills in a suite of fictive CBSS requests using simulated responses
@@ -20,7 +20,6 @@ in order to avoid live requests to the CBSS.
 
 import os
 from django.conf import settings
-import six
 from lino.utils import IncompleteDate
 from lino.api import rt
 from io import open
@@ -83,17 +82,15 @@ def objects():
     # mustermann = CLIENTS.pop()
     # print 20150512, Client.objects.all()
     mustermann = Client.objects.get(pk=116)
+    # mustermann = Client.objects.get(last_name="Mustermann")
+    # print(mustermann, mustermann.pk)
     for model, kw, fn in DEMO_REQUESTS:
         kw.update(person=mustermann)
         kw.update(user=root)
         obj = model(**kw)
         if fn:
             fn = os.path.join(os.path.dirname(__file__), fn)
-            if six.PY2 and False:
-                xml = open(fn).read().decode('utf-8')
-            else:
-                xml = open(fn).read()
+            xml = open(fn).read()
             obj.execute_request(simulate_response=xml)
             #~ print obj.debug_messages
         yield obj
-
