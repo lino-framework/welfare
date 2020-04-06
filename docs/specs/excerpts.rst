@@ -57,7 +57,7 @@ Here is a more complete list of excerpt types:
 Demo excerpts
 =============
 
-Here is a list of all demo excerpts. 
+Here is a list of all demo excerpts.
 
 >>> rt.show(excerpts.AllExcerpts, language="en", column_names="id excerpt_type owner project company language")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
@@ -157,10 +157,10 @@ The default template for excerpts
 
 .. xfile:: excerpts/Default.odt
 
-This template should be customized locally to contain the site owner's
-layout.
+This template should be customized locally to contain the :term:`site
+operator`'s layout.
 
-          
+
 The template inserts the recipient address using this appy.pod code::
 
     do text
@@ -177,7 +177,6 @@ text.
 That paragraph should also contain another comment::
 
     do text if this.excerpt_type.print_recipient
-    
+
 There should of course be a paragraph style "Recipient" with proper
 margins and spacing set.
-
