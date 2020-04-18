@@ -1,8 +1,6 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2017 Rumma & Ko Ltd
+# Copyright 2008-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
-
-from __future__ import unicode_literals
 
 
 from django.contrib.contenttypes.models import ContentType
@@ -50,9 +48,9 @@ def objects():
                      de="Brief oder Einschreiben",
                      fr="Lettre",
                      en="Letter"))
-    
+
     # yield excerpt_types()
-        
+
     eventType = Instantiator('notes.EventType', "name remark").build
 
     yield eventType("Aktennotiz", remark="Alle Notizen/Ereignisse, die keine andere Form haben")
@@ -101,5 +99,3 @@ The eventual noble condition of this person. Imported from TIM.
     yield I(t, 'language', u"""\
     Die Sprache, in der Dokumente ausgestellt werden sollen.
 """)
-
-
