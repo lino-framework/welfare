@@ -33,7 +33,7 @@ CLIENTS_TABLE = pcsw.CoachedClients
 class CourseProvider(contacts.Company):
 
     """
-    A CourseProvider is a Company that offers Courses. 
+    A CourseProvider is a Company that offers Courses.
     """
     class Meta:
         verbose_name = _("Course provider")
@@ -161,10 +161,10 @@ class Course(dd.Model):
 
     u"""
     Ein konkreter Kurs, der an einem bestimmten Datum beginnt.
-    Für jeden Kurs muss ein entsprechendes Angebot existieren, 
-    das u.A. den :class:`Kursinhalt <CourseContent>` 
-    und :class:`Kursanbieter <CourseProvider>` 
-    detailliert. Also selbst für einen einmalig stattfindenden 
+    Für jeden Kurs muss ein entsprechendes Angebot existieren,
+    das u.A. den :class:`Kursinhalt <CourseContent>`
+    und :class:`Kursanbieter <CourseProvider>`
+    detailliert. Also selbst für einen einmalig stattfindenden
     Kurs muss ein Angebot erstellt werden.
     """
     class Meta:
@@ -205,16 +205,16 @@ class Course(dd.Model):
 
     def participants(self):
         u"""
-        Liste von :class:`CourseRequest`-Instanzen, 
-        die in diesem Kurs eingetragen sind. 
+        Liste von :class:`CourseRequest`-Instanzen,
+        die in diesem Kurs eingetragen sind.
         """
         return ParticipantsByCourse.request(self).data_iterator
 
     def candidates(self):
         u"""
-        Liste von :class:`CourseRequest`-Instanzen, 
-        die noch in keinem Kurs eingetragen sind, aber für diesen Kurs in Frage 
-        kommen. 
+        Liste von :class:`CourseRequest`-Instanzen,
+        die noch in keinem Kurs eingetragen sind, aber für diesen Kurs in Frage
+        kommen.
         """
         return CandidatesByCourse.request(self).data_iterator
 
@@ -302,7 +302,7 @@ class RegisterCandidate(dd.ChangeStateAction):
 
 class UnRegisterCandidate(dd.ChangeStateAction):
     label = pgettext("courses", "Unregister")
-    required_states = 'registered'
+    required_states = 'registered inactive'
     help_text = _("Unregister this candidate from this course.")
 
     def run_from_ui(self, ar, **kw):
@@ -452,9 +452,9 @@ class CourseRequests(dd.Table):
     model = 'xcourses.CourseRequest'
     required_roles = dd.login_required(CoursesStaff)
     detail_layout = """
-    date_submitted person content offer urgent 
-    course state date_ended id:8 
-    remark  uploads.UploadsByController 
+    date_submitted person content offer urgent
+    course state date_ended id:8
+    remark  uploads.UploadsByController
     """
     order_by = ['date_submitted']
     active_fields = 'offer'
@@ -561,7 +561,7 @@ class PendingCourseRequests(CourseRequests):
     def setup_columns(self):
         """
         Builds columns dynamically for the different age slices.
-        Called when kernel setup is done, 
+        Called when kernel setup is done,
         before the UI handle is being instantiated.
         """
         self.column_names = 'date_submitted workflow_buttons:30 person age '
@@ -639,6 +639,5 @@ def setup_courses_workflow(sender=None, **kw):
     CourseRequestStates.aborted.add_transition(required_states="registered")
 
     CourseRequestStates.inactive.add_transition(required_states="candidate")
-    CourseRequestStates.candidate.add_transition(required_states="inactive")
+    # CourseRequestStates.candidate.add_transition(required_states="inactive")
         #~ debug_permissions = 20130424)
-
