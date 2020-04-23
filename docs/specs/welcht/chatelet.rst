@@ -98,7 +98,7 @@ Romain
   - Contacts : Personnes de contact, Partenaires, Types d'adresses, Adresses, Membres du conseil, Rôles de membres de ménage, Membres de ménage, Liens de parenté, Types de parenté
   - Système : Procurations, Types d'utilisateur, Rôles d'utilisateur, Notifications, Changes, All dashboard widgets, Types de contenu, Tests de données, Problèmes de données
   - Bureau : Extraits, Fichiers téléchargés, Domaines de téléchargement, Mails envoyés, Pièces jointes, Observations, Text Field Templates
-  - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Entry states, Presence states, Task states
+  - Calendrier : Entrées calendrier, Tâches, Présences, Abonnements, Entry states, Presence states, Task states, Colonnes planificateur, Classes d'accès, Display colors
   - Ateliers : Tests de niveau, Ateliers, Inscriptions, États Inscription, Course layouts, États Atelier
   - CPAS : Exclusions du chômage, Antécédents judiciaires, Bénéficiaires, Etats civils, Etats bénéficiaires, Types de carte eID, Octrois d'aide, Certificats de revenu, Refund confirmations, Confirmations simple, Contacts client, Types de contact connus, Interventions
   - Parcours : Connaissances de langue, Formations, Études, Expériences professionnelles, Connaissances de langue, Compétences professionnelles, Compétences sociales, Freins
@@ -1010,6 +1010,9 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Calendrier --> Entry states : 5
 - Explorateur --> Calendrier --> Presence states : 9
 - Explorateur --> Calendrier --> Task states : 5
+- Explorateur --> Calendrier --> Colonnes planificateur : 2
+- Explorateur --> Calendrier --> Classes d'accès : 3
+- Explorateur --> Calendrier --> Display colors : 16
 - Explorateur --> Ateliers --> Tests de niveau : 1
 - Explorateur --> Ateliers --> Ateliers : 8
 - Explorateur --> Ateliers --> Inscriptions : 84

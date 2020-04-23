@@ -108,7 +108,7 @@ Rolf is the local system administrator, he has a complete menu:
   - System : Vollmachten, Benutzerarten, Benutzerrollen, Benachrichtigungen, Änderungen, All dashboard widgets, Datenbankmodelle, Datentests, Datenprobleme
   - Eigenschaften : Eigenschaften
   - Büro : Auszüge, Upload-Dateien, Upload-Bereiche, E-Mail-Ausgänge, Anhänge, Ereignisse/Notizen, Einfügetexte
-  - Kalender : Kalendereinträge, Aufgaben, Anwesenheiten, Abonnements, Kalendereintrag-Zustände, Anwesenheits-Zustände, Aufgaben-Zustände
+  - Kalender : Kalendereinträge, Aufgaben, Anwesenheiten, Abonnements, Kalendereintrag-Zustände, Anwesenheits-Zustände, Aufgaben-Zustände, Tagesplanerkolonnen, Zugriffsklassen, Display colors
   - ÖSHZ : AG-Sperren, Vorstrafen, Klienten, Zivilstände, Bearbeitungszustände Klienten, eID-Kartenarten, Hilfebeschlüsse, Einkommensbescheinigungen, Kostenübernahmescheine, Einfache Bescheinigungen, Phonetische Wörter, Klientenkontakte, Standard-Klientenkontaktarten, Begleitungen
   - Buchhaltung : Gemeinkonten, Begleichungsregeln, Belege, Belegarten, Bewegungen, Handelsarten, Journalgruppen, Rechnungen
   - SEPA : Bankkonten, Importierte  Bankkonten, Kontoauszüge, Transaktionen
@@ -1174,6 +1174,9 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Kalender --> Kalendereintrag-Zustände : 5
 - Explorer --> Kalender --> Anwesenheits-Zustände : 9
 - Explorer --> Kalender --> Aufgaben-Zustände : 5
+- Explorer --> Kalender --> Tagesplanerkolonnen : 2
+- Explorer --> Kalender --> Zugriffsklassen : 3
+- Explorer --> Kalender --> Display colors : 16
 - Explorer --> ÖSHZ --> AG-Sperren : 1
 - Explorer --> ÖSHZ --> Vorstrafen : 1
 - Explorer --> ÖSHZ --> Klienten : 58
