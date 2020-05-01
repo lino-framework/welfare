@@ -64,7 +64,7 @@ class TestCase(TestCase):
         colnames = [col.name for col in rh.get_columns()]
         colnames.sort()
         self.assertEqual(
-            'detected_date id mobile_item overview person remark type user workflow_buttons',
+            'detected_date id overview person remark type user workflow_buttons',
             ' '.join(colnames))
 
         url = "/api/cv/ObstaclesByPerson"
