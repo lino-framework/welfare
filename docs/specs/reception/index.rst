@@ -131,7 +131,7 @@ Client #127 is `ClientStates.coached` and has two coachings:
 >>> print(obj)
 EVERS Eberhart (127)
 >>> obj.client_state
-<ClientStates.coached:30>
+<clients.ClientStates.coached:30>
 
 >>> rt.login('romain').show(reception.AgentsByClient, obj, language='en')
 ================= =============== =========================
@@ -152,7 +152,7 @@ have a non-zero :attr:`newcomer_quota
 >>> print(obj)
 BRAUN Bruno (259)
 >>> obj.client_state
-<ClientStates.newcomer:10>
+<clients.ClientStates.newcomer:10>
 
 >>> rt.login('romain').show(reception.AgentsByClient, obj, language='en')
 ================= =============== =========================

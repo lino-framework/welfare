@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2015 Rumma & Ko Ltd
+# Copyright 2012-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """
@@ -7,11 +7,7 @@ The :xfile:`ui.py` module for `lino_welfare.modlib.debts`.
 
 """
 
-from __future__ import unicode_literals
-
-from builtins import str
-import logging
-logger = logging.getLogger(__name__)
+import logging ; logger = logging.getLogger(__name__)
 
 import decimal
 
@@ -289,7 +285,7 @@ class PrintEntriesByBudget(dd.VirtualTable):
     """Base class for the printable tables of entries by budget
 (:class:`PrintExpensesByBudget`, :class:`PrintIncomesByBudget`,
 :class:`PrintLiabilitiesByBudget` and :class:`PrintAssetsByBudget`).
-    
+
 This is historically the first table that uses Lino's per-request
 dynamic columns feature.
 
@@ -307,7 +303,7 @@ per user, you would add the user name to the default name::
             hname = _handle_attr_name
             hname += ar.get_user().username
             return hname
-    
+
 TODO: more explanations....
 
 .. attribute:: yearly_amount
@@ -332,7 +328,7 @@ TODO: more explanations....
         if eg is None:
             return None
         return str(eg.group)
-        
+
     @classmethod
     def get_handle_name(self, ar):
         hname = _handle_attr_name
@@ -341,7 +337,7 @@ TODO: more explanations....
             hname += eg.group.entries_layout.value
             hname += "_" + str(len(eg.budget.get_actors()))
         return hname
-    
+
 
     @classmethod
     def get_column_names(self, ar):
@@ -715,5 +711,3 @@ proportionally distributing the `Distributable amount` among the debtors.
         return desc
             #~ return "%s (%s / %s)" % (obj.description,obj.total,obj.periods)
         #~ return obj.description
-
-

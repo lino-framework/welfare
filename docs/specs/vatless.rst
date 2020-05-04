@@ -132,7 +132,7 @@ clients:
 This invoice is registered, and ledger movements have been created:
 
 >>> obj.state
-<VoucherStates.registered:20>
+<ledger.VoucherStates.registered:20>
 >>> rt.show(rt.models.ledger.MovementsByVoucher, obj)
 =================================== ============================ =================== =========== =========== ================= ===========
  Haushaltsartikel                    Klient                       Zahlungsempfänger   Debit       Kredit      Match             Beglichen

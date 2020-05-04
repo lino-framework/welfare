@@ -55,7 +55,7 @@ Document templates
   <lino.modlib.excerpts.models.Excerpt.body_template>` on the excerpt
   type used to print a
   :class:`lino_welfare.modlib.art61.models.Contract`.
-  The default content is in 
+  The default content is in
   `lino_welfare/modlib/art61/config/art61/Contract/contract.body.html <https://github.com/lino-framework/welfare/blob/master/lino_welfare/modlib/art61/config/art61/Contract/contract.body.html>`__.
 
 
@@ -65,7 +65,7 @@ The printed document
 
 >>> obj = art61.Contract.objects.get(pk=1)
 >>> list(obj.get_subsidizations())
-[<Subsidizations.activa:10>]
+[<art61.Subsidizations.activa:10>]
 
 >>> ar = rt.login('romain')
 >>> html = ar.get_data_value(obj.printed_by, 'preview')
@@ -108,13 +108,13 @@ private company about one of the clients of the PCSW.
 
         Yield a list of all subsidizations activated for this
         contract.
-   
-           
+
+
 .. class:: ContractsByClient
-           
-    Shows the *Art61 job supplyments* for this client.           
-           
-           
+
+    Shows the *Art61 job supplyments* for this client.
+
+
 .. class:: ContractType
 
 This is the homologue of :class:`isip.ContractType
@@ -130,6 +130,3 @@ The demo database comes with these contract types:
  Mise à l'emploi art.61   Art.61-Konvention   Art61 job supplyment
 ======================== =================== ====================== ===========
 <BLANKLINE>
-
-
-           

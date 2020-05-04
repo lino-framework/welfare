@@ -64,13 +64,13 @@ Sheet.objects = (BalanceSheet, EarningsSheet)
 class AccountType(dd.Choice):
     # top_level = True
     sheet = None
-    
+
     def __init__(self, *args, **kwargs):
         # the class attribute `name` ís used as value
         super(AccountType, self).__init__(*args, **kwargs)
         self.top_level = len(self.value) == 1
 
-    
+
 
 class AccountTypes(dd.ChoiceList):
     verbose_name = _("Account type")
@@ -78,7 +78,7 @@ class AccountTypes(dd.ChoiceList):
     item_class = AccountType
     column_names = 'value name text dc sheet'
     required_roles = dd.login_required(LedgerStaff)
-    
+
     @dd.virtualfield(DebitOrCreditField(_("D/C")))
     def dc(cls, choice, ar):
         return choice.dc
@@ -93,7 +93,7 @@ add = AccountTypes.add_item_instance
 class Assets(AccountType):
     value = 'A'
     text = _("Assets")   # Aktiva, Anleihe, Vermögen, Anlage
-    name = "assets"
+    names = "assets"
     dc = DEBIT
     sheet = BalanceSheet
 add(Assets())
@@ -102,7 +102,7 @@ add(Assets())
 class Liabilities(AccountType):
     value = 'L'
     text = _("Liabilities")  # Guthaben, Schulden, Verbindlichkeit
-    name = "liabilities"
+    names = "liabilities"
     dc = CREDIT
     sheet = BalanceSheet
 add(Liabilities())
@@ -111,7 +111,7 @@ add(Liabilities())
 class Capital(AccountType):  # aka Owner's Equities
     value = 'C'
     text = _("Capital")  # Kapital
-    name = "capital"
+    names = "capital"
     dc = CREDIT
     sheet = BalanceSheet
 add(Capital())
@@ -120,7 +120,7 @@ add(Capital())
 class Incomes(AccountType):
     value = 'I'
     text = _("Incomes")  # Gain/Revenue     Einnahmen  Produits
-    name = "incomes"
+    names = "incomes"
     dc = CREDIT
     balance_sheet = True
     sheet = EarningsSheet
@@ -130,7 +130,7 @@ add(Incomes())
 class Expenses(AccountType):
     value = 'E'
     text = _("Expenses")  # Loss/Cost       Ausgaben   Charges
-    name = "expenses"
+    names = "expenses"
     dc = DEBIT
     sheet = EarningsSheet
 add(Expenses())
@@ -182,4 +182,3 @@ add('40',  # used by Inkasso-Unternehmen and Gerichtsvollzieher
 # add('I', '10',  # used by PrintAssetsByBudget, PrintIncomesByBudget
 #     _("Full description, actor amounts"),
 #     "full_description dynamic_amounts")
-

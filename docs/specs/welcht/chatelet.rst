@@ -118,7 +118,7 @@ sociales, freins. Elle peut faire des requètes CBSS. Elle peut
 modifier les intervention d'autres utilisateurs.
 
 >>> rt.login('theresia').user.user_type
-users.UserTypes:210
+<users.UserTypes:210>
 
 >>> rt.login('theresia').show_menu() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
