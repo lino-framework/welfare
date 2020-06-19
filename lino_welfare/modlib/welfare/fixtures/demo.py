@@ -28,7 +28,7 @@ from lino_xl.lib.cal.choicelists import DurationUnits
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 pcsw = dd.resolve_app('pcsw')
-uploads = dd.resolve_app('uploads')
+# uploads = dd.resolve_app('uploads')
 contacts = dd.resolve_app('contacts')
 countries = dd.resolve_app('countries')
 reception = dd.resolve_app('reception')

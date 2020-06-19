@@ -45,28 +45,38 @@ class Site(Site):
     # workflows_module = 'lino_xl.lib.reception.workflows'
     workflows_module = 'lino_welfare.modlib.welfare.workflows'
 
-    def setup_plugins(self):
-        """
-        Change the default value of certain plugin settings.
+    # def setup_plugins(self):
+    #     """
+    #     Change the default value of certain plugin settings.
+    #
+    #     - :attr:`lino_xl.lib.ledger.Plugin.ref_length` = 5
+    #
+    #     - :attr:`excerpts.responsible_user
+    #       <lino_xl.lib.excerpts.Plugin.responsible_user>` is set to
+    #       ``'melanie'``.
+    #
+    #     """
+    #     super(Site, self).setup_plugins()
+    #     self.plugins.clients.configure(client_model='pcsw.Client')
+    #     self.plugins.addresses.configure(partner_model='contacts.Partner')
+    #     self.plugins.excerpts.configure(responsible_user='melanie')
+    #     # self.plugins.extjs.configure(enter_submits_form=True)
+    #
+    #     if 'ledger' in self.plugins:
+    #         self.plugins.ledger.configure(ref_length=16)
+    #         self.plugins.ledger.configure(project_model='pcsw.Client')
+    #     # self.plugins.humanlinks.configure(person_model='pcsw.Client')
+    #     # self.plugins.households.configure(person_model='pcsw.Client')
 
-        - :attr:`lino_xl.lib.ledger.Plugin.ref_length` = 5
-        
-        - :attr:`excerpts.responsible_user
-          <lino_xl.lib.excerpts.Plugin.responsible_user>` is set to
-          ``'melanie'``.
-
-        """
-        super(Site, self).setup_plugins()
-        self.plugins.clients.configure(client_model='pcsw.Client')
-        self.plugins.addresses.configure(partner_model='contacts.Partner')
-        self.plugins.excerpts.configure(responsible_user='melanie')
-        # self.plugins.extjs.configure(enter_submits_form=True)
-
-        if 'ledger' in self.plugins:
-            self.plugins.ledger.configure(ref_length=16)
-            self.plugins.ledger.configure(project_model='pcsw.Client')
-        # self.plugins.humanlinks.configure(person_model='pcsw.Client')
-        # self.plugins.households.configure(person_model='pcsw.Client')
+    def get_plugin_configs(self):
+        yield super(Site, self).get_plugin_configs()
+        yield ('clients', 'client_model', 'pcsw.Client')
+        yield ('clients', 'demo_coach', 'hubert')
+        yield ('addresses', 'partner_model', 'contacts.Partner')
+        yield ('excerpts', 'responsible_user', 'melanie')
+        # if 'ledger' in self.plugins:
+        yield ('ledger', 'ref_length', 16)
+        yield ('ledger', 'project_model', 'pcsw.Client')
 
     def setup_quicklinks(self, user, tb):
         # tb.add_action(self.modules.pcsw.Clients.detail_action)
@@ -97,8 +107,9 @@ class Site(Site):
         yield 'lino_xl.lib.addresses'
 
         yield 'lino_xl.lib.excerpts'
-        
-        yield 'lino_xl.lib.uploads'
+
+        yield 'lino_welfare.modlib.pcsw'  # needs coachings, which needs clients
+        yield 'lino_xl.lib.uploads' # needs clients
         yield 'lino_xl.lib.outbox'
 
         yield 'lino_xl.lib.extensible'
@@ -107,11 +118,10 @@ class Site(Site):
         yield 'lino_welfare.modlib.badges'
         yield 'lino_xl.lib.boards'
 
-        yield 'lino_welfare.modlib.pcsw'
         # yield 'lino_xl.lib.clients'
         # yield 'lino_xl.lib.coachings'
         yield 'lino_welfare.modlib.welfare'
-        
+
         # NOTE: ordering influences (1) main menu (2) fixtures loading
         # e.g. pcsw.demo creates clients needed by cbss.demo
         yield 'lino_welfare.modlib.sales'

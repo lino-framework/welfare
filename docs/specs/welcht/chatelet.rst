@@ -263,7 +263,7 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
  outbox.Recipient               outbox.Recipients               6         0
  pcsw.Activity                  pcsw.Activities                 3         0
  pcsw.AidType                   pcsw.AidTypes                   5         0
- pcsw.Client                    pcsw.Clients                    68        63
+ pcsw.Client                    pcsw.Clients                    69        63
  pcsw.Conviction                pcsw.Convictions                5         0
  pcsw.Dispense                  pcsw.Dispenses                  6         0
  pcsw.DispenseReason            pcsw.DispenseReasons            6         4

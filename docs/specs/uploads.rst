@@ -1,9 +1,14 @@
 .. doctest docs/specs/uploads.rst
 .. _welfare.specs.uploads:
 
-=============
-Uploads
-=============
+=======================
+Uploads in Lino Welfare
+=======================
+
+This document describes the :mod:`lino_xl.lib.uploads` plugin as used by
+:ref:`welfare`.
+
+.. currentmodule:: lino_xl.lib.uploads
 
 .. contents::
    :depth: 2
@@ -14,13 +19,8 @@ Uploads
 >>> lino.startup('lino_welfare.projects.gerd.settings.doctests')
 >>> from lino.api.doctest import *
 
-A technical tour into the :mod:`lino_welfare.modlib.uploads` plugin.
-
-Lino Welfare extends the standard :mod:`lino_xl.lib.uploads` plugin
-into a system which helps social agents to manage certain documents
-about their clients. For example, integration agents want to get a
-reminder when the driving license of one of their client is going to
-expire.
+Lino Welfare uses the :mod:`lino_xl.lib.uploads` plugin together with the
+:mod:`lino_xl.lib.coachings` plugin, which changes some aspects.
 
 
 .. A few things that should pass, otherwise don't expect the remaining
@@ -81,7 +81,7 @@ The UploadsByClient summary shows a summary grouped by upload type.
 In a detail view it also
 
 >>> rt.show(uploads.UploadsByClient, newcomer)
-Identifizierendes Dokument: *8* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,121,{  })>`__
+Identifizierendes Dokument: *2* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,121,{  })>`__
 
 
 >>> rt.show(uploads.UploadsByClient, newcomer, nosummary=True)
@@ -100,7 +100,7 @@ Here is another client with three uploads:
 DOBBELSTEIN Dorothée (124)
 
 >>> rt.show(uploads.UploadsByClient, oldclient)
-Aufenthaltserlaubnis: *9* / Arbeitserlaubnis: *10* / Führerschein: *11* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,124,{  })>`__
+Aufenthaltserlaubnis: *3* / Arbeitserlaubnis: *4* / Führerschein: *5* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,124,{  })>`__
 
 
 >>> rt.show(uploads.UploadsByClient, oldclient, nosummary=True)
@@ -126,15 +126,15 @@ Meine Upload-Dateien
 Meine ablaufenden Upload-Dateien
 
 
-This is the MyUploads table for Theresia:
+This is the :class:`MyUploads` table for Theresia:
 
 >>> rt.login('theresia').show(uploads.MyUploads)
 ==== ============================ ============================ ============ ============ ======= ============================ =======
  ID   Klient                       Upload-Art                   Gültig von   Gültig bis   Nötig   Beschreibung                 Datei
 ---- ---------------------------- ---------------------------- ------------ ------------ ------- ---------------------------- -------
- 9    DOBBELSTEIN Dorothée (124)   Aufenthaltserlaubnis                      18.03.15     Ja      Aufenthaltserlaubnis
- 8    DERICUM Daniel (121)         Identifizierendes Dokument                25.05.14     Ja      Identifizierendes Dokument
- 7    DERICUM Daniel (121)         Identifizierendes Dokument                22.04.14     Nein    Identifizierendes Dokument
+ 3    DOBBELSTEIN Dorothée (124)   Aufenthaltserlaubnis                      18.03.15     Ja      Aufenthaltserlaubnis
+ 2    DERICUM Daniel (121)         Identifizierendes Dokument                25.05.14     Ja      Identifizierendes Dokument
+ 1    DERICUM Daniel (121)         Identifizierendes Dokument                22.04.14     Nein    Identifizierendes Dokument
 ==== ============================ ============================ ============ ============ ======= ============================ =======
 <BLANKLINE>
 
@@ -145,23 +145,23 @@ And the same for Caroline:
 ==== ============================ ============== ============ ============ ======= ============== =======
  ID   Klient                       Upload-Art     Gültig von   Gültig bis   Nötig   Beschreibung   Datei
 ---- ---------------------------- -------------- ------------ ------------ ------- -------------- -------
- 11   DOBBELSTEIN Dorothée (124)   Führerschein                01.06.14     Ja      Führerschein
+ 5    DOBBELSTEIN Dorothée (124)   Führerschein                01.06.14     Ja      Führerschein
 ==== ============================ ============== ============ ============ ======= ============== =======
 <BLANKLINE>
 
 
-This is the MyExpiringUploads table for :ref:`hubert`:
+This is the :class:`MyExpiringUploads` table for :ref:`hubert`:
 
 >>> rt.login('hubert').show(uploads.MyExpiringUploads)
 ========================= ====================== ====================== =================== ============ ============ =======
  Klient                    Upload-Art             Beschreibung           Hochgeladen durch   Gültig von   Gültig bis   Nötig
 ------------------------- ---------------------- ---------------------- ------------------- ------------ ------------ -------
- AUSDEMWALD Alfons (116)   Source document        Source document        Hubert Huppertz                  17.05.15     Ja
- AUSDEMWALD Alfons (116)   Aufenthaltserlaubnis   Aufenthaltserlaubnis   Hubert Huppertz                  17.05.15     Ja
+ COLLARD Charlotte (118)   Source document        Source document        Hubert Huppertz                  17.05.15     Ja
+ COLLARD Charlotte (118)   Aufenthaltserlaubnis   Aufenthaltserlaubnis   Hubert Huppertz                  17.05.15     Ja
 ========================= ====================== ====================== =================== ============ ============ =======
 <BLANKLINE>
 
-:ref:`theresia` does not coach anybody, so the `MyExpiringUploads`
+:ref:`theresia` does not coach anybody, so the :class:`MyExpiringUploads`
 table is empty for her:
 
 >>> rt.login('theresia').show(uploads.MyExpiringUploads)

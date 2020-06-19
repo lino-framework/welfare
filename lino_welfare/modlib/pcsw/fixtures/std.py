@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2011,2013 Rumma & Ko Ltd
+# Copyright 2011-2020 Rumma & Ko Ltd
 # This file is part of Lino Welfare.
 #
 # Lino Welfare is free software: you can redistribute it and/or modify
@@ -19,8 +19,6 @@
 
 """
 
-from __future__ import unicode_literals
-
 from django.utils.translation import ugettext_lazy as _
 
 from lino.utils.instantiator import Instantiator, i2d
@@ -28,63 +26,6 @@ from lino.api.dd import babelkw
 
 
 from lino.api import dd, rt
-from lino.modlib.uploads.choicelists import Shortcuts
-
-UPLOADTYPE_RESIDENCE_PERMIT = 2
-UPLOADTYPE_WORK_PERMIT = 3
-UPLOADTYPE_DRIVING_LICENSE = 4
-
-
-def uploads_objects():
-    Recurrencies = rt.models.cal.Recurrencies
-    UploadType = rt.models.uploads.UploadType
-
-    kw = dict(
-        warn_expiry_unit=Recurrencies.monthly,
-        warn_expiry_value=2)
-    kw.update(max_number=1, wanted=True)
-    kw.update(dd.str2kw('name', _("Residence permit")))
-    # 'name', de=u"Aufenthaltserlaubnis",
-    # fr=u"Permis de séjour", en="Residence permit"))
-    yield UploadType(id=UPLOADTYPE_RESIDENCE_PERMIT, **kw)
-
-    kw.update(dd.str2kw('name', _("Work permit")))
-        # 'name', de=u"Arbeitserlaubnis",
-        # fr=u"Permis de travail", en="Work permit"))
-    yield UploadType(id=UPLOADTYPE_WORK_PERMIT, **kw)
-
-    kw.update(warn_expiry_value=1)
-
-    kw.update(dd.str2kw('name', _("Driving licence")))
-    yield UploadType(id=UPLOADTYPE_DRIVING_LICENSE, **kw)
-
-    kw.update(dd.str2kw('name', _("Identifying document")))
-    yield UploadType(shortcut=Shortcuts.id_document, **kw)
-
-    kw.update(max_number=-1, wanted=False)
-    kw.update(warn_expiry_unit='')
-
-    kw.update(dd.str2kw('name', _("Contract")))
-    yield UploadType(**kw)
-
-    kw.update(dd.str2kw('name', _("Medical certificate")))
-    # de="Ärztliche Bescheinigung",
-    # fr="Certificat médical",
-    yield UploadType(**kw)
-
-    kw.update(dd.str2kw('name', _("Handicap certificate")))
-    # de="Behindertenausweis",
-    # fr="Certificat de handicap",
-    yield UploadType(**kw)
-
-    kw.update(wanted=True)
-    kw.update(dd.str2kw('name', _("Diploma")))
-    yield UploadType(**kw)
-
-    kw.update(wanted=False)
-    kw.update(dd.str2kw('name', _("Identity card")))
-    # fr=u"Carte d'identité", en="Identity card"))
-    yield UploadType(**kw)
 
 
 def objects():
@@ -109,5 +50,3 @@ def objects():
     yield pcsw.DispenseReason(**babelkw('name', de="Studium/Ausbildung", fr="Etude/Formation", en="Studies"))
     yield pcsw.DispenseReason(**babelkw('name', de="Familiär", fr="Cause familiale", en="Familiar"))
     yield pcsw.DispenseReason(**babelkw('name', de="Sonstige", fr="Autre", en="Other"))
-
-    yield uploads_objects()

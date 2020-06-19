@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2017 Rumma & Ko Ltd
+# Copyright 2015-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 """
 Demo data for this plugin.
@@ -12,7 +12,7 @@ from lino.api import dd, rt
 
 from lino.modlib.uploads.choicelists import Shortcuts
 
-from lino_welfare.modlib.pcsw.fixtures.std import (
+from lino_xl.lib.uploads.fixtures.std import (
     UPLOADTYPE_RESIDENCE_PERMIT,
     UPLOADTYPE_WORK_PERMIT,
     UPLOADTYPE_DRIVING_LICENSE)
@@ -21,25 +21,8 @@ from lino_welfare.modlib.pcsw.fixtures.std import (
 def objects():
     Upload = rt.models.uploads.Upload
     UploadType = rt.models.uploads.UploadType
-    Client = rt.models.pcsw.Client
-
-    # create some random uploads, all uploaded by hubert
-    hubert = rt.login('hubert')
-    CLIENTS = Cycler(rt.models.pcsw.CoachedClients.request(user=hubert))
-    UPLOAD_TYPES = Cycler(UploadType.objects.all())
-    if len(CLIENTS) == 0:
-        raise Exception("There are no clients?!")
-    for i in range(3):
-        cli = CLIENTS.pop()
-        for j in range(2):
-            obj = Upload(
-                project=cli,
-                owner=cli,
-                # user=hubert,
-                end_date=settings.SITE.demo_date(360+i*10),
-                type=UPLOAD_TYPES.pop())
-            obj.on_create(hubert)  # sets `user` and `needed`
-            yield obj
+    # Client = rt.models.pcsw.Client
+    Client = dd.plugins.clients.client_model
 
     # some upload stories
 
@@ -82,4 +65,3 @@ def objects():
                  user=ai, **kw)
     yield Upload(type=driving_license, end_date=dd.demo_date(10),
                  user=agent, **kw)
-

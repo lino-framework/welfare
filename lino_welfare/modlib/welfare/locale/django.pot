@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lino-welfare 20.1.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-03-29 09:36+0300\n"
+"POT-Creation-Date: 2020-06-19 08:11+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,7 +56,7 @@ msgid "Response to offer"
 msgstr ""
 
 #: lino_welfare/modlib/active_job_search/models.py:34
-#: lino_welfare/modlib/debts/ui.py:469
+#: lino_welfare/modlib/debts/ui.py:465
 msgid "Remarks"
 msgstr ""
 
@@ -355,10 +355,10 @@ msgstr ""
 #: lino_welfare/modlib/client_vouchers/models.py:37
 #: lino_welfare/modlib/client_vouchers/models.py:107
 #: lino_welfare/modlib/debts/models.py:178
-#: lino_welfare/modlib/debts/models.py:453 lino_welfare/modlib/debts/ui.py:502
-#: lino_welfare/modlib/debts/ui.py:506 lino_welfare/modlib/debts/ui.py:510
-#: lino_welfare/modlib/debts/ui.py:514 lino_welfare/modlib/debts/ui.py:518
-#: lino_welfare/modlib/debts/ui.py:538
+#: lino_welfare/modlib/debts/models.py:453 lino_welfare/modlib/debts/ui.py:498
+#: lino_welfare/modlib/debts/ui.py:502 lino_welfare/modlib/debts/ui.py:506
+#: lino_welfare/modlib/debts/ui.py:510 lino_welfare/modlib/debts/ui.py:514
+#: lino_welfare/modlib/debts/ui.py:534
 #: lino_welfare/modlib/households/models.py:77
 msgid "Amount"
 msgstr ""
@@ -392,8 +392,8 @@ msgstr ""
 #: lino_welfare/modlib/aids/fixtures/demo.py:65
 #: lino_welfare/modlib/aids/fixtures/std.py:87
 #: lino_welfare/modlib/aids/models.py:716
-#: lino_welfare/modlib/welfare/fixtures/demo.py:537
-#: lino_welfare/modlib/welfare/fixtures/std.py:19
+#: lino_welfare/modlib/welfare/fixtures/demo.py:533
+#: lino_welfare/modlib/welfare/fixtures/std.py:16
 msgid "Pharmacy"
 msgstr ""
 
@@ -615,7 +615,7 @@ msgstr ""
 #: lino_welfare/modlib/contacts/models.py:119
 #: lino_welfare/modlib/contacts/models.py:192
 #: lino_welfare/modlib/contacts/models.py:282
-#: lino_welfare/modlib/debts/ui.py:128 lino_welfare/modlib/finan/models.py:21
+#: lino_welfare/modlib/debts/ui.py:124 lino_welfare/modlib/finan/models.py:21
 #: lino_welfare/modlib/isip/models.py:249
 #: lino_welfare/modlib/system/models.py:104
 #: lino_welfare/modlib/users/desktop.py:23
@@ -1507,12 +1507,12 @@ msgid "Sheet"
 msgstr ""
 
 #: lino_welfare/modlib/debts/choicelists.py:95
-#: lino_welfare/modlib/debts/ui.py:636
+#: lino_welfare/modlib/debts/ui.py:632
 msgid "Assets"
 msgstr ""
 
 #: lino_welfare/modlib/debts/choicelists.py:104
-#: lino_welfare/modlib/debts/ui.py:615
+#: lino_welfare/modlib/debts/ui.py:611
 msgid "Liabilities"
 msgstr ""
 
@@ -1694,7 +1694,7 @@ msgstr ""
 msgid "Entered data"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:386 lino_welfare/modlib/debts/ui.py:148
+#: lino_welfare/modlib/debts/models.py:386 lino_welfare/modlib/debts/ui.py:144
 msgctxt "debts"
 msgid "Summary"
 msgstr ""
@@ -1736,20 +1736,20 @@ msgid "To Do"
 msgstr ""
 
 #: lino_welfare/modlib/debts/models.py:473
-#: lino_welfare/modlib/debts/models.py:533 lino_welfare/modlib/debts/ui.py:456
-#: lino_welfare/modlib/debts/ui.py:465 lino_welfare/modlib/debts/ui.py:533
-#: lino_welfare/modlib/debts/ui.py:710 lino_welfare/modlib/integ/models.py:249
+#: lino_welfare/modlib/debts/models.py:533 lino_welfare/modlib/debts/ui.py:452
+#: lino_welfare/modlib/debts/ui.py:461 lino_welfare/modlib/debts/ui.py:529
+#: lino_welfare/modlib/debts/ui.py:706 lino_welfare/modlib/integ/models.py:249
 #: lino_welfare/modlib/integ/models.py:314
 #: lino_welfare/modlib/xcourses/models.py:129
 msgid "Description"
 msgstr ""
 
-#: lino_welfare/modlib/debts/models.py:487 lino_welfare/modlib/debts/ui.py:496
+#: lino_welfare/modlib/debts/models.py:487 lino_welfare/modlib/debts/ui.py:492
 msgid "Monthly rate"
 msgstr ""
 
 #: lino_welfare/modlib/debts/models.py:495
-#: lino_welfare/modlib/debts/models.py:609 lino_welfare/modlib/debts/ui.py:492
+#: lino_welfare/modlib/debts/models.py:609 lino_welfare/modlib/debts/ui.py:488
 msgid "Debt collection agency"
 msgstr ""
 
@@ -1789,35 +1789,35 @@ msgstr ""
 msgid "Name of debts mediator"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:40
+#: lino_welfare/modlib/debts/ui.py:36
 msgid "DM Clients"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:109
+#: lino_welfare/modlib/debts/ui.py:105
 msgid "To be filled if there is more than one person involved."
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:115
+#: lino_welfare/modlib/debts/ui.py:111
 msgid "Is actor in these budgets:"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:133
+#: lino_welfare/modlib/debts/ui.py:129
 msgid "Expenses & Income"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:138
+#: lino_welfare/modlib/debts/ui.py:134
 msgid "Liabilities & Assets"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:164
+#: lino_welfare/modlib/debts/ui.py:160
 msgid "Preview"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:203
+#: lino_welfare/modlib/debts/ui.py:199
 msgid "Is partner of these budgets:"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:452 lino_welfare/modlib/integ/models.py:184
+#: lino_welfare/modlib/debts/ui.py:448 lino_welfare/modlib/integ/models.py:184
 #: lino_welfare/modlib/integ/models.py:400
 #: lino_welfare/modlib/integ/models.py:425
 #: lino_welfare/modlib/integ/models.py:455
@@ -1826,60 +1826,60 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:473 lino_welfare/modlib/debts/ui.py:479
+#: lino_welfare/modlib/debts/ui.py:469 lino_welfare/modlib/debts/ui.py:475
 msgid "Yearly amount"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:557
+#: lino_welfare/modlib/debts/ui.py:553
 msgid "Shows the Incomes & Expenses for this budget."
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:558
+#: lino_welfare/modlib/debts/ui.py:554
 msgid "Incomes & Expenses"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:567
+#: lino_welfare/modlib/debts/ui.py:563
 msgid "Monthly incomes"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:573
+#: lino_welfare/modlib/debts/ui.py:569
 msgid "Yearly incomes ({0} / 12)"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:579
+#: lino_welfare/modlib/debts/ui.py:575
 msgid "Incomes with other periodicity"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:582
+#: lino_welfare/modlib/debts/ui.py:578
 msgid "Monthly expenses"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:586
+#: lino_welfare/modlib/debts/ui.py:582
 msgid "Expenses with other periodicity"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:590
+#: lino_welfare/modlib/debts/ui.py:586
 msgid "Monthly reserve for yearly expenses ({0} / 12)"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:605
+#: lino_welfare/modlib/debts/ui.py:601
 msgid "Monthly installment for running credits"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:610
+#: lino_welfare/modlib/debts/ui.py:606
 msgid "Remaining for credits and debts"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:628
+#: lino_welfare/modlib/debts/ui.py:624
 #, python-format
 msgid "%s (distributable)"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:657
+#: lino_welfare/modlib/debts/ui.py:653
 msgid "Debts distribution"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:660
+#: lino_welfare/modlib/debts/ui.py:656
 msgid ""
 "Répartition au marc-le-franc.\n"
 "A table with one row per entry in Liabilities which has \"distribute\" "
@@ -1888,19 +1888,19 @@ msgid ""
 "\n"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:695
+#: lino_welfare/modlib/debts/ui.py:691
 msgid "%"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:699
+#: lino_welfare/modlib/debts/ui.py:695
 msgid "Monthly payback suggested"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:706
+#: lino_welfare/modlib/debts/ui.py:702
 msgid "Creditor"
 msgstr ""
 
-#: lino_welfare/modlib/debts/ui.py:707
+#: lino_welfare/modlib/debts/ui.py:703
 msgid "Debt"
 msgstr ""
 
@@ -2277,7 +2277,7 @@ msgid "Internal meetings with client"
 msgstr ""
 
 #: lino_welfare/modlib/integ/fixtures/std.py:52
-#: lino_welfare/modlib/pcsw/fixtures/std.py:96
+#: lino_welfare/modlib/pcsw/fixtures/std.py:37
 msgid "Evaluation"
 msgstr ""
 
@@ -3368,57 +3368,19 @@ msgstr ""
 msgid "Liste des types d'aide financière."
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/fixtures/std.py:46
-msgid "Residence permit"
-msgstr ""
-
-#: lino_welfare/modlib/pcsw/fixtures/std.py:51
-msgid "Work permit"
-msgstr ""
-
-#: lino_welfare/modlib/pcsw/fixtures/std.py:58
-msgid "Driving licence"
-msgstr ""
-
-#: lino_welfare/modlib/pcsw/fixtures/std.py:61
-#: lino_welfare/modlib/welfare/workflows.py:17
-msgid "Identifying document"
-msgstr ""
-
-#: lino_welfare/modlib/pcsw/fixtures/std.py:67
-#: lino_welfare/modlib/welfare/workflows.py:47
-msgid "Contract"
-msgstr ""
-
-#: lino_welfare/modlib/pcsw/fixtures/std.py:70
-msgid "Medical certificate"
-msgstr ""
-
-#: lino_welfare/modlib/pcsw/fixtures/std.py:75
-msgid "Handicap certificate"
-msgstr ""
-
-#: lino_welfare/modlib/pcsw/fixtures/std.py:81
-msgid "Diploma"
-msgstr ""
-
-#: lino_welfare/modlib/pcsw/fixtures/std.py:85
-msgid "Identity card"
-msgstr ""
-
-#: lino_welfare/modlib/pcsw/fixtures/std.py:98
+#: lino_welfare/modlib/pcsw/fixtures/std.py:39
 msgid "Formation"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/fixtures/std.py:99
+#: lino_welfare/modlib/pcsw/fixtures/std.py:40
 msgid "Search"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/fixtures/std.py:100
+#: lino_welfare/modlib/pcsw/fixtures/std.py:41
 msgid "Work"
 msgstr ""
 
-#: lino_welfare/modlib/pcsw/fixtures/std.py:101
+#: lino_welfare/modlib/pcsw/fixtures/std.py:42
 msgid "Standby"
 msgstr ""
 
@@ -4306,125 +4268,129 @@ msgstr ""
 msgid "CVs emitted"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/std.py:45
+#: lino_welfare/modlib/welfare/fixtures/std.py:42
 #: lino_welfare/modlib/welfare/workflows.py:26
 msgid "First meeting"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:195
+#: lino_welfare/modlib/welfare/workflows.py:47
+msgid "Contract"
+msgstr ""
+
+#: lino_welfare/modlib/welfare/fixtures/demo.py:191
 msgid "Colleague"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:350
+#: lino_welfare/modlib/welfare/fixtures/demo.py:346
 msgid "Consultations with client"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:351
+#: lino_welfare/modlib/welfare/fixtures/demo.py:347
 msgid "Consultation"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:364
+#: lino_welfare/modlib/welfare/fixtures/demo.py:360
 msgid "External meetings with client"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:365
-#: lino_welfare/modlib/welfare/fixtures/demo.py:384
+#: lino_welfare/modlib/welfare/fixtures/demo.py:361
+#: lino_welfare/modlib/welfare/fixtures/demo.py:380
 msgid "External meeting"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:369
+#: lino_welfare/modlib/welfare/fixtures/demo.py:365
 msgid "Informational meetings"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:370
+#: lino_welfare/modlib/welfare/fixtures/demo.py:366
 msgid "Informational meeting"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:374
+#: lino_welfare/modlib/welfare/fixtures/demo.py:370
 msgid "Internal meetings"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:375
+#: lino_welfare/modlib/welfare/fixtures/demo.py:371
 msgid "Internal meeting"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:383
+#: lino_welfare/modlib/welfare/fixtures/demo.py:379
 msgid "External meetings"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:392
+#: lino_welfare/modlib/welfare/fixtures/demo.py:388
 msgid "Private"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:526
+#: lino_welfare/modlib/welfare/fixtures/demo.py:522
 msgid "Health insurance"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:551
+#: lino_welfare/modlib/welfare/fixtures/demo.py:547
 msgid "Advocate"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:561
+#: lino_welfare/modlib/welfare/fixtures/demo.py:557
 msgid "Bailiff"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:574
+#: lino_welfare/modlib/welfare/fixtures/demo.py:570
 msgid "Debt collecting company"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:653
+#: lino_welfare/modlib/welfare/fixtures/demo.py:649
 msgid "Employment office"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:665
+#: lino_welfare/modlib/welfare/fixtures/demo.py:661
 msgid "Physician"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:673
+#: lino_welfare/modlib/welfare/fixtures/demo.py:669
 msgid "Family doctor"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:681
+#: lino_welfare/modlib/welfare/fixtures/demo.py:677
 msgid "Dentist"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:691
+#: lino_welfare/modlib/welfare/fixtures/demo.py:687
 msgid "Pediatrician"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:883
+#: lino_welfare/modlib/welfare/fixtures/demo.py:879
 msgid "A very hard job."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:885
+#: lino_welfare/modlib/welfare/fixtures/demo.py:881
 msgid "No supervisor. Only for independent people."
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:1091
+#: lino_welfare/modlib/welfare/fixtures/demo.py:1087
 msgid "Urgent problem"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:1091
+#: lino_welfare/modlib/welfare/fixtures/demo.py:1087
 msgid "Complain"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/demo.py:1091
+#: lino_welfare/modlib/welfare/fixtures/demo.py:1087
 msgid "Information"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/std.py:73
+#: lino_welfare/modlib/welfare/fixtures/std.py:70
 msgid "Normal"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/std.py:74
+#: lino_welfare/modlib/welfare/fixtures/std.py:71
 msgid "Alcohol"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/std.py:75
+#: lino_welfare/modlib/welfare/fixtures/std.py:72
 msgid "Health"
 msgstr ""
 
-#: lino_welfare/modlib/welfare/fixtures/std.py:76
+#: lino_welfare/modlib/welfare/fixtures/std.py:73
 msgid "Force majeure"
 msgstr ""
 

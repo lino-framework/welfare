@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2017-2018 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
-"""Defines application workflows. 
+"""Defines application workflows.
 """
 
 from lino.api import dd, _
@@ -13,9 +13,9 @@ from lino_xl.lib.excerpts.choicelists import Shortcuts
 
 Shortcuts.add_item('pcsw.Client', 'cvs_emitted', _("CVs emitted"))
 
-from lino.modlib.uploads.choicelists import add_shortcut as add
-add('pcsw.Client', 'id_document', _("Identifying document"),
-    target='uploads.UploadsByClient')
+# from lino.modlib.uploads.choicelists import add_shortcut as add
+# add('pcsw.Client', 'id_document', _("Identifying document"),
+#     target='uploads.UploadsByClient')
 # from lino.modlib.uploads.choicelists import Shortcuts
 # Shortcuts.add_item(
 #     'pcsw.Client', 'id_document', _("Identifying document"),
@@ -46,4 +46,3 @@ UploadAreas.clear()
 add = UploadAreas.add_item
 add('10', _("Contract"), 'contract')
 add('90', _("General"), 'general')
-

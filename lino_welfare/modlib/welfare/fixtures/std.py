@@ -5,10 +5,9 @@
 
 from django.contrib.contenttypes.models import ContentType
 from lino.utils.instantiator import Instantiator
-from django.utils.translation import ugettext_lazy as _
 from lino_xl.lib.notes.choicelists import SpecialTypes
 
-from lino.api import dd, rt
+from lino.api import dd, rt, _
 
 
 def objects():
