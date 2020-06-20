@@ -429,7 +429,7 @@ Database structure
 - outbox.Recipient : id, mail, partner, type, address, name
 - pcsw.Activity : id, name, lst104
 - pcsw.AidType : id, name, name_fr, name_en
-- pcsw.Client : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, title, first_name, middle_name, last_name, gender, birth_date, person_ptr, national_id, nationality, birth_country, birth_place, card_number, card_valid_from, card_valid_until, card_type, card_issuer, nationality_text, noble_condition, client_state, group, civil_state, residence_type, in_belgium_since, residence_until, unemployed_since, seeking_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type, declared_name, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_office_contact, refusal_reason, remarks2, gesdos_id, tim_id, is_cpas, is_senior, health_insurance, pharmacy, income_ag, income_wg, income_kg, income_rente, income_misc, job_agents, broker, faculty, has_esf
+- pcsw.Client : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, title, first_name, middle_name, last_name, gender, birth_date, person_ptr, client_state, national_id, nationality, birth_country, birth_place, card_number, card_valid_from, card_valid_until, card_type, card_issuer, nationality_text, noble_condition, group, civil_state, residence_type, in_belgium_since, residence_until, unemployed_since, seeking_since, needs_residence_permit, needs_work_permit, work_permit_suspended_until, aid_type, declared_name, is_seeking, unavailable_until, unavailable_why, obstacles, skills, job_office_contact, refusal_reason, remarks2, gesdos_id, tim_id, is_cpas, is_senior, health_insurance, pharmacy, income_ag, income_wg, income_kg, income_rente, income_misc, job_agents, broker, faculty, has_esf
 - pcsw.Conviction : id, client, date, prejudicial, designation
 - pcsw.Dispense : id, client, reason, remarks, start_date, end_date
 - pcsw.DispenseReason : id, seqno, name, name_fr, name_en
@@ -1161,7 +1161,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Datenprobleme : 66
 - Explorer --> Eigenschaften --> Eigenschaften : 24
 - Explorer --> Büro --> Auszüge : 69
-- Explorer --> Büro --> Upload-Dateien : 12
+- Explorer --> Büro --> Upload-Dateien : 16
 - Explorer --> Büro --> Upload-Bereiche : 2
 - Explorer --> Büro --> E-Mail-Ausgänge : 1
 - Explorer --> Büro --> Anhänge : 1

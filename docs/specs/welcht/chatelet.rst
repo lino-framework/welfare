@@ -175,7 +175,7 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
  cal.RemoteCalendar             cal.RemoteCalendars             7         0
  cal.Room                       cal.Rooms                       10        0
  cal.Subscription               cal.Subscriptions               4         9
- cal.Task                       cal.Tasks                       20        34
+ cal.Task                       cal.Tasks                       20        30
  calview.DailyPlannerRow        calview.DailyPlannerRows        8         2
  cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     21        5
  cbss.ManageAccessRequest       cbss.ManageAccessRequests       24        1
@@ -281,7 +281,7 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
  sessions.Session               sessions.SessionTable           3         ...
  system.SiteConfig              system.SiteConfigs              29        1
  tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
- uploads.Upload                 uploads.Uploads                 19        11
+ uploads.Upload                 uploads.Uploads                 19        5
  uploads.UploadType             uploads.UploadTypes             11        9
  uploads.Volume                 uploads.Volumes                 5         0
  users.Authority                users.Authorities               3         3
@@ -997,14 +997,14 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> Tests de données : 14
 - Explorateur --> Système --> Problèmes de données : 0
 - Explorateur --> Bureau --> Extraits : 71
-- Explorateur --> Bureau --> Fichiers téléchargés : 12
+- Explorateur --> Bureau --> Fichiers téléchargés : 6
 - Explorateur --> Bureau --> Domaines de téléchargement : 2
 - Explorateur --> Bureau --> Mails envoyés : 1
 - Explorateur --> Bureau --> Pièces jointes : 1
 - Explorateur --> Bureau --> Observations : 112
 - Explorateur --> Bureau --> Text Field Templates : 3
 - Explorateur --> Calendrier --> Entrées calendrier : 343
-- Explorateur --> Calendrier --> Tâches : 35
+- Explorateur --> Calendrier --> Tâches : 31
 - Explorateur --> Calendrier --> Présences : 589
 - Explorateur --> Calendrier --> Abonnements : 10
 - Explorateur --> Calendrier --> Entry states : 5

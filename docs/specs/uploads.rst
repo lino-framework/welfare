@@ -81,13 +81,15 @@ The UploadsByClient summary shows a summary grouped by upload type.
 In a detail view it also
 
 >>> rt.show(uploads.UploadsByClient, newcomer)
-Identifizierendes Dokument: *2* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,121,{  })>`__
+Identifizierendes Dokument: *2* / Diplom: *14* / Personalausweis: *15* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,121,{  })>`__
 
 
 >>> rt.show(uploads.UploadsByClient, newcomer, nosummary=True)
 ============================ ============ ======= ============================ ===================
  Upload-Art                   Gültig bis   Nötig   Beschreibung                 Hochgeladen durch
 ---------------------------- ------------ ------- ---------------------------- -------------------
+ Personalausweis              26.06.15     Nein    Personalausweis              Hubert Huppertz
+ Diplom                       26.06.15     Nein    Diplom                       Hubert Huppertz
  Identifizierendes Dokument   25.05.14     Ja      Identifizierendes Dokument   Theresia Thelen
  Identifizierendes Dokument   22.04.14     Nein    Identifizierendes Dokument   Theresia Thelen
 ============================ ============ ======= ============================ ===================
@@ -156,8 +158,8 @@ This is the :class:`MyExpiringUploads` table for :ref:`hubert`:
 ========================= ====================== ====================== =================== ============ ============ =======
  Klient                    Upload-Art             Beschreibung           Hochgeladen durch   Gültig von   Gültig bis   Nötig
 ------------------------- ---------------------- ---------------------- ------------------- ------------ ------------ -------
- COLLARD Charlotte (118)   Source document        Source document        Hubert Huppertz                  17.05.15     Ja
- COLLARD Charlotte (118)   Aufenthaltserlaubnis   Aufenthaltserlaubnis   Hubert Huppertz                  17.05.15     Ja
+ AUSDEMWALD Alfons (116)   Source document        Source document        Hubert Huppertz                  17.05.15     Ja
+ AUSDEMWALD Alfons (116)   Aufenthaltserlaubnis   Aufenthaltserlaubnis   Hubert Huppertz                  17.05.15     Ja
 ========================= ====================== ====================== =================== ============ ============ =======
 <BLANKLINE>
 
@@ -178,12 +180,11 @@ Shortcut fields
 =================== ========================= ============================ ======= ============ ============ ============================
  Hochgeladen durch   Klient                    Upload-Art                   Datei   Gültig von   Gültig bis   Beschreibung
 ------------------- ------------------------- ---------------------------- ------- ------------ ------------ ----------------------------
+ Hubert Huppertz     COLLARD Charlotte (118)   Identifizierendes Dokument                        06.06.15     Identifizierendes Dokument
  Theresia Thelen     DERICUM Daniel (121)      Identifizierendes Dokument                        25.05.14     Identifizierendes Dokument
  Theresia Thelen     DERICUM Daniel (121)      Identifizierendes Dokument                        22.04.14     Identifizierendes Dokument
- Hubert Huppertz     COLLARD Charlotte (118)   Identifizierendes Dokument                        06.06.15     Identifizierendes Dokument
 =================== ========================= ============================ ======= ============ ============ ============================
 <BLANKLINE>
-
 
 Let's have a closer look at the `id_document` shortcut field for
 some customers.
@@ -205,11 +206,11 @@ row. Which means that it has two buttons.
 The first button opens a detail window on the *last* uploaded filed:
 
 >>> div.contents[0]
-<a href='javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 8 })'>Letzte</a>
+<a href='javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 2 })'>Letzte</a>
 
 The second item is just the comma which separates the two buttons:
 
->>> sixprint(div.contents[1]) #doctest: +IGNORE_EXCEPTION_DETAIL
+>>> div.contents[1]
 ', '
 
 The second button opens the list of uploads:
@@ -239,9 +240,9 @@ It has 3 keys:
 ["base_params", "param_values", "record_id"]
 
 >>> d.record_id
-8
+2
 >>> d.base_params['mt'] #doctest: +ELLIPSIS
-5...
+37
 >>> d.base_params['type']
 5
 >>> d.base_params['mk']
@@ -265,23 +266,21 @@ Uploads by client
 =================
 
 :class:`UploadsByClient
-<lino_welfare.modlib.uploads.models.UploadsByClient>` shows all the
+<lino_welfare.modlib.uploads.UploadsByClient>` shows all the
 uploads of a given client, but it has a customized
 :meth:`get_slave_summary <lino.core.actors.Actor.get_slave_summary>`.
 
-The following example is going to use client #177 as master.
+The following example is going to use client #121 as master.
 
->>> obj = pcsw.Client.objects.get(pk=177)
->>> print(obj)
-BRECHT Bernd (177)
+>>> obj = oldclient
 
 Here we use :func:`lino.api.doctest.get_json_soup` to inspect what the
 summary view of `UploadsByClient` returns for this client.
 
->>> soup = get_json_soup('rolf', 'pcsw/Clients/177', 'uploads_UploadsByClient')
+>>> soup = get_json_soup('rolf', 'pcsw/Clients/124', 'uploads_UploadsByClient')
 >>> print(soup.get_text())
 ... #doctest: +NORMALIZE_WHITESPACE
-Source document: Aufenthaltserlaubnis: Arbeitserlaubnis: 3Führerschein: 4Identifizierendes Dokument: Diplom:
+Source document: Aufenthaltserlaubnis: 3Arbeitserlaubnis: 4Führerschein: 5Identifizierendes Dokument: Diplom:
 
 The HTML fragment contains five links:
 
@@ -308,11 +307,11 @@ src="/static/images/mjames/add.png"/></a>
 
 >>> print(links[2].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 3 })
+javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 4 })
 
 >>> print(links[3].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 4 })
+javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 5 })
 
 
 Now let's inspect the javascript of the first button
@@ -334,9 +333,9 @@ It has 4 keys:
 10
 
 >>> d.base_params['mt'] #doctest: +ELLIPSIS
-5...
+37
 >>> d.base_params['mk'] #doctest: +ELLIPSIS
-177
+124
 >>> d.base_params['type_id'] #doctest: +ELLIPSIS
 1
 

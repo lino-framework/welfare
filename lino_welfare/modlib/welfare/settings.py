@@ -108,8 +108,7 @@ class Site(Site):
 
         yield 'lino_xl.lib.excerpts'
 
-        yield 'lino_welfare.modlib.pcsw'  # needs coachings, which needs clients
-        yield 'lino_xl.lib.uploads' # needs clients
+        yield 'lino_xl.lib.uploads'
         yield 'lino_xl.lib.outbox'
 
         yield 'lino_xl.lib.extensible'
@@ -118,6 +117,7 @@ class Site(Site):
         yield 'lino_welfare.modlib.badges'
         yield 'lino_xl.lib.boards'
 
+        yield 'lino_welfare.modlib.pcsw'
         # yield 'lino_xl.lib.clients'
         # yield 'lino_xl.lib.coachings'
         yield 'lino_welfare.modlib.welfare'
