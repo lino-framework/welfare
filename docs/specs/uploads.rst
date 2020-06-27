@@ -81,17 +81,17 @@ The UploadsByClient summary shows a summary grouped by upload type.
 In a detail view it also
 
 >>> rt.show(uploads.UploadsByClient, newcomer)
-Identifizierendes Dokument: *2* / Diplom: *14* / Personalausweis: *15* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,121,{  })>`__
+Identifizierendes Dokument: *12* / Diplom: *9* / Personalausweis: *10* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,121,{  })>`__
 
 
 >>> rt.show(uploads.UploadsByClient, newcomer, nosummary=True)
 ============================ ============ ======= ============================ ===================
  Upload-Art                   Gültig bis   Nötig   Beschreibung                 Hochgeladen durch
 ---------------------------- ------------ ------- ---------------------------- -------------------
- Personalausweis              26.06.15     Nein    Personalausweis              Hubert Huppertz
- Diplom                       26.06.15     Nein    Diplom                       Hubert Huppertz
  Identifizierendes Dokument   25.05.14     Ja      Identifizierendes Dokument   Theresia Thelen
  Identifizierendes Dokument   22.04.14     Nein    Identifizierendes Dokument   Theresia Thelen
+ Personalausweis              26.06.15     Nein    Personalausweis              Hubert Huppertz
+ Diplom                       26.06.15     Nein    Diplom                       Hubert Huppertz
 ============================ ============ ======= ============================ ===================
 <BLANKLINE>
 
@@ -102,7 +102,7 @@ Here is another client with three uploads:
 DOBBELSTEIN Dorothée (124)
 
 >>> rt.show(uploads.UploadsByClient, oldclient)
-Aufenthaltserlaubnis: *3* / Arbeitserlaubnis: *4* / Führerschein: *5* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,124,{  })>`__
+Aufenthaltserlaubnis: *13* / Arbeitserlaubnis: *14* / Führerschein: *15* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,124,{  })>`__
 
 
 >>> rt.show(uploads.UploadsByClient, oldclient, nosummary=True)
@@ -134,9 +134,9 @@ This is the :class:`MyUploads` table for Theresia:
 ==== ============================ ============================ ============ ============ ======= ============================ =======
  ID   Klient                       Upload-Art                   Gültig von   Gültig bis   Nötig   Beschreibung                 Datei
 ---- ---------------------------- ---------------------------- ------------ ------------ ------- ---------------------------- -------
- 3    DOBBELSTEIN Dorothée (124)   Aufenthaltserlaubnis                      18.03.15     Ja      Aufenthaltserlaubnis
- 2    DERICUM Daniel (121)         Identifizierendes Dokument                25.05.14     Ja      Identifizierendes Dokument
- 1    DERICUM Daniel (121)         Identifizierendes Dokument                22.04.14     Nein    Identifizierendes Dokument
+ 13   DOBBELSTEIN Dorothée (124)   Aufenthaltserlaubnis                      18.03.15     Ja      Aufenthaltserlaubnis
+ 12   DERICUM Daniel (121)         Identifizierendes Dokument                25.05.14     Ja      Identifizierendes Dokument
+ 11   DERICUM Daniel (121)         Identifizierendes Dokument                22.04.14     Nein    Identifizierendes Dokument
 ==== ============================ ============================ ============ ============ ======= ============================ =======
 <BLANKLINE>
 
@@ -147,7 +147,7 @@ And the same for Caroline:
 ==== ============================ ============== ============ ============ ======= ============== =======
  ID   Klient                       Upload-Art     Gültig von   Gültig bis   Nötig   Beschreibung   Datei
 ---- ---------------------------- -------------- ------------ ------------ ------- -------------- -------
- 5    DOBBELSTEIN Dorothée (124)   Führerschein                01.06.14     Ja      Führerschein
+ 15   DOBBELSTEIN Dorothée (124)   Führerschein                01.06.14     Ja      Führerschein
 ==== ============================ ============== ============ ============ ======= ============== =======
 <BLANKLINE>
 
@@ -180,9 +180,9 @@ Shortcut fields
 =================== ========================= ============================ ======= ============ ============ ============================
  Hochgeladen durch   Klient                    Upload-Art                   Datei   Gültig von   Gültig bis   Beschreibung
 ------------------- ------------------------- ---------------------------- ------- ------------ ------------ ----------------------------
- Hubert Huppertz     COLLARD Charlotte (118)   Identifizierendes Dokument                        06.06.15     Identifizierendes Dokument
  Theresia Thelen     DERICUM Daniel (121)      Identifizierendes Dokument                        25.05.14     Identifizierendes Dokument
  Theresia Thelen     DERICUM Daniel (121)      Identifizierendes Dokument                        22.04.14     Identifizierendes Dokument
+ Hubert Huppertz     COLLARD Charlotte (118)   Identifizierendes Dokument                        06.06.15     Identifizierendes Dokument
 =================== ========================= ============================ ======= ============ ============ ============================
 <BLANKLINE>
 
@@ -206,7 +206,7 @@ row. Which means that it has two buttons.
 The first button opens a detail window on the *last* uploaded filed:
 
 >>> div.contents[0]
-<a href='javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 2 })'>Letzte</a>
+<a href='javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 12 })'>Letzte</a>
 
 The second item is just the comma which separates the two buttons:
 
@@ -221,14 +221,14 @@ The second button opens the list of uploads:
 And as you can see, it does not use the default table
 (UploadsByController) but the welfare specific table UploadsByClient.
 
-Now let's inspect these three dots (`...`) of this second button.
+Let's inspect these three dots (`...`) of this second button.
 
 >>> btn = div.contents[2]
 >>> dots = btn['href'][54:-1]
 >>> print(dots)  #doctest: +ELLIPSIS
 { ... }
 
-They are a big "object" (in Python we call it a `dict`):
+They are a big "object", which is represented in Python as a `dict`:
 
 >>> d = AttrDict(json.loads(dots))
 
@@ -240,15 +240,11 @@ It has 3 keys:
 ["base_params", "param_values", "record_id"]
 
 >>> d.record_id
-2
->>> d.base_params['mt'] #doctest: +ELLIPSIS
-37
->>> d.base_params['type']
-5
->>> d.base_params['mk']
-121
+12
+>>> d.base_params #doctest: +ELLIPSIS
+{'mk': 121, 'mt': 56, 'type': 5}
 
->>> pprint(rmu(d.param_values))
+>>> pprint(d.param_values)
 ... #doctest: +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL
 {'coached_by': None,
  'coached_byHidden': None,
@@ -280,7 +276,7 @@ summary view of `UploadsByClient` returns for this client.
 >>> soup = get_json_soup('rolf', 'pcsw/Clients/124', 'uploads_UploadsByClient')
 >>> print(soup.get_text())
 ... #doctest: +NORMALIZE_WHITESPACE
-Source document: Aufenthaltserlaubnis: 3Arbeitserlaubnis: 4Führerschein: 5Identifizierendes Dokument: Diplom:
+Source document: Aufenthaltserlaubnis: 13Arbeitserlaubnis: 14Führerschein: 15Identifizierendes Dokument: Diplom:
 
 The HTML fragment contains five links:
 
@@ -307,11 +303,11 @@ src="/static/images/mjames/add.png"/></a>
 
 >>> print(links[2].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 4 })
+javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 14 })
 
 >>> print(links[3].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 5 })
+javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 15 })
 
 
 Now let's inspect the javascript of the first button
@@ -320,37 +316,26 @@ Now let's inspect the javascript of the first button
 >>> print(dots)  #doctest: +ELLIPSIS
 { ... }
 
-They are a big "object" (in Python we call it a `dict`):
-
 >>> d = AttrDict(json.loads(dots))
 
-It has 4 keys:
-
->>> sorted(d.keys())
-['base_params', 'data_record', 'param_values', 'record_id']
-
->>> len(d.param_values)
-10
-
->>> d.base_params['mt'] #doctest: +ELLIPSIS
-37
->>> d.base_params['mk'] #doctest: +ELLIPSIS
-124
->>> d.base_params['type_id'] #doctest: +ELLIPSIS
-1
-
->>> sorted(d.data_record.keys())
-['data', 'phantom', 'title']
->>> d.data_record['phantom']
-True
->>> print(d.data_record['title'])
-Upload-Datei erstellen
-
->>> sorted(d.data_record['data'].keys())
-['description', 'disabled_fields', 'end_date', 'file', 'type', 'typeHidden']
-
->>> pprint(d.data_record['data'], width=200)
-... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
-{'description': '', 'disabled_fields': {'mimetype': True},
-'end_date': None, 'file': '', 'type': 'Source document',
-'typeHidden': 1}
+>>> pprint(d)
+{'base_params': {'mk': 124, 'mt': 56, 'type_id': 1},
+ 'data_record': {'data': {'description': '',
+                          'disabled_fields': {'mimetype': True},
+                          'end_date': None,
+                          'file': '',
+                          'type': 'Source document',
+                          'typeHidden': 1},
+                 'phantom': True,
+                 'title': 'Upload-Datei erstellen'},
+ 'param_values': {'coached_by': None,
+                  'coached_byHidden': None,
+                  'end_date': None,
+                  'observed_event': 'Ist aktiv',
+                  'observed_eventHidden': '20',
+                  'start_date': None,
+                  'upload_type': None,
+                  'upload_typeHidden': None,
+                  'user': None,
+                  'userHidden': None},
+ 'record_id': None}

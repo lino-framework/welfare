@@ -166,7 +166,7 @@ user being assigned (6 in this case):
 
 ..
     >>> contenttypes.ContentType.objects.get_for_model(pcsw.Client).pk #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-    37
+    56
 
 >>> print(links[0].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
