@@ -518,9 +518,9 @@ Each window layout defines a given set of fields.
 - uploads.UploadTypes.detail : id, upload_area, shortcut, name, name_nl, name_de, name_en, warn_expiry_unit, warn_expiry_value, wanted, max_number
 - uploads.UploadTypes.insert : upload_area, name, name_nl, name_de, name_en, warn_expiry_unit, warn_expiry_value
 - uploads.Uploads.detail : user, project, id, type, description, start_date, end_date, needed, company, contact_person, contact_role, file, owner, remark
-- uploads.Uploads.insert : type, file, start_date, end_date, description
-- uploads.UploadsByClient.insert : file, type, end_date, description
-- uploads.UploadsByController.insert : file, type, end_date, description
+- uploads.Uploads.insert : type, file, start_date, end_date, needed, description
+- uploads.UploadsByClient.insert : file, type, end_date, needed, description
+- uploads.UploadsByController.insert : file, type, end_date, needed, description
 - uploads.Volumes.detail : ref, description, root_dir, base_url, overview
 - uploads.Volumes.insert : ref, description, root_dir, base_url
 - uploads.Volumes.merge_row : merge_to, reason

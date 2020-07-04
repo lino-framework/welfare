@@ -324,6 +324,7 @@ Now let's inspect the javascript of the first button
                           'disabled_fields': {'mimetype': True},
                           'end_date': None,
                           'file': '',
+                          'needed': True,
                           'type': 'Source document',
                           'typeHidden': 1},
                  'phantom': True,
