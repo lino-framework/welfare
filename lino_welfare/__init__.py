@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2002-2019 Rumma & Ko Ltd
+# Copyright 2002-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """
@@ -14,10 +14,7 @@ This package defines functionality specific to :ref:`welfare`.
 
 """
 
-import os
-
-fn = os.path.join(os.path.dirname(__file__), 'setup_info.py')
-exec(compile(open(fn, "rb").read(), fn, 'exec'))
+from .setup_info import SETUP_INFO
 
 # doc_trees = ['docs', 'dedocs', 'frdocs']
 # doc_trees = ['dedocs', 'frdocs']
