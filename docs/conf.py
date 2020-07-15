@@ -29,7 +29,7 @@ configure(globals(), 'lino_book.projects.min1.settings.doctests')
 intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
 interproject.configure(globals(), 'atelier lino_book lino_weleup lino_welcht',
-    cg=('http://community.lino-framework.org/', None))
+    cg=('https://community.lino-framework.org/', None))
 
 
 # intersphinx_mapping = {}
