@@ -177,13 +177,13 @@ Shortcut fields
 
 >>> id_document = uploads.UploadType.objects.get(shortcut=uploads.Shortcuts.id_document)
 >>> rt.show(uploads.UploadsByType, id_document)
-=================== ========================= ============================ ======= ============ ============ ============================
- Hochgeladen durch   Klient                    Upload-Art                   Datei   Gültig von   Gültig bis   Beschreibung
-------------------- ------------------------- ---------------------------- ------- ------------ ------------ ----------------------------
- Theresia Thelen     DERICUM Daniel (121)      Identifizierendes Dokument                        25.05.14     Identifizierendes Dokument
- Theresia Thelen     DERICUM Daniel (121)      Identifizierendes Dokument                        22.04.14     Identifizierendes Dokument
- Hubert Huppertz     COLLARD Charlotte (118)   Identifizierendes Dokument                        06.06.15     Identifizierendes Dokument
-=================== ========================= ============================ ======= ============ ============ ============================
+=================== ========================= ============================ ======= ============ ============ ======= ============================
+ Hochgeladen durch   Klient                    Upload-Art                   Datei   Gültig von   Gültig bis   Nötig   Beschreibung
+------------------- ------------------------- ---------------------------- ------- ------------ ------------ ------- ----------------------------
+ Theresia Thelen     DERICUM Daniel (121)      Identifizierendes Dokument                        25.05.14     Ja      Identifizierendes Dokument
+ Theresia Thelen     DERICUM Daniel (121)      Identifizierendes Dokument                        22.04.14     Nein    Identifizierendes Dokument
+ Hubert Huppertz     COLLARD Charlotte (118)   Identifizierendes Dokument                        06.06.15     Ja      Identifizierendes Dokument
+=================== ========================= ============================ ======= ============ ============ ======= ============================
 <BLANKLINE>
 
 Let's have a closer look at the `id_document` shortcut field for

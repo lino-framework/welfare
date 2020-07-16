@@ -179,7 +179,7 @@ class Site(Site):
 
 
         """
-        if user.authenticated:
+        if user.is_authenticated:
             yield self.modules.integ.UsersWithClients
             yield self.modules.reception.MyWaitingVisitors
             yield self.modules.reception.WaitingVisitors
