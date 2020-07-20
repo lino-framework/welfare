@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2018 Rumma & Ko Ltd
+# Copyright 2008-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 
@@ -9,12 +9,7 @@ See also :ref:`welfare.specs.jobs`.
 
 
 """
-from __future__ import unicode_literals
-
-import logging
-from builtins import str
-
-logger = logging.getLogger(__name__)
+import logging ; logger = logging.getLogger(__name__)
 
 from django.db import models
 from django.conf import settings
@@ -105,10 +100,10 @@ class JobProviderDetail(contacts.CompanyDetail):
 
     """
     This is the same as CompanyDetail, except that we
-    
+
     - remove MTI fields from `remark` panel
     - add a new tab `jobs`
-    
+
     """
     box5 = "remarks"
 
@@ -144,7 +139,7 @@ class ContractType(ContractTypeBase,  # mixins.PrintableType,
     """This is the homologue of :class:`isip.ContractType
     <lino_welfare.modlib.isip.models.ContractType>` (see there for
     general documentation).
-    
+
     They are separated tables because ISIP contracts are in practice
     very different from JOBS contracts, and also their types should
     not be mixed.
@@ -397,9 +392,9 @@ class ContractsBySchedule(Contracts):
 
 
 class MyContracts(Contracts):
-    
-    required_roles = dd.login_required(IntegUser)    
-    
+
+    required_roles = dd.login_required(IntegUser)
+
     column_names = "applies_from client job type company applies_until date_ended ending *"
     #~ label = _("My contracts")
     #~ order_by = "reminder_date"
@@ -465,7 +460,7 @@ class Offers(dd.Table):
 class Job(SectorFunction):
     """
     A **job** is a place where a Client can work. The Job Provider
-    
+
     """
 
     preferred_foreignkey_width = 20
@@ -788,7 +783,7 @@ class Jobs(dd.Table):
     ContractsByJob
     """
     insert_layout = """
-    name provider 
+    name provider
     contract_type type
     sector function
     # capacity hourly_rate
@@ -807,7 +802,7 @@ class JobType(mixins.Sequenced):
     .. django2rst::
 
         rt.show('jobs.JobTypes')
-        
+
     """
 
     class Meta:

@@ -15,10 +15,6 @@
 # :class:`RowFactory`.
 
 
-
-from __future__ import unicode_literals
-
-from builtins import str
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.utils.encoding import force_text
@@ -477,12 +473,12 @@ def IT111(n):
 
     info = Info()
     info.addfrom(n, 'Date', _("Date"), DateType)
-    
+
     info.addfrom(n, 'Justification', '', JustificationType)
     info.addfrom(n, 'Situation', '', SituationType111)
     info.addfrom(n, 'Graphic', " ")
     info.add_deldate(n)
-    
+
     return info
 
 
@@ -1006,7 +1002,7 @@ class RowFactory(object):
     # The result of a Tx25 consist of data rows, each of which has a
     # given type.  Consult the source code of this class to see how it
     # works.
-    
+
 
     def start_group(self, group):
         self.current_group = group
@@ -1044,7 +1040,7 @@ class RowFactory(object):
                 info = it(n)
                 yield self.datarow(n, n.Date, info)
         return f
-    
+
     def IT000(self, n, name):
         self.start_group(_("National Number"))
         n = n.NationalNumber
@@ -1325,5 +1321,3 @@ class RetrieveTIGroupsResult(ConfidentialResultsTable):
                                     % (name, node.__class__.__name__))
             for row in m(node, name):
                 yield row
-
-

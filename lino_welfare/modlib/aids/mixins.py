@@ -103,7 +103,7 @@ class RevokeConfirmation(dd.Action):
 
 
 class Confirmable(mixins.DateRange):
-    
+
     class Meta:
         abstract = True
 
@@ -204,7 +204,7 @@ class Confirmable(mixins.DateRange):
 class Confirmation(
         Confirmable, UserAuthored, ContactRelated,
         mixins.Created, Certifiable):
-    
+
     class Meta:
         abstract = True
 
@@ -239,7 +239,7 @@ class Confirmation(
 
     def get_date_range_veto(obj):
         pk = dd.plugins.aids.no_date_range_veto_until
-        if pk and obj.pk and obj.pk <= pk:
+        if pk and pk > 0 and obj.granting_id and obj.granting_id <= pk:
             return
         gp = obj.granting.get_period()
         if obj.start_date or obj.end_date:
@@ -250,7 +250,7 @@ class Confirmation(
                     "Date range %(p1)s lies outside of granted "
                     "period %(p2)s.") % dict(
                         p2=rangefmt(gp), p1=rangefmt(cp))
-                
+
     def full_clean(self):
         super(Confirmation, self).full_clean()
         if self.granting is None:
@@ -278,7 +278,7 @@ class Confirmation(
                 self.contact_person = at.contact_person
                 self.contact_role = at.contact_role
         super(Confirmation, self).on_create(ar)
-        
+
     @classmethod
     def get_confirmable_fields(cls):
         return 'client signer granting remark start_date end_date'
@@ -332,7 +332,7 @@ class ConfirmationChecker(Checker):
     model = Confirmation
 
     verbose_name = _("Check for confirmations outside of granted period")
-    
+
     def get_responsible_user(self, obj):
         return obj.client.get_primary_coach()
 
@@ -344,5 +344,5 @@ class ConfirmationChecker(Checker):
         msg = obj.get_date_range_veto()
         if msg is not None:
             yield (False, msg)
-        
+
 ConfirmationChecker.activate()

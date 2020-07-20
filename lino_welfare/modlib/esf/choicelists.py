@@ -7,7 +7,7 @@ import datetime
 
 from django.db import models
 
-from atelier.utils import last_day_of_month
+from lino.utils import last_day_of_month
 
 from lino.api import dd, _
 from lino.utils.dates import weekdays

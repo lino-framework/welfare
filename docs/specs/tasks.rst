@@ -23,12 +23,16 @@ My tasks
 The `My tasks` table (:class:`lino_xl.lib.cal.MyTasks`) is visible
 in the dashboard.
 
-This table shows tasks that are due in the next **30** days.  This
-value is currently as a class attribute :attr:`default_end_date_offset
-<lino.modlib.cal.MyTasks.default_end_date_offset>` on that table:
+This table shows tasks that are due in the next **30** days.  These edge values
+may get customized locally in the :xfile:`settings.py` file.
 
->>> cal.MyTasks.default_end_date_offset
+>>> print(dd.plugins.cal.mytasks_start_date)
+None
+>>> dd.plugins.cal.mytasks_end_date
 30
+
+The gerd demo project sets :attr:`lino_xl.lib.cal.Plugin.mytasks_start_date` to
+-30, which means that users don't see tasks that are older than 30 days.
 
 For example Hubert has some tasks in that table:
 

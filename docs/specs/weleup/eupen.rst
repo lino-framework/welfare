@@ -1265,3 +1265,15 @@ None
 
 >>> contacts.Person.disable_create_choice
 True
+
+
+
+
+The gerd demo project sets :attr:`lino_xl.lib.cal.Plugin.mytasks_start_date` to
+-30, which means that users don't see tasks that are older than 30 days.
+
+
+>>> dd.plugins.cal.mytasks_start_date
+-30
+>>> dd.plugins.cal.mytasks_end_date
+30

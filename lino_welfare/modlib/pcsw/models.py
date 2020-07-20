@@ -155,9 +155,9 @@ class Client(contacts.Person, BiographyOwner, BeIdCardHolder,
         return rv
 
     @classmethod
-    def get_user_queryset(cls, user):
-        return cls.objects.select_related(
-            'country', 'city', 'nationality')
+    def get_request_queryset(cls, *ar, **kwargs):
+        qs = super(Client, cls).get_request_queryset(*ar, **kwargs)
+        return qs.select_related('country', 'city', 'nationality')
 
     def get_excerpt_options(self, ar, **kw):
         # Set project field when creating an excerpt from Client.

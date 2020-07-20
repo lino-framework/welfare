@@ -77,6 +77,7 @@ class Site(Site):
         # if 'ledger' in self.plugins:
         yield ('ledger', 'ref_length', 16)
         yield ('ledger', 'project_model', 'pcsw.Client')
+        yield ('cal', 'mytasks_start_date', -30)
 
     def setup_quicklinks(self, user, tb):
         # tb.add_action(self.modules.pcsw.Clients.detail_action)

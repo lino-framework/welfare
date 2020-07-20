@@ -62,7 +62,6 @@ A **social staff member** is a social agent who has access to more
 technical information about welfare clients.  For example the
 `Miscellaneous` panel.
 
-
 An **integration agent** is a specialized social agent who works with
 immigrants who want to integrate into local society.  They can access
 database content specific to integration work: CV, language courses,
