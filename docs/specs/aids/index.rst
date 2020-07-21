@@ -23,7 +23,7 @@ of aid during a given period.
 >>> from lino.api.doctest import *
 
 >>> translation.activate('de')
-           
+
 
 
 Confirmation types
@@ -39,7 +39,7 @@ True
 <lino_welfare.modlib.aids.choicelists.ConfirmationTypes>` is a
 choicelist where each subclass of :class:`Confirmation
 <lino_welfare.modlib.aids.mixins.Confirmation>`
-has been registered. 
+has been registered.
 
 Currently Lino Welfare knows three confirmation types.
 
@@ -91,9 +91,9 @@ Konfigurierung --> ÖSHZ --> Hilfearten
 
 
 .. class:: AidType
-           
+
     The Django model representing an *aid type*.
-    
+
     Database fields:
 
     .. attribute:: short_name
@@ -106,7 +106,7 @@ Konfigurierung --> ÖSHZ --> Hilfearten
         The database model to use for issuing an aid confirmation of
         this type. This is a mandatory pointer to
         :class:`ConfirmationTypes`.
-    
+
     .. attribute:: name
 
         The designation of this aid type as seen by the user e.g. when
@@ -141,7 +141,7 @@ Konfigurierung --> ÖSHZ --> Hilfearten
         for aid projects of this type.
 
     .. attribute:: confirmed_by_primary_coach
-    
+
         Whether grantings for this aid type are to be signed by the
         client's primary coach (see :meth:`Client.get_primary_coach
         <lino_welfare.modlib.pcsw.models.Client.get_primary_coach>`).
@@ -195,14 +195,14 @@ gets a given aid during a given period.
 
         Currently only used for printing an `isip.Contract`.
 
-        
+
 .. class:: Grantings
 .. class:: AllGrantings
 .. class:: MyPendingGrantings
 .. class:: GrantingsByClient
 .. class:: GrantingsByType
-        
-           
+
+
 
 Alicia hat 2 Hilfebeschlüsse zu bestätigen. Dies kriegt sie als
 Willkommensmeldung unter die Nase gerieben:
@@ -251,7 +251,7 @@ Aid confirmations (Hilfebestätigungen)
     <lino_welfare.modlib.aids.models.RefundConfirmation>`.
 
     .. method:: get_date_range_veto(self)
-    
+
         Return an error message if this confirmation lies outside of
         granted period.
 
@@ -263,8 +263,8 @@ Aid confirmations (Hilfebestätigungen)
 
         Used in :xfile:`medical_refund.body.html`.
 
-                
-           
+
+
 
 In der Demo-Datenbank gibt es 2 generierte Bescheinigungen pro Hilfeart :
 
@@ -645,7 +645,7 @@ Neither start nor end:
 <BLANKLINE>
 <BLANKLINE>
 <BLANKLINE>
- 
+
 
 ConfirmationsByGranting
 =======================
@@ -704,7 +704,7 @@ this client has four grantings:
 .. image:: 0219a.png
     :scale: 50
 
-Clicking on the "Create confirmation" should show the window on the left, 
+Clicking on the "Create confirmation" should show the window on the left,
 but currently it shows the window on the right:
 
 .. image:: 0219b.png
@@ -778,7 +778,7 @@ They all inherit from :class:`lino.utils.jsgen.Component`, which is
 part of :mod:`lino.utils.jsgen`, which is a general framework for
 generating Javascript.
 
-It uses functions like 
+It uses functions like
 :func:`with_user_profile <lino.utils.jsgen.with_user_profile>`,
 :func:`declare_vars <lino.utils.jsgen.declare_vars>` and
 :func:`py2js <lino.utils.jsgen.py2js>`.
@@ -875,7 +875,7 @@ the Confirmable mixin
     user.
 
     .. attribute:: signer
- 
+
     The agent who has signed or is expected to sign this item.
 
     .. attribute:: state
@@ -886,14 +886,14 @@ the Confirmable mixin
     Actions:
 
     .. method:: sign
-                
+
         Sign this granting or confirmation, making most fields read-only.
 
         This is available if signer is either empty or equals the
         requesting user.  Except for system managers who can sign as
         somebody else by manually setting the signer field before running
         this action.
-   
+
     .. method:: revoke
 
         Revoke your signature of this granting or confirmation.
@@ -927,7 +927,7 @@ Here is a list of the templates defined in the `Aids` module.
 
   try:
     from django.utils import translation
-    from atelier.rstgen import header
+    from rstgen import header
     from lino.api.shell import *
 
     def f(name):
@@ -972,5 +972,3 @@ Here is a list of the templates defined in the `Aids` module.
 
   except Exception as e:
     print("Oops: %s" % e)
-
-
