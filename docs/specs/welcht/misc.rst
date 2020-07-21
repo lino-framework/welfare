@@ -11,8 +11,6 @@ Miscellaneous
 
 .. include:: /../docs/shared/include/tested.rst
 
->>> import os
->>> os.environ['LINO_CACHE_ROOT'] = '' # disable for this doctest
 >>> from lino import startup
 >>> startup('lino_welfare.projects.mathieu.settings.doctests')
 >>> from lino.api.doctest import *
@@ -99,6 +97,10 @@ After having created the directory, we must tell Lino to scan the file
 system again:
 
 >>> settings.SITE.confdirs.scan_config_dirs()
+
+Hack : on travis the local config dir is not writeable, but here we simulate 
+
+>>> settings.SITE.confdirs.LOCAL_CONFIG_DIR.writeable = True
 
 >>> for cd in settings.SITE.confdirs.config_dirs:
 ...     print(cd.name, cd.writeable)  #doctest: +ELLIPSIS
