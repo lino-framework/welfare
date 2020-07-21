@@ -13,6 +13,11 @@ General information about how to read and maintain this document in :ref:`dev.ch
   :local:
 
 
+2020-07-21
+==========
+
+Released to PyPI : welfare, weleup and welcht.
+
 2020-01-18
 ==========
 

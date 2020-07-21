@@ -15,7 +15,7 @@ requires.append('suds-py3')
 
 SETUP_INFO = dict(
     name='lino-welfare',
-    version='20.7.0',
+    version='20.7.1',
     install_requires=requires,
     test_suite='tests',
     tests_require=['pytest'],
