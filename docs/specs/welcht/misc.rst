@@ -12,6 +12,7 @@ Miscellaneous
 .. include:: /../docs/shared/include/tested.rst
 
 >>> import os
+>>> os.environ['LINO_CACHE_ROOT'] = '' # disable for this doctest
 >>> from lino import startup
 >>> startup('lino_welfare.projects.mathieu.settings.doctests')
 >>> from lino.api.doctest import *
@@ -84,7 +85,7 @@ Editing the print template of an excerpt
 ========================================
 
 Here we want to see what the :class:`EditTemplate
-<lino.modlib.printing.actions.EditTemplate>` action says, especially
+<lino.modlib.printing.EditTemplate>` action says, especially
 when called on an excerpt where Lino has two possible locations.
 
 Note that we need a local config directory for the following test to
@@ -99,6 +100,16 @@ system again:
 
 >>> settings.SITE.confdirs.scan_config_dirs()
 
+>>> for cd in settings.SITE.confdirs.config_dirs:
+...     print(cd.name, cd.writeable)  #doctest: +ELLIPSIS
+/.../lino_welfare/projects/mathieu/settings/config True
+/.../lino/modlib/tinymce/config False
+...
+/.../lino/modlib/jinja/config False
+/.../lino/config False
+
+
+
 Excerpts are printables with *two* template groups.  The first
 template group is given by the owner (e.g. `"immersion/Contract"`) and
 the second is just `"excerpts"`.
@@ -111,9 +122,9 @@ the owner of Excerpt #4 is an aids confirmation:
 >>> excerpts.Excerpt.objects.get(pk=4).get_template_groups() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL
 ['aids/Confirmation', 'excerpts']
 
-When creating a local copy of the factory template, Lino copies the
-factory file to the directory given by the *first* group. Before doing
-so, it will ask for user confirmation.
+When creating a local copy of the factory template, Lino copies the factory file
+to the directory given by the *first* group. Before doing so, it will ask for
+user confirmation.  The following code snippet partly tests this situation.
 
 >>> obj = excerpts.Excerpt.objects.get(pk=2)
 >>> obj.owner
