@@ -11,14 +11,12 @@ You can run only these tests by issuing::
 
 """
 
-from __future__ import unicode_literals
-from builtins import str
 
 from django.conf import settings
 from django.utils import translation, six
 from django.core.exceptions import ValidationError
 
-from atelier.utils import i2d
+from rstgen.utils import i2d
 
 from lino.api import rt
 from lino.utils.djangotest import TestCase
@@ -33,7 +31,7 @@ class TestCase(TestCase):
     maxDiff = None
 
     def test_aids(self):
-        """Test whether 
+        """Test whether
 
         """
         # print("20180502 test_aids.test_aids()")
@@ -70,7 +68,7 @@ class TestCase(TestCase):
         grant.start_date = i2d(20180401)
         grant.full_clean()
         grant.save()
-        
+
         obj = ar.create_instance(
             granting=grant,
             start_date=i2d(20180331), end_date=i2d(20180331))
@@ -85,7 +83,3 @@ class TestCase(TestCase):
                 else:
                     self.assertEqual(
                         str(e), "['Date range 31/03/2018...31/03/2018 lies outside of granted period 01/04/2018....']")
-                
-
-        
-

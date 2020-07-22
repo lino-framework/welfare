@@ -86,10 +86,10 @@ Here we want to see what the :class:`EditTemplate
 <lino.modlib.printing.EditTemplate>` action says, especially
 when called on an excerpt where Lino has two possible locations.
 
-Note that we need a local config directory for the following test to
-work:
+Note that we need a local config directory for the following test to work. On
+travis we use :envvar:`LINO_CACHE_ROOT`, so there is no local config dir. That's
+why this doctest must create one.
 
->>> # lcd = os.path.join(settings.SITE.cache_dir, 'config')
 >>> lcd = settings.SITE.cache_dir.child('config')
 >>> rt.makedirs_if_missing(lcd)
 
@@ -98,26 +98,23 @@ system again:
 
 >>> settings.SITE.confdirs.scan_config_dirs()
 
-Hack : on travis the local config dir is not writeable, but here we simulate 
+.. How to simulate the travis situation in a contributor environment::
 
->>> settings.SITE.confdirs.LOCAL_CONFIG_DIR.writeable = True
+    $ go mathieu
+    $ export LINO_CACHE_ROOT=~/lino_cache
+    $ pm prep
+    $ go welfare
+    $ dt docs/specs/welcht/misc.rst
 
->>> for cd in settings.SITE.confdirs.config_dirs:
-...     print(cd.name, cd.writeable)  #doctest: +ELLIPSIS
-/.../lino_welfare/projects/mathieu/settings/config True
-/.../lino/modlib/tinymce/config False
-...
-/.../lino/modlib/jinja/config False
-/.../lino/config False
+>>> settings.SITE.confdirs.LOCAL_CONFIG_DIR.writeable
+True
 
-
-
-Excerpts are printables with *two* template groups.  The first
-template group is given by the owner (e.g. `"immersion/Contract"`) and
-the second is just `"excerpts"`.
-
-For example the owner of Excerpt #2 is an immersion training, while
-the owner of Excerpt #4 is an aids confirmation:
+Excerpts are printables with *two* template groups.
+A printable with several template groups will use the first one that exists, and will fail only if non of them exists.
+The first template group is
+given by the owner (e.g. `"immersion/Contract"`) and the second is just
+`"excerpts"`. For example the owner of Excerpt #2 is an immersion training,
+while the owner of Excerpt #4 is an aids confirmation:
 
 >>> excerpts.Excerpt.objects.get(pk=2).get_template_groups() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +IGNORE_EXCEPTION_DETAIL
 ['immersion/Contract', 'excerpts']
