@@ -24,6 +24,55 @@ of aid during a given period.
 
 >>> translation.activate('de')
 
+Date range validation
+=====================
+
+>>> # print(dd.plugins.aids.no_date_range_veto_until)
+>>> obj = rt.models.aids.Granting.objects.get(pk=10)
+>>> def f(gs, ge, cs, ce):
+...     if gs: gs = i2d(gs)
+...     if ge: ge = i2d(ge)
+...     if cs: cs = i2d(cs)
+...     if ce: ce = i2d(ce)
+...     obj.start_date = gs
+...     obj.end_date = ge
+...     p = aids.IncomeConfirmation(start_date=cs, end_date=ce, granting=obj)
+...     return p.get_date_range_veto()
+
+>>> dd.plugins.aids.no_date_range_veto_until = 0
+>>> f(20140522, 20140522, 20140522, 20140522)
+
+A confirmation without an end date means only on the start date:
+>>> f(20140522, 20140522, 20140522, None)
+
+>>> f(20140522, None, 20140522, None)
+>>> f(20140522, None, 20140522, 20150521)
+>>> f(20140522, 20140522, 20140522, 20140523)
+'Datumsbereich 22.05.14...23.05.14 außerhalb der Laufzeit des Beschlusses 22.05.14...22.05.14.'
+>>> f(20140522, 20140522, 20140523, 20140523)
+'Datumsbereich 23.05.14...23.05.14 außerhalb der Laufzeit des Beschlusses 22.05.14...22.05.14.'
+>>> f(20140522, 20140522, 20140523, 20140523)
+'Datumsbereich 23.05.14...23.05.14 außerhalb der Laufzeit des Beschlusses 22.05.14...22.05.14.'
+
+>>> f(None, 20140522, 20140521, None)
+>>> f(None, 20140522, 20140522, None)
+>>> f(None, 20140522, 20140523, None)
+'Datumsbereich 23.05.14...23.05.14 außerhalb der Laufzeit des Beschlusses ...22.05.14.'
+
+>>> dd.plugins.aids.no_date_range_veto_until = -1
+>>> f(None, 20140522, 20140523, None)
+
+
+>>> obj.pk
+10
+
+>>> dd.plugins.aids.no_date_range_veto_until = 15
+>>> f(None, 20140522, 20140523, None)
+
+>>> dd.plugins.aids.no_date_range_veto_until = 5
+>>> f(None, 20140522, 20140523, None)
+'Datumsbereich 23.05.14...23.05.14 außerhalb der Laufzeit des Beschlusses ...22.05.14.'
+
 
 
 Confirmation types
@@ -585,8 +634,8 @@ False
 Arzt : Kann keinen neuen Arzt erstellen, wenn Art des Arztes leer ist
 
 
-The period of a confirmation
-============================
+The period covered by a confirmation
+====================================
 
 >>> from lino.utils.format_date import fdl
 >>> print(dd.fdl(dd.today()))
@@ -645,6 +694,7 @@ Neither start nor end:
 <BLANKLINE>
 <BLANKLINE>
 <BLANKLINE>
+
 
 
 ConfirmationsByGranting
@@ -864,7 +914,7 @@ components with an attribute "hidden":
 Which corresponds to what we want.
 
 
-the Confirmable mixin
+The Confirmable mixin
 =====================
 
 .. class:: Confirmable

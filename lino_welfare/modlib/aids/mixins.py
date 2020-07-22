@@ -239,7 +239,7 @@ class Confirmation(
 
     def get_date_range_veto(obj):
         pk = dd.plugins.aids.no_date_range_veto_until
-        if pk and pk > 0 and obj.granting_id and obj.granting_id <= pk:
+        if pk < 0 or obj.granting_id is None or obj.granting_id <= pk:
             return
         gp = obj.granting.get_period()
         if obj.start_date or obj.end_date:
