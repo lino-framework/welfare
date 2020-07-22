@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Lino-DSBE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-22 15:12+0300\n"
-"PO-Revision-Date: 2020-07-22 15:13+0300\n"
+"PO-Revision-Date: 2020-07-22 15:16+0300\n"
 "Last-Translator: Luc Saffre <luc.saffre@gmail.com>\n"
 "Language: de\n"
 "Language-Team: de <luc.saffre@gmail.com>\n"
@@ -3486,7 +3486,7 @@ msgstr "Bitten wählen Sie einen Benutzer aus!"
 
 #: lino_welfare/modlib/reception/models.py:157
 msgid "{client} now waiting for {user}"
-msgstr ""
+msgstr "{client} wartet ab jetzt auf {user}"
 
 #: lino_welfare/modlib/reception/models.py:180
 #, fuzzy
