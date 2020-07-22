@@ -10,6 +10,8 @@
 {% block title %}
 {% if language != settings.SITE.get_default_language() %}
 <p class="CenteredHeader">({{_("Translation")}})</p>
+{% else %}
+<p class="CenteredHeader"></p>
 {% endif %}
 <h1>{{obj.get_excerpt_title()}}</h1>
 {% endblock %}
