@@ -1,13 +1,9 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2017 Rumma & Ko Ltd
+# Copyright 2015-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
-"""
-Database models for `lino_welfare.modlib.dupable_clients`.
-"""
-from builtins import str
+from django.utils.text import format_lazy
 from lino.api import dd, _
-
 from lino.mixins.dupable import PhoneticWordBase, SimilarObjects
 
 
@@ -38,7 +34,7 @@ class SimilarClients(SimilarObjects):
     """Shows the other clients who are similar to this one."""
     label = _("Similar clients")
 
-from lino_welfare.modlib.pcsw.models import ClientChecker
+from lino_xl.lib.coachings.mixins import ClientChecker
 
 # dd.inject_action('pcsw.Client', show_phonetic_words=dd.ShowSlaveTable(
 #     WordsByOwner))
@@ -55,7 +51,7 @@ class SimilarClientsChecker(ClientChecker):
     def get_checkdata_problems(self, obj, fix=False):
         lst = list(obj.find_similar_instances(1))
         if len(lst):
-            msg = _("Similar clients: {clients}").format(
+            msg = format_lazy(_("Similar clients: {clients}"),
                 clients=', '.join([str(i) for i in lst]))
             yield (False, msg)
 

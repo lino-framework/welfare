@@ -254,7 +254,7 @@ gets a given aid during a given period.
 
 
 Alicia hat 2 Hilfebeschlüsse zu bestätigen. Dies kriegt sie als
-Willkommensmeldung unter die Nase gerieben:
+Willkommensmeldung gesagt:
 
 >>> ses = rt.login('alicia')
 >>> translation.activate('de')
@@ -262,7 +262,6 @@ Willkommensmeldung unter die Nase gerieben:
 ...     print(tostring(msg))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 <span>Du bist beschäftigt in <a href="Detail">Beschwerde (22.05.2014) mit COLLARD Charlotte (118)</a> (<b>☑</b>). </span>
-<b>Du hast 3 offene Datenprobleme.</b>
 <span>Du hast <b>6 Einträge in Zu bestätigende Hilfebeschlüsse</b>.</span>
 
 When she clicks the link "Zu bestätigende Hilfebeschlüsse", then they show up:

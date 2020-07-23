@@ -21,6 +21,7 @@ from lino.core.utils import get_field
 
 from lino_xl.lib.cal.utils import update_reminder
 from lino_xl.lib.cal.choicelists import DurationUnits
+from lino_xl.lib.coachings.mixins import ClientChecker
 from lino.modlib.uploads.choicelists import Shortcuts
 from lino.modlib.uploads.mixins import UploadController
 
@@ -34,7 +35,6 @@ from lino_welfare.modlib.contacts import models as contacts
 cv = dd.resolve_app('cv')
 uploads = dd.resolve_app('uploads')
 from lino_xl.lib.beid.mixins import BeIdCardHolder
-from lino.modlib.checkdata.choicelists import Checker
 # from lino.modlib.vatless.mixins import PartnerDetailMixin
 
 from lino_xl.lib.contacts.roles import SimpleContactsUser
@@ -783,13 +783,6 @@ class AllClients(Clients):
     required_roles = dd.login_required(SocialStaff)
 
 
-class ClientChecker(Checker):
-    model = 'pcsw.Client'
-
-    def get_responsible_user(self, obj):
-        return obj.get_primary_coach()
-
-
 class IdentityChecker(ClientChecker):
     """Clients must have either valid eId data or an alternative
     identifying document.
@@ -809,7 +802,8 @@ class IdentityChecker(ClientChecker):
                     "nor alternative identifying document.")
                 yield (False, msg)
 
-IdentityChecker.activate()
+# IdentityChecker.activate()
+# 20200723 "Meldung ist an dieser Stelle relativ unnütz und kommt wieder komplett raus"
 
 
 

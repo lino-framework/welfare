@@ -23,7 +23,7 @@ from lino.utils import mti
 from lino.utils.ranges import isrange
 from lino.utils.ranges import overlap2, encompass
 from lino_welfare.modlib.integ.roles import IntegUser
-from lino_welfare.modlib.pcsw.models import ClientChecker
+from lino_xl.lib.coachings.mixins import ClientChecker
 from lino_welfare.modlib.system.models import Signers
 from lino_xl.lib.cal.choicelists import DurationUnits
 from lino_xl.lib.cal.mixins import EventGenerator
@@ -206,7 +206,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
 
     def get_upload_area(self):
         return UploadAreas.contract
-    
+
     def get_excerpt_title(self):
         return str(self.type)
         # return unicode(self._meta.verbose_name)
@@ -216,7 +216,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
             if self.type.template:
                 # assert self.type.template.endswith(bm.template_ext)
                 return [self.type.template]
-        
+
     # backwards compat for document templates
     def get_person(self):
         return self.client
@@ -246,7 +246,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
                     self.user_asd = None
                 else:
                     self.user_asd = user_asd
-                
+
     def on_create(self, ar):
         super(ContractBase, self).on_create(ar)
         self.client_changed(ar)
@@ -254,12 +254,12 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
     def get_author(self):
         """If `user` is empty, then `user_asd` can edit this contract."""
         return self.user or self.user_asd
-    
+
     def set_author(self, user):
         self.user = user
         if self.user_asd == user:
             self.user_asd = None
-        
+
     def after_ui_save(self, ar, cw):
         super(ContractBase, self).after_ui_save(ar, cw)
         self.update_reminders(ar)
@@ -295,7 +295,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
     def setup_auto_event(self, evt):
         super(ContractBase, self).setup_auto_event(evt)
         self.client.setup_auto_event(evt)
-    
+
     def update_cal_rset(self):
         return self.exam_policy
 
@@ -385,7 +385,7 @@ class ContractBase(Signers, Certifiable, EventGenerator, UserAuthored,
     @classmethod
     def get_printable_demo_objects(cls):
         return cls.objects.all()
-    
+
 dd.update_field(ContractBase, 'signer1', default=default_signer1)
 dd.update_field(ContractBase, 'signer2', default=default_signer2)
 
@@ -417,7 +417,7 @@ class ContractBaseTable(dd.Table):
     company ending_success ending
     """
     params_panel_hidden = True
-    
+
     @classmethod
     def get_request_queryset(cls, ar):
         qs = super(ContractBaseTable, cls).get_request_queryset(ar)
@@ -479,5 +479,3 @@ class ContractBaseTable(dd.Table):
 
         if pv.company:
             yield str(pv.company)
-
-
