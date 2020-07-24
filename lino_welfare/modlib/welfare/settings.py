@@ -37,6 +37,10 @@ class Site(Site):
     # use_java = False  # temporarily
     # verbose_client_info_message = True
 
+
+    # default_ui = "lino_react.react" # does not yet work because "Tried to get
+    # static handle for debts.PrintEntriesByBudget"
+
     # default_build_method = "appyodt"
     default_build_method = "appypdf"
     uppercase_last_name = True
@@ -112,8 +116,13 @@ class Site(Site):
         yield 'lino_xl.lib.uploads'
         yield 'lino_xl.lib.outbox'
 
-        yield 'lino_xl.lib.extensible'
-        yield 'lino_welfare.modlib.cal'
+        if self.default_ui == "lino.modlib.extjs":
+            yield 'lino_xl.lib.extensible'
+            yield 'lino_welfare.modlib.cal'
+        else:
+            yield 'lino_welfare.modlib.cal'
+            yield 'lino_xl.lib.calview'
+
         yield 'lino_welfare.modlib.reception'
         yield 'lino_welfare.modlib.badges'
         yield 'lino_xl.lib.boards'
@@ -167,7 +176,8 @@ class Site(Site):
         yield 'lino.modlib.export_excel'
         yield 'lino_welfare.modlib.dupable_clients'
         yield 'lino.modlib.checkdata'
-        yield 'lino.modlib.tinymce'
+        if self.default_ui == "lino.modlib.extjs":
+            yield 'lino.modlib.tinymce'
 
     def get_dashboard_items(self, user):
         """Returns the items of the admin index page:
