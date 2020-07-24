@@ -137,7 +137,7 @@ Gonna copy ...welfare/config/excerpts/Default.odt to .../config/immersion/Contra
 >>> print(rv['message'])
 ...     #doctest: +NORMALIZE_WHITESPACE
 Before you can edit this template we must create a local copy on the server. This will exclude the template from future updates.
-D'accord ?
+D'accord?
 
 
 Another thing is the location of the factory template.

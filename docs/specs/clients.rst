@@ -26,8 +26,6 @@ Most code is in :mod:`lino_welfare.modlib.pcsw` plugin.
 >>> ses = rt.login("hubert")
 
 
-
-
 Default lists of coached clients
 ================================
 
@@ -312,6 +310,27 @@ All clients who have at least one note dated 2013-07-25 or later:
  EVERTZ Bernd (126)
 =========================
 <BLANKLINE>
+
+
+Deleting clients
+================
+
+>>> d = get_json_dict('robin', "pcsw/Clients/167", an='delete_selected', sr=167)
+>>> print(d['message'])
+You are about to delete 1 Client
+(ÕUNAPUU Õie (167))
+as well as all related volatile records (2 Coachings, 1 Language knowledge, 5 Properties, 2 Phonetic words, 3 ESF Summaries, 1 Address). Are you sure?
+
+>>> d = get_json_dict('rolf', "pcsw/Clients/167", an='delete_selected', sr=167)
+>>> print(d['message'])
+1 Klient werden gelöscht
+(ÕUNAPUU Õie (167))
+sowie alle verknüpften unbeständigen Daten (2 Begleitungen, 1 Sprachkenntnis, 5 Eigenschaften, 2 Phonetische Wörter, 3 ESF Summaries, 1 Adresse). Sind Sie sicher?
+
+
+>>> d = get_json_dict('robin', "pcsw/Clients/118", an='delete_selected', sr=118)
+>>> print(d['message'])
+Cannot delete Partner Collard Charlotte because 5 Presences refer to it.
 
 
 
