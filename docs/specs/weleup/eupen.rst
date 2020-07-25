@@ -579,10 +579,10 @@ Each window layout defines a given set of fields.
 - finan.FinancialVouchers.insert : entry_date, narration
 - finan.PaymentOrders.detail : entry_date, number, total, execution_date, workflow_buttons, narration, journal, accounting_period, user, id, item_account, item_remark, MovementsByVoucher
 - gfks.ContentTypes.detail : id, app_label, model, base_classes
-- households.Households.detail : type, prefix, name, id
+- households.Households.detail : type, prefix, name, id, overview, language, email, phone, gsm
 - households.Households.insert : name, type
 - households.Households.merge_row : merge_to, households_Member, addresses_Address, sepa_Account, reason
-- households.HouseholdsByType.detail : type, prefix, name, id
+- households.HouseholdsByType.detail : type, prefix, name, id, overview, language, email, phone, gsm
 - households.HouseholdsByType.insert : name, language
 - households.MembersByPerson.insert : person, role, household, primary
 - households.Types.detail : name, name_fr, name_en

@@ -1,9 +1,7 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2019 Rumma & Ko Ltd
+# Copyright 2013-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
-
-from __future__ import unicode_literals
 
 from decimal import Decimal
 
@@ -34,23 +32,23 @@ class HouseholdDetail(dd.DetailLayout):
 
     main = """
     type prefix name id
-    # overview box3 box4
+    overview:30 box3:30 #box4:45
     # bottom_box
     households.MembersByHousehold
     """
 
     box3 = """
+    language
+    email
     phone
     gsm
-    language
-    # email
     # url
     """
 
-    box4 = """
-    # activity
-    sepa.AccountsByPartner
-    """
+    # box4 = """
+    # # activity
+    # sepa.AccountsByPartner
+    # """
 
     bottom_box = "remarks households.MembersByHousehold"
 

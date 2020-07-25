@@ -451,10 +451,10 @@ Each window layout defines a given set of fields.
 - excerpts.ExcerptTypes.insert : name, name_nl, name_de, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
 - gfks.ContentTypes.detail : id, app_label, model, base_classes
-- households.Households.detail : type, prefix, name, id
+- households.Households.detail : type, prefix, name, id, overview, language, email, phone, gsm
 - households.Households.insert : name, type
 - households.Households.merge_row : merge_to, households_Member, addresses_Address, reason
-- households.HouseholdsByType.detail : type, prefix, name, id
+- households.HouseholdsByType.detail : type, prefix, name, id, overview, language, email, phone, gsm
 - households.HouseholdsByType.insert : name, language
 - households.MembersByPerson.insert : person, role, household, primary
 - households.Types.detail : name, name_nl, name_de, name_en
