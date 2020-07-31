@@ -359,9 +359,9 @@ class EntriesByContract(dd.Table):
         kwargs.update(start_date=_("Date"))
         return kwargs
 
-# from lino_xl.lib.uploads.models import UploadsByClient
+# from lino_xl.lib.uploads.models import UploadsByProject
 
-# class UploadsByContract(UploadsByClient):
+# class UploadsByContract(UploadsByProject):
 #     @classmethod
 #     def create_instance(self, ar, **kw):
 #         obj = super(UploadsByContract, self).create_instance(ar, **kw)

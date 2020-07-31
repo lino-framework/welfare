@@ -519,8 +519,8 @@ Each window layout defines a given set of fields.
 - uploads.UploadTypes.insert : upload_area, name, name_nl, name_de, name_en, warn_expiry_unit, warn_expiry_value
 - uploads.Uploads.detail : user, project, id, type, description, start_date, end_date, needed, company, contact_person, contact_role, file, owner, remark
 - uploads.Uploads.insert : type, file, start_date, end_date, needed, description
-- uploads.UploadsByClient.insert : file, type, end_date, needed, description
 - uploads.UploadsByController.insert : file, type, end_date, needed, description
+- uploads.UploadsByProject.insert : file, type, end_date, needed, description
 - uploads.Volumes.detail : ref, description, root_dir, base_url, overview
 - uploads.Volumes.insert : ref, description, root_dir, base_url
 - uploads.Volumes.merge_row : merge_to, reason
@@ -726,8 +726,8 @@ Each window layout is **viewable** by a given set of user types.
 - uploads.UploadTypes.insert : visible for 110 120 410 420 admin 910
 - uploads.Uploads.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - uploads.Uploads.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
-- uploads.UploadsByClient.insert : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
 - uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- uploads.UploadsByProject.insert : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
 - uploads.Volumes.detail : visible for 110 120 410 420 admin 910
 - uploads.Volumes.insert : visible for 110 120 410 420 admin 910
 - uploads.Volumes.merge_row : visible for admin 910

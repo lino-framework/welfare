@@ -78,7 +78,7 @@ Lino Welfare à la Chatelet.
 - **Historique** (history):
   - **Observations** (notes.NotesByProject) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]
   - (history_right):
-    - **Fichiers téléchargés** (uploads.UploadsByClient) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]
+    - **Fichiers téléchargés** (uploads.UploadsByProject) [visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910]
     - (history_right_2): **cherche du travail** (is_seeking), **Inoccupé depuis** (unemployed_since), **Cherche du travail depuis** (seeking_since)
     - **Situation chômage** (pcsw.ExclusionsByClient) [visible for 100 110 120 200 300 400 410 420 admin 910]
     - **Fiches FSE** (esf.SummariesByClient) [visible for 100 110 120 420 admin 910]

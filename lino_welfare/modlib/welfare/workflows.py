@@ -15,11 +15,11 @@ Shortcuts.add_item('pcsw.Client', 'cvs_emitted', _("CVs emitted"))
 
 # from lino.modlib.uploads.choicelists import add_shortcut as add
 # add('pcsw.Client', 'id_document', _("Identifying document"),
-#     target='uploads.UploadsByClient')
+#     target='uploads.UploadsByProject')
 # from lino.modlib.uploads.choicelists import Shortcuts
 # Shortcuts.add_item(
 #     'pcsw.Client', 'id_document', _("Identifying document"),
-#     target='uploads.UploadsByClient')
+#     target='uploads.UploadsByProject')
 
 from lino_xl.lib.notes.choicelists import SpecialTypes
 add = SpecialTypes.add_item

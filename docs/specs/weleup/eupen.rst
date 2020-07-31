@@ -630,7 +630,7 @@ Each window layout defines a given set of fields.
 - outbox.Mails.detail : subject, project, date, user, sent, id, owner, outbox_AttachmentsByMail, uploads_UploadsByController, body
 - outbox.Mails.insert : project, subject, body
 - pcsw.Clients.create_visit : user, summary
-- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, dupable_clients_SimilarClients, humanlinks_LinksByHuman, cbss_relations, households_MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, uploads_UploadsByClient, cvs_emitted, cv_LanguageKnowledgesByPerson, skills, obstacles, notes_NotesByProject, excerpts_ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, checkdata_ProblemsByOwner, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
+- pcsw.Clients.detail : overview, gender, id, tim_id, first_name, middle_name, last_name, birth_date, age, national_id, nationality, declared_name, civil_state, birth_country, birth_place, language, email, phone, fax, gsm, image, AgentsByClient, dupable_clients_SimilarClients, humanlinks_LinksByHuman, cbss_relations, households_MembersByPerson, workflow_buttons, id_document, broker, faculty, refusal_reason, in_belgium_since, residence_type, gesdos_id, job_agents, group, income_ag, income_wg, income_kg, income_rente, income_misc, seeking_since, unemployed_since, work_permit_suspended_until, needs_residence_permit, needs_work_permit, uploads_UploadsByProject, cvs_emitted, cv_LanguageKnowledgesByPerson, skills, obstacles, notes_NotesByProject, excerpts_ExcerptsByProject, MovementsByProject, activity, client_state, noble_condition, unavailable_until, unavailable_why, is_cpas, is_senior, is_obsolete, created, modified, remarks, remarks2, checkdata_ProblemsByOwner, cbss_identify_person, cbss_manage_access, cbss_retrieve_ti_groups, cbss_summary
 - pcsw.Clients.insert : first_name, last_name, national_id, gender, language
 - pcsw.Clients.merge_row : merge_to, aids_IncomeConfirmation, aids_RefundConfirmation, aids_SimpleConfirmation, coachings_Coaching, cv_LanguageKnowledge, cv_PersonProperty, dupable_clients_Word, esf_ClientSummary, pcsw_Dispense, addresses_Address, sepa_Account, reason
 - pcsw.Clients.refuse_client : reason, remark
@@ -647,8 +647,8 @@ Each window layout defines a given set of fields.
 - uploads.UploadTypes.insert : upload_area, name, name_fr, name_en, warn_expiry_unit, warn_expiry_value
 - uploads.Uploads.detail : user, project, id, type, description, start_date, end_date, needed, company, contact_person, contact_role, file, owner, remark
 - uploads.Uploads.insert : type, file, start_date, end_date, needed, description
-- uploads.UploadsByClient.insert : file, type, end_date, needed, description
 - uploads.UploadsByController.insert : file, type, end_date, needed, description
+- uploads.UploadsByProject.insert : file, type, end_date, needed, description
 - uploads.Volumes.detail : ref, description, root_dir, base_url, overview
 - uploads.Volumes.insert : ref, description, root_dir, base_url
 - uploads.Volumes.merge_row : merge_to, reason
@@ -863,8 +863,8 @@ Each window layout is **viewable** by a given set of user types.
 - uploads.UploadTypes.insert : visible for 110 120 410 420 admin 910
 - uploads.Uploads.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - uploads.Uploads.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
-- uploads.UploadsByClient.insert : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
 - uploads.UploadsByController.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- uploads.UploadsByProject.insert : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
 - uploads.Volumes.detail : visible for 110 120 410 420 admin 910
 - uploads.Volumes.insert : visible for 110 120 410 420 admin 910
 - uploads.Volumes.merge_row : visible for admin 910

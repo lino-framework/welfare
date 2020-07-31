@@ -483,7 +483,7 @@ class ClientDetail(dd.DetailLayout):
     papers = dd.Panel("""
     unemployed_since seeking_since work_permit_suspended_until
     needs_residence_permit needs_work_permit
-    uploads.UploadsByClient
+    uploads.UploadsByProject
     """)  # ,label = _("Papers"))
 
     work_tab = dd.Panel("""

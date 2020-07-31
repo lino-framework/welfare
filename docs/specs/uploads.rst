@@ -77,14 +77,14 @@ The other is still valid but will expire in 3 days.
 >>> print(newcomer)
 DERICUM Daniel (121)
 
-The UploadsByClient summary shows a summary grouped by upload type.
+The UploadsByProject summary shows a summary grouped by upload type.
 In a detail view it also
 
->>> rt.show(uploads.UploadsByClient, newcomer)
+>>> rt.show(uploads.UploadsByProject, newcomer)
 Identifizierendes Dokument: *12* / Diplom: *9* / Personalausweis: *10* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,121,{  })>`__
 
 
->>> rt.show(uploads.UploadsByClient, newcomer, nosummary=True)
+>>> rt.show(uploads.UploadsByProject, newcomer, nosummary=True)
 ============================ ============ ======= ============================ ===================
  Upload-Art                   Gültig bis   Nötig   Beschreibung                 Hochgeladen durch
 ---------------------------- ------------ ------- ---------------------------- -------------------
@@ -101,11 +101,11 @@ Here is another client with three uploads:
 >>> print(str(oldclient))
 DOBBELSTEIN Dorothée (124)
 
->>> rt.show(uploads.UploadsByClient, oldclient)
+>>> rt.show(uploads.UploadsByProject, oldclient)
 Aufenthaltserlaubnis: *13* / Arbeitserlaubnis: *14* / Führerschein: *15* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,124,{  })>`__
 
 
->>> rt.show(uploads.UploadsByClient, oldclient, nosummary=True)
+>>> rt.show(uploads.UploadsByProject, oldclient, nosummary=True)
 ====================== ============ ======= ====================== ===================
  Upload-Art             Gültig bis   Nötig   Beschreibung           Hochgeladen durch
 ---------------------- ------------ ------- ---------------------- -------------------
@@ -216,10 +216,10 @@ The second item is just the comma which separates the two buttons:
 The second button opens the list of uploads:
 
 >>> div.contents[2]  #doctest: +ELLIPSIS
-<a href='javascript:Lino.uploads.UploadsByClient.grid.run(null,...)'...>Alle 2 Dateien</a>
+<a href='javascript:Lino.uploads.UploadsByProject.grid.run(null,...)'...>Alle 2 Dateien</a>
 
 And as you can see, it does not use the default table
-(UploadsByController) but the welfare specific table UploadsByClient.
+(UploadsByController) but the welfare specific table UploadsByProject.
 
 Let's inspect these three dots (`...`) of this second button.
 
@@ -261,8 +261,8 @@ It has 3 keys:
 Uploads by client
 =================
 
-:class:`UploadsByClient
-<lino_welfare.modlib.uploads.UploadsByClient>` shows all the
+:class:`UploadsByProject
+<lino_welfare.modlib.uploads.UploadsByProject>` shows all the
 uploads of a given client, but it has a customized
 :meth:`get_slave_summary <lino.core.actors.Actor.get_slave_summary>`.
 
@@ -271,9 +271,9 @@ The following example is going to use client #121 as master.
 >>> obj = oldclient
 
 Here we use :func:`lino.api.doctest.get_json_soup` to inspect what the
-summary view of `UploadsByClient` returns for this client.
+summary view of `UploadsByProject` returns for this client.
 
->>> soup = get_json_soup('rolf', 'pcsw/Clients/124', 'uploads_UploadsByClient')
+>>> soup = get_json_soup('rolf', 'pcsw/Clients/124', 'uploads_UploadsByProject')
 >>> print(soup.get_text())
 ... #doctest: +NORMALIZE_WHITESPACE
 Source document: Aufenthaltserlaubnis: 13Arbeitserlaubnis: 14Führerschein: 15Identifizierendes Dokument: Diplom:
@@ -285,7 +285,7 @@ The HTML fragment contains five links:
 6
 
 
-The first link would run the insert action on `UploadsByClient`, with
+The first link would run the insert action on `UploadsByProject`, with
 the owner set to this client
 
 >>> btn = links[0]
@@ -296,7 +296,7 @@ None
 
 >>> print(btn)
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-<a href='javascript:Lino.uploads.UploadsByClient.insert.run(null,{ ... })'
+<a href='javascript:Lino.uploads.UploadsByProject.insert.run(null,{ ... })'
 style="vertical-align:-30%;"
 title="Öffnet ein Dialogfenster, um einen neuen Datensatz (Upload-Datei) zu erstellen."><img alt="add"
 src="/static/images/mjames/add.png"/></a>
