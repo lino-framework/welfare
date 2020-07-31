@@ -1144,7 +1144,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Kontakte --> Kontaktpersonen : 14
 - Explorer --> Kontakte --> Partner : 175
 - Explorer --> Kontakte --> Adressenarten : 6
-- Explorer --> Kontakte --> Adressen : 181
+- Explorer --> Kontakte --> Adressen : 176
 - Explorer --> Kontakte --> Gremienmitglieder : 1
 - Explorer --> Kontakte --> Haushaltsmitgliedsrollen : 9
 - Explorer --> Kontakte --> Mitglieder : 64

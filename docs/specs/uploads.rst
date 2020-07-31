@@ -78,10 +78,9 @@ The other is still valid but will expire in 3 days.
 DERICUM Daniel (121)
 
 The UploadsByProject summary shows a summary grouped by upload type.
-In a detail view it also
 
 >>> rt.show(uploads.UploadsByProject, newcomer)
-Identifizierendes Dokument: *12* / Diplom: *9* / Personalausweis: *10* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,121,{  })>`__
+Identifizierendes Dokument: *12*, *11* / Diplom: *9* / Personalausweis: *10* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,121,{  })>`__
 
 
 >>> rt.show(uploads.UploadsByProject, newcomer, nosummary=True)
@@ -224,7 +223,7 @@ And as you can see, it does not use the default table
 Let's inspect these three dots (`...`) of this second button.
 
 >>> btn = div.contents[2]
->>> dots = btn['href'][54:-1]
+>>> dots = btn['href'][55:-1]
 >>> print(dots)  #doctest: +ELLIPSIS
 { ... }
 
@@ -312,7 +311,7 @@ javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 15 })
 
 Now let's inspect the javascript of the first button
 
->>> dots = btn['href'][56:-1]
+>>> dots = btn['href'][57:-1]
 >>> print(dots)  #doctest: +ELLIPSIS
 { ... }
 
