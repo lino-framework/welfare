@@ -5,17 +5,16 @@
 Avoiding duplicate clients
 ===========================
 
-Lino Welfare offers some functionality for avoiding duplicate 
+Lino Welfare offers some functionality for avoiding duplicate
 :class:`Client <lino_welfare.modlib.pcsw.models.Client>` records.
 
-.. contents:: 
+.. contents::
    :local:
    :depth: 2
 
 
 .. include:: /../docs/shared/include/tested.rst
-             
->>> from __future__ import print_function, unicode_literals
+
 >>> import lino
 >>> lino.startup('lino_welfare.projects.gerd.settings.doctests')
 >>> from lino.api.doctest import *
@@ -100,7 +99,7 @@ records in the `SimilarClients` table:
 *DOBBELSTEIN-DEMEULENAERE Dorothée (123)* Phonetic words: TPLSTN, TR0
 
 Note how the result can differ depending on the partner.  Our
-algorithm is not perfect and does not detect all duplicates. 
+algorithm is not perfect and does not detect all duplicates.
 
 Checked at input
 ----------------
