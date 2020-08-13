@@ -119,8 +119,8 @@ will ask a confirmation first:
 >>> r = json.loads(res.content)
 >>> print(r['message'])
 There are 2 similar Clients:<br/>
-DOBBELSTEIN Dorothée (124)<br/>
 DOBBELSTEIN-DEMEULENAERE Dorothée (123)<br/>
+DOBBELSTEIN Dorothée (124)<br/>
 Are you sure you want to create a new Client named Mrs Dorothée DOBBELSTEIN?
 
 This is because :class:`lino.mixins.dupable.Dupable` replaces

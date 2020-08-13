@@ -54,6 +54,6 @@ class DupableClient(Dupable):
                     break
             if ok:
                 yield other
-
-
-
+        # if found == 2:
+        #     msg = ', '.join(["{} {}".format(o.num, o) for o in qs])
+        #     print("20200813 %s" % msg)
