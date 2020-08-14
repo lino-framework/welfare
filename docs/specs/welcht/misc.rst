@@ -259,137 +259,138 @@ see it.
 >>> print(analyzer.show_action_permissions(Duplicate))
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - cal.AllEntries.duplicate : visible for admin 910
-- cal.ConflictingEvents.duplicate : visible for admin 910
-- cal.EntriesByClient.duplicate : visible for admin 910
-- cal.EntriesByController.duplicate : visible for admin 910
-- cal.EntriesByDay.duplicate : visible for admin 910
-- cal.EntriesByGuest.duplicate : visible for admin 910
-- cal.EntriesByProject.duplicate : visible for admin 910
-- cal.EntriesByRoom.duplicate : visible for admin 910
-- cal.EntriesByType.duplicate : visible for admin 910
-- cal.EventTypes.duplicate : visible for admin 910
-- cal.Events.duplicate : visible for admin 910
-- cal.MyAssignedEvents.duplicate : visible for admin 910
-- cal.MyEntries.duplicate : visible for admin 910
-- cal.MyEntriesToday.duplicate : visible for admin 910
-- cal.MyOverdueAppointments.duplicate : visible for admin 910
-- cal.MyUnconfirmedAppointments.duplicate : visible for admin 910
-- cal.OneEvent.duplicate : visible for admin 910
-- cal.OverdueAppointments.duplicate : visible for admin 910
+- cal.ConflictingEvents.duplicate : visible for 110 120 410 420 admin 910
+- cal.EntriesByClient.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- cal.EntriesByController.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- cal.EntriesByDay.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- cal.EntriesByGuest.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- cal.EntriesByProject.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- cal.EntriesByRoom.duplicate : visible for 110 120 410 420 admin 910
+- cal.EntriesByType.duplicate : visible for 110 120 410 420 admin 910
+- cal.EventTypes.duplicate : visible for 110 120 410 420 admin 910
+- cal.Events.duplicate : visible for 110 120 410 420 admin 910
+- cal.MyAssignedEvents.duplicate : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
+- cal.MyEntries.duplicate : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
+- cal.MyEntriesToday.duplicate : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
+- cal.MyOverdueAppointments.duplicate : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
+- cal.MyUnconfirmedAppointments.duplicate : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
+- cal.OneEvent.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- cal.OverdueAppointments.duplicate : visible for 110 120 410 420 admin 910
 - cal.PublicEntries.duplicate : visible for nobody
-- cal.RemoteCalendars.duplicate : visible for admin 910
-- calview.DailyPlanner.duplicate : visible for admin 910
-- calview.DailyPlannerRows.duplicate : visible for admin 910
-- calview.DailySlave.duplicate : visible for admin 910
-- calview.WeeklySlave.duplicate : visible for admin 910
+- cal.RemoteCalendars.duplicate : visible for 110 120 410 420 admin 910
+- calview.DailyPlanner.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- calview.DailyPlannerRows.duplicate : visible for 110 120 410 420 admin 910
+- calview.DailySlave.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- calview.WeeklySlave.duplicate : visible for 110 120 410 420 admin 910
 - cbss.AllIdentifyPersonRequests.duplicate : visible for admin 910
 - cbss.AllManageAccessRequests.duplicate : visible for admin 910
 - cbss.AllRetrieveTIGroupsRequests.duplicate : visible for admin 910
-- cbss.IdentifyPersonRequests.duplicate : visible for admin 910
-- cbss.IdentifyRequestsByPerson.duplicate : visible for admin 910
-- cbss.ManageAccessRequests.duplicate : visible for admin 910
-- cbss.ManageAccessRequestsByPerson.duplicate : visible for admin 910
-- cbss.MyIdentifyPersonRequests.duplicate : visible for admin 910
-- cbss.MyManageAccessRequests.duplicate : visible for admin 910
-- cbss.MyRetrieveTIGroupsRequests.duplicate : visible for admin 910
-- cbss.RetrieveTIGroupsRequests.duplicate : visible for admin 910
-- cbss.RetrieveTIGroupsRequestsByPerson.duplicate : visible for admin 910
-- clients.PartnersByClientContactType.duplicate : visible for admin 910
-- coachings.CoachingEndings.duplicate : visible for admin 910
-- contacts.Companies.duplicate : visible for admin 910
-- contacts.Partners.duplicate : visible for admin 910
-- contacts.PartnersByCity.duplicate : visible for admin 910
-- contacts.PartnersByCountry.duplicate : visible for admin 910
-- contacts.Persons.duplicate : visible for admin 910
-- countries.Places.duplicate : visible for admin 910
-- countries.PlacesByCountry.duplicate : visible for admin 910
-- countries.PlacesByPlace.duplicate : visible for admin 910
-- courses.ActiveCourses.duplicate : visible for admin 910
-- courses.Activities.duplicate : visible for admin 910
+- cbss.IdentifyPersonRequests.duplicate : visible for 100 110 120 200 210 300 400 410 420 admin 910
+- cbss.IdentifyRequestsByPerson.duplicate : visible for 100 110 120 200 210 300 400 410 420 admin 910
+- cbss.ManageAccessRequests.duplicate : visible for 100 110 120 200 210 300 400 410 420 admin 910
+- cbss.ManageAccessRequestsByPerson.duplicate : visible for 100 110 120 200 210 300 400 410 420 admin 910
+- cbss.MyIdentifyPersonRequests.duplicate : visible for 100 110 120 200 210 300 400 410 420 admin 910
+- cbss.MyManageAccessRequests.duplicate : visible for 100 110 120 200 210 300 400 410 420 admin 910
+- cbss.MyRetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 300 400 410 420 admin 910
+- cbss.RetrieveTIGroupsRequests.duplicate : visible for 100 110 120 200 210 300 400 410 420 admin 910
+- cbss.RetrieveTIGroupsRequestsByPerson.duplicate : visible for 100 110 120 200 210 300 400 410 420 admin 910
+- clients.PartnersByClientContactType.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- coachings.CoachingEndings.duplicate : visible for 110 120 210 410 420 admin 910
+- contacts.Companies.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- contacts.Partners.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- contacts.PartnersByCity.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- contacts.PartnersByCountry.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- contacts.Persons.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- countries.Places.duplicate : visible for 110 120 210 410 420 800 admin 910
+- countries.PlacesByCountry.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- countries.PlacesByPlace.duplicate : visible for 110 120 210 410 420 800 admin 910
+- courses.ActiveCourses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.Activities.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
 - courses.AllActivities.duplicate : visible for admin 910
-- courses.BasicCourses.duplicate : visible for admin 910
-- courses.ClosedCourses.duplicate : visible for admin 910
-- courses.Courses.duplicate : visible for admin 910
-- courses.CoursesByLine.duplicate : visible for admin 910
-- courses.CoursesBySlot.duplicate : visible for admin 910
-- courses.CoursesByTeacher.duplicate : visible for admin 910
-- courses.CoursesByTopic.duplicate : visible for admin 910
-- courses.DraftCourses.duplicate : visible for admin 910
-- courses.EntriesByTeacher.duplicate : visible for admin 910
-- courses.InactiveCourses.duplicate : visible for admin 910
-- courses.JobCourses.duplicate : visible for admin 910
-- courses.Lines.duplicate : visible for admin 910
-- courses.LinesByTopic.duplicate : visible for admin 910
-- courses.MyCourses.duplicate : visible for admin 910
+- courses.BasicCourses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.ClosedCourses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.Courses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.CoursesByLine.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.CoursesBySlot.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.CoursesByTeacher.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.CoursesByTopic.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.DraftCourses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.EntriesByTeacher.duplicate : visible for 110 120 410 420 admin 910
+- courses.InactiveCourses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.JobCourses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.Lines.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.LinesByTopic.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.MyCourses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
 - courses.MyCoursesGiven.duplicate : visible for nobody
 - courses.Slots.duplicate : visible for admin 910
 - courses.Topics.duplicate : visible for admin 910
-- cv.EducationLevels.duplicate : visible for admin 910
+- cv.EducationLevels.duplicate : visible for 110 120 420 admin 910
 - dashboard.AllWidgets.duplicate : visible for admin 910
-- dashboard.Widgets.duplicate : visible for admin 910
-- dashboard.WidgetsByUser.duplicate : visible for admin 910
+- dashboard.Widgets.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- dashboard.WidgetsByUser.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - debts.Accounts.duplicate : visible for admin 910
-- debts.AccountsByGroup.duplicate : visible for admin 910
+- debts.AccountsByGroup.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - debts.Actors.duplicate : visible for admin 910
-- debts.ActorsByBudget.duplicate : visible for admin 910
-- debts.ActorsByPartner.duplicate : visible for admin 910
-- debts.AssetsByBudget.duplicate : visible for admin 910
+- debts.ActorsByBudget.duplicate : visible for 120 300 420 admin 910
+- debts.ActorsByPartner.duplicate : visible for 120 300 420 admin 910
+- debts.AssetsByBudget.duplicate : visible for 120 300 420 admin 910
 - debts.Budgets.duplicate : visible for admin 910
-- debts.BudgetsByPartner.duplicate : visible for admin 910
-- debts.Clients.duplicate : visible for admin 910
-- debts.DistByBudget.duplicate : visible for admin 910
+- debts.BudgetsByPartner.duplicate : visible for 120 300 420 admin 910
+- debts.Clients.duplicate : visible for 120 300 420 admin 910
+- debts.DistByBudget.duplicate : visible for 120 300 420 admin 910
 - debts.Entries.duplicate : visible for admin 910
 - debts.EntriesByAccount.duplicate : visible for admin 910
-- debts.EntriesByBudget.duplicate : visible for admin 910
-- debts.EntriesByType.duplicate : visible for admin 910
-- debts.ExpensesByBudget.duplicate : visible for admin 910
-- debts.IncomesByBudget.duplicate : visible for admin 910
-- debts.LiabilitiesByBudget.duplicate : visible for admin 910
-- debts.MyBudgets.duplicate : visible for admin 910
+- debts.EntriesByBudget.duplicate : visible for 120 300 420 admin 910
+- debts.EntriesByType.duplicate : visible for 120 300 420 admin 910
+- debts.ExpensesByBudget.duplicate : visible for 120 300 420 admin 910
+- debts.IncomesByBudget.duplicate : visible for 120 300 420 admin 910
+- debts.LiabilitiesByBudget.duplicate : visible for 120 300 420 admin 910
+- debts.MyBudgets.duplicate : visible for 120 300 420 admin 910
 - excerpts.AllExcerpts.duplicate : visible for admin 910
-- excerpts.Excerpts.duplicate : visible for admin 910
-- excerpts.ExcerptsByOwner.duplicate : visible for admin 910
-- excerpts.ExcerptsByProject.duplicate : visible for admin 910
-- excerpts.ExcerptsByType.duplicate : visible for admin 910
-- excerpts.MyExcerpts.duplicate : visible for admin 910
-- extensible.PanelEvents.duplicate : visible for admin 910
-- households.Households.duplicate : visible for admin 910
-- households.HouseholdsByType.duplicate : visible for admin 910
-- integ.Clients.duplicate : visible for admin 910
-- integ.CoachingEndingsByType.duplicate : visible for admin 910
-- integ.CoachingEndingsByUser.duplicate : visible for admin 910
-- integ.CompaniesAndContracts.duplicate : visible for admin 910
-- integ.JobProvidersAndContracts.duplicate : visible for admin 910
-- isip.EntriesByContract.duplicate : visible for admin 910
-- jobs.JobProviders.duplicate : visible for admin 910
-- jobs.JobTypes.duplicate : visible for admin 910
-- newcomers.ClientsByFaculty.duplicate : visible for admin 910
-- newcomers.Competences.duplicate : visible for admin 910
-- newcomers.CompetencesByFaculty.duplicate : visible for admin 910
-- newcomers.CompetencesByUser.duplicate : visible for admin 910
-- newcomers.MyCompetences.duplicate : visible for admin 910
-- newcomers.NewClients.duplicate : visible for admin 910
-- notes.AllNotes.duplicate : visible for admin 910
-- notes.MyNotes.duplicate : visible for admin 910
-- notes.Notes.duplicate : visible for admin 910
-- notes.NotesByCompany.duplicate : visible for admin 910
-- notes.NotesByEventType.duplicate : visible for admin 910
-- notes.NotesByOwner.duplicate : visible for admin 910
-- notes.NotesByPerson.duplicate : visible for admin 910
-- notes.NotesByProject.duplicate : visible for admin 910
-- notes.NotesByType.duplicate : visible for admin 910
-- pcsw.AllClients.duplicate : visible for admin 910
-- pcsw.Clients.duplicate : visible for admin 910
-- pcsw.ClientsByNationality.duplicate : visible for admin 910
-- pcsw.CoachedClients.duplicate : visible for admin 910
-- pcsw.DispenseReasons.duplicate : visible for admin 910
-- polls.Choices.duplicate : visible for admin 910
-- polls.ChoicesBySet.duplicate : visible for admin 910
-- polls.PollResult.duplicate : visible for admin 910
-- polls.Questions.duplicate : visible for admin 910
-- polls.QuestionsByPoll.duplicate : visible for admin 910
-- reception.Clients.duplicate : visible for admin 910
+- excerpts.Excerpts.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- excerpts.ExcerptsByOwner.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- excerpts.ExcerptsByProject.duplicate : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
+- excerpts.ExcerptsByType.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- excerpts.MyExcerpts.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- extensible.PanelEvents.duplicate : visible for 100 110 120 200 300 400 410 420 500 510 admin 910
+- households.Households.duplicate : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
+- households.HouseholdsByType.duplicate : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
+- integ.Clients.duplicate : visible for 100 110 120 420 admin 910
+- integ.CoachingEndingsByType.duplicate : visible for 110 120 210 410 420 admin 910
+- integ.CoachingEndingsByUser.duplicate : visible for 110 120 210 410 420 admin 910
+- integ.CompaniesAndContracts.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- integ.JobProvidersAndContracts.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- isip.EntriesByContract.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- jobs.JobProviders.duplicate : visible for 100 110 120 420 admin 910
+- jobs.JobTypes.duplicate : visible for 110 120 410 420 admin 910
+- newcomers.ClientsByFaculty.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- newcomers.Competences.duplicate : visible for 110 120 410 420 admin 910
+- newcomers.CompetencesByFaculty.duplicate : visible for 110 120 410 420 admin 910
+- newcomers.CompetencesByUser.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- newcomers.MyCompetences.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- newcomers.NewClients.duplicate : visible for 120 200 220 300 420 admin 910
+- notes.AllNotes.duplicate : visible for 110 120 420 admin 910
+- notes.MyNotes.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- notes.Notes.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- notes.NotesByCompany.duplicate : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
+- notes.NotesByEventType.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- notes.NotesByOwner.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- notes.NotesByPerson.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- notes.NotesByProject.duplicate : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
+- notes.NotesByType.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- pcsw.AllClients.duplicate : visible for 110 120 410 420 admin 910
+- pcsw.Clients.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- pcsw.ClientsByNationality.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- pcsw.CoachedClients.duplicate : visible for 100 110 120 200 300 400 410 420 admin 910
+- pcsw.DispenseReasons.duplicate : visible for 110 120 410 420 admin 910
+- polls.Choices.duplicate : visible for 110 120 410 420 admin 910
+- polls.ChoicesBySet.duplicate : visible for 110 120 410 420 admin 910
+- polls.PollResult.duplicate : visible for 110 120 410 420 admin 910
+- polls.Questions.duplicate : visible for 110 120 410 420 admin 910
+- polls.QuestionsByPoll.duplicate : visible for 100 110 120 200 300 400 410 420 admin 910
+- reception.Clients.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 <BLANKLINE>
+
 
 
 Permissions

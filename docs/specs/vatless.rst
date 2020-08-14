@@ -119,17 +119,17 @@ clients:
 ============================ =================================== =========== ============== ============
  Klient                       Haushaltsartikel                    Betrag      Beschreibung   Bearbeiten
 ---------------------------- ----------------------------------- ----------- -------------- ------------
- EMONTS Daniel (128)          (832/330/01) Allgemeine Beihilfen   5,33
- AUSDEMWALD Alfons (116)      (832/330/01) Allgemeine Beihilfen   10,00
- COLLARD Charlotte (118)      (832/330/01) Allgemeine Beihilfen   12,50
- DOBBELSTEIN Dorothée (124)   (832/330/01) Allgemeine Beihilfen   25,00
- EVERS Eberhart (127)         (832/330/01) Allgemeine Beihilfen   29,95
+ EMONTS Daniel (128)          (832/330/01) Allgemeine Beihilfen   5,33                       [⚇]
+ AUSDEMWALD Alfons (116)      (832/330/01) Allgemeine Beihilfen   10,00                      [⚇]
+ COLLARD Charlotte (118)      (832/330/01) Allgemeine Beihilfen   12,50                      [⚇]
+ DOBBELSTEIN Dorothée (124)   (832/330/01) Allgemeine Beihilfen   25,00                      [⚇]
+ EVERS Eberhart (127)         (832/330/01) Allgemeine Beihilfen   29,95                      [⚇]
  **Total (5 Zeilen)**                                             **82,78**
 ============================ =================================== =========== ============== ============
 <BLANKLINE>
 
-
-This invoice is registered, and ledger movements have been created:
+This invoice is registered, so the :term:`ledger movements <ledger movement>`
+have been created:
 
 >>> obj.state
 <ledger.VoucherStates.registered:20>
