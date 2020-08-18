@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2019 Rumma & Ko Ltd
+# Copyright 2012-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """Adds functionality to make CBSS requests.
@@ -67,7 +67,7 @@ class Plugin(ad.Plugin):
             version = suds.__version__
         except ImportError:
             version = self.site.not_found_msg
-        yield ("suds", version, "https://fedorahosted.org/suds/")
+        yield ("suds", version, "https://pypi.org/project/suds-py3/")
 
     def setup_main_menu(self, site, user_type, m):
         mg = site.plugins.integ
