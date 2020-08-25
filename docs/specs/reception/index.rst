@@ -550,3 +550,17 @@ and `True` all subsequent times:
 False
 >>> theresia.user_type.has_required_roles(career_panel.required_roles)
 False
+
+
+.. _welfare.specs.20200825:
+
+Cannot select a coaching type for user
+======================================
+
+The following failed before 20200825.
+
+>>> show_choices('romain', '/choices/users/Users/coaching_type')
+<br/>
+SSG
+SI
+Médiation de dettes
