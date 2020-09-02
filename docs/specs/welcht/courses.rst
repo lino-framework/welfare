@@ -1,4 +1,4 @@
-.. doctest docs/specs/welfare/courses.rst
+.. doctest docs/specs/welcht/courses.rst
 .. _welfare.specs.courses2:
 
 =======================
@@ -9,7 +9,7 @@ This is about *internal* courses (:mod:`lino_welcht.lib.courses`), not to mixed
 up with :mod:`lino_welcht.lib.xcourses`.
 
 
-.. contents:: 
+.. contents::
     :local:
     :depth: 1
 
@@ -48,7 +48,8 @@ Ateliers
 <BLANKLINE>
 
 >>> print(rt.models.courses.Courses.params_layout.main)
-topic line user teacher state 
+... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
+topic line user teacher state
     room can_enroll:10 start_date end_date show_exposed
 
 >>> demo_get('robin', 'choices/courses/Courses/topic', 'count rows', 0)
@@ -110,7 +111,7 @@ Kitchen (12/05/2014)
 +---------------+--------------+------------------------------------------------------------+
 | Internal name | Verbose name | Help text                                                  |
 +===============+==============+============================================================+
-| start_date    | Date début   | La date (de début) de la première rencontre à générer.     |
+| start_date    | Date début   | La date de début de la première rencontre à générer.       |
 +---------------+--------------+------------------------------------------------------------+
 | end_date      | Date de fin  | La date de fin de la première rencontre à générer.         |
 |               |              | Laisser vide si les rencontres durent moins d'une journée. |
@@ -126,4 +127,3 @@ Verify that users can create new courses:
 >>> response = test_client.get(url, REMOTE_USER='romain')
 >>> response.status_code
 200
-

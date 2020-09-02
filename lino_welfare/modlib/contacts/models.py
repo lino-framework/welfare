@@ -177,6 +177,11 @@ class Person(Partner, Person):
             '''name first_name middle_name last_name title
             birth_date gender''')
 
+    @classmethod
+    def choice_text_to_dict(cls, text):
+        """In Welfare we don't want Lino to automatically create persons from learning comboboxes.
+        """
+        return None
 
 #dd.update_field(Person, 'first_name', blank=False)
 dd.update_field(Person, 'last_name', blank=False)

@@ -1259,11 +1259,9 @@ like unrequested changes.
 
 >>> obj = contacts.Role.objects.get(pk=1)
 >>> pprint(obj.create_person_choice("Joe Smith"))
-None
-
->>> contacts.Person.disable_create_choice
-True
-
+Traceback (most recent call last):
+...
+django.core.exceptions.ValidationError: ["Cannot create Person from 'Joe Smith'"]
 
 
 
