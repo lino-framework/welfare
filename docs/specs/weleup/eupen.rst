@@ -29,7 +29,6 @@ it was the first Lino that went into production in 2010.
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - 64 plugins
 - 141 models
-- 42 user roles
 - 16 user types
 - 535 views
 - 29 dialog actions
@@ -1150,7 +1149,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Kontakte --> Verwandschaftsarten : 13
 - Explorer --> System --> Vollmachten : 4
 - Explorer --> System --> Benutzerarten : 16
-- Explorer --> System --> Benutzerrollen : 42
+- Explorer --> System --> Benutzerrollen : 56
 - Explorer --> System --> Benachrichtigungen : 14
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> All dashboard widgets : 1

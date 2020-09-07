@@ -147,53 +147,68 @@ True
 
 >>> rt.show(users.UserRoles)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-============================= ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
- Name                          000   100   110   120   200   210   220   300   400   410   420   500   510   800   900   910
------------------------------ ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
- about.SiteSearcher                                                                                                ☑     ☑
- aids.AidsStaff                            ☑     ☑           ☑                       ☑     ☑     ☑     ☑     ☑     ☑     ☑
- aids.AidsUser                       ☑     ☑     ☑     ☑     ☑           ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑
- beid.BeIdUser                       ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑                 ☑     ☑     ☑
- cal.GuestOperator                   ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑                 ☑     ☑     ☑
- cbss.CBSSUser                       ☑     ☑     ☑     ☑     ☑           ☑     ☑     ☑     ☑                       ☑     ☑
- checkdata.CheckdataUser             ☑     ☑     ☑     ☑                 ☑     ☑     ☑     ☑                       ☑     ☑
- coachings.CoachingsStaff                  ☑     ☑           ☑                       ☑     ☑                       ☑     ☑
- coachings.CoachingsUser             ☑     ☑     ☑     ☑     ☑           ☑     ☑     ☑     ☑                       ☑     ☑
- contacts.ContactsStaff                    ☑     ☑           ☑                       ☑     ☑                 ☑     ☑     ☑
- contacts.ContactsUser               ☑     ☑     ☑     ☑     ☑           ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑
- contacts.SimpleContactsUser         ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑
- core.Anonymous                ☑
- core.SiteUser                       ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑
- courses.CoursesUser                 ☑     ☑     ☑     ☑     ☑           ☑     ☑     ☑     ☑                 ☑     ☑     ☑
- cv.CareerStaff                            ☑     ☑                                         ☑                       ☑     ☑
- cv.CareerUser                       ☑     ☑     ☑                                         ☑                       ☑     ☑
- debts.DebtsStaff                                                                                                  ☑     ☑
- debts.DebtsUser                                 ☑                       ☑                 ☑                       ☑     ☑
- excerpts.ExcerptsStaff                                                                                            ☑     ☑
- excerpts.ExcerptsUser               ☑     ☑     ☑           ☑     ☑           ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑
- integ.IntegUser                     ☑     ☑     ☑                                         ☑                       ☑     ☑
- integ.IntegrationStaff                    ☑     ☑                                         ☑                       ☑     ☑
- ledger.LedgerStaff                                                                                    ☑           ☑     ☑
- ledger.LedgerUser                                                                               ☑     ☑           ☑     ☑
- newcomers.NewcomersOperator               ☑     ☑     ☑           ☑     ☑                 ☑                 ☑     ☑     ☑
- newcomers.NewcomersUser                         ☑     ☑           ☑     ☑                 ☑                       ☑     ☑
- notes.NotesStaff                          ☑     ☑                                         ☑                       ☑     ☑
- notes.NotesUser                     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑
- office.OfficeOperator                     ☑     ☑     ☑     ☑     ☑     ☑           ☑     ☑                 ☑     ☑     ☑
- office.OfficeStaff                        ☑     ☑                                   ☑     ☑                       ☑     ☑
- office.OfficeUser                   ☑     ☑     ☑     ☑                 ☑     ☑     ☑     ☑     ☑     ☑           ☑     ☑
- pcsw.SocialCoordinator                                      ☑                 ☑     ☑
- pcsw.SocialStaff                          ☑     ☑                                   ☑     ☑                       ☑     ☑
- pcsw.SocialUser                     ☑     ☑     ☑     ☑                 ☑     ☑     ☑     ☑                       ☑     ☑
- polls.PollsStaff                          ☑     ☑                                   ☑     ☑                       ☑     ☑
- polls.PollsUser                     ☑     ☑     ☑     ☑                 ☑     ☑     ☑     ☑                       ☑     ☑
- sepa.SepaStaff                            ☑     ☑                                   ☑     ☑     ☑     ☑           ☑     ☑
- sepa.SepaUser                       ☑     ☑     ☑     ☑     ☑           ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑
- users.AuthorshipTaker                                       ☑     ☑           ☑     ☑                       ☑     ☑     ☑
- xcourses.CoursesStaff                     ☑     ☑                                         ☑                       ☑     ☑
- xcourses.CoursesUser                ☑     ☑     ☑                                         ☑                       ☑     ☑
-============================= ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
+================================== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
+ Name                               000   100   110   120   200   210   220   300   400   410   420   500   510   800   900   910
+---------------------------------- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+ about.SiteSearcher                                                                                                     ☑     ☑
+ aids.AidsStaff                                 ☑     ☑           ☑                       ☑     ☑     ☑     ☑     ☑     ☑     ☑
+ aids.AidsUser                            ☑     ☑     ☑     ☑     ☑           ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑
+ beid.BeIdUser                            ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑                 ☑     ☑     ☑
+ cal.GuestOperator                        ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑                 ☑     ☑     ☑
+ cbss.CBSSUser                            ☑     ☑     ☑     ☑     ☑           ☑     ☑     ☑     ☑                       ☑     ☑
+ checkdata.CheckdataUser                  ☑     ☑     ☑     ☑                 ☑     ☑     ☑     ☑                       ☑     ☑
+ coachings.CoachingsStaff                       ☑     ☑           ☑                       ☑     ☑                       ☑     ☑
+ coachings.CoachingsUser                  ☑     ☑     ☑     ☑     ☑           ☑     ☑     ☑     ☑                       ☑     ☑
+ contacts.ContactsStaff                         ☑     ☑           ☑                       ☑     ☑                 ☑     ☑     ☑
+ contacts.ContactsUser                    ☑     ☑     ☑     ☑     ☑           ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑
+ contacts.SimpleContactsUser              ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑
+ core.Anonymous                     ☑
+ core.SiteUser                            ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑
+ courses.CoursesUser                      ☑     ☑     ☑     ☑     ☑           ☑     ☑     ☑     ☑                 ☑     ☑     ☑
+ cv.CareerStaff                                 ☑     ☑                                         ☑                       ☑     ☑
+ cv.CareerUser                            ☑     ☑     ☑                                         ☑                       ☑     ☑
+ debts.DebtsStaff                                                                                                       ☑     ☑
+ debts.DebtsUser                                      ☑                       ☑                 ☑                       ☑     ☑
+ excerpts.ExcerptsStaff                                                                                                 ☑     ☑
+ excerpts.ExcerptsUser                    ☑     ☑     ☑           ☑     ☑           ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑
+ integ.IntegUser                          ☑     ☑     ☑                                         ☑                       ☑     ☑
+ integ.IntegrationStaff                         ☑     ☑                                         ☑                       ☑     ☑
+ ledger.LedgerStaff                                                                                         ☑           ☑     ☑
+ ledger.LedgerUser                                                                                    ☑     ☑           ☑     ☑
+ newcomers.NewcomersOperator                    ☑     ☑     ☑           ☑     ☑                 ☑                 ☑     ☑     ☑
+ newcomers.NewcomersUser                              ☑     ☑           ☑     ☑                 ☑                       ☑     ☑
+ notes.NotesStaff                               ☑     ☑                                         ☑                       ☑     ☑
+ notes.NotesUser                          ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑
+ office.OfficeOperator                          ☑     ☑     ☑     ☑     ☑     ☑           ☑     ☑                 ☑     ☑     ☑
+ office.OfficeStaff                             ☑     ☑                                   ☑     ☑                       ☑     ☑
+ office.OfficeUser                        ☑     ☑     ☑     ☑                 ☑     ☑     ☑     ☑     ☑     ☑           ☑     ☑
+ pcsw.SocialCoordinator                                           ☑                 ☑     ☑
+ pcsw.SocialStaff                               ☑     ☑                                   ☑     ☑                       ☑     ☑
+ pcsw.SocialUser                          ☑     ☑     ☑     ☑                 ☑     ☑     ☑     ☑                       ☑     ☑
+ polls.PollsStaff                               ☑     ☑                                   ☑     ☑                       ☑     ☑
+ polls.PollsUser                          ☑     ☑     ☑     ☑                 ☑     ☑     ☑     ☑                       ☑     ☑
+ sepa.SepaStaff                                 ☑     ☑                                   ☑     ☑     ☑     ☑           ☑     ☑
+ sepa.SepaUser                            ☑     ☑     ☑     ☑     ☑           ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑     ☑
+ users.AuthorshipTaker                                            ☑     ☑           ☑     ☑                       ☑     ☑     ☑
+ welfare.Accountant                                                                                   ☑
+ welfare.AccountantManager                                                                                  ☑
+ welfare.DebtsConsultant                                                      ☑
+ welfare.IntegrationAgent                 ☑     ☑     ☑                                         ☑
+ welfare.IntegrationAgentFlexible                     ☑                                         ☑
+ welfare.IntegrationAgentManager                ☑     ☑                                         ☑
+ welfare.NewcomersConsultant                                ☑
+ welfare.ReceptionClerk                                           ☑
+ welfare.ReceptionClerkFlexible                                         ☑
+ welfare.SecurityAdvisor                                                                                                      ☑
+ welfare.SiteAdmin                                                                                                      ☑     ☑
+ welfare.SocialAgent                                                                ☑     ☑
+ welfare.SocialAgentManager                                                               ☑
+ welfare.Supervisor                                                                                               ☑
+ xcourses.CoursesStaff                          ☑     ☑                                         ☑                       ☑     ☑
+ xcourses.CoursesUser                     ☑     ☑     ☑                                         ☑                       ☑     ☑
+================================== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====
 <BLANKLINE>
+
 
 
 
