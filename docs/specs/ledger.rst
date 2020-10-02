@@ -165,57 +165,51 @@ because Lino Welfare doesn't use full accounting reports
 
 >>> rt.show(ledger.Accounts)
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
-========================================================= ================= =============== =============
- Beschreibung                                              Braucht Partner   Auszugleichen   Referenz
---------------------------------------------------------- ----------------- --------------- -------------
- **   1000 Net income (loss)**                             Ja                Ja              1000
- **4 Kommerzielle Vermögenswerte und Verbindlichkeiten**   Nein              Nein            4
- **   4000 Kunden**                                        Ja                Ja              4000
- **   4100 Lieferanten**                                   Ja                Ja              4100
- **   4200 Angestellte**                                   Ja                Ja              4200
- **   4300 Offene Zahlungsaufträge**                       Ja                Ja              4300
- **   4450 Auszuführende Ausgabeanweisungen**              Ja                Ja              4450
- **   4500 Steuerämter**                                   Ja                Ja              4500
- **   4510 Geschuldete Mehrwertsteuer**                    Nein              Nein            4510
- **   4513 Deklarierte Mehrwertsteuer**                    Nein              Nein            4513
- **   4520 Abziehbare Mehrwertsteuer**                     Nein              Nein            4520
- **   4530 Rückzahlbare Mehrwertsteuer**                   Nein              Nein            4530
- **   4800 Internal clearings**                            Ja                Ja              4800
- **   4810 Granted aids**                                  Ja                Ja              4810
- **   4900 Wartekonto**                                    Ja                Ja              4900
- **5 Finanzielle Vermögenswerte und Verbindlichkeiten**    Nein              Nein            5
- **   5500 BestBank**                                      Nein              Nein            5500
- **   5700 Kasse**                                         Nein              Nein            5700
- **6 Ausgaben**                                            Nein              Nein            6
- ** 60 Diplome**                                           Nein              Nein            60
- **   6010 Einkäufe von Dienstleistungen**                 Nein              Nein            6010
- **   6020 Investierungskäufe**                            Nein              Nein            6020
- **   6040 Wareneinkäufe**                                 Nein              Nein            6040
- ** 61 Löhne und Gehälter**                                Nein              Nein            61
- **   6300 Löhne und Gehälter**                            Nein              Nein            6300
- **   6900 Net income**                                    Nein              Nein            6900
- **7 Einnahmen**                                           Nein              Nein            7
- **   7000 Verkauf**                                       Nein              Nein            7000
- **         820/333/01 Vorschuss auf Vergütungen o.ä.**    Nein              Nein            820/333/01
- **         821/333/01 Vorschuss auf Pensionen**           Nein              Nein            821/333/01
- **         822/333/01 Vorsch. Entsch. Arbeitsunfälle**    Nein              Nein            822/333/01
- **         823/333/01 Vor. Kranken- u. Invalidengeld**    Nein              Nein            823/333/01
- **         825/333/01 Vorschuss auf Familienzulage**      Nein              Nein            825/333/01
- **         826/333/01 Vorschuss auf Arbeitslosengeld**    Nein              Nein            826/333/01
- **         827/333/01 Vorschuss auf Behindertenzulag**    Nein              Nein            827/333/01
- **         832/330/01 Allgemeine Beihilfen**              Nein              Nein            832/330/01
- **         832/330/02 Gesundheitsbeihilfe**               Nein              Nein            832/330/02
- **         832/330/03 Heizkosten- u. Energiebeihilfe**    Nein              Nein            832/330/03
- **          832/330/03F Fonds Gas und Elektrizität**      Nein              Nein            832/330/03F
- **         832/330/04 Mietkaution**                       Nein              Nein            832/330/04
- **         832/333/22 Mietbeihilfe**                      Nein              Nein            832/333/22
- **          832/3331/01 Eingliederungseinkommen**         Nein              Nein            832/3331/01
- **         832/334/27 Sozialhilfe**                       Nein              Nein            832/334/27
- **          832/3343/21 Beihilfe für Ausländer**          Nein              Nein            832/3343/21
- **         P82/000/00 Einn. Dritter: Weiterleitung**      Nein              Nein            P82/000/00
- **         P83/000/00 Unber. erh. Beträge + Erstatt.**    Nein              Nein            P83/000/00
- **         P87/000/00 Abhebung von pers. Guthaben**       Nein              Nein            P87/000/00
-========================================================= ================= =============== =============
+======================================================== ================= =============== =============
+ Beschreibung                                             Braucht Partner   Auszugleichen   Referenz
+-------------------------------------------------------- ----------------- --------------- -------------
+ **   1000 Net income (loss)**                            Ja                Ja              1000
+ **   4000 Kunden**                                       Ja                Ja              4000
+ **   4100 Lieferanten**                                  Ja                Ja              4100
+ **   4200 Angestellte**                                  Ja                Ja              4200
+ **   4300 Offene Zahlungsaufträge**                      Ja                Ja              4300
+ **   4450 Auszuführende Ausgabeanweisungen**             Ja                Ja              4450
+ **   4500 Steuerämter**                                  Ja                Ja              4500
+ **   4510 Geschuldete Mehrwertsteuer**                   Nein              Nein            4510
+ **   4513 Deklarierte Mehrwertsteuer**                   Nein              Nein            4513
+ **   4520 Abziehbare Mehrwertsteuer**                    Nein              Nein            4520
+ **   4530 Rückzahlbare Mehrwertsteuer**                  Nein              Nein            4530
+ **   4800 Internal clearings**                           Ja                Ja              4800
+ **   4810 Granted aids**                                 Ja                Ja              4810
+ **   4900 Wartekonto**                                   Ja                Ja              4900
+ **   5500 BestBank**                                     Nein              Nein            5500
+ **   5700 Kasse**                                        Nein              Nein            5700
+ **   6010 Einkäufe von Dienstleistungen**                Nein              Nein            6010
+ **   6020 Investierungskäufe**                           Nein              Nein            6020
+ **   6040 Wareneinkäufe**                                Nein              Nein            6040
+ **   6300 Löhne und Gehälter**                           Nein              Nein            6300
+ **   6900 Net income**                                   Nein              Nein            6900
+ **   7000 Verkauf**                                      Nein              Nein            7000
+ **         820/333/01 Vorschuss auf Vergütungen o.ä.**   Nein              Nein            820/333/01
+ **         821/333/01 Vorschuss auf Pensionen**          Nein              Nein            821/333/01
+ **         822/333/01 Vorsch. Entsch. Arbeitsunfälle**   Nein              Nein            822/333/01
+ **         823/333/01 Vor. Kranken- u. Invalidengeld**   Nein              Nein            823/333/01
+ **         825/333/01 Vorschuss auf Familienzulage**     Nein              Nein            825/333/01
+ **         826/333/01 Vorschuss auf Arbeitslosengeld**   Nein              Nein            826/333/01
+ **         827/333/01 Vorschuss auf Behindertenzulag**   Nein              Nein            827/333/01
+ **         832/330/01 Allgemeine Beihilfen**             Nein              Nein            832/330/01
+ **         832/330/02 Gesundheitsbeihilfe**              Nein              Nein            832/330/02
+ **         832/330/03 Heizkosten- u. Energiebeihilfe**   Nein              Nein            832/330/03
+ **          832/330/03F Fonds Gas und Elektrizität**     Nein              Nein            832/330/03F
+ **         832/330/04 Mietkaution**                      Nein              Nein            832/330/04
+ **         832/333/22 Mietbeihilfe**                     Nein              Nein            832/333/22
+ **          832/3331/01 Eingliederungseinkommen**        Nein              Nein            832/3331/01
+ **         832/334/27 Sozialhilfe**                      Nein              Nein            832/334/27
+ **          832/3343/21 Beihilfe für Ausländer**         Nein              Nein            832/3343/21
+ **         P82/000/00 Einn. Dritter: Weiterleitung**     Nein              Nein            P82/000/00
+ **         P83/000/00 Unber. erh. Beträge + Erstatt.**   Nein              Nein            P83/000/00
+ **         P87/000/00 Abhebung von pers. Guthaben**      Nein              Nein            P87/000/00
+======================================================== ================= =============== =============
 <BLANKLINE>
 
 
