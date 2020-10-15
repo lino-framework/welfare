@@ -35,7 +35,7 @@ from lino_welfare.modlib.welfare.management.commands.watch_tim import process_li
 POST_GEORGES = """{"method":"POST","alias":"PAR","id":"0000023633","time":"20130220 08:55:30",\
 "user":"MELANIE","data":{"IDPAR":"0000023633","FIRME":"Schneider Georges","NAME2":"",\
 "RUE":"","CP":"","IDPRT":"S","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"",\
-"COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"N","IDMFC":"30","LANGUE":"D",\
+"COMPTE3":"","IDPGP":"","DC.debit":"","DC.credit":"","ATTRIB":"N","IDMFC":"30","LANGUE":"D",\
 "IDBUD":"","PROF":"80","CODE1":"","CODE2":"","CODE3":"",\
 "DATCREA":{"__date__":{"year":2013,"month":2,"day":20}},"ALLO":"","NB1":"","NB2":"",\
 "IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"","RUEBTE":"","DEBIT2":"","CREDIT2":"",\
@@ -46,7 +46,7 @@ PUT_MAX_MORITZ = """{"method":"PUT","alias":"PAR","id":"0000005088","time":"2013
 "user":"MELANIE","data":{"IDPAR":"0000005088","FIRME":"Müller Max Moritz","NAME2":"",
 "RUE":"Werthplatz 12","CP":"4700","IDPRT":"I","PAYS":"B","TEL":"","FAX":"",
 "COMPTE1":"001-1234567-89","NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"",
-"DEBIT":"","CREDIT":"","ATTRIB":"N","IDMFC":"","LANGUE":"D","IDBUD":"",
+"DC.debit":"","DC.credit":"","ATTRIB":"N","IDMFC":"","LANGUE":"D","IDBUD":"",
 "PROF":"80","CODE1":"RH","CODE2":"","CODE3":"",
 "DATCREA":{"__date__":{"year":1991,"month":8,"day":12}},
 "ALLO":"Herr","NB1":"","NB2":"","IDDEV":"","MEMO":"","COMPTE2":"",
@@ -71,7 +71,7 @@ POST_PXS = """{"method":"POST","alias":"PXS","id":"0000023635","time":"20130222 
 PUT_PAR_POTTER = """{"method":"PUT","alias":"PAR","id":"0000004260","time":"20130225 11:44:16",
 "user":"WIL011","data":{"IDPAR":"0000004260","FIRME":"Voldemort-Potter Harald",
 "NAME2":"","RUE":"Schilsweg 26","CP":"4700","IDPRT":"I","PAYS":"B","TEL":"","FAX":"","COMPTE1":"",
-"NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"N","IDMFC":"",
+"NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DC.debit":"","DC.credit":"","ATTRIB":"N","IDMFC":"",
 "LANGUE":"D","IDBUD":"","PROF":"80","CODE1":"ER","CODE2":"","CODE3":"",
 "DATCREA":{"__date__":{"year":1985,"month":7,"day":23}},"ALLO":"Eheleute","NB1":"","NB2":"",
 "IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"","RUEBTE":"","DEBIT2":"","CREDIT2":"",
@@ -85,7 +85,7 @@ PUT_PAR_6283 = """
 {"method":"PUT","alias":"PAR","id":"0000006283","time":"20130225 11:52:56","user":"WIL011","data":
 {"IDPAR":"0000006283","FIRME":"Willekens-Delanuit Paul","NAME2":"","RUE":"Rotenbergplatz","CP":"4700",
 "IDPRT":"I","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"","IDPGP":"",
-"DEBIT":"","CREDIT":"","ATTRIB":"A","IDMFC":"","LANGUE":"D","IDBUD":"","PROF":"80","CODE1":"",
+"DC.debit":"","DC.credit":"","ATTRIB":"A","IDMFC":"","LANGUE":"D","IDBUD":"","PROF":"80","CODE1":"",
 "CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":1998,"month":11,"day":17}},
 "ALLO":"Eheleute","NB1":"","NB2":"","IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"  24","RUEBTE":"",
 "DEBIT2":"","CREDIT2":"","IMPDATE":{"__date__":{"year":1999,"month":8,"day":9}},
@@ -246,7 +246,7 @@ class TestCase(TestCase):
         "user":"","data":{"IDPAR":"0000001334","FIRME":"Belgacom",
         "NAME2":"","RUE":"","CP":"1030","IDPRT":"V","PAYS":"B","TEL":"0800-44500",
         "FAX":"0800-11333","COMPTE1":"","NOTVA":"","COMPTE3":"","IDPGP":"",
-        "DEBIT":"  2242.31","CREDIT":"","ATTRIB":"","IDMFC":"60","LANGUE":"F",
+        "DC.debit":"  2242.31","DC.credit":"","ATTRIB":"","IDMFC":"60","LANGUE":"F",
         "IDBUD":"","PROF":"30","CODE1":"","CODE2":"","CODE3":"",
         "DATCREA":{"__date__":{"year":1992,"month":10,"day":6}},"ALLO":"","NB1":"",
         "NB2":"","IDDEV":"","MEMO":"Foo bar","COMPTE2":"","RUENUM":"","RUEBTE":"",
@@ -276,7 +276,7 @@ class TestCase(TestCase):
         ln = """{"method":"PUT","alias":"PAR","id":"0000023649","time":"20130228 10:05:41","user":"MELANIEL",
         "data":{"IDPAR":"0000023649","FIRME":"Reinders Denis","NAME2":"","RUE":"Sch<94>nefelderweg",
         "CP":"4700","IDPRT":"S","PAYS":"","TEL":"","FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"",
-        "IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"N","IDMFC":"30","LANGUE":"D","IDBUD":"",
+        "IDPGP":"","DC.debit":"","DC.credit":"","ATTRIB":"N","IDMFC":"30","LANGUE":"D","IDBUD":"",
         "PROF":"80","CODE1":"","CODE2":"","CODE3":"",
         "DATCREA":{"__date__":{"year":2013,"month":2,"day":28}},
         "ALLO":"Herr","NB1":"","NB2":"791228 123-35","IDDEV":"","MEMO":"","COMPTE2":"",
@@ -310,7 +310,7 @@ class TestCase(TestCase):
         "user":"","data":{"IDPAR":"0000000005","FIRME":"Air Liquide Belgium",
         "NAME2":"","RUE":"Quai des Vennes","CP":"4020","IDPRT":"V","PAYS":"B",
         "TEL":"04/349.89.89","FAX":"04/341.20.70","COMPTE1":"GKCCBEBB:BE57551373330235",
-        "NOTVA":"BE-0441.857.467","COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"",
+        "NOTVA":"BE-0441.857.467","COMPTE3":"","IDPGP":"","DC.debit":"","DC.credit":"",
         "ATTRIB":"A","IDMFC":"30","LANGUE":"F","IDBUD":"","PROF":"19",
         "CODE1":"","CODE2":"","CODE3":"",
         "DATCREA":{"__date__":{"year":1985,"month":3,"day":12}},"ALLO":"S.A.",
@@ -352,7 +352,7 @@ class TestCase(TestCase):
         Person becomes Company
         """
         Person(id=9932, first_name="CPAS", last_name="Andenne").save()
-        ln = """{"method":"PUT","alias":"PAR","id":"0000009932","time":"20130503 07:38:16","user":"","data":{"IDPAR":"0000009932","FIRME":"Andenne, CPAS","NAME2":"","RUE":"Rue de l'Hopital","CP":"5300","IDPRT":"V","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"","LANGUE":"F","IDBUD":"","PROF":"65","CODE1":"","CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":1988,"month":12,"day":9}},"ALLO":"","NB1":"","NB2":"        0","IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"  22","RUEBTE":"","DEBIT2":"","CREDIT2":"","IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},"ATTRIB2":"","CPTSYSI":"","EMAIL":"","MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}"""
+        ln = """{"method":"PUT","alias":"PAR","id":"0000009932","time":"20130503 07:38:16","user":"","data":{"IDPAR":"0000009932","FIRME":"Andenne, CPAS","NAME2":"","RUE":"Rue de l'Hopital","CP":"5300","IDPRT":"V","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DC.debit":"","DC.credit":"","ATTRIB":"","IDMFC":"","LANGUE":"F","IDBUD":"","PROF":"65","CODE1":"","CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":1988,"month":12,"day":9}},"ALLO":"","NB1":"","NB2":"        0","IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"  22","RUEBTE":"","DEBIT2":"","CREDIT2":"","IMPDATE":{"__date__":{"year":0,"month":0,"day":0}},"ATTRIB2":"","CPTSYSI":"","EMAIL":"","MVIDATE":{"__date__":{"year":0,"month":0,"day":0}},"IDUSR":"","DOMI1":""}}"""
         process_line(ln)
         self.assertDoesNotExist(Client, id=9932)
         self.assertDoesNotExist(Person, id=9932)
@@ -380,7 +380,7 @@ class TestCase(TestCase):
         "user":"","data":{"IDPAR":"0000001267","FIRME":"Velopa","NAME2":"",
         "RUE":"Leuvenselaan","CP":"3300","IDPRT":"I","PAYS":"B","TEL":"",
         "FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"","IDPGP":"",
-        "DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"30","LANGUE":"F","IDBUD":"",
+        "DC.debit":"","DC.credit":"","ATTRIB":"","IDMFC":"30","LANGUE":"F","IDBUD":"",
         "PROF":"15","CODE1":"","CODE2":"","CODE3":"",
         "DATCREA":{"__date__":{"year":1992,"month":1,"day":2}},"ALLO":"S.A.",
         "NB1":"","NB2":"","IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":" 172",
@@ -404,7 +404,7 @@ class TestCase(TestCase):
         ln = """{"method":"PUT","alias":"PAR","id":"0000000665","time":"20130517 12:33:58","user":"",
         "data":{"IDPAR":"0000000665","FIRME":"Petra","NAME2":"","RUE":"Beskensstraat 34","CP":"3520",
         "IDPRT":"I","PAYS":"B","TEL":"011/815911","FAX":"","COMPTE1":"","NOTVA":"BE-0426.896.703",
-        "COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"30",
+        "COMPTE3":"","IDPGP":"","DC.debit":"","DC.credit":"","ATTRIB":"","IDMFC":"30",
         "LANGUE":"3",
         "IDBUD":"","PROF":"12","CODE1":"","CODE2":"","CODE3":"",
         "DATCREA":{"__date__":{"year":1986,"month":8,"day":14}},"ALLO":"sprl","NB1":"","NB2":"",
@@ -421,7 +421,7 @@ class TestCase(TestCase):
         ln = """{"method":"PUT","alias":"PAR","id":"0000007826","time":"20130517 12:35:51","user":"",
         "data":{"IDPAR":"0000007826","FIRME":"Mustermann Peter","NAME2":"","RUE":"Burgundstraße","CP":
         "4700","IDPRT":"S","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"",
-        "COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"A",
+        "COMPTE3":"","IDPGP":"","DC.debit":"","DC.credit":"","ATTRIB":"A",
         "IDMFC":"30","LANGUE":"D","IDBUD":"","PROF":"82","CODE1":"",
         "CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":2006,"month":1,"day":5}},
         "ALLO":"Herrn","NB1":"","NB2":"","IDDEV":"","MEMO":"","COMPTE2":"",
@@ -526,7 +526,7 @@ class TestCase(TestCase):
         ln = """{"method":"POST","alias":"PAR","id":"0000087683","time":"20130610 11:26:30",
         "user":"ROGER","data":{"IDPAR":"0000087683","FIRME":"Bellavilla","NAME2":"","RUE":"",
         "CP":"","IDPRT":"V","PAYS":"","TEL":"","FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"",
-        "IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"30","LANGUE":"D","IDBUD":"",
+        "IDPGP":"","DC.debit":"","DC.credit":"","ATTRIB":"","IDMFC":"30","LANGUE":"D","IDBUD":"",
         "PROF":"00","CODE1":"","CODE2":"","CODE3":"",
         "DATCREA":{"__date__":{"year":2013,"month":6,"day":10}},"ALLO":"","NB1":"",
         "NB2":"","IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"","RUEBTE":"","DEBIT2":"",
@@ -545,8 +545,8 @@ class TestCase(TestCase):
         ln = """{"method":"PUT","alias":"PAR","id":"0000004124","time":"20130517 12:34:37",
         "user":"","data":{"IDPAR":"0000004124","FIRME":"Theves-Carlsberg","NAME2":"",
         "RUE":"Werthplatz 22","CP":"4700","IDPRT":"I","PAYS":"B","TEL":"","FAX":"",
-        "COMPTE1":"","NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DEBIT":"",
-        "CREDIT":"","ATTRIB":"W","IDMFC":"","LANGUE":"D","IDBUD":"","PROF":"80",
+        "COMPTE1":"","NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DC.debit":"",
+        "DC.credit":"","ATTRIB":"W","IDMFC":"","LANGUE":"D","IDBUD":"","PROF":"80",
         "CODE1":"EP","CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":1985,
         "month":4,"day":18}},"ALLO":"Eheleute","NB1":"THCA600115","NB2":"",
         "IDDEV":"","MEMO":"","COMPTE2":"","RUENUM":"","RUEBTE":"",
@@ -568,7 +568,7 @@ class TestCase(TestCase):
         "RUE":"Rue des Champs","CP":"4630","IDPRT":"V","PAYS":"B","TEL":"04/567.89.10",
         "FAX":"04/365.31.10","COMPTE1":"JVBABE22:BE39645678910619",
         "NOTVA":"BE-0123.456.789","COMPTE3":"","IDPGP":"",
-        "DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"30","LANGUE":"F",
+        "DC.debit":"","DC.credit":"","ATTRIB":"","IDMFC":"30","LANGUE":"F",
         "IDBUD":"","PROF":"22","CODE1":"","CODE2":"","CODE3":"",
         "DATCREA":{"__date__":{"year":1992,"month":7,"day":24}},"ALLO":"S.A.",
         "NB1":"EUPO","NB2":"","IDDEV":"","MEMO":"","COMPTE2":"",
@@ -589,7 +589,7 @@ class TestCase(TestCase):
         "user":"PAC","data":{"IDPAR":"0000001588","FIRME":"Zentrum f.Aus- u. Weiterbildung des",
         "NAME2":"Mittelstandes","RUE":"Limburgerweg","CP":"4700","IDPRT":"V","PAYS":"B",
         "TEL":"087/59.39.89","FAX":"087/55.27.95","COMPTE1":"BBRUBEBB:BE16340143185374",
-        "NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DEBIT":"","CREDIT":"",
+        "NOTVA":"BE-0999.999.999","COMPTE3":"","IDPGP":"","DC.debit":"","DC.credit":"",
         "ATTRIB":"","IDMFC":"30","LANGUE":"D","IDBUD":"","PROF":"62","CODE1":"",
         "CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":1994,"month":11,"day":16}},
         "ALLO":"G.o.E.","NB1":"","NB2":"","IDDEV":"","MEMO":"\n",
@@ -601,7 +601,7 @@ class TestCase(TestCase):
         """{"method":"PUT","alias":"PAR","id":"0000022307","time":"20131002 14:40:27","user":"GERD",
         "data":{"IDPAR":"0000022307","FIRME":"Lerho Renée","NAME2":"","RUE":"Lütticher Strasse 321 /A",
         "CP":"4721","IDPRT":"S","PAYS":"B","TEL":"","FAX":"","COMPTE1":"","NOTVA":"","COMPTE3":"",
-        "IDPGP":"","DEBIT":"","CREDIT":"","ATTRIB":"","IDMFC":"30","LANGUE":"D","IDBUD":"","PROF":"91",
+        "IDPGP":"","DC.debit":"","DC.credit":"","ATTRIB":"","IDMFC":"30","LANGUE":"D","IDBUD":"","PROF":"91",
         "CODE1":"","CODE2":"","CODE3":"","DATCREA":{"__date__":{"year":2010,"month":9,"day":1}},"ALLO":"","NB1":"",
         "NB2":"941128 176-65","IDDEV":"","MEMO":"","COMPTE2":"",
         "RUENUM":" 000","RUEBTE":"","DEBIT2":"","CREDIT2":"",

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2018 Rumma & Ko Ltd
+# Copyright 2015-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """Defines a default accounts chart for social accounting.
@@ -28,8 +28,6 @@ Lino Welfare accounting:
 #. (4450 ->) Bank Statement -> 5500
 
 """
-
-from __future__ import unicode_literals
 
 from lino.api import dd, rt, _
 

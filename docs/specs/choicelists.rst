@@ -80,6 +80,7 @@ Here are the choicelists used in Lino Welfare:
  isip.OverlapGroups              2        12                Überlappungsgruppen                Groupes de chevauchement           Overlap groups
  jobs.CandidatureStates          5        21                Kandidatur-Zustände                États de candidatures              Candidature states
  ledger.CommonAccounts           23       32                Gemeinkonten                       Comptes communs                    Common accounts
+ ledger.DC                       2        6                 Booking directions                 Booking directions                 Booking directions
  ledger.JournalGroups            5        20                Journalgruppen                     Groupes de journaux                Journal groups
  ledger.PeriodStates             2        14                Zustände                           États                              States
  ledger.TradeTypes               3        13                Handelsarten                       Types de commerce                  Trade types

@@ -1,16 +1,14 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2016 Rumma & Ko Ltd
+# Copyright 2015-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """
 Database models for :mod:`lino_welfare.modlib.ledger`.
 """
 
-from __future__ import unicode_literals
-
 from lino_xl.lib.ledger.models import *
 from lino.api import _
-from lino_xl.lib.ledger.utils import DEBIT
+from lino_xl.lib.ledger.utils import DC
 from lino_xl.lib.ledger.choicelists import CommonAccounts
 from lino_xl.lib.ledger.choicelists import TradeTypes
 
@@ -52,9 +50,9 @@ add('50', _("Payment orders"), 'zau')
 
 TradeTypes.clear()
 add = TradeTypes.add_item
-add('P', _("Purchases"), 'purchases', dc=DEBIT)
-add('A', _("Aids"), 'aids', dc=DEBIT)
-add('C', _("Clearings"), 'clearings', dc=DEBIT)
+add('P', _("Purchases"), 'purchases', dc=DC.debit)
+add('A', _("Aids"), 'aids', dc=DC.debit)
+add('C', _("Clearings"), 'clearings', dc=DC.debit)
 
 
 TradeTypes.purchases.update(main_account=CommonAccounts.suppliers)

@@ -1,13 +1,10 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2019 Rumma & Ko Ltd
+# Copyright 2015-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """Adds demo journals and some bookings for usage by Lino Welfare.
 
 """
-
-# import os
-# HERE = os.path.dirname(__file__)
 
 from builtins import range
 from lino_xl.lib.sepa.fixtures.demo import objects as lib_objects
@@ -84,14 +81,16 @@ def objects():
     jnl = Journal.get_by_ref('AAW')
     for i in range(3):
         kw = dict()
-        kw.update(entry_date=dd.today(-30*i))
-        kw.update(voucher_date=dd.today(-30*i))
+        date = dd.today(-30*i)
+        kw.update(entry_date=date)
+        kw.update(voucher_date=date)
         kw.update(journal=jnl)
         kw.update(user=ses.get_user())
         for acc in ACCOUNTS:
             kw.update(narration=acc.name)
             kw.update(item_account=acc)
-            obj = PaymentOrder(**kw)
+            obj = jnl.create_voucher(**kw)
+            # obj = PaymentOrder(**kw)
             yield obj
             for j in range(5):
                 cli = CLIENTS.pop()

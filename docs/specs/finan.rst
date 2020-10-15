@@ -11,7 +11,7 @@ Financial vouchers in Lino Welfare
     >>> from etgen.html import E
     >>> from lino.api.doctest import *
 
-This document describes specific aspecs of *financial vouchers* in
+This document describes specific aspects of *financial vouchers* in
 :ref:`welfare`, as implemented by the :mod:`lino_welfare.lib.finan`
 plugin.
 
@@ -45,10 +45,10 @@ The AAW journal contains the following statements:
 ======================= =============== ================================ =============== ================== ================= =================
  Nr.                     Buchungsdatum   Interne Referenz                 Total           Ausführungsdatum   Buchungsperiode   Workflow
 ----------------------- --------------- -------------------------------- --------------- ------------------ ----------------- -----------------
- 22/2014                 13.04.14                                         -553,39                            2014-04           **Registriert**
- 21/2014                 13.03.14                                         -585,84                            2014-03           **Registriert**
- 20/2014                 13.02.14                                         -483,01                            2014-02           **Registriert**
- 19/2014                 13.01.14                                         -350,61                            2014-01           **Registriert**
+ 22/2014                 13.04.14                                         553,39                             2014-04           **Registriert**
+ 21/2014                 13.03.14                                         585,84                             2014-03           **Registriert**
+ 20/2014                 13.02.14                                         483,01                             2014-02           **Registriert**
+ 19/2014                 13.01.14                                         350,61                             2014-01           **Registriert**
  18/2014                 23.03.14        Beihilfe für Ausländer           3 628,62                           2014-03           **Registriert**
  17/2014                 23.03.14        Sozialhilfe                      3 460,17                           2014-03           **Registriert**
  16/2014                 23.03.14        Eingliederungseinkommen          3 611,34                           2014-03           **Registriert**
@@ -67,7 +67,7 @@ The AAW journal contains the following statements:
  3/2014                  22.05.14        Fonds Gas und Elektrizität       3 356,17                           2014-05           **Registriert**
  2/2014                  22.05.14        Heizkosten- u. Energiebeihilfe   3 628,62                           2014-05           **Registriert**
  1/2014                  22.05.14        Allgemeine Beihilfen             3 460,17                           2014-05           **Registriert**
- **Total (22 Zeilen)**                                                    **61 341,14**
+ **Total (22 Zeilen)**                                                    **65 286,84**
 ======================= =============== ================================ =============== ================== ================= =================
 <BLANKLINE>
 
@@ -88,16 +88,13 @@ The ZKBC journal contains the following payment orders:
 ====================== =============== ================== =============== ================== ================= =================
  Nr.                    Buchungsdatum   Interne Referenz   Total           Ausführungsdatum   Buchungsperiode   Workflow
 ---------------------- --------------- ------------------ --------------- ------------------ ----------------- -----------------
- 4/2014                 21.04.14                           20 521,42                          2014-04           **Registriert**
- 3/2014                 21.03.14                           -758,29                            2014-03           **Registriert**
- 2/2014                 21.02.14                           -620,84                            2014-02           **Registriert**
- 1/2014                 21.01.14                           -350,61                            2014-01           **Registriert**
- **Total (4 Zeilen)**                                      **18 791,68**
+ 4/2014                 21.04.14                           21 698,48                          2014-04           **Registriert**
+ 3/2014                 21.03.14                           585,84                             2014-03           **Registriert**
+ 2/2014                 21.02.14                           483,01                             2014-02           **Registriert**
+ 1/2014                 21.01.14                           350,61                             2014-01           **Registriert**
+ **Total (4 Zeilen)**                                      **23 117,94**
 ====================== =============== ================== =============== ================== ================= =================
 <BLANKLINE>
-
-TODO: Note that it is not normal to have negative totals in above
-list.  See :ticket:`1985`.
 
 
 >>> obj = ZKBC.voucher_type.model.objects.get(number=1, journal=ZKBC)  #doctest: -SKIP
@@ -124,4 +121,4 @@ list.  See :ticket:`1985`.
 >>> obj = ZKBC.voucher_type.model.objects.get(number=1, journal=ZKBC)  #doctest: -SKIP
 >>> demo_get(
 ...    'wilfried', 'choices/finan/ItemsByPaymentOrder/match',
-...    fields, 94, mk=obj.pk, **kw)  #doctest: -SKIP
+...    fields, 60, mk=obj.pk, **kw)  #doctest: -SKIP

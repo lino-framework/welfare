@@ -1,15 +1,13 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2018 Rumma & Ko Ltd
+# Copyright 2015-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """Defines some default journals for social accounting.
 
 """
 
-from __future__ import unicode_literals
-
 from lino.api import dd, rt, _
-from lino_xl.lib.ledger.utils import DEBIT
+from lino_xl.lib.ledger.utils import DC
 from lino_xl.lib.ledger.choicelists import CommonAccounts
 
 def objects():
@@ -29,7 +27,7 @@ def objects():
     kw = dict(journal_group=JournalGroups.reg)
     kw.update(trade_type='purchases', ref="REG")
     kw.update(dd.str2kw('name', _("Incoming invoices")))
-    kw.update(dc=DEBIT)
+    kw.update(dc=DC.debit)
     yield ProjectInvoicesByJournal.create_journal(**kw)
 
     kw.update(ref="SREG")
@@ -39,7 +37,7 @@ def objects():
     kw.update(dd.str2kw('name', _("Disbursement orders")))
     kw.update(account='4450', ref="AAW")
     kw.update(journal_group=JournalGroups.anw)
-    # kw.update(dc=CREDIT)
+    # kw.update(dc=DC.credit)
     # kw.update(invert_due_dc=False)
     jnl = DisbursementOrdersByJournal.create_journal(**kw)
     yield jnl
@@ -66,7 +64,7 @@ def objects():
     kw.update(journal_group=JournalGroups.zau)
     kw.update(dd.str2kw('name', _("KBC Payment Orders")))
     kw.update(account=a5800, ref="ZKBC")
-    kw.update(dc=DEBIT)
+    kw.update(dc=DC.debit)
     jnl = PaymentOrdersByJournal.create_journal(**kw)
     yield jnl
     yield MatchRule(journal=jnl, account=a4450)
@@ -79,4 +77,3 @@ def objects():
     # jnl = PaymentOrder.create_journal(**kw)
     # yield jnl
     # yield MatchRule(journal=jnl, account=a4460)
-

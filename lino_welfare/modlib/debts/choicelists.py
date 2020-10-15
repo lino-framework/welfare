@@ -1,34 +1,18 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2018 Rumma & Ko Ltd
-# This file is part of Lino Welfare.
-#
-# Lino Welfare is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# Lino Welfare is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public
-# License along with Lino Welfare.  If not, see
-# <http://www.gnu.org/licenses/>.
+# Copyright 2012-2020 Rumma & Ko Ltd
+# License: BSD (see file COPYING for details)
 
 """
 Database models for `lino_welfare.modlib.debts`.
 
 """
 
-from __future__ import unicode_literals
-
 from django.db import models
 
 from lino.api import dd, _
 
-from lino_xl.lib.ledger.utils import DEBIT, CREDIT
-from lino_xl.lib.ledger.fields import DebitOrCreditField
+from lino_xl.lib.ledger.utils import DC
+# from lino_xl.lib.ledger.fields import DebitOrCreditField
 from lino_xl.lib.ledger.roles import LedgerStaff
 
 
@@ -79,7 +63,7 @@ class AccountTypes(dd.ChoiceList):
     column_names = 'value name text dc sheet'
     required_roles = dd.login_required(LedgerStaff)
 
-    @dd.virtualfield(DebitOrCreditField(_("D/C")))
+    @dd.virtualfield(DC.field(_("D/C")))
     def dc(cls, choice, ar):
         return choice.dc
 
@@ -94,7 +78,7 @@ class Assets(AccountType):
     value = 'A'
     text = _("Assets")   # Aktiva, Anleihe, Vermögen, Anlage
     names = "assets"
-    dc = DEBIT
+    dc = DC.debit
     sheet = BalanceSheet
 add(Assets())
 
@@ -103,7 +87,7 @@ class Liabilities(AccountType):
     value = 'L'
     text = _("Liabilities")  # Guthaben, Schulden, Verbindlichkeit
     names = "liabilities"
-    dc = CREDIT
+    dc = DC.credit
     sheet = BalanceSheet
 add(Liabilities())
 
@@ -112,7 +96,7 @@ class Capital(AccountType):  # aka Owner's Equities
     value = 'C'
     text = _("Capital")  # Kapital
     names = "capital"
-    dc = CREDIT
+    dc = DC.credit
     sheet = BalanceSheet
 add(Capital())
 
@@ -121,7 +105,7 @@ class Incomes(AccountType):
     value = 'I'
     text = _("Incomes")  # Gain/Revenue     Einnahmen  Produits
     names = "incomes"
-    dc = CREDIT
+    dc = DC.credit
     balance_sheet = True
     sheet = EarningsSheet
 add(Incomes())
@@ -131,7 +115,7 @@ class Expenses(AccountType):
     value = 'E'
     text = _("Expenses")  # Loss/Cost       Ausgaben   Charges
     names = "expenses"
-    dc = DEBIT
+    dc = DC.debit
     sheet = EarningsSheet
 add(Expenses())
 

@@ -30,7 +30,7 @@ it was the first Lino that went into production in 2010.
 - 64 plugins
 - 141 models
 - 16 user types
-- 535 views
+- 536 views
 - 29 dialog actions
 <BLANKLINE>
 
@@ -383,11 +383,11 @@ Database structure
 - excerpts.Excerpt : id, project, build_time, build_method, user, owner_type, owner_id, company, contact_person, contact_role, excerpt_type, language
 - excerpts.ExcerptType : id, name, build_method, template, attach_to_email, email_template, certifying, remark, body_template, content_type, primary, backward_compat, print_recipient, print_directly, shortcut, name_fr, name_en
 - finan.BankStatement : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, voucher_ptr, printed_by, state, item_account, item_remark, last_item_date, balance1, balance2
-- finan.BankStatementItem : id, seqno, project, match, amount, dc, remark, account, partner, date, voucher
+- finan.BankStatementItem : id, seqno, project, match, amount, remark, account, partner, date, voucher
 - finan.JournalEntry : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, voucher_ptr, printed_by, project, state, item_account, item_remark, last_item_date
-- finan.JournalEntryItem : id, seqno, project, match, amount, dc, remark, account, partner, date, voucher
+- finan.JournalEntryItem : id, seqno, project, match, amount, remark, account, partner, date, voucher
 - finan.PaymentOrder : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, voucher_ptr, printed_by, state, item_account, item_remark, total, execution_date
-- finan.PaymentOrderItem : id, seqno, project, match, amount, dc, remark, account, partner, bank_account, voucher
+- finan.PaymentOrderItem : id, seqno, project, match, amount, remark, account, partner, bank_account, voucher
 - gfks.HelpText : id, content_type, field, help_text
 - households.Household : id, email, language, url, phone, gsm, fax, modified, created, country, city, zip_code, region, addr1, street_prefix, street, street_no, street_box, addr2, prefix, name, remarks, is_obsolete, activity, client_contact_type, payment_term, partner_ptr, type
 - households.Member : id, start_date, end_date, title, first_name, middle_name, last_name, gender, birth_date, role, person, household, dependency, primary
@@ -413,7 +413,7 @@ Database structure
 - ledger.Journal : id, ref, seqno, name, build_method, template, trade_type, voucher_type, journal_group, auto_check_clearings, auto_fill_suggestions, force_sequence, preliminary, account, partner, printed_name, dc, yearly_numbering, must_declare, uploads_volume, printed_name_fr, printed_name_en, name_fr, name_en, sepa_account
 - ledger.LedgerInfo : user, entry_date
 - ledger.MatchRule : id, account, journal
-- ledger.Movement : id, project, voucher, partner, seqno, account, amount, dc, match, cleared, value_date
+- ledger.Movement : id, project, voucher, partner, seqno, account, amount, match, cleared, value_date
 - ledger.PaymentTerm : id, ref, name, days, months, end_of_month, printed_text, printed_text_fr, printed_text_en, name_fr, name_en
 - ledger.Voucher : id, user, journal, entry_date, voucher_date, accounting_period, number, narration
 - newcomers.Broker : id, name
@@ -1073,8 +1073,8 @@ Here is the output of :func:`walk_menu_items
 - Erstempfang --> Verfügbare Begleiter : 3
 - Schuldnerberatung --> Klienten : 0
 - Schuldnerberatung --> Meine Budgets : 4
-- Berichte --> Buchhaltung --> Schuldner : 5
-- Berichte --> Buchhaltung --> Gläubiger : 10
+- Berichte --> Buchhaltung --> Schuldner : 0
+- Berichte --> Buchhaltung --> Gläubiger : 15
 - Berichte --> DSBE --> Benutzer und ihre Klienten : 3
 - Konfigurierung --> System --> Benutzer : 14
 - Konfigurierung --> System --> Hilfetexte : 6
@@ -1192,7 +1192,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> Buchhaltung --> Begleichungsregeln : 3
 - Explorer --> Buchhaltung --> Belege : 56
 - Explorer --> Buchhaltung --> Belegarten : 6
-- Explorer --> Buchhaltung --> Bewegungen : 602
+- Explorer --> Buchhaltung --> Bewegungen : 580
 - Explorer --> Buchhaltung --> Handelsarten : 3
 - Explorer --> Buchhaltung --> Journalgruppen : 5
 - Explorer --> Buchhaltung --> Rechnungen : 31
