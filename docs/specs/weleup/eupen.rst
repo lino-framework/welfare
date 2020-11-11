@@ -1037,12 +1037,12 @@ Here is the output of :func:`walk_menu_items
 - Büro --> Meine Ereignisse/Notizen : 9
 - Büro --> Meine Datenkontrollliste : 0
 - Kalender --> Meine Termine : 6
-- Kalender --> Überfällige Termine : 37
+- Kalender --> Überfällige Termine : 25
 - Kalender --> Meine unbestätigten Termine : 3
 - Kalender --> Meine Aufgaben : 1
 - Kalender --> Meine Gäste : 1
 - Kalender --> Meine Anwesenheiten : 1
-- Kalender --> Meine überfälligen Termine : 3
+- Kalender --> Meine überfälligen Termine : 1
 - Empfang --> Klienten : 30
 - Empfang --> Termine heute : 4
 - Empfang --> Wartende Besucher : 8

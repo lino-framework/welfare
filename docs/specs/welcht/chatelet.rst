@@ -878,13 +878,13 @@ Here is the output of :func:`walk_menu_items
 - Bureau --> Mon courrier sortant : 1
 - Bureau --> Mes Observations : 10
 - Bureau --> Mes problèmes de données : 0
-- Calendrier --> Mes rendez-vous : 6
-- Calendrier --> Rendez-vous dépassés : 74
+- Calendrier --> Mes rendez-vous : 7
+- Calendrier --> Rendez-vous dépassés : 62
 - Calendrier --> Mes rendez-vous à confirmer : 3
 - Calendrier --> Mes tâches : 1
 - Calendrier --> Mes visiteurs : 1
 - Calendrier --> Mes présences : 1
-- Calendrier --> Mes rendez-vous dépassés : 2
+- Calendrier --> Mes rendez-vous dépassés : 1
 - Réception --> Bénéficiaires : 30
 - Réception --> Rendez-vous aujourd'hui : 4
 - Réception --> Salle d'attente : 8

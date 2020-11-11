@@ -113,13 +113,13 @@ Here is what the :class:`lino_xl.lib.cal.EntriesByDay` table gives:
 ===========================
 Thu 22/05/2014 (22.05.2014)
 ===========================
-============ ======== ============================ ================ ============= ===================== ====== ===================================
- Start time   Client   Short description            Managed by       Assigned to   Calendar entry type   Room   Workflow
------------- -------- ---------------------------- ---------------- ------------- --------------------- ------ -----------------------------------
-                       Absent for private reasons   Rolf Rompen                    Absences                     [⚑] **? Suggested** → [☼] [☑] [☒]
- 08:30:00              Rencontre                    Mélanie Mélard                 External meetings            [⚑] **? Suggested** → [☼] [☑] [☒]
- 13:30:00              Frühstück                    Judith Jousten                 Internal meetings            [⚑] **☒ Cancelled**
-============ ======== ============================ ================ ============= ===================== ====== ===================================
+============ ======== ============================ ================== ============= ===================== ====== ===================================
+ Start time   Client   Short description            Managed by         Assigned to   Calendar entry type   Room   Workflow
+------------ -------- ---------------------------- ------------------ ------------- --------------------- ------ -----------------------------------
+                       Absent for private reasons   Patrick Paraneau                 Absences                     [⚑] **☑ Took place** → [☐]
+ 08:30:00              Treffen                      Rolf Rompen                      External meetings            [⚑] **☼ Published** → [☑] [☒] [☐]
+ 13:30:00              Petit-déjeuner               Romain Raffault                  Internal meetings            [⚑] **☒ Cancelled**
+============ ======== ============================ ================== ============= ===================== ====== ===================================
 <BLANKLINE>
 
 
@@ -130,26 +130,27 @@ Here is the :term:`My calendar entries` view for Alicia.
 
 >>> rt.login('alicia').show(cal.MyEntries, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-====================================== ========================= ======================== ============================ ===============================
- When                                   Client                    Calendar entry type      Short description            Workflow
--------------------------------------- ------------------------- ------------------------ ---------------------------- -------------------------------
- `Sat 24/05/2014 <Detail>`__                                      Absences                 Absent for private reasons   **☑ Took place** → [☐]
- `Mon 26/05/2014 at 09:40 <Detail>`__   JANSEN Jérémy (136)       Informational meetings   Diner                        **☐ Draft** → [☼] [☒]
- `Sun 01/06/2014 at 08:30 <Detail>`__                             Internal meetings        Diner                        **? Suggested** → [☼] [☒]
- `Sat 07/06/2014 at 13:30 <Detail>`__                             External meetings        Diner                        **☒ Cancelled**
- `Mon 23/06/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 1                 [▽] **? Suggested** → [☼] [☒]
- `Mon 14/07/2014 <Detail>`__            RADERMACHER Fritz (158)   Evaluation               Évaluation 6                 [▽] **? Suggested** → [☼] [☒]
- `Wed 23/07/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 2                 [▽] **? Suggested** → [☼] [☒]
- `Thu 14/08/2014 <Detail>`__            HILGERS Hildegard (133)   Evaluation               Évaluation 7                 [▽] **? Suggested** → [☼] [☒]
- `Mon 25/08/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 3                 [▽] **? Suggested** → [☼] [☒]
- `Thu 25/09/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 4                 [▽] **? Suggested** → [☼] [☒]
- `Tue 14/10/2014 <Detail>`__            RADERMACHER Fritz (158)   Evaluation               Évaluation 7                 [▽] **? Suggested** → [☼] [☒]
- `Mon 27/10/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 5                 [▽] **? Suggested** → [☼] [☒]
- `Thu 27/11/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 6                 [▽] **? Suggested** → [☼] [☒]
- `Mon 29/12/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 7                 [▽] **? Suggested** → [☼] [☒]
- `Thu 29/01/2015 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 8                 [▽] **? Suggested** → [☼] [☒]
- `Mon 02/03/2015 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation               Évaluation 9                 [▽] **? Suggested** → [☼] [☒]
-====================================== ========================= ======================== ============================ ===============================
+====================================== ========================= ===================== ============================ ===============================
+ When                                   Client                    Calendar entry type   Short description            Workflow
+-------------------------------------- ------------------------- --------------------- ---------------------------- -------------------------------
+ `Sat 24/05/2014 at 10:20 <Detail>`__                             Meeting               Séminaire                    **☐ Draft** → [☼] [☒]
+ `Sun 25/05/2014 <Detail>`__                                      Absences              Absent for private reasons   **☐ Draft** → [☼] [☒]
+ `Thu 29/05/2014 at 08:30 <Detail>`__                             Meeting               Consultation                 **☐ Draft** → [☼] [☒]
+ `Tue 03/06/2014 at 11:10 <Detail>`__                             Meeting               Rencontre                    **☐ Draft** → [☼] [☒]
+ `Mon 09/06/2014 at 09:40 <Detail>`__                             Meeting               Petit-déjeuner               **☐ Draft** → [☼] [☒]
+ `Mon 23/06/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 1                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 14/07/2014 <Detail>`__            RADERMACHER Fritz (158)   Evaluation            Évaluation 6                 [▽] **? Suggested** → [☼] [☒]
+ `Wed 23/07/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 2                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 14/08/2014 <Detail>`__            HILGERS Hildegard (133)   Evaluation            Évaluation 7                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 25/08/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 3                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 25/09/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 4                 [▽] **? Suggested** → [☼] [☒]
+ `Tue 14/10/2014 <Detail>`__            RADERMACHER Fritz (158)   Evaluation            Évaluation 7                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 27/10/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 5                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 27/11/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 6                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 29/12/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 7                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 29/01/2015 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 8                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 02/03/2015 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 9                 [▽] **? Suggested** → [☼] [☒]
+====================================== ========================= ===================== ============================ ===============================
 <BLANKLINE>
 
 
@@ -157,24 +158,22 @@ These are for Hubert:
 
 >>> rt.login('hubert').show(cal.MyEntries, language='en')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
-====================================== ======================== ===================== ============================ ===============================
- When                                   Client                   Calendar entry type   Short description            Workflow
--------------------------------------- ------------------------ --------------------- ---------------------------- -------------------------------
- `Sun 25/05/2014 <Detail>`__                                     Absences              Absent for private reasons   **☒ Cancelled**
- `Tue 27/05/2014 at 10:20 <Detail>`__                            Internal meetings     Abendessen                   **☼ Published** → [☒] [☐]
- `Wed 28/05/2014 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Évaluation 15                [▽] **? Suggested** → [☼] [☒]
- `Mon 02/06/2014 at 09:40 <Detail>`__                            External meetings     Abendessen                   **☐ Draft** → [☼] [☒]
- `Tue 03/06/2014 <Detail>`__            DENON Denis (180*)       Evaluation            Auswertung 1                 [▽] **? Suggested** → [☼] [☒]
+====================================== ========================= =============================== ============================ ===============================
+ When                                   Client                    Calendar entry type             Short description            Workflow
+-------------------------------------- ------------------------- ------------------------------- ---------------------------- -------------------------------
+ `Sat 24/05/2014 at 11:10 <Detail>`__   HILGERS Hildegard (133)   Internal meetings with client   Auswertung                   **? Suggested** → [☼] [☒]
+ `Mon 26/05/2014 <Detail>`__                                      Absences                        Absent for private reasons   **? Suggested** → [☼] [☒]
+ `Wed 28/05/2014 at 09:00 <Detail>`__   BRECHT Bernd (177)        Evaluation                      Évaluation 15                [▽] **? Suggested** → [☼] [☒]
+ `Fri 30/05/2014 at 09:40 <Detail>`__   JACOBS Jacqueline (137)   Internal meetings with client   Seminar                      **? Suggested** → [☼] [☒]
+ `Tue 03/06/2014 <Detail>`__            DENON Denis (180*)        Evaluation                      Auswertung 1                 [▽] **? Suggested** → [☼] [☒]
  ...
- `Thu 19/02/2015 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Auswertung 8                 [▽] **? Suggested** → [☼] [☒]
- `Tue 03/03/2015 <Detail>`__            DENON Denis (180*)       Evaluation            Auswertung 4                 [▽] **? Suggested** → [☼] [☒]
- `Mon 09/03/2015 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)   Evaluation            Auswertung 8                 [▽] **? Suggested** → [☼] [☒]
- `Thu 19/03/2015 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Auswertung 9                 [▽] **? Suggested** → [☼] [☒]
- `Thu 09/04/2015 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)   Evaluation            Auswertung 9                 [▽] **? Suggested** → [☼] [☒]
- `Mon 20/04/2015 at 09:00 <Detail>`__   BRECHT Bernd (177)       Evaluation            Auswertung 10                [▽] **? Suggested** → [☼] [☒]
-====================================== ======================== ===================== ============================ ===============================
+ `Tue 03/03/2015 <Detail>`__            DENON Denis (180*)        Evaluation                      Auswertung 4                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 09/03/2015 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)    Evaluation                      Auswertung 8                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 19/03/2015 at 09:00 <Detail>`__   BRECHT Bernd (177)        Evaluation                      Auswertung 9                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 09/04/2015 at 09:00 <Detail>`__   JEANÉMART Jérôme (181)    Evaluation                      Auswertung 9                 [▽] **? Suggested** → [☼] [☒]
+ `Mon 20/04/2015 at 09:00 <Detail>`__   BRECHT Bernd (177)        Evaluation                      Auswertung 10                [▽] **? Suggested** → [☼] [☒]
+====================================== ========================= =============================== ============================ ===============================
 <BLANKLINE>
-
 
 
 And these for Mélanie:
@@ -184,19 +183,15 @@ And these for Mélanie:
 ====================================== ============================= =============================== ============================ ===============================
  When                                   Client                        Calendar entry type             Short description            Workflow
 -------------------------------------- ----------------------------- ------------------------------- ---------------------------- -------------------------------
- `Thu 22/05/2014 at 08:30 <Detail>`__                                 External meetings               Rencontre                    **? Suggested** → [☼] [☑] [☒]
+ `Mon 26/05/2014 at 08:30 <Detail>`__   INGELS Irene (135)            External meetings with client   Interview                    **? Suggested** → [☼] [☒]
  `Mon 26/05/2014 at 09:00 <Detail>`__   ENGELS Edgar (129)            Evaluation                      Évaluation 3                 [▽] **? Suggested** → [☼] [☒]
- `Tue 27/05/2014 <Detail>`__                                          Absences                        Absent for private reasons   **☐ Draft** → [☼] [☒]
- `Wed 28/05/2014 at 13:30 <Detail>`__                                 Private                         Rencontre                    **☒ Cancelled**
- `Tue 03/06/2014 at 11:10 <Detail>`__                                 Meeting                         Rencontre                    **☑ Took place** → [☐]
+ `Wed 28/05/2014 <Detail>`__                                          Absences                        Absent for private reasons   **? Suggested** → [☼] [☒]
+ `Sat 31/05/2014 at 11:10 <Detail>`__   JONAS Josef (139)             External meetings with client   Première rencontre           **? Suggested** → [☼] [☒]
  `Thu 05/06/2014 at 09:00 <Detail>`__   LAZARUS Line (144)            Evaluation                      Évaluation 2                 [▽] **? Suggested** → [☼] [☒]
  `Thu 05/06/2014 at 09:00 <Detail>`__   DUBOIS Robin (179)            Evaluation                      Évaluation 15                [▽] **? Suggested** → [☼] [☒]
- `Mon 09/06/2014 at 10:20 <Detail>`__   LEFFIN Josefine (145)         Internal meetings with client   Rencontre                    **☼ Published** → [☒] [☐]
- `Fri 13/06/2014 <Detail>`__            MALMENDIER Marc (146)         Evaluation                      Évaluation 2                 [▽] **? Suggested** → [☼] [☒]
- `Mon 16/06/2014 at 09:00 <Detail>`__   MEESSEN Melissa (147)         Evaluation                      Évaluation 1                 [▽] **? Suggested** → [☼] [☒]
+ `Thu 05/06/2014 at 09:40 <Detail>`__   LASCHET Laura (143)           External meetings with client   Evaluation                   **? Suggested** → [☼] [☒]
+ `Wed 11/06/2014 at 13:30 <Detail>`__   MEESSEN Melissa (147)         External meetings with client   Séminaire                    **? Suggested** → [☼] [☒]
  ...
- `Mon 09/03/2015 at 09:00 <Detail>`__   ÖSTGES Otto (168)             Evaluation                      Évaluation 8                 [▽] **? Suggested** → [☼] [☒]
- `Thu 19/03/2015 at 09:00 <Detail>`__   RADERMACHER Guido (159)       Evaluation                      Évaluation 9                 [▽] **? Suggested** → [☼] [☒]
  `Thu 02/04/2015 at 09:00 <Detail>`__   DUBOIS Robin (179)            Evaluation                      Évaluation 8                 [▽] **? Suggested** → [☼] [☒]
  `Thu 09/04/2015 at 09:00 <Detail>`__   ÖSTGES Otto (168)             Evaluation                      Évaluation 9                 [▽] **? Suggested** → [☼] [☒]
  `Mon 20/04/2015 at 09:00 <Detail>`__   RADERMACHER Guido (159)       Evaluation                      Évaluation 10                [▽] **? Suggested** → [☼] [☒]
@@ -211,16 +206,17 @@ These are Alicia's appointments of the last two months:
 >>> pv = dict(start_date=dd.today(-15), end_date=dd.today(-1))
 >>> rt.login('alicia').show(cal.MyEntries, language='en',
 ...     param_values=pv)
-====================================== =========================== =============================== =================== ===================================
- When                                   Client                      Calendar entry type             Short description   Workflow
--------------------------------------- --------------------------- ------------------------------- ------------------- -----------------------------------
- `Wed 07/05/2014 at 09:00 <Detail>`__   DA VINCI David (165)        Evaluation                      Évaluation 15       [▽] **? Suggested** → [☼] [☑] [☒]
- `Thu 08/05/2014 at 13:30 <Detail>`__   DERICUM Daniel (121)        Internal meetings with client   Diner               **☒ Cancelled**
- `Wed 14/05/2014 <Detail>`__            HILGERS Hildegard (133)     Evaluation                      Évaluation 6        [▽] **? Suggested** → [☼] [☑] [☒]
- `Wed 14/05/2014 at 11:10 <Detail>`__   EVERTZ Bernd (126)          Evaluation                      Diner               **☑ Took place** → [☐]
- `Tue 20/05/2014 at 10:20 <Detail>`__   GERNEGROSS Germaine (131)   External meetings with client   Diner               **☼ Published** → [☑] [☒] [☐]
-====================================== =========================== =============================== =================== ===================================
+====================================== ========================= ===================== ==================== ===================================
+ When                                   Client                    Calendar entry type   Short description    Workflow
+-------------------------------------- ------------------------- --------------------- -------------------- -----------------------------------
+ `Wed 07/05/2014 at 09:00 <Detail>`__   DA VINCI David (165)      Evaluation            Évaluation 15        [▽] **? Suggested** → [☼] [☑] [☒]
+ `Thu 08/05/2014 at 11:10 <Detail>`__                             Meeting               Interview            **☒ Cancelled**
+ `Tue 13/05/2014 at 09:40 <Detail>`__                             Meeting               Première rencontre   **☑ Took place** → [☐]
+ `Wed 14/05/2014 <Detail>`__            HILGERS Hildegard (133)   Evaluation            Évaluation 6         [▽] **? Suggested** → [☼] [☑] [☒]
+ `Sun 18/05/2014 at 13:30 <Detail>`__                             Meeting               Evaluation           **☼ Published** → [☑] [☒] [☐]
+====================================== ========================= ===================== ==================== ===================================
 <BLANKLINE>
+
 
 
 
@@ -235,7 +231,6 @@ Overdue appointments
  `Évaluation 15 (07.04.2014 09:00) with RADERMACHER Alfons (153) <Detail>`__   `ISIP#17 (Alfons RADERMACHER) <Detail>`__                    Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
  `Évaluation 14 (07.04.2014 09:00) with DA VINCI David (165) <Detail>`__       `ISIP#22 (David DA VINCI) <Detail>`__                        Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
  `Évaluation 5 (14.04.2014) with RADERMACHER Fritz (158) <Detail>`__           `Art60§7 job supplyment#11 (Fritz RADERMACHER) <Detail>`__   Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
- `Diner (02.05.2014 08:30) <Detail>`__                                                                                                      Meeting               **? Suggested** → [☼] [☑] [☒]
  `Évaluation 15 (07.05.2014 09:00) with DA VINCI David (165) <Detail>`__       `ISIP#22 (David DA VINCI) <Detail>`__                        Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
  `Évaluation 6 (14.05.2014) with HILGERS Hildegard (133) <Detail>`__           `Art60§7 job supplyment#5 (Hildegard HILGERS) <Detail>`__    Evaluation            [▽] **? Suggested** → [☼] [☑] [☒]
 ============================================================================= ============================================================ ===================== ===================================

@@ -39,21 +39,20 @@ it is much work to maintain.
 
 >>> links = soup.find_all('a')
 >>> len(links)
-125
+113
 
 >>> print(links[0].text)
 Suchen
 
 >>> tables = soup.find_all('table')
 >>> len(tables)
-4
+3
 
 >>> for h in soup.find_all('h2'):
 ...     print(h.text.strip())
 Benutzer und ihre Klienten ⏏
 Wartende Besucher ⏏
 Meine Termine  ⏏
-Meine überfälligen Termine  ⏏
 Meine Benachrichtigungen ✓ ⏏
 
 
@@ -68,7 +67,6 @@ Meine Benachrichtigungen ✓ ⏏
 Users with their Clients ⏏
 Waiting visitors ⏏
 My appointments  ⏏
-My overdue appointments  ⏏
 My Notification messages ✓ ⏏
 
 

@@ -75,24 +75,22 @@ the responsible user.
 
 
 >>> rt.show(checkdata.AllProblems, language="en")
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-================== =========================================================== ============================================================ ========================================
- Responsible        Database object                                             Message                                                      Checker
------------------- ----------------------------------------------------------- ------------------------------------------------------------ ----------------------------------------
- Robin Rood         *Christi Himmelfahrt (29.05.2014)*                          Event conflicts with 4 other events.                         Check for conflicting calendar entries
- Robin Rood         *Pfingsten (09.06.2014)*                                    Event conflicts with 2 other events.                         Check for conflicting calendar entries
- Patrick Paraneau   *Beratung (29.05.2014 08:30)*                               Event conflicts with Christi Himmelfahrt (29.05.2014).       Check for conflicting calendar entries
- Judith Jousten     *Frühstück (09.06.2014 09:40)*                              Event conflicts with Pfingsten (09.06.2014).                 Check for conflicting calendar entries
- Mélanie Mélard     *Rencontre (09.06.2014 10:20) with LEFFIN Josefine (145)*   Event conflicts with Pfingsten (09.06.2014).                 Check for conflicting calendar entries
- Romain Raffault    *Absent for private reasons (29.05.2014)*                   Event conflicts with Christi Himmelfahrt (29.05.2014).       Check for conflicting calendar entries
-                    *DEMEULENAERE Dorothée (122)*                               Ähnliche Klienten: DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Check for similar clients
- Hubert Huppertz    *DOBBELSTEIN-DEMEULENAERE Dorothée (123)*                   Ähnliche Klienten: DEMEULENAERE Dorothée (122)               Check for similar clients
- Mélanie Mélard     *DOBBELSTEIN Dorothée (124)*                                Ähnliche Klienten: DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Check for similar clients
- Caroline Carnol    *FAYMONVILLE Luc (130*)*                                    Begleitet und veraltet zugleich.                             Check coachings
- Caroline Carnol    *DENON Denis (180*)*                                        Begleitet und veraltet zugleich.                             Check coachings
-================== =========================================================== ============================================================ ========================================
-<BLANKLINE>
-
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+================== ========================================================= ============================================================ ========================================
+ Responsible        Database object                                           Message                                                      Checker
+------------------ --------------------------------------------------------- ------------------------------------------------------------ ----------------------------------------
+ Robin Rood         *Christi Himmelfahrt (29.05.2014)*                        Event conflicts with 4 other events.                         Check for conflicting calendar entries
+ Robin Rood         *Pfingsten (09.06.2014)*                                  Event conflicts with 2 other events.                         Check for conflicting calendar entries
+ Alicia Allmanns    *Consultation (29.05.2014 08:30)*                         Event conflicts with Christi Himmelfahrt (29.05.2014).       Check for conflicting calendar entries
+ Alicia Allmanns    *Petit-déjeuner (09.06.2014 09:40)*                       Event conflicts with Pfingsten (09.06.2014).                 Check for conflicting calendar entries
+ Hubert Huppertz    *Treffen (09.06.2014 10:20) with LEFFIN Josefine (145)*   Event conflicts with Pfingsten (09.06.2014).                 Check for conflicting calendar entries
+ Patrick Paraneau   *Absent for private reasons (29.05.2014)*                 Event conflicts with Christi Himmelfahrt (29.05.2014).       Check for conflicting calendar entries
+                    *DEMEULENAERE Dorothée (122)*                             Ähnliche Klienten: DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Check for similar clients
+ Hubert Huppertz    *DOBBELSTEIN-DEMEULENAERE Dorothée (123)*                 Ähnliche Klienten: DEMEULENAERE Dorothée (122)               Check for similar clients
+ Mélanie Mélard     *DOBBELSTEIN Dorothée (124)*                              Ähnliche Klienten: DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Check for similar clients
+ Caroline Carnol    *FAYMONVILLE Luc (130*)*                                  Begleitet und veraltet zugleich.                             Check coachings
+ Caroline Carnol    *DENON Denis (180*)*                                      Begleitet und veraltet zugleich.                             Check coachings
+================== ========================================================= ============================================================ ========================================
 
 Filtering data problems
 =======================
@@ -125,17 +123,16 @@ Data problems assigned to me` to see a list of all problems
 assigned to you.
 
 ..
-    >>> show_menu_path(checkdata.MyProblems, language="en")
-    Office --> Data problems assigned to me
+>>> show_menu_path(checkdata.MyProblems, language="en")
+Office --> Data problems assigned to me
 
 >>> print(rt.login('melanie').user.language)
 fr
 >>> rt.login('melanie').show(checkdata.MyProblems, language="en")
-... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
-================ ====================================================================== ============================================================ ========================================
- Responsible      Database object                                                        Message                                                      Checker
----------------- ---------------------------------------------------------------------- ------------------------------------------------------------ ----------------------------------------
- Mélanie Mélard   `Rencontre (09.06.2014 10:20) with LEFFIN Josefine (145) <Detail>`__   Event conflicts with Pfingsten (09.06.2014).                 Check for conflicting calendar entries
- Mélanie Mélard   `DOBBELSTEIN Dorothée (124) <Detail>`__                                Ähnliche Klienten: DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Check for similar clients
-================ ====================================================================== ============================================================ ========================================
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
+================ ========================================= ============================================================ ===========================
+ Responsible      Database object                           Message                                                      Checker
+---------------- ----------------------------------------- ------------------------------------------------------------ ---------------------------
+ Mélanie Mélard   `DOBBELSTEIN Dorothée (124) <Detail>`__   Ähnliche Klienten: DOBBELSTEIN-DEMEULENAERE Dorothée (123)   Check for similar clients
+================ ========================================= ============================================================ ===========================
 <BLANKLINE>
