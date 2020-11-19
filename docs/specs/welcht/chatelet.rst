@@ -226,7 +226,7 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
  debts.Budget                   debts.Budgets                   11        14
  debts.Entry                    debts.Entries                   16        716
  debts.Group                    debts.Groups                    8         8
- esf.ClientSummary              esf.Summaries                   23        189
+ esf.ClientSummary              esf.Summaries                   24        189
  excerpts.Excerpt               excerpts.Excerpts               12        71
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        19
  gfks.HelpText                  gfks.HelpTexts                  4         5
@@ -446,7 +446,7 @@ Each window layout defines a given set of fields.
 - debts.Budgets.insert : partner, date, user
 - debts.Groups.detail : ref, name, name_nl, name_de, name_en, id, account_type, entries_layout
 - debts.Groups.insert : name, name_nl, name_de, name_en, account_type, ref
-- esf.Summaries.detail : master, year, month, children_at_charge, certified_handicap, other_difficulty, id, education_level, result, remark, results
+- esf.Summaries.detail : master, year, month, children_at_charge, certified_handicap, other_difficulty, user_modified, education_level, result, remark, id, results
 - excerpts.ExcerptTypes.detail : id, name, name_nl, name_de, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_nl, name_de, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content

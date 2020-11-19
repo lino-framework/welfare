@@ -43,13 +43,13 @@ Client summaries
 ================
 
 A **client summary** is a database entry holding statistical information for a
-given year about a given client.  Client summaries are temporary generated
-database content. Every client summary can be printed as a document called
-"Fiche stagiaire".
+given year about a given client.  Client summaries are generated database
+content. Every client summary can be printed as a document called "Fiche
+stagiaire".
 
 .. class:: ClientSummary
 
-    The Django model which represents a *client summary*.
+    The Django model that represents a *client summary*.
 
     It is a :class:`lino.modlib.summaries.MonthlySlaveSummary` and
     :class:`lino_xl.lib.excerpts.Certifiable`.

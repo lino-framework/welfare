@@ -1,11 +1,7 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016-2019 Rumma & Ko Ltd
+# Copyright 2016-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
-from __future__ import unicode_literals
-from __future__ import print_function
-
-from builtins import str
 from django.db import models
 from django.conf import settings
 
@@ -13,9 +9,9 @@ from lino.api import rt, dd, _
 from lino import mixins
 from etgen.html import E
 from lino.modlib.summaries.mixins import MonthlySlaveSummary
-
-from lino_welfare.modlib.integ.roles import IntegUser
 from lino_xl.lib.excerpts.mixins import Certifiable
+from lino_welfare.modlib.integ.roles import IntegUser
+
 from .choicelists import ParticipationCertificates, StatisticalFields
 
 
@@ -40,6 +36,23 @@ class ClientSummary(Certifiable, MonthlySlaveSummary):
     remark = models.CharField(
         _("Remark"),
         blank=True, max_length=200)
+    user_modified = models.BooleanField(
+        _("User modified"), default=False)
+
+    def before_ui_save(self, ar, cw):
+        # Emits notification about the change to every observer.
+        super(ClientSummary, self).after_ui_save(ar, cw)
+        if cw and not self.user_modified:
+            for fn, old, new in cw.get_updates():
+                if fn in StatisticalFields.field_names:
+                    self.user_modified = True
+                    break
+
+    # def disabled_fields(self, ar):
+    #     s = super(ClientSummary, self).disabled_fields(ar)
+    #     if not self.user_modified:
+    #         s |= StatisticalFields.field_names
+    #     return s
 
     # @classmethod
     # def get_summary_master_model(cls):
@@ -72,6 +85,8 @@ class ClientSummary(Certifiable, MonthlySlaveSummary):
             yield (self.collect_from_jobs_contract, qs)
 
     def reset_summary_data(self):
+        if self.user_modified:
+            return
         for sf in StatisticalFields.objects():
             setattr(self, sf.field_name, sf.field.get_default())
 
@@ -109,8 +124,8 @@ class Summaries(dd.Table):
     model = 'esf.ClientSummary'
     detail_layout = """
     master year month
-    children_at_charge certified_handicap other_difficulty id
-    education_level result remark
+    children_at_charge certified_handicap other_difficulty user_modified
+    education_level result remark id
     results
     """
     allow_create = False
@@ -142,7 +157,6 @@ class SummariesByClient(Summaries):
         for sf in StatisticalFields.items():
             if sf.field_name is not None:
                 cls.column_names += ' ' + sf.field_name
-        
+
 dd.inject_field(
     'pcsw.Client', 'has_esf', models.BooleanField(_("ESF data"), default=True))
-

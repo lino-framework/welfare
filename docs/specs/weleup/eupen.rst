@@ -379,7 +379,7 @@ Database structure
 - debts.Entry : id, seqno, budget, account_type, account, partner, amount, actor, circa, distribute, todo, remark, description, periods, monthly_rate, bailiff
 - debts.Group : id, name, ref, account_type, entries_layout, name_fr, name_en
 - dupable_clients.Word : id, word, owner
-- esf.ClientSummary : id, printed_by, year, month, esf10, esf20, esf21, esf30, esf40, esf41, esf42, esf43, esf44, esf50, esf60, esf70, master, education_level, children_at_charge, certified_handicap, other_difficulty, result, remark
+- esf.ClientSummary : id, printed_by, year, month, esf10, esf20, esf21, esf30, esf40, esf41, esf42, esf43, esf44, esf50, esf60, esf70, master, education_level, children_at_charge, certified_handicap, other_difficulty, result, remark, user_modified
 - excerpts.Excerpt : id, project, build_time, build_method, user, owner_type, owner_id, company, contact_person, contact_role, excerpt_type, language
 - excerpts.ExcerptType : id, name, build_method, template, attach_to_email, email_template, certifying, remark, body_template, content_type, primary, backward_compat, print_recipient, print_directly, shortcut, name_fr, name_en
 - finan.BankStatement : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, voucher_ptr, printed_by, state, item_account, item_remark, last_item_date, balance1, balance2
@@ -566,7 +566,7 @@ Each window layout defines a given set of fields.
 - debts.Budgets.insert : partner, date, user
 - debts.Groups.detail : ref, name, name_fr, name_en, id, account_type, entries_layout
 - debts.Groups.insert : name, name_fr, name_en, account_type, ref
-- esf.Summaries.detail : master, year, month, children_at_charge, certified_handicap, other_difficulty, id, education_level, result, remark, results
+- esf.Summaries.detail : master, year, month, children_at_charge, certified_handicap, other_difficulty, user_modified, education_level, result, remark, id, results
 - excerpts.ExcerptTypes.detail : id, name, name_fr, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_fr, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content

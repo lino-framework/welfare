@@ -1,8 +1,7 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2016-2019 Rumma & Ko Ltd
+# Copyright 2016-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
-from __future__ import unicode_literals
 import datetime
 
 from django.db import models
@@ -72,7 +71,7 @@ class HoursField(StatisticalField):
         if sd and ed:
             ssd = datetime.date(summary.year, summary.month or 1, 1)
             sd = max(sd, ssd)
-            
+
             sed = last_day_of_month(
                 datetime.date(summary.year, summary.month or 12, 1))
             ed = min(ed, sed)
@@ -110,7 +109,7 @@ class GuestHoursEvent(HoursField):
 class GuestHoursFixed(HoursField):
 
     hours_per_guest = Duration('1:00')
-    
+
     def collect_from_guest(self, obj, summary):
         if obj.event.event_type is None:
             return
@@ -142,6 +141,7 @@ class StatisticalFields(dd.ChoiceList):
     column_names = 'value name text type'
     item_class = StatisticalField
     required_roles = dd.login_required(dd.SiteStaff)
+    field_names = None  # to be initialized during pre_analyze
 
 add = StatisticalFields.add_item_instance
 
@@ -189,9 +189,12 @@ add(Art60Hours('70', "60§7", _("Art 60§7 job supplyment")))
 
 @dd.receiver(dd.pre_analyze)
 def inject_statistical_fields(sender, **kw):
+    field_names = set()
     for sf in StatisticalFields.items():
         if sf.field_name is not None:
             dd.inject_field('esf.ClientSummary', sf.field_name, sf.field)
+            field_names.add(sf.field_name)
+    StatisticalFields.field_names = frozenset(field_names)
 
 dd.inject_field(
     'cal.EventType', 'esf_field', StatisticalFields.field(blank=True))
