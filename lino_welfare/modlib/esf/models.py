@@ -123,7 +123,7 @@ class ClientSummary(Certifiable, MonthlySlaveSummary):
 class Summaries(dd.Table):
     model = 'esf.ClientSummary'
     detail_layout = """
-    master year month
+    master year #month
     children_at_charge certified_handicap other_difficulty user_modified
     education_level result remark id
     results

@@ -122,7 +122,6 @@ In the web interface you can select :menuselection:`Office -->
 Data problems assigned to me` to see a list of all problems
 assigned to you.
 
-..
 >>> show_menu_path(checkdata.MyProblems, language="en")
 Office --> Data problems assigned to me
 
