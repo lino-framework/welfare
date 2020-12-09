@@ -681,7 +681,10 @@ proportionally distributing the `Distributable amount` among the debtors.
 
         for e in entries:
             if e.amount is not None:
-                e.dist_perc = 100 * e.amount / total
+                if total:
+                    e.dist_perc = 100 * e.amount / total
+                else:
+                    e.dist_perc = total
                 #~ if e.dist_perc == 0:
                     #~ e.dist_amount = decimal.Decimal(0)
                 #~ else:
