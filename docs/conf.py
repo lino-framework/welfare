@@ -21,8 +21,8 @@ extensions = []
 from lino.sphinxcontrib import configure
 #configure(globals(), 'lino_welfare.projects.eupen.settings.demo')
 #configure(globals(), 'lino_welfare.projects.eupen.settings.doctests')
-#configure(globals(), 'lino_welfare.projects.std.settings.doctests')
-configure(globals(), 'lino_book.projects.min1.settings.doctests')
+configure(globals(), 'lino_welfare.projects.gerd.settings.doctests')
+# configure(globals(), 'lino_book.projects.min1.settings.doctests')
 #configure(globals(), 'lino.projects.std.settings')
 # configure(globals())
 

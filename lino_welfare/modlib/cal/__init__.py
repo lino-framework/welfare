@@ -12,7 +12,6 @@ Lino Welfare extension of :mod:`lino_xl.lib.cal`
     fixtures.demo2
 
 
-
 """
 
 from lino_xl.lib.cal import Plugin

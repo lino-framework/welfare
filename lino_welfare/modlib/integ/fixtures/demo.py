@@ -41,7 +41,7 @@ ONE_DAY = datetime.timedelta(days=1)
 
 
 def objects():
-    
+
     DSBE = rt.models.coachings.CoachingType.objects.get(
         id=isip.COACHINGTYPE_DSBE)
 
@@ -103,6 +103,7 @@ def objects():
             kw.update(study_type=STUDY_TYPES.pop())
         kw.update(
             type=ct,
+            duties_pcsw="Help with administrative issues.",
             applies_until=af + datetime.timedelta(
                 days=ISIP_DURATIONS.pop()))
         if not 'type' in kw:
@@ -226,7 +227,7 @@ def objects():
             g = Granting(**kw)
             g.after_ui_save(None, None)
             yield g
-        
+
     if dd.is_installed('immersion'):
         # Extra loop on immersion trainings to print one of every type
         ExcerptType = rt.models.excerpts.ExcerptType

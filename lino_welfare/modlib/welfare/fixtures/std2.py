@@ -1,9 +1,6 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2015 Rumma & Ko Ltd
+# Copyright 2014-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
-
-from __future__ import unicode_literals
-
 
 from lino.utils.instantiator import Instantiator
 
@@ -18,7 +15,7 @@ def excerpt_types():  # also used for migration to 1.1.11
     attType = Instantiator(ExcerptType,
                            # build_method='appypdf',
                            email_template='Default.eml.html').build
-    
+
     Shortcuts = rt.models.excerpts.Shortcuts
 
     yield attType(

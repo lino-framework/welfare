@@ -17,7 +17,7 @@ from lino_welfare.modlib.integ.roles import IntegrationStaff, IntegUser
 
 
 class Proof(dd.Model):
-    
+
     class Meta:
         app_label = 'active_job_search'
         verbose_name = _("Proof of search")
@@ -51,6 +51,15 @@ class ProofsByClient(Proofs):
     column_names = "date company spontaneous response *"
     auto_fit_column_widths = True
 
+# if dd.is_installed('active_job_search'):
+    # When executing a py2rst directive under Sphinx, this module has been
+    # imported by autodoc even when DJANGO_SETTINGS_MODULE points to some demo
+    # project that doesn't use this plugin but has a pcsw plugin.  And in that
+    # case, the fields would get added to the Django model and cause a database
+    # error when trying to get a pcsw.Client.
+
+    # no longer needed because we simply no longer include the models.py in the
+    # autosummary
 
 dd.inject_field(
     'pcsw.Client', 'geographic_area',
@@ -64,5 +73,3 @@ dd.inject_field(
     models.TextField(
         _("Child custody"), blank=True,
         help_text=_("Notes concerning child custody.")))
-
-

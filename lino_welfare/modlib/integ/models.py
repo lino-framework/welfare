@@ -1,16 +1,13 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2018 Rumma & Ko Ltd
+# Copyright 2013-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """
 The :xfile:`models` module for the :mod:`lino_welfare.modlib.integ` app.
 
 """
-from __future__ import unicode_literals
 
-from builtins import str
-import logging
-logger = logging.getLogger(__name__)
+import logging ; logger = logging.getLogger(__name__)
 
 import datetime
 
@@ -487,7 +484,7 @@ class JobsContractsPerUserAndContractType(ContractsPerUserAndContractType):
 
 class StudyTypesAndContracts(cv.StudyTypes, dd.VentilatingTable):
     label = _("PIIS et types de formation")
-    help_text = _("""Nombre de PIIS actifs par 
+    help_text = _("""Nombre de PIIS actifs par
     type de formation et type de contrat.""")
     contracts_table = isip.Contracts
 
@@ -525,7 +522,7 @@ class StudyTypesAndContracts(cv.StudyTypes, dd.VentilatingTable):
 
 class CompaniesAndContracts(contacts.Companies, dd.VentilatingTable):
     label = _("Organisations externes et contrats")
-    help_text = _("""Nombre de PIIS actifs par 
+    help_text = _("""Nombre de PIIS actifs par
     organisation externe et type de contrat.""")
     contracts_table = isip.Contracts
     contract_types = isip.ContractType

@@ -964,9 +964,9 @@ You revoke your signatore from this confirmation.
 Templates
 =========
 
-Here is a list of the templates defined in the `Aids` module.
+Here is a list of the templates used by this plugin.
 
-..  Building the following requires the lino_welfare.projects.std
+..  Building the following requires the lino_welfare.projects.gerd
     database to be populated.
 
 .. py2rst::
@@ -980,10 +980,12 @@ Here is a list of the templates defined in the `Aids` module.
     from rstgen import header
     from lino.api.shell import *
 
+    url_tpl = "https://github.com/lino-framework/welfare/blob/master/lino_welfare/modlib/aids/config/aids/Confirmation/{}"
+
     def f(name):
         print("\n\n.. xfile:: %s\n\n" % name)
-
-        print("\nSee the source code :file:`lino_welfare/modlib/aids/config/aids/Confirmation/%s>`" % name)
+        url = url_tpl.format(name)
+        print("\nSee the `source code <{}>`__\n".format(url))
 
         try:
             at = aids.AidType.objects.get(body_template=name)
@@ -993,12 +995,12 @@ Here is a list of the templates defined in the `Aids` module.
 
         qs = at.confirmation_type.model.objects.all()
         qs = qs.filter(granting__aid_type=at, printed_by__isnull=False)
-        print("or %d example documents:" % qs.count())
+        print("%d example documents:" % qs.count())
 
         items = []
         for conf in qs:
             ex = conf.printed_by
-            url = "http://de.welfare.lino-framework.org/dl/excerpts/"
+            url = "https://de.welfare.lino-framework.org/dl/excerpts/"
             url += ex.filename_root()
             url += ex.get_build_method().target_ext
             items.append("`%s <%s>`__" % (conf, url))
@@ -1019,6 +1021,6 @@ Here is a list of the templates defined in the `Aids` module.
         if not name.startswith("#"):
             f(name)
 
-
   except Exception as e:
+    raise
     print("Oops: %s" % e)

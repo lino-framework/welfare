@@ -144,8 +144,10 @@ def objects():
             yield Granting(**kw)
             urgent_aid_generated += 1
 
-    if False:  # no need to print them all.
+    if True:   # no need to print them all.
                # lino_welfare.modlib.welfare.fixtures.demo2 is enough.
+               # we need them for specs/aids/index.rst
+        used_templates = set()
         ses = rt.login('theresia')
         for at in rt.models.aids.AidType.objects.exclude(
                 confirmation_type=''):
@@ -153,9 +155,13 @@ def objects():
             et = ExcerptType.get_for_model(M)
             qs = M.objects.filter(granting__aid_type=at)
             for obj in qs:
-                ses.selected_rows = [obj]
-                yield et.get_or_create_excerpt(ses)
-            
+                if at.body_template in used_templates:
+                    break
+                else:
+                    ses.selected_rows = [obj]
+                    yield et.get_or_create_excerpt(ses)
+                    used_templates.add(at.body_template)
+
     def person2client(f, l):
         obj = Person.objects.get(first_name=f, last_name=l)
         mti.insert_child(obj, Client)
@@ -179,4 +185,3 @@ def objects():
     et = ExcerptType.get_for_model(M)
     ses.selected_rows = [conf]
     yield et.get_or_create_excerpt(ses)
-
