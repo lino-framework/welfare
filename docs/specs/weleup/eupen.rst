@@ -543,6 +543,7 @@ Each window layout defines a given set of fields.
 - countries.Countries.detail : isocode, name, name_fr, name_en, short_code, inscode, actual_country
 - countries.Countries.insert : isocode, inscode, name, name_fr, name_en
 - countries.Places.detail : name, name_fr, name_en, country, inscode, zip_code, parent, type, id
+- countries.Places.insert : name, name_fr, name_en, country, zip_code, type, parent
 - cv.Durations.detail : id, name, name_fr, name_en
 - cv.EducationLevels.detail : name, name_fr, name_en, is_study, is_training
 - cv.Experiences.detail : person, company, country, city, sector, function, title, status, duration, regime, is_training, start_date, end_date, duration_text, termination_reason, remarks
@@ -566,7 +567,7 @@ Each window layout defines a given set of fields.
 - debts.Budgets.insert : partner, date, user
 - debts.Groups.detail : ref, name, name_fr, name_en, id, account_type, entries_layout
 - debts.Groups.insert : name, name_fr, name_en, account_type, ref
-- esf.Summaries.detail : master, year, month, children_at_charge, certified_handicap, other_difficulty, user_modified, education_level, result, remark, id, results
+- esf.Summaries.detail : master, year, children_at_charge, certified_handicap, other_difficulty, user_modified, education_level, result, remark, id, results
 - excerpts.ExcerptTypes.detail : id, name, name_fr, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_fr, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
@@ -758,6 +759,7 @@ Each window layout is **viewable** by a given set of user types.
 - countries.Countries.detail : visible for 110 120 210 410 420 800 admin 910
 - countries.Countries.insert : visible for 110 120 210 410 420 800 admin 910
 - countries.Places.detail : visible for 110 120 210 410 420 800 admin 910
+- countries.Places.insert : visible for 110 120 210 410 420 800 admin 910
 - cv.Durations.detail : visible for 110 120 420 admin 910
 - cv.EducationLevels.detail : visible for 110 120 420 admin 910
 - cv.Experiences.detail : visible for 110 120 420 admin 910
@@ -1157,7 +1159,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Datentests : 17
 - Explorer --> System --> Datenprobleme : 11
 - Explorer --> Eigenschaften --> Eigenschaften : 24
-- Explorer --> Büro --> Auszüge : 69
+- Explorer --> Büro --> Auszüge : 76
 - Explorer --> Büro --> Upload-Dateien : 16
 - Explorer --> Büro --> Upload-Bereiche : 2
 - Explorer --> Büro --> E-Mail-Ausgänge : 1

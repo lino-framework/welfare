@@ -227,7 +227,7 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
  debts.Entry                    debts.Entries                   16        716
  debts.Group                    debts.Groups                    8         8
  esf.ClientSummary              esf.Summaries                   24        189
- excerpts.Excerpt               excerpts.Excerpts               12        71
+ excerpts.Excerpt               excerpts.Excerpts               12        78
  excerpts.ExcerptType           excerpts.ExcerptTypes           18        19
  gfks.HelpText                  gfks.HelpTexts                  4         5
  households.Household           households.Households           27        14
@@ -409,6 +409,7 @@ Each window layout defines a given set of fields.
 - countries.Countries.detail : isocode, name, name_nl, name_de, name_en, short_code, inscode, actual_country
 - countries.Countries.insert : isocode, inscode, name, name_nl, name_de, name_en
 - countries.Places.detail : name, name_nl, name_de, name_en, country, inscode, zip_code, parent, type, id
+- countries.Places.insert : name, name_nl, name_de, name_en, country, zip_code, type, parent
 - courses.Activities.detail : line, teacher, start_date, start_time, end_time, end_date, room, workflow_buttons, id, user, name, description, description_nl, description_de, description_en, max_events, max_date, every_unit, every, positions, monday, tuesday, wednesday, thursday, friday, saturday, sunday, enrolments_until, max_places, confirmed, free_places, print_actions, EnrolmentsByCourse
 - courses.Activities.insert : line, teacher, name, start_date
 - courses.Activities.print_presence_sheet : start_date, end_date, show_remarks, show_states
@@ -446,7 +447,7 @@ Each window layout defines a given set of fields.
 - debts.Budgets.insert : partner, date, user
 - debts.Groups.detail : ref, name, name_nl, name_de, name_en, id, account_type, entries_layout
 - debts.Groups.insert : name, name_nl, name_de, name_en, account_type, ref
-- esf.Summaries.detail : master, year, month, children_at_charge, certified_handicap, other_difficulty, user_modified, education_level, result, remark, id, results
+- esf.Summaries.detail : master, year, children_at_charge, certified_handicap, other_difficulty, user_modified, education_level, result, remark, id, results
 - excerpts.ExcerptTypes.detail : id, name, name_nl, name_de, name_en, content_type, build_method, template, body_template, email_template, shortcut, primary, print_directly, certifying, print_recipient, backward_compat, attach_to_email
 - excerpts.ExcerptTypes.insert : name, name_nl, name_de, name_en, content_type, primary, certifying, build_method, template, body_template
 - excerpts.Excerpts.detail : id, excerpt_type, project, user, build_method, company, contact_person, language, owner, build_time, body_template_content
@@ -615,6 +616,7 @@ Each window layout is **viewable** by a given set of user types.
 - countries.Countries.detail : visible for 110 120 210 410 420 800 admin 910
 - countries.Countries.insert : visible for 110 120 210 410 420 800 admin 910
 - countries.Places.detail : visible for 110 120 210 410 420 800 admin 910
+- countries.Places.insert : visible for 110 120 210 410 420 800 admin 910
 - courses.Activities.detail : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
 - courses.Activities.insert : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
 - courses.Activities.print_presence_sheet : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
@@ -772,16 +774,6 @@ avant de les exécuter, Lino ouvre une fenêtre à part pour demander des
 options.
 
 >>> show_dialog_actions()  #doctest: +REPORT_UDIFF
-- polls.AllResponses.toggle_choice : toggle_choice
-  (main) [visible for all]: **Question** (question), **Choix** (choice)
-- polls.MyResponses.toggle_choice : toggle_choice
-  (main) [visible for all]: **Question** (question), **Choix** (choice)
-- polls.Responses.toggle_choice : toggle_choice
-  (main) [visible for all]: **Question** (question), **Choix** (choice)
-- polls.ResponsesByPartner.toggle_choice : toggle_choice
-  (main) [visible for all]: **Question** (question), **Choix** (choice)
-- polls.ResponsesByPoll.toggle_choice : toggle_choice
-  (main) [visible for all]: **Question** (question), **Choix** (choice)
 - art61.ContractTypes.merge_row : Fusionner
   (main) [visible for all]: **vers...** (merge_to), **Raison** (reason)
 - cal.EventTypes.merge_row : Fusionner
@@ -994,7 +986,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> Types de contenu : 136
 - Explorateur --> Système --> Tests de données : 13
 - Explorateur --> Système --> Problèmes de données : 0
-- Explorateur --> Bureau --> Extraits : 71
+- Explorateur --> Bureau --> Extraits : 78
 - Explorateur --> Bureau --> Fichiers téléchargés : 6
 - Explorateur --> Bureau --> Domaines de téléchargement : 2
 - Explorateur --> Bureau --> Mails envoyés : 1
