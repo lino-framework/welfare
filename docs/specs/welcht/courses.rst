@@ -47,14 +47,14 @@ Ateliers
 ============ ============= ============================= ============= ======= ===============
 <BLANKLINE>
 
->>> print(rt.models.courses.Courses.params_layout.main)
+>>> print(rt.models.courses.Activities.params_layout.main)
 ... #doctest: +NORMALIZE_WHITESPACE +REPORT_UDIFF
 topic line user teacher state
     room can_enroll:10 start_date end_date show_exposed
 
->>> demo_get('robin', 'choices/courses/Courses/topic', 'count rows', 0)
->>> demo_get('robin', 'choices/courses/Courses/teacher', 'count rows', 102)
->>> demo_get('robin', 'choices/courses/Courses/user', 'count rows', 12)
+>>> demo_get('robin', 'choices/courses/Activities/topic', 'count rows', 0)
+>>> demo_get('robin', 'choices/courses/Activities/teacher', 'count rows', 102)
+>>> demo_get('robin', 'choices/courses/Activities/user', 'count rows', 12)
 
 Yes, the demo database has no topics defined:
 
@@ -123,7 +123,7 @@ Don't read on
 
 Verify that users can create new courses:
 
->>> url = '/api/courses/MyCourses?an=insert'
+>>> url = '/api/courses/MyActivities?an=insert'
 >>> response = test_client.get(url, REMOTE_USER='romain')
 >>> response.status_code
 200

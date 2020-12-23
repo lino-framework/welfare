@@ -1,16 +1,13 @@
 .. doctest docs/specs/welcht/chatelet.rst
 .. _welfare.specs.chatelet:
 
-
 ===================================
 The Lino Welfare "Châtelet" variant
 ===================================
 
-
 .. contents::
    :local:
    :depth: 2
-
 
 .. include:: /../docs/shared/include/tested.rst
 
@@ -494,7 +491,7 @@ Each window layout defines a given set of fields.
 - notes.NoteTypes.insert : name, name_nl, name_de, name_en, build_method
 - notes.Notes.detail : date, time, event_type, type, project, subject, important, company, contact_person, user, language, build_time, id, body, uploads_UploadsByController
 - notes.Notes.insert : event_type, type, subject, project
-- notes.NotesByOwner.insert : event_type, type, subject, project
+- notes.NotesByProject.insert : event_type, type, subject, project
 - outbox.Mails.detail : subject, project, date, user, sent, id, owner, outbox_AttachmentsByMail, uploads_UploadsByController, body
 - outbox.Mails.insert : project, subject, body
 - pcsw.Clients.create_visit : user, summary
@@ -701,7 +698,7 @@ Each window layout is **viewable** by a given set of user types.
 - notes.NoteTypes.insert : visible for 110 120 410 420 admin 910
 - notes.Notes.detail : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - notes.Notes.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
-- notes.NotesByOwner.insert : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
+- notes.NotesByProject.insert : visible for 100 110 120 200 210 300 400 410 420 500 510 800 admin 910
 - outbox.Mails.detail : visible for 110 120 410 420 admin 910
 - outbox.Mails.insert : visible for 110 120 410 420 admin 910
 - pcsw.Clients.create_visit : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910

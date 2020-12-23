@@ -304,23 +304,22 @@ see it.
 - countries.Places.duplicate : visible for 110 120 210 410 420 800 admin 910
 - countries.PlacesByCountry.duplicate : visible for 100 110 120 200 210 220 300 400 410 420 500 510 800 admin 910
 - countries.PlacesByPlace.duplicate : visible for 110 120 210 410 420 800 admin 910
-- courses.ActiveCourses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.ActiveActivities.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
 - courses.Activities.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.ActivitiesByLayout.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.ActivitiesByLine.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.ActivitiesBySlot.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.ActivitiesByTeacher.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.ActivitiesByTopic.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
 - courses.AllActivities.duplicate : visible for admin 910
-- courses.BasicCourses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
-- courses.ClosedCourses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
-- courses.Courses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
-- courses.CoursesByLine.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
-- courses.CoursesBySlot.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
-- courses.CoursesByTeacher.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
-- courses.CoursesByTopic.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
-- courses.DraftCourses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.ClosedActivities.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.DraftActivities.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
 - courses.EntriesByTeacher.duplicate : visible for 110 120 410 420 admin 910
-- courses.InactiveCourses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.InactiveActivities.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
 - courses.JobCourses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
 - courses.Lines.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
 - courses.LinesByTopic.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
-- courses.MyCourses.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
+- courses.MyActivities.duplicate : visible for 100 110 120 200 210 300 400 410 420 800 admin 910
 - courses.MyCoursesGiven.duplicate : visible for nobody
 - courses.Slots.duplicate : visible for admin 910
 - courses.Topics.duplicate : visible for admin 910
