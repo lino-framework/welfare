@@ -323,7 +323,7 @@ as well as all related volatile records (2 Coachings, 1 Language knowledge, 5 Pr
 
 >>> d = get_json_dict('rolf', "pcsw/Clients/167", an='delete_selected', sr=167)
 >>> print(d['message'])
-1 Klient werden gelöscht
+Sie wollen 1 Klient löschen
 (ÕUNAPUU Õie (167))
 sowie alle verknüpften unbeständigen Daten (2 Begleitungen, 1 Sprachkenntnis, 5 Eigenschaften, 2 Phonetische Wörter, 3 ESF Summaries, 1 Adresse). Sind Sie sicher?
 
