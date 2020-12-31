@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2017 Rumma & Ko Ltd
+# Copyright 2017-2020 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """
@@ -8,9 +8,6 @@
   $ python manage.py test tests.test_clients
 
 """
-
-from __future__ import unicode_literals
-from __future__ import print_function
 
 import logging
 logger = logging.getLogger(__name__)
@@ -26,13 +23,6 @@ from lino.modlib.system.choicelists import Genders
 from lino.utils.instantiator import create_row as create
 from lino.api import rt
 
-
-# def create(model, **kwargs):
-#     obj = model(**kwargs)
-#     obj.full_clean()
-#     obj.save()
-#     return obj
-    
 
 class QuickTest(RemoteAuthTestCase):
     maxDiff = None
@@ -50,14 +40,14 @@ class QuickTest(RemoteAuthTestCase):
             users.User, username="robin",
             user_type=UserTypes.admin,
             language="fr")
-        
+
         self.client.force_login(robin)
         aline = create(
             users.User,
             username="aline",
             user_type=UserTypes.admin,
             language="fr")
-        
+
 
         nt = create(EventType, name="System note")
         settings.SITE.site_config.update(system_note_type=nt)
@@ -99,5 +89,5 @@ robin a classé [client 100] (M. Max MUSTERMANN) comme <b>Refusé</b>.
 Raison de refus: CPAS n'est pas compétent
 Wohnt noch in Lüttich. Wollte nach Eupen ziehen. Noch nicht zuständigg"""
         self.assertEqual(expected, msg.body)
-        
+
         # print("20180503 test_clients.test01() done")
