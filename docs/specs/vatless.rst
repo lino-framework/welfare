@@ -207,28 +207,27 @@ Our partner has 11 movements which are not yet *cleared*.
 Let's look at the detail of these movements:
 
 >>> rt.show(rt.models.ledger.MovementsByPartner, obj.partner, nosummary=True)
-========== =============== ==================================================================================== =========== ============ ================= ===========
- Valuta     Beleg           Beschreibung                                                                         Debit       Kredit       Match             Beglichen
----------- --------------- ------------------------------------------------------------------------------------ ----------- ------------ ----------------- -----------
- 17.04.14   *SREG 3/2014*   *(4100) Lieferanten* | *AUSDEMWALD Alfons (116)*                                                 10,00        **SREG 3/2014**   Nein
- 17.04.14   *SREG 3/2014*   *(4100) Lieferanten* | *COLLARD Charlotte (118)*                                                 12,50        **SREG 3/2014**   Nein
- 17.04.14   *SREG 3/2014*   *(4100) Lieferanten* | *DOBBELSTEIN Dorothée (124)*                                              25,00        **SREG 3/2014**   Nein
- 17.04.14   *SREG 3/2014*   *(4100) Lieferanten* | *EVERS Eberhart (127)*                                                    29,95        **SREG 3/2014**   Nein
- 17.04.14   *SREG 3/2014*   *(4100) Lieferanten* | *EMONTS Daniel (128)*                                                     5,33         **SREG 3/2014**   Nein
- 21.03.14   *ZKBC 3/2014*   *(4300) Offene Zahlungsaufträge* | *Ethias s.a.* | *EMONTS Daniel (128)*                         5,33         **REG 12/2014**   Nein
- 21.03.14   *ZKBC 3/2014*   *(4450) Auszuführende Ausgabeanweisungen* | *Ethias s.a.* | *EMONTS Daniel (128)*    5,33                     **REG 12/2014**   Ja
- 13.03.14   *AAW 21/2014*   *(4100) Lieferanten* | *Ethias s.a.* | *EMONTS Daniel (128)*                         5,33                     **REG 12/2014**   Ja
- 13.03.14   *AAW 21/2014*   *(4450) Auszuführende Ausgabeanweisungen* | *Ethias s.a.* | *EMONTS Daniel (128)*                5,33         **REG 12/2014**   Ja
- 26.02.14   *REG 12/2014*   *(4100) Lieferanten* | *EMONTS Daniel (128)*                                                     5,33         **REG 12/2014**   Ja
- 21.01.14   *ZKBC 1/2014*   *(4300) Offene Zahlungsaufträge* | *Ethias s.a.* | *EVERS Eberhart (127)*                        5,33         **REG 19/2014**   Nein
- 21.01.14   *ZKBC 1/2014*   *(4450) Auszuführende Ausgabeanweisungen* | *Ethias s.a.* | *EVERS Eberhart (127)*   5,33                     **REG 19/2014**   Ja
- 13.01.14   *AAW 19/2014*   *(4100) Lieferanten* | *Ethias s.a.* | *EVERS Eberhart (127)*                        5,33                     **REG 19/2014**   Ja
- 13.01.14   *AAW 19/2014*   *(4450) Auszuführende Ausgabeanweisungen* | *Ethias s.a.* | *EVERS Eberhart (127)*               5,33         **REG 19/2014**   Ja
- 07.01.14   *REG 19/2014*   *(4100) Lieferanten* | *EVERS Eberhart (127)*                                                    5,33         **REG 19/2014**   Ja
+========== =============== ==================================================================================== =========== ============ ============= ===========
+ Valuta     Beleg           Beschreibung                                                                         Debit       Kredit       Match         Beglichen
+---------- --------------- ------------------------------------------------------------------------------------ ----------- ------------ ------------- -----------
+ 17.04.14   *SREG 3/2014*   *(4100) Lieferanten* | *AUSDEMWALD Alfons (116)*                                                 10,00        SREG 3/2014   Nein
+ 17.04.14   *SREG 3/2014*   *(4100) Lieferanten* | *COLLARD Charlotte (118)*                                                 12,50        SREG 3/2014   Nein
+ 17.04.14   *SREG 3/2014*   *(4100) Lieferanten* | *DOBBELSTEIN Dorothée (124)*                                              25,00        SREG 3/2014   Nein
+ 17.04.14   *SREG 3/2014*   *(4100) Lieferanten* | *EVERS Eberhart (127)*                                                    29,95        SREG 3/2014   Nein
+ 17.04.14   *SREG 3/2014*   *(4100) Lieferanten* | *EMONTS Daniel (128)*                                                     5,33         SREG 3/2014   Nein
+ 21.03.14   *ZKBC 3/2014*   *(4300) Offene Zahlungsaufträge* | *Ethias s.a.* | *EMONTS Daniel (128)*                         5,33         REG 12/2014   Nein
+ 21.03.14   *ZKBC 3/2014*   *(4450) Auszuführende Ausgabeanweisungen* | *Ethias s.a.* | *EMONTS Daniel (128)*    5,33                     REG 12/2014   Ja
+ 13.03.14   *AAW 21/2014*   *(4100) Lieferanten* | *Ethias s.a.* | *EMONTS Daniel (128)*                         5,33                     REG 12/2014   Ja
+ 13.03.14   *AAW 21/2014*   *(4450) Auszuführende Ausgabeanweisungen* | *Ethias s.a.* | *EMONTS Daniel (128)*                5,33         REG 12/2014   Ja
+ 26.02.14   *REG 12/2014*   *(4100) Lieferanten* | *EMONTS Daniel (128)*                                                     5,33         REG 12/2014   Ja
+ 21.01.14   *ZKBC 1/2014*   *(4300) Offene Zahlungsaufträge* | *Ethias s.a.* | *EVERS Eberhart (127)*                        5,33         REG 19/2014   Nein
+ 21.01.14   *ZKBC 1/2014*   *(4450) Auszuführende Ausgabeanweisungen* | *Ethias s.a.* | *EVERS Eberhart (127)*   5,33                     REG 19/2014   Ja
+ 13.01.14   *AAW 19/2014*   *(4100) Lieferanten* | *Ethias s.a.* | *EVERS Eberhart (127)*                        5,33                     REG 19/2014   Ja
+ 13.01.14   *AAW 19/2014*   *(4450) Auszuführende Ausgabeanweisungen* | *Ethias s.a.* | *EVERS Eberhart (127)*               5,33         REG 19/2014   Ja
+ 07.01.14   *REG 19/2014*   *(4100) Lieferanten* | *EVERS Eberhart (127)*                                                    5,33         REG 19/2014   Ja
                             **Saldo -93.44 (15 Bewegungen)**                                                     **21,32**   **114,76**
-========== =============== ==================================================================================== =========== ============ ================= ===========
+========== =============== ==================================================================================== =========== ============ ============= ===========
 <BLANKLINE>
-
 
 
 The first two movements are invoices which have been admitted for
