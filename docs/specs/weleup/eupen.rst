@@ -1040,7 +1040,7 @@ Here is the output of :func:`walk_menu_items
 - Büro --> Meine Datenkontrollliste : 0
 - Kalender --> Meine Termine : 6
 - Kalender --> Überfällige Termine : 25
-- Kalender --> Meine unbestätigten Termine : 3
+- Kalender --> Meine unbestätigten Termine : 4
 - Kalender --> Meine Aufgaben : 1
 - Kalender --> Meine Gäste : 1
 - Kalender --> Meine Anwesenheiten : 1

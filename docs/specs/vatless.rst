@@ -137,19 +137,20 @@ have been created:
 =================================== ============================ =================== =========== =========== ================= ===========
  Haushaltsartikel                    Klient                       Zahlungsempfänger   Debit       Kredit      Match             Beglichen
 ----------------------------------- ---------------------------- ------------------- ----------- ----------- ----------------- -----------
- (4100) Lieferanten                  AUSDEMWALD Alfons (116)      Ethias s.a.                     10,00       **SREG 3/2014**   Nein
- (4100) Lieferanten                  COLLARD Charlotte (118)      Ethias s.a.                     12,50       **SREG 3/2014**   Nein
- (4100) Lieferanten                  DOBBELSTEIN Dorothée (124)   Ethias s.a.                     25,00       **SREG 3/2014**   Nein
- (4100) Lieferanten                  EVERS Eberhart (127)         Ethias s.a.                     29,95       **SREG 3/2014**   Nein
- (4100) Lieferanten                  EMONTS Daniel (128)          Ethias s.a.                     5,33        **SREG 3/2014**   Nein
+ (832/330/01) Allgemeine Beihilfen   EMONTS Daniel (128)                              5,33                                      Ja
  (832/330/01) Allgemeine Beihilfen   AUSDEMWALD Alfons (116)                          10,00                                     Ja
  (832/330/01) Allgemeine Beihilfen   COLLARD Charlotte (118)                          12,50                                     Ja
  (832/330/01) Allgemeine Beihilfen   DOBBELSTEIN Dorothée (124)                       25,00                                     Ja
  (832/330/01) Allgemeine Beihilfen   EVERS Eberhart (127)                             29,95                                     Ja
- (832/330/01) Allgemeine Beihilfen   EMONTS Daniel (128)                              5,33                                      Ja
+ (4100) Lieferanten                  EMONTS Daniel (128)          Ethias s.a.                     5,33        **SREG 3/2014**   Nein
+ (4100) Lieferanten                  AUSDEMWALD Alfons (116)      Ethias s.a.                     10,00       **SREG 3/2014**   Nein
+ (4100) Lieferanten                  COLLARD Charlotte (118)      Ethias s.a.                     12,50       **SREG 3/2014**   Nein
+ (4100) Lieferanten                  DOBBELSTEIN Dorothée (124)   Ethias s.a.                     25,00       **SREG 3/2014**   Nein
+ (4100) Lieferanten                  EVERS Eberhart (127)         Ethias s.a.                     29,95       **SREG 3/2014**   Nein
                                                                                       **82,78**   **82,78**
 =================================== ============================ =================== =========== =========== ================= ===========
 <BLANKLINE>
+
 
 
 The last five movements are *cleared* because their account is not

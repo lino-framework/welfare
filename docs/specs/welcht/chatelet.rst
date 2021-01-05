@@ -869,7 +869,7 @@ Here is the output of :func:`walk_menu_items
 - Bureau --> Mes problèmes de données : 0
 - Calendrier --> Mes rendez-vous : 7
 - Calendrier --> Rendez-vous dépassés : 62
-- Calendrier --> Mes rendez-vous à confirmer : 3
+- Calendrier --> Mes rendez-vous à confirmer : 4
 - Calendrier --> Mes tâches : 1
 - Calendrier --> Mes visiteurs : 1
 - Calendrier --> Mes présences : 1
