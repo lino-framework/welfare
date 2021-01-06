@@ -121,4 +121,4 @@ The ZKBC journal contains the following payment orders:
 >>> obj = ZKBC.voucher_type.model.objects.get(number=1, journal=ZKBC)  #doctest: -SKIP
 >>> demo_get(
 ...    'wilfried', 'choices/finan/ItemsByPaymentOrder/match',
-...    fields, 60, mk=obj.pk, **kw)  #doctest: -SKIP
+...    fields, 0, mk=obj.pk, **kw)  #doctest: -SKIP
