@@ -37,7 +37,7 @@ def objects():
     kw.update(dd.str2kw('name', _("Disbursement orders")))
     kw.update(account='4450', ref="AAW")
     kw.update(journal_group=JournalGroups.anw)
-    # kw.update(dc=DC.credit)
+    kw.update(dc=DC.credit)  # 20201219  AAW Journal.dc
     # kw.update(invert_due_dc=False)
     jnl = DisbursementOrdersByJournal.create_journal(**kw)
     yield jnl
@@ -64,7 +64,7 @@ def objects():
     kw.update(journal_group=JournalGroups.zau)
     kw.update(dd.str2kw('name', _("KBC Payment Orders")))
     kw.update(account=a5800, ref="ZKBC")
-    kw.update(dc=DC.debit)
+    kw.update(dc=DC.credit)  # 20201219  ZKBC Journal.dc
     jnl = PaymentOrdersByJournal.create_journal(**kw)
     yield jnl
     yield MatchRule(journal=jnl, account=a4450)

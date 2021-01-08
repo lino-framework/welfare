@@ -248,48 +248,48 @@ Our client has lots of other open transactions:
 ========== =============== ================================================================================================== =============== =============== ================== ===========
  Valuta     Beleg           Beschreibung                                                                                       Debit           Kredit          Match              Beglichen
 ---------- --------------- -------------------------------------------------------------------------------------------------- --------------- --------------- ------------------ -----------
- 22.05.14   *AAW 1/2014*    *(832/330/01) Allgemeine Beihilfen* / Allgemeine Beihilfen / *Emonts Daniel*                       648,91                          **AAW 1:5**        Nein
- 22.05.14   *AAW 1/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*                                 648,91          **AAW 1:5**        Nein
- 22.05.14   *AAW 2/2014*    *(832/330/03) Heizkosten- u. Energiebeihilfe* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*   817,36                          **AAW 2:5**        Nein
- 22.05.14   *AAW 2/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*                       817,36          **AAW 2:5**        Nein
- 22.05.14   *AAW 3/2014*    *(832/330/03F) Fonds Gas und Elektrizität* / Fonds Gas und Elektrizität / *Emonts Daniel*          544,91                          **AAW 3:5**        Nein
- 22.05.14   *AAW 3/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*                           544,91          **AAW 3:5**        Nein
- 22.05.14   *AAW 4/2014*    *(832/3331/01) Eingliederungseinkommen* / Eingliederungseinkommen / *Emonts Daniel*                800,08                          **AAW 4:5**        Nein
- 22.05.14   *AAW 4/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*                              800,08          **AAW 4:5**        Nein
- 22.05.14   *AAW 5/2014*    *(832/334/27) Sozialhilfe* / Sozialhilfe / *Emonts Daniel*                                         648,91                          **AAW 5:5**        Nein
- 22.05.14   *AAW 5/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                                          648,91          **AAW 5:5**        Nein
- 22.05.14   *AAW 6/2014*    *(832/3343/21) Beihilfe für Ausländer* / Beihilfe für Ausländer / *Emonts Daniel*                  817,36                          **AAW 6:5**        Nein
- 22.05.14   *AAW 6/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*                               817,36          **AAW 6:5**        Nein
+ 23.05.14   *AAW 13/2014*   *(832/330/01) Allgemeine Beihilfen* / Allgemeine Beihilfen / *Emonts Daniel*                       648,91                          **AAW 13:5**       Nein
+ 23.05.14   *AAW 13/2014*   *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*                                 648,91          **AAW 13:5**       Nein
+ 23.05.14   *AAW 14/2014*   *(832/330/03) Heizkosten- u. Energiebeihilfe* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*   817,36                          **AAW 14:5**       Nein
+ 23.05.14   *AAW 14/2014*   *(4450) Auszuführende Ausgabeanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*                       817,36          **AAW 14:5**       Nein
+ 23.05.14   *AAW 15/2014*   *(832/330/03F) Fonds Gas und Elektrizität* / Fonds Gas und Elektrizität / *Emonts Daniel*          544,91                          **AAW 15:5**       Nein
+ 23.05.14   *AAW 15/2014*   *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*                           544,91          **AAW 15:5**       Nein
+ 23.05.14   *AAW 16/2014*   *(832/3331/01) Eingliederungseinkommen* / Eingliederungseinkommen / *Emonts Daniel*                800,08                          **AAW 16:5**       Nein
+ 23.05.14   *AAW 16/2014*   *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*                              800,08          **AAW 16:5**       Nein
+ 23.05.14   *AAW 17/2014*   *(832/334/27) Sozialhilfe* / Sozialhilfe / *Emonts Daniel*                                         648,91                          **AAW 17:5**       Nein
+ 23.05.14   *AAW 17/2014*   *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                                          648,91          **AAW 17:5**       Nein
+ 23.05.14   *AAW 18/2014*   *(832/3343/21) Beihilfe für Ausländer* / Beihilfe für Ausländer / *Emonts Daniel*                  817,36                          **AAW 18:5**       Nein
+ 23.05.14   *AAW 18/2014*   *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*                               817,36          **AAW 18:5**       Nein
  17.05.14   *SREG 1/2014*   *(4100) Lieferanten* / *AS Matsalu Veevärk*                                                                        29,95           **SREG 1/2014**    Nein
  02.05.14   *SREG 2/2014*   *(4100) Lieferanten* / *Maksu- ja Tolliamet*                                                                       120,00          **SREG 2/2014**    Nein
- 22.04.14   *AAW 7/2014*    *(832/330/01) Allgemeine Beihilfen* / Allgemeine Beihilfen / *Emonts Daniel*                       544,91                          **AAW 7:5**        Nein
- 22.04.14   *AAW 7/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*                                 544,91          **AAW 7:5**        Nein
- 22.04.14   *AAW 8/2014*    *(832/330/03) Heizkosten- u. Energiebeihilfe* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*   800,08                          **AAW 8:5**        Nein
- 22.04.14   *AAW 8/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*                       800,08          **AAW 8:5**        Nein
- 22.04.14   *AAW 9/2014*    *(832/330/03F) Fonds Gas und Elektrizität* / Fonds Gas und Elektrizität / *Emonts Daniel*          648,91                          **AAW 9:5**        Nein
- 22.04.14   *AAW 9/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*                           648,91          **AAW 9:5**        Nein
- 22.04.14   *AAW 10/2014*   *(832/3331/01) Eingliederungseinkommen* / Eingliederungseinkommen / *Emonts Daniel*                817,36                          **AAW 10:5**       Nein
- 22.04.14   *AAW 10/2014*   *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*                              817,36          **AAW 10:5**       Nein
- 22.04.14   *AAW 11/2014*   *(832/334/27) Sozialhilfe* / Sozialhilfe / *Emonts Daniel*                                         544,91                          **AAW 11:5**       Nein
- 22.04.14   *AAW 11/2014*   *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                                          544,91          **AAW 11:5**       Nein
- 22.04.14   *AAW 12/2014*   *(832/3343/21) Beihilfe für Ausländer* / Beihilfe für Ausländer / *Emonts Daniel*                  800,08                          **AAW 12:5**       Nein
- 22.04.14   *AAW 12/2014*   *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*                               800,08          **AAW 12:5**       Nein
- 21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *Emonts Daniel*                                                                 648,91          **AAW 13:5**       Nein
- 21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *Emonts Daniel*                                                                 817,36          **AAW 14:5**       Nein
- 21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *Emonts Daniel*                                                                 544,91          **AAW 15:5**       Nein
- 21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *Emonts Daniel*                                                                 800,08          **AAW 16:5**       Nein
- 21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *Emonts Daniel*                                                                 648,91          **AAW 17:5**       Nein
- 21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *Emonts Daniel*                                                                 817,36          **AAW 18:5**       Nein
+ 23.04.14   *AAW 7/2014*    *(832/330/01) Allgemeine Beihilfen* / Allgemeine Beihilfen / *Emonts Daniel*                       544,91                          **AAW 7:5**        Nein
+ 23.04.14   *AAW 7/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Allgemeine Beihilfen / *Emonts Daniel*                                 544,91          **AAW 7:5**        Nein
+ 23.04.14   *AAW 8/2014*    *(832/330/03) Heizkosten- u. Energiebeihilfe* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*   800,08                          **AAW 8:5**        Nein
+ 23.04.14   *AAW 8/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*                       800,08          **AAW 8:5**        Nein
+ 23.04.14   *AAW 9/2014*    *(832/330/03F) Fonds Gas und Elektrizität* / Fonds Gas und Elektrizität / *Emonts Daniel*          648,91                          **AAW 9:5**        Nein
+ 23.04.14   *AAW 9/2014*    *(4450) Auszuführende Ausgabeanweisungen* / Fonds Gas und Elektrizität / *Emonts Daniel*                           648,91          **AAW 9:5**        Nein
+ 23.04.14   *AAW 10/2014*   *(832/3331/01) Eingliederungseinkommen* / Eingliederungseinkommen / *Emonts Daniel*                817,36                          **AAW 10:5**       Nein
+ 23.04.14   *AAW 10/2014*   *(4450) Auszuführende Ausgabeanweisungen* / Eingliederungseinkommen / *Emonts Daniel*                              817,36          **AAW 10:5**       Nein
+ 23.04.14   *AAW 11/2014*   *(832/334/27) Sozialhilfe* / Sozialhilfe / *Emonts Daniel*                                         544,91                          **AAW 11:5**       Nein
+ 23.04.14   *AAW 11/2014*   *(4450) Auszuführende Ausgabeanweisungen* / Sozialhilfe / *Emonts Daniel*                                          544,91          **AAW 11:5**       Nein
+ 23.04.14   *AAW 12/2014*   *(832/3343/21) Beihilfe für Ausländer* / Beihilfe für Ausländer / *Emonts Daniel*                  800,08                          **AAW 12:5**       Nein
+ 23.04.14   *AAW 12/2014*   *(4450) Auszuführende Ausgabeanweisungen* / Beihilfe für Ausländer / *Emonts Daniel*                               800,08          **AAW 12:5**       Nein
+ 21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *Emonts Daniel*                                                                 648,91          **AAW 1:5**        Nein
+ 21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *Emonts Daniel*                                                                 817,36          **AAW 2:5**        Nein
+ 21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *Emonts Daniel*                                                                 544,91          **AAW 3:5**        Nein
+ 21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *Emonts Daniel*                                                                 800,08          **AAW 4:5**        Nein
+ 21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *Emonts Daniel*                                                                 648,91          **AAW 5:5**        Nein
+ 21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *Emonts Daniel*                                                                 817,36          **AAW 6:5**        Nein
  21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *AS Express Post*                                                               15,33           **SREG 4/2014**    Nein
  21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *Eesti Energia AS*                                                              25,00           **REG 9/2014**     Nein
  21.04.14   *ZKBC 4/2014*   *(4300) Offene Zahlungsaufträge* / *IIZI kindlustusmaakler AS*                                                     10,00           **SREG 5/2014**    Nein
  17.04.14   *SREG 3/2014*   *(4100) Lieferanten* / *Ethias s.a.*                                                                               5,33            **SREG 3/2014**    Nein
- 23.03.14   *AAW 13/2014*   *(832/330/01) Allgemeine Beihilfen* / Allgemeine Beihilfen / *Emonts Daniel*                       648,91                          **AAW 13:5**       Nein
- 23.03.14   *AAW 14/2014*   *(832/330/03) Heizkosten- u. Energiebeihilfe* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*   817,36                          **AAW 14:5**       Nein
- 23.03.14   *AAW 15/2014*   *(832/330/03F) Fonds Gas und Elektrizität* / Fonds Gas und Elektrizität / *Emonts Daniel*          544,91                          **AAW 15:5**       Nein
- 23.03.14   *AAW 16/2014*   *(832/3331/01) Eingliederungseinkommen* / Eingliederungseinkommen / *Emonts Daniel*                800,08                          **AAW 16:5**       Nein
- 23.03.14   *AAW 17/2014*   *(832/334/27) Sozialhilfe* / Sozialhilfe / *Emonts Daniel*                                         648,91                          **AAW 17:5**       Nein
- 23.03.14   *AAW 18/2014*   *(832/3343/21) Beihilfe für Ausländer* / Beihilfe für Ausländer / *Emonts Daniel*                  817,36                          **AAW 18:5**       Nein
+ 23.03.14   *AAW 1/2014*    *(832/330/01) Allgemeine Beihilfen* / Allgemeine Beihilfen / *Emonts Daniel*                       648,91                          **AAW 1:5**        Nein
+ 23.03.14   *AAW 2/2014*    *(832/330/03) Heizkosten- u. Energiebeihilfe* / Heizkosten- u. Energiebeihilfe / *Emonts Daniel*   817,36                          **AAW 2:5**        Nein
+ 23.03.14   *AAW 3/2014*    *(832/330/03F) Fonds Gas und Elektrizität* / Fonds Gas und Elektrizität / *Emonts Daniel*          544,91                          **AAW 3:5**        Nein
+ 23.03.14   *AAW 4/2014*    *(832/3331/01) Eingliederungseinkommen* / Eingliederungseinkommen / *Emonts Daniel*                800,08                          **AAW 4:5**        Nein
+ 23.03.14   *AAW 5/2014*    *(832/334/27) Sozialhilfe* / Sozialhilfe / *Emonts Daniel*                                         648,91                          **AAW 5:5**        Nein
+ 23.03.14   *AAW 6/2014*    *(832/3343/21) Beihilfe für Ausländer* / Beihilfe für Ausländer / *Emonts Daniel*                  817,36                          **AAW 6:5**        Nein
  21.03.14   *ZKBC 3/2014*   *(4300) Offene Zahlungsaufträge* / *Ragn-Sells AS*                                                                 29,95           **REG 11/2014**    Nein
  21.03.14   *ZKBC 3/2014*   *(4300) Offene Zahlungsaufträge* / *Electrabel Customer Solutions*                                                 12,50           **SREG 6/2014**    Nein
  21.03.14   *ZKBC 3/2014*   *(4300) Offene Zahlungsaufträge* / *Ethias s.a.*                                                                   5,33            **REG 12/2014**    Nein
@@ -301,6 +301,7 @@ Our client has lots of other open transactions:
                             **Saldo -493.29 (50 Bewegungen)**                                                                  **12 711,31**   **13 204,60**
 ========== =============== ================================================================================================== =============== =============== ================== ===========
 <BLANKLINE>
+
 
 
 .. _welfare.specs.r20160105:

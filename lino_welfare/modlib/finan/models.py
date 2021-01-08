@@ -33,12 +33,12 @@ class DisbursementOrders(PaymentOrders):
 
 class ItemsByPaymentOrder(ItemsByPaymentOrder):
     column_names = "seqno project partner workflow_buttons bank_account match "\
-                   "amount remark *"
+                   "to_pay remark *"
 
 
 class ItemsByDisbursementOrder(ItemsByPaymentOrder):
     column_names = "seqno project partner bank_account workflow_buttons match "\
-                   "amount *"
+                   "to_pay *"
 
 
 class DisbursementOrdersByJournal(ledger.ByJournal, DisbursementOrders):

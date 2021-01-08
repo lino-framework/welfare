@@ -30,18 +30,30 @@ Table of contents:
    :local:
 
 
-Disbursment orders
-==================
+Disbursement orders
+===================
 
+A disbursement order is an internal confirmation that certain expenses should be
+done. It is a document to be signed by some responsible person before some other
+person will do the actual payments.
+
+The demo database has a journal AAW that contains disbursement orders.
+Technically it is like a :term:`payment order`, but it has no partner and no
+sepa_account.
 
 >>> AAW = ledger.Journal.get_by_ref('AAW')
-
+>>> print(AAW)
+Ausgabeanweisungen (AAW)
 >>> print(AAW.voucher_type.model)
 <class 'lino_xl.lib.finan.models.PaymentOrder'>
+>>> print(AAW.partner)
+None
+>>> print(AAW.sepa_account)
+None
 
-The AAW journal contains the following statements:
 
 >>> rt.show(AAW.voucher_type.table_class, AAW)
+... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE -REPORT_UDIFF
 ======================= =============== ================================ =============== ================== ================= =================
  Nr.                     Buchungsdatum   Interne Referenz                 Total           Ausführungsdatum   Buchungsperiode   Workflow
 ----------------------- --------------- -------------------------------- --------------- ------------------ ----------------- -----------------
@@ -49,24 +61,24 @@ The AAW journal contains the following statements:
  21/2014                 13.03.14                                         585,84                             2014-03           **Registriert**
  20/2014                 13.02.14                                         483,01                             2014-02           **Registriert**
  19/2014                 13.01.14                                         350,61                             2014-01           **Registriert**
- 18/2014                 23.03.14        Beihilfe für Ausländer           3 628,62                           2014-03           **Registriert**
- 17/2014                 23.03.14        Sozialhilfe                      3 460,17                           2014-03           **Registriert**
- 16/2014                 23.03.14        Eingliederungseinkommen          3 611,34                           2014-03           **Registriert**
- 15/2014                 23.03.14        Fonds Gas und Elektrizität       3 356,17                           2014-03           **Registriert**
- 14/2014                 23.03.14        Heizkosten- u. Energiebeihilfe   3 628,62                           2014-03           **Registriert**
- 13/2014                 23.03.14        Allgemeine Beihilfen             3 460,17                           2014-03           **Registriert**
- 12/2014                 22.04.14        Beihilfe für Ausländer           3 611,34                           2014-04           **Registriert**
- 11/2014                 22.04.14        Sozialhilfe                      3 356,17                           2014-04           **Registriert**
- 10/2014                 22.04.14        Eingliederungseinkommen          3 628,62                           2014-04           **Registriert**
- 9/2014                  22.04.14        Fonds Gas und Elektrizität       3 460,17                           2014-04           **Registriert**
- 8/2014                  22.04.14        Heizkosten- u. Energiebeihilfe   3 611,34                           2014-04           **Registriert**
- 7/2014                  22.04.14        Allgemeine Beihilfen             3 356,17                           2014-04           **Registriert**
- 6/2014                  22.05.14        Beihilfe für Ausländer           3 628,62                           2014-05           **Registriert**
- 5/2014                  22.05.14        Sozialhilfe                      3 460,17                           2014-05           **Registriert**
- 4/2014                  22.05.14        Eingliederungseinkommen          3 611,34                           2014-05           **Registriert**
- 3/2014                  22.05.14        Fonds Gas und Elektrizität       3 356,17                           2014-05           **Registriert**
- 2/2014                  22.05.14        Heizkosten- u. Energiebeihilfe   3 628,62                           2014-05           **Registriert**
- 1/2014                  22.05.14        Allgemeine Beihilfen             3 460,17                           2014-05           **Registriert**
+ 18/2014                 23.05.14        Beihilfe für Ausländer           3 628,62                           2014-05           **Registriert**
+ 17/2014                 23.05.14        Sozialhilfe                      3 460,17                           2014-05           **Registriert**
+ 16/2014                 23.05.14        Eingliederungseinkommen          3 611,34                           2014-05           **Registriert**
+ 15/2014                 23.05.14        Fonds Gas und Elektrizität       3 356,17                           2014-05           **Registriert**
+ 14/2014                 23.05.14        Heizkosten- u. Energiebeihilfe   3 628,62                           2014-05           **Registriert**
+ 13/2014                 23.05.14        Allgemeine Beihilfen             3 460,17                           2014-05           **Registriert**
+ 12/2014                 23.04.14        Beihilfe für Ausländer           3 611,34                           2014-04           **Registriert**
+ 11/2014                 23.04.14        Sozialhilfe                      3 356,17                           2014-04           **Registriert**
+ 10/2014                 23.04.14        Eingliederungseinkommen          3 628,62                           2014-04           **Registriert**
+ 9/2014                  23.04.14        Fonds Gas und Elektrizität       3 460,17                           2014-04           **Registriert**
+ 8/2014                  23.04.14        Heizkosten- u. Energiebeihilfe   3 611,34                           2014-04           **Registriert**
+ 7/2014                  23.04.14        Allgemeine Beihilfen             3 356,17                           2014-04           **Registriert**
+ 6/2014                  23.03.14        Beihilfe für Ausländer           3 628,62                           2014-03           **Registriert**
+ 5/2014                  23.03.14        Sozialhilfe                      3 460,17                           2014-03           **Registriert**
+ 4/2014                  23.03.14        Eingliederungseinkommen          3 611,34                           2014-03           **Registriert**
+ 3/2014                  23.03.14        Fonds Gas und Elektrizität       3 356,17                           2014-03           **Registriert**
+ 2/2014                  23.03.14        Heizkosten- u. Energiebeihilfe   3 628,62                           2014-03           **Registriert**
+ 1/2014                  23.03.14        Allgemeine Beihilfen             3 460,17                           2014-03           **Registriert**
  **Total (22 Zeilen)**                                                    **65 286,84**
 ======================= =============== ================================ =============== ================== ================= =================
 <BLANKLINE>
@@ -101,7 +113,7 @@ The ZKBC journal contains the following payment orders:
 >>> rt.login('wilfried').show(finan.ItemsByPaymentOrder, obj)  #doctest: -SKIP
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 ===== ============================ =============================== ========== ===================== ============== ============ ==================
- Nr.   Klient                       Zahlungsempfänger               Workflow   Bankkonto             Match          Betrag       Externe Referenz
+ Nr.   Klient                       Zahlungsempfänger               Workflow   Bankkonto             Match          To pay       Externe Referenz
 ----- ---------------------------- ------------------------------- ---------- --------------------- -------------- ------------ ------------------
  1     COLLARD Charlotte (118)      Electrabel Customer Solutions              BE46 0003 2544 8336   REG 18/2014    120,00
  2     EVERS Eberhart (127)         Ethias s.a.                                BE79 8270 8180 3833   REG 19/2014    5,33

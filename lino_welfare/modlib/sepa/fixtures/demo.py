@@ -1,12 +1,13 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2020 Rumma & Ko Ltd
+# Copyright 2015-2021 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """Adds demo journals and some bookings for usage by Lino Welfare.
 
 """
 
-from builtins import range
+from dateutil.relativedelta import relativedelta as delta
+# from builtins import range
 from lino_xl.lib.sepa.fixtures.demo import objects as lib_objects
 from decimal import Decimal as D
 
@@ -79,9 +80,10 @@ def objects():
     ACCOUNTS = list(rt.models.ledger.Account.objects.filter(ref__in=refs))
     AMOUNTS = Cycler(D('648.91'), D('817.36'), D('544.91'), D('800.08'))
     jnl = Journal.get_by_ref('AAW')
-    for i in range(3):
+    months = 2
+    date = dd.today(-30*months)
+    for i in range(months+1):
         kw = dict()
-        date = dd.today(-30*i)
         kw.update(entry_date=date)
         kw.update(voucher_date=date)
         kw.update(journal=jnl)
@@ -97,10 +99,12 @@ def objects():
                 yield PaymentOrderItem(
                     seqno=j+1,
                     voucher=obj,
-                    amount=AMOUNTS.pop(), project=cli)
+                    amount=-AMOUNTS.pop(), project=cli)
             # this is especially slow in a sqlite :memory: databae
             # dd.logger.info(
             #     "20151211 Gonna register PaymentOrder %s %s %s",
             #     dd.fds(obj.entry_date), obj, obj.narration)
             obj.register(ses)
             obj.save()
+
+        date += delta(months=1)
