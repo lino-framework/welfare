@@ -60,7 +60,7 @@ Rolf
 
 Rolf is the local system administrator, he has a complete menu:
 
->>> rt.login('rolf').show_menu()
+>>> show_menu('rolf')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Meine Benachrichtigungen, Meine Auszüge, Meine ablaufenden Upload-Dateien, Meine Upload-Dateien, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
@@ -127,8 +127,7 @@ Hubert
 
 Hubert is an Integration agent.
 
->>> with translation.override('de'):
-...     rt.login('hubert').show_menu()
+>>> show_menu('hubert', language='de')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Meine Benachrichtigungen, Meine Auszüge, Meine ablaufenden Upload-Dateien, Meine Upload-Dateien, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
@@ -172,9 +171,9 @@ Mélanie is a manager of the Integration service.
 Because Mélanie has her :attr:`language
 <lino.modlib.users.models.User.language>` field set to French, we need
 to explicitly override the language of :meth:`show_menu
-<lino.core.requests.BaseRequest.show_menu>` to get her menu in German:
+<lino.api.doctest.show_menu>` to get her menu in German:
 
->>> rt.login('melanie').show_menu(language="de")
+>>> show_menu('melanie', language="de")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Meine Benachrichtigungen, Meine Auszüge, Meine ablaufenden Upload-Dateien, Meine Upload-Dateien, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
@@ -225,8 +224,7 @@ Kerstin is a debts consultant.
 >>> print(p)
 300 (Schuldenberater)
 
->>> with translation.override('de'):
-...     rt.login('kerstin').show_menu()
+>>> show_menu('kerstin', language='de')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Meine Benachrichtigungen, Meine Auszüge, Meine ablaufenden Upload-Dateien, Meine Upload-Dateien, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
@@ -257,8 +255,7 @@ Caroline is a newcomers consultant.
 >>> print(p)
 200 (Berater Erstempfang)
 
->>> with translation.override('de'):
-...     rt.login('caroline').show_menu()
+>>> show_menu('caroline', language='de')
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Meine Benachrichtigungen, Meine Auszüge, Meine ablaufenden Upload-Dateien, Meine Upload-Dateien, Mein E-Mail-Ausgang, Meine Ereignisse/Notizen, Meine Datenkontrollliste
@@ -288,7 +285,7 @@ Theresia is a reception clerk.
 210 (Empfangsschalter)
 
 
->>> rt.login('theresia').show_menu(language="de")
+>>> show_menu('theresia', language="de")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
 - Kontakte : Personen,  ▶ Klienten, Organisationen, -, Partner (alle), Haushalte
 - Büro : Meine Auszüge, Meine ablaufenden Upload-Dateien, Meine Upload-Dateien, Meine Ereignisse/Notizen

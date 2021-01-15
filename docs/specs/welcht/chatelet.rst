@@ -55,7 +55,7 @@ The main menu
 Romain
 ------
 
->>> rt.login('romain').show_menu() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+>>> show_menu('romain') #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
 - Bureau : Mes Notifications, Mes Extraits, Mes fichiers téléchargés à renouveler, Mes Fichiers téléchargés, Mon courrier sortant, Mes Observations, Mes problèmes de données
 - Calendrier : Calendrier, Mes rendez-vous, Rendez-vous dépassés, Mes rendez-vous à confirmer, Mes tâches, Mes visiteurs, Mes présences, Mes rendez-vous dépassés, Calendrier
@@ -117,7 +117,7 @@ modifier les intervention d'autres utilisateurs.
 >>> rt.login('theresia').user.user_type
 <users.UserTypes:210>
 
->>> rt.login('theresia').show_menu() #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
+>>> show_menu('theresia') #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - Contacts : Personnes,  ▶ Bénéficiaires, Organisations, -, Partenaires (tous), Ménages
 - Bureau : Mes Extraits, Mes fichiers téléchargés à renouveler, Mes Fichiers téléchargés, Mes Observations
 - Réception : Bénéficiaires, Rendez-vous aujourd'hui, Salle d'attente, Visiteurs occupés, Visiteurs repartis
