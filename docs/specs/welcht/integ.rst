@@ -9,7 +9,7 @@ This document describes the :mod:`lino_welfare.modlib.integ` plugin.
 See also :ref:`welfare.specs.autoevents`.
 
 .. currentmodule:: lino_welfare.modlib.integ
-                   
+
 
 Table of contents:
 
@@ -30,7 +30,7 @@ Note that we set :attr:`lino.modlib.users.UserType.hidden_languages`
 to `None` because in this document we want to see the other languages
 as well.
 
-      
+
 
 
 Configuration
@@ -323,7 +323,7 @@ User problem report:
   | pdf-Dokument aus Startseite erstellen:
   | kommt leider nur ein leeres Dok-pdf bei raus auf den 30/09/2011 datiert
 
-The following lines reproduced this problem 
+The following lines reproduced this problem
 and passed when it was fixed:
 
 >>> settings.SITE.appy_params.update(raiseOnError=True)
@@ -359,7 +359,5 @@ Verify that :ticket:`2784` is fixed:
 
 >>> for ba in integ.ActivityReport.get_actions():
 ...     if ba.action.is_window_action():
-...         print(ba)
+...         ba
 <BoundAction(integ.ActivityReport, <lino.core.actions.ShowEmptyTable show ('D\xe9tail')>)>
-
-

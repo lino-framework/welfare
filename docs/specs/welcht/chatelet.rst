@@ -104,7 +104,7 @@ Romain
   - BCSS : Requêtes IdentifyPerson, Requêtes ManageAccess, Requêtes Tx25
   - Médiation de dettes : Budgets, Entrées
   - Questionnaires : Questionnaires, Questions, Choix, Interviews, Choix de réponse, Answer Remarks
-- Site : à propos
+- Site : à propos, Sessions utilisateurs
 
 Theresia
 --------
@@ -275,7 +275,7 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
  polls.Poll                     polls.Polls                     11        2
  polls.Question                 polls.Questions                 9         38
  polls.Response                 polls.Responses                 7         6
- sessions.Session               sessions.SessionTable           3         ...
+ sessions.Session               users.Sessions                  3         ...
  system.SiteConfig              system.SiteConfigs              29        1
  tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
  uploads.Upload                 uploads.Uploads                 19        5
@@ -1048,6 +1048,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Questionnaires --> Interviews : 7
 - Explorateur --> Questionnaires --> Choix de réponse : 89
 - Explorateur --> Questionnaires --> Answer Remarks : 1
+- Site --> Sessions utilisateurs : ...
 <BLANKLINE>
 
 

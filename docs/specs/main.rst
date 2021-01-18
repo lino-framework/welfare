@@ -75,7 +75,7 @@ Here is a text variant of Hubert's dashboard.
 .. Not tested because some details are changing in the demo database.
 
 >>> show_dashboard('hubert', ignore_links=True)
-... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF +ELLIPSIS -SKIP
+... #doctest: +NORMALIZE_WHITESPACE +REPORT_CDIFF +ELLIPSIS +SKIP
 Quick links: [Calendar] [Read eID card] [Clients] [ISIPs] [Art60§7 job
 supplyments] [Appointments today] autorefresh [Refresh]
 <BLANKLINE>

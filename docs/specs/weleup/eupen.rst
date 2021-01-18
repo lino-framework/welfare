@@ -118,7 +118,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Erstempfang : Kompetenzen
   - ZDSS : IdentifyPerson-Anfragen, ManageAccess-Anfragen, Tx25-Anfragen
   - Schuldnerberatung : Budgets, Einträge
-- Site : Info
+- Site : Info, Benutzersitzungen
 
 .. _hubert:
 
@@ -1221,6 +1221,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> ZDSS --> Tx25-Anfragen : 7
 - Explorer --> Schuldnerberatung --> Budgets : 15
 - Explorer --> Schuldnerberatung --> Einträge : 717
+- Site --> Benutzersitzungen : ...
 <BLANKLINE>
 
 
