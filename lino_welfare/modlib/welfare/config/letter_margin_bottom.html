@@ -1,0 +1,12 @@
+<p class="Centered12pt">
+{% if isinstance(this.project, rt.models.pcsw.Client) %}
+<b>{{this.project.get_primary_coach() or this.user}}</b>
+<br/>{{this.project.get_primary_coach().coaching_type or _('Secretariat')}}
+{% else %}
+<b>{{this.user}}</b>
+<br/>{{this.user.coaching_type or _('Secretariat')}}
+{% endif %}
+</p>
+<p class="Centered9pt">
+{{- settings.SITE.site_version() -}}
+</p>
