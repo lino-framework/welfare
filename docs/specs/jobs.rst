@@ -6,14 +6,14 @@ The Jobs plugin
 ===============
 
 .. doctest initialization:
-    
+
     >>> from lino import startup
     >>> startup('lino_welfare.projects.gerd.settings.doctests')
     >>> from lino.api.doctest import *
 
     Repair database after uncomplete test run:
     >>> settings.SITE.site_config.update(hide_events_before=i2d(20140401))
-    
+
 
 The :mod:`lino_welfare.modlib.jobs` plugin provides functionality for
 managing *job supplyment* (German *Art-60§7-Konventionen*, French
@@ -47,22 +47,22 @@ Jobs
 
 The central concept added by this module is a table of **jobs**.
 
->>> with translation.override('de'):
-...     ses.show(jobs.Jobs, column_names="function provider sector")
+>>> ses.show(jobs.Jobs, column_names="function provider sector", language="de")
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-================= ================================ ==========================
- Funktion          Stellenanbieter                  Sektor
------------------ -------------------------------- --------------------------
- Kellner           BISA                             Landwirtschaft & Garten
- Kellner           R-Cycle Sperrgutsortierzentrum   Horeca
- Koch              R-Cycle Sperrgutsortierzentrum   Seefahrt
- Koch              Pro Aktiv V.o.G.                 Unterricht
- Küchenassistent   Pro Aktiv V.o.G.                 Medizin & Paramedizin
- Küchenassistent   BISA                             Reinigung
- Tellerwäscher     BISA                             Bauwesen & Gebäudepflege
- Tellerwäscher     R-Cycle Sperrgutsortierzentrum   Transport
-================= ================================ ==========================
+=================== ================================ ==========================
+ Berufsbezeichnung   Stellenanbieter                  Sektor
+------------------- -------------------------------- --------------------------
+ Kellner             BISA                             Landwirtschaft & Garten
+ Kellner             R-Cycle Sperrgutsortierzentrum   Horeca
+ Koch                R-Cycle Sperrgutsortierzentrum   Seefahrt
+ Koch                Pro Aktiv V.o.G.                 Unterricht
+ Küchenassistent     Pro Aktiv V.o.G.                 Medizin & Paramedizin
+ Küchenassistent     BISA                             Reinigung
+ Tellerwäscher       BISA                             Bauwesen & Gebäudepflege
+ Tellerwäscher       R-Cycle Sperrgutsortierzentrum   Transport
+=================== ================================ ==========================
 <BLANKLINE>
+
 
 
 Job providers
@@ -87,11 +87,11 @@ Job Offers
 
 >>> # settings.SITE.catch_layout_exceptions = False
 >>> ses.show(jobs.Offers)  #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE
-======================== ================== ========================= ========== ================ ============== =============
- Name                     Stellenanbieter    Sektor                    Funktion   Beginn Auswahl   Ende Auswahl   Beginndatum
------------------------- ------------------ ------------------------- ---------- ---------------- -------------- -------------
- Übersetzer DE-FR (m/w)   Pro Aktiv V.o.G.   Landwirtschaft & Garten   Kellner    22.01.14         02.05.14       01.06.14
-======================== ================== ========================= ========== ================ ============== =============
+======================== ================== ========================= =================== ================ ============== =============
+ Name                     Stellenanbieter    Sektor                    Berufsbezeichnung   Beginn Auswahl   Ende Auswahl   Beginndatum
+------------------------ ------------------ ------------------------- ------------------- ---------------- -------------- -------------
+ Übersetzer DE-FR (m/w)   Pro Aktiv V.o.G.   Landwirtschaft & Garten   Kellner             22.01.14         02.05.14       01.06.14
+======================== ================== ========================= =================== ================ ============== =============
 <BLANKLINE>
 
 
@@ -392,4 +392,3 @@ True
 
 This bug was fixed :blogref:`20130423`.
 Note: the ``webdav/`` is only there when :attr:`lino.core.site.Site.use_java` is `True`.
-

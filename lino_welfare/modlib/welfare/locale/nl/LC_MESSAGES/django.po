@@ -2478,19 +2478,19 @@ msgid "Job Contract Types"
 msgstr ""
 
 #: lino_welfare/modlib/jobs/models.py:195
-msgid "Job Sector"
+msgid "Activity sector"
 msgstr ""
 
 #: lino_welfare/modlib/jobs/models.py:196
-msgid "Job Sectors"
+msgid "Activity sectors"
 msgstr ""
 
 #: lino_welfare/modlib/jobs/models.py:220
-msgid "Job Function"
+msgid "Job title"
 msgstr ""
 
 #: lino_welfare/modlib/jobs/models.py:221
-msgid "Job Functions"
+msgid "Job titles"
 msgstr ""
 
 #: lino_welfare/modlib/jobs/models.py:268

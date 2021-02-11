@@ -1,33 +1,30 @@
+.. doctest docs/specs/welcht/cv2.rst
 .. _welfare.specs.cv2:
 
 =====================
 Career (new version)
 =====================
 
-.. How to test only this document:
+This document describes the
+:mod:`lino_welcht.lib.cv` plugin, which
+extends the standard :mod:`lino_xl.lib.cv` plugin.
 
-    $ python setup.py test -s tests.SpecsTests.test_cv2
-    
-    doctest init:
-    >>> import lino
-    >>> lino.startup('lino_welfare.projects.mathieu.settings.doctests')
-    >>> from lino.api.doctest import *
 
-A technical tour into the
-:mod:`lino_welcht.lib.cv` plugin.
+>>> import lino
+>>> lino.startup('lino_welfare.projects.mathieu.settings.doctests')
+>>> from lino.api.doctest import *
 
-Lino Welfare extends the standard :mod:`lino.modlib.cv` plugin 
 
 .. contents::
    :depth: 2
 
-    
+
 >>> dd.today()
 datetime.date(2014, 5, 22)
 
 
 Configuration data
-========================
+==================
 
 This is the list of training types:
 
@@ -129,4 +126,53 @@ Obstacles
  Alcohol                             22/05/2014
  Santé                               22/05/2014
 ===================== ============= ============ ==========
+<BLANKLINE>
+
+The list of :term:`activity sectors <activity sector>` is configurable via
+:menuselection:`Configuration --> Career --> Activity sectors`.
+
+>>> show_menu_path(cv.Sectors, language="en")
+Configure --> Career --> Activity sectors
+>>> show_menu_path(cv.Sectors, language="fr")
+Configuration --> Parcours --> Secteurs d'activité
+
+>>> rt.show(cv.Sectors)
+==== ============================ ========================== ============================ ==========
+ ID   Désignation                  Désignation (de)           Désignation (en)             Remarque
+---- ---------------------------- -------------------------- ---------------------------- ----------
+ 14   Administration & Finance     Verwaltung & Finanzwesen   Administration & Finance
+ 1    Agriculture & horticulture   Landwirtschaft & Garten    Agriculture & horticulture
+ 4    Construction & bâtiment      Bauwesen & Gebäudepflege   Construction & buildings
+ 12   Cosmétique                   Kosmetik                   Esthetical
+ 10   Culture                      Kultur                     Cultural
+ 6    Enseignement                 Unterricht                 Education
+ 5    Horeca                       Horeca                     Tourism
+ 11   Informatique                 Informatik                 Information Technology
+ 2    Maritime                     Seefahrt                   Maritime
+ 3    Médical & paramédical        Medizin & Paramedizin      Medical & paramedical
+ 7    Nettoyage                    Reinigung                  Cleaning
+ 9    Textile                      Textil                     Textile
+ 8    Transport                    Transport                  Transport
+ 13   Vente                        Verkauf                    Sales
+==== ============================ ========================== ============================ ==========
+<BLANKLINE>
+
+The list of :term:`job titles <job title>` is configurable via
+:menuselection:`Configure --> Career --> Job titles`.
+
+>>> show_menu_path(cv.Functions, language="en")
+Configure --> Career --> Job titles
+
+>>> show_menu_path(cv.Functions, language="fr")
+Configuration --> Parcours --> Fonctions professionnelles
+
+>>> rt.show(cv.Functions)
+================ ================== ================== ====================
+ Désignation      Désignation (de)   Désignation (en)   Secteur d'activité
+---------------- ------------------ ------------------ --------------------
+ Aide Cuisinier   Küchenassistent    Cook assistant     Horeca
+ Cuisinier        Koch               Cook               Horeca
+ Plongeur         Tellerwäscher      Dishwasher         Horeca
+ Serveur          Kellner            Waiter             Horeca
+================ ================== ================== ====================
 <BLANKLINE>

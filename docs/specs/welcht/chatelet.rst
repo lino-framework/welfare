@@ -85,7 +85,7 @@ Romain
   - Calendrier : Calendriers, Locaux, Évènements periodiques, Rôles de participants, Types d'entrée calendrier, Règles de récurrence, Calendriers externes, Lignes de planificateur
   - Ateliers : Savoirs de base, Topics, Timetable Slots
   - CPAS : Droits chômage, Types d'aide sociale, Catégories , Types de contact client, Services, Raisons d’arrêt d'intervention
-  - Parcours : Types d'éducation, Niveaux académiques, Secteurs, Fonctions, Régimes de travail, Statuts, Types de contrat, Types de compétence sociale, Types de freins, Preuves de qualification, Langues
+  - Parcours : Types d'éducation, Niveaux académiques, Secteurs d'activité, Fonctions professionnelles, Régimes de travail, Statuts, Types de contrat, Types de compétence sociale, Types de freins, Preuves de qualification, Langues
   - Intégration : Types de PIIS, Motifs d’arrêt de contrat, Régimes d'évaluation, Types de mise à l'emploi art60§7, Types de poste, Horaires, Types de mise à l'emploi art.61, Types de stage d'immersion, Objectifs
   - Nouvelles demandes : Intermédiaires, Spécificités
   - BCSS : Secteurs, Codes fonction
@@ -940,8 +940,8 @@ Here is the output of :func:`walk_menu_items
 - Configuration --> CPAS --> Raisons d’arrêt d'intervention : 5
 - Configuration --> Parcours --> Types d'éducation : 12
 - Configuration --> Parcours --> Niveaux académiques : 6
-- Configuration --> Parcours --> Secteurs : 15
-- Configuration --> Parcours --> Fonctions : 5
+- Configuration --> Parcours --> Secteurs d'activité : 15
+- Configuration --> Parcours --> Fonctions professionnelles : 5
 - Configuration --> Parcours --> Régimes de travail : 4
 - Configuration --> Parcours --> Statuts : 8
 - Configuration --> Parcours --> Types de contrat : 6

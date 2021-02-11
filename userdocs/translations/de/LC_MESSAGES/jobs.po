@@ -59,11 +59,11 @@ msgstr ""
 #~ msgstr ""
 
 # 4e162b2e3359430d877cdcef3aa59104
-#~ msgid "Job Sector (model in app \"jobs\")"
+#~ msgid "Activity sector (model in app \"jobs\")"
 #~ msgstr ""
 
 # 8c004ae9727e478bb671065e1c56d5e6
-#~ msgid "Job Function (model in app \"jobs\")"
+#~ msgid "Job title (model in app \"jobs\")"
 #~ msgstr ""
 
 # a39a9c2dc2d6467a937688c1a9e6fdc3
@@ -135,11 +135,11 @@ msgstr ""
 #~ msgstr ""
 
 # 8f06666059f54943abbb716cdc3940d7
-#~ msgid "Job Sector (model)"
+#~ msgid "Activity sector (model)"
 #~ msgstr ""
 
 # 73b78f1f31474e97bde2b5e8d94a5a34
-#~ msgid "Job Function (model)"
+#~ msgid "Job title (model)"
 #~ msgstr ""
 
 # e200b4f8534a44d6b66e496fd4d00139
@@ -199,11 +199,11 @@ msgstr ""
 #~ msgstr ""
 
 # 9297866790f1415c990721fc5b7916c9
-#~ msgid "Job Sector (model in jobs)"
+#~ msgid "Activity sector (model in jobs)"
 #~ msgstr ""
 
 # d119660bc54d4528891bb2ced01a72ed
-#~ msgid "Job Function (model in jobs)"
+#~ msgid "Job title (model in jobs)"
 #~ msgstr ""
 
 # d7301e7125ad4164aabaf52fec0210d9

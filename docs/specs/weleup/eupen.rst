@@ -96,7 +96,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Kalender : Kalenderliste, Räume, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien, Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe
   - Buchhaltung : Haushaltsartikel, Journale, Geschäftsjahre, Buchungsperioden, Zahlungsbedingungen
-  - Lebenslauf : Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
+  - Lebenslauf : Bildungsarten, Akademische Grade, Sektoren, Berufsbezeichnungen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
   - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche
@@ -198,7 +198,7 @@ to explicitly override the language of :meth:`show_menu
   - Büro : Dateibibliotheken, Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Regelmäßige Ereignisse, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien, Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe
-  - Lebenslauf : Bildungsarten, Akademische Grade, Sektoren, Funktionen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
+  - Lebenslauf : Bildungsarten, Akademische Grade, Sektoren, Berufsbezeichnungen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
   - Kurse : Kursinhalte
   - Erstempfang : Vermittler, Fachbereiche
@@ -1118,7 +1118,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Lebenslauf --> Bildungsarten : 12
 - Konfigurierung --> Lebenslauf --> Akademische Grade : 6
 - Konfigurierung --> Lebenslauf --> Sektoren : 15
-- Konfigurierung --> Lebenslauf --> Funktionen : 5
+- Konfigurierung --> Lebenslauf --> Berufsbezeichnungen : 5
 - Konfigurierung --> Lebenslauf --> Arbeitsregimes : 4
 - Konfigurierung --> Lebenslauf --> Statuus : 8
 - Konfigurierung --> Lebenslauf --> Vertragsdauern : 6
