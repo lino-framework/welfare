@@ -10,7 +10,6 @@ made in TIM to the Lino database.
 
 """
 
-from builtins import str
 import os
 import codecs
 import time
@@ -295,7 +294,7 @@ def PAR_model(data):
     """
     - wer eine SSIN oder Gesdos-Nr hat ist ein Klient, selbst wenn er auch eine Mwst-Nummer hat.
     - Neuzugänge (Attribut N) sind ebenfalls immer Klienten
-    
+
     """
     has_first_name = len(data.get('FIRME', '').split()) > 1
     if has_first_name:
@@ -505,7 +504,7 @@ class PAR(Controller):
       - Household
       - Person
         - Client
-    
+
     """
 
     #~ def prepare_data(self,data):
@@ -583,7 +582,7 @@ class PAR(Controller):
                         #~ u = users.User.objects.get(username=username)
                         """
                         typical cases:
-                        - imported client has been assigned a coach in Lino, 
+                        - imported client has been assigned a coach in Lino,
                           then filled IDUSR and removed PARATTR_N in TIM
                         """
                     else:
@@ -650,7 +649,7 @@ class PAR(Controller):
 
                         if u is not None and coaching.user != u:
                             """
-                            create a new coaching 
+                            create a new coaching
                             """
                             coaching = rt.models.coachings.Coaching(
                                 client=obj, primary=True,
@@ -730,7 +729,7 @@ class PAR(Controller):
         """
         Convert the watched object to a new_class instance and apply data accordingly.
         Caution: Here be dragons! See also :mod:`lino_welfare.tests.watchtim_tests`.
-          
+
         """
         obj = watcher.watched
         old_class = obj.__class__
@@ -800,16 +799,16 @@ class PXS(Controller):
     "Controller for importing PXS changes to Person."
 
     allow_put2post = False
-    """This is False because the following case cannot be resolved: 
-    a Person that exists in TIM but not in Lino gets her PXS modified in TIM. 
-    TIM issues a PUT on PXS. Lino cannot convert this into a POST and create 
+    """This is False because the following case cannot be resolved:
+    a Person that exists in TIM but not in Lino gets her PXS modified in TIM.
+    TIM issues a PUT on PXS. Lino cannot convert this into a POST and create
     the person because e.g. name ist not known.
-    
-    TIM schreibt beim Erstellen eines neuen Partners logischerweise 
-    sowohl für PAR als auch für PXS ein POST. Weil die beiden in Lino 
-    aber eine einzige Tabelle sind, bekamen wir dann beim POST des PXS 
+
+    TIM schreibt beim Erstellen eines neuen Partners logischerweise
+    sowohl für PAR als auch für PXS ein POST. Weil die beiden in Lino
+    aber eine einzige Tabelle sind, bekamen wir dann beim POST des PXS
     eine Fehlermeldung "Partner with this id already exists".
-        
+
     """
 
     def create_object(self, kw):
@@ -894,7 +893,7 @@ class ADR(Controller):
 
     u"""
     Aus ADR werden nur die Krankenkassen (d.h. ADR->IdMut nicht leer)
-    nach Lino übernommen, 
+    nach Lino übernommen,
     wobei `Company.id = 199000 + int(ADR->IdMut)`.
     """
     model = Company

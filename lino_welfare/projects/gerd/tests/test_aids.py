@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2017 Rumma & Ko Ltd
+# Copyright 2017-2021 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """Miscellaneous tests on an empty database.
@@ -13,7 +13,7 @@ You can run only these tests by issuing::
 
 
 from django.conf import settings
-from django.utils import translation, six
+from django.utils import translation
 from django.core.exceptions import ValidationError
 
 from rstgen.utils import i2d
@@ -77,9 +77,5 @@ class TestCase(TestCase):
                 obj.full_clean()
                 self.fail("Expected ValidationError")
             except ValidationError as e:
-                if six.PY2:
-                    self.assertEqual(
-                    str(e), "[u'Date range 31/03/2018...31/03/2018 lies outside of granted period 01/04/2018....']")
-                else:
-                    self.assertEqual(
-                        str(e), "['Date range 31/03/2018...31/03/2018 lies outside of granted period 01/04/2018....']")
+                self.assertEqual(
+                    str(e), "['Date range 31/03/2018...31/03/2018 lies outside of granted period 01/04/2018....']")
