@@ -19,7 +19,7 @@
 
 """
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from lino.utils.instantiator import Instantiator, i2d
 from lino.api.dd import babelkw

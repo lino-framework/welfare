@@ -8,7 +8,7 @@ Lino-Welfare extension of :mod:`lino_xl.lib.contacts`
 from lino_xl.lib.contacts import Plugin
 
 from django.utils.text import format_lazy
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 class Plugin(Plugin):

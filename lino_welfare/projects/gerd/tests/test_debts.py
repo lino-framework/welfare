@@ -5,14 +5,10 @@
 
 How to run only this test::
 
-  $ go welfare
-  $ cd lino_welfare/projects/eupen
+  $ go gerd
   $ python manage.py test tests.test_debts
 
 """
-
-from __future__ import unicode_literals
-from __future__ import print_function
 
 import logging
 logger = logging.getLogger(__name__)
@@ -47,13 +43,13 @@ class DebtsTests(RemoteAuthTestCase):
         Budget = rt.models.debts.Budget
         Actor = rt.models.debts.Actor
         Entry = rt.models.debts.Entry
-        
+
         def check_count(b, a, e):
             self.assertEqual(Budget.objects.count(), b)
             self.assertEqual(Actor.objects.count(), a)
             self.assertEqual(Entry.objects.count(), e)
-        
-        
+
+
 
         u = users.User(username='root',
                        user_type=UserTypes.admin,
@@ -81,7 +77,7 @@ class DebtsTests(RemoteAuthTestCase):
 
         # Reproduce ticket #521
         ar = rt.login('root')
-        
+
         p1 = Person(first_name="A", last_name="A", gender=Genders.male)
         p1.save()
         p2 = Person(first_name="B", last_name="B", gender=Genders.female)
@@ -93,12 +89,12 @@ class DebtsTests(RemoteAuthTestCase):
         h.add_member(None)
 
         check_count(0, 0, 0)
-        
+
         b = Budget(partner=h, user=u)
         b.save()
         b.fill_defaults()
-        # from django.utils.encoding import force_text
-        # s = ' & '.join([force_text(a) for a in b.get_actors()])
+        # from django.utils.encoding import force_str
+        # s = ' & '.join([force_str(a) for a in b.get_actors()])
         # s = '{0} & {1}'.format(*b.get_actors())
         # self.assertEqual(s, "Mr. & Mrs.")
 
@@ -107,7 +103,7 @@ class DebtsTests(RemoteAuthTestCase):
         ## (after duplicating a budget)) and verify ticket #471
         ## (Become the author after duplicating a budget).
         ##
-        
+
         self.assertEqual(b.user.username, 'root')
         self.assertEqual(b.id, 1)
 
@@ -118,15 +114,15 @@ class DebtsTests(RemoteAuthTestCase):
         ar = rt.login('other')
 
         check_count(1, 2, 44)
-        
+
         new = b.duplicate.run_from_code(ar)
         self.assertEqual(new.user.username, 'other')
         self.assertEqual(new.id, 2)
-        
+
         check_count(2, 4, 88)
         new = Budget.objects.get(pk=2)
         self.assertEqual(new.user.username, 'other')
-       
+
         url = "/api/debts/Budgets/1?&an=duplicate&sr=1"
         dlg = []
         dlg.append((

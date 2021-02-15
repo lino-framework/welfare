@@ -7,7 +7,7 @@ Now done by :mod:`lino_welfare.modlib.integ.fixtures.demo`
 
 """
 
-# from django.utils.translation import ugettext_lazy as _
+# from django.utils.translation import gettext_lazy as _
 
 from lino.api import rt, dd
 from lino.utils.cycler import Cycler

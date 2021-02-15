@@ -21,7 +21,7 @@ import decimal
 from lino.utils import ONE_DAY
 
 from django.conf import settings
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from lino.utils import Cycler
 from lino.api import rt

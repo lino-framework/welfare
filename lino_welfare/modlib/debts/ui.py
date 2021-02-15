@@ -12,9 +12,9 @@ import logging ; logger = logging.getLogger(__name__)
 import decimal
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from lino.api import dd
 from lino.core.constants import _handle_attr_name
@@ -528,8 +528,8 @@ class SummaryTable(dd.VirtualTable):
 
     @dd.displayfield(_("Description"))
     def desc(self, row, ar):
-        # print("20160531 get_data_rows", force_text(row[0]))
-        return force_text(row[0])
+        # print("20160531 get_data_rows", force_str(row[0]))
+        return force_str(row[0])
 
     @dd.virtualfield(dd.PriceField(_("Amount")))
     def amount(self, row, ar):

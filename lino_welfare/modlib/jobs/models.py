@@ -13,9 +13,9 @@ import logging ; logger = logging.getLogger(__name__)
 
 from django.db import models
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext_lazy as pgettext
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from lino.api import dd, rt
 from lino import mixins
@@ -661,7 +661,7 @@ class Candidature(SectorFunction):
         return s
 
     def __str__(self):
-        return force_text(_('Candidature by %(person)s') % dict(
+        return force_str(_('Candidature by %(person)s') % dict(
             person=self.person.get_full_name(salutation=False)))
 
     #~ @dd.chooser()

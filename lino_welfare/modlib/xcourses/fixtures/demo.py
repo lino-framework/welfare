@@ -13,7 +13,7 @@ import datetime
 ONE_DAY = datetime.timedelta(days=1)
 
 from django.conf import settings
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 from lino.api import dd, rt

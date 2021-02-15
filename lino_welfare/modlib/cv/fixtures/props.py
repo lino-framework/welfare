@@ -9,7 +9,7 @@ Installs a set of property types and property groups specific to
 """
 
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.conf import settings
 
 from lino.utils.instantiator import Instantiator

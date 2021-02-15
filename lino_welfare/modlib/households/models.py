@@ -9,7 +9,7 @@ from lino_xl.lib.households.models import *
 
 from lino_xl.lib.households.choicelists import child_roles, parent_roles
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ungettext
 
 # There is a Partner model imported from lino_xl.lib.households, but

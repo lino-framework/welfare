@@ -9,7 +9,7 @@ The demo fixture for :mod:`welfare.aids`.
 from builtins import range
 import datetime
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from lino.api.dd import resolve_model
 from lino.utils import Cycler
 from lino.utils import mti

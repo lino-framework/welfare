@@ -1,23 +1,18 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2019 Rumma & Ko Ltd
+# Copyright 2015-2021 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """Miscellaneous tests on an empty database.
 
 You can run just these tests by issuing::
 
-  $ cd lino_welcht/demo
-  $ python manage.py test tests.test_chatelet
+  $ go mathieu
+  $ pm test tests.test_chatelet
 
 """
 
-from __future__ import unicode_literals, print_function
-
-from builtins import str
-
 from django.conf import settings
 from django.core.exceptions import ValidationError
-import six
 
 from lino.api import rt
 from lino.core import constants
@@ -64,7 +59,7 @@ class TestCase(TestCase):
         colnames = [col.name for col in rh.get_columns()]
         colnames.sort()
         self.assertEqual(
-            'detected_date id overview person remark type user workflow_buttons',
+            'detected_date id name_column overview person remark type user workflow_buttons',
             ' '.join(colnames))
 
         url = "/api/cv/ObstaclesByPerson"
@@ -80,32 +75,18 @@ class TestCase(TestCase):
             REMOTE_USER='robin')
         result = self.check_json_result(response, 'rows success message navinfo')
         self.assertEqual(result['success'], True)
-        if six.PY2:
-            self.assertEqual(
-                # result['message'],
-                # """Freins "Obstacle object" a \xe9t\xe9 cr\xe9\xe9""")
-                result['message'],
-                """Obstacle "Obstacle object" has been created.""")
-            self.assertEqual(result['rows'], [
-                ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
-                 '<span />',
-                 '<div><em>Obstacle object</em></div>',
-                 '<div><em>Obstacle object</em></div>',
-                 'First LAST', 100,
-                 {'id': True}, False]])
-        else:
-            self.assertEqual(
-                # result['message'],
-                # """Freins "Obstacle object" a \xe9t\xe9 cr\xe9\xe9""")
-                result['message'],
-                """Obstacle "Obstacle object (1)" has been created.""")
-            # print(result['rows'])
-            self.assertEqual(result['rows'], [
-                ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
-                 '<div><em>Obstacle object (1)</em></div>',
-                 '<div><em>Obstacle object (1)</em></div>',
-                 '<span />', 'First LAST', 100,
-                 {'id': True}, False]])
+        self.assertEqual(
+            # result['message'],
+            # """Freins "Obstacle object" a \xe9t\xe9 cr\xe9\xe9""")
+            result['message'],
+            """Obstacle "Obstacle object (1)" has been created.""")
+        # print(result['rows'])
+        self.assertEqual(result['rows'], [
+            ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
+             'Obstacle object (1)',
+             '<div><em>Obstacle object (1)</em></div>',
+             '<span />', 'First LAST', 100,
+             {'id': True}, False]])
 
         self.assertEqual(Obstacle.objects.get(pk=1).user.username, 'robin')
 
@@ -217,10 +198,5 @@ class TestCase(TestCase):
                             state=EnrolmentStates.confirmed, pupil=pupil)
             self.fail("Expected ValidationError")
         except ValidationError as e:
-            if six.PY2:
-                expected = "{'__all__': [u'Un object Inscription avec ces " \
-                           "champs Atelier et B\\xe9n\\xe9ficiaire existe " \
-                           "d\\xe9j\\xe0.']}"
-            else:
-                expected = "{'__all__': ['Un object Inscription avec ces champs Atelier et Bénéficiaire existe déjà.']}"
+            expected = "{'__all__': ['Un objet Inscription avec ces champs Atelier et Participant existe déjà.']}"
             self.assertEqual(str(e), expected)
