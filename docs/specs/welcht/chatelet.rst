@@ -278,7 +278,7 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
  sessions.Session               users.Sessions                  3         ...
  system.SiteConfig              system.SiteConfigs              29        1
  tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
- uploads.Upload                 uploads.Uploads                 19        5
+ uploads.Upload                 uploads.Uploads                 20        5
  uploads.UploadType             uploads.UploadTypes             11        9
  uploads.Volume                 uploads.Volumes                 5         0
  users.Authority                users.Authorities               3         3

@@ -320,7 +320,8 @@ Now let's inspect the javascript of the first button
 >>> pprint(d)
 {'base_params': {'mk': 124, 'mt': 56, 'type_id': 1},
  'data_record': {'data': {'description': '',
-                          'disabled_fields': {'mimetype': True},
+                          'disabled_fields': {'file_size': True,
+                                              'mimetype': True},
                           'end_date': None,
                           'file': '',
                           'needed': True,
