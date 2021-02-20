@@ -1,12 +1,8 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2018 Rumma & Ko Ltd
+# Copyright 2014-2021 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
-from __future__ import unicode_literals
-
-from builtins import str
-import logging
-logger = logging.getLogger(__name__)
+import logging ; logger = logging.getLogger(__name__)
 
 from django.conf import settings
 from django.db import models

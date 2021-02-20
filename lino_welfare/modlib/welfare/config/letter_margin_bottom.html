@@ -1,12 +1,26 @@
-<p class="Centered12pt">
-{% if isinstance(this.project, rt.models.pcsw.Client) %}
-<b>{{this.project.get_primary_coach() or this.user}}</b>
-<br/>{{this.project.get_primary_coach().coaching_type or _('Secretariat')}}
-{% else %}
-<b>{{this.user}}</b>
-<br/>{{this.user.coaching_type or _('Secretariat')}}
-{% endif %}
+<p class="Centered10pt">
+<b>
+<br/>Öffentliches
+<br/>Sozialhilfezentrum
+<br/>Centre Public
+<br/>d’Action Sociale
+</b>
 </p>
+{% if isinstance(this.owner, rt.models.aids.Confirmation) %}
+<p class="Centered12pt">
+<b>{{this.owner.signer or this.user}}</b>
+</p>
+<p class="Centered9pt">
+<br/>{{(this.owner.signer or this.user).coaching_type or _('Secretariat')}}
+</p>
+{% else %}
+<p class="Centered12pt">
+<b>{{this.user}}</b>
+</p>
+<p class="Centered9pt">
+<br/>{{this.user.coaching_type or _('Secretariat')}}
+</p>
+{% endif %}
 <p class="Centered9pt">
 {{- settings.SITE.site_version() -}}
 </p>

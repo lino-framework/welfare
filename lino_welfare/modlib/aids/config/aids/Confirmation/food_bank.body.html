@@ -15,7 +15,7 @@ du droit d'utiliser la banque alimentaire.
 {% endif %}
 </p>
 <p>
-{{ ar.show(rt.models.households.RefundsByPerson, obj.client) }}
+{{ ar.show(rt.models.households.RefundsByPerson, obj.client, column_names="person_info age:10 gender:10") }}
 </p>
 {%- endblock %}
 
