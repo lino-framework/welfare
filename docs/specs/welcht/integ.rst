@@ -19,7 +19,7 @@ Table of contents:
 .. include:: /../docs/shared/include/tested.rst
 
 >>> import lino
->>> lino.startup('lino_welfare.projects.mathieu.settings.doctests')
+>>> lino.startup('lino_welfare.projects.mathieu.settings.demo')
 >>> from lino.api.doctest import *
 
 >>> ses = rt.login('robin')

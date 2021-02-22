@@ -11,7 +11,7 @@ extends the standard :mod:`lino_xl.lib.cv` plugin.
 
 
 >>> import lino
->>> lino.startup('lino_welfare.projects.mathieu.settings.doctests')
+>>> lino.startup('lino_welfare.projects.mathieu.settings.demo')
 >>> from lino.api.doctest import *
 
 

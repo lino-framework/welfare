@@ -22,7 +22,7 @@ class Site(Site):
     url = lino_welfare.SETUP_INFO['url']
 
     demo_fixtures = """std std2 few_languages demo
-    demo2 cbss checkdata""".split()
+    demo2 demo3 cbss checkdata""".split()
 
     languages = 'en fr de nl'
     hidden_languages = 'nl'

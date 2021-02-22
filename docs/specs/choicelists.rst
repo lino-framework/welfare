@@ -58,7 +58,7 @@ Here are the choicelists used in Lino Welfare:
  cbss.RequestLanguages           3        14                None                               None                               None
  cbss.RequestStates              6        15                Zustände cbss request              États cbss request                 cbss request states
  changes.ChangeTypes             6        14                Änderungsarten                     Änderungsarten                     Change Types
- checkdata.Checkers              17       49                Datentests                         Tests de données                   Data checkers
+ checkdata.Checkers              19       49                Datentests                         Tests de données                   Data checkers
  clients.ClientEvents            10       19                Beobachtungskriterien              Évènements observés                Observed events
  clients.ClientStates            4        9                 Bearbeitungszustände Klienten      Etats bénéficiaires                Client states
  clients.KnownContactTypes       2        9                 Standard-Klientenkontaktarten      Types de contact connus            Known contact types

@@ -1,21 +1,18 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2020 Rumma & Ko Ltd
+# Copyright 2015-2021 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
-"""
-Demo data for this plugin.
-"""
 
-from builtins import range
+# from pathlib import Path
 from django.conf import settings
+
 from lino.utils import Cycler
 from lino.api import dd, rt
-
 from lino.modlib.uploads.choicelists import Shortcuts
-
 from lino_xl.lib.uploads.fixtures.std import (
     UPLOADTYPE_RESIDENCE_PERMIT,
     UPLOADTYPE_WORK_PERMIT,
     UPLOADTYPE_DRIVING_LICENSE)
+from lino.modlib.uploads.mixins import demo_upload
 
 
 def objects():
@@ -59,9 +56,9 @@ def objects():
     # this coached client has three documents uploaded:
 
     kw = dict(owner=coached)
-    yield Upload(type=residence_permit, end_date=dd.demo_date(300),
-                 user=clerk, **kw)
-    yield Upload(type=work_permit, end_date=dd.demo_date(100),
-                 user=ai, **kw)
-    yield Upload(type=driving_license, end_date=dd.demo_date(10),
-                 user=agent, **kw)
+    yield demo_upload("residence_permit.pdf", type=residence_permit,
+        end_date=dd.demo_date(300), user=clerk, **kw)
+    yield demo_upload("work_permit.pdf", type=work_permit,
+        end_date=dd.demo_date(100), user=ai, **kw)
+    yield demo_upload("driving_license.pdf", type=driving_license,
+        end_date=dd.demo_date(10), user=agent, **kw)

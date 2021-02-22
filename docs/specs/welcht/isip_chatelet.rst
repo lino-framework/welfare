@@ -1,3 +1,4 @@
+.. doctest docs/specs/welcht/isip_chatelet.rst
 .. _welfare.specs.isip_chatelet:
 .. _welcht.specs.isip:
 
@@ -5,18 +6,12 @@
 ISIP contracts (Chatelet)
 =========================
 
-.. How to test only this document:
+>>> from lino import startup
+>>> startup('lino_welfare.projects.mathieu.settings.demo')
+>>> from lino.api.doctest import *
 
-    $ doctest docs/specs/isip_chatelet.rst
-    
-    Doctest initialization:
-
-    >>> from lino import startup
-    >>> startup('lino_welfare.projects.mathieu.settings.doctests')
-    >>> from lino.api.doctest import *
-
-    >>> ses = rt.login('robin')
-    >>> translation.activate('en')
+>>> ses = rt.login('robin')
+>>> translation.activate('en')
 
 
 .. contents::
@@ -64,7 +59,7 @@ Contracts
 <BLANKLINE>
 
 
-This contract has a slave table 
+This contract has a slave table
 :class:`EntriesByContract<lino_welfare.modlib.isip.models.EntriesByContract>`
 which contains non-ascii characters:
 

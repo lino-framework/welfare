@@ -101,17 +101,17 @@ Here is another client with three uploads:
 DOBBELSTEIN Dorothée (124)
 
 >>> rt.show(uploads.UploadsByProject, oldclient)
-Aufenthaltserlaubnis: *13* / Arbeitserlaubnis: *14* / Führerschein: *15* / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,124,{  })>`__
+Aufenthaltserlaubnis: *residence_permit.pdf* `⇲ </media/uploads/2014/05/residence_permit.pdf>`__ / Arbeitserlaubnis: *work_permit.pdf* `⇲ </media/uploads/2014/05/work_permit.pdf>`__ / Führerschein: *driving_license.pdf* `⇲ </media/uploads/2014/05/driving_license.pdf>`__ / `🖿 <javascript:Lino.pcsw.Clients.show_uploads(null,false,124,{  })>`__
 
 
 >>> rt.show(uploads.UploadsByProject, oldclient, nosummary=True)
-====================== ============ ======= ====================== ===================
- Upload-Art             Gültig bis   Nötig   Beschreibung           Hochgeladen durch
----------------------- ------------ ------- ---------------------- -------------------
- Führerschein           01.06.14     Ja      Führerschein           Caroline Carnol
- Arbeitserlaubnis       30.08.14     Ja      Arbeitserlaubnis       Alicia Allmanns
- Aufenthaltserlaubnis   18.03.15     Ja      Aufenthaltserlaubnis   Theresia Thelen
-====================== ============ ======= ====================== ===================
+====================== ============ ======= ======================================================================== ===================
+ Upload-Art             Gültig bis   Nötig   Beschreibung                                                             Hochgeladen durch
+---------------------- ------------ ------- ------------------------------------------------------------------------ -------------------
+ Führerschein           01.06.14     Ja      `driving_license.pdf </media/uploads/2014/05/driving_license.pdf>`__     Caroline Carnol
+ Arbeitserlaubnis       30.08.14     Ja      `work_permit.pdf </media/uploads/2014/05/work_permit.pdf>`__             Alicia Allmanns
+ Aufenthaltserlaubnis   18.03.15     Ja      `residence_permit.pdf </media/uploads/2014/05/residence_permit.pdf>`__   Theresia Thelen
+====================== ============ ======= ======================================================================== ===================
 <BLANKLINE>
 
 
@@ -130,25 +130,27 @@ Meine ablaufenden Upload-Dateien
 This is the :class:`MyUploads` table for Theresia:
 
 >>> rt.login('theresia').show(uploads.MyUploads)
-==== ============================ ============================ ============ ============ ======= ============================ =======
- ID   Klient                       Upload-Art                   Gültig von   Gültig bis   Nötig   Beschreibung                 Datei
----- ---------------------------- ---------------------------- ------------ ------------ ------- ---------------------------- -------
- 13   DOBBELSTEIN Dorothée (124)   Aufenthaltserlaubnis                      18.03.15     Ja      Aufenthaltserlaubnis
+==== ============================ ============================ ============ ============ ======= ======================================================================== ======================================
+ ID   Klient                       Upload-Art                   Gültig von   Gültig bis   Nötig   Beschreibung                                                             Datei
+---- ---------------------------- ---------------------------- ------------ ------------ ------- ------------------------------------------------------------------------ --------------------------------------
+ 13   DOBBELSTEIN Dorothée (124)   Aufenthaltserlaubnis                      18.03.15     Ja      `residence_permit.pdf </media/uploads/2014/05/residence_permit.pdf>`__   uploads/2014/05/residence_permit.pdf
  12   DERICUM Daniel (121)         Identifizierendes Dokument                25.05.14     Ja      Identifizierendes Dokument
  11   DERICUM Daniel (121)         Identifizierendes Dokument                22.04.14     Nein    Identifizierendes Dokument
-==== ============================ ============================ ============ ============ ======= ============================ =======
+==== ============================ ============================ ============ ============ ======= ======================================================================== ======================================
 <BLANKLINE>
+
 
 
 And the same for Caroline:
 
 >>> rt.login('caroline').show(uploads.MyUploads)
-==== ============================ ============== ============ ============ ======= ============== =======
- ID   Klient                       Upload-Art     Gültig von   Gültig bis   Nötig   Beschreibung   Datei
----- ---------------------------- -------------- ------------ ------------ ------- -------------- -------
- 15   DOBBELSTEIN Dorothée (124)   Führerschein                01.06.14     Ja      Führerschein
-==== ============================ ============== ============ ============ ======= ============== =======
+==== ============================ ============== ============ ============ ======= ====================================================================== =====================================
+ ID   Klient                       Upload-Art     Gültig von   Gültig bis   Nötig   Beschreibung                                                           Datei
+---- ---------------------------- -------------- ------------ ------------ ------- ---------------------------------------------------------------------- -------------------------------------
+ 15   DOBBELSTEIN Dorothée (124)   Führerschein                01.06.14     Ja      `driving_license.pdf </media/uploads/2014/05/driving_license.pdf>`__   uploads/2014/05/driving_license.pdf
+==== ============================ ============== ============ ============ ======= ====================================================================== =====================================
 <BLANKLINE>
+
 
 
 This is the :class:`MyExpiringUploads` table for :ref:`hubert`:
@@ -275,13 +277,13 @@ summary view of `UploadsByProject` returns for this client.
 >>> soup = get_json_soup('rolf', 'pcsw/Clients/124', 'uploads_UploadsByProject')
 >>> print(soup.get_text())
 ... #doctest: +NORMALIZE_WHITESPACE
-Source document: Aufenthaltserlaubnis: 13Arbeitserlaubnis: 14Führerschein: 15Identifizierendes Dokument: Diplom:
+Source document: Aufenthaltserlaubnis: residence_permit.pdf ⇲Arbeitserlaubnis: work_permit.pdf ⇲Führerschein: driving_license.pdf ⇲Identifizierendes Dokument: Diplom:
 
 The HTML fragment contains five links:
 
 >>> links = soup.find_all('a')
 >>> len(links)
-6
+9
 
 
 The first link would run the insert action on `UploadsByProject`, with
@@ -302,11 +304,11 @@ src="/static/images/mjames/add.png"/></a>
 
 >>> print(links[2].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 14 })
+/media/uploads/2014/05/residence_permit.pdf
 
 >>> print(links[3].get('href'))
 ... #doctest: +NORMALIZE_WHITESPACE +ELLIPSIS
-javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 15 })
+javascript:Lino.uploads.Uploads.detail.run(null,{ "record_id": 14 })
 
 
 Now let's inspect the javascript of the first button

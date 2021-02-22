@@ -13,7 +13,7 @@ A technical tour into the :mod:`lino_welfare.modlib.cal` module.
 .. include:: /../docs/shared/include/tested.rst
 
 >>> from lino import startup
->>> startup('lino_welfare.projects.mathieu.settings.doctests')
+>>> startup('lino_welfare.projects.mathieu.settings.demo')
 >>> from lino.api.doctest import *
 
 

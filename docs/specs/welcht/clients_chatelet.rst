@@ -11,7 +11,7 @@ Clients (Chatelet)
 .. include:: /shared/include/tested.rst
 
 >>> import lino
->>> lino.startup('lino_welfare.projects.mathieu.settings.doctests')
+>>> lino.startup('lino_welfare.projects.mathieu.settings.demo')
 >>> from lino.api.doctest import *
 
 

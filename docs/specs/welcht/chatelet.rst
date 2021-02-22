@@ -12,7 +12,7 @@ The Lino Welfare "Châtelet" variant
 .. include:: /../docs/shared/include/tested.rst
 
 >>> from lino import startup
->>> startup('lino_welfare.projects.mathieu.settings.doctests')
+>>> startup('lino_welfare.projects.mathieu.settings.demo')
 >>> from lino.api.doctest import *
 
 
@@ -149,7 +149,7 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
  Name                           Default table                   #fields   #rows
 ------------------------------ ------------------------------- --------- -------
  active_job_search.Proof        active_job_search.Proofs        7         10
- addresses.Address              addresses.Addresses             16        92
+ addresses.Address              addresses.Addresses             16        161
  aids.AidType                   aids.AidTypes                   23        11
  aids.Category                  aids.Categories                 5         3
  aids.Granting                  aids.Grantings                  12        55
@@ -180,7 +180,7 @@ This is the list of models used in the Châtelet variant of Lino Welfare:
  cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        6
  cbss.Sector                    cbss.Sectors                    11        209
  changes.Change                 changes.Changes                 10        0
- checkdata.Problem              checkdata.Problems              6         0
+ checkdata.Problem              checkdata.Problems              6         10
  clients.ClientContact          clients.ClientContacts          7         14
  clients.ClientContactType      clients.ClientContactTypes      8         10
  coachings.Coaching             coachings.Coachings             8         90
@@ -968,7 +968,7 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Contacts --> Personnes de contact : 14
 - Explorateur --> Contacts --> Partenaires : 163
 - Explorateur --> Contacts --> Types d'adresses : 6
-- Explorateur --> Contacts --> Adresses : 93
+- Explorateur --> Contacts --> Adresses : 162
 - Explorateur --> Contacts --> Membres du conseil : 1
 - Explorateur --> Contacts --> Rôles de membres de ménage : 9
 - Explorateur --> Contacts --> Membres de ménage : 64
@@ -981,8 +981,8 @@ Here is the output of :func:`walk_menu_items
 - Explorateur --> Système --> Changes : 0
 - Explorateur --> Système --> All dashboard widgets : 1
 - Explorateur --> Système --> Types de contenu : 136
-- Explorateur --> Système --> Tests de données : 13
-- Explorateur --> Système --> Problèmes de données : 0
+- Explorateur --> Système --> Tests de données : 15
+- Explorateur --> Système --> Problèmes de données : 10
 - Explorateur --> Bureau --> Extraits : 78
 - Explorateur --> Bureau --> Fichiers téléchargés : 6
 - Explorateur --> Bureau --> Domaines de téléchargement : 2

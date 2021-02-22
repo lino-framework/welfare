@@ -17,7 +17,7 @@ The :mod:`lino_welfare.modlib.art61` plugin adds support for managing Article
 .. include:: /../docs/shared/include/tested.rst
 
 >>> from lino import startup
->>> startup('lino_welfare.projects.mathieu.settings.doctests')
+>>> startup('lino_welfare.projects.mathieu.settings.demo')
 >>> from lino.api.doctest import *
 
 

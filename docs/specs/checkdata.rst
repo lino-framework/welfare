@@ -56,6 +56,8 @@ checkers.
  printing.CachedPrintableChecker         Check for missing target files
  sepa.BankAccountChecker                 Check for partner mismatches in bank accounts
  system.BleachChecker                    Find unbleached html content
+ uploads.UploadChecker                   Check metadata of upload files
+ uploads.UploadsFolderChecker            Find orphaned files in uploads folder
 ======================================= ===================================================
 <BLANKLINE>
 

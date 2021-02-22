@@ -1,4 +1,4 @@
-.. doctest docs/specs/immersion.rst
+.. doctest docs/specs/welcht/immersion.rst
 .. _welfare.specs.immersion:
 .. _welcht.specs.immersion:
 
@@ -17,7 +17,7 @@ plugin.
 .. include:: /../docs/shared/include/tested.rst
 
 >>> from lino import startup
->>> startup('lino_welfare.projects.mathieu.settings.doctests')
+>>> startup('lino_welfare.projects.mathieu.settings.demo')
 >>> from lino.api.doctest import *
 
 
