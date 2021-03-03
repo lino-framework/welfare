@@ -11,7 +11,7 @@ for Belgian
 *Public Centres for Social Welfare*.
 
 - The central project homepage is
-  http://welfare.lino-framework.org
+  https://welfare.lino-framework.org
 
 - There are two applications using this library:
   `welcht <http://welcht.lino-framework.org>`__
@@ -22,13 +22,20 @@ for Belgian
   <http://de.welfare.lino-framework.org>`_.
 
 - Online demo sites at
-  http://welfare-demo.lino-framework.org
+  https://welfare-demo.lino-framework.org
   and
-  http://welfare-demo-fr.lino-framework.org
+  https://welfare-demo-fr.lino-framework.org
 
-- For *introductions* and *commercial information* about Lino Welfare
-  see `www.saffre-rumma.net
-  <http://www.saffre-rumma.net/welfare/>`__.
+- This is an integral part of the Lino framework, which is documented
+  at https://www.lino-framework.org
+
+- The changelog is at https://www.lino-framework.org/changes
+
+- For introductions, commercial information and hosting solutions
+  see https://www.saffre-rumma.net
+
+- This is a sustainably free open-source project. Your contributions are
+  welcome.  See https://community.lino-framework.org for details.
 
 
 
