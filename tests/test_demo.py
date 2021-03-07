@@ -10,12 +10,7 @@ from lino.utils.pythontest import TestCase
 
 class TestCase(TestCase):
 
-    def do_test_demo_project(self, prjname):
-        """Run :manage:`test` and :manage:`demotest` in a subprocess in the given demo project.
-        """
-        pth = 'lino_welfare/projects/' + prjname
-        self.run_django_manage_test(pth)
-        self.run_django_admin_command_cd(pth, "demotest")
+    demo_projects_root = 'lino_welfare/projects'
 
     def test_gerd(self): self.do_test_demo_project('gerd')
     def test_mathieu(self): self.do_test_demo_project('mathieu')
