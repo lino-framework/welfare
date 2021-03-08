@@ -4,10 +4,9 @@
 Changes
 =======
 
-Changes in :mod:`lino_welfare` package.
+The changelog for welfare is in :ref:`book.changes`.
 
-See also :ref:`book.changes.2020`.
-
+Old changes in :mod:`lino_welfare` package.
 
 
 .. toctree::
