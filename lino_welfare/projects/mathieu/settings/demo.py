@@ -10,6 +10,8 @@ class Site(Site):
     # use_silk_icons = True  # temporarily
     webdav_protocol = 'webdav'
     # beid_protocol = 'beid'
+    languages = "fr nl de en"
+    hidden_languages = 'nl'
 
 
 SITE = Site(globals())

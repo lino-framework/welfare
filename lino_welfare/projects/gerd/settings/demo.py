@@ -3,6 +3,7 @@ import datetime
 from lino_welfare.projects.gerd.settings import *
 
 class Site(Site):
+    languages = 'de fr en'
     the_demo_date = datetime.date(2014, 5, 22)
     # ignore_dates_after = datetime.date(2019, 05, 22)
     use_java = False
@@ -14,6 +15,9 @@ class Site(Site):
     def get_plugin_configs(self):
         yield super(Site, self).get_plugin_configs()
         yield ('extjs', 'autorefresh_seconds', 5)
+
+    # def get_default_language(self):
+    #     return 'de'
 
 
 SITE = Site(globals())

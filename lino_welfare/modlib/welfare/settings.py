@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2009-2018 Rumma & Ko Ltd
+# Copyright 2009-2021 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """Default settings of a :ref:`welfare` project.
@@ -17,26 +17,20 @@ class Site(Site):
     """
 
     verbose_name = _("Lino Welfare")
-
     version = lino_welfare.SETUP_INFO['version']
     url = lino_welfare.SETUP_INFO['url']
 
     demo_fixtures = """std std2 few_languages demo
     demo2 demo3 cbss checkdata""".split()
 
-    languages = 'en fr de nl'
-    hidden_languages = 'nl'
+    # languages = 'en fr de nl'
+    # hidden_languages = 'nl'
 
     migration_class = 'lino_welfare.migrate.Migrator'
     project_model = 'pcsw.Client'
-
-    # ~ catch_layout_exceptions = False # 20130804
-
     userdocs_prefix = 'welfare.'
-    auto_configure_logger_names = 'atelier schedule django lino lino_xl lino_cosi lino_welfare'
-    # use_java = False  # temporarily
+    auto_configure_logger_names = 'atelier schedule django lino lino_xl lino_welfare'
     # verbose_client_info_message = True
-
 
     # default_ui = "lino_react.react" # does not yet work because "Tried to get
     # static handle for debts.PrintEntriesByBudget"
@@ -46,31 +40,7 @@ class Site(Site):
     uppercase_last_name = True
 
     user_types_module = 'lino_welfare.modlib.welfare.user_types'
-    # workflows_module = 'lino_xl.lib.reception.workflows'
     workflows_module = 'lino_welfare.modlib.welfare.workflows'
-
-    # def setup_plugins(self):
-    #     """
-    #     Change the default value of certain plugin settings.
-    #
-    #     - :attr:`lino_xl.lib.ledger.Plugin.ref_length` = 5
-    #
-    #     - :attr:`excerpts.responsible_user
-    #       <lino_xl.lib.excerpts.Plugin.responsible_user>` is set to
-    #       ``'melanie'``.
-    #
-    #     """
-    #     super(Site, self).setup_plugins()
-    #     self.plugins.clients.configure(client_model='pcsw.Client')
-    #     self.plugins.addresses.configure(partner_model='contacts.Partner')
-    #     self.plugins.excerpts.configure(responsible_user='melanie')
-    #     # self.plugins.extjs.configure(enter_submits_form=True)
-    #
-    #     if 'ledger' in self.plugins:
-    #         self.plugins.ledger.configure(ref_length=16)
-    #         self.plugins.ledger.configure(project_model='pcsw.Client')
-    #     # self.plugins.humanlinks.configure(person_model='pcsw.Client')
-    #     # self.plugins.households.configure(person_model='pcsw.Client')
 
     def get_plugin_configs(self):
         yield super(Site, self).get_plugin_configs()
@@ -85,9 +55,7 @@ class Site(Site):
 
     def setup_quicklinks(self, user, tb):
         # tb.add_action(self.modules.pcsw.Clients.detail_action)
-
         super(Site, self).setup_quicklinks(user, tb)
-
         tb.add_action(self.modules.pcsw.Clients, 'find_by_beid')
         tb.add_action(self.modules.integ.Clients)
         tb.add_action(self.modules.isip.MyContracts)
