@@ -1,0 +1,47 @@
+Version 1.0.10
+==============
+
+Released 2013-01-30
+
+- Neuer Button "Merge" auf Kienten. 
+  Experimentell. Noch nicht auf echten Daten benutzen.
+  Requires Lino 1.5.7.
+
+- verbose_name for :class:`ContractEnding <lino_welfare.modlib.isip.models.ContractEnding>`
+  is "Reason of termination" (de: Beendigungsgrund, fr: Cause d'abandon).
+  
+- BudgetSummary now also shows the original amounts for entries with periods other than 1
+
+- watch_tim setzte das Feld "Dienst" der primären Begleitung nicht.
+  Bei der Migration werden alle leeren Felder nachträglich gesetzt.
+  
+- Deutsche Übersetzung von CBSS ist "ZDSS", nicht "KBSS".
+
+- Beträge in Budgets (Entry.amount) können jetzt leer sein. 
+  Man hat anfangs also nicht mehr lauter "0,00" da stehen, was optisch angenehmer ist.
+
+- In der Vorschau eines Budgets stand als Titel 
+  "Schuldenverteilung von Budget Nr. 4 für Klient Soundso"
+  statt einfach nur "Schuldenverteilung"
+  
+- Übersetzung und Hilfetexte dist_amount und DistByBudget  
+
+- help_text of slave tables is now being rendered as tooltip.
+  The tooltip is anchored to the "header" part of the containing panel
+
+- AvailableCoaches : meldete "Only for newcomers with valid SSIN", 
+  obwohl die Regel (dass begleitete Klienten eine gültige INSS haben müssen) 
+  seit 20121207 deaktiviert ist.
+
+- watch_tim wollte aus Klient ohne INSS in Lino eine Person machen.
+
+- :class:`lino_welfare.modlib.isip.models.ContractBase`: `update_reminders` 
+  ignored premature ending (`date_ended`) when creating the reminder "Contracts ends in a month".
+  
+- Im BudgetSummary fehlten jährliche Einnahmen sowie 
+  Ausgaben und Einnahmen "mit sonstiger Periodizität".
+  
+- Der Text der letzten Zeile der Übersicht eines Budgets lautet jetzt nicht 
+  mehr "Total (5 Zeilen)" sondern 
+  
+- Summenzeilen werden jetzt in Fett gedruckt.  

@@ -1,0 +1,74 @@
+=============================
+Lino Welfare (Eupen) 2017.3.0
+=============================
+
+Neue Features
+=============
+
+- :ticket:`874` Nouveau profile "Conseiller en sécurité".
+- :ticket:`856` Multiple profiles per user (sh. http://luc.lino-framework.org/blog/2016/0527.html#user-teams)
+- :ticket:`1214` (Verträge sichtbar für ASD)
+- :ticket:`205` (VSE über Sprachkurs)
+- :ticket:`1553` (Termine erstellen ASD)
+
+Optimierungen
+=============
+
+- :ticket:`1570` (Billigkeitsgründe)
+- :ticket:`1569` (Reihenfolge der Listen Startbildschirm)
+- :ticket:`1551` (Falscher Vertragsautor)
+- :ticket:`1352` (Kann VSE nicht ändern nach Ausdruck)
+  
+Bugfixes
+========
+
+- :ticket:`1183` Deleting a user deletes all reported tickets.
+- Fehlermeldungen, die beim Ausdruck Tx25 auftreten: :ticket:`739` /
+  :ticket:`1161` Type not found: 'r:CourtName' (Tx25 Nr 1220 und 1221),
+  :ticket:`1159` DeliveryType206 instance has no attribute 'Place'.
+- Manchmal funktionierte Ausdruck nach pdf nicht. Behoben.
+- :ticket:`1440` (action_param_values() called without selected_rows)
+- :ticket:`1353` (TypeError: 'fse_field' is an invalid keyword argument for this function)
+- :ticket:`1303` (permission error with appy)
+- :ticket:`1350` (Error while evaluating expression user.get_full_name())
+- :ticket:`1195` (Workflow column differentiates custom actions from state change actions)
+  
+Sonstige Änderungen
+===================
+
+- Das Feld "Verantwortlicher (DSBE)" eines Vertrags (VSE, Art 60§7)
+  heißt jetzt "Autor", denn der Autor kann auch im ASD sein.
+
+- Fundamentale Optimierungen im Handhaben von Benachrichtigungen
+  ("notification framework")
+
+- Diverse Optimierungen im Arbeitsablauf Kalender, Benachrichtigungen,
+  mit Risiko von Nebenwirkungen.
+  
+- :ticket:`750` :message:`unsupported operand type(s) for *: 'int' and
+  'NoneType'` in GET /api/debts/BudgetsByPartner
+  
+- :ticket:`934` Cannot duplicate a Referrable.
+- :ticket:`964`  Mises à l'emploi - filtrer par période active.
+- :ticket:`1111`  Filtrage des articles 60§7
+
+Nach dem Release
+================
+
+- :ticket:`1351` (VSEs auch in Französisch)
+- :ticket:`1552` (Verträge auf Französisch)
+- :ticket:`1189` (Release coming@weleup (planning, release notes))
+ 
+            
+Noch nicht
+==========
+
+- Es gibt jetzt ein Modul zum Erstellen von "fiches de stage" für den
+  ESF
+  
+- :ticket:`923` (Display live notifications even when the browser is
+  minimized), also die Sofort-Benachrichtigungen à la
+  Facebook-Messenger kann Lino noch nicht ganz. Aber ist im Kommen.
+
+- :ticket:`1354` (Deferred RefundConfirmation : [u'Date range 19.04.16...19.04.16 lies outside of granted period 01.01.15...01.04.16.'])
+  

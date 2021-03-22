@@ -1,0 +1,31 @@
+==========
+2017-05-23
+==========
+
+- :ticket:`1838` (Ausdruck Sozialhilfeart in VSE)
+- :ticket:`1858` (VSE nicht drucken, wenn Klient keinen aktiven Hilfebeschluss hat)
+- :ticket:`1857` (Änderungspaket 20170519):
+
+- Feld "Sozialhilfeart" pro Klient raus, zumindest vom Bildschirm weg
+  (#1838)
+  
+- Neues Feld "Verpflichtungen ÖSHZ" pro VSE (neben den bestehenden
+  Feldern für DSBE und ASD). Interner Name "xxx".
+  
+- VSE darf nicht gedruckt werden (und Benutzer muss eine vernünftige
+  Fehlermeldung bekommen), wenn der Klient keinen aktiven
+  Hilfebeschluss hat.
+  
+- Neues Feld "Verantwortlicher (DSBE)" zwischen "Autor" und
+  "Verantwortlicher (ASD)". Interner Name "user_dsbe".
+  
+- In Tabelle "Zu bestätigende Hilfebeschlüsse" (MyPendingGrantings) :
+  "category" an dritter Stelle hinzufügen
+
+- In der Druckvorlage für die VSEs (config/isip/Contract/Default.odt)
+  müssen jetzt noch die besprochenen Kleinigkeiten geändert werden.
+  Steve, meldest du dich bitte, damit wir das gemeinsam machen?
+
+- Nachtrag: Kolonne "Kategorie" in "Zu bestätigende Hilfebeschlüsse"
+  und Fehlermeldung in Deutsch "Kann VSE#654 (Marthà MUSTERFRAU) nicht
+  drucken, weil es keine aktive Hilfebestätigung gibt."

@@ -1,0 +1,96 @@
+.. _welfare.1.1.1:
+
+==========================
+Lino-Welfare 1.1.1
+==========================
+
+Release process started Thursday, 21 March 2013
+
+List of changes
+===============
+
+New features
+------------
+
+- Einfügetexte funktionieren jetzt wieder.
+
+- Es gibt jetzt die Notion von `users.Teams`.
+  Diese entsprechen (momentan) exakt den "Diensten" 
+  (:class:`welfare.pcsw.CoachingType`).
+
+- Im Kalendermodul habe ich die Team-Mitgliedschaften ersetzt 
+  durch diese Benutzergruppen (diese Funktionalität wurde bisher 
+  nicht benutzt, insofern hatte ich da keine Skrupel).
+  Pro Kalender ist das Feld "Team-Einladungen verschicken" 
+  jetzt keine Checkbox mehr, sondern ein ForeignKey auf ein Team.
+  
+- Schuldnerberatung: Die Auswahlliste der Konten war schon immer 
+  nach der Kontonummer ("Referenz") sortiert, aber dieses Feld 
+  war nirgendwo sichtbar. Jetzt wohl.
+  Neues Site-Setting `accounts_ref_length` (maximale Länge dieses Feldes) 
+  steht für Lino-Welfare standardmäßig auf 5.
+  
+- Ausdruck Budget: hier wurde eine Tabelle nicht gedruckt 
+  (und traceback auf dem Server)  
+  
+- Bemerkungen wurden nicht gedruckt. Jetzt wohl
+
+- Neue Option "Jährliche Einkünte ignorieren" eines pro Budget (Reiter "Zusammenfassung"). 
+
+- Neue Option "Auch leere Einträge drucken" eines pro Budget (Reiter "Zusammenfassung"). Diese kann man ankreuzen, um einen "Blanko-Ausdruck" 
+  zu drucken.
+
+- Im Reiter "Zusammenfassung" gibt es jetzt eine weitere Tabelle "Schulden".
+
+- Zwei neue Zustände einer Kandidatur:
+  "Probezeit ohne Erfolg" und "Arbeitet" (beide gelten für die Übersicht wie "Inaktiv", 
+  aber enthalten Info über den Grund der Inaktivität).
+  
+  
+
+Optimizations
+-------------
+
+- Internal renames
+
+Bugfixes
+--------
+
+
+Upgrading existing sites
+========================
+
+- If you have production data to migrate, you must make a full 
+  Python backup *before* the upgrade::
+  
+    $ manage.py dumpdata --format=py > fixtures/backup.py
+
+- pip install -U lino_welfare
+
+- In your local :file:`settings.py` file, change::
+
+    from lino_welfare.modlib.pcsw.settings import *
+    
+  to::
+  
+    from lino_welfare.settings import *
+
+- If you have production data to migrate, you must now 
+  load the previously made backup using `initdb`::
+
+    $ manage.py initdb backup
+    
+  The output should look similar to::
+  
+    ...
+    INFO Loading /var/log/lino/backups/b20130327_204618.py...
+    INFO Migrating from version 1.1.0 to 1.1.1:
+    
+        - cal.Calendar.invite_team_members : ignore this field
+          (set manually the Team where appropriate)
+        - new fields Budget.print_empty_rows, and Budget.ignore_yearly_incomes
+        - cal.Membership are not converted. Create team memberships manually.
+        
+    Installed 63654 object(s) from 1 fixture(s)
+    INFO Done manage.py initdb b20130327_204618 (PID 21893)  
+

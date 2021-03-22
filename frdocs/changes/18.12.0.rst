@@ -1,0 +1,122 @@
+.. _welcht.18.12.0:
+
+============================================
+Lino Welfare "Châtelet" 18.12.0 (2018-12-15)
+============================================
+
+DONE:
+
+- Onglet Compétences : Enlever les panneaux Compétences professionnelles,
+  Compétences sociales et connaissances de langues.
+
+- Onglet Parcours : Colonne "Remarques" manque dans Études. Et pour les
+  Formations il faut la mettre en dernier lieu.
+
+- Onglet Freins : Enlever le panneau Antécédents juridiques.
+
+- Onglet PIIS:
+
+  Enlever le detail d'un PIIS. Aussi les tâches, évaluations et services utilisateurs.
+  Enlever la colonne "Type d'éducation".
+  Ajouter les Fichiers téléchargés (FT) en tant que colonne.
+  Après avoir ajouté un FT pour le PIIS#4 de Luc saffre,
+  il continue à afficher "Aucun enregistrement" dans le summary des FT du PIIS.
+
+  Enlever le panneau "Octrois d'aide".
+
+  Nouveau bouton 🖿 pour les voir en tableau. Sommaire
+  avec des "/" au lieu d'une ligne par type.
+
+- Rendez-vous d'un atelier :
+  Click sur date affiche maintenant le détail et non tous les entrées cal. du jour.
+  La colonne "N°" est maintenant visible.
+
+- Enlever les colonnes "Description" et "Attribué à". (J'ai laisse
+  "Description" car je doute que ce serait bien et cela n'apporte rien.)
+
+- Stages d'immersion : enlever le détail. Ajouter quelques champs dans le
+  tableau:
+  Date de début/Date de fin/Type de stage/Objectif/Organisation/Secteur/Fonction/Remarques
+
+- Note: un contrat (PIIS ou immersion) qui a ete imprime ne se laissera pas
+  modifier. Il faut faire click droit et choisir "Supprimer le fichier
+  imprimable"
+
+- Onglet "RAE" :
+
+  - Mettre le panneau "Exclusions" dans l'onglet "Historique" et
+    le renommer en "Situation chomage".
+
+  - Mettre les champs suivants dans l'onglet Historique:
+    is_seeking, unemployed_since and seeking_since
+
+  - Enlever le champ work_permit_suspended_until
+
+- Onglet Historique : enlever le panneau "Existing excerpts"
+
+- Mes tâches : Lino n'affiche que les tâches ayant une date début après
+  aujourd'hui. Il faudrait montrer toutes les tâches "à faire" indépendamment de
+  leur date de début.
+
+- Onglet Personne : Quand on insère une inscription (EnrolmentsByPupil.insert), il
+  affiche tous les ateliers. Il faudrait afficher seulement ceux qui sont actifs.
+  --> cela devrait etre fait. Comparer Explorateur --> Ateliers --> Etats Atelier.
+
+- Quand je demande Bureau -> Mes extraits, il fait une erreur:
+  Problème de connexion à la base de données.
+  UndefinedError: 'None' has no attribute 'user'
+
+- Probablement résolu (à vérifier): AttributeError: 'Course' object has no
+  attribute 'get_date_formatter' quand on clique sur update_all_guests de
+  l'atelier "Cyber Employ FATTAH 2018"
+
+- Le workflow des présences ateliers est trop sévère : un participant peut
+  participer sans se présenter à l'accueil.  Pour l'instant Lino refuse de le
+  marquer comme "présent" car il n'a pas fait le checkin.
+  --> GuestStates.ignore_required_states set to True
+
+- Il n'est plus nécessaire de passer par l'état "Publié" avant de mettre une
+  session d'attelier à Terminé.
+
+- Ajouter un champ "Priorité" par tache.
+
+
+REPORTÉ:
+
+- Tâches : ne plus avertir "Carte eID expire dans 2 mois".
+
+- Phase d'insertion: colorier en orange. Il faudrait pouvoir colorier un champ.
+  Seulement si c'est facile.
+
+- (éventuellement) Mettre le bouton pour choisir la couleur de la police dans le
+  toolbar de l'éditeur par défaut.
+
+
+TALK:
+
+- Enlever l'état de tâche "Important"?
+
+- Quand on marque une séance comme "Terminé", Lino supprime les présences.
+
+- (éventuellement) Fiches FSE : peut diminuer.
+
+- Afficher les observations d'un beneficiaire en mode html ou summary?
+
+
+- 20181008 Le Detail d'une présence est maintenant dans une fenetre
+  plus petite.  Et dans certaines vue Lino affichait le champ partner
+  au lieu du champ client.
+
+- vue intelligente pour cal.EntriesByClient?
+
+- 20181008 Nouvelle table :class:`lino.modlib.users.UserRoles`.
+
+
+
+TODO:  
+
+- Atelier : La colonne Workflow est visible mais si on veut cliquer
+  sur un symbole, on a un message qui précise qu’on a pas les
+  droits. Il faut alors entrer dans l’atelier pour faire la manœuvre.
+  --> Je n'ai pas su reproduire. à voir ensemble.
+

@@ -1,0 +1,24 @@
+Version 1.0.8
+=============
+
+Released 2013-01-14.
+Requires `Lino version 1.5.4`
+
+Neuerungen
+----------
+
+- Einlesen von eID-Karten: 
+
+  - Unter Umständen schloss die Aktion versehentlich das Hauptfenster
+    (was normalerweise unmöglich ist)
+  - Wenn Lino eine Stadt noch nicht kennt, legt er sie jetzt automatisch an.
+
+  - Städtenamen sind jetzt mehrsprachig, und wenn z.B. jemand in Kelmis wohnt, 
+    findet er sowohl für deutschsprachige ("Kelmis") als auch für 
+    französischsprachige Karten ("La Calamine") die gleiche Stadt.
+    Siehe auch :blogref:`20130110`
+
+- Tabelle "Verfügbare Begleiter" zeigt jetzt alle Begleiter 
+  an, falls nötig mit vertikaler Scrollbar.
+  
+

@@ -1,0 +1,22 @@
+Version 1.0.9
+=============
+
+Released 2013-01-18 (only unofficially)
+
+
+- Im Detail von Klienten und Budgets habe ich den neuen Parameter 
+  :attr:`auto_fit_column_widths 
+  <lino.core.tables.AbstractTable.auto_fit_column_widths>`
+  (sowie :attr:`hidden_columns 
+  <lino.core.tables.AbstractTable.hidden_columns>`) angewandt.
+  Was sich erfreulich auf den Gesamteindruck auswirkt.
+
+- Die vier großflächigen Felder im Reiter "Sonstige" sind jetzt 2x2 statt 1x4 angeordnet.
+
+- Neue Einstellung
+  :attr:`show_internal_field_names <lino.Lino.show_internal_field_names>`
+  zeigt in den Tooltips die internen Feldnamen an. 
+  Find ich praktisch.
+  
+  
+  

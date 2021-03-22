@@ -1,0 +1,37 @@
+Version 1.0.3
+=============
+
+Bugfix release. Läuft in Eupen seit dem 21.11.2012.
+
+Bugfixes:
+
+- Diverse Warnungen im Stil 
+  "L'action jobs.ContractsByPerson.do_print a échoué pour Contrat de 
+  travail "Contrat de travail#12 (Bernd BRECHT)": 'module' object has 
+  no attribute 'Warning'." kamen nie beim Benutzer an.
+  
+- Setting a column filter on a date column caused a server traceback.
+
+- Clicking the "Home" button (the one of Lino's main menu) 
+  when at least one window was opened caused the viewport's loadmask 
+  to show up forever.
+  
+- Lino didn't work in Internet Explorer. It said "Invalid procedure call or argument".
+
+- The message "Failed to delete %(record)s : %(error)s." never reached 
+  the user, they saw only "'dict' object has no attribute 'has_header'".
+  
+Database change:
+
+- Remove the 'Country.nationalities' field because that idea 
+  was utopic anyway.
+
+Todo:
+
+- Setting a column filter for a *normal* date column now works... 
+  but Lino also allows setting a filter on a virtual field. 
+  Which then causes another traceback
+  "FieldError at /api/pcsw/IntegClients / Cannot resolve keyword 'applies_from' into field."
+  
+- Inform about active column filters when building the title of table
+  (using title tags).

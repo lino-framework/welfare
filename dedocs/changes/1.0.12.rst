@@ -1,0 +1,27 @@
+Version 1.0.12
+==============
+
+Gelöste Probleme
+----------------
+
+- `watch_tim`: wenn man in TIM 
+  den `PAR->IdUsr` eines Klienten ändert, dann kriegt die bestehende primäre 
+  Begleitung in Lino nicht einfach den Benutzer aktualisiert, sondern sie bleibt 
+  als sekundäre und beendete Begleitung erhalten (Enddatum = heute), 
+  und watch_tim erstellt eine neue Begleitung für den neuen Benutzer.
+  Wenn `PAR->IdUsr` *geleert* wird, wurde bisher die primäre Begleitung gelöscht. 
+  Die bleibt jetzt ebenso als sekundäre und beendete Begleitung erhalten.
+
+
+- In den Begleitungen war eine Mausefalle: "Hubert kann eine seiner 
+  Begleitungen zwar auf einen anderen Benutzer setzen, aber danach 
+  kann er diese Begleitung weder ändern noch löschen".
+  Behoben.
+  
+- das Beginndatum einer primären Begleitung eines importierten Klienten darf jetzt 
+  bearbeitet werden.
+
+
+Sonstige Änderungen
+-------------------
+

@@ -1,0 +1,36 @@
+Version 1.1.0
+=============
+
+Kandidaturen auf Probe
+----------------------
+
+Eine `Kandidatur <jobs.Candidature>`
+hatte bisher lediglich ein Ankreuzfeld "Aktiv". 
+Das wurde ersetzt durch ein Auswahlfeld "Zustand" mit den möglichen 
+Werten "Aktiv", "Probezeit", "Inaktiv".
+(:class:`CandidatureStates 
+<lino_welfare.modlib.jobs.models.CandidatureStates>`)
+
+
+Nicht zu verwechseln: eine *aktive* Kandidatur bedeutet, 
+dass der Klient *keinen* aktiven Art-60*7 hat.
+
+In der Übersicht Art-60*7 
+(`jobs.JobsOverview`)
+wird dieser Status der Kandidaturen jetzt berücksichtigt:
+Als "Kandidaten" stehen jetzt nur noch Kandidaturen 
+im Zustand "Aktiv" (bisher standen dort alle Kandidaturen).
+Als "Probezeit" stehen jetzt nur noch Kandidaturen im Zustand "Probezeit".
+
+
+
+Sonstiges
+---------
+
+- Neue experimentelle Version der Liste "Übersicht Art-60*7-Konventionen" 
+  (im Menü `DSBE`, nicht `Listings`). 
+  Ist noch kein Ersatz für die bestehende Liste, aber vielleicht gibt es uns Ideen.
+  
+  
+- Ich experimentiere mit der Dokumentation 
+  Siehe z.B. :class:`welfare.jobs.JobsOverview`.

@@ -1,0 +1,8 @@
+Version 1.0.13
+==============
+
+Fixed 2 bugs introduced in version 1.0.12:
+
+- "'NoneType' object has no attribute 'coaching_type'" in watch_tim
+- Manually creating a Coaching now fills the current user to the user field.
+- Printing a Tx25 failed with a traceback "No module named extjs3"

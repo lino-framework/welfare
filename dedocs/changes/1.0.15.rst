@@ -1,0 +1,17 @@
+Version 1.0.15
+==============
+
+- Unknown HTTP method 'OPTIONS'
+
+- "cercle vicieux" wegen Fehlalarm "Date range overlaps with ISIP #1".
+  Wrote new testcase 
+  :func:`test02 <lino_welfare.modlib.pcsw.tests.pcsw_tests.test02>`.
+  
+- Tx25 kennt jetzt "Pseudo-Nationalnummern" (PseudoNationalNumbers)
+
+- watch_tim: 
+  Had to completely rewrite 
+  :meth:`swapclass <lino_welfare.modlib.pcsw.management.commands.watch_tim.PAR.swapclass>`
+  because it wasn't able to handle conversion situations 
+  (1) from Household to Client
+  or (2) from Person to Household

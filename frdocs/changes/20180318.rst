@@ -1,0 +1,16 @@
+==========
+2018-03-18
+==========
+
+- Les agents sociaux (300, 400 et 410) voyaient jusque
+  maintenant --par erreur-- les PIIS et autres projects du SI dans le
+  détail bénéficiaires.  Corrigé.
+
+- On peut de nouveau rechercher des bénéficiaires par leur adresse
+  (rue) ou leur numéro du RN.
+
+- Pour trouver un bénéficiaire par son numéro interne, on peut
+  spécifier "#" devant ce numéro dans le champ de recherche rapide.
+
+- Nouveau raccouci `[Recherche]` pour rechercher dans toutes les
+  tables.

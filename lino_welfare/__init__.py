@@ -16,8 +16,11 @@ This package defines functionality specific to :ref:`welfare`.
 
 from .setup_info import SETUP_INFO
 
-# doc_trees = ['docs', 'dedocs', 'frdocs']
+doc_trees = ['docs', 'dedocs', 'frdocs']
 # doc_trees = ['dedocs', 'frdocs']
-doc_trees = ['docs']
-intersphinx_urls = dict(docs="http://welfare.lino-framework.org")
+# doc_trees = ['docs']
+intersphinx_urls = dict(
+    docs="https://welfare.lino-framework.org",
+    dedocs="https://de.welfare.lino-framework.org",
+    frdocs="https://fr.welfare.lino-framework.org")
 srcref_url = 'https://github.com/lino-framework/welfare/blob/master/%s'

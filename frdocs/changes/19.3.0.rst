@@ -1,0 +1,20 @@
+.. _welcht.19.3.0:
+
+===================
+19.3.0 (2019-03-04)
+===================
+Changements:
+
+- :ticket:`2851` : Modifications de l'interface utilisateur. Sur la vue
+  détail d'un bénéficiaire:
+
+  - Supprimer l'onglet 'RAE'.
+  - Supprimer la colonne 'Type d'éducation' du PIISs
+  - Déplacer les champs 'Cherche du travail','Inoccupé depuis' et 'Cherche du travail depuis' vers
+    la partie droite de l'onglet 'Historique'.
+
+- :ticket:`2850`: Sur le détail d'un bénéficiaire, le champ "Phase
+  d'insertion" ne propose que les phases d'insertion actives.
+
+- Lors de l'inscription d'une personne dans un atelier, ne proposer que les ateliers
+  dont la date n'est pas encore dépassée.

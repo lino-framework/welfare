@@ -1,0 +1,42 @@
+Version 1.0.4
+=============
+
+Bugfixes
+
+- "ich stelle gerade fest, dass ich bei den Benutzern nicht mehr das 
+  Benutzerprofil auswählen kann. Die Dropdown-Box geht nicht."
+  (:blogref:`20121127`)
+  
+- HTML-Ansicht funktionierte nicht. 
+  Meldete stattdesen "'User' object has no attribute 'level'"  
+  (:blogref:`20121127`)
+  
+- Dienstleiter DSBE konnte Verträge anderer Benutzer nicht löschen.
+  (:blogref:`20121127`)
+  
+- When trying to create a Posting from a Postable (e.g. a Note),
+  the action failed with 
+  "ValidationError {'state': [u'Dieses Feld darf nicht leer sein.']}"
+
+
+Kleinkram
+
+- Der Anwendungsentwickler (d.h. ich) kann jetzt auch pro Modell sagen, 
+  welche Felder in der Tabellenansicht versteckt sein sollen. 
+  Für die Liste der VSEs habe ich das mal gemacht. Dort kriegt man 
+  jetzt mit einem einfachen Klick eine akzeptable Liste als pdf. 
+  Dafür muss man "seltener benutzte" Kolonnen erst einschalten, um sie zu sehen.
+  (:blogref:`20121127`)
+
+- New :class:`ExamPolicies <lino_welfare.modlib.isip.models.ExamPolicies>`
+  now has a :attr:`detail_layout <lino.core.actors.Actor.detail_layout>`.
+  (:blogref:`20121126`)
+
+- :menuselection:`Explorer --> ÖSHZ --> ClientStates`
+
+- In der vse.odt oder der art607.odt kann man jetzt den Ausdruck 
+  `self.client.gender.mf("Er","Sie")` benutzen, der
+  je nach Geschlecht des Klienten "Er" oder "Sie" ergibt.
+  Oder auch `self.user.partner.gender.mf("Er","Sie")` 
+  für den/die Sozialarbeiter/in.
+  

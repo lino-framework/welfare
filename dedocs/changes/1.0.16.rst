@@ -1,0 +1,38 @@
+Version 1.0.16
+==============
+
+- 2x Glückwunsch an Hubert fürs Entdecken zweier neuer Fälle :mod:`Tx25 <lino_welfare.modlib.cbss.tx25>`:
+  
+  - Tx25 Nr 152 für jemanden, der eine 
+    legale Hauptadresse (LegalMainAddresses) mit leerem 
+    Feld `HouseNumber` hat. Das vertrug Lino noch nicht.
+  
+  - Added handler for RetirementCertificates.
+
+- Fixed a bug in `watch_tim`: 
+  watch_tim verursachte einen Traceback, wenn ein Partner 
+  synchronisiert wurde, dessen Feld "Land" in TIM nicht 
+  ausgefüllt war (aber wohl die Postleitzahl).
+  Added unit test case :func:`test07 <lino_welfare.modlib.pcsw.tests.watchtim_tests.test07>`.
+
+- Lino und der neue Präsident:
+
+  Jeder einzelne Vertrag (sowohl VSEs als auch Art60*7-Konventionen) 
+  hat jetzt zwei neue Felder `signer1` ("Sekretär") und `signer2` ("Präsident"). 
+  Diese Felder sind "kaum sichtbar": man muss in der Tabellenansicht die beiden 
+  Spalten sichtbar machen, um sie zu sehen.
+  Für die Benutzer ändert sich so gut wie nichts.
+  
+  Für alle bestehenden Verträge wurden diese Felder 
+  bei der Datenmigration ausgefüllt mit dem bisherigen Sekretär und Präsident.
+  
+  In den Site-Parametern gibt es ebensolche Felder, die die Standardwerte enthalten. 
+  Auswählbar sind hier alle Kontaktpersonen der `site_company`.
+  
+  Es gibt in den Site-Parametern auch zwei weitere neue Felder 
+  `signer1_function` und `signer2_function`, deren Wert nicht 
+  in den einzelnen Verträgen gespeichert wird. Sie gelten als Konstante 
+  und sind nicht gedacht, zwischendurch mal schnell geändert zu werden.
+  
+
+
