@@ -142,7 +142,9 @@ Lino Welfare:
   - PROTECT : ledger.AccountingPeriod.year
 - ledger.Journal :
   - CASCADE : ledger.MatchRule.journal
-  - PROTECT : ledger.Voucher.journal
+  - PROTECT : ledger.PaymentMethod.journal, ledger.Voucher.journal
+- ledger.PaymentMethod :
+  - PROTECT : vatless.AccountInvoice.payment_method
 - ledger.PaymentTerm :
   - PROTECT : contacts.Partner.payment_term, vatless.AccountInvoice.payment_term
 - ledger.Voucher :

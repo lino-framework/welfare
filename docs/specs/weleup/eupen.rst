@@ -28,9 +28,9 @@ it was the first Lino that went into production in 2010.
 >>> print(analyzer.show_complexity_factors())
 ... #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF
 - 64 plugins
-- 141 models
+- 142 models
 - 16 user types
-- 536 views
+- 537 views
 - 29 dialog actions
 <BLANKLINE>
 
@@ -95,7 +95,7 @@ Rolf is the local system administrator, he has a complete menu:
   - Büro : Auszugsarten, Dateibibliotheken, Upload-Arten, Notizarten, Ereignisarten, Meine Einfügetexte
   - Kalender : Kalenderliste, Räume, Regelmäßige Ereignisse, Gastrollen, Kalendereintragsarten, Wiederholungsregeln, Externe Kalender
   - ÖSHZ : Integrationsphasen, Berufe, AG-Sperrgründe, Dispenzgründe, Hilfearten, Kategorien, Klientenkontaktarten, Dienste, Begleitungsbeendigungsgründe
-  - Buchhaltung : Haushaltsartikel, Journale, Geschäftsjahre, Buchungsperioden, Zahlungsbedingungen
+  - Buchhaltung : Haushaltsartikel, Journale, Geschäftsjahre, Buchungsperioden, Zahlungsbedingungen, Zahlungsmethoden
   - Lebenslauf : Bildungsarten, Akademische Grade, Sektoren, Berufsbezeichnungen, Arbeitsregimes, Statuus, Vertragsdauern, Sprachen
   - DSBE : VSE-Arten, Vertragsbeendigungsgründe, Auswertungsstrategien, Art.60§7-Konventionsarten, Stellenarten, Stundenpläne, Art.61-Konventionsarten
   - Kurse : Kursinhalte
@@ -411,6 +411,7 @@ Database structure
 - ledger.LedgerInfo : user, entry_date
 - ledger.MatchRule : id, account, journal
 - ledger.Movement : id, project, voucher, partner, seqno, account, amount, match, cleared, value_date
+- ledger.PaymentMethod : id, designation, journal, designation_fr, designation_en
 - ledger.PaymentTerm : id, ref, name, days, months, end_of_month, printed_text, printed_text_fr, printed_text_en, name_fr, name_en
 - ledger.Voucher : id, user, journal, entry_date, voucher_date, accounting_period, number, narration
 - newcomers.Broker : id, name
@@ -445,7 +446,7 @@ Database structure
 - uploads.Volume : id, ref, root_dir, base_url, description
 - users.Authority : id, user, authorized
 - users.User : id, email, language, modified, created, start_date, end_date, password, last_login, username, user_type, initials, first_name, last_name, remarks, newcomer_consultations, newcomer_appointments, notify_myself, mail_mode, access_class, event_type, calendar, coaching_type, coaching_supervisor, newcomer_quota, partner
-- vatless.AccountInvoice : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, voucher_ptr, project, partner, payment_term, your_ref, due_date, match, bank_account, state, amount
+- vatless.AccountInvoice : id, user, journal, entry_date, voucher_date, accounting_period, number, narration, voucher_ptr, project, partner, payment_term, payment_method, your_ref, due_date, match, bank_account, state, amount
 - vatless.InvoiceItem : id, seqno, project, account, voucher, title, amount
 - xcourses.Course : id, offer, title, start_date, remark
 - xcourses.CourseContent : id, name
@@ -1115,6 +1116,7 @@ Here is the output of :func:`walk_menu_items
 - Konfigurierung --> Buchhaltung --> Geschäftsjahre : 9
 - Konfigurierung --> Buchhaltung --> Buchungsperioden : 30
 - Konfigurierung --> Buchhaltung --> Zahlungsbedingungen : 9
+- Konfigurierung --> Buchhaltung --> Zahlungsmethoden : 1
 - Konfigurierung --> Lebenslauf --> Bildungsarten : 12
 - Konfigurierung --> Lebenslauf --> Akademische Grade : 6
 - Konfigurierung --> Lebenslauf --> Sektoren : 15
@@ -1152,7 +1154,7 @@ Here is the output of :func:`walk_menu_items
 - Explorer --> System --> Benachrichtigungen : 14
 - Explorer --> System --> Änderungen : 0
 - Explorer --> System --> All dashboard widgets : 1
-- Explorer --> System --> Datenbankmodelle : 142
+- Explorer --> System --> Datenbankmodelle : 143
 - Explorer --> System --> Datentests : 19
 - Explorer --> System --> Datenprobleme : 11
 - Explorer --> Eigenschaften --> Eigenschaften : 24
