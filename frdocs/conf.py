@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# from __future__ import unicode_literals
-
 extlinks = {}
 extensions = []
 templates_path = []
@@ -11,10 +9,9 @@ configure(globals(), 'lino_welfare.projects.mathieu.settings.doctests')
 
 intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
-interproject.configure(globals(), 'lino_welfare')
-intersphinx_mapping['book'] = (
-    'http://www.lino-framework.org', None)
-
+interproject.configure(globals(), 'lino_welfare',
+    cg=('https://community.lino-framework.org/', None),
+    book=('https://www.lino-framework.org/', None))
 
 extensions += ['atelier.sphinxconf.blog']
 extensions += ['lino.sphinxcontrib.logo']

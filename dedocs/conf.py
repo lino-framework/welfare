@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# from __future__ import unicode_literals
-
 extlinks = {}
 extensions = []
 templates_path = []
@@ -16,9 +14,9 @@ extensions += ['lino.sphinxcontrib.actordoc']
 
 intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
-interproject.configure(globals(), 'lino_welfare')
-intersphinx_mapping['cg'] = ('https://community.lino-framework.org/', None)
-intersphinx_mapping['book'] = ('https://www.lino-framework.org/', None)
+interproject.configure(globals(), 'lino_welfare',
+    cg=('https://community.lino-framework.org/', None),
+    book=('https://www.lino-framework.org/', None))
 
 # from importlib import import_module
 # for n in 'lino lino_welfare'.split():
@@ -35,7 +33,7 @@ html_theme = 'alabaster'
 
 
 from django.conf import settings
-settings.SITE.title = u"Lino für ÖSHZ"
+settings.SITE.title = "Lino für ÖSHZ"
 
 primary_domain = 'py'
 
@@ -54,7 +52,7 @@ master_doc = 'index'
 # General information about the project.
 #~ project = u"Lino-Welfare"
 project = settings.SITE.title
-copyright = u'2012-2018 Rumma & Ko OÜ'
+copyright = '2012-2021 Rumma & Ko OÜ'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

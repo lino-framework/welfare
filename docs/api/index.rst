@@ -13,12 +13,17 @@ Welfare
 
 .. automodule:: lino_welfare
 
-Welfare Eupen
-=============
+
+.. _weleup:
+
+The Eupen variant of Lino Welfare
+=================================
 
 .. automodule:: lino_weleup
 
-Welfare Chatelet
-================
+.. _welcht:
+
+The Chatelet variant of Lino Welfare
+====================================
 
 .. automodule:: lino_welcht

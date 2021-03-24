@@ -28,28 +28,9 @@ configure(globals(), 'lino_welfare.projects.gerd.settings.doctests')
 
 intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
-interproject.configure(globals(), 'atelier lino_book lino_weleup lino_welcht',
+interproject.configure(globals(), 'atelier',
+    book=('https://www.lino-framework.org/', None),
     cg=('https://community.lino-framework.org/', None))
-
-
-# intersphinx_mapping = {}
-# from atelier.sphinxconf import interproject
-# interproject.configure(globals(), 'atelier lino_cosi')
-# intersphinx_mapping['book'] = (
-#     'http://www.lino-framework.org', None)
-
-# intersphinx_mapping = {}
-# from atelier.sphinxconf import interproject
-# interproject.configure(globals(), 'atelier lino_cosi')
-
-# from django.conf import settings
-# settings.SITE.title = "Lino Welfare Reference Manual"
-
-# intersphinx_mapping = {}
-# from importlib import import_module
-# for n in 'atelier lino'.split():
-#     m = import_module(n)
-#     intersphinx_mapping[n] = (m.intersphinx_urls['docs'], None)
 
 # extensions += ['lino.sphinxcontrib.actordoc']
 extensions += ['lino.sphinxcontrib.logo']
@@ -77,7 +58,7 @@ master_doc = 'index'
 # General information about the project.
 #~ project = u"Lino-Welfare"
 project = "Lino Welfare project home"
-copyright = '2012-2019 Rumma & Ko Ltd'
+copyright = '2012-2021 Rumma & Ko Ltd'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
