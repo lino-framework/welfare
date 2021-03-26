@@ -59,7 +59,7 @@ class TestCase(TestCase):
         colnames = [col.name for col in rh.get_columns()]
         colnames.sort()
         self.assertEqual(
-            'detected_date id name_column overview person remark type user workflow_buttons',
+            'detected_date id person remark type user',
             ' '.join(colnames))
 
         url = "/api/cv/ObstaclesByPerson"
@@ -83,10 +83,7 @@ class TestCase(TestCase):
         # print(result['rows'])
         self.assertEqual(result['rows'], [
             ['Alcohol', 1, 'robin', 1, '22.05.2014', '', 1,
-             'Obstacle object (1)',
-             '<div><em>Obstacle object (1)</em></div>',
-             '<span />', 'First LAST', 100,
-             {'id': True}, False]])
+            'First LAST', 100, {'id': True}, False]])
 
         self.assertEqual(Obstacle.objects.get(pk=1).user.username, 'robin')
 
