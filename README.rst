@@ -11,7 +11,7 @@ for Belgian
 *Public Centres for Social Welfare*.
 
 - The central project homepage is
-  https://welfare.lino-framework.org
+  http://welfare.lino-framework.org
 
 - There are two applications using this library:
   `welcht <http://welcht.lino-framework.org>`__

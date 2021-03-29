@@ -1,16 +1,15 @@
+.. _weleup.changes:
+.. _welcht.changes:
 .. _welfare.changes:
 
 =======
 Changes
 =======
 
-The changelog for welfare is in :ref:`book.changes`.
-
-Old changes in :mod:`lino_welfare` package.
-
 
 .. toctree::
    :maxdepth: 1
 
    2020
+   20200722
    2019

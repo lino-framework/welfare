@@ -1,3 +1,5 @@
+.. _welcht.changes.2019:
+.. _weleup.changes.2019:
 .. _welfare.changes.2019:
 
 ====
@@ -48,6 +50,11 @@ Released Welfare 19.9.0 and weleup 19.9.0.
 
 New field :attr:`lino_xl.lib.cv.LanguageKnowledge.has_certificate` is a side
 effect of a change in Avanti which might be useful for Welfare as well.
+
+2019-04-17
+==========
+
+- (:ticket:`2968`): Remove cal.MyOverdueAppointments from dashboard.
 
 2019-04-16
 ==========
@@ -104,16 +111,23 @@ We plan to do the same operation for weleup soon.
 
 Released version 19.2.0
 
-- (:ticket:`2851`) Remove the filter added 2019-02-27 on pcsw.PersonGroup so the choicelists show
-  only the activated groups. This filter was asked by Chatelet.
+(:ticket:`2851`) Remove the filter added 2019-02-27 on pcsw.PersonGroup so the
+choicelists show only the activated groups. This filter was asked by Chatelet.
 
+(:ticket:`2850`) add a filter on pcsw.PersonGroup so the choicelists show only
+the activated groups.
 
 2019-02-27
 ==========
 
-- (:ticket:`2853`) Missing dependency in 'six' in welfare. The
-  :xfile:`setup_info.py` may of course not import any module which is installed
-  only during :xfile:`setup.py`.
+(:ticket:`2853`) Missing dependency in 'six' in welfare. The
+:xfile:`setup_info.py` may of course not import any module which is installed
+only during :xfile:`setup.py`.
 
-- (:ticket:`2851`) Added a filter on pcsw.PersonGroup so the choicelists show
-  only the activated groups
+(:ticket:`2851`) Added a filter on pcsw.PersonGroup so the choicelists show
+only the activated groups
+
+(:ticket:`2851`) Removed study_type from column_names of ContractsByClient,
+removed job_search from the main of pcsw.ClientDetail, moved 'is_seeking
+unemployed_since seeking_since' from history_left to history_right of the main
+of pcsw.ClientDetail.

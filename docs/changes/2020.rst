@@ -1,3 +1,5 @@
+.. _welcht.changes.2020:
+.. _weleup.changes.2020:
 .. _welfare.changes.2020:
 
 ====
@@ -36,3 +38,5 @@ Released to PyPI : welfare and weleup 20.1.0
 ==========
 
 Started this document.
+
+We started writing release notes in :doc:`20200722`.
