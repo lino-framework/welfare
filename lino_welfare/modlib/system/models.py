@@ -20,7 +20,7 @@ class Signers(dd.Model):
 
     """Model mixin which adds two fields `signer1` and `signer2`,
     the two in-house signers of contracts and official documents.
-    
+
     Inherited by :class:`SiteConfig
     <lino.modlib.system.models.SiteConfig>` and :class:`ContractBase`.
 
@@ -65,12 +65,12 @@ class SiteConfig(SiteConfig, Signers):
     """
     This adds the :class:`lino_welfare.modlib.isip.models.Signers`
     mixin to Lino's standard SiteConfig.
-    
+
     """
 
     class Meta(SiteConfig.Meta):
         abstract = dd.is_abstract_model(__name__, 'SiteConfig')
-        
+
 
     signer1_function = dd.ForeignKey(
         "contacts.RoleType",
@@ -94,6 +94,8 @@ dd.update_field(SiteConfig, 'signer2', blank=True, null=True)
 class SiteConfigDetail(dd.DetailLayout):
 
     main = "general constants cbss"
+
+    # window_size = (80, 'auto')  ExtJS does not support auto height on tabbed details
 
     general = dd.Panel(
         """
