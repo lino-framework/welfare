@@ -29,7 +29,7 @@ def album1(driver):
 
         Sie können die hier beschriebenen Aktionen auch selber
         nachspielen in unserer `Online-Demo
-        <http://welfare-demo.lino-framework.org>`_
+        <https://welfare-demo.lino-framework.org>`_
 
         """)
 

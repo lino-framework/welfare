@@ -5,7 +5,7 @@
   - **04.11.2012** 
     Überzeugen Sie sich selbst!
     Die offizielle Demo-Datenbank von Lino für ÖSHZ ist frei verfügbar unter
-    http://welfare-demo.lino-framework.org
+    https://welfare-demo.lino-framework.org
     
     
     
@@ -18,7 +18,7 @@
   - **04/11/2012** 
     Essayez-le vous-même!
     La base de données démo de Lino pour CPAS est en ligne:
-    http://welfare-demo.lino-framework.org
+    https://welfare-demo.lino-framework.org
     
     
   - **28/08/2012** 

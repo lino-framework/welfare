@@ -8,9 +8,9 @@ Bienvenue sur le **site de documentation en français** de `Lino
 Welfare <http://www.saffre-rumma.net/fr/welfare/>`_.
 
 Un site similaire existe en `allemand
-<http://de.welfare.lino-framework.org/>`_.  Pour des informations plus
+<https://de.welfare.lino-framework.org/>`_.  Pour des informations plus
 *techniques* veuillez consulter la version `anglaise
-<http://welfare.lino-framework.org/>`_.  
+<https://welfare.lino-framework.org/>`_.  
 Pour des questions *commerciales* veuillez consulter
 `www.saffre-rumma.net <http://www.saffre-rumma.net/welfare/>`_.
 

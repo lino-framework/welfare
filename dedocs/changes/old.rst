@@ -480,7 +480,7 @@ Version 1.1.2 (released :blogref:`20130422`)
   submodels.
   the one and only usage example is visible in the 
   `Lino-Welfare user manual
-  <http://welfare-user.lino-framework.org/fr/clients.html#partenaire>`_
+  <https://welfare-user.lino-framework.org/fr/clients.html#partenaire>`_
   See :blogref:`20130401`.
 
 Version 1.1.1 (released 2013-03-29)

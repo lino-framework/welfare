@@ -10,9 +10,9 @@ Willkommen im **Benutzerhandbuch** von `Lino Welfare
 für belgische ÖSHZ.
 
 Ein ähnliches Dokument existiert in `Französisch
-<http://fr.welfare.lino-framework.org/>`_.  *Technische Informationen*
+<https://fr.welfare.lino-framework.org/>`_.  *Technische Informationen*
 gibt es in der `englischen Version
-<http://welfare.lino-framework.org/>`_.  Für Fragen zum *Vertrieb* und
+<https://welfare.lino-framework.org/>`_.  Für Fragen zum *Vertrieb* und
 *professionellen Support* siehe `www.saffre-rumma.net
 <http://www.saffre-rumma.net/de/welfare/>`_.
 

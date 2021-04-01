@@ -11,15 +11,15 @@ for Belgian
 *Public Centres for Social Welfare*.
 
 - The central project homepage is
-  http://welfare.lino-framework.org
+  https://welfare.lino-framework.org
 
 - There are two applications using this library:
   `welcht <http://welcht.lino-framework.org>`__
   and `weleup <http://weleup.lino-framework.org>`__
 
 - There are *user guides* in `French
-  <http://fr.welfare.lino-framework.org>`_ and `German
-  <http://de.welfare.lino-framework.org>`_.
+  <https://fr.welfare.lino-framework.org>`_ and `German
+  <https://de.welfare.lino-framework.org>`_.
 
 - Online demo sites at
   https://welfare-demo.lino-framework.org

@@ -22,6 +22,6 @@ Released 2013-02-03
   Die Gültigkeit der INSS hat keinerlei Einfluss auf irgendwelche Workflows.
   Bestehende Klienten mit diesem Status werden bei der Migration auf "Begleitet" gesetzt.
   Auch die folgende Seite wurde aktualisiert:
-  http://welfare-userman.lino-framework.org/de/user/clients.html#bearbeitungszustand
+  https://welfare-userman.lino-framework.org/de/user/clients.html#bearbeitungszustand
 
   

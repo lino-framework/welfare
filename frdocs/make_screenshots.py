@@ -26,7 +26,7 @@ def album1(driver):
         Voici un petit tour dans Lino Welfare.
 
         Vous pouvez également aller jouer vous-même sur notre `site de
-        démonstraton en ligne <http://welfare-demo.lino-framework.org>`_
+        démonstraton en ligne <https://welfare-demo.lino-framework.org>`_
 
         """)
 
