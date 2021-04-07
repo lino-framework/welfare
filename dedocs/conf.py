@@ -35,19 +35,8 @@ html_theme = 'alabaster'
 from django.conf import settings
 settings.SITE.title = "Lino für ÖSHZ"
 
-primary_domain = 'py'
-
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['.templates']
-
-# The suffix of source filenames.
-source_suffix = '.rst'
-
-# The encoding of source files.
-#source_encoding = 'utf-8'
-
-# The master toctree document.
-master_doc = 'index'
 
 # General information about the project.
 #~ project = u"Lino-Welfare"

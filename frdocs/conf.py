@@ -30,24 +30,13 @@ html_theme = 'alabaster'
 from django.conf import settings
 settings.SITE.title = "Lino pour CPAS"
 
-primary_domain = 'py'
-
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['.templates']
-
-# The suffix of source filenames.
-source_suffix = '.rst'
-
-# The encoding of source files.
-#source_encoding = 'utf-8'
-
-# The master toctree document.
-master_doc = 'index'
 
 # General information about the project.
 #~ project = u"Lino-Welfare"
 project = settings.SITE.title
-copyright = '2012-2019 Rumma & Ko Ltd'
+copyright = '2012-2021 Rumma & Ko Ltd'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

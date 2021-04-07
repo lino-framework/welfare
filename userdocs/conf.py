@@ -19,7 +19,7 @@ configure(globals(), 'lino_welfare.projects.docs.settings.doctests')
 extensions += ['lino.sphinxcontrib.actordoc']
 extensions += ['lino.utils.screenshots']
 
-#~ Trigger loading of Djangos model cache in order to avoid side effects that 
+#~ Trigger loading of Djangos model cache in order to avoid side effects that
 #~ would occur when this happens later while importing one of the models modules.
 from django.conf import settings
 #~ settings.SITE.startup()
@@ -48,23 +48,6 @@ settings.SITE.title = "Lino-Welfare User Documentation"
 #~ ]
 
 #~ extensions.append('sphinxcontrib.autorun')
-
-
-primary_domain = 'py'
-
-
-
-# Add any paths that contain templates here, relative to this directory.
-#~ templates_path = ['.templates']
-
-# The suffix of source filenames.
-source_suffix = '.rst'
-
-# The encoding of source files.
-#source_encoding = 'utf-8'
-
-# The master toctree document.
-master_doc = 'index'
 
 # General information about the project.
 #~ project = u"Lino-Welfare"
@@ -241,12 +224,12 @@ latex_logo = '.static/lino-logo-2.png'
 # If false, no module index is generated.
 #latex_use_modindex = True
 
-#~ language = "fr" # the source language. 
+#~ language = "fr" # the source language.
 
 #~ show_source = True
 
 #~ srcref_base_uri="http://code.google.com/lino"
-#~ srcref_base_uri="http://code.google.com/p/lino/source/browse/#hg" 
+#~ srcref_base_uri="http://code.google.com/p/lino/source/browse/#hg"
 
 
 # extlinks = {
