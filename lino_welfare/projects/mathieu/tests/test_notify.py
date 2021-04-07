@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2016-2021 Rumma & Ko Ltd
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """
 Miscellaneous tests about the notification framework

@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2015 Luc Saffre
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 """Adds some demo trainings for an arbitrary selection of clients.
 
 Now done by :mod:`lino_welfare.modlib.integ.fixtures.demo`

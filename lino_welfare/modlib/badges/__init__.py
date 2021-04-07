@@ -1,5 +1,5 @@
 # Copyright 2014-2015 Rumma & Ko Ltd
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """This module is internally named after the notion of
 `Scout badges <http://en.wikipedia.org/wiki/Scout_badge>`.

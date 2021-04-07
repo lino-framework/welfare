@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2012 Rumma & Ko Ltd
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """
 Fills the cbss.Purposes table with the official values defined in 

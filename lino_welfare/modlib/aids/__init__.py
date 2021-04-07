@@ -1,5 +1,5 @@
 # Copyright 2014-2018 Rumma & Ko Ltd
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """Specs for this plugin are in :ref:`weleup`.
 

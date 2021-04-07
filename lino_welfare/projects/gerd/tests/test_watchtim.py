@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2013-2017 Rumma & Ko Ltd
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """This module contains tests for the :mod:`watch_tim
 <lino_welfare.management.commands.watch_tim>` command.

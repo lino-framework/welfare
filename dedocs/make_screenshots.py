@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2015-2016 Luc Saffre.
-# License: BSD, see LICENSE for more details.
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """This is the :xfile:`make_screenshots.py` script for `docs_de`.
 

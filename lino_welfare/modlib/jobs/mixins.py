@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2013-2017 Rumma & Ko Ltd
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """Model mixins for `lino_welfare.modlib.jobs`.
 

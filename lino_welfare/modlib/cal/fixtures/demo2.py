@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2013-2015 Rumma & Ko Ltd
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 from lino_xl.lib.cal.fixtures.demo2 import objects as lino_objects
 from lino.api import rt

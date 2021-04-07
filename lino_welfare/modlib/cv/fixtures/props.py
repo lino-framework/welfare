@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2008-2013 Rumma & Ko Ltd
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """
 Installs a set of property types and property groups specific to 

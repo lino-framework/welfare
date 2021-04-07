@@ -1,6 +1,6 @@
 # coding: utf-8
 # Copyright 2015 Rumma & Ko Ltd
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """Generates the objects in :mod:`lino_xl.lib.notes.fixtures.demo`
 plus one :attr:`important

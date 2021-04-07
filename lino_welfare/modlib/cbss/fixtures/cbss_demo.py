@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2012-2020 Rumma & Ko Ltd
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """Fills in a suite of fictive CBSS requests using simulated responses
 in order to avoid live requests to the CBSS.

@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2008-2017 Luc Saffre
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """The :xfile:`models` module for this plugin.
 

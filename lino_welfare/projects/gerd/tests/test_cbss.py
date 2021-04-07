@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2012-2020 Rumma & Ko Ltd
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """
 This module contains "quick" tests that are run on a demo database

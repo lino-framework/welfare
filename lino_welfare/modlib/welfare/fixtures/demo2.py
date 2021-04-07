@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2014-2019 Rumma & Ko Ltd
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 """
 For each client who has a non-empty `card_number` we create a
 corresponding image file in the local media directory in order to

@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2015 Luc Saffre
-# License: BSD (see file COPYING for details)
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 """Adds some training types and some training goals.
 
 TODO: ask Mathieu and Gerd for their advice in establishing a more or
