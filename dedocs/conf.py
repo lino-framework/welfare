@@ -12,11 +12,11 @@ extensions += ['lino.sphinxcontrib.logo']
 extensions += ['lino.sphinxcontrib.actordoc']
 
 
-intersphinx_mapping = {}
+# intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
-interproject.configure(globals(), 'lino_welfare',
-    cg=('https://community.lino-framework.org/', None),
-    book=('https://www.lino-framework.org/', None))
+interproject.configure(globals(), 'lino_welfare')
+    # cg=('https://community.lino-framework.org/', None),
+    # book=('https://www.lino-framework.org/', None))
 
 # from importlib import import_module
 # for n in 'lino lino_welfare'.split():
@@ -180,4 +180,4 @@ html_theme_options = {
     "head_font_family": my_font_family,
 }
 
-extlinks.update(ticket=('http://bugs.saffre-rumma.net/tickets/Ticket/%s', '#'))
+# extlinks.update(ticket=('https://jane.mylino.net/#/api/tickets/AllTickets/%s', '#'))

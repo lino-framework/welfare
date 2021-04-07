@@ -18,7 +18,7 @@ extensions += ['lino.sphinxcontrib.logo']
 extensions += ['lino.sphinxcontrib.actordoc']
 
 extlinks.update(
-    ticket=('http://bugs.saffre-rumma.net/tickets/Ticket/%s', '#'))
+    ticket=('https://jane.mylino.net/#/api/tickets/AllTickets/%s', '#'))
 
 import alabaster
 extensions.append('alabaster')

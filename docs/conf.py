@@ -17,6 +17,7 @@ import sys, os
 
 extlinks = {}
 extensions = []
+intersphinx_mapping = {}
 
 from lino.sphinxcontrib import configure
 #configure(globals(), 'lino_welfare.projects.eupen.settings.demo')
@@ -26,11 +27,10 @@ configure(globals(), 'lino_welfare.projects.gerd.settings.doctests')
 #configure(globals(), 'lino.projects.std.settings')
 # configure(globals())
 
-intersphinx_mapping = {}
 from atelier.sphinxconf import interproject
 interproject.configure(globals(), 'atelier',
-    book=('https://www.lino-framework.org/', None),
-    cg=('https://community.lino-framework.org/', None))
+    # book=('https://www.lino-framework.org/', None),
+    hg=('https://hosting.lino-framework.org/', None))
 
 # extensions += ['lino.sphinxcontrib.actordoc']
 extensions += ['lino.sphinxcontrib.logo']
@@ -44,10 +44,10 @@ autodoc_default_options = {'members': None}
 primary_domain = 'py'
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['.templates']
+# templates_path = ['.templates']
 
 # The suffix of source filenames.
-source_suffix = '.rst'
+# source_suffix = '.rst'
 
 # The encoding of source files.
 #source_encoding = 'utf-8'
@@ -57,7 +57,7 @@ master_doc = 'index'
 
 # General information about the project.
 #~ project = u"Lino-Welfare"
-project = "Lino Welfare project home"
+project = "Lino Welfare"
 copyright = '2012-2021 Rumma & Ko Ltd'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -225,8 +225,8 @@ latex_documents = [
 #~ srcref_base_uri="http://code.google.com/lino"
 #~ srcref_base_uri="http://code.google.com/p/lino/source/browse/#hg"
 
-extlinks.update(ticket=('http://bugs.saffre-rumma.net/tickets/Ticket/%s', '#'))
-extlinks.update(lino=('http://www.lino-framework.org%s.html', ''))
+# extlinks.update(ticket=('https://jane.mylino.net/#/api/tickets/AllTickets/%s', '#'))
+# extlinks.update(lino=('http://www.lino-framework.org%s.html', ''))
 
 # extlinks = {
 #   'issue': ('http://code.google.com/p/lino/issues/detail?id=%s', 'Issue '),
