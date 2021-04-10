@@ -27,7 +27,3 @@ def objects():
                subject=_("Do not offer coffee"),
                important=True,
                type=NTYPES.pop())
-
-    
-
-

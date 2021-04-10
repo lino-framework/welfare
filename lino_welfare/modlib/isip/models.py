@@ -1,12 +1,10 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2018 Rumma & Ko Ltd
+# Copyright 2008-2021 Rumma & Ko Ltd
 # License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """Database models for `lino_welfare.modlib.isip`.
 
 """
-
-from builtins import str
 
 from django.conf import settings
 from django.db import models
@@ -161,7 +159,7 @@ class ContractPartners(dd.Table):
     duties_company
     """
     insert_layout = """
-    company 
+    company
     contact_person
     contact_role
     """
@@ -215,7 +213,7 @@ class Contract(ContractBase):
         # removes the need of writing a custom database migrator
         if loader and loader.source_version == '2017.1.0':
             if self.user_dsbe is None:
-                self.user_dsbe = self.user 
+                self.user_dsbe = self.user
 
     @classmethod
     def get_certifiable_fields(cls):
@@ -223,7 +221,7 @@ class Contract(ContractBase):
         applies_from applies_until
         language
         stages goals duties_dsbe
-        duties_asd duties_pcsw duties_person 
+        duties_asd duties_pcsw duties_person
         user user_asd user_dsbe exam_policy
         date_decided date_issued"""
 
@@ -304,7 +302,7 @@ class Contracts(ContractBaseTable):
 class MyContracts(Contracts):
 
     required_roles = dd.login_required(IntegUser)
-    
+
     @classmethod
     def param_defaults(self, ar, **kw):
         kw = super(MyContracts, self).param_defaults(ar, **kw)

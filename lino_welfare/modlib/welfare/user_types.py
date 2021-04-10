@@ -1,10 +1,10 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2009-2018 Rumma & Ko Ltd
+# Copyright 2009-2021 Rumma & Ko Ltd
 # License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """Defines default user profiles and shortcuts for Lino Welfare.
 
-See :doc:`/specs/usertypes`.
+See :doc:`/specs/topics/usertypes`.
 
 """
 
@@ -76,10 +76,10 @@ class IntegrationAgentManager(IntegrationAgent,
                               IntegrationStaff,
                               OfficeStaff, NotesStaff, CoachingsStaff, AidsStaff,
                               ContactsStaff, SocialStaff, CareerStaff,
-                              NewcomersOperator, 
+                              NewcomersOperator,
                               xCoursesStaff, SepaStaff, PollsStaff):
     pass
-                              
+
 class IntegrationAgentFlexible(NewcomersUser, IntegrationAgentManager,
                                BeIdUser, DebtsUser):
     pass
@@ -109,7 +109,7 @@ class DebtsConsultant(SiteUser, DebtsUser, SocialUser, OfficeUser,
 
 class NewcomersConsultant(SiteUser, NewcomersUser, SocialUser,
                           OfficeUser, OfficeOperator, ContactsUser,
-                          CBSSUser, BeIdUser, NotesUser, CoursesUser, 
+                          CBSSUser, BeIdUser, NotesUser, CoursesUser,
                           CheckdataUser, AidsUser, CoachingsUser,
                           PollsUser,
                           GuestOperator, SepaUser):
@@ -190,4 +190,3 @@ add('910', _("Security advisor"),              SecurityAdvisor)
 
 from lino.modlib.notify.choicelists import MessageTypes
 UserTypes.get_by_value('420').mask_notifications(MessageTypes.change)
-

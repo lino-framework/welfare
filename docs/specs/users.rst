@@ -20,7 +20,7 @@ This document describes how Lino Welfare uses the
 User types
 =============
 
-See :doc:`usertypes`.
+See :doc:`topics/usertypes`.
 
 Demo users
 ==========

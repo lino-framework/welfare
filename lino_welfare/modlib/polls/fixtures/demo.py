@@ -127,7 +127,7 @@ def demo_responses():
     alicia = settings.SITE.user_model.objects.get(username="alicia")
 
     def response(date_offset, isreg, partner, poll):
-        
+
         kw = dict(poll=poll)
         if isreg:
             kw.update(state=polls.ResponseStates.registered)
@@ -163,4 +163,3 @@ def demo_responses():
 def objects():
     yield demo_polls()
     yield demo_responses()
-

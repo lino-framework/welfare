@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015-2019 Rumma & Ko Ltd
+# Copyright 2015-2021 Rumma & Ko Ltd
 # License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """Provides functionality for managing "immersion trainings" (stages
@@ -11,15 +11,11 @@ Technical specs see :ref:`welcht`.
     :toctree:
 
     fixtures.std
-    fixtures.demo
 
 """
 
-from __future__ import unicode_literals
 
-from django.utils.translation import gettext_lazy as _
-
-from lino.api import ad
+from lino.api import ad, _
 
 
 class Plugin(ad.Plugin):

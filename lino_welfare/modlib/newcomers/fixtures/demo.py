@@ -63,6 +63,7 @@ def objects():
         if p.has_required_roles([IntegUser])
         and not p.has_required_roles([dd.SiteStaff])]
     qs = User.objects.filter(user_type__in=user_types)
+    # qs = qs.order_by('last_name', 'first_name', 'username')
     for u in qs:
         u.newcomer_quota = QUOTAS.pop()
         yield u

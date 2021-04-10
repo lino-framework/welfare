@@ -1,25 +1,7 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2018 Rumma & Ko Ltd
-# This file is part of Lino Welfare.
-#
-# Lino Welfare is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# Lino Welfare is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public
-# License along with Lino Welfare.  If not, see
-# <http://www.gnu.org/licenses/>.
+# Copyright 2012-2021 Rumma & Ko Ltd
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
-
-from __future__ import unicode_literals
-
-from builtins import str
 import logging
 logger = logging.getLogger(__name__)
 
@@ -51,7 +33,7 @@ if False:
   def bulk_create_with_manual_ids(model, obj_list):
     """
     Originally copied from http://stackoverflow.com/a/13143062/407239
-    
+
     """
     last = model.objects.all().aggregate(models.Max('id'))['id__max']
     if last is None:
@@ -130,11 +112,11 @@ class Budget(UserAuthored, Certifiable, mixins.Duplicable):
         _("Print to-do list"),
         default=False,
         help_text=_("""\
-Einträge im Feld "To-do" werden nur ausgedruckt, 
-wenn die Option "To-dos drucken" des Budgets angekreuzt ist. 
-Diese Option wird aber momentan noch ignoriert 
-(d.h. To-do-Liste wird gar nicht ausgedruckt), 
-weil wir noch überlegen müssen, *wie* sie ausgedruckt werden sollen. 
+Einträge im Feld "To-do" werden nur ausgedruckt,
+wenn die Option "To-dos drucken" des Budgets angekreuzt ist.
+Diese Option wird aber momentan noch ignoriert
+(d.h. To-do-Liste wird gar nicht ausgedruckt),
+weil wir noch überlegen müssen, *wie* sie ausgedruckt werden sollen.
 Vielleicht mit Fußnoten?"""))
     print_empty_rows = models.BooleanField(
         _("Print empty rows"),
@@ -255,7 +237,7 @@ Vielleicht mit Fußnoten?"""))
         AccountType.
 
         Parameters:
- 
+
             ar: the ActionRequest
 
             group: an instance of :class:`debts.Group
@@ -400,7 +382,7 @@ Vielleicht mit Fußnoten?"""))
             if sar.get_total_count():
                 yield E.h3(sar.get_title())
                 yield sar
-            
+
         for eg in self.entry_groups(ar):
             yield render(eg.action_request)
 
@@ -454,7 +436,7 @@ class Entry(SequencedBudgetComponent):
     actor = dd.ForeignKey(Actor,
                               blank=True, null=True,
         help_text="""\
-Hier optional einen Akteur angeben, wenn der Eintrag 
+Hier optional einen Akteur angeben, wenn der Eintrag
 sich nicht auf den Gesamthaushalt bezieht.""")
     # amount = dd.PriceField(_("Amount"),default=0)
     circa = models.BooleanField(_("Circa"),
@@ -473,20 +455,20 @@ Ob diese Schuld in die Schuldenverteilung aufgenommen wird oder nicht."""
     description = models.CharField(_("Description"),
                                    max_length=200, blank=True,
         help_text=u"""\
-Beschreibung wird automatisch mit der Kontobezeichung 
-ausgefüllt. Kann man aber manuell ändern. 
+Beschreibung wird automatisch mit der Kontobezeichung
+ausgefüllt. Kann man aber manuell ändern.
 Wenn man das Konto ändert, gehen manuelle Änderungen in diesem Feld verloren.
 Beim Ausdruck steht in Kolonne "Beschreibung"
-lediglich der Inhalt dieses Feldes, der eventuellen Bemerkung sowie 
+lediglich der Inhalt dieses Feldes, der eventuellen Bemerkung sowie
 (falls angegeben bei Schulden) der Partner.""")
     periods = PeriodsField(_("Periods"),
         help_text=u"""\
-Gibt an, für wieviele Monate dieser Betrag sich versteht. 
-Also bei monatlichen Ausgaben steht hier 1, 
+Gibt an, für wieviele Monate dieser Betrag sich versteht.
+Also bei monatlichen Ausgaben steht hier 1,
 bei jährlichen Ausgaben 12.""")
     monthly_rate = dd.PriceField(_("Monthly rate"), default=0,
         help_text=u"""
-Eventueller Betrag monatlicher Rückzahlungen, über deren Zahlung nicht verhandelt wird. 
+Eventueller Betrag monatlicher Rückzahlungen, über deren Zahlung nicht verhandelt wird.
 Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
     """)
 
@@ -505,7 +487,7 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
 
     def get_siblings(self):
         """
-        Like super(), but adds account_type. 
+        Like super(), but adds account_type.
         E.g. the Up/Down methods should work only within a given account_type.
         """
         # return super(Entry,self).get_siblings().filter(account_type=self.account_type)
@@ -591,7 +573,7 @@ Wenn hier ein Betrag steht, darf "Verteilen" nicht angekreuzt sein.
         but the new Budget that has been created.  We now need to
         adapt the `actor` of this Entry by making it an actor of the
         new Budget.
-        
+
         TODO: this method relies on the fact that related Actors get
         duplicated *before* related Entries.  The order of `fklist` in
         `_lino_ddh`
@@ -653,4 +635,3 @@ _("Name of debts mediator")  # Name des Schuldnerberaters
 # _("Conclusion")  # Schlussfolgerung
 
 from .ui import *
-

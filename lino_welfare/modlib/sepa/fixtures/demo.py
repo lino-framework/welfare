@@ -35,6 +35,9 @@ def objects():
     if len(CLIENTS) == 0:
         raise Exception("Oops, no CLIENTS in %s" % CLIENTS)
     qs = Company.objects.filter(sepa_accounts__iban__gt='').distinct()
+    # qs = Company.objects.exclude(sepa_accounts__iban='').distinct().order_by('id')
+    # if qs.count() == 0:
+    # qs = qs.order_by('name')
     # RECIPIENTS = Cycler(qs[:5])
     RECIPIENTS = Cycler(qs)
     if len(RECIPIENTS) == 0:

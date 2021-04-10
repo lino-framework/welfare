@@ -1,19 +1,6 @@
-# Copyright 2014-2015 Rumma & Ko Ltd
-# This file is part of Lino Welfare.
-#
-# Lino Welfare is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# Lino Welfare is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public
-# License along with Lino Welfare.  If not, see
-# <http://www.gnu.org/licenses/>.
+# Copyright 2014-2021 Rumma & Ko Ltd
+# License: GNU Affero General Public License v3 (see file COPYING for details)
+
 """Functionality for doing "debts mediation".
 
 .. autosummary::
@@ -29,7 +16,6 @@
 
 """
 
-from builtins import str
 from lino import ad
 
 from django.utils.translation import gettext_lazy as _
@@ -56,7 +42,7 @@ class Plugin(ad.Plugin):
         mb = site.site_config.master_budget
         if mb is not None:
             """
-            the following line is to specify user permissions: non-manager 
+            the following line is to specify user permissions: non-manager
             debts agents users should have this command.
             """
             #~ mb._detail_action = MyBudgets.get_url_action('detail_action')
@@ -64,7 +50,7 @@ class Plugin(ad.Plugin):
 
             fld = site.modules.system.SiteConfig._meta.get_field(
                 'master_budget')
-    
+
             MyBudgets = site.modules.debts.MyBudgets
             m.add_instance_action(
                 mb, label=str(fld.verbose_name),

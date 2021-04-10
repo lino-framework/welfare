@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2012-2018 Rumma & Ko Ltd
+# Copyright 2012-2021 Rumma & Ko Ltd
 # License: GNU Affero General Public License v3 (see file COPYING for details)
 """Database models for :mod:`lino_welfare.modlib.newcomers`.
 
@@ -12,10 +12,6 @@ Tables like :class:`NewClients`, :class:`AvailableCoaches`,
 See also :ref:`welfare.specs.newcomers`.
 
 """
-
-from builtins import str
-import logging
-logger = logging.getLogger(__name__)
 
 import decimal
 
@@ -93,7 +89,7 @@ class Faculty(mixins.BabelNamed):
     weight = models.IntegerField(
         _("Work effort"),  # Arbeitsaufwand
         default=MAX_WEIGHT,
-        help_text=u"""\
+        help_text="""\
 Wieviel Aufwand ein Neuantrag in diesem Fachbereich allgemein verursacht
 (0 = gar kein Aufwand, %d = maximaler Aufwand).""" % MAX_WEIGHT)
 
@@ -131,7 +127,7 @@ class Competence(UserAuthored, mixins.Sequenced):
     weight = models.IntegerField(
         _("Work effort"),  # Arbeitsaufwand
         blank=True,
-          help_text=u"""\
+        help_text="""\
 Wieviel Aufwand mir persönlich ein Neuantrag in diesem Fachbereich verursacht
 (0 = gar kein Aufwand, %d = maximaler Aufwand).""" % MAX_WEIGHT)
 
@@ -141,7 +137,7 @@ Wieviel Aufwand mir persönlich ein Neuantrag in diesem Fachbereich verursacht
         super(Competence, self).full_clean(*args, **kw)
 
     def __str__(self):
-        return u'%s #%s' % (self._meta.verbose_name, self.pk)
+        return '%s #%s' % (self._meta.verbose_name, self.pk)
 
 dd.update_field(Competence, 'user', verbose_name=_("User"))
 
@@ -369,7 +365,7 @@ class AvailableCoaches(Users):
     @dd.virtualfield(models.DecimalField(_("Current workload"),
                                          max_digits=8, decimal_places=0,
         help_text=u"""\
-Momentane Gesamtbelastung dieses Benutzers durch neue Klienten. 
+Momentane Gesamtbelastung dieses Benutzers durch neue Klienten.
 Summe der Belastungspunkte pro neuem Klient."""))
     def current_weight(self, obj, ar):
         #~ return "%+6.2f%%" % self.compute_workload(ar,obj)
@@ -517,5 +513,3 @@ dd.inject_field(
         blank=True, null=True,
         help_text=_("The Faculty this client has been attributed to.")),
     active=True)
-
-

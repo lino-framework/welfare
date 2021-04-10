@@ -1,18 +1,16 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2008-2014 Rumma & Ko Ltd
+# Copyright 2008-2021 Rumma & Ko Ltd
 # License: GNU Affero General Public License v3 (see file COPYING for details)
 
 """
 The :xfile:`models.py` module for the :mod:`lino_welfare` app.
 
-Contains PCSW-specific models and tables that have not yet been 
+Contains PCSW-specific models and tables that have not yet been
 moved into a separate module because they are really very PCSW specific.
 
 """
-from __future__ import unicode_literals
 
-import logging
-logger = logging.getLogger(__name__)
+import logging ; logger = logging.getLogger(__name__)
 
 from django.db import models
 from django.conf import settings
@@ -24,19 +22,14 @@ from lino.core.roles import SiteStaff
 from lino_xl.lib.contacts.roles import ContactsStaff
 
 households = dd.resolve_app('households')
-#~ cal = dd.resolve_app('cal')
 properties = dd.resolve_app('properties')
 countries = dd.resolve_app('countries')
 contacts = dd.resolve_app('contacts')
 cv = dd.resolve_app('cv')
-# uploads = dd.resolve_app('uploads')
-# auth = dd.resolve_app('auth')
 isip = dd.resolve_app('isip')
 jobs = dd.resolve_app('jobs')
 pcsw = dd.resolve_app('pcsw')
 courses = dd.resolve_app('courses')
-#~ from lino_welfare.modlib.isip import models as isip
-#~ newcomers = dd.resolve_app('newcomers')
 
 
 @dd.receiver(dd.pre_analyze)
@@ -52,7 +45,7 @@ def customize_siteconfig(sender, **kw):
                                       blank=True, null=True,
                                       verbose_name=_("Local job office"),
                                       related_name='job_office_sites',
-            help_text="""The Company whose contact persons 
+            help_text="""The Company whose contact persons
             will be choices for `Person.job_office_contact`."""))
 
     dd.inject_field('system.SiteConfig',
@@ -115,9 +108,9 @@ def customize_sqlite(sender, **kw):
     Here is how we install case-insensitive sorting in sqlite3.
     Note that this caused noticeable performance degradation...
 
-    Thanks to 
+    Thanks to
     - http://efreedom.com/Question/1-3763838/Sort-Order-SQLite3-Umlauts
-    - http://docs.python.org/library/sqlite3.html#sqlite3.Connection.create_collation
+    - https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection.create_collation
     - http://www.sqlite.org/lang_createindex.html
     """
     from django.db.backends.signals import connection_created
@@ -125,6 +118,7 @@ def customize_sqlite(sender, **kw):
     def belgian(s):
 
         s = s.decode('utf-8').lower()
+        # s = s.lower()
 
         s = s.replace(u'ä', u'a')
         s = s.replace(u'à', u'a')
@@ -149,8 +143,20 @@ def customize_sqlite(sender, **kw):
 
         return s
 
-    def stricmp(str1, str2):
-        return cmp(belgian(str1), belgian(str2))
+    # 20210408 in Django 3.2 stricmp() caused a `NameError: name 'cmp' is not
+    # defined` and I have no explanation why this error didn't come already earlier.
+    # The built-in :func:`cmp` function has been removed in Python 3.
+
+    def stricmp(s1, s2):
+        return cmp(belgian(s1), belgian(s2))
+        # s1 = belgian(s1)
+        # s2 = belgian(s2)
+        # if s1 == s2:
+        #     return 0
+        # elif s1 < s2:
+        #     return -1
+        # else:
+        #     return 1
 
     def my_callback(sender, **kw):
         from django.db.backends.sqlite3.base import DatabaseWrapper
@@ -158,10 +164,10 @@ def customize_sqlite(sender, **kw):
             db = kw['connection']
             db.connection.create_collation('BINARY', stricmp)
 
-    connection_created.connect(my_callback)
+    # connection_created.connect(my_callback)
 
 
-# moved to user_types_module    
+# moved to user_types_module
 # @dd.receiver(dd.pre_analyze)
 # def set_merge_actions(sender, **kw):
 #     #~ logger.info("20130409 %s.set_merge_actions()",__name__)
@@ -189,4 +195,3 @@ def my_details(sender, **kw):
     # nationalities
     countries.PlacesByCountry cv.StudiesByCountry
     """)
-

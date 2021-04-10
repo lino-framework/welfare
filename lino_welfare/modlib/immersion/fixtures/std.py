@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2015 Luc Saffre
+# Copyright 2015 Rumma & Ko Ltd
 # License: GNU Affero General Public License v3 (see file COPYING for details)
 """Adds some training types and some training goals.
 
@@ -39,4 +39,3 @@ def objects():
         **dd.str2kw('name', _("Immersion training")))
     yield rt.models.excerpts.ExcerptType.update_for_model(
         'immersion.Contract', **kw)
-

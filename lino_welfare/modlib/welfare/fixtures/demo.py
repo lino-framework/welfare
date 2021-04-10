@@ -1125,11 +1125,6 @@ Flexibilität: die Termine sind je nach Kandidat anpassbar.""",
         u.calendar = obj
         u.save()
 
-    # create a primary ClientAddress for each Client.
-    # no longer needed. done by checkdata.fixtures.demo2
-    # for obj in settings.SITE.models.contacts.Partner.objects.all():
-    #     obj.repairdata()
-
     # have partners speak different languages
     # most partners speak first language
     if len(settings.SITE.languages):

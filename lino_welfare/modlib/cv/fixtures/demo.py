@@ -26,4 +26,3 @@ def objects():
                 for n in range(len(VALUES)):
                     yield PP(person=PERSONS.pop(),
                              property=prop, value=VALUES.pop()[0].value)
-

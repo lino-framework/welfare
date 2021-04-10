@@ -78,12 +78,7 @@ def objects():
     User = settings.SITE.user_model
     root = User.objects.get(username='hubert')
     Client = rt.models.pcsw.Client
-    # CLIENTS = Cycler(Client.objects.all().order_by('id'))
-    # mustermann = CLIENTS.pop()
-    # print 20150512, Client.objects.all()
     mustermann = Client.objects.get(pk=116)
-    # mustermann = Client.objects.get(last_name="Mustermann")
-    # print(mustermann, mustermann.pk)
     for model, kw, fn in DEMO_REQUESTS:
         kw.update(person=mustermann)
         kw.update(user=root)

@@ -377,7 +377,7 @@ The primary key of a client is `id`:
 
 >>> pk = pcsw.Client._meta.get_field('id')
 >>> pk
-<django.db.models.fields.AutoField: id>
+<django.db.models.fields.BigAutoField: id>
 
 >>> pk = pcsw.Client._meta.pk
 >>> pk

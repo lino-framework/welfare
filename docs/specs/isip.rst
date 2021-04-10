@@ -29,7 +29,7 @@ This module is also used and extended by
 :mod:`lino_welfare.modlib.jobs` and
 :mod:`lino_welfare.modlib.immersion`,
 :mod:`lino_welfare.modlib.art61`.
-See also :doc:`autoevents`.
+See also :doc:`topics/autoevents`.
 
 An **ISIP** (called "PIIS" in French and "VSE" in German) is a
 convention or contract between the PCSW and a young client that
@@ -246,7 +246,7 @@ Miscellaneous models
 
     Whether the client has at least one ISIP contact during the
     observed date range.
-    
+
     A filter criteria added to
     :class:`lino_xl.lib.clients.ClientEvents`.
 
@@ -479,4 +479,3 @@ Contracts and Grantings
 31 2014-07-23 None
 32 2013-03-08 Granting #32 ('Ausl\xe4nderbeihilfe/08/03/2013/181')
 33 2014-07-02 None
-
