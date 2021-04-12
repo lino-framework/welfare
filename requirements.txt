@@ -14,3 +14,4 @@
 
 -e git+https://github.com/lino-framework/weleup.git#egg=lino_weleup
 -e git+https://github.com/lino-framework/welcht.git#egg=lino_welcht
+Django<=3.2
