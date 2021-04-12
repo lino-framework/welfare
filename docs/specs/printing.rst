@@ -17,9 +17,9 @@ configure print templates in Lino Welfare.
 >>> from lino import startup
 >>> startup('lino_welfare.projects.gerd.settings.doctests')
 >>> from lino.api.doctest import *
-    
 
-      
+
+
 
 Which database objects are printable?
 =====================================
@@ -91,8 +91,7 @@ We did not yet test what happens if you define an excerpt type for one
 of the above models.
 
 For configuring the printing of these models, see
-`Printing
-<http://lino-framework.org/admin/index.html#printing>`__.
+:ref:`specs.printing`.
 
 
 Main templates
@@ -110,7 +109,7 @@ designing the template itself.
 
 
 Excerpt types
-=============  
+=============
 
 See `Database excerpts
 <http://xl.lino-framework.org/specs/excerpts.html>`__ for a general
@@ -163,4 +162,3 @@ Lino adds another rule:
     <lino_welfare.modlib.aids.AidType.body_template>` overrides
     :attr:`ExcerptType.body_template
     <lino.modlib.excerpts.ExcerptType.body_template>`.
-
