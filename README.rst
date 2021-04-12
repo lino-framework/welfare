@@ -2,7 +2,7 @@
 The ``lino-welfare`` package
 ============================
 
-
+Warning: This repository is no longer maintained. Development has moved to https://gitlab.com/lino-framework/welfare
 
 Lino Welfare is a
 `Lino <http://www.lino-framework.org>`__
