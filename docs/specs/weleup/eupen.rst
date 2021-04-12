@@ -48,6 +48,162 @@ it was the first Lino that went into production in 2010.
 <BLANKLINE>
 
 
+Database structure
+==================
+
+This is the list of models used in the Eupen variant of Lino Welfare:
+
+>>> from lino.utils.diag import analyzer
+>>> print(analyzer.show_db_overview()) #doctest: +ELLIPSIS +NORMALIZE_WHITESPACE +REPORT_UDIFF -SKIP
+64 apps: lino, staticfiles, about, jinja, bootstrap3, extjs, printing, system, office, xl, countries, contacts, appypod, humanize, users, contenttypes, gfks, memo, notify, changes, properties, checkdata, addresses, excerpts, uploads, outbox, extensible, cal, reception, boards, clients, coachings, pcsw, welfare, sales, weasyprint, ledger, sepa, cosi, b2c, finan, vatless, languages, cv, integ, isip, jobs, art61, xcourses, newcomers, cbss, households, humanlinks, debts, notes, aids, summaries, esf, beid, dashboard, export_excel, dupable_clients, tinymce, sessions.
+142 models:
+============================== =============================== ========= =======
+ Name                           Default table                   #fields   #rows
+------------------------------ ------------------------------- --------- -------
+ addresses.Address              addresses.Addresses             16        175
+ aids.AidType                   aids.AidTypes                   21        11
+ aids.Category                  aids.Categories                 4         3
+ aids.Granting                  aids.Grantings                  12        58
+ aids.IncomeConfirmation        aids.IncomeConfirmations        17        58
+ aids.RefundConfirmation        aids.RefundConfirmations        18        12
+ aids.SimpleConfirmation        aids.SimpleConfirmations        15        19
+ art61.Contract                 art61.Contracts                 32        7
+ art61.ContractType             art61.ContractTypes             9         1
+ b2c.Account                    b2c.Accounts                    6         34
+ b2c.Statement                  b2c.Statements                  8         34
+ b2c.Transaction                b2c.Transactions                17        57
+ boards.Board                   boards.Boards                   6         3
+ boards.Member                  boards.Members                  4         0
+ cal.Calendar                   cal.Calendars                   6         11
+ cal.Event                      cal.OneEvent                    24        587
+ cal.EventPolicy                cal.EventPolicies               20        6
+ cal.EventType                  cal.EventTypes                  25        12
+ cal.Guest                      cal.Guests                      9         628
+ cal.GuestRole                  cal.GuestRoles                  5         4
+ cal.RecurrentEvent             cal.RecurrentEvents             22        15
+ cal.RemoteCalendar             cal.RemoteCalendars             7         0
+ cal.Room                       cal.Rooms                       9         0
+ cal.Subscription               cal.Subscriptions               4         9
+ cal.Task                       cal.Tasks                       20        36
+ cbss.IdentifyPersonRequest     cbss.IdentifyPersonRequests     21        5
+ cbss.ManageAccessRequest       cbss.ManageAccessRequests       24        1
+ cbss.Purpose                   cbss.Purposes                   6         106
+ cbss.RetrieveTIGroupsRequest   cbss.RetrieveTIGroupsRequests   15        6
+ cbss.Sector                    cbss.Sectors                    9         209
+ changes.Change                 changes.Changes                 10        0
+ checkdata.Problem              checkdata.Problems              6         11
+ clients.ClientContact          clients.ClientContacts          7         14
+ clients.ClientContactType      clients.ClientContactTypes      7         10
+ coachings.Coaching             coachings.Coachings             8         90
+ coachings.CoachingEnding       coachings.CoachingEndings       6         4
+ coachings.CoachingType         coachings.CoachingTypes         7         3
+ contacts.Company               contacts.Companies              29        51
+ contacts.CompanyType           contacts.CompanyTypes           7         14
+ contacts.Partner               contacts.Partners               26        174
+ contacts.Person                contacts.Persons                33        109
+ contacts.Role                  contacts.Roles                  4         13
+ contacts.RoleType              contacts.RoleTypes              6         5
+ contenttypes.ContentType       gfks.ContentTypes               3         142
+ countries.Country              countries.Countries             8         270
+ countries.Place                countries.Places                10        78
+ cv.Duration                    cv.Durations                    4         5
+ cv.EducationLevel              cv.EducationLevels              7         5
+ cv.Experience                  cv.Experiences                  18        30
+ cv.Function                    cv.Functions                    6         4
+ cv.LanguageKnowledge           cv.LanguageKnowledges           10        112
+ cv.PersonProperty              cv.PersonProperties             6         310
+ cv.Regime                      cv.Regimes                      4         3
+ cv.Sector                      cv.Sectors                      5         14
+ cv.Status                      cv.Statuses                     4         7
+ cv.Study                       cv.Studies                      15        22
+ cv.StudyType                   cv.StudyTypes                   7         11
+ cv.Training                    cv.Trainings                    17        20
+ dashboard.Widget               dashboard.Widgets               5         0
+ debts.Account                  debts.Accounts                  12        51
+ debts.Actor                    debts.Actors                    6         63
+ debts.Budget                   debts.Budgets                   11        14
+ debts.Entry                    debts.Entries                   16        716
+ debts.Group                    debts.Groups                    7         8
+ dupable_clients.Word           dupable_clients.Words           3         130
+ esf.ClientSummary              esf.Summaries                   24        189
+ excerpts.Excerpt               excerpts.Excerpts               12        76
+ excerpts.ExcerptType           excerpts.ExcerptTypes           17        21
+ finan.BankStatement            finan.BankStatements            16        0
+ finan.BankStatementItem        finan.BankStatementItemTable    10        0
+ finan.JournalEntry             finan.FinancialVouchers         15        0
+ finan.JournalEntryItem         finan.JournalEntryItemTable     10        0
+ finan.PaymentOrder             finan.PaymentOrders             15        26
+ finan.PaymentOrderItem         finan.PaymentOrderItemTable     10        220
+ gfks.HelpText                  gfks.HelpTexts                  4         5
+ households.Household           households.Households           28        14
+ households.Member              households.Members              14        63
+ households.Type                households.Types                4         6
+ humanlinks.Link                humanlinks.Links                4         59
+ isip.Contract                  isip.Contracts                  24        33
+ isip.ContractEnding            isip.ContractEndings            6         4
+ isip.ContractPartner           isip.ContractPartners           6         38
+ isip.ContractType              isip.ContractTypes              10        5
+ isip.ExamPolicy                isip.ExamPolicies               20        6
+ jobs.Candidature               jobs.Candidatures               10        74
+ jobs.Contract                  jobs.Contracts                  28        16
+ jobs.ContractType              jobs.ContractTypes              9         5
+ jobs.Job                       jobs.Jobs                       10        8
+ jobs.JobProvider               jobs.JobProviders               30        3
+ jobs.JobType                   jobs.JobTypes                   5         5
+ jobs.Offer                     jobs.Offers                     9         1
+ jobs.Schedule                  jobs.Schedules                  4         3
+ languages.Language             languages.Languages             5         5
+ ledger.Account                 ledger.Accounts                 16        41
+ ledger.AccountingPeriod        ledger.AccountingPeriods        7         29
+ ledger.FiscalYear              ledger.FiscalYears              5         8
+ ledger.Journal                 ledger.Journals                 25        4
+ ledger.LedgerInfo              ledger.LedgerInfoTable          2         0
+ ledger.MatchRule               ledger.MatchRules               3         2
+ ledger.Movement                ledger.Movements                10        580
+ ledger.PaymentMethod           ledger.PaymentMethods           5         0
+ ledger.PaymentTerm             ledger.PaymentTerms             11        8
+ ledger.Voucher                 ledger.AllVouchers              8         56
+ newcomers.Broker               newcomers.Brokers               2         2
+ newcomers.Competence           newcomers.Competences           5         7
+ newcomers.Faculty              newcomers.Faculties             5         5
+ notes.EventType                notes.EventTypes                8         10
+ notes.Note                     notes.Notes                     18        111
+ notes.NoteType                 notes.NoteTypes                 11        13
+ notify.Message                 notify.Messages                 11        13
+ outbox.Attachment              outbox.Attachments              4         0
+ outbox.Mail                    outbox.Mails                    9         0
+ outbox.Recipient               outbox.Recipients               6         0
+ pcsw.Activity                  pcsw.Activities                 3         0
+ pcsw.AidType                   pcsw.AidTypes                   4         0
+ pcsw.Client                    pcsw.Clients                    81        63
+ pcsw.Conviction                pcsw.Convictions                5         0
+ pcsw.Dispense                  pcsw.Dispenses                  6         0
+ pcsw.DispenseReason            pcsw.DispenseReasons            5         4
+ pcsw.Exclusion                 pcsw.Exclusions                 6         0
+ pcsw.ExclusionType             pcsw.ExclusionTypes             2         2
+ pcsw.PersonGroup               pcsw.PersonGroups               4         5
+ properties.PropChoice          properties.PropChoices          6         2
+ properties.PropGroup           properties.PropGroups           4         3
+ properties.PropType            properties.PropTypes            8         3
+ properties.Property            properties.Properties           6         23
+ sepa.Account                   sepa.Accounts                   8         52
+ sessions.Session               users.Sessions                  3         21
+ system.SiteConfig              system.SiteConfigs              32        1
+ tinymce.TextFieldTemplate      tinymce.TextFieldTemplates      5         2
+ uploads.Upload                 uploads.Uploads                 20        15
+ uploads.UploadType             uploads.UploadTypes             10        10
+ uploads.Volume                 uploads.Volumes                 5         0
+ users.Authority                users.Authorities               3         3
+ users.User                     users.AllUsers                  26        13
+ vatless.AccountInvoice         vatless.Invoices                19        30
+ vatless.InvoiceItem            vatless.InvoiceItemTable        7         80
+ xcourses.Course                xcourses.Courses                5         3
+ xcourses.CourseContent         xcourses.CourseContents         2         2
+ xcourses.CourseOffer           xcourses.CourseOffers           6         3
+ xcourses.CourseProvider        xcourses.CourseProviders        30        2
+ xcourses.CourseRequest         xcourses.CourseRequests         10        20
+============================== =============================== ========= =======
+<BLANKLINE>
 
 
 The main menu

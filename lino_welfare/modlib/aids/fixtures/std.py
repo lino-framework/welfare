@@ -1,14 +1,10 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2014-2015 Rumma & Ko Ltd
+# Copyright 2014-2021 Rumma & Ko Ltd
 # License: GNU Affero General Public License v3 (see file COPYING for details)
-
-from __future__ import unicode_literals
-
-from django.utils.translation import gettext_lazy as _
 
 from lino.api.dd import babel_values
 from lino.utils.instantiator import Instantiator
-from lino.api import dd, rt
+from lino.api import dd, rt, _
 
 
 def objects():
